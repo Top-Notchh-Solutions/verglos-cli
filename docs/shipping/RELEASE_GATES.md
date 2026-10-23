@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · DIST-002 bounded registry metadata preflight
+
+CLI PR #193 at exact head `dedcc90dc38d4593eab72e86655e127416753ab7` adds a
+1 MiB bounded npm registry metadata read with fatal UTF-8 decoding, stream
+cancellation, and fail-closed oversized/invalid response handling. Complete
+release-contract tests passed **60/60**; build, typecheck, and diff checks
+passed. PR #193 is open with hosted checks queued, so no merge or hosted
+completion is claimed. No package, tag, release, workflow dispatch, or
+provider write occurred. Keep DIST-002 open for provider/trusted-publisher
+lifecycle, publication/provenance, customer/recipient acceptance,
+independent review, AppSec/Hunt, and final release decision. Score remains
+**244/36/280 (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/dist-002-registry-response-boundary-pr193-2026-10-23.md`.
+
 ## 2026-10-23 · STUDIO-CLI-001 duplicate-projection reservation race
 
 Web PR #254 at exact head `c290c9f49c10e47a3f1421f427f76f1fd7607622` fixes the

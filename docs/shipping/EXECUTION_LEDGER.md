@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## DIST-002 bounded registry metadata preflight · 2026-10-23
+
+- **Source mapping:** CLI PR #193, exact head
+  `dedcc90dc38d4593eab72e86655e127416753ab7`.
+- **Contract mapping:** The npm registry metadata preflight is bounded to 1
+  MiB and fails closed on oversized or invalid bytes, including fallback text
+  responses and reader cancellation on stream failures.
+- **Verification mapping:** Complete release-contract tests **60/60**; build
+  8 successful tasks; typecheck 14 successful tasks; `git diff --check`
+  passed.
+- **Artifact mapping:** Additive bundle contains 170 hashed files with
+  manifest SHA-256
+  `sha256:13690647788d60cac9ccc537968e4f1f36985d571d74b86f40ee37dbda29f313`
+  and bundle file SHA-256
+  `d48bd5db77fe044def188a9ed668ca24e968c1853b2a804099a532d653cb1471`;
+  secret scan passed.
+- **Acceptance mapping:** PR #193 remains open with hosted checks queued.
+  No merge, package publication, provider write, customer/recipient
+  acceptance, independent review, AppSec/Hunt review, or final release was
+  claimed. No checkbox or external state changed; nothing was deleted or
+  overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-002-registry-response-boundary-pr193-2026-10-23.md`.
+
 ## STUDIO-CLI-001 projection reservation race · 2026-10-23
 
 - **Source mapping:** Web PR #254, exact head

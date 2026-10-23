@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-002 bounded registry metadata preflight
+
+CLI PR #193 at exact head `dedcc90dc38d4593eab72e86655e127416753ab7` adds a
+1 MiB bounded npm registry metadata read with streaming UTF-8 validation,
+reader cancellation, and fail-closed oversized/invalid response handling.
+The complete release-contract suite passed **60/60**; build, typecheck, and
+diff checks passed. PR #193 is open with hosted checks queued. No checkbox
+changed. No package, tag, release, workflow dispatch, or provider write
+occurred. The additive bundle contains 170 hashed files with manifest
+`sha256:13690647788d60cac9ccc537968e4f1f36985d571d74b86f40ee37dbda29f313`
+and file SHA-256
+`d48bd5db77fe044def188a9ed668ca24e968c1853b2a804099a532d653cb1471`;
+secret scan passed. Provider/trusted-publisher, publication, and final
+acceptance remain open. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-002-registry-response-boundary-pr193-2026-10-23.md`.
+
 ## 2026-10-23 · STUDIO-CLI-001 projection reservation race
 
 Web PR #254 at exact head `c290c9f49c10e47a3f1421f427f76f1fd7607622` fixes

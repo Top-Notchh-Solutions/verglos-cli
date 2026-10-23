@@ -1,5 +1,30 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · DIST-002 bounded registry metadata preflight
+
+CLI PR #193 at exact head `dedcc90dc38d4593eab72e86655e127416753ab7`
+adds a 1 MiB bounded UTF-8 read for npm registry metadata preflight, with
+stream cancellation and fail-closed handling for oversized or invalid bytes.
+The complete release-contract suite passed **60/60**; build passed with 8
+successful tasks; typecheck passed with 14 successful tasks; and
+`git diff --check` passed.
+
+PR #193 is open with hosted checks queued, so no merge or hosted completion is
+claimed. No package was published, tag/release was created, workflow was
+dispatched, or provider write occurred. The owner-confirmed `NPM_TOKEN` is not
+consumed by the OIDC-protected publication path. This advances DIST-002
+implementation only; provider/trusted-publisher lifecycle, publication,
+customer/recipient acceptance, independent review, AppSec/Hunt, and final
+release gates remain open. No backlog checkbox or external state changed, and
+nothing was deleted or overwritten. The additive bundle contains **170 hashed
+files** with manifest
+`sha256:13690647788d60cac9ccc537968e4f1f36985d571d74b86f40ee37dbda29f313`
+and file SHA-256
+`d48bd5db77fe044def188a9ed668ca24e968c1853b2a804099a532d653cb1471`;
+secret scan passed. The live score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/dist-002-registry-response-boundary-pr193-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · STUDIO-CLI-001 projection reservation race
 
 Web PR #254 at exact head `c290c9f49c10e47a3f1421f427f76f1fd7607622` now

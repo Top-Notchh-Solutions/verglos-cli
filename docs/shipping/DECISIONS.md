@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · DIST-002 bounded registry metadata preflight
+
+- **Decision:** Bound npm registry metadata reads before JSON parsing, using
+  a 1 MiB byte limit, fatal UTF-8 decoding, reader cancellation, and a
+  fail-closed response-size boundary for fallback text responses.
+- **Verification:** CLI PR #193 exact head
+  `dedcc90dc38d4593eab72e86655e127416753ab7`; complete release-contract
+  tests **60/60**, build, typecheck, and diff checks passed.
+- **Disposition:** PR #193 is open with hosted checks queued. This is
+  implementation progress only; no merge, publication, provider write,
+  customer/recipient acceptance, independent review, AppSec/Hunt review, or
+  final release decision is claimed. Score remains **244/36/280 (87.1%)**.
+  Nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-002-registry-response-boundary-pr193-2026-10-23.md`.
+
 ## 2026-10-23 · STUDIO-CLI-001 duplicate-projection reservation race
 
 - **Decision:** A losing duplicate custody insert must release its reserved
