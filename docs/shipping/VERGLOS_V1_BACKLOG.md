@@ -1,5 +1,31 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-003 QUAL-WEB-005 bundle addendum
+
+The additive private reproducibility bundle now contains **132 hashed files**
+and passed its secret scan. Its SHA-256 is
+`sha256:34a18707d3f4d34174a69b6d6ffb44bb554606e88b5f46db612b12bf73f5f58f`.
+It includes the fresh migrated current-head QUAL-WEB-005 qualification.
+Provider lifecycle, customer consent, independent review, browser, field-CWV,
+and account-deletion gates remain open. No checkbox changed; score remains
+**244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-qual-web-005-2026-10-23.md`.
+
+## 2026-10-23 · QUAL-WEB-005 fresh migrated current-head qualification
+
+The clean Web head `16ceddc9` ran against a new local PostgreSQL 15
+`verglos_test` database after the explicit local empty-database bootstrap:
+**43 migrations** and **53 public tables**. The authenticated deletion route,
+deletion-job migration, and tenant-runtime integration tests passed **3/3**
+with zero skips and failures. This closes the missing local migrated-schema
+qualification slice, not the complete row: legal/customer-held disposition,
+Production migration/restore/rollback, reconciliation, independent review,
+and final acceptance remain open. No checkbox changed; score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten.
+Evidence:
+`docs/shipping/evidence/qual-web-005-fresh-migrated-current-head-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 provider-state bundle addendum
 
 The additive private reproducibility bundle now contains **131 hashed files**

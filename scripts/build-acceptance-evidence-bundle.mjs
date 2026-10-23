@@ -143,6 +143,7 @@ const paths = [
   "docs/shipping/evidence/studio-cli-001-current-head-contract-2026-10-23.md",
   "docs/shipping/evidence/dist-002-current-publish-contract-2026-10-23.md",
   "docs/shipping/evidence/dist-002-release-environment-state-2026-10-23.md",
+  "docs/shipping/evidence/qual-web-005-fresh-migrated-current-head-2026-10-23.md",
 ];
 
 const forbidden = [

@@ -1,5 +1,33 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-003 QUAL-WEB-005 bundle addendum
+
+- **Artifact:** Additive private bundle with **132** hashed evidence files.
+- **Integrity:** SHA-256
+  `sha256:34a18707d3f4d34174a69b6d6ffb44bb554606e88b5f46db612b12bf73f5f58f`;
+  secret scan passed.
+- **Coverage:** Includes fresh migrated current-head QUAL-WEB-005 evidence;
+  provider, customer, independent-review, browser, field-CWV, and
+  account-deletion gates remain open.
+- **Disposition:** ACCEPT-003 reproducibility only; no Production/customer/
+  reviewer/final-release outcome was claimed. Score remains **244/36/280
+  (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-qual-web-005-2026-10-23.md`.
+
+## 2026-10-23 · QUAL-WEB-005 fresh migrated current-head qualification
+
+- **Source:** Web exact head `16ceddc9`.
+- **Database:** New local PostgreSQL 15 `verglos_test`; explicit local
+  bootstrap applied 43 migrations and produced 53 public tables. The stopped
+  container was retained and not removed.
+- **Verification:** Authenticated deletion route, deletion-job migration, and
+  tenant-runtime integration tests passed **3/3**, zero skipped/failing.
+- **Disposition:** Local migrated-schema slice complete; legal/customer-held,
+  Production migration/restore/rollback, reconciliation, independent review,
+  and final acceptance remain open. Score remains **244/36/280 (87.1%)**.
+  Nothing was deleted or overwritten.
+- **Evidence:** `evidence/qual-web-005-fresh-migrated-current-head-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 provider-state bundle addendum
 
 - **Artifact:** Additive private bundle with **131** hashed files.

@@ -1,5 +1,31 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 QUAL-WEB-005 bundle addendum · 2026-10-23
+
+- **Source mapping:** Bundle includes the fresh migrated current-head
+  QUAL-WEB-005 qualification.
+- **Integrity mapping:** 132 hashed files; SHA-256
+  `sha256:34a18707d3f4d34174a69b6d6ffb44bb554606e88b5f46db612b12bf73f5f58f`;
+  secret scan passed.
+- **Gate mapping:** Provider lifecycle, customer consent, independent review,
+  authenticated browser, field CWV, and account deletion remain open.
+- **Acceptance mapping:** ACCEPT-003 remains reproducibility only; score
+  remains **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-qual-web-005-2026-10-23.md`.
+
+## QUAL-WEB-005 fresh migrated current-head qualification · 2026-10-23
+
+- **Source mapping:** Web exact head `16ceddc9`.
+- **Database mapping:** Fresh local PostgreSQL 15 `verglos_test`; 43 reviewed
+  migrations and 53 public tables.
+- **Verification mapping:** Authenticated deletion route, deletion-job
+  migration, and tenant-runtime integrations passed **3/3**, zero skips/fails.
+- **Acceptance mapping:** The local migrated-schema slice is complete, but
+  legal/customer-held, Production migration/restore/rollback, reconciliation,
+  independent review, and final acceptance remain open. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/qual-web-005-fresh-migrated-current-head-2026-10-23.md`.
+
 ## ACCEPT-003 provider-state bundle addendum · 2026-10-23
 
 - **Source mapping:** The bundle includes the read-only current release-
