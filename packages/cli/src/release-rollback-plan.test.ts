@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, symlink, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -47,6 +47,13 @@ test("rollback inputs refuse symlinked references and rehearsal manifests", asyn
   } finally {
     console.log = original;
   }
+});
+
+test("rollback bounded reads recheck the opened handle after reading", async () => {
+  const source = await readFile(join(dirname(fileURLToPath(import.meta.url)), "../src/release-rollback-plan.ts"), "utf8");
+  assert.match(source, /const final = await handle\.stat\(\)/u);
+  assert.match(source, /final\.size !== opened\.size/u);
+  assert.match(source, /bytes\.byteLength !== final\.size/u);
 });
 
 test("rollback-rehearsal covers every provider boundary and preserves historical records", async () => {
