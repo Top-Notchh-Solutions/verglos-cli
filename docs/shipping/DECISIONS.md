@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record Production Cards-only checkout presentation
+
+- **Decision:** Record the live checkout presentation as bounded Production
+  evidence without creating a payment or claiming provider acceptance.
+- **Verification:** Deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf` returned HTTP
+  200; `Cards` was rendered and UPI, Netbanking, Wallets, EMI, and Pay Later
+  were absent.
+- **Disposition:** Advance FINAL-WEB-003/005 implementation evidence only.
+  No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-production-checkout-card-only-2026-10-24.md`.
+
 ## 2026-10-24 · record current candidate no-go and complete freeze artifacts
 
 - **Decision:** Reconcile the current alpha.4 candidate and freeze its

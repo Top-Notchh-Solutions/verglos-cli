@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Production Cards-only checkout receipt
+
+The live Production `/checkout` route returned HTTP **200** from deployment
+`dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf`; the bounded response rendered `Cards` and
+none of UPI, Netbanking, Wallets, EMI, or Pay Later. This advances the
+deployed Final V1 checkout presentation/configuration evidence only. No order,
+payment, webhook, database, customer, or release write occurred. Score remains
+**245/35/280 (87.5%)**, with 13 AppSec-dependent and 22 non-AppSec rows open.
+Evidence: `evidence/vercel-production-checkout-card-only-2026-10-24.md`.
+
 ## 2026-10-24 · current candidate reconciliation and freeze
 
 The current candidate (`aad2c743` CLI / `98b5cf6` Web / `2.0.0-alpha.4`) was
