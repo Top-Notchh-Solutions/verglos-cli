@@ -3183,6 +3183,26 @@ Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · DIST-001 package-content read binding
+
+The public package-content audit now reads every public package manifest and
+every bounded packaged file through opened regular-file handles before applying
+private-key and package-surface checks. The real audit passed for **6 public
+packages**; package-surface, publish-workflow, and bounded-reader contracts
+passed **7/7**, with syntax and diff checks passing.
+
+This is DIST-001 implementation evidence only. Keep `DIST-001` unchecked for
+dependent product surfaces, final legal/release qualification, independent
+review where required, and final acceptance. No npm publication, provider,
+Production, customer, deployment, tag, or release-sign-off action occurred.
+The additive bundle contains **159** files with manifest
+`sha256:b8469928c7470152eec23dc18e4e6bbac8bac6c2fe9608044c5d221d0bff02c6`
+and file SHA-256
+`c80624a7a45fcb56b96f18ee1b3585cdc878f0073167cddcf0b45ff8cb4f30d8`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-001-package-content-read-binding-private-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · DIST-003/006 local rehearsal refresh
 
 The real local clean-consumer run installed all six staged archives, imported

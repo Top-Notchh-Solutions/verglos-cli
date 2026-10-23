@@ -12092,6 +12092,24 @@ Evidence: `evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`
 rerun bundle manifest
 `sha256:28d34e5df8e3f09ca6bb9b4185e5552aadb3c13fcfbe02840097068a56dd3d2d`.
 
+## 2026-10-23 · DIST-001 package-content read binding
+
+The public package-content audit now reads all package manifests and bounded
+packaged files through opened regular-file handles before private-key and
+package-surface checks. The real audit passed for **6 public packages**;
+package-surface, publish-workflow, and bounded-reader contracts passed
+**7/7**, with syntax and diff checks passing.
+
+`DIST-001` remains unchecked for dependent product surfaces, final
+legal/release qualification, independent review where required, and final
+acceptance. No npm publication, provider, Production, customer, deployment,
+tag, or release-sign-off action occurred; nothing was deleted or overwritten.
+Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
+Evidence: `evidence/dist-001-package-content-read-binding-private-2026-10-23.md`;
+bundle manifest
+`sha256:b8469928c7470152eec23dc18e4e6bbac8bac6c2fe9608044c5d221d0bff02c6`.
+
 ## 2026-10-23 · DIST-002 release-tag read binding
 
 The private release-tag verifier now reads all six public package manifests

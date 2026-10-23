@@ -170,6 +170,7 @@ const paths = [
   "docs/shipping/evidence/dist-002-release-tag-read-binding-private-2026-10-23.md",
   "docs/shipping/evidence/dist-003-release-artifact-read-binding-private-2026-10-23.md",
   "docs/shipping/evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md",
+  "docs/shipping/evidence/dist-001-package-content-read-binding-private-2026-10-23.md",
 ];
 
 const FORBIDDEN = [

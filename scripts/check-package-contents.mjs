@@ -1,7 +1,8 @@
-import { lstat, readFile, readdir } from "node:fs/promises";
+import { lstat, readdir } from "node:fs/promises";
 import { isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePath } from "./package-surface-audit.mjs";
+import { readBoundedFile, readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const packageDirs = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"].map((name) => join(root, "packages", name));
@@ -23,7 +24,7 @@ async function walk(path) {
 const failures = [];
 const manifests = [];
 for (const packageDir of packageDirs) {
-  const packageJson = JSON.parse(await readFile(join(packageDir, "package.json"), "utf8"));
+  const packageJson = await readBoundedJsonFile(join(packageDir, "package.json"), `${relative(root, packageDir)} package.json`, MAX_AUDIT_FILE_BYTES);
   manifests.push(packageJson);
   const files = Array.isArray(packageJson.files) ? packageJson.files : [];
   const includedFiles = [];
@@ -51,7 +52,7 @@ for (const packageDir of packageDirs) {
           includedFiles.push(packagePath);
           const fileStat = await lstat(file);
           if (fileStat.size > MAX_AUDIT_FILE_BYTES) failures.push(`${packageJson.name}: packaged file exceeds the ${MAX_AUDIT_FILE_BYTES}-byte private-key inspection bound: ${packagePath}`);
-          else if (PRIVATE_KEY_MARKER.test(await readFile(file, "utf8"))) failures.push(`${packageJson.name}: private-key PEM marker found in ${packagePath}`);
+          else if (PRIVATE_KEY_MARKER.test(decodeUtf8(await readBoundedFile(file, `${packageJson.name} ${packagePath}`, MAX_AUDIT_FILE_BYTES), packagePath))) failures.push(`${packageJson.name}: private-key PEM marker found in ${packagePath}`);
         }
       } else {
         if (included.replaceAll("\\", "/").startsWith("dist/") && /\.test\./u.test(included)) continue;
@@ -59,7 +60,7 @@ for (const packageDir of packageDirs) {
         if (isForbiddenPublicPackagePath(included)) failures.push(`${packageJson.name}: forbidden packaged path ${included}`);
         includedFiles.push(included.replaceAll("\\", "/"));
         if (entry.size > MAX_AUDIT_FILE_BYTES) failures.push(`${packageJson.name}: packaged file exceeds the ${MAX_AUDIT_FILE_BYTES}-byte private-key inspection bound: ${included}`);
-        else if (PRIVATE_KEY_MARKER.test(await readFile(includedPath, "utf8"))) failures.push(`${packageJson.name}: private-key PEM marker found in ${included}`);
+        else if (PRIVATE_KEY_MARKER.test(decodeUtf8(await readBoundedFile(includedPath, `${packageJson.name} ${included}`, MAX_AUDIT_FILE_BYTES), included))) failures.push(`${packageJson.name}: private-key PEM marker found in ${included}`);
       }
     } catch (error) {
       failures.push(`${packageJson.name}: ${error instanceof Error ? error.message : `declared package path is missing: ${included}`}`);
@@ -74,3 +75,11 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`Package contents audit passed for ${packageDirs.length} public packages.`);
+
+function decodeUtf8(bytes, label) {
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  } catch {
+    throw new Error(`${label} is not valid bounded UTF-8 text`);
+  }
+}

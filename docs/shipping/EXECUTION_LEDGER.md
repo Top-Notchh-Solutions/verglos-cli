@@ -15627,3 +15627,22 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   `sha256:28d34e5df8e3f09ca6bb9b4185e5552aadb3c13fcfbe02840097068a56dd3d2d`;
   bundle file SHA-256
   `87d74afefd75aa331d14e49aa33faae9a139cef3df0c2a161bbae353bdd15680`.
+
+## DIST-001 package-content read binding · 2026-10-23
+
+- **Source mapping:** `scripts/check-package-contents.mjs` now reads public
+  package manifests and bounded packaged files through opened regular-file
+  handles before applying package-surface and private-key checks.
+- **Verification mapping:** Real six-package audit passed; package-surface,
+  publish-workflow, and bounded-reader contracts **7/7**, syntax and diff
+  checks passed.
+- **Acceptance mapping:** Keep DIST-001 unchecked for dependent product
+  surfaces, final legal/release qualification, independent review where
+  required, and final acceptance. No npm publication, provider, Production,
+  customer, deployment, tag, or release-sign-off action occurred. Nothing was
+  deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-001-package-content-read-binding-private-2026-10-23.md`;
+  bundle manifest
+  `sha256:b8469928c7470152eec23dc18e4e6bbac8bac6c2fe9608044c5d221d0bff02c6`;
+  bundle file SHA-256
+  `c80624a7a45fcb56b96f18ee1b3585cdc878f0073167cddcf0b45ff8cb4f30d8`.

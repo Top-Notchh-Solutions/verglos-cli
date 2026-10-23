@@ -9460,6 +9460,23 @@ changed. See
   rerun bundle manifest
   `sha256:28d34e5df8e3f09ca6bb9b4185e5552aadb3c13fcfbe02840097068a56dd3d2d`.
 
+## DIST-001 package-content read binding · 2026-10-23
+
+- **Source mapping:** `scripts/check-package-contents.mjs` now uses bounded
+  opened-file reads for each public manifest and bounded packaged file.
+- **Contract mapping:** Symlinked or changed files fail closed before
+  private-key and package-surface decisions.
+- **Verification mapping:** Real six-package audit passed; package-surface,
+  publish-workflow, and bounded-reader contracts **7/7**, syntax and diff
+  checks passed.
+- **Acceptance mapping:** Keep DIST-001 open for dependent product surfaces,
+  final legal/release qualification, independent review where required, and
+  final acceptance. Score remains **244/36/280 (87.1%)**; nothing was deleted
+  or overwritten.
+- **Evidence:** `evidence/dist-001-package-content-read-binding-private-2026-10-23.md`;
+  bundle manifest
+  `sha256:b8469928c7470152eec23dc18e4e6bbac8bac6c2fe9608044c5d221d0bff02c6`.
+
 ## DIST-002 release-tag read binding · 2026-10-23
 
 - **Source mapping:** Private `scripts/verify-release-tag.mjs` now uses the
