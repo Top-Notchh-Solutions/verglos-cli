@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## DIST-006 local rollback/revocation rehearsal · 2026-10-23
+
+- **Source mapping:** CLI exact candidate `3d4bca1f` with a matching synthetic
+  fixture digest.
+- **Verification mapping:** Five rollback/revocation boundaries passed; two
+  historical records were preserved; focused contracts passed **3/3**.
+- **Boundary mapping:** The rehearsal made no provider, registry, signing,
+  Hunt-feed, Vercel, publication, or revocation call.
+- **Acceptance mapping:** DIST-006 remains open for authenticated provider /
+  deployment rollback or revocation, independent review, and final acceptance.
+  Score remains **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-006-local-rollback-rehearsal-2026-10-23.md`.
+
 ## QUAL-WEB-005 current-head local integration qualification · 2026-10-23
 
 - **Source mapping:** Clean Web exact head `16ceddc9`.

@@ -1,5 +1,17 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · DIST-006 local rollback/revocation rehearsal
+
+The exact CLI candidate `3d4bca1f` passed the local rollback/revocation
+rehearsal and focused contracts **3/3**. The synthetic manifest matched, all
+five boundaries were exercised, and two historical records were preserved.
+No provider, registry, signing, Hunt-feed, Vercel, publication, or revocation
+action occurred. This advances `DIST-006` implementation evidence only;
+authenticated rollback/revocation, independent review, and final acceptance
+remain open. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-006-local-rollback-rehearsal-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-005 local current-head integration
 
 The clean Web head `16ceddc9` passed the focused deletion/tenant-boundary

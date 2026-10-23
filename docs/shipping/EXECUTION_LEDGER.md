@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-006 local rollback/revocation rehearsal
+
+- **Source:** CLI exact head `3d4bca1f`; synthetic manifest digest matched.
+- **Verification:** Rehearsal passed with five operations, two historical
+  records preserved, and focused contracts **3/3**.
+- **Boundaries:** npm package rollback, engine-manifest rollback, Hunt-feed
+  rollback, signing-identity revoke, and Web-deployment rollback were all
+  exercised as local decisions.
+- **Disposition:** No provider, registry, signing, Hunt-feed, Vercel,
+  publication, or revocation call occurred. DIST-006 remains open for
+  authenticated rollback/revocation, independent review, and final acceptance.
+  Score remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-006-local-rollback-rehearsal-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-005 current-head local integration qualification
 
 - **Source:** Clean Web exact head `16ceddc9`.

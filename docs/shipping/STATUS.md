@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-006 local rollback/revocation rehearsal
+
+The exact CLI candidate `3d4bca1f` passed the local rollback/revocation
+rehearsal and focused contracts **3/3**. The synthetic manifest matched, all
+five boundaries were exercised, and two historical records were preserved.
+No provider, registry, signing, Hunt-feed, Vercel, publication, or revocation
+action occurred. `DIST-006` remains open for authenticated provider/deployment
+rollback, independent review, and final acceptance. Score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten.
+Evidence: `evidence/dist-006-local-rollback-rehearsal-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-005 current-head local integration qualification
 
 The clean Web head `16ceddc9` passed the focused deletion/tenant-boundary
