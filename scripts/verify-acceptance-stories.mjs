@@ -10,9 +10,10 @@
  */
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { buildAcceptanceStoryCoverage } from "./acceptance-story-plan.mjs";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const privateRoot = resolve(import.meta.dirname, "..");
 const workspaceRoot = process.env.VERGLOS_WORKSPACE_ROOT ?? resolve(privateRoot, "..");
@@ -27,7 +28,7 @@ const webRoot = process.env.VERGLOS_WEB_ROOT ?? join(workspaceRoot, "verglos-web
 const outputPath = process.env.VERGLOS_ACCEPTANCE_STORIES_OUTPUT
   ?? join(privateRoot, "docs/shipping/evidence/acceptance-stories-verification-2026-10-03.json");
 const storyMapPath = join(privateRoot, "docs/shipping/evidence/acceptance-story-map-2026-10-03.json");
-const storyMap = JSON.parse(readFileSync(storyMapPath, "utf8"));
+const storyMap = await readBoundedJsonFile(storyMapPath, "acceptance story map");
 if (storyMap.schema !== "verglos.private.acceptance-story-map.v1" || !Array.isArray(storyMap.stories) || storyMap.stories.length !== 12) {
   throw new Error("acceptance story map must contain the twelve frozen V1 story surfaces");
 }

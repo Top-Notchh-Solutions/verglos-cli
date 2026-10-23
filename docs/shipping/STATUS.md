@@ -12110,6 +12110,26 @@ Evidence: `evidence/dist-001-package-content-read-binding-private-2026-10-23.md`
 bundle manifest
 `sha256:b8469928c7470152eec23dc18e4e6bbac8bac6c2fe9608044c5d221d0bff02c6`.
 
+## 2026-10-23 · ACCEPT-002 coherent-head story substrate run
+
+The private harness ran against clean CLI head
+`9218819a33a97e5944e57f2ac4bfa2174fc17f2e` and Web head
+`c290c9f49c10e47a3f1421f427f76f1fd7607622`. CLI passed **315 tests / 2
+explicit skips / 0 failures**; Web passed **956 / 30 explicit skips / 0
+failures**; composed acceptance substrates passed **79/79**; and all
+**12/12** story mappings completed.
+
+This is substrate/regression evidence only. `ACCEPT-002` remains unchecked
+for external/hosted/provider/customer/reviewer acceptance and final release
+decision. No external state was mutated; nothing was deleted or overwritten.
+Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
+Evidence: `evidence/accept-002-stories-coherent-head-2026-10-23.md`;
+result SHA-256
+`3ea3e757303ed8d72341c99d7fc7fe422a6b95c5114f1a6af9a087c54b17d1ac`;
+bundle manifest
+`sha256:93820e1b4dd44193fdbaaa8a1680fb228222c8f70f015cc70f84659a8ea8537d`.
+
 ## 2026-10-23 · DIST-002 release-tag read binding
 
 The private release-tag verifier now reads all six public package manifests

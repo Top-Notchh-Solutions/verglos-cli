@@ -15646,3 +15646,24 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   `sha256:b8469928c7470152eec23dc18e4e6bbac8bac6c2fe9608044c5d221d0bff02c6`;
   bundle file SHA-256
   `c80624a7a45fcb56b96f18ee1b3585cdc878f0073167cddcf0b45ff8cb4f30d8`.
+
+## ACCEPT-002 coherent-head story substrate run · 2026-10-23
+
+- **Source mapping:** Clean CLI head `9218819a33a97e5944e57f2ac4bfa2174fc17f2e`
+  and clean Web head `c290c9f49c10e47a3f1421f427f76f1fd7607622`.
+- **Verification mapping:** CLI **315 passed / 2 skips / 0 failures**, Web
+  **956 passed / 30 skips / 0 failures**, composed substrates **79/79**, and
+  story mappings **12/12** complete.
+- **Boundary mapping:** Substrate/regression evidence only; no hosted HTTP,
+  provider, customer/recipient, reviewer, human-browser, field-CWV,
+  migration, or Production acceptance is claimed.
+- **Acceptance mapping:** Keep ACCEPT-002 unchecked for its external/hosted
+  contract and final release decision. No external state was mutated; nothing
+  was deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-002-stories-coherent-head-2026-10-23.md`;
+  result SHA-256
+  `3ea3e757303ed8d72341c99d7fc7fe422a6b95c5114f1a6af9a087c54b17d1ac`;
+  bundle manifest
+  `sha256:93820e1b4dd44193fdbaaa8a1680fb228222c8f70f015cc70f84659a8ea8537d`;
+  bundle file SHA-256
+  `8561a5428c80eca4b61ea6a4bb33417b64e3d263b2abfe06315c38e9c9c0ae23`.

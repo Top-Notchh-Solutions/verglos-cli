@@ -3203,6 +3203,28 @@ Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/dist-001-package-content-read-binding-private-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-002 coherent-head story substrate run
+
+The private acceptance-story harness ran against clean coherent CLI head
+`9218819a33a97e5944e57f2ac4bfa2174fc17f2e` and Web head
+`c290c9f49c10e47a3f1421f427f76f1fd7607622`. CLI passed **315 tests with 2
+explicit skips and 0 failures**; Web passed **956 tests with 30 explicit skips
+and 0 failures**; composed Studio/Enterprise/Team/quality substrates passed
+**79/79**; and all **12/12** story mappings completed.
+
+This is ACCEPT-002 substrate/regression evidence only. It claims no hosted
+HTTP, provider, customer/recipient, reviewer, human-browser, field-CWV,
+migration, or Production acceptance. Keep `ACCEPT-002` unchecked for its full
+external/hosted contract and final release decision. The persisted result has
+SHA-256 `3ea3e757303ed8d72341c99d7fc7fe422a6b95c5114f1a6af9a087c54b17d1ac`;
+the additive bundle contains **161** files with manifest
+`sha256:93820e1b4dd44193fdbaaa8a1680fb228222c8f70f015cc70f84659a8ea8537d`
+and file SHA-256
+`8561a5428c80eca4b61ea6a4bb33417b64e3d263b2abfe06315c38e9c9c0ae23`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/accept-002-stories-coherent-head-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · DIST-003/006 local rehearsal refresh
 
 The real local clean-consumer run installed all six staged archives, imported
