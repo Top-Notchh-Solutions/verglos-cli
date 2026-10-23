@@ -5053,6 +5053,13 @@ Evidence/problem: external validation is deliberately last. It validates the com
 - [ ] **ACCEPT-007** · Hunt adjudication study · deps: ACCEPT-001/003 · Evaluate at least 100 independently adjudicated findings with preregistered methodology; separate false confirmation, not reproduced, and environment failure. Commit(s): —
 - [ ] **ACCEPT-008** · commercial acceptance/COGS evidence · deps: technical acceptance + founder authorization · Test actual plan agreements/checkout, repeat use, support minutes, hosted cost, recipient value, and explicit allowances; hypotheses remain hypotheses otherwise. Commit(s): private `64c1a477` adds the bounded commercial-evidence validator and `f986f80c` adds its regression coverage. Implementation substrate is complete; the row remains open for actual agreement/checkout/repeat-use/support/cost/recipient evidence and independent/final acceptance. Evidence: `docs/shipping/evidence/accept-008-commercial-validator-2026-10-19.md`.
 - **ACCEPT-008 validator boundary addendum (2026-10-23):** Private `6af3fbb7` rejects future completion, secret-like input, and cross-kind evidence-digest reuse; focused commercial tests pass **7/7**. Actual commercial evidence and independent/final acceptance remain open. Evidence: `docs/shipping/evidence/accept-008-commercial-boundary-2026-10-23.md`.
+- **ACCEPT-008 payload-integrity addendum (2026-10-23):** Private `fba771c3`
+  binds each commercial event digest to its canonical kind, subject digest,
+  observation time, and facts. Fact tampering without a matching digest now
+  fails closed; the adjacent acceptance set passes **48/48**. Keep the row
+  unchecked for actual commercial evidence and independent/final acceptance.
+  Score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+  `docs/shipping/evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-009** · truth registry/release-gate reconciliation · deps: ACCEPT-002-008 · Update shipped/partial/planned labels strictly from evidence, list failed gates and rollback/correction work, and make a documented go/no-go. Commit(s): —
 - **ACCEPT-009 implementation addendum (2026-10-23):** Private
   `scripts/reconcile-release-gates.mjs` now validates candidate commits,

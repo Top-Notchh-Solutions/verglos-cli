@@ -12073,6 +12073,16 @@ nothing was deleted. Score remains **244 checked / 36 open / 280 total
 (87.1%)**. Evidence:
 `evidence/accept-006-rubric-digest-boundary-2026-10-23.md`.
 
+## 2026-10-23 · ACCEPT-008 commercial payload binding
+
+Private commit `fba771c3` binds each commercial event digest to its canonical
+kind, subject digest, observation time, and facts. Fact tampering now fails
+closed; the adjacent acceptance set passed **48/48**. Keep `ACCEPT-008` open
+for actual commercial evidence and independent/final acceptance. No external
+state changed and nothing was deleted. Score remains **244 checked / 36 open /
+280 total (87.1%)**. Evidence:
+`evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009 future-date reconciliation boundary
 
 Private commit `f1b74154` rejects a release reconciliation whose `completedAt`

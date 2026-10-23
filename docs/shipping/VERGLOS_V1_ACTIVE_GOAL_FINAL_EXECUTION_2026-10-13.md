@@ -948,6 +948,21 @@ Production, publication, customer, recipient, or release state changed, and
 nothing was deleted. The live score remains **244 checked / 36 open / 280
 total (87.1%)**.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-008 commercial payload binding
+
+Private commit `fba771c3` closes a commercial-evidence integrity gap: every
+event digest now covers the canonical event kind, subject digest, observation
+time, and facts. Changing a checkout, repeat-use, support, hosted-cost,
+recipient-value, or allowance fact without a new digest fails closed. The
+adjacent acceptance set passed **48/48**, including fact-tampering rejection;
+study-protocol, syntax, and diff checks passed.
+
+Evidence: `docs/shipping/evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+Actual commercial evidence and independent/final acceptance remain open. No
+checkbox, provider, Production, publication, customer, recipient, or release
+state changed, and nothing was deleted. The live score remains **244 checked /
+36 open / 280 total (87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-010 artifact inventory
 
 Private commit `199e6095` closes a concrete freeze-contract gap: a candidate

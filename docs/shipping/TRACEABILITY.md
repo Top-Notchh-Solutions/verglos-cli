@@ -9447,6 +9447,19 @@ changed. See
   **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-006-rubric-digest-boundary-2026-10-23.md`.
 
+## ACCEPT-008 commercial payload binding · 2026-10-23
+
+- **Source mapping:** Private implementation commit `fba771c3`.
+- **Contract mapping:** `acceptance:commercial:validate` rejects commercial
+  event facts that do not match their declared evidence digest.
+- **Verification mapping:** Adjacent acceptance contracts **48/48** passed;
+  study-protocol, syntax, and diff checks passed.
+- **Acceptance mapping:** This does not close `ACCEPT-008`; actual commercial
+  evidence and independent/final acceptance remain open. No checkbox or
+  external state changed; nothing was deleted. Score remains **244/36/280
+  (87.1%)**.
+- **Evidence:** `evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source mapping:** Private commit `f1b74154`.
