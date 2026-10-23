@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Production receipt API route mapping
+
+- **Implementation mapping:** Web commit `74239c8` / PR #264 merge
+  `9985f1f7030de66f5f8d07b01705f65c678f1369` maps the bounded public receipt
+  JSON route to the Clerk public matcher and release-smoke contract.
+- **Hosted mapping:** Vercel `main` deployment
+  `verglos-m2zim7kjt-anuragyadav20062002s-projects.vercel.app` is READY and
+  aliases the live site. A forged all-zero ID reaches the route handler and
+  returns the expected JSON 404 without data enumeration.
+- **Verification mapping:** public-release smoke 12/12, truth-registry 37/37,
+  typecheck, diff check, and a 211-file zero-mismatch secret-scanned bundle
+  pass.
+- **Acceptance mapping:** this advances hosted/runtime evidence for the
+  receipt and FINAL-WEB surfaces; it does not prove provider lifecycle,
+  recipient/customer acceptance, independent review, human/field evidence, or
+  final release. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/vercel-web-production-receipt-api-route-fix-2026-10-24.md`.
+
 ## 2026-10-23 · current implementation mappings
 
 - **QUAL-WEB-006:** Web PR #259 / merge `42fe33e` maps the dashboard capture

@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Production receipt API boundary
+
+Web PR #264 merged normally as `9985f1f`; its Vercel `main` Production
+deployment `verglos-m2zim7kjt-anuragyadav20062002s-projects.vercel.app` is READY
+and owns the live aliases. The public receipt API now returns its intended
+bounded JSON 404 for a forged all-zero ID, with `application/json` and
+`no-store`, rather than middleware HTML 404. Public-release smoke passed
+12/12, truth-registry 37/37, typecheck, and diff checks passed. This records
+real hosted implementation/provider evidence, but it does not open provider
+lifecycle completion, customer/recipient acceptance, independent review,
+human/field-CWV, or final-release/go-no-go gates. Score remains
+**244/36/280 (87.1%)**. Evidence:
+`evidence/vercel-web-production-receipt-api-route-fix-2026-10-24.md`.
+
 ## 2026-10-23 · current implementation gate disposition
 
 QUAL-WEB-006 input integrity is implemented by Web PR #259 (`42fe33e`) and

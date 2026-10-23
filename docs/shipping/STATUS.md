@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Production receipt API route boundary verified
+
+Web PR #264 merged normally as `9985f1f`, and the merged `main` Vercel
+Production deployment `verglos-m2zim7kjt-anuragyadav20062002s-projects.vercel.app`
+reported READY with the live `verglos.com` aliases. The bounded public receipt
+API now reaches its route handler: a forged all-zero receipt GET returns JSON
+404 `{\"ok\":false,\"reason\":\"receipt not found\"}` with `application/json`
+and `no-store`, rather than the prior middleware HTML 404. Local public-release
+smoke passed 12/12, truth-registry 37/37, typecheck, and diff checks passed.
+This is hosted implementation evidence only; provider lifecycle, customer,
+reviewer, browser/field, and final-release gates remain open. Score remains
+**244/36/280 (87.1%)**. Evidence:
+`evidence/vercel-web-production-receipt-api-route-fix-2026-10-24.md` and the
+211-file additive bundle.
+
 ## 2026-10-23 · current implementation continuation: Web capture boundary and CLI distribution requalification
 
 Web PR #259 merged as `42fe33e`; its QUAL-WEB-006 dashboard capture reader
