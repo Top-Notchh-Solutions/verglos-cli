@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
@@ -9,7 +9,9 @@ const archiveRoot = resolve(process.argv[2] ?? "");
 if (!process.argv[2]) throw new Error("release archive directory is required");
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const npmOptions = { shell: process.platform === "win32", timeout: 180_000, maxBuffer: 8 * 1024 * 1024 };
-const archiveNames = ["verglos-shared-2.0.0-alpha.1.tgz", "verglos-scanner-2.0.0-alpha.1.tgz", "verglos-reporter-2.0.0-alpha.1.tgz", "verglos-mcp-2.0.0-alpha.1.tgz", "verglos-entitlement-2.0.0-alpha.1.tgz", "verglos-hunt-2.0.0-alpha.1.tgz", "verglos-2.0.0-alpha.1.tgz"];
+const releaseVersion = JSON.parse(await readFile(new URL("../packages/cli/package.json", import.meta.url), "utf8")).version;
+if (typeof releaseVersion !== "string" || !releaseVersion) throw new Error("CLI package manifest has no release version");
+const archiveNames = ["verglos-shared", "verglos-scanner", "verglos-reporter", "verglos-mcp", "verglos-entitlement", "verglos-hunt", "verglos"].map((name) => `${name}-${releaseVersion}.tgz`);
 const archives = archiveNames.map((name) => join(archiveRoot, name));
 const consumer = await mkdtemp(join(tmpdir(), "verglos-upgrade-rollback-"));
 const cli = () => join(consumer, "node_modules", ".bin", process.platform === "win32" ? "verglos.cmd" : "verglos");
@@ -28,7 +30,7 @@ try {
   const upgraded = await version();
   await install("verglos@1.8.3");
   const rolledBack = await version();
-  if (before !== "1.8.3" || upgraded !== "2.0.0-alpha.1" || rolledBack !== "1.8.3") {
+  if (before !== "1.8.3" || upgraded !== releaseVersion || rolledBack !== "1.8.3") {
     throw new Error(`unexpected transition versions: ${before} -> ${upgraded} -> ${rolledBack}`);
   }
   console.log(`upgrade/rollback transition passed: ${before} -> ${upgraded} -> ${rolledBack}`);
