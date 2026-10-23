@@ -2935,3 +2935,21 @@ actual trusted publication/attestation and final acceptance. Score remains
 **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
 overwritten. Evidence:
 `docs/shipping/evidence/dist-002-npm-preflight-identity-boundary-merge-pr190-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-006 rollback read-time binding
+
+CLI PR #191 merged normally into `main` as
+`5f6e2cdea77b678ba82ac6117eb61284b82e0d4f`, preserving implementation commit
+`f46fb8c9ed575e89b1a4f708f019f0f044c60b63`; no squash or branch deletion was
+used. The rollback-plan reader now rechecks the opened regular-file handle
+after reading and rejects identity, size, non-regular, and short-read changes.
+
+The focused rollback suite passed **8/8**, CLI typecheck passed, the full CLI
+package test target passed with only the existing explicit Hunt Docker skips,
+and `git diff --check` passed. Hosted validation was still running at capture
+and is not claimed as green. No provider, registry, signing, Hunt-feed, Web
+deployment, tag, customer, or final release action occurred. Keep `DIST-006`
+unchecked for authenticated rollback/revocation and final acceptance. Score
+remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/dist-006-rollback-handle-recheck-pr191-2026-10-23.md`.

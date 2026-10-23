@@ -159,6 +159,7 @@ const paths = [
   "docs/shipping/evidence/qual-web-005-fresh-migrated-current-head-2026-10-23.md",
   "docs/shipping/evidence/dist-002-npm-preflight-identity-boundary-pr190-2026-10-23.md",
   "docs/shipping/evidence/dist-002-npm-preflight-identity-boundary-merge-pr190-2026-10-23.md",
+  "docs/shipping/evidence/dist-006-rollback-handle-recheck-pr191-2026-10-23.md",
 ];
 
 const FORBIDDEN = [

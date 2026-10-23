@@ -189,6 +189,21 @@
   score remains **244/36/280 (87.1%)**. Nothing was deleted.
 - **Evidence:** `evidence/dist-002-npm-preflight-identity-boundary-merge-pr190-2026-10-23.md`.
 
+## DIST-006 rollback read-time binding merged · 2026-10-23
+
+- **Promotion mapping:** PR #191 merged normally into CLI `main` as
+  `5f6e2cdea77b678ba82ac6117eb61284b82e0d4f`, preserving implementation
+  `f46fb8c9ed575e89b1a4f708f019f0f044c60b63`; no squash or branch deletion.
+- **Implementation:** Rollback reference and rehearsal reads re-stat the
+  opened handle and reject identity, size, non-regular, and short-read changes.
+- **Verification:** Focused rollback tests **8/8**, CLI typecheck, full CLI
+  package test target with explicit Hunt Docker skips, and diff check passed.
+- **Boundary:** Hosted validation was pending at capture. No provider,
+  registry, signing, deployment, tag, customer, or final release action
+  occurred. Keep DIST-006 open; score remains **244/36/280 (87.1%)**. Nothing
+  was deleted.
+- **Evidence:** `evidence/dist-006-rollback-handle-recheck-pr191-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 additive current evidence bundle
 
 - **Artifact:** Additive private bundle with **130** hashed evidence files.

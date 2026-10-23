@@ -193,6 +193,23 @@
   remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/dist-002-npm-preflight-identity-boundary-merge-pr190-2026-10-23.md`.
 
+## DIST-006 rollback read-time binding merged · 2026-10-23
+
+- **Promotion mapping:** PR #191 merged normally into CLI `main` at
+  `5f6e2cdea77b678ba82ac6117eb61284b82e0d4f`, preserving source commit
+  `f46fb8c9ed575e89b1a4f708f019f0f044c60b63`; no squash or branch deletion.
+- **Contract mapping:** The rollback reader validates the opened file again
+  after reading, binding identity, size, regular-file status, and complete
+  bytes to the decision input.
+- **Verification mapping:** Focused rollback tests **8/8**, CLI typecheck,
+  full package tests with the explicit Hunt Docker skips, and diff check passed;
+  hosted validation was pending at capture.
+- **Acceptance mapping:** No provider/registry/signing/deployment action, tag,
+  customer action, or final release sign-off occurred. Keep DIST-006 unchecked
+  for authenticated rollback/revocation and final acceptance. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-006-rollback-handle-recheck-pr191-2026-10-23.md`.
+
 ## ACCEPT-003 additive current evidence bundle · 2026-10-23
 
 - **Source mapping:** Protected bundle builder includes the four latest
