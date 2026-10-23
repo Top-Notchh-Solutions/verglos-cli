@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · reconcile Production receipt API route fix
+
+- **Decision:** Promote the Web public receipt API matcher correction through
+  the normal merge path and record its live Production boundary; do not
+  convert a forged not-found probe into receipt acceptance.
+- **Implementation:** Web commit `74239c8`; PR #264 merged normally as
+  `9985f1f7030de66f5f8d07b01705f65c678f1369`.
+- **Verification:** Vercel `main` deployment
+  `verglos-m2zim7kjt-anuragyadav20062002s-projects.vercel.app` is READY. The
+  all-zero GET returns JSON 404 with `no-store`; local smoke 12/12,
+  truth-registry 37/37, typecheck, and diff checks pass.
+- **Disposition:** Hosted implementation evidence advances, but provider,
+  customer/recipient, independent-review, browser/field, and final-release
+  gates remain open. No data or external customer state was changed. Score
+  remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/vercel-web-production-receipt-api-route-fix-2026-10-24.md`.
+
 ## 2026-10-23 · current implementation continuation
 
 - **Decision:** Merge the QUAL-WEB-006 capture-input boundary and record the

@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Web Production receipt API route fix · 2026-10-24
+
+- **Implementation:** Web commit `74239c8` added the missing public matcher for
+  `/api/v1/receipts(.*)` and its smoke assertion; PR #264 merged normally as
+  `9985f1f7030de66f5f8d07b01705f65c678f1369`.
+- **Provider receipt:** merged `main` deployment
+  `verglos-m2zim7kjt-anuragyadav20062002s-projects.vercel.app` is READY and owns
+  the live aliases. The forged all-zero receipt GET returns the bounded JSON
+  404 with `application/json` and `no-store`.
+- **Verification:** public-release smoke 12/12, truth-registry 37/37,
+  typecheck, and diff checks passed. The 211-file additive bundle verifies
+  with zero mismatches and passed secret scanning.
+- **Disposition:** hosted/runtime implementation advanced; no receipt,
+  database, payment, account, entitlement, webhook, customer, CLI/npm release,
+  or AppSec action occurred. Provider lifecycle, customer/recipient,
+  independent-review, human/field, and final-release gates remain open. Score
+  remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/vercel-web-production-receipt-api-route-fix-2026-10-24.md`.
+
 ## Current implementation continuation · 2026-10-23
 
 - **QUAL-WEB-006:** Web PR #259 merged as `42fe33e`; bounded no-follow
