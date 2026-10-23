@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-006 comprehension scorer boundaries
+
+Private commit `e8a551d1` hardens the comprehension scorer against future
+completion timestamps, duplicate participant identity digests, and
+secret-like material in the complete input, including artifact/rubric fields.
+The focused ACCEPT-006 suite passes **8/8**; the combined current bounded suite
+passes **29/29**. The regenerated private bundle contains **135 unique hashed
+files** with content-manifest SHA-256
+`sha256:b9f5cdfed289a5bd791b574b5e5c56393f4b99a78c0bb34856969e5794e1cd44`;
+secret scan passed. ACCEPT-006 remains open for the real consenting
+participant run, redacted aggregate, and independent scoring review. The live
+score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-accept-006-boundary-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-005 workflow-validator boundary
 
 Private commit `10e39268` hardens the authorized-workflow validator to reject

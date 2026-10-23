@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-006 comprehension scorer boundaries
+
+Private commit `e8a551d1` hardens the comprehension scorer against future
+completion timestamps, duplicate participant identity digests, and
+secret-like material in the complete input, including artifact/rubric fields.
+The focused ACCEPT-006 suite passes **8/8**; the combined current bounded suite
+passes **29/29**. The regenerated private bundle contains **135 unique hashed
+files** with content-manifest SHA-256
+`sha256:b9f5cdfed289a5bd791b574b5e5c56393f4b99a78c0bb34856969e5794e1cd44`;
+secret scan passed. ACCEPT-006 remains open for the real consenting
+participant run, redacted aggregate, and independent scoring review. No
+checkbox changed; score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-accept-006-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-005 workflow-validator boundary
 
 Private commit `10e39268` hardens the authorized-workflow validator to reject
@@ -5004,6 +5019,7 @@ Evidence/problem: external validation is deliberately last. It validates the com
 - **ACCEPT-005 blocker addendum (2026-10-22):** The protocol validator passes, but reports `externalContact: not-performed` and `customerAcceptance: open`. The row still requires a named external owner's consent record, exact founder authorization, reproducible redacted release reconciliation, and fixture/evidence expiry or deletion proof. Adjacent merged-head truth checks pass **35/35**, **4/4**, and **4/4**; no checkbox changed. Evidence: `docs/shipping/evidence/accept-005-current-blocker-audit-2026-10-22.md`.
 - **ACCEPT-005 current-head qualification addendum (2026-10-22):** Clean merged CLI/Web scans exited **0** with CLI **78 findings / score 67 high** and Web **22 findings / score 73 medium**; both coverage states are incomplete because provenance was skipped. This updates first-party evidence only and does not close the external workflow row. Evidence: `docs/shipping/evidence/accept-005-current-head-first-party-qualification-2026-10-22.md`.
 - [ ] **ACCEPT-006** · report comprehension test · deps: ACCEPT-003/005 · Developers/leads/recipients answer exact artifact, decision, change, remaining risk, authenticity, and limitations within the defined gate. Commit(s): private `6430a38d` adds the bounded six-question scorer and `423daecc` adds its regression coverage. Implementation substrate is complete; the row remains open for the preregistered consenting participant run, aggregate result, independent scoring review, and final acceptance. Evidence: `docs/shipping/evidence/accept-006-comprehension-scorer-2026-10-19.md`.
+- **ACCEPT-006 scorer boundary addendum (2026-10-23):** Private `e8a551d1` rejects future completion, duplicate participant digests, and secret-like artifact/input material; focused scorer tests pass **8/8**. The participant run and independent review remain open. Evidence: `docs/shipping/evidence/accept-006-comprehension-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-007** · Hunt adjudication study · deps: ACCEPT-001/003 · Evaluate at least 100 independently adjudicated findings with preregistered methodology; separate false confirmation, not reproduced, and environment failure. Commit(s): —
 - [ ] **ACCEPT-008** · commercial acceptance/COGS evidence · deps: technical acceptance + founder authorization · Test actual plan agreements/checkout, repeat use, support minutes, hosted cost, recipient value, and explicit allowances; hypotheses remain hypotheses otherwise. Commit(s): private `64c1a477` adds the bounded commercial-evidence validator and `f986f80c` adds its regression coverage. Implementation substrate is complete; the row remains open for actual agreement/checkout/repeat-use/support/cost/recipient evidence and independent/final acceptance. Evidence: `docs/shipping/evidence/accept-008-commercial-validator-2026-10-19.md`.
 - [ ] **ACCEPT-009** · truth registry/release-gate reconciliation · deps: ACCEPT-002-008 · Update shipped/partial/planned labels strictly from evidence, list failed gates and rollback/correction work, and make a documented go/no-go. Commit(s): —

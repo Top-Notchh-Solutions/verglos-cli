@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-006 comprehension scorer boundaries
+
+Private commit `e8a551d1` hardens the scorer against future completion,
+duplicate participant digests, and secret-like artifact/input material. The
+focused scorer suite passes **8/8** and the combined current bounded suite
+passes **29/29**. The regenerated bundle has **135 unique files**,
+content-manifest SHA-256
+`b9f5cdfed289a5bd791b574b5e5c56393f4b99a78c0bb34856969e5794e1cd44`, and a
+passing secret scan. ACCEPT-006 remains open for the real participant run and
+independent scoring review. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-evidence-bundle-accept-006-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-005 workflow-validator boundary
 
 Private commit `10e39268` hardens the authorized-workflow validator against

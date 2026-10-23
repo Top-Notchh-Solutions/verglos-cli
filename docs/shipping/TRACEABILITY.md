@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## ACCEPT-006 comprehension scorer boundaries · 2026-10-23
+
+- **Source mapping:** Private commit `e8a551d1` and
+  `scripts/score-comprehension-test.mjs`.
+- **Contract mapping:** Future completion, duplicate participant identity, and
+  secret-like artifact/input material now fail closed; answers remain
+  digest-only.
+- **Verification mapping:** Focused scorer suite **8/8**; combined current
+  bounded suite **29/29**; syntax and diff checks passed.
+- **Artifact mapping:** 135 unique bundle files; content-manifest SHA-256
+  `sha256:b9f5cdfed289a5bd791b574b5e5c56393f4b99a78c0bb34856969e5794e1cd44`;
+  secret scan passed.
+- **Acceptance mapping:** ACCEPT-006 remains open for the consenting
+  participant run, redacted aggregate, and independent scoring review. Score
+  remains **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-006-boundary-2026-10-23.md`.
+
 ## ACCEPT-005 workflow-validator boundary · 2026-10-23
 
 - **Source mapping:** Private commit `10e39268` and

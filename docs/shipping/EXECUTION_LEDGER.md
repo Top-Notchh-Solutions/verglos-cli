@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-006 comprehension scorer boundaries
+
+- **Implementation:** Private commit `e8a551d1` hardens the scorer against
+  future completion, duplicate participant digests, and secret-like
+  artifact/input material.
+- **Verification:** Focused scorer suite **8/8**; combined current bounded
+  suite **29/29**; syntax and diff checks passed.
+- **Artifact:** Regenerated private bundle contains **135 unique files** with
+  content-manifest SHA-256
+  `sha256:b9f5cdfed289a5bd791b574b5e5c56393f4b99a78c0bb34856969e5794e1cd44`;
+  secret scan passed.
+- **Disposition:** ACCEPT-006 remains open for the consenting participant run,
+  redacted aggregate, and independent scoring review. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-006-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-005 workflow-validator boundary
 
 - **Implementation:** Private commit `10e39268` makes non-string
