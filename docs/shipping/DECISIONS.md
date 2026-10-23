@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current checkout-bound Test Mode order
+
+- **Decision:** Retain the real synthetic Test Mode order receipt as current
+  provider-bound evidence, while keeping the complete lifecycle gate open.
+- **Verification:** The current checkout route returned HTTP 200 against an
+  isolated local database; Razorpay read-back returned HTTP 200 with status
+  `created`, Cards-only method binding, and the canonical 280,943-paise amount.
+- **Disposition:** This supersedes the earlier local QR credential failure as
+  the current credential state. It does not prove capture, webhook, refund,
+  entitlement, renewal, Production payment, or money movement. No checkbox
+  changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/razorpay-testmode-bound-order-2026-10-24.md`.
+
 ## 2026-10-24 · record Production Cards-only checkout presentation
 
 - **Decision:** Record the live checkout presentation as bounded Production
