@@ -1,5 +1,56 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · owner-controlled human review recorded
+
+At **2026-10-24 01:18:38 IST** (`2026-10-23T19:48:38Z`), Anurag Yadav,
+owner of Top Notchh Solutions and Verglos, recorded an owner-controlled human
+review of the current backlog, implementation evidence, and acceptance boundary.
+The owner states that he is the only human currently working on Verglos and
+personally performed the review. This records human review of the technical
+implementation/evidence-preparation scope for continued execution.
+
+It does not represent independent review, customer/recipient acceptance,
+provider/Production action, field evidence, AppSec/Hunt review, or final
+release/go-no-go. Rows requiring those distinct events remain unchecked. The
+owner-controlled review covers all **23 non-AppSec** open implementation rows,
+so no additional owner-review artifact is needed from the owner for shipping
+progress before the next testing/POC execution. The score remains **244 checked
+/ 36 open / 280 total (87.1%)**, with **13 AppSec-dependent / 23 non-AppSec**
+rows. Evidence:
+`docs/shipping/evidence/owner-controlled-human-review-2026-10-24.md`. The
+additive acceptance bundle includes the record as **205/205** files, verifies
+with zero mismatches, passes secret scanning, and matches manifest
+`sha256:7eba9d28779e2880149bb9e54a1e76d886ff69a7428f10c26974cb869f1cba27`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-owner-review-v3.json`.
+
+## 2026-10-24 · current Preview checkout receipt
+
+The current Web Preview deployment served `/checkout` with HTTP **200**, the
+expected security headers, and a CSP permitting the Razorpay checkout origin
+for script, connect, frame, and form actions. This is read-only hosted route
+evidence; no checkout, payment, webhook, database, entitlement, account, or
+Production write occurred. The additive bundle verifies **204/204** files with
+zero mismatches and passed secret scanning, manifest
+`sha256:ec44445fc794eed900f6e89c8e0fa012d54b11b673775a4d6b4b80cbf5540db0`.
+Keep ACCEPT-003 unchecked for authenticated checkout/payment lifecycle,
+review, and acceptance evidence. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/vercel-web-current-head-checkout-preview-2026-10-24.md`
+and `docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-checkout-preview-v4.json`.
+
+## 2026-10-24 · Test-Mode inventory merged
+
+The redacted Test-Mode provider inventory and bundle-source update merged
+normally in PR **#222** at CLI `main` merge commit
+`76dba49fb1f36bb467dd5c4dd39eae3a9be013c6`. Hosted platform matrix
+`40011386284` completed **10/10** successfully, including in-toto, and the
+standard validator passed. Verglos self-scan `40011386653` reproduced the
+known public-ledger boundary failure because `docs/shipping/**` remains in the
+public repository; no bypass or history rewrite was used. Keep the score at
+**244 checked / 36 open / 280 total (87.1%)**: **13** AppSec-dependent and
+**23** non-AppSec rows. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-testmode-recheck-v3.json`.
+
 ## 2026-10-24 · current Test-Mode provider inventory
 
 The isolated Razorpay Test-Mode configuration accepted a redacted read-only
