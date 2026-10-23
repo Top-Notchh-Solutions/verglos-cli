@@ -15328,6 +15328,20 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   deleted. Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
 
+## ACCEPT-013 correction-loop chronology · 2026-10-23
+
+- **Source:** Private implementation commit `29184f95`.
+- **Contract mapping:** Held-out freeze/review, adjudication, and correction
+  timestamps are now bounded by the run clock while train/holdout ordering is
+  retained.
+- **Verification:** Adjacent acceptance contracts **55/55**, study protocol,
+  syntax, and diff checks passed.
+- **Boundary:** Keep `ACCEPT-013` open for the actual held-out run,
+  independent review, customer acceptance, and final release decision. No
+  external state changed and nothing was deleted. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-013-correction-time-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source:** Private implementation commit `f1b74154`.

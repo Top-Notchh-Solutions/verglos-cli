@@ -12083,6 +12083,17 @@ state changed and nothing was deleted. Score remains **244 checked / 36 open /
 280 total (87.1%)**. Evidence:
 `evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
 
+## 2026-10-23 · ACCEPT-013 correction-loop chronology
+
+Private commit `29184f95` rejects future holdout freeze/review, adjudication,
+and correction timestamps while preserving the protocol's ordering checks. The
+adjacent acceptance set passed **55/55**, including future-review rejection.
+Keep `ACCEPT-013` open for the actual held-out run, independent review,
+customer acceptance, and final release decision. No external state changed and
+nothing was deleted. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`evidence/accept-013-correction-time-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009 future-date reconciliation boundary
 
 Private commit `f1b74154` rejects a release reconciliation whose `completedAt`

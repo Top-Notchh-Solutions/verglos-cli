@@ -5221,6 +5221,14 @@ assumes the legacy `licenses` table. No checkbox changed; backlog remains
   **244 checked / 36 open / 280 total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md`.
 - [ ] **ACCEPT-013** · false-positive and false-truth correction loop · deps: ACCEPT-012, QUAL-CLI-004/006, QUAL-WEB-005/006 · Use a held-out fixture split and review each high-impact finding/claim; correct rules, copy, and evidence contracts without tuning against the final holdout. Commit(s): Private `14d916df` plus boundary fix `daf6524f` add `scripts/run-acceptance-correction-loop.mjs`, package command `acceptance:correction:run`, and 6 focused contract tests. The protocol substrate is complete; the row remains open for the actual preregistered held-out run, dependent qualification, independent review, and final acceptance. Evidence: `docs/shipping/evidence/accept-013-held-out-correction-loop-2026-10-23.md`.
+- **ACCEPT-013 chronology addendum (2026-10-23):** Private `29184f95`
+  rejects future holdout freeze/review, adjudication, and correction
+  timestamps relative to the run clock while preserving train-before-freeze
+  and holdout-ordering checks. The adjacent acceptance set passes **55/55**.
+  Keep the row unchecked for the actual held-out run, independent review,
+  customer acceptance, and final release decision. Score remains **244 checked /
+  36 open / 280 total (87.1%)**. Evidence:
+  `docs/shipping/evidence/accept-013-correction-time-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-014** · final regression corpus and go/no-go evidence · deps: ACCEPT-013, GITHUB-WEB-004, PLAN-WEB-015 · Re-run the frozen corpus across plan/user/tenant scenarios, compare report and performance deltas, reconcile truth/risk/gates, and issue a dated release recommendation. Commit(s): Private `acceptance:release:regress` implementation in `scripts/run-final-regression.mjs`; focused contract tests pass **4/4**. Evidence: `docs/shipping/evidence/accept-014-final-regression-contract-2026-10-23.md`. Row remains open for the actual frozen-corpus scenario run, dependent correction/provider gates, and final decision.
 - **ACCEPT-014 Web-candidate binding addendum (2026-10-23):** Private
   `1391acf4` requires every regression scenario to carry the exact candidate

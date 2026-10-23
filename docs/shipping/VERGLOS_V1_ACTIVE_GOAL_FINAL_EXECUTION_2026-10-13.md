@@ -948,6 +948,21 @@ Production, publication, customer, recipient, or release state changed, and
 nothing was deleted. The live score remains **244 checked / 36 open / 280
 total (87.1%)**.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-013 chronology binding
+
+Private commit `29184f95` hardens the held-out correction loop against future
+holdout freeze/review, adjudication, and correction timestamps. Existing
+train-before-freeze and holdout-ordering checks remain enforced. The adjacent
+acceptance set passed **55/55**, including the future-review regression;
+study-protocol, syntax, and diff checks passed.
+
+Evidence: `docs/shipping/evidence/accept-013-correction-time-boundary-2026-10-23.md`.
+This is implementation progress only; the actual held-out run, independent
+review, customer acceptance, and final release decision remain open. No
+checkbox, provider, Production, publication, customer, recipient, or release
+state changed, and nothing was deleted. The live score remains **244 checked /
+36 open / 280 total (87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-008 commercial payload binding
 
 Private commit `fba771c3` closes a commercial-evidence integrity gap: every

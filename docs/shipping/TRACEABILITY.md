@@ -9460,6 +9460,20 @@ changed. See
   (87.1%)**.
 - **Evidence:** `evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
 
+## ACCEPT-013 correction-loop chronology · 2026-10-23
+
+- **Source mapping:** Private implementation commit `29184f95`.
+- **Contract mapping:** `acceptance:correction:run` rejects protocol events
+  dated after the run clock and retains the train-before-freeze/holdout-order
+  invariants.
+- **Verification mapping:** Adjacent acceptance contracts **55/55** passed;
+  study-protocol, syntax, and diff checks passed.
+- **Acceptance mapping:** This does not close `ACCEPT-013`; held-out,
+  independent-review, customer, and final-release evidence remain open. No
+  checkbox or external state changed; nothing was deleted. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-013-correction-time-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source mapping:** Private commit `f1b74154`.
