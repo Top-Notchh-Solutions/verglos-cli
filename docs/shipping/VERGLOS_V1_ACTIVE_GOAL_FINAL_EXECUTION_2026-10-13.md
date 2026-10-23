@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · QUAL-WEB-005 isolated database integration
+
+The current Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` was run against
+a fresh local Docker `postgres:16-alpine` database at
+`127.0.0.1:55437/verglos_test`, after applying all **43** current migrations.
+The focused privacy/deletion suite now passes **47/47**, including the two
+PostgreSQL integrations that previously skipped without an isolated database.
+`pnpm typecheck` and `git diff --check` also pass; the fixture-user cleanup
+count is zero. The remote Neon test URL was not used. Evidence:
+`docs/shipping/evidence/qual-web-005-local-isolated-integration-2026-10-23.md`.
+
+The additive acceptance bundle v8 contains **184 files** and passes the
+checked-in verifier with **0 mismatches** and secret scanning passed. Its
+manifest is
+`sha256:cf67a55b0b4d661ab38c33ebc38ac5cd7c668b417f0ac5d94d9e05595bb29393`
+and its bundle-file SHA-256 is
+`b7f11b71444c663b9572c0fb7c4f127a86aabc40d56eeb5689625e5e05d6a815`.
+
+This completes the local database execution evidence for QUAL-WEB-005 only.
+Its Production migration/rollback, legal-retention disposition,
+customer-held-record, independent-review, and final-acceptance conditions
+remain open. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · machine-checked backlog partition
 
 The checked-in `pnpm shipping:backlog:audit` command confirms the live

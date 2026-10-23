@@ -148,6 +148,7 @@ const paths = [
   "docs/shipping/evidence/acceptance-evidence-bundle-current-retry-2026-10-23.md",
   "docs/shipping/evidence/backlog-audit-13-23-current-2026-10-23.md",
   "docs/shipping/evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md",
+  "docs/shipping/evidence/qual-web-005-local-isolated-integration-2026-10-23.md",
   "docs/shipping/evidence/accept-003-qual-web005-bundle-integrity-v3-2026-10-23.md",
   "docs/shipping/evidence/accept-003-bundle-verifier-2026-10-23.md",
   "docs/shipping/evidence/accept-002-003-clean-current-story-run-2026-10-23.md",
