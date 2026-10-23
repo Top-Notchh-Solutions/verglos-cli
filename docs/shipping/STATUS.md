@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current-head local release artifact candidate
+
+CLI PR #241 merged normally as `8e87c81d` after correcting stale SBOM version
+metadata. A fresh local `2.0.0-alpha.4` candidate produced **7/7** public
+archives and **8/8** sidecars; strict artifact verification passed **15/15**,
+including checksums, origin metadata, notices in every archive, current
+CycloneDX/SPDX version binding, and clean-consumer installation/import. The
+license inventory reports **250** packages, **1** bundled component, and **0**
+review blockers. Release-sidecar tests passed **14/14** and the CLI build
+passed **8/8**.
+
+This advances local DIST-003/DIST-006 and release-contract evidence only.
+Npm publication, registry attestation, provider lifecycle, customer/recipient,
+independent-review, AppSec/Hunt, and final-release gates remain open. No
+checkbox changed; score remains **245/35/280 (87.5%)**, with 13
+AppSec-dependent and 22 non-AppSec rows open. Evidence:
+`evidence/current-head-release-artifact-candidate-2026-10-24.md`.
+
 ## 2026-10-24 · Razorpay Test-Mode QR attempt
 
 The bounded synthetic QR-create attempt used the local Test-Mode key pair and

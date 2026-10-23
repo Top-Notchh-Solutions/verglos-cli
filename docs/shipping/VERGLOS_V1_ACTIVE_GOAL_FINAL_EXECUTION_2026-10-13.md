@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-head release artifact candidate
+
+The current CLI release generators were corrected and merged normally in CLI
+PR #241 (`8e87c81d`). CycloneDX and SPDX metadata now derive their version from
+the package manifest instead of stale `2.0.0-alpha.1` literals. A fresh local
+`2.0.0-alpha.4` candidate then produced **7/7** public archives and **8/8**
+required sidecars; checksums, origin metadata, archive notices, and strict
+seven-package verification passed for **15/15** artifacts. The dependency
+inventory reports **250** package entries, **1** bundled component, and **0**
+review blockers; clean-consumer installation/import and the bounded signed Hunt
+fixture passed. Release-sidecar tests passed **14/14** and the CLI build passed
+**8/8**. Evidence:
+`docs/shipping/evidence/current-head-release-artifact-candidate-2026-10-24.md`.
+
+This is local candidate evidence only. No npm publication, registry
+attestation, provider lifecycle, customer/recipient, independent-review,
+AppSec/Hunt, or final go/no-go event was created, and no release tag was
+published. No backlog checkbox changed. The score remains **245 checked / 35
+open / 280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22
+non-AppSec** rows.
+
 ## Latest continuation result · 2026-10-24 · Razorpay Test-Mode QR attempt
 
 One bounded synthetic QR lifecycle attempt used the local Razorpay Test-Mode
