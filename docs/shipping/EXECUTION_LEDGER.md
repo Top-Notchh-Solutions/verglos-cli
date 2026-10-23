@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## App-bound Cards fixture boundary · 2026-10-24
+
+- **Application/provider:** Current order route HTTP 200; Cards-only Test Mode
+  order lookup HTTP 200; status `created`; canonical amount and 12 expected
+  signed binding keys present.
+- **Hosted result:** Cards form rendered and accepted fixture input, but no
+  terminal provider result, payment record, OTP completion, handler, or
+  webhook followed. Provider payments read-back contained zero records.
+- **Disposition:** No money, Production state, entitlement, customer state,
+  or deletion changed. No checkbox changed; score remains **245/35/280
+  (87.5%)**.
+- **Evidence:** `evidence/razorpay-testmode-card-fixture-boundary-2026-10-24.md`.
+
 ## Current checkout-bound Test Mode order · 2026-10-24
 
 - **Provider receipt:** The current checkout route created one synthetic

@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · app-bound Cards fixture boundary
+
+The current Web order route returned HTTP **200** with `card` / Cards-only
+methods, and the owner-controlled Test Mode provider returned HTTP **200** for
+the bound order. The latest app-bound order was created at
+`2026-10-23T22:39:50Z`, with status `created`, canonical amount **280,943
+paise / INR 2,809.43**, and all 12 expected catalog, checkout-signature,
+identity, term, currency, and method note keys. The read-only provider payments
+endpoint returned HTTP **200** with **0** payment records.
+
+The hosted harness reached the Cards form and submitted the documented Test
+Mode fixture, but the provider returned to the form without a terminal
+success/failure result, handler response, OTP completion, payment, or webhook.
+No money moved and no provider event was fabricated. This is stronger
+app-bound provider evidence, but the provider-lifecycle gate remains open and
+no checkbox changed. The authoritative score remains **245 checked / 35 open /
+280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**
+rows. Evidence:
+`docs/shipping/evidence/razorpay-testmode-card-fixture-boundary-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · current checkout-bound Test Mode order
 
 The owner-controlled Test Mode pair was revalidated through the current

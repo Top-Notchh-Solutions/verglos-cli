@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · app-bound Cards fixture boundary
+
+The current order route returned HTTP **200** with Cards-only methods; the
+bound Razorpay Test Mode order returned HTTP **200** with status `created`, and
+the provider payments read-back returned **0** records. The hosted card
+fixture reached the Cards form but did not produce capture, payment, OTP,
+handler, or webhook evidence. Provider lifecycle remains closed; score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/razorpay-testmode-card-fixture-boundary-2026-10-24.md`.
+
 ## 2026-10-24 · current checkout-bound Test Mode provider receipt
 
 The current route created one synthetic Cards-only Pro order through the valid

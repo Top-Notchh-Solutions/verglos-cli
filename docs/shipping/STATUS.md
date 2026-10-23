@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · app-bound Cards fixture boundary
+
+The current app order route and provider order lookup returned HTTP **200**;
+the order was Cards-only, canonical amount, and status `created`. Provider
+read-back found **0** payments. The hosted fixture reached the Cards form but
+did not produce a terminal result or webhook. No money or Production state
+moved. Score remains **245/35/280 (87.5%)**, with 13 AppSec-dependent and 22
+non-AppSec rows open. Evidence:
+`evidence/razorpay-testmode-card-fixture-boundary-2026-10-24.md`.
+
 ## 2026-10-24 · current checkout-bound Test Mode order
 
 The current checkout route created a synthetic Cards-only Pro order through the

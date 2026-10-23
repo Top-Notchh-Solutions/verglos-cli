@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain provider lifecycle gate after app-bound Cards probe
+
+- **Decision:** Record the current app-bound Cards-only Test Mode boundary and
+  keep provider lifecycle open.
+- **Verification:** Application route and provider order read-back returned
+  HTTP 200; the order was `created` with the canonical amount and signed
+  catalog/checkout bindings; provider payments returned zero records. Hosted
+  card submission returned to the form without a terminal result.
+- **Disposition:** No capture, webhook, entitlement, money movement, or
+  checkbox change. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/razorpay-testmode-card-fixture-boundary-2026-10-24.md`.
+
 ## 2026-10-24 · record current checkout-bound Test Mode order
 
 - **Decision:** Retain the real synthetic Test Mode order receipt as current
