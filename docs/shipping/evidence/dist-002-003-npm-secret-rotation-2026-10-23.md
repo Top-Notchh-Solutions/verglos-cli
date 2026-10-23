@@ -25,3 +25,14 @@ until the whole shipping goal is complete. The earlier alpha.4 partial state
 remains five of seven packages, with `@verglos/hunt` absent and the unscoped
 CLI not attempted. Nothing was deleted.
 
+## Candidate workflow audit
+
+The candidate publish workflow at CLI commit `70ddc01d` grants
+`id-token: write` and invokes `npm publish --provenance`; it does not reference
+`NPM_TOKEN` or set `NODE_AUTH_TOKEN`. That is intentional: the DIST-002
+contract is OIDC trusted publishing with no long-lived publish token. The new
+secret therefore does not alter the current candidate workflow. The remaining
+provider blocker is first publication/trusted-publisher setup for the absent
+`@verglos/hunt` package. Resolving that before the final release would require
+an npm-side package/trusted-publisher action or an explicitly approved,
+documented first-publication exception; neither is being performed now.

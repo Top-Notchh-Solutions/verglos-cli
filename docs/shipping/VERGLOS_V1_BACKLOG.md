@@ -4,11 +4,12 @@
 
 The owner replaced and read back the public CLI repository's GitHub Actions
 `NPM_TOKEN` secret without exposing its value. No release workflow, tag, or
-npm registry write was triggered; effective npm organization/package permission
-remains unverified. Keep `DIST-002`/`DIST-003` open and public publication
-paused until the whole shipping goal is complete. No checkbox changed. The
-live score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
-deleted. Evidence:
+npm registry write was triggered. The candidate workflow uses OIDC and does
+not consume this token; the remaining provider blocker is first
+publication/trusted-publisher setup for absent `@verglos/hunt`. Keep
+`DIST-002`/`DIST-003` open and public publication paused until the whole
+shipping goal is complete. No checkbox changed. The live score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted. Evidence:
 `docs/shipping/evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
 
 ## 2026-10-23 · DIST-002/003 npm publication observation

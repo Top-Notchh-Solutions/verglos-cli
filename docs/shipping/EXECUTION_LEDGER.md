@@ -7,8 +7,10 @@
   The secret name was read back with `gh secret list`; the token value was not
   printed or stored.
 - **Provider boundary:** No workflow dispatch, tag creation, or npm registry
-  write occurred. Secret presence does not prove npm organization/package
-  permission; that remains an authorized-release observation.
+  write occurred. The candidate workflow at `70ddc01d` uses OIDC and does not
+  consume `NPM_TOKEN`; secret presence does not prove npm organization/package
+  permission. The remaining blocker is first publication/trusted-publisher
+  setup for the absent `@verglos/hunt` package.
 - **Disposition:** Keep public publication paused until whole-goal completion;
   keep `DIST-002`/`DIST-003` open. Score remains **244/36/280 (87.1%)**.
   Nothing was deleted. Evidence:

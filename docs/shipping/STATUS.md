@@ -5,11 +5,12 @@
 The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`
 secret. The secret name was confirmed by `gh secret list`; its value is not
 stored in this tracker. No workflow was dispatched, tag was created, or npm
-registry write occurred. This removes the stale-secret configuration concern,
-but effective npm organization/package permission remains unverified until an
-authorized release attempt. Public publication remains paused until the whole
-shipping goal is complete. Score remains **244 checked / 36 open / 280 total
-(87.1%)**. Nothing was deleted. Evidence:
+registry write occurred. The candidate workflow is OIDC-based and does not
+consume this secret; wiring it in would regress the no-long-lived-token
+DIST-002 contract. The remaining provider blocker is first publication/trusted
+publisher setup for the absent `@verglos/hunt` package. Public publication
+remains paused until the whole shipping goal is complete. Score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted. Evidence:
 `evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
 
 ## 2026-10-23 · DIST-002/003 alpha.4 partial provider publication

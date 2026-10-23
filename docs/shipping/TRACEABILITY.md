@@ -6,8 +6,9 @@
   `Top-Notchh-Solutions/verglos-cli` was replaced by the owner and confirmed
   present through the GitHub CLI; the value is intentionally not recorded.
 - **Verification mapping:** No release workflow, tag, or npm write was
-  triggered. Effective npm organization/package permission remains unverified
-  until an authorized release attempt.
+  triggered. Candidate commit `70ddc01d` uses OIDC (`id-token: write`) and does
+  not consume `NPM_TOKEN`; the absent `@verglos/hunt` first-publication/
+  trusted-publisher setup remains the provider blocker.
 - **Acceptance mapping:** `DIST-002`/`DIST-003` remain open. Publication is
   paused until the whole shipping goal is complete. Score remains
   **244/36/280 (87.1%)**; nothing was deleted.

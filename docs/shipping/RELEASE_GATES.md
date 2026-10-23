@@ -4,10 +4,12 @@
 
 The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`
 secret and confirmed its presence without exposing its value. No workflow,
-tag, or registry write was triggered. The credential's effective npm
-organization/package permission remains unverified; public publication stays
-paused until whole-goal completion. `DIST-002` and `DIST-003` remain open, and
-the current score is **244/36/280 (87.1%)**. Nothing was deleted. Evidence:
+tag, or registry write was triggered. The candidate workflow intentionally uses
+OIDC (`id-token: write`) and does not consume this token. The effective
+provider blocker remains first publication/trusted-publisher setup for the
+absent `@verglos/hunt` package; public publication stays paused until whole-goal
+completion. `DIST-002` and `DIST-003` remain open, and the current score is
+**244/36/280 (87.1%)**. Nothing was deleted. Evidence:
 `evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
 
 ## 2026-10-23 · FINAL-WEB-007/008 public release integration gate

@@ -57,12 +57,14 @@ security-review track is unchanged.
 The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`
 secret and confirmed the secret name through `gh secret list`; the token value
 is not recorded. No release workflow, tag, or npm registry write was triggered.
-This records provider configuration progress only: effective npm
-organization/package permission remains unverified until an explicitly
-authorized release attempt. Public publication remains paused until the whole
-shipping goal is complete. `DIST-002` and `DIST-003` stay open, the score is
-unchanged at **244 checked / 36 open / 280 total (87.1%)**, and nothing was
-deleted. Evidence:
+This records provider configuration progress only. The candidate workflow at
+CLI commit `70ddc01d` uses OIDC and does not consume `NPM_TOKEN`; wiring the
+secret into it would regress the no-long-lived-token `DIST-002` contract. The
+remaining provider blocker is first publication/trusted-publisher setup for
+the absent `@verglos/hunt` package. Public publication remains paused until
+the whole shipping goal is complete. `DIST-002` and `DIST-003` stay open, the
+score is unchanged at **244 checked / 36 open / 280 total (87.1%)**, and
+nothing was deleted. Evidence:
 `docs/shipping/evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
 
 ## Execution-input manifest · 2026-10-23
