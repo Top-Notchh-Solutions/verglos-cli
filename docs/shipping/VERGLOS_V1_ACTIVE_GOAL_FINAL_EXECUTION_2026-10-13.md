@@ -3014,3 +3014,27 @@ and file SHA-256
 `58542ed8c80d1ce6c9a4d7af388551bd2405cdec2b239de560d8ee824713829b`.
 Score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
 `docs/shipping/evidence/accept-013-correction-loop-version-binding-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-001 package license-read binding
+
+CLI PR #179 implementation commit `d6101b2a92554e06a1441e7f021989e6352676f6`
+binds repository and staged package `LICENSE` reads to bounded regular-file
+handles. It merged normally into CLI `main` as
+`a833a9ff12a3d44994fecdb95cea5a1787ba1c00`; no squash or branch deletion was
+used. Hosted self-scan, standard validation, in-toto, and all nine platform
+matrix cells passed. Targeted local boundary tests passed **19/20** and CLI
+typecheck passed; the one local pack-generation test is limited by missing
+optional `@esbuild/*@0.28.1` manifests in this machine's installed dependency
+metadata, confirmed unchanged by frozen install. `git diff --check` passed.
+
+This is implementation/hosted qualification evidence only. `DIST-001`
+remains unchecked for dependent product surfaces, final license/release
+qualification, independent review where required, and final acceptance. No
+tag, npm publication, provider, Production, customer, or release-sign-off
+event occurred. The additive bundle contains **152** files with manifest
+`sha256:da252ce9ed967f112fd8a42108071c78bda6ed7fe0a8565fdf56a7c7c3b739fd`
+and file SHA-256
+`792c1240246b14ac91c92016783001fcdee01d1ee5af06f661adf361553c9e71`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-001-license-read-binding-pr179-2026-10-23.md`.

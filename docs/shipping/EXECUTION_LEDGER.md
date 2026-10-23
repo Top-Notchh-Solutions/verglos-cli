@@ -15445,3 +15445,23 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-013-correction-loop-version-binding-2026-10-23.md`;
   additive bundle manifest `sha256:44a5baea01b1a3ca37e8f13ac61d242b3957e97bf2986c470938a5823d7c159f`.
+
+## DIST-001 package license-read binding · 2026-10-23
+
+- **Source mapping:** CLI PR #179 implementation commit
+  `d6101b2a92554e06a1441e7f021989e6352676f6`, merged normally as
+  `a833a9ff12a3d44994fecdb95cea5a1787ba1c00`; source branch preserved.
+- **Contract mapping:** Repository and staged package `LICENSE` reads in the
+  packed-manifest audit and public packer now use bounded regular-file
+  handles, with source regressions for both boundaries.
+- **Verification mapping:** Hosted self-scan, standard validation, in-toto,
+  and all nine platform matrix cells passed. Targeted local boundary tests
+  passed **19/20**; the one local pack-generation test is limited by missing
+  optional `@esbuild/*@0.28.1` manifests in installed dependency metadata.
+  Typecheck and diff check passed.
+- **Acceptance mapping:** Keep `DIST-001` open for dependent product
+  surfaces, final license/release qualification, independent review where
+  required, and final acceptance. No external release state changed and
+  nothing was deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-001-license-read-binding-pr179-2026-10-23.md`;
+  additive bundle manifest `sha256:da252ce9ed967f112fd8a42108071c78bda6ed7fe0a8565fdf56a7c7c3b739fd`.

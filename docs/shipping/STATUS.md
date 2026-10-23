@@ -12081,6 +12081,23 @@ and nothing was deleted or overwritten. Score remains **244 checked / 36 open /
 280 total (87.1%)**. Evidence:
 `evidence/accept-013-correction-loop-version-binding-2026-10-23.md`.
 
+## 2026-10-23 · DIST-001 package license-read binding
+
+CLI PR #179 merged normally as `a833a9ff12a3d44994fecdb95cea5a1787ba1c00`,
+preserving source commit `d6101b2a92554e06a1441e7f021989e6352676f6`. The
+repository and staged package license reads are now bounded regular-file
+reads. Hosted self-scan, standard validation, in-toto, and all nine platform
+matrix cells passed. Targeted local boundary tests passed **19/20**, with the
+one pack-generation failure limited to missing optional package manifests in
+the local installed dependency metadata; typecheck and diff check passed.
+
+This does not close `DIST-001`: dependent product surfaces, final
+license/release qualification, independent review where required, and final
+acceptance remain open. No external release state changed and nothing was
+deleted or overwritten. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`evidence/dist-001-license-read-binding-pr179-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-012 triage report integrity binding
 
 Private commit `c46bbdfd` binds public-OSS triage to the exact report bytes

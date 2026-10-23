@@ -9451,6 +9451,23 @@ changed. See
   Nothing was deleted or overwritten.
 - **Evidence:** `evidence/accept-013-correction-loop-version-binding-2026-10-23.md`.
 
+## DIST-001 package license-read binding · 2026-10-23
+
+- **Source mapping:** CLI PR #179 source `d6101b2a92554e06a1441e7f021989e6352676f6`,
+  merged normally as `a833a9ff12a3d44994fecdb95cea5a1787ba1c00`.
+- **Contract mapping:** The packed-manifest audit and public packer bind
+  repository/staged package `LICENSE` reads to bounded regular-file handles.
+- **Verification mapping:** Hosted self-scan, standard validation, in-toto,
+  and all nine platform matrix cells passed; local targeted boundary tests
+  passed **19/20**, with one pack-generation environment limitation, and
+  typecheck/diff check passed.
+- **Acceptance mapping:** This is implementation and hosted qualification
+  evidence only. Keep `DIST-001` unchecked for dependent product surfaces,
+  final license/release qualification, independent review where required,
+  and final acceptance. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/dist-001-license-read-binding-pr179-2026-10-23.md`.
+
 ## ACCEPT-012 triage integrity boundary · 2026-10-23
 
 - **Source mapping:** Private commit `c46bbdfd`.
