@@ -15465,3 +15465,29 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   nothing was deleted or overwritten. Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/dist-001-license-read-binding-pr179-2026-10-23.md`;
   additive bundle manifest `sha256:da252ce9ed967f112fd8a42108071c78bda6ed7fe0a8565fdf56a7c7c3b739fd`.
+
+## ENT-CLI-001 private-runner read binding · 2026-10-23
+
+- **Source mapping:** CLI PR #192 implementation commit
+  `9218819a33a97e5944e57f2ac4bfa2174fc17f2e`, merged normally as
+  `622d59ffb31a27cc6651e78fa1212a3767c5fcc3`; the source branch was
+  preserved and no squash was used.
+- **Contract mapping:** Private-runner trusted-key and replay-cache reads now
+  use bounded regular-file handles with `O_NOFOLLOW`, opened-handle
+  identity/type checks, post-read identity/size checks, and short/oversized
+  read rejection.
+- **Verification mapping:** Focused tests **13/13**, forced workspace build
+  **7/7**, typecheck, full CLI package tests with only the two existing
+  explicit Hunt Docker integration skips, and diff check passed. Hosted
+  standard `39898377713`, self-scan `39898377746`, in-toto, and all nine
+  Ubuntu/macOS/Windows × Node 20/22/24 matrix cells in `39898377834` passed.
+- **Acceptance mapping:** Keep `ENT-CLI-001` open for operational runner
+  enrollment/approved execution, cross-platform operational acceptance,
+  independent review, enterprise/customer acceptance where required, and
+  final release decision. No provider, customer, Production, deployment,
+  registry publication, tag, or release action occurred. Nothing was deleted
+  or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/ent-cli-001-runner-read-binding-pr192-2026-10-23.md`;
+  additive bundle manifest `sha256:c172902038c1cc7622073a3de3c4fc0bfc4595b97de1288e148f7794995b92a3`;
+  bundle file SHA-256
+  `7cfd9b15afeee10ee84c29d4ae9f265084006691771cb9ad2914644f650fd14a`.

@@ -3038,3 +3038,32 @@ and file SHA-256
 Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/dist-001-license-read-binding-pr179-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · ENT-CLI-001 private-runner read binding
+
+CLI PR #192 source commit `9218819a33a97e5944e57f2ac4bfa2174fc17f2e` binds
+private-runner trusted-key and replay-cache reads to bounded regular-file
+handles with `O_NOFOLLOW`, opened-handle identity/type checks, post-read
+identity/size checks, and short/oversized-read rejection. It merged normally
+into CLI `main` as `622d59ffb31a27cc6651e78fa1212a3767c5fcc3`; the source
+branch was preserved and no squash was used.
+
+Focused private-runner tests passed **13/13**, CLI typecheck passed, the full
+CLI package test target passed with only the two existing explicit Hunt Docker
+integration skips, the forced workspace build passed **7/7**, and
+`git diff --check` passed. Hosted standard validation `39898377713`,
+self-scan `39898377746`, and platform/in-toto matrix `39898377834` passed,
+including all nine Ubuntu/macOS/Windows × Node 20/22/24 cells.
+
+This is implementation and hosted qualification evidence only. Keep
+`ENT-CLI-001` unchecked for operational runner enrollment/approved execution,
+cross-platform operational acceptance, independent review, enterprise or
+customer acceptance where required, and final release decision. No provider,
+customer, Production, deployment, registry publication, tag, or release action
+occurred. The additive bundle contains **153** files with manifest
+`sha256:c172902038c1cc7622073a3de3c4fc0bfc4595b97de1288e148f7794995b92a3`
+and file SHA-256
+`7cfd9b15afeee10ee84c29d4ae9f265084006691771cb9ad2914644f650fd14a`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/ent-cli-001-runner-read-binding-pr192-2026-10-23.md`.

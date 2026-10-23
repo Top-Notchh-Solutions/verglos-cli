@@ -12039,6 +12039,25 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · ENT-CLI-001 private-runner read binding
+
+CLI PR #192 source `9218819a33a97e5944e57f2ac4bfa2174fc17f2e` merged normally
+as `622d59ffb31a27cc6651e78fa1212a3767c5fcc3`, preserving the source branch
+and without squash. Private-runner trusted-key and replay-cache reads now use
+bounded opened regular-file handles with `O_NOFOLLOW`, identity/type/size
+rechecks, and short-read rejection. Focused tests passed **13/13**, the
+forced workspace build passed **7/7**, and hosted standard validation
+`39898377713`, self-scan `39898377746`, in-toto, and all nine platform cells
+in matrix `39898377834` passed.
+
+`ENT-CLI-001` remains unchecked for operational enrollment/approved execution,
+independent or enterprise/customer acceptance where required, and final
+release decision. No provider, customer, Production, deployment, registry,
+tag, or release action occurred; nothing was deleted or overwritten. Score
+remains **244 checked / 36 open / 280 total (87.1%)**.
+
+Evidence: `evidence/ent-cli-001-runner-read-binding-pr192-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009/010/014 candidate-version binding
 
 Private shipping commit `049eee35` now enforces the bounded SemVer candidate

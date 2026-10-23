@@ -164,6 +164,7 @@ const paths = [
   "docs/shipping/evidence/accept-005-authorized-workflow-version-binding-2026-10-23.md",
   "docs/shipping/evidence/accept-013-correction-loop-version-binding-2026-10-23.md",
   "docs/shipping/evidence/dist-001-license-read-binding-pr179-2026-10-23.md",
+  "docs/shipping/evidence/ent-cli-001-runner-read-binding-pr192-2026-10-23.md",
 ];
 
 const FORBIDDEN = [

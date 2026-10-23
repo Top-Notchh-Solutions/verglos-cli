@@ -9409,6 +9409,27 @@ changed. See
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## ENT-CLI-001 private-runner read binding · 2026-10-23
+
+- **Source mapping:** CLI PR #192 implementation commit
+  `9218819a33a97e5944e57f2ac4bfa2174fc17f2e`, merged normally as
+  `622d59ffb31a27cc6651e78fa1212a3767c5fcc3`; source branch preserved.
+- **Contract mapping:** Trusted-key and replay-cache reads use bounded opened
+  regular-file handles with `O_NOFOLLOW`, identity/type/size rechecks, and
+  short/oversized-read rejection.
+- **Verification mapping:** Focused tests **13/13**; forced workspace build
+  **7/7**; typecheck, full CLI package tests with two explicit Hunt Docker
+  skips, and diff check passed. Hosted standard `39898377713`, self-scan
+  `39898377746`, in-toto, and all nine platform cells in `39898377834`
+  passed.
+- **Acceptance mapping:** Keep `ENT-CLI-001` open for operational enrollment
+  and approved execution, independent/enterprise/customer acceptance where
+  required, and final release decision. Score remains **244/36/280 (87.1%)**;
+  nothing was deleted.
+- **Evidence:** `evidence/ent-cli-001-runner-read-binding-pr192-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:c172902038c1cc7622073a3de3c4fc0bfc4595b97de1288e148f7794995b92a3`.
+
 ## ACCEPT-009 / ACCEPT-010 / ACCEPT-014 candidate-version binding · 2026-10-23
 
 - **Source mapping:** Private shipping commit `049eee35`.
