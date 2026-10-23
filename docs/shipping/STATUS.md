@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-002 final-release readiness gate merged
+
+PR #186 merged normally into CLI `main` at `f18ae2b1` after the complete
+hosted check set passed: official standard/provenance, Verglos self-scan,
+in-toto, and Ubuntu/macOS/Windows Node 20/22/24. The repository variable
+`VERGLOS_FINAL_RELEASE_READY` remains unset, so the protected publish job is
+still fail-closed. No tag, npm write, deployment, package version, or final
+release decision occurred. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-002-pr186-merge-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 final-release readiness gate proposed
 
 CLI PR #186, commit `447237fa`, adds a fail-closed requirement for repository

@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-002 final-release readiness gate merged
+
+CLI PR #186 merged normally into `main` at `f18ae2b1` after all hosted
+validators, self-scan, in-toto, and cross-platform Node 20/22/24 checks passed.
+The repository variable `VERGLOS_FINAL_RELEASE_READY` remains unset, so the
+protected publication job cannot run. `DIST-002`/`DIST-003` remain open for
+complete current-candidate publication and provenance. No checkbox changed;
+the live score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing
+was deleted. Evidence:
+`docs/shipping/evidence/dist-002-pr186-merge-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 final-release readiness gate proposed
 
 CLI PR #186, commit `447237fa`, requires `VERGLOS_FINAL_RELEASE_READY=true`

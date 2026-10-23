@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## DIST-002 final-release readiness gate merge · 2026-10-23
+
+- **Source mapping:** CLI PR #186 source commit `447237fa` merged normally
+  into `main` at `f18ae2b18a98b6a7ff7bd0914132cc208ea4e0d9`.
+- **Contract mapping:** The protected publish job requires
+  `VERGLOS_FINAL_RELEASE_READY=true` in addition to stable-tag,
+  protected-environment, immutable-tag, OIDC, and no-long-lived-token gates.
+- **Verification mapping:** Official validators, Verglos self-scan, in-toto,
+  and the Ubuntu/macOS/Windows Node 20/22/24 matrix all passed. The variable
+  remains unset; no tag or registry write occurred.
+- **Acceptance mapping:** `DIST-002`/`DIST-003` remain open for complete
+  current-candidate publication and final acceptance. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/dist-002-pr186-merge-2026-10-23.md`.
+
 ## DIST-002 final-release readiness gate · 2026-10-23
 
 - **Source mapping:** CLI PR #186, commit `447237fa`, modifies the protected

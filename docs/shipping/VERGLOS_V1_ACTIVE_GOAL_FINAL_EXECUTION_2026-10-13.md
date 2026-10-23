@@ -67,6 +67,21 @@ score is unchanged at **244 checked / 36 open / 280 total (87.1%)**, and
 nothing was deleted. Evidence:
 `docs/shipping/evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · final-release readiness gate merged
+
+PR #186 merged normally into CLI `main` at
+`f18ae2b18a98b6a7ff7bd0914132cc208ea4e0d9` from source commit `447237fa`.
+The complete hosted check set passed, including official standard/provenance,
+Verglos self-scan, in-toto release binding, and the Ubuntu/macOS/Windows Node
+20/22/24 matrix. The repository variable `VERGLOS_FINAL_RELEASE_READY` is
+still unset, so the protected publish job remains fail-closed. No tag,
+workflow dispatch, npm write, deployment, package version, or final release
+decision occurred. `DIST-002`/`DIST-003` remain open for complete
+current-candidate publication and matching provenance. The score remains
+**244 checked / 36 open / 280 total (87.1%)**, and nothing was deleted.
+Evidence:
+`docs/shipping/evidence/dist-002-pr186-merge-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · prerelease-publication block
 
 CLI PR #185, commit `4890a1c7`, makes the protected publication job stable-only:

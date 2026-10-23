@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-002 final-release readiness gate merged
+
+- **Merge:** PR #186 merged normally into CLI `main` at
+  `f18ae2b18a98b6a7ff7bd0914132cc208ea4e0d9` from source commit `447237fa`.
+  No squash or branch/file deletion was used.
+- **Verification:** Every hosted PR check passed, including the official
+  standard/provenance validators, Verglos self-scan, in-toto release binding,
+  and Ubuntu/macOS/Windows Node 20/22/24. The repository variable
+  `VERGLOS_FINAL_RELEASE_READY` remains unset.
+- **Boundary:** The fail-closed publish gate is now merged, but no tag,
+  workflow dispatch, npm write, deployment, package version, or final release
+  decision occurred. Keep `DIST-002`/`DIST-003` open. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted. Evidence:
+  `evidence/dist-002-pr186-merge-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 final-release readiness gate proposed
 
 - **Implementation:** CLI PR #186, commit `447237fa`, requires
