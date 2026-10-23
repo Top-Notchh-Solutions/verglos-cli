@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · hosted CLI platform matrix
+
+GitHub Actions Platform matrix run `39993289161` completed successfully at
+merged head `550451c50dd550937be139317a5a5712e98a78e8`. The in-toto release
+binding and all nine Ubuntu/Windows/macOS × Node 20/22/24 cells returned
+`completed / success`; 30 non-expired hosted artifacts were observed.
+
+This adds hosted validation evidence for ACCEPT-003. The row remains
+unchecked for reviewer sign-off and its provider/customer/final-acceptance
+conditions. No publication, Production CLI release, customer acceptance,
+independent Hunt/AppSec review, final go/no-go, deletion, or checkbox change
+is claimed. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+Evidence: `docs/shipping/evidence/cli-platform-matrix-run-39993289161-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 private contract-suite verification
 
 The rebuilt local checkout completed `pnpm build` with **8/8** Turbo tasks;
