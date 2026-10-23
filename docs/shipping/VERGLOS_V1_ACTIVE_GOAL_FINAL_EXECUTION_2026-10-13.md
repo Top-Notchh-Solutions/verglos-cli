@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · app-bound Cards payment pending OTP
+
+The current app-bound Cards-only run advanced beyond card-form validation. The
+application order route returned HTTP **200**; Razorpay created the bound order
+at `2026-10-23T22:42:50Z`, and the hosted Test Mode fixture reached the
+provider-owned **Sending OTP** state. A read-only provider payments lookup
+returned HTTP **200** with one payment in status `created` and
+`captured: false`; no handler response or signed payment webhook was observed.
+
+This is genuine provider lifecycle progress, but it is not a captured payment.
+No OTP was guessed, no event was fabricated, and no money, entitlement,
+Production, customer, refund, or deletion state changed. The provider gate
+remains open and no checkbox changed. The authoritative score remains **245
+checked / 35 open / 280 total (87.5%)**, partitioned as **13 AppSec-dependent /
+22 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/razorpay-testmode-card-otp-boundary-2026-10-24.md`.
+The additive acceptance bundle contains **232** hashed files, verifies with
+**0 mismatches**, passes secret scanning, and matches manifest
+`sha256:f5665472dd29caf774761adc5455bd7ca626e72a8574e6b8695f10659c75f0dc`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-card-otp-boundary-v5.json`.
+
 ## Latest continuation result · 2026-10-24 · app-bound Cards fixture boundary
 
 The current Web order route returned HTTP **200** with `card` / Cards-only

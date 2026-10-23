@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain provider gate at pending OTP boundary
+
+- **Decision:** Record the provider-created pending payment and retain the
+  provider lifecycle gate as open.
+- **Verification:** Current app route returned HTTP 200; Razorpay reached
+  `Sending OTP`; provider payments returned one `created` payment with
+  `captured: false`; no webhook or handler result appeared.
+- **Disposition:** Do not guess OTP or fabricate capture. No money, entitlement,
+  Production, customer, refund, or deletion state changed; score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/razorpay-testmode-card-otp-boundary-2026-10-24.md`.
+- **Bundle:** The additive v5 bundle contains 232 hashed files, verifies with
+  zero mismatches, passes secret scanning, and matches manifest
+  `sha256:f5665472dd29caf774761adc5455bd7ca626e72a8574e6b8695f10659c75f0dc`.
+
 ## 2026-10-24 · retain provider lifecycle gate after app-bound Cards probe
 
 - **Decision:** Record the current app-bound Cards-only Test Mode boundary and

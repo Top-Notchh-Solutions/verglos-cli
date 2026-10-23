@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · app-bound Cards payment pending OTP
+
+The current app-bound Cards-only provider run reached Razorpay’s **Sending OTP**
+state. The provider order was created at `2026-10-23T22:42:50Z`; read-only
+payment lookup returned HTTP **200** with one payment in `created` state and
+`captured: false`. No webhook, entitlement, money movement, or checkbox change
+occurred. Score remains **245 checked / 35 open / 280 total (87.5%)**,
+partitioned as **13 AppSec-dependent / 22 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/razorpay-testmode-card-otp-boundary-2026-10-24.md`.
+The additive acceptance bundle contains **232** hashed files, verifies with
+zero mismatches, passes secret scanning, and matches manifest
+`sha256:f5665472dd29caf774761adc5455bd7ca626e72a8574e6b8695f10659c75f0dc`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-card-otp-boundary-v5.json`.
+
 ## 2026-10-24 · app-bound Cards fixture boundary
 
 The current order route returned HTTP **200** with Cards-only methods, and the

@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · app-bound Cards payment pending OTP
+
+The current app-bound Cards-only Test Mode run reached **Sending OTP**. The
+provider returned one payment record with status `created` and
+`captured: false`; no handler, signed webhook, entitlement, or money movement
+was observed. The provider lifecycle gate remains open; score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/razorpay-testmode-card-otp-boundary-2026-10-24.md`.
+The additive evidence bundle verifies **232/232** files with zero mismatches,
+passes secret scanning, and matches manifest
+`sha256:f5665472dd29caf774761adc5455bd7ca626e72a8574e6b8695f10659c75f0dc`:
+`evidence/acceptance-evidence-bundle-2026-10-24-card-otp-boundary-v5.json`.
+
 ## 2026-10-24 · app-bound Cards fixture boundary
 
 The current order route returned HTTP **200** with Cards-only methods; the
