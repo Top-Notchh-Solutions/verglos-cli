@@ -40,6 +40,7 @@ async function writeReleaseFixture(root) {
   await writeFile(join(root, "dependency-license-inventory.json"), JSON.stringify({ schemaId: "urn:verglos:artifact:dependency-license-inventory", packages: [{ name: "x" }], bundledComponents: [], reviewBlockers: [] }));
   await writeFile(join(root, "external-license-records.json"), await readFile(join(process.cwd(), "licenses", "external-content-records.json")));
   await writeFile(join(root, "clean-consumer-verification.txt"), "clean consumer installed 7 archives, imported all libraries, executed Verglos 2.0.0-alpha.1, confirmed no external engine installation, and executed signed a1-utf8-contains through the bounded restricted-process runtime with an isolated Pro capability fixture\n");
+  await writeFile(join(root, "RELEASE_NOTES.md"), "# Verglos v2.0.0-alpha.1\n\nRelease version: 2.0.0-alpha.1\nRelease tag: v2.0.0-alpha.1\nSource commit: " + "a".repeat(40) + "\n\n## Package set\n");
   await run(process.execPath, [originScript, root, "--source-commit", "a".repeat(40), "--release-tag", "v2.0.0-alpha.1"]);
   await writeChecksums(root);
 }
@@ -57,7 +58,7 @@ async function refreshOrigin(root) {
 test("release verifier requires checksums for package archives and every release sidecar", async () => {
   await withFixture(async (root) => {
     const result = await run(process.execPath, [script, root]);
-    assert.match(result.stdout, /verified 14 release artifacts \(7 npm archives, 7 sidecars, and notices in every archive\)/u);
+    assert.match(result.stdout, /verified 15 release artifacts \(7 npm archives, 8 sidecars, and notices in every archive\)/u);
     await writeFile(join(root, "THIRD_PARTY_NOTICES"), "changed after checksumming");
     await assert.rejects(run(process.execPath, [script, root]), /checksum mismatch: THIRD_PARTY_NOTICES/u);
   });

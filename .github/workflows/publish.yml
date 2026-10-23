@@ -83,7 +83,7 @@ jobs:
         run: pnpm test
 
       - name: Test release artifact verifier
-        run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-release-origin.test.mjs scripts/generate-release-checksums.test.mjs scripts/generate-third-party-notices.test.mjs scripts/license-inventory.test.mjs scripts/package-surface-audit.test.mjs scripts/check-packed-manifests.test.mjs scripts/external-license-records.test.mjs scripts/publish-public-package.test.mjs
+        run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-release-notes.test.mjs scripts/generate-release-origin.test.mjs scripts/generate-release-checksums.test.mjs scripts/generate-third-party-notices.test.mjs scripts/license-inventory.test.mjs scripts/package-surface-audit.test.mjs scripts/check-packed-manifests.test.mjs scripts/external-license-records.test.mjs scripts/publish-public-package.test.mjs
 
       - name: Verify release rollback/revocation rehearsal
         run: node scripts/verify-release-rollback-rehearsal.mjs
@@ -125,6 +125,7 @@ jobs:
         run: |
           node --test scripts/verify-clean-consumer.test.mjs
           node scripts/verify-clean-consumer.mjs "$RELEASE_DIR" > "$RELEASE_DIR/clean-consumer-verification.txt"
+          node scripts/generate-release-notes.mjs "$RELEASE_DIR" --source-commit "$GITHUB_SHA" --release-tag "$GITHUB_REF_NAME"
           node scripts/generate-release-origin.mjs "$RELEASE_DIR" --source-commit "$GITHUB_SHA" --release-tag "$GITHUB_REF_NAME"
 
       - name: Prepare release checksums
@@ -147,6 +148,7 @@ jobs:
             ${{ env.RELEASE_DIR }}/SBOM.spdx.json
             ${{ env.RELEASE_DIR }}/external-license-records.json
             ${{ env.RELEASE_DIR }}/clean-consumer-verification.txt
+            ${{ env.RELEASE_DIR }}/RELEASE_NOTES.md
             ${{ env.RELEASE_DIR }}/dependency-license-inventory.json
             ${{ env.RELEASE_DIR }}/RELEASE_METADATA.json
           if-no-files-found: error
