@@ -2,7 +2,7 @@
 
 ## Implementation
 
-Private shipping commit `14d916df` adds
+Private shipping commits `14d916df` and `daf6524f` add
 `scripts/run-acceptance-correction-loop.mjs` and the package command
 `acceptance:correction:run`.
 
@@ -23,10 +23,11 @@ not copy source paths, snippets, customer data, or report content.
 
 ## Verification
 
-- Correction-loop contract tests: **5 passed / 0 failed**.
+- Correction-loop contract tests: **6 passed / 0 failed**.
 - Adjacent corpus-triage and final-regression contract tests: **7 passed / 0
   failed**.
-- Combined focused result: **12 passed / 0 failed**.
+- Combined focused result: **13 passed / 0 failed**.
+- Protocol date inputs reject non-string coercion, including `null`.
 - Node syntax checks and `git diff --check`: passed.
 
 ## Disposition

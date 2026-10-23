@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-003 bundle after ACCEPT-013 boundary fix
+
+- **Artifact:** Additive private bundle with **133** hashed evidence files.
+- **Integrity:** SHA-256
+  `sha256:5011424ef91891728217137d69bb50d65f5fbe7cbc3bedb632573a23e7f01f30`;
+  secret scan passed.
+- **Verification:** ACCEPT-013 now rejects coerced non-string dates; combined
+  correction-loop, corpus-triage, and final-regression contracts pass
+  **13/13**.
+- **Disposition:** No checkbox changed; score remains **244/36/280 (87.1%)**.
+  Nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-013-date-fix-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 bundle addendum for ACCEPT-013
 
 - **Artifact:** Additive private bundle with **133** hashed evidence files.
@@ -16,13 +29,13 @@
 
 ## 2026-10-23 · ACCEPT-013 held-out correction-loop implementation
 
-- **Implementation:** Private commit `14d916df` adds the
+- **Implementation:** Private commits `14d916df` and `daf6524f` add the
   `acceptance:correction:run` command and fail-closed held-out protocol.
 - **Boundary:** It enforces disjoint train/holdout fixtures, complete
   high-impact adjudication, pre-freeze-only rule/copy/evidence corrections,
   exact candidate binding, and no post-freeze tuning. Output is digest-only.
 - **Verification:** New correction-loop tests plus adjacent corpus-triage and
-  final-regression contracts passed **12/12**; syntax and diff checks passed.
+  final-regression contracts passed **13/13**; syntax and diff checks passed.
 - **Disposition:** Implementation substrate only. The actual held-out run,
   dependent qualification, independent review, and final acceptance remain
   open. No provider, customer, Production, publication, or deployment action

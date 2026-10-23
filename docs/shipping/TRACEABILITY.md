@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 bundle after ACCEPT-013 boundary fix · 2026-10-23
+
+- **Artifact mapping:** Additive private bundle contains 133 hashed files;
+  SHA-256 `sha256:5011424ef91891728217137d69bb50d65f5fbe7cbc3bedb632573a23e7f01f30`;
+  secret scan passed.
+- **Verification mapping:** ACCEPT-013 now rejects coerced non-string dates;
+  combined correction-loop, corpus-triage, and final-regression contracts pass
+  **13/13**.
+- **Acceptance mapping:** No checkbox changed; score remains **244/36/280
+  (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-013-date-fix-2026-10-23.md`.
+
 ## ACCEPT-003 bundle addendum for ACCEPT-013 · 2026-10-23
 
 - **Artifact mapping:** Additive private bundle contains 133 hashed files;
@@ -15,14 +27,14 @@
 
 ## ACCEPT-013 held-out correction-loop implementation · 2026-10-23
 
-- **Source mapping:** Private commit `14d916df`; script
+- **Source mapping:** Private commits `14d916df` and `daf6524f`; script
   `scripts/run-acceptance-correction-loop.mjs`; package command
   `acceptance:correction:run`.
 - **Protocol mapping:** Complete disjoint train/holdout coverage, exact
   candidate/corpus binding, high-impact adjudication, pre-freeze-only
   corrections, and explicit no-post-freeze tuning.
 - **Verification mapping:** New correction-loop tests plus adjacent
-  corpus-triage/final-regression contracts passed **12/12**; syntax and diff
+  corpus-triage/final-regression contracts passed **13/13**; syntax and diff
   checks passed.
 - **Acceptance mapping:** This is repository-owned implementation evidence;
   the actual held-out run, independent review, dependent qualification, and

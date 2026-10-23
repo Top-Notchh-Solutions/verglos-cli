@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-003 bundle after ACCEPT-013 boundary fix
+
+The additive private evidence bundle after the protocol date-boundary fix now
+contains **133 hashed files** with SHA-256
+`5011424ef91891728217137d69bb50d65f5fbe7cbc3bedb632573a23e7f01f30`; its
+secret scan passed. The combined correction-loop, corpus-triage, and
+final-regression result is **13/13**. Score remains **244 checked / 36 open /
+280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-evidence-bundle-accept-013-date-fix-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 bundle addendum for ACCEPT-013
 
 The additive private evidence bundle now contains **133 hashed files** with
@@ -13,11 +23,12 @@ total (87.1%)**. Nothing was deleted or overwritten. Evidence:
 
 ## 2026-10-23 · ACCEPT-013 held-out correction-loop implementation
 
-Private commit `14d916df` adds the fail-closed `acceptance:correction:run`
+Private commits `14d916df` and `daf6524f` add the fail-closed
+`acceptance:correction:run`
 protocol for disjoint train/holdout partitions, high-impact adjudication,
 pre-freeze-only corrections, immutable candidate binding, and digest-only
 results. Focused correction-loop, corpus-triage, and final-regression
-contracts passed **12/12**. The ACCEPT-013 row remains open for the actual
+contracts passed **13/13**. The ACCEPT-013 row remains open for the actual
 held-out run, dependent qualification, independent review, and final
 acceptance. Score remains **244 checked / 36 open / 280 total (87.1%)**.
 Nothing was deleted or overwritten. Evidence:
