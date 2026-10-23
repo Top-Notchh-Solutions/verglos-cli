@@ -1,5 +1,18 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-008 provenance merged
+
+The ACCEPT-008 provenance implementation and additive 202-file evidence bundle
+merged normally in PR #220 at CLI `main` merge commit
+`12dca694c994f5027ff37ec5085ee33690fcce54`. Standard validation run
+`40009015648` passed; the complete Ubuntu/Windows/macOS × Node 20/22/24
+platform matrix run `40009015554` passed **10/10**, including in-toto binding.
+Self-scan run `40009015710` reproduced the existing public-ledger policy
+failure at the retained `docs/shipping/**` history boundary; no bypass or
+history rewrite was used. The score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-accept-008-provenance.json`.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-008 commercial provenance
 
 Private commit `0533b21106bf3081d5bca6fc60efc238fd902114` now requires every
