@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-002 stable publication dist-tag correction merged
+
+PR #187 merged normally into CLI `main` at `f310e8a0` after all hosted
+validators and the Ubuntu/macOS/Windows Node 20/22/24 matrix passed. The
+stable-only workflow now publishes all seven packages with npm's `latest`
+dist-tag rather than `alpha`; its contract test enforces that boundary.
+`VERGLOS_FINAL_RELEASE_READY` remains unset. No tag, npm write, deployment,
+package version, or final release decision occurred. Score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-002-stable-latest-dist-tag-pr187-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 final-release readiness gate merged
 
 PR #186 merged normally into CLI `main` at `f18ae2b1` after the complete

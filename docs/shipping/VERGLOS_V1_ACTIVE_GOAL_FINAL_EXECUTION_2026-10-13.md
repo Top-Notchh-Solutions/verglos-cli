@@ -82,6 +82,23 @@ current-candidate publication and matching provenance. The score remains
 Evidence:
 `docs/shipping/evidence/dist-002-pr186-merge-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · stable publication dist-tag correction
+
+CLI PR #187 merged normally into `main` at
+`f310e8a0b46acb6042fab2172766fa5d27812678` from source `cf796c78` after all
+hosted validators and the complete Ubuntu/macOS/Windows Node 20/22/24 matrix
+passed. The stable-only publication workflow now passes npm's `latest`
+dist-tag to all seven public package commands; the contract test asserts the
+seven-command set and rejects `alpha` for stable publication. The local
+contract test passed **2/2** and `git diff --check` passed.
+
+`VERGLOS_FINAL_RELEASE_READY` remains unset. No tag, release dispatch, npm
+registry write, deployment, package version, or final release decision
+occurred. `DIST-002`/`DIST-003` remain open for complete current-candidate
+publication and provenance. The score remains **244 checked / 36 open / 280
+total (87.1%)**, and nothing was deleted. Evidence:
+`docs/shipping/evidence/dist-002-stable-latest-dist-tag-pr187-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · prerelease-publication block
 
 CLI PR #185, commit `4890a1c7`, makes the protected publication job stable-only:

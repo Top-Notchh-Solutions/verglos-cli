@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## DIST-002 stable publication dist-tag correction · 2026-10-23
+
+- **Source mapping:** CLI PR #187 source `cf796c78` merged normally into
+  `main` as `f310e8a0b46acb6042fab2172766fa5d27812678`.
+- **Contract mapping:** Stable-only publication now passes npm `latest` to
+  all seven public packages; a regression assertion rejects `alpha` for the
+  stable commands.
+- **Verification mapping:** Local contract tests **2/2**, diff check, official
+  validators, Verglos self-scan, in-toto, and all Ubuntu/macOS/Windows Node
+  20/22/24 checks passed.
+- **Acceptance mapping:** The readiness variable remains unset and no
+  registry write occurred. `DIST-002`/`DIST-003` remain open; score remains
+  **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/dist-002-stable-latest-dist-tag-pr187-2026-10-23.md`.
+
 ## DIST-002 final-release readiness gate merge · 2026-10-23
 
 - **Source mapping:** CLI PR #186 source commit `447237fa` merged normally

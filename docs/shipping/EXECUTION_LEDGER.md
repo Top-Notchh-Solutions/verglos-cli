@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-002 stable publication dist-tag correction merged
+
+- **Implementation:** CLI PR #187 changed every stable-only publication
+  command from npm dist-tag `alpha` to `latest` and added a contract
+  assertion for exactly seven stable publish commands.
+- **Merge:** PR #187 merged normally at
+  `f310e8a0b46acb6042fab2172766fa5d27812678` from `cf796c78`; no squash or
+  branch/file deletion was used.
+- **Verification:** Local contract tests passed **2/2**, diff check passed,
+  and all hosted validators, self-scan, in-toto, and the full
+  Ubuntu/macOS/Windows Node 20/22/24 matrix passed.
+- **Boundary:** `VERGLOS_FINAL_RELEASE_READY` remains unset. No tag, npm
+  write, deployment, package version, or final release decision occurred.
+  Keep `DIST-002`/`DIST-003` open. Score remains **244/36/280 (87.1%)**.
+  Nothing was deleted. Evidence:
+  `evidence/dist-002-stable-latest-dist-tag-pr187-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 final-release readiness gate merged
 
 - **Merge:** PR #186 merged normally into CLI `main` at

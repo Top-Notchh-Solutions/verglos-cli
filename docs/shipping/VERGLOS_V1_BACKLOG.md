@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-002 stable publication dist-tag correction merged
+
+CLI PR #187 merged normally into `main` at `f310e8a0` after all hosted
+validators and the complete cross-platform matrix passed. The stable-only
+workflow now uses npm's `latest` dist-tag for all seven packages, with a
+contract assertion preventing `alpha` from being used for stable publication.
+`DIST-002`/`DIST-003` remain open for the actual complete publication and
+provenance. No checkbox changed; the live score remains **244 checked / 36 open
+/ 280 total (87.1%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/dist-002-stable-latest-dist-tag-pr187-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 final-release readiness gate merged
 
 CLI PR #186 merged normally into `main` at `f18ae2b1` after all hosted

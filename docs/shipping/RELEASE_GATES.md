@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · DIST-002 stable publication dist-tag correction merged
+
+PR #187 merged normally at `f310e8a0` after all hosted checks passed. The
+stable-only workflow now sends `latest` to all seven npm publication commands,
+and the workflow contract test rejects the prerelease `alpha` tag in those
+commands. `VERGLOS_FINAL_RELEASE_READY` remains unset, so no publication can
+run. `DIST-002`/`DIST-003` remain open; score is **244/36/280 (87.1%)**.
+Nothing was deleted. Evidence:
+`evidence/dist-002-stable-latest-dist-tag-pr187-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 final-release readiness gate merged
 
 PR #186 merged normally at `f18ae2b1` after all hosted checks passed across
