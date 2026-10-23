@@ -67,6 +67,19 @@ score is unchanged at **244 checked / 36 open / 280 total (87.1%)**, and
 nothing was deleted. Evidence:
 `docs/shipping/evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · prerelease-publication block
+
+CLI PR #185, commit `4890a1c7`, makes the protected publication job stable-only:
+only a `vX.Y.Z` tag can enter the publish job, so prerelease tags cannot reach
+the registry. The OIDC, protected-environment, immutable-tag, and
+no-long-lived-token controls remain intact. Local workflow contract tests
+passed **2/2** and `git diff --check` passed; hosted PR checks were queued and
+are not claimed. No tag, workflow dispatch, registry write, deployment, or
+package version was created. `DIST-002`/`DIST-003` remain open, the score is
+**244 checked / 36 open / 280 total (87.1%)**, and nothing was deleted.
+Evidence:
+`docs/shipping/evidence/dist-002-pr185-prerelease-publication-block-2026-10-23.md`.
+
 ## Execution-input manifest · 2026-10-23
 
 All safe authorization, fixture, product-decision, and test/Preview/Production

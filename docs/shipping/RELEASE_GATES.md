@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · DIST-002 prerelease-publication block implemented
+
+CLI PR #185, commit `4890a1c7`, makes the protected publish job stable-only:
+`vX.Y.Z` tags are eligible, while prerelease tags are skipped. The release
+environment, OIDC permission, immutable tag binding, and no-long-lived-token
+boundary remain intact. Local contract tests passed **2/2** and diff check
+passed; hosted PR checks were queued and are not claimed. No registry write or
+tag occurred. `DIST-002`/`DIST-003` remain open; score is **244/36/280
+(87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-002-pr185-prerelease-publication-block-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 npm CI secret rotation
 
 The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`

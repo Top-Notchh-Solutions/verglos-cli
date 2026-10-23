@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## DIST-002 prerelease-publication block · 2026-10-23
+
+- **Source mapping:** CLI PR #185, commit `4890a1c7`, modifies the protected
+  npm publication workflow and its contract test.
+- **Contract mapping:** Only stable `vX.Y.Z` tags can enter the publish job;
+  prerelease tags cannot reach the registry. OIDC, protected environment,
+  immutable tag binding, and no-long-lived-token controls remain unchanged.
+- **Verification mapping:** Local contract tests **2/2** and diff check passed;
+  hosted PR checks were queued and no release was triggered.
+- **Acceptance mapping:** `DIST-002`/`DIST-003` remain open for final
+  publication, provenance, and acceptance evidence. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/dist-002-pr185-prerelease-publication-block-2026-10-23.md`.
+
 ## DIST-002/003 npm CI secret rotation · 2026-10-23
 
 - **Source/provider mapping:** Repository secret `NPM_TOKEN` in

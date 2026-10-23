@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-002 prerelease-publication block implemented
+
+CLI PR #185, commit `4890a1c7`, changes the protected publication job to run
+only for a stable `vX.Y.Z` tag. Prerelease tags cannot reach the registry;
+OIDC, protected `release`, immutable tag binding, and the no-long-lived-token
+contract remain intact. Local workflow contract tests passed **2/2** and diff
+check passed. PR checks were queued at observation; no hosted pass or release
+event is claimed. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted. Evidence:
+`evidence/dist-002-pr185-prerelease-publication-block-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 npm CI secret rotation
 
 The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`
