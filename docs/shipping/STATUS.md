@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-010 freeze artifact overwrite hardening
+
+The private release-candidate freeze writer now creates its output with
+exclusive `wx` semantics and fails closed with `EEXIST` instead of overwriting
+an existing candidate artifact. The regression preserves the original output;
+the focused freeze/reconciliation/regression/comprehension/commercial suite
+passed **20/20**, study-protocol validation, syntax validation, and diff check
+also passed. `ACCEPT-010` remains open for its actual frozen candidate,
+critical acceptance evidence, trusted publication/provenance, independent
+review, and final release decision. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Nothing was deleted. Evidence:
+`evidence/accept-010-candidate-freeze-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 registry presence and trusted-publisher boundary
 
 Read-only npm checks still return `E404 Not Found` for both

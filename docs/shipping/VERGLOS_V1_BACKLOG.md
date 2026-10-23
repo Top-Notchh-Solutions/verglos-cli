@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-010 freeze artifact overwrite hardening
+
+The private release-candidate freeze writer now uses exclusive `wx` output
+creation and refuses to overwrite an existing candidate artifact. The focused
+freeze/reconciliation/final-regression/comprehension/commercial suite passed
+**20/20**, with study-protocol, syntax, and diff checks passing. This is
+implementation progress only; `ACCEPT-010` remains open for its actual frozen
+candidate, critical evidence, trusted publication/provenance, independent
+review, and final release decision. No checkbox changed; the live score
+remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
+Evidence: `docs/shipping/evidence/accept-010-candidate-freeze-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 rollback no-follow hardening merged
 
 CLI PR #189 merged normally as `6ad18792` from `3d4bca1f`. Rollback input

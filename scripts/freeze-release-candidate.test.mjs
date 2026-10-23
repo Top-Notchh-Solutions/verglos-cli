@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import test from "node:test";
-import { freezeReleaseCandidate } from "./freeze-release-candidate.mjs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { freezeReleaseCandidate, freezeReleaseCandidateFile } from "./freeze-release-candidate.mjs";
 
 const digest = (value) => `sha256:${value.repeat(64).slice(0, 64)}`;
 const gates = { providerLifecycle: "open", customerConsent: "open", independentReview: "open", authenticatedBrowser: "passed", fieldCwv: "open", accountDeletion: "open", finalRelease: "open" };
@@ -39,4 +42,21 @@ test("all artifacts and gates passed produce a ready-for-signoff manifest", () =
 test("unsafe paths and invalid digests are rejected", () => {
   assert.throws(() => freezeReleaseCandidate(run({ artifacts: [{ path: "../secrets", kind: "other", sha256: digest("d"), required: false, present: true }] })), /unsafe freeze artifact path/u);
   assert.throws(() => freezeReleaseCandidate(run({ artifacts: [{ path: "release/out", kind: "other", sha256: "sha256:not-a-digest", required: false, present: true }] })), /digest is invalid/u);
+});
+
+test("freeze file refuses to overwrite an existing candidate artifact", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-freeze-output-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "freeze.json");
+  await writeFile(inputPath, `${JSON.stringify(run())}\n`, "utf8");
+  await writeFile(outputPath, "existing-freeze\n", "utf8");
+  try {
+    await assert.rejects(
+      freezeReleaseCandidateFile(inputPath, outputPath),
+      (error) => error?.code === "EEXIST",
+    );
+    assert.equal(await readFile(outputPath, "utf8"), "existing-freeze\n");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });

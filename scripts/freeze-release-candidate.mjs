@@ -60,7 +60,7 @@ export function freezeReleaseCandidate(input) {
 export async function freezeReleaseCandidateFile(inputPath, outputPath) {
   const input = JSON.parse(await readFile(inputPath, "utf8"));
   const report = freezeReleaseCandidate(input);
-  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;
 }
 

@@ -103,6 +103,21 @@ complete publication/provenance, and final acceptance. Score remains **244
 checked / 36 open / 280 total (87.1%)**. Nothing was deleted. Evidence:
 `docs/shipping/evidence/dist-002-003-registry-trusted-publisher-boundary-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-010 freeze artifact hardening
+
+The private release-candidate freeze writer now uses exclusive `wx` output
+creation and fails closed with `EEXIST` instead of overwriting an existing
+candidate artifact. The focused freeze/reconciliation/final-regression/
+comprehension/commercial suite passed **20/20**; study-protocol validation,
+syntax validation, and diff check also passed. The existing output remains
+unchanged when a second write is attempted.
+
+This advances the ACCEPT-010 implementation substrate only. The row remains
+open for the actual frozen candidate, critical acceptance evidence, trusted
+publication/provenance, independent review, and final release decision. Score
+remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
+Evidence: `docs/shipping/evidence/accept-010-candidate-freeze-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · npm CI secret rotation
 
 The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`

@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-010 freeze artifact overwrite hardening
+
+- **Implementation:** `scripts/freeze-release-candidate.mjs` now writes
+  candidate output with exclusive `wx` creation, refusing `EEXIST` rather than
+  replacing an existing evidence artifact.
+- **Verification:** Freeze/reconciliation/final-regression/comprehension/
+  commercial contracts passed **20/20**; study-protocol validation, syntax,
+  and diff check passed. The regression confirmed the pre-existing output was
+  unchanged after refusal.
+- **Disposition:** This is code-side ACCEPT-010 progress only. Keep the row
+  open for the actual frozen candidate, critical evidence, trusted
+  publication/provenance, independent review, and final release decision.
+  Score remains **244/36/280 (87.1%)**. Nothing was deleted.
+- **Evidence:** `evidence/accept-010-candidate-freeze-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 registry presence and trusted-publisher boundary
 
 - **Observation:** Read-only `npm view` checks return `E404 Not Found` for

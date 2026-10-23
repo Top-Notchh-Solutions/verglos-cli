@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## ACCEPT-010 freeze artifact overwrite hardening · 2026-10-23
+
+- **Source mapping:** Private shipping toolchain freeze output now uses
+  exclusive `wx` creation and refuses an existing candidate artifact.
+- **Verification mapping:** The focused freeze/reconciliation/final-regression/
+  comprehension/commercial suite passed **20/20**, with study-protocol,
+  syntax, and diff checks also passing.
+- **Acceptance mapping:** The freeze contract remains open for actual critical
+  evidence, trusted publication/provenance, independent review, and final
+  release decision. Score remains **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/accept-010-candidate-freeze-2026-10-23.md`.
+
 ## DIST-006 rollback no-follow hardening · 2026-10-23
 
 - **Source mapping:** CLI PR #189 source `3d4bca1f` merged normally into
