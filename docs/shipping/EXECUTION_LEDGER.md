@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## Current checkout-bound Test Mode order · 2026-10-24
+
+- **Provider receipt:** The current checkout route created one synthetic
+  Razorpay Test Mode Cards-only Pro order against isolated local PostgreSQL.
+- **Verification:** Application route HTTP 200; read-only Razorpay order
+  lookup HTTP 200; provider status `created`; amount **280,943 paise / INR
+  2,809.43**; the provider ID is masked and the catalog/signature/identity/
+  term/method note bindings are recorded.
+- **Disposition:** Order creation only. No hosted payment, capture, refund,
+  webhook, entitlement, Production payment, customer state, or money movement
+  occurred. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/razorpay-testmode-bound-order-2026-10-24.md`.
+
 ## Production Cards-only checkout receipt · 2026-10-24
 
 - **Provider receipt:** Vercel deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf`

@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current checkout-bound Test Mode order
+
+The current checkout route created a synthetic Cards-only Pro order through the
+owner-controlled Razorpay Test Mode pair against isolated local PostgreSQL.
+Both the application route and read-only provider lookup returned HTTP **200**;
+the provider status is `created` for **280,943 paise / INR 2,809.43**. The
+receipt is bound to the catalog, signed checkout, synthetic identity, term,
+currency, and Cards-only method, with the provider ID masked.
+
+This is provider order-creation evidence only. There was no capture, refund,
+webhook, entitlement, Production payment, customer state, or money movement.
+The score remains **245/35/280 (87.5%)**, with 13 AppSec-dependent and 22
+non-AppSec rows open. Evidence:
+`evidence/razorpay-testmode-bound-order-2026-10-24.md`.
+
 ## 2026-10-24 · Production Cards-only checkout receipt
 
 The live Production `/checkout` route returned HTTP **200** from deployment

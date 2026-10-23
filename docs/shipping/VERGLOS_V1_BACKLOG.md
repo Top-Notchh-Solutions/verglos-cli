@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current checkout-bound Test Mode order
+
+The current checkout route created one real synthetic Razorpay Test Mode
+Cards-only Pro order against the isolated local `verglos_test` database. The
+route returned HTTP **200** and the read-only provider lookup returned HTTP
+**200** with provider status `created`, amount **280,943 paise / INR 2,809.43**,
+and creation time `2026-10-23T22:26:12Z`. The provider identifier is masked in
+the receipt; the bound note keys prove catalog, signed-checkout, identity,
+currency, term, and Cards-only binding.
+
+This advances provider-bound implementation evidence only. No hosted payment,
+capture, refund, webhook, entitlement, Production payment, customer state, or
+money movement occurred, so the provider-lifecycle gate and all dependent
+acceptance rows remain open. No checkbox changed; score remains **245 checked /
+35 open / 280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22
+non-AppSec** rows. Evidence:
+`docs/shipping/evidence/razorpay-testmode-bound-order-2026-10-24.md`.
+
 ## 2026-10-24 · Production Cards-only checkout receipt
 
 The live Production `/checkout` route returned HTTP **200** from deployment

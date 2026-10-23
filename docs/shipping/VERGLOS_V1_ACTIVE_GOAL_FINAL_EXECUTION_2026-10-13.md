@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current checkout-bound Test Mode order
+
+The owner-controlled Test Mode pair was revalidated through the current
+checkout route. `POST /api/razorpay/create-order` returned HTTP **200** against
+the isolated local `verglos_test` database, and a read-only provider lookup
+returned HTTP **200** for the newly created Cards-only Pro order. Razorpay
+reported status `created`, amount **280,943 paise / INR 2,809.43**, and provider
+creation time `2026-10-23T22:26:12Z`; the identifier is masked in the retained
+receipt. The order notes were bound to the catalog, signed checkout, synthetic
+user, currency, term, and Cards-only method.
+
+This supersedes the earlier local QR credential failure as the current
+provider-credential state, but it is only order-creation evidence. No hosted
+payment, capture, refund, webhook, entitlement, Production payment, customer
+state, or money movement occurred. The provider-lifecycle gate therefore
+remains open and no checkbox changed. The authoritative score remains **245
+checked / 35 open / 280 total (87.5%)**, partitioned as **13 AppSec-dependent /
+22 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/razorpay-testmode-bound-order-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Production Cards-only checkout receipt
 
 The live Production checkout route returned HTTP **200** from deployment

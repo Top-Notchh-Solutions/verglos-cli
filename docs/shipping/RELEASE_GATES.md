@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current checkout-bound Test Mode provider receipt
+
+The current route created one synthetic Cards-only Pro order through the valid
+owner-controlled Razorpay Test Mode pair against isolated local PostgreSQL.
+Application order creation and read-only provider lookup both returned HTTP
+**200**; Razorpay status is `created` for **280,943 paise / INR 2,809.43**.
+
+This opens provider order-binding evidence only. It does not open the complete
+provider lifecycle: no hosted capture, signed payment webhook, refund,
+entitlement projection, or renewal was performed. No Production payment,
+customer state, or money movement occurred. Provider lifecycle, independent
+review, browser/field evidence, account deletion, AppSec/Hunt, and final
+release gates remain closed. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/razorpay-testmode-bound-order-2026-10-24.md`.
+
 ## 2026-10-24 · Production Cards-only checkout gate receipt
 
 The live `/checkout` route returned HTTP **200** from the READY Production
