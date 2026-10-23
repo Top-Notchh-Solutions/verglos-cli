@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · alpha.4 public-OSS POC rerun
+
+The current alpha.4 CLI candidate `aad2c74395a5c381c955ab9dfab7462295564840`
+was built successfully (**8/8** packages) and ran against eight owner-authorized
+public JS/TS repositories pinned to exact commits. Verification passed **8/8
+fixtures / 13,494 files / 0 coverage gaps** across all four required
+architecture shapes; bounded triage produced **351 findings / 23 rule groups /
+0 coverage gaps**. The reports remain private, redacted derived artifacts with
+telemetry disabled and no source upload. Evidence:
+`docs/shipping/evidence/accept-011-012-current-cli-aad2c743-public-corpus-2026-10-24.md`.
+
+This refreshes ACCEPT-011/012 against the current candidate and advances the
+POC path. It does not create customer/recipient, provider/Production,
+independent-review, human/field, AppSec/Hunt, or final-release evidence; no
+checkbox changed. The authoritative score remains **245 checked / 35 open /
+280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
+Additive bundle v11 verifies **237/237** files with zero mismatches, passes
+secret scanning, and has manifest
+`sha256:43180f9f8a8ffafd4acbee93b621ca3eeb1184680ffefe1f8b3ee732d59e4097`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-alpha4-corpus-v11.json`.
+
 ## Latest continuation result · 2026-10-24 · attempted-order processing is live in Production
 
 Vercel deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` reached **READY** and is

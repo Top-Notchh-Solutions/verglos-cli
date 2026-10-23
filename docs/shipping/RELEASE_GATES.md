@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · alpha.4 public-OSS POC rerun
+
+The current alpha.4 CLI candidate `aad2c743` built **8/8** packages and passed
+the exact-commit public JS/TS corpus: **8 fixtures / 13,494 files / 351 findings
+/ 23 rule groups / 0 coverage gaps** across all required architecture shapes.
+This advances the private ACCEPT-011/012 POC input only. Provider lifecycle,
+customer/recipient, independent review, authenticated browser/field-CWV,
+account deletion, AppSec/Hunt, and final release gates remain open. Score
+remains **245/35/280 (87.5%)**; no checkbox changed. Evidence:
+`evidence/accept-011-012-current-cli-aad2c743-public-corpus-2026-10-24.md`.
+Additive bundle v11 verifies **237/237** files with zero mismatches and
+manifest `sha256:43180f9f8a8ffafd4acbee93b621ca3eeb1184680ffefe1f8b3ee732d59e4097`.
+
 ## 2026-10-24 · attempted-order processing Production deployment READY
 
 The merged Web status mapping is live in Vercel Production deployment
