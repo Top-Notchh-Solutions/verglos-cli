@@ -12,6 +12,12 @@ export const COMMERCIAL_EVIDENCE_KINDS = Object.freeze([
   "allowance",
 ]);
 
+export const COMMERCIAL_EVIDENCE_CLASSES = Object.freeze([
+  "observed-commercial-evidence",
+  "owner-controlled-synthetic",
+  "consenting-recipient",
+]);
+
 const CURRENCIES = new Set(["USD", "INR"]);
 const PLAN_IDS = new Set(["free", "pro", "team", "studio", "enterprise"]);
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
@@ -38,6 +44,8 @@ export function validateCommercialAcceptance(input, { now = new Date() } = {}) {
   const approval = validateApproval(run.founderApproval, completedAt);
   const events = run.events.map((event) => validateEvent(event, catalog, completedAt));
   const byKind = new Map(COMMERCIAL_EVIDENCE_KINDS.map((kind) => [kind, events.filter((event) => event.kind === kind)]));
+  const evidenceClasses = [...new Set(events.map((event) => event.evidenceClass))];
+  const evidenceClass = evidenceClasses.length === 1 ? evidenceClasses[0] : "mixed-commercial-sources";
 
   for (const kind of COMMERCIAL_EVIDENCE_KINDS) {
     if ((byKind.get(kind)?.length ?? 0) === 0) throw new Error(`commercial evidence is missing ${kind}`);
@@ -64,6 +72,8 @@ export function validateCommercialAcceptance(input, { now = new Date() } = {}) {
       allowances: Object.freeze({ ...catalog.allowances }),
     }),
     evidence: Object.freeze({
+      evidenceClass,
+      evidenceClasses: Object.freeze([...evidenceClasses]),
       kinds: Object.freeze(COMMERCIAL_EVIDENCE_KINDS.map((kind) => Object.freeze({ kind, count: byKind.get(kind)?.length ?? 0 }))),
       distinctEvidenceDigests: uniqueEvidence.size,
       repeatUseCount: repeatUse.length,
@@ -79,6 +89,7 @@ export function validateCommercialAcceptance(input, { now = new Date() } = {}) {
     }),
     gate: Object.freeze({
       evidenceStatus: "complete",
+      evidenceClass,
       acceptanceStatus: "open",
       independentReview: "required",
     }),
@@ -127,6 +138,9 @@ function validateEvent(input, catalog, completedAt) {
     throw new Error("commercial evidence event kind is invalid");
   }
   if (!SHA256.test(input.evidenceDigest) || !SHA256.test(input.subjectDigest)) throw new Error(`commercial ${input.kind} digests are invalid`);
+  if (typeof input.evidenceClass !== "string" || !COMMERCIAL_EVIDENCE_CLASSES.includes(input.evidenceClass)) {
+    throw new Error(`commercial ${input.kind} evidence class is invalid`);
+  }
   const observedAt = parseDate(input.observedAt, `commercial ${input.kind} observedAt`);
   if (observedAt > completedAt) throw new Error(`commercial ${input.kind} occurs after completion`);
   if (!input.facts || typeof input.facts !== "object") throw new Error(`commercial ${input.kind} facts are required`);
@@ -158,7 +172,13 @@ function validateEvent(input, catalog, completedAt) {
       break;
   }
   if (input.evidenceDigest !== digestEventPayload(input)) throw new Error(`commercial ${input.kind} evidence digest does not match event payload`);
-  return Object.freeze({ kind: input.kind, evidenceDigest: input.evidenceDigest, subjectDigest: input.subjectDigest, facts: Object.freeze({ ...input.facts }) });
+  return Object.freeze({
+    kind: input.kind,
+    evidenceClass: input.evidenceClass,
+    evidenceDigest: input.evidenceDigest,
+    subjectDigest: input.subjectDigest,
+    facts: Object.freeze({ ...input.facts }),
+  });
 }
 
 function requirePlanFacts(facts, catalog, kind) {
@@ -174,7 +194,7 @@ function parseDate(value, label) {
 }
 
 function digestEventPayload(input) {
-  return `sha256:${createHash("sha256").update(JSON.stringify({ kind: input.kind, subjectDigest: input.subjectDigest, observedAt: input.observedAt, facts: input.facts }), "utf8").digest("hex")}`;
+  return `sha256:${createHash("sha256").update(JSON.stringify({ kind: input.kind, evidenceClass: input.evidenceClass, subjectDigest: input.subjectDigest, observedAt: input.observedAt, facts: input.facts }), "utf8").digest("hex")}`;
 }
 
 function rejectSecretLike(input) {

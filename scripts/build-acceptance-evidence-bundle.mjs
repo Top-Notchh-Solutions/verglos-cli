@@ -23,6 +23,7 @@ const paths = [
   "docs/shipping/acceptance/external-workflow-protocol.md",
   "docs/shipping/acceptance/consent-record.template.md",
   "docs/shipping/acceptance/comprehension-test-protocol.md",
+  "docs/shipping/acceptance/commercial-acceptance-protocol.md",
   "docs/shipping/acceptance/hunt-adjudication-protocol.md",
   "docs/shipping/evidence/razorpay-sandbox-qr-2026-10-03.md",
   "docs/shipping/evidence/current-source-verification-2026-10-03.md",
