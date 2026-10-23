@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · live Production surface recheck
+
+Latest READY Vercel deployments were observed. Five unauthenticated public GET
+routes returned 200 and the POST-only QR endpoint returned the expected 405;
+bounded hashes are recorded in
+`evidence/vercel-live-production-readonly-recheck-2026-10-24T2201Z.md`.
+This opens read-only Production surface evidence only. Provider lifecycle,
+customer/recipient, human/field-CWV, independent review, AppSec/Hunt, and
+final go/no-go remain closed. Score remains **245/35/280 (87.5%)**.
+
 ## 2026-10-24 · current-head local release artifact gate
 
 CLI PR #241 merged normally as `8e87c81d`. The fresh local `2.0.0-alpha.4`

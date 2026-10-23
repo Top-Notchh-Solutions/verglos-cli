@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · live Production read-only recheck
+
+Latest READY Vercel deployments were inspected and six unauthenticated GET
+probes were run against `https://verglos.com`: five public routes returned 200,
+and the POST-only QR route returned the expected 405. Response hashes and
+deployment source commits are recorded in
+`evidence/vercel-live-production-readonly-recheck-2026-10-24T2201Z.md`.
+No deployment, alias, environment, database, payment, webhook, customer, or
+release-publication write occurred. This is surface evidence only; score
+remains **245/35/280 (87.5%)**, with 13 AppSec-dependent and 22 non-AppSec
+rows open.
+
 ## 2026-10-24 · current-head local release artifact candidate
 
 CLI PR #241 merged normally as `8e87c81d` after correcting stale SBOM version

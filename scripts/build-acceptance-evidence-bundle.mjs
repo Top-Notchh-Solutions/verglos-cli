@@ -235,6 +235,7 @@ const paths = [
   "docs/shipping/evidence/vercel-live-production-recheck-2026-10-24.md",
   "docs/shipping/evidence/current-head-nonappsec-implementation-regression-2026-10-24.md",
   "docs/shipping/evidence/current-head-release-artifact-candidate-2026-10-24.md",
+  "docs/shipping/evidence/vercel-live-production-readonly-recheck-2026-10-24T2201Z.md",
   "THIRD_PARTY_NOTICES",
 ];
 

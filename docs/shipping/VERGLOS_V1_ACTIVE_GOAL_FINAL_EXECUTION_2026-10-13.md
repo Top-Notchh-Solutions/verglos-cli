@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · live Production read-only recheck
+
+The latest READY Vercel deployments were rechecked without credentials or
+writes. Live `https://verglos.com` returned **200** for `/`, `/proof`,
+`/llms.txt`, `/robots.txt`, and `/sitemap.xml`; the unauthenticated GET against
+the POST-only `/api/razorpay/create-qr` route returned the expected **405**.
+Bounded response hashes and deployment source commits are recorded in
+`docs/shipping/evidence/vercel-live-production-readonly-recheck-2026-10-24T2201Z.md`.
+
+This is fresh Production surface evidence only. It does not create a payment,
+provider lifecycle, database, customer/recipient, human/field,
+independent-review, AppSec/Hunt, or final-release event. No backlog checkbox
+changed. The score remains **245 checked / 35 open / 280 total (87.5%)**,
+partitioned as **13 AppSec-dependent / 22 non-AppSec** rows.
+
 ## Latest continuation result · 2026-10-24 · current-head release artifact candidate
 
 The current CLI release generators were corrected and merged normally in CLI

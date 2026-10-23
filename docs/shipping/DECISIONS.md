@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record live Production surface recheck
+
+- **Decision:** Recheck the latest READY Vercel Production surface using only
+  unauthenticated GET requests and bounded response hashes.
+- **Verification:** Five public routes returned 200; the POST-only QR route
+  returned the expected 405 method boundary.
+- **Disposition:** Record this as current surface evidence only. No deployment,
+  provider, payment, database, customer, or release-publication write occurred;
+  no checkbox changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-live-production-readonly-recheck-2026-10-24T2201Z.md`.
+
 ## 2026-10-24 · retain release rows after local candidate verification
 
 - **Decision:** Generate and verify a fresh current-head alpha.4 candidate
