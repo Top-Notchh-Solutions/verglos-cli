@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Production public-surface recheck
+
+Vercel Production deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` is READY.
+Thirteen bounded read-only probes against `https://verglos.com` matched their
+expected statuses for public pages, machine-readable files, the synthetic
+handoff page, CLI-auth redirect, and receipt/API negative boundaries. No
+external write or customer data was used. This is provider/runtime evidence,
+not customer acceptance, human/field evidence, independent review, or final
+release sign-off. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/vercel-web-production-public-surface-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · Web full regression after Production migration hook
 
 The merged Web #268 head passed `pnpm test:serial`: **904/928 passed**, 24

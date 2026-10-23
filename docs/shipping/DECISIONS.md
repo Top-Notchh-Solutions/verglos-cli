@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record Production public-surface recheck
+
+- **Decision:** Record the current Vercel Production route result as bounded
+  provider evidence; do not convert synthetic negative probes into customer,
+  recipient, or release acceptance.
+- **Verification:** Deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` is READY;
+  thirteen declared read-only probes matched their expected statuses.
+- **Disposition:** No external write or customer data was used. No checkbox
+  changed; score remains **244/36/280 (87.1%)**. Authenticated deletion,
+  provider lifecycle, customer/recipient, human/field, independent-review,
+  and final-release gates remain separately open. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/vercel-web-production-public-surface-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · retain rows after Web full regression
 
 - **Decision:** Record the fresh serial Web regression as current code-side

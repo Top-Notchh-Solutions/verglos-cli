@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## Web Production public-surface recheck · 2026-10-24
+
+- **Provider receipt:** Vercel deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL`
+  reported `READY` for the live aliases.
+- **Verification:** Thirteen bounded read-only probes matched their expected
+  statuses across public pages, machine-readable files, the synthetic handoff
+  page, CLI-auth redirect, and receipt/API negative boundaries.
+- **Disposition:** No login, token, payment, webhook, database, account,
+  customer, or release-publication write occurred. This is provider/runtime
+  evidence only; no checkbox changed. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/vercel-web-production-public-surface-recheck-2026-10-24.md`.
+
 ## Web full serial regression after Production migration hook · 2026-10-24
 
 - **Source:** Web PR #268 merged head `98b5cf652623bf4f000ed93366b67a38154579e1`.
