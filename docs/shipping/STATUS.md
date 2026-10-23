@@ -1,18 +1,32 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · current merged CLI public corpus
+
+The owner-authorized public-OSS run used CLI `c0f0db6` after a clean **8/8**
+build. Eight exact-commit full clones completed with **13,494** files walked,
+all four architecture shapes, **0** coverage gaps, and bounded triage of **350
+findings / 23 rule groups**. Adjudication, customer acceptance, and
+independent review remain open. This advances ACCEPT-011/012 inputs only. The
+current bundle has **177** hashed files, manifest
+`sha256:6afb9fff718c3987ed0cb3239667a35cb17a28d7669b083ed491ced062088e99`,
+passed secret scan, and passed 177/177 integrity verification. Score remains
+**244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
+
 ## 2026-10-23 · merged source queue reconciled
 
 CLI `main` is `c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web `main` is
 `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`, read from the authoritative
 GitHub commit APIs. Both repositories have zero open PRs, so no merge remains
-pending. The current additive `ACCEPT-003` bundle contains **176** hashed
-files, manifest `sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
-and a passed secret scan; a read-only verifier confirmed **176/176** file
+pending. The current additive `ACCEPT-003` bundle contains **177** hashed
+files, manifest `sha256:6afb9fff718c3987ed0cb3239667a35cb17a28d7669b083ed491ced062088e99`,
+and a passed secret scan; a read-only verifier confirmed **177/177** file
 digests and byte counts. `ACCEPT-003` remains open for reviewer,
 hosted, and external acceptance artifacts. Score remains **244 checked / 36
 open / 280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
-`evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
-`evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
+`evidence/source-queue-audit-after-merged-prs-2026-10-23.md`,
+`evidence/accept-003-bundle-integrity-verification-2026-10-23.md`, and
+`evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
 
 ## 2026-10-23 · STUDIO-CLI-001 reservation race merged
 

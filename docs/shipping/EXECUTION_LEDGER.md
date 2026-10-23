@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## Current merged CLI public corpus · 2026-10-23
+
+- **Source:** CLI `main` `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`; build
+  **8/8**.
+- **Run:** 8 exact-commit full clones; **13,494** files; all four architecture
+  shapes; **0** coverage gaps.
+- **Triage:** **350** findings / **23** rule groups; unadjudicated; no customer
+  acceptance claim.
+- **Digests:** verification
+  `f1b16979cb5ef5307b644b37dd41dd964363f5eb61e7cd10cd21dfac534f1e41`;
+  triage `aa99f6935f88647c66961887ee9d417a61ec8d456abf2cec86a4a51b55156c0a`.
+- **Disposition:** ACCEPT-011/012 execution progress only; score remains
+  **244/36/280 (87.1%)** and no external/release state changed.
+- **Evidence:** `evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
+
 ## Merged source queue reconciled · 2026-10-23
 
 - **Authoritative heads:** CLI `main`
@@ -7,15 +22,16 @@
   `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; no open PRs in either repo.
 - **Next queue entry:** `ACCEPT-003`; its bounded evidence-bundle code is
   present, but its reviewer/hosted/external acceptance artifacts are missing.
-- **Bundle:** 176 hashed files; manifest
-  `sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`;
-  secret scan passed; read-only verification confirmed 176/176 file digests
+- **Bundle:** 177 hashed files; manifest
+  `sha256:6afb9fff718c3987ed0cb3239667a35cb17a28d7669b083ed491ced062088e99`;
+  secret scan passed; read-only verification confirmed 177/177 file digests
   and byte counts.
 - **Disposition:** No row checked and no publication/provider/Production,
   customer, tag, or release action occurred. Score remains **244/36/280
   (87.1%)**. Nothing was deleted or overwritten.
-- **Evidence:** `evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
-  `evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
+- **Evidence:** `evidence/source-queue-audit-after-merged-prs-2026-10-23.md`,
+  `evidence/accept-003-bundle-integrity-verification-2026-10-23.md`, and
+  `evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
 
 ## STUDIO-CLI-001 reservation race merged · 2026-10-23
 

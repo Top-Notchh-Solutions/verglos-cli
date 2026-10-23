@@ -1,19 +1,31 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · current merged CLI public corpus
+
+The owner-authorized public-OSS run used CLI `c0f0db6` after a clean **8/8**
+build. Eight exact-commit full clones completed with **13,494** files walked,
+all four architecture shapes, and **0** coverage gaps. Bounded triage produced
+**350 findings / 23 rule groups**; observations remain unadjudicated and no
+customer acceptance is claimed. This advances ACCEPT-011/012 execution inputs
+only; no checkbox changed. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`docs/shipping/evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
+
 ## 2026-10-23 · merged source queue reconciled
 
 Authoritative GitHub reads show CLI `main` at
 `c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web `main` at
 `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; both repositories have zero open
 PRs. The next non-AppSec queue entry is `ACCEPT-003`. Its current additive
-bundle contains **176** hashed files, manifest
-`sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
-and a passed secret scan; read-only verification confirmed **176/176** file
+bundle contains **177** hashed files, manifest
+`sha256:6afb9fff718c3987ed0cb3239667a35cb17a28d7669b083ed491ced062088e99`,
+and a passed secret scan; read-only verification confirmed **177/177** file
 digests and byte counts. No checkbox changed: `ACCEPT-003` remains open for
 reviewer, hosted, and external acceptance artifacts. Score remains **244
 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten.
-Evidence: `docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
-`docs/shipping/evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
+Evidence: `docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md`,
+`docs/shipping/evidence/accept-003-bundle-integrity-verification-2026-10-23.md`, and
+`docs/shipping/evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
 
 ## 2026-10-23 · STUDIO-CLI-001 reservation race merged
 
@@ -5494,6 +5506,13 @@ assumes the legacy `licenses` table. No checkbox changed; backlog remains
   correction, independent review, and final acceptance. Score remains
   **244 checked / 36 open / 280 total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md`.
+- **ACCEPT-011/012 current merged-CLI addendum (2026-10-23):** The
+  owner-authorized public-OSS path reran all eight exact-commit full clones
+  against CLI `c0f0db6`, walking **13,494** files with all four architecture
+  shapes and **0** coverage gaps. Bounded triage produced **350** findings
+  across **23** rule groups; adjudication remains open and no customer claim
+  is made. Evidence:
+  `docs/shipping/evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
 - [ ] **ACCEPT-013** · false-positive and false-truth correction loop · deps: ACCEPT-012, QUAL-CLI-004/006, QUAL-WEB-005/006 · Use a held-out fixture split and review each high-impact finding/claim; correct rules, copy, and evidence contracts without tuning against the final holdout. Commit(s): Private `14d916df` plus boundary fix `daf6524f` add `scripts/run-acceptance-correction-loop.mjs`, package command `acceptance:correction:run`, and 6 focused contract tests. The protocol substrate is complete; the row remains open for the actual preregistered held-out run, dependent qualification, independent review, and final acceptance. Evidence: `docs/shipping/evidence/accept-013-held-out-correction-loop-2026-10-23.md`.
 - **ACCEPT-013 chronology addendum (2026-10-23):** Private `29184f95`
   rejects future holdout freeze/review, adjudication, and correction

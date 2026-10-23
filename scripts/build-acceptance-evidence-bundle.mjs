@@ -127,6 +127,7 @@ const paths = [
   "docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md",
   "docs/shipping/evidence/accept-012-triage-integrity-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md",
+  "docs/shipping/evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md",
   "docs/shipping/evidence/accept-013-held-out-correction-loop-2026-10-23.md",
   "docs/shipping/evidence/accept-013-correction-time-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-003-deterministic-bundle-manifest-2026-10-23.md",

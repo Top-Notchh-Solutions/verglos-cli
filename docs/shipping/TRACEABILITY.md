@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## Current merged CLI public corpus · 2026-10-23
+
+- **Source mapping:** CLI `main` `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`;
+  clean build **8/8**.
+- **Execution mapping:** Eight full exact-commit public fixtures, **13,494**
+  files walked, all four architecture shapes, and **0** coverage gaps.
+- **Triage mapping:** **350** bounded findings across **23** rule groups;
+  classification complete, adjudication open, customer acceptance not claimed.
+- **Artifact mapping:** Verification SHA-256
+  `f1b16979cb5ef5307b644b37dd41dd964363f5eb61e7cd10cd21dfac534f1e41`;
+  triage SHA-256
+  `aa99f6935f88647c66961887ee9d417a61ec8d456abf2cec86a4a51b55156c0a`.
+- **Disposition:** Advances ACCEPT-011/012 execution inputs only; no row,
+  provider, Production, customer, independent-review, or release state changed.
+- **Evidence:** `evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
+
 ## Merged source queue reconciled · 2026-10-23
 
 - **Source mapping:** CLI `main` is
@@ -9,16 +25,17 @@
 - **Acceptance mapping:** The next non-AppSec queue entry is `ACCEPT-003`.
   Its bounded implementation is present, but the row remains open for the
   required reviewer, hosted, and external acceptance artifacts.
-- **Artifact mapping:** Current additive bundle has 176 hashed files,
+- **Artifact mapping:** Current additive bundle has 177 hashed files,
   manifest SHA-256
-  `sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
-  and a passed secret scan; a read-only verifier confirmed 176/176 file
+  `sha256:6afb9fff718c3987ed0cb3239667a35cb17a28d7669b083ed491ced062088e99`,
+  and a passed secret scan; a read-only verifier confirmed 177/177 file
   digests and byte counts.
 - **Disposition:** No pending merge, squash, branch deletion, tag,
   publication, provider, Production, customer, or final-release action.
   Score remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
-- **Evidence:** `evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
-  `evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
+- **Evidence:** `evidence/source-queue-audit-after-merged-prs-2026-10-23.md`,
+  `evidence/accept-003-bundle-integrity-verification-2026-10-23.md`, and
+  `evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
 
 ## STUDIO-CLI-001 reservation race merged · 2026-10-23
 

@@ -1,5 +1,24 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · current merged CLI public corpus
+
+The owner-authorized public-OSS path ran against merged CLI `main`
+`c0f0db6ab8ab223d0eead310bf827fc11da59bbd` after a clean **8/8** workspace
+build. Eight full, non-shallow exact-commit fixtures completed with **13,494
+files walked**, all four required architecture shapes, and **0 coverage gaps**.
+Bounded triage produced **350 findings across 23 rule groups**; every result is
+unadjudicated, customer acceptance is not claimed, and independent review is
+still required. This advances `ACCEPT-011/012` execution inputs without
+checking those rows or substituting for the held review.
+
+The next non-AppSec queue entry remains `ACCEPT-003`; the public-OSS run is a
+parallel authorized execution path. The current additive private bundle now
+contains **177 hashed files** with manifest
+`sha256:6afb9fff718c3987ed0cb3239667a35cb17a28d7669b083ed491ced062088e99`;
+secret scan and **177/177** file-integrity verification passed. Score remains
+**244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · merged source queue reconciled
 
 The authoritative GitHub heads are CLI `main` at
@@ -11,15 +30,16 @@ branch deletion, tag, publication, provider, Production, customer, or final
 release action occurred.
 
 The next non-AppSec queue entry is `ACCEPT-003`. Its bounded bundle
-implementation is present, and the current additive bundle now contains **176
+implementation is present, and the current additive bundle now contains **177
 hashed files** with manifest
-`sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`;
-secret scan passed. A read-only verifier confirmed **176/176** listed file
+`sha256:6afb9fff718c3987ed0cb3239667a35cb17a28d7669b083ed491ced062088e99`;
+secret scan passed. A read-only verifier confirmed **177/177** listed file
 digests and byte counts plus the manifest digest. `ACCEPT-003` remains open
 for its complete reviewer, hosted, and external acceptance artifacts. The
 score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
-`docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
-`docs/shipping/evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
+`docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md`,
+`docs/shipping/evidence/accept-003-bundle-integrity-verification-2026-10-23.md`,
+and `docs/shipping/evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
 
 ## Latest continuation result · 2026-10-23 · STUDIO-CLI-001 reservation race merged
 

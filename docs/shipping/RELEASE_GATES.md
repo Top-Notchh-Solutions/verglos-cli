@@ -1,19 +1,29 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · current merged CLI public corpus
+
+The owner-authorized public-OSS run completed against CLI `c0f0db6` after an
+**8/8** build: 8 exact-commit full clones, **13,494** files, all four
+architecture shapes, **0** coverage gaps, and bounded triage of **350 findings
+/ 23 rule groups**. Adjudication and independent review remain open; no
+customer acceptance or release gate is claimed. Evidence:
+`evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
+
 ## 2026-10-23 · merged source queue reconciled
 
 CLI `main` is `c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web `main` is
 `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; both repositories have no open
 PRs. The next non-AppSec queue entry is `ACCEPT-003`. Its current additive
-bundle contains 176 hashed files with manifest
-`sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
-passed secret scan, and passed read-only 176/176 file-integrity verification.
+bundle contains 177 hashed files with manifest
+`sha256:6afb9fff718c3987ed0cb3239667a35cb17a28d7669b083ed491ced062088e99`,
+passed secret scan, and passed read-only 177/177 file-integrity verification.
 This does not satisfy the reviewer, hosted, or external
 acceptance gates, so no row or release gate is checked. Score remains
 **244/36/280 (87.1%)**. No publication, provider, Production, customer, tag,
 or release action occurred. Nothing was deleted or overwritten. Evidence:
-`evidence/source-queue-audit-after-merged-prs-2026-10-23.md` and
-`evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
+`evidence/source-queue-audit-after-merged-prs-2026-10-23.md`,
+`evidence/accept-003-bundle-integrity-verification-2026-10-23.md`, and
+`evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
 
 ## 2026-10-23 · STUDIO-CLI-001 reservation race merged
 

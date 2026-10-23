@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · execute current merged CLI public corpus
+
+- **Decision:** Use the owner-authorized public-OSS path for local exact-commit
+  analysis without treating it as customer consent or independent review.
+- **Result:** CLI `c0f0db6`; build **8/8**; 8 fixtures; **13,494** files;
+  all four architecture shapes; **0** coverage gaps; triage **350/23**.
+- **Boundary:** Findings remain unadjudicated and customer acceptance is not
+  claimed. No provider, Production, customer, reviewer, AppSec/Hunt, or final
+  release state changed.
+- **Evidence:** `evidence/accept-011-012-current-cli-c0f0db6-public-corpus-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile merged source queue
 
 - **Decision:** Treat the GitHub merge queue as empty after normal merges;
@@ -11,9 +22,9 @@
 - **Next action:** Continue with `ACCEPT-003` evidence/reconciliation. Its
   implementation substrate is present, but its reviewer/hosted/external
   acceptance artifacts are not fabricated by this audit.
-- **Evidence:** Current bundle has 176 hashed files, manifest
-  `sha256:c33125569111a190dd305fecd33c7f637539d701a883afc03a29be5151762733`,
-  passed secret scan, and passed read-only 176/176 file-integrity verification.
+- **Evidence:** Current bundle has 177 hashed files, manifest
+  `sha256:6afb9fff718c3987ed0cb3239667a35cb17a28d7669b083ed491ced062088e99`,
+  passed secret scan, and passed read-only 177/177 file-integrity verification.
   Score remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
 
 ## 2026-10-23 · merge STUDIO-CLI-001 reservation race hardening
