@@ -1,5 +1,18 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · current Web Preview provider receipt
+
+Clean Web `origin/main` commit `42fe33eefd2d2ce23ec89512381af2b767de4e54`
+was deployed to the owner-managed Vercel `verglos-web` project as Preview
+deployment `dpl_8aTPJdicafq8zSduHUYwiQcQHg7D`. The provider reports `READY`; its
+build generated **49/49** static pages, and protected read-only smoke returned
+HTTP 200 for `/`, `/proof`, `/llms.txt`, `/sitemap.xml`, and `/robots.txt` with
+the expected security headers. This is current Preview provider evidence, not
+Production promotion, customer acceptance, human/field evidence, independent
+review, or final go/no-go. The score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/vercel-web-current-head-preview-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · Web current-head contracts
 
 Clean Web `origin/main` head `42fe33eefd2d2ce23ec89512381af2b767de4e54`
