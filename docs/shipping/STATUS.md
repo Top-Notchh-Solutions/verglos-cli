@@ -10,6 +10,9 @@ Score remains **245/35/280 (87.5%)** and no checkbox changed. Evidence:
 `evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md`.
 The additive bundle v19 verifies **244/244** files with zero mismatches and
 manifest `sha256:0ac911d9fb9d3280b57d51eb69a34d4dd9cd2573f00b108f24a88f3a8094013a`.
+`VERGLOS_FINAL_RELEASE_READY` is absent from the release environment; the
+owner `NPM_TOKEN` secret remains unused. Bundle v20 supersedes v19 and matches
+manifest `sha256:4cdf892359036d86a15a82a28ea47511f991ed17dee021112d264b63444dbf1d`.
 
 ## 2026-10-24 · QUAL-WEB-006 dashboard contract recheck
 
