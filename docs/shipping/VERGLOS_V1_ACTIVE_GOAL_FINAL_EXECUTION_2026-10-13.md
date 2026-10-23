@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · DIST-006 contract-suite verification
+
+The rebuilt exact local checkout `d013796e` completed `pnpm build` with **8/8**
+Turbo tasks. The focused rollback evidence test passed **2/2**, and the full
+private shipping contract suite passed **171/171**. The rollback rehearsal
+exercised all five bounded provider-boundary decisions and preserved two
+historical records.
+
+This is implementation/regression evidence only. `DIST-006` remains open for
+authenticated provider action, independent review, and final release
+acceptance; no provider, publication, deployment, tag, customer-data, or
+revocation action occurred. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`docs/shipping/evidence/dist-006-private-contract-suite-2026-10-23.md` and
+`docs/shipping/evidence/acceptance-evidence-bundle-dist006-private-suite-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-006 capture input boundary
 
 Web PR #259 merged normally as `42fe33eefd2d2ce23ec89512381af2b767de4e54`,
