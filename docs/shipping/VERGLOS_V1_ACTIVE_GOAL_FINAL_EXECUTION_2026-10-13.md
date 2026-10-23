@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web full regression after Production migration hook
+
+The exact Web PR #268 merged head `98b5cf652623bf4f000ed93366b67a38154579e1`
+completed a fresh local serial regression: **904 passed / 24 designed skips /
+0 failures** out of **928** tests in **10.765 seconds**. The migration-hook
+contract passed **1/1**, public-release smoke **12/12**, truth-registry
+**37/37**, typecheck, and diff checks passed. This confirms current Web code
+integrity after the Production migration operation; it does not create
+recipient, reviewer, field-CWV, independent-review, or final-release
+evidence. No checkbox changed; score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/web-full-serial-regression-pr268-2026-10-24.md`.
+The additive regression bundle contains **215 files**, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:e66807f9fb38de3b5beaea8d55b1112562710c7de9a1d452105b40c65167446a`.
+
 ## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 Production provider migration completed
 
 The first Production handoff probe correctly returned a bounded JSON 503

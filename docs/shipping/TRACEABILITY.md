@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web full regression mapping
+
+- **Implementation mapping:** Web PR #268 merge
+  `98b5cf652623bf4f000ed93366b67a38154579e1` maps the guarded Production
+  migration hook to a fresh full serial Web regression.
+- **Verification mapping:** **904/928** tests passed with 24 designed skips,
+  zero failures; migration hook **1/1**, public smoke **12/12**, truth
+  registry **37/37**, typecheck, and diff check passed.
+- **Acceptance mapping:** This confirms code integrity only; no customer,
+  recipient, reviewer, field-CWV, independent-review, or final-release gate
+  is opened. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/web-full-serial-regression-pr268-2026-10-24.md`.
+  The additive regression bundle contains **215 files**, verifies with **0
+  mismatches**, passes secret scanning, and matches manifest
+  `sha256:e66807f9fb38de3b5beaea8d55b1112562710c7de9a1d452105b40c65167446a`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production migration mapping
 
 - **Implementation mapping:** Web PR #268 / merge
