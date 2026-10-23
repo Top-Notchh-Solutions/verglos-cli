@@ -116,6 +116,7 @@ const paths = [
   "docs/shipping/evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md",
   "docs/shipping/evidence/final-web-007-008-public-metadata-landing-2026-10-23.md",
   "docs/shipping/evidence/final-web-source-contracts-2026-10-23.md",
+  "docs/shipping/evidence/cli-workspace-full-test-2026-10-23.md",
   "docs/shipping/evidence/final-web-007-qualification-runtime-pr253-2026-10-23.md",
   "docs/shipping/evidence/final-web-008-machine-readable-release-smoke-pr250-2026-10-23.md",
   "docs/shipping/evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md",

@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · CLI full-test boundary
+
+The merged CLI workspace passes `pnpm test` with **13/13 Turbo tasks
+successful** after workspace-link repair. This does not open hosted CI,
+independent AppSec review, provider/Production, customer, publication, or
+final release gates; Docker Hunt integration skips remain explicit. Score
+remains **244/36/280 (87.1%)**. Acceptance bundle v10 verifies **186 files / 0
+mismatches** with manifest
+`sha256:fe3a09317d830d7188f0ce935f0238617f5f3b8d694b5c02b23ff7b0e9a1c936`.
+Evidence:
+`evidence/cli-workspace-full-test-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB source-contract boundary
 
 The current Web source contract passes **54/54** focused tests plus typecheck

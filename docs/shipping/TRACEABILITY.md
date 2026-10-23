@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## CLI merged-head full test · 2026-10-23
+
+- **Verification mapping:** The merged CLI workspace passed `pnpm test` with
+  **13/13 Turbo tasks successful**, 0 failed tasks, after a frozen-lockfile
+  install restored workspace links.
+- **Limit mapping:** Docker Hunt integration skips are explicit and do not
+  prove host adversarial behavior; external/release gates remain open. Score
+  remains **244/36/280 (87.1%)**. Acceptance bundle v10 verifies **186 files /
+  0 mismatches** with manifest
+  `sha256:fe3a09317d830d7188f0ce935f0238617f5f3b8d694b5c02b23ff7b0e9a1c936`.
+- **Evidence:** `evidence/cli-workspace-full-test-2026-10-23.md`.
+
 ## FINAL-WEB source-contract pass · 2026-10-23
 
 - **Implementation mapping:** FINAL-WEB-001/002/003/005/006/007/008 map to
