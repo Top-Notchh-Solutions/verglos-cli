@@ -177,6 +177,22 @@
   attestation, and final acceptance. Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/dist-002-npm-preflight-identity-boundary-pr190-2026-10-23.md`.
 
+## DIST-002/003 PR #190 merged · 2026-10-23
+
+- **Promotion mapping:** PR #190 merged normally into CLI `main` at merge
+  commit `7f3f2519529413fc2b6e138b53359ddda25a2da0`, preserving source commit
+  `9e793fd84b74d1ba873de8011033d1898cbb0eb2`; no squash or branch deletion.
+- **Contract mapping:** The publisher requires exact package identity in a
+  registry `200` response before an already-published skip.
+- **Verification mapping:** Local release contracts passed **52/52** and diff
+  check passed; Standard/in-toto were green while matrix/self-scan were
+  pending at the merge observation.
+- **Acceptance mapping:** No tag, npm write, provider/Production action,
+  customer action, or final release sign-off occurred. Keep DIST-002/003
+  unchecked for trusted publication, attestation, and final acceptance. Score
+  remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-002-npm-preflight-identity-boundary-merge-pr190-2026-10-23.md`.
+
 ## ACCEPT-003 additive current evidence bundle · 2026-10-23
 
 - **Source mapping:** Protected bundle builder includes the four latest

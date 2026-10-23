@@ -167,6 +167,21 @@ attestation, and final acceptance. Score remains **244 checked / 36 open /
 
 Evidence: `evidence/dist-002-npm-preflight-identity-boundary-pr190-2026-10-23.md`.
 
+## 2026-10-23 · DIST-002/003 PR #190 merged
+
+PR #190 merged normally into CLI `main` at
+`7f3f2519529413fc2b6e138b53359ddda25a2da0`, preserving source commit
+`9e793fd84b74d1ba873de8011033d1898cbb0eb2`; no squash or branch deletion was
+used. The complete local release-contract set passed **52/52** and diff check
+passed. Standard validation and in-toto were green at merge observation;
+cross-platform and self-scan were still pending and are not claimed. No tag,
+npm publication, provider, Production, customer, or final release action
+occurred. Keep DIST-002/003 open for trusted publication/attestation and final
+acceptance. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted or overwritten.
+
+Evidence: `evidence/dist-002-npm-preflight-identity-boundary-merge-pr190-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 additive current evidence bundle
 
 The protected bundle builder generated an additive **130-file** private

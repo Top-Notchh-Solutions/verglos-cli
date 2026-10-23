@@ -2920,3 +2920,18 @@ acceptance. The 13 AppSec-held rows remain unchanged. Live score remains
 **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
 overwritten. Evidence:
 `docs/shipping/evidence/dist-002-npm-preflight-identity-boundary-pr190-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-002/003 PR #190 merged
+
+PR #190 merged normally into CLI `main` at
+`7f3f2519529413fc2b6e138b53359ddda25a2da0`, preserving source commit
+`9e793fd84b74d1ba873de8011033d1898cbb0eb2`; no squash or branch deletion was
+used. The complete local release-contract set passed **52/52** and diff check
+passed. Standard validation and in-toto binding were green at the merge
+observation; the cross-platform matrix and self-scan were still pending and
+are not claimed as green here. No tag, npm publication, provider, Production,
+customer, or final release action occurred. Keep DIST-002/003 unchecked for
+actual trusted publication/attestation and final acceptance. Score remains
+**244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/dist-002-npm-preflight-identity-boundary-merge-pr190-2026-10-23.md`.
