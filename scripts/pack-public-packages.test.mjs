@@ -31,4 +31,7 @@ test("public packer fails closed for private workspace dependencies", async () =
   const source = await readFile("scripts/pack-public-packages.mjs", "utf8");
   assert.match(source, /privateWorkspacePackages/);
   assert.match(source, /cannot depend on private workspace package/);
+  assert.match(source, /readBoundedJsonFile/u);
+  assert.match(source, /readBoundedFile/u);
+  assert.match(source, /const npmCommand/u);
 });

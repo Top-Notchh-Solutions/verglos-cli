@@ -1,16 +1,19 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { readBoundedFile, readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const run = promisify(execFile);
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
+const npmOptions = { shell: process.platform === "win32", timeout: 180_000, maxBuffer: 8 * 1024 * 1024 };
 const packageNames = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"];
 const PUBLIC_NOTICE = "THIRD_PARTY_NOTICES";
 const PRIVATE_DIST_NAMES = /(?:^|\/)(?:cli-fixture|fixture-engine|fixture-validator)(?:\.[^/]+)?$/u;
 const manifests = new Map();
-for (const name of packageNames) manifests.set(name, JSON.parse(await readFile(join(root, "packages", name, "package.json"), "utf8")));
+for (const name of packageNames) manifests.set(name, await readBoundedJsonFile(join(root, "packages", name, "package.json"), `${name} package manifest`));
 const versions = new Map([...manifests.values()].map((manifest) => [manifest.name, manifest.version]));
 const privateWorkspacePackages = new Set([...manifests.values()].filter((manifest) => manifest.private === true).map((manifest) => manifest.name));
 const destination = resolve(process.argv[2] ?? "");
@@ -33,8 +36,14 @@ try {
     // Each npm archive is independently redistributable. Package-local terms
     // take precedence; otherwise carry the repository's Apache license into
     // the staged archive instead of relying on the source checkout.
-    try { await readFile(join(stage, "LICENSE")); }
-    catch { await cp(join(root, "LICENSE"), join(stage, "LICENSE")); }
+    try {
+      const packageLicense = await readBoundedFile(join(source, "LICENSE"), `${name} package LICENSE`);
+      await writeFile(join(stage, "LICENSE"), packageLicense);
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+      const repositoryLicense = await readBoundedFile(join(root, "LICENSE"), "repository LICENSE");
+      await writeFile(join(stage, "LICENSE"), repositoryLicense);
+    }
     await writeFile(join(stage, "THIRD_PARTY_NOTICES"), thirdPartyNotices, { encoding: "utf8", mode: 0o644 });
     const manifest = manifests.get(name);
     manifest.files = [...new Set([...(Array.isArray(manifest.files) ? manifest.files : []), "THIRD_PARTY_NOTICES"])];

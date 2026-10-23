@@ -99,6 +99,6 @@ for (const entry of entries) {
   }
   lines.push("");
 }
-const output = `${lines.join("\n").replaceAll(/[ \t]+\n/g, "\n").trimEnd()}\n`;
+const output = `${lines.join("\n").replaceAll(/\r\n?/g, "\n").replaceAll(/[ \t]+\n/g, "\n").trimEnd()}\n`;
 if (process.argv.includes("--write")) await writeFile(join(root, "THIRD_PARTY_NOTICES"), output, { encoding: "utf8", mode: 0o644 });
 process.stdout.write(output);

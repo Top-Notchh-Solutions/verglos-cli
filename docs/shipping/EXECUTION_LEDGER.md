@@ -15687,3 +15687,28 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   `sha256:7011061d397b47a260e0fd7f1ddf30c5a4f6252971b898e820be1b58c5e21425`;
   bundle file SHA-256
   `bb9998dfd4e28dc958ef289ddba0b65e2fc52fcfb45fe163a4f618672ec76f16`.
+## DIST-001/003 public packer read binding · 2026-10-23
+
+- **Source mapping:** Private `scripts/pack-public-packages.mjs` and
+  `scripts/generate-third-party-notices.mjs`.
+- **Contract mapping:** Reviewed package manifests and package licenses are
+  read through bounded regular-file handles; npm invocation is explicit per
+  platform; generated notice output normalizes upstream line endings.
+- **Verification mapping:** Real clean pack passed for six public archives;
+  packer/package-surface/bounded-reader/bundle contracts passed **12/12**;
+  notice-generator/license-text contracts passed **4/4**; syntax and diff
+  checks passed. The supported-architecture input retained 254 lockfile
+  versions, 250 package entries, one bundled component, and seven review
+  blockers.
+- **Artifact mapping:** Additive bundle contains 164 hashed files with
+  manifest SHA-256
+  `sha256:9bb2bc29ac68301212a53b0cbb955d205ca870240711d7ecfa788c45d54ddb18`
+  and bundle file SHA-256
+  `ff703406cc14998bfd03664302753e2c30489b8f9d0c2d6b6f25bd7f72f18117`;
+  secret scan passed.
+- **Acceptance mapping:** Keep DIST-001/003 open for the seven license review
+  blockers, trusted publication, provider/Production/customer/independent
+  review gates, and final release acceptance. No checkbox or external state
+  changed; nothing was deleted or overwritten. Score remains **244/36/280
+  (87.1%)**.
+- **Evidence:** `evidence/dist-001-003-public-packer-read-binding-private-2026-10-23.md`.

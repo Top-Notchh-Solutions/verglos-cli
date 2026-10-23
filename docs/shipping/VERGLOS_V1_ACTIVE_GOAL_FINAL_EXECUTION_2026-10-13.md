@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · DIST-001/003 public packer read binding
+
+The public packer now reads reviewed package manifests and package license
+files through bounded regular-file handles and uses an explicit cross-platform
+npm invocation. Generated third-party notices normalize upstream line endings
+and were refreshed from the supported-architecture dependency graph. The real
+clean pack passed for **6 public archives**; packer, package-surface,
+bounded-reader, and bundle contracts passed **12/12**; notice-generator and
+license-text contracts passed **4/4**; syntax and `git diff --check` passed.
+
+This is implementation evidence only. The seven license review blockers and
+all external/provider/customer/independent-review/final-release gates remain
+open. No backlog checkbox changed, no publication/tag/release action occurred,
+and nothing was deleted or overwritten. The additive bundle contains **164
+hashed files** with manifest
+`sha256:9bb2bc29ac68301212a53b0cbb955d205ca870240711d7ecfa788c45d54ddb18`
+and file SHA-256
+`ff703406cc14998bfd03664302753e2c30489b8f9d0c2d6b6f25bd7f72f18117`.
+The live score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/dist-001-003-public-packer-read-binding-private-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-008 commercial validator boundaries
 
 Private commit `6af3fbb7` hardens the commercial-evidence validator against

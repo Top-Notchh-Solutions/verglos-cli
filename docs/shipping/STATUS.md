@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-001/003 public packer read binding
+
+The public packer now uses bounded regular-file reads for reviewed package
+manifests and package licenses, explicit cross-platform npm invocation, and
+normalized generated notice output. The real clean pack passed for **6 public
+archives**; packer/package-surface/bounded-reader/bundle contracts passed
+  **12/12**; notice-generator/license-text contracts passed **4/4**; syntax and
+  diff checks passed. The additive 164-file bundle has manifest
+  `sha256:9bb2bc29ac68301212a53b0cbb955d205ca870240711d7ecfa788c45d54ddb18`
+  and file SHA-256
+  `ff703406cc14998bfd03664302753e2c30489b8f9d0c2d6b6f25bd7f72f18117`.
+  The seven license review blockers remain open. No checkbox, publication,
+  provider, Production, customer, deployment, tag, or release state changed.
+  Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing
+  was deleted or overwritten. Evidence:
+`evidence/dist-001-003-public-packer-read-binding-private-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-008 commercial validator boundaries
 
 Private commit `6af3fbb7` hardens the validator against future completion,

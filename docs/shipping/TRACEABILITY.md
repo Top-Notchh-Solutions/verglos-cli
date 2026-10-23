@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## DIST-001/003 public packer read binding · 2026-10-23
+
+- **Source mapping:** Private public-packer, notice-generator, and focused
+  test changes.
+- **Contract mapping:** Package manifests and package licenses use bounded
+  regular-file reads; npm execution is explicit per platform; generated notice
+  output normalizes upstream line endings.
+- **Verification mapping:** Six-archive clean pack **passed**; packer,
+  package-surface, bounded-reader, and bundle contracts **12/12**; notice and
+  license-text contracts **4/4**; syntax and diff checks passed.
+- **Artifact mapping:** 164 hashed bundle files; manifest SHA-256
+  `sha256:9bb2bc29ac68301212a53b0cbb955d205ca870240711d7ecfa788c45d54ddb18`;
+  bundle file SHA-256
+  `ff703406cc14998bfd03664302753e2c30489b8f9d0c2d6b6f25bd7f72f18117`;
+  secret scan passed.
+- **Acceptance mapping:** DIST-001/003 remain open for the seven license
+  blockers, trusted publication, provider/customer/independent-review gates,
+  and final release acceptance. Score remains **244/36/280 (87.1%)**; nothing
+  was deleted or overwritten.
+- **Evidence:** `evidence/dist-001-003-public-packer-read-binding-private-2026-10-23.md`.
+
 ## ACCEPT-008 commercial validator boundaries · 2026-10-23
 
 - **Source mapping:** Private commit `6af3fbb7` and
