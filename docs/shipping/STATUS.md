@@ -12039,6 +12039,27 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · STUDIO-CLI-001 projection reservation race
+
+Web PR #254 source `c290c9f` fixes a custody race where the losing identical
+client-projection upload could commit a duplicate allowance reservation. The
+losing reservation is now released, and release ambiguity returns bounded
+service-unavailable. The race regression passed; Studio projection/workspace
+contracts passed **21/21**, negative-boundary contracts **8/8**, the full Web
+suite passed **900/924 with 24 explicit skips / 0 failures**, typecheck and
+diff check passed. GitGuardian and Vercel Preview Comments passed.
+
+Verify run `39899676684` and Private runner qualification run `39899676731`
+failed before repository steps with `runner_id: 0` and empty runner names for
+every job. PR #254 remains open and unmerged pending the hosted runner/account
+gate. `STUDIO-CLI-001` remains unchecked for hosted/audit qualification,
+authorized independent recipient/customer acceptance, and final release
+decision. No database migration, provider, Production, customer, deployment,
+registry, tag, or release action occurred; nothing was deleted or overwritten.
+Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
+Evidence: `evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`.
+
 ## 2026-10-23 · ENT-CLI-001 private-runner read binding
 
 CLI PR #192 source `9218819a33a97e5944e57f2ac4bfa2174fc17f2e` merged normally

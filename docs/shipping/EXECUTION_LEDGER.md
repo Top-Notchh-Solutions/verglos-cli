@@ -15491,3 +15491,32 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   additive bundle manifest `sha256:c172902038c1cc7622073a3de3c4fc0bfc4595b97de1288e148f7794995b92a3`;
   bundle file SHA-256
   `7cfd9b15afeee10ee84c29d4ae9f265084006691771cb9ad2914644f650fd14a`.
+
+## STUDIO-CLI-001 projection reservation race · 2026-10-23
+
+- **Source mapping:** Web PR #254 implementation commit `c290c9f`; source
+  branch preserved and PR remains open because hosted validation could not
+  start.
+- **Contract mapping:** The losing identical client-projection upload now
+  releases its duplicate allowance reservation after a custody uniqueness
+  conflict; if compensation is ambiguous, the route fails closed with bounded
+  service-unavailable.
+- **Verification mapping:** Race regression passed; Studio
+  projection/workspace contracts **21/21**; negative-boundary contracts
+  **8/8**; full Web suite **900/924 with 24 explicit skips / 0 failures**;
+  typecheck and diff check passed. GitGuardian and Vercel Preview Comments
+  passed.
+- **Hosted boundary:** Verify `39899676684` and Private runner qualification
+  `39899676731` both failed before repository steps; GitHub reports
+  `runner_id: 0` and empty runner names for every failed job. No hosted source,
+  typecheck, database, or repository step ran.
+- **Acceptance mapping:** Keep `STUDIO-CLI-001` unchecked for hosted/audit
+  qualification, authorized independent recipient/customer acceptance, and
+  final release decision. No database migration, provider, Production,
+  customer, deployment, registry publication, tag, or release action occurred.
+  Nothing was deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:89e26d4786b8b22d30217c8366484ce7339f5e75b64f13276313cd49d30c8149`;
+  bundle file SHA-256
+  `1aca87069c115597e11ca251313266f920a18f72cc56fe5b86dba8be83cc9b53`.

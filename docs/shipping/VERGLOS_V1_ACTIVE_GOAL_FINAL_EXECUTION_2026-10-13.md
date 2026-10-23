@@ -3067,3 +3067,31 @@ and file SHA-256
 Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/ent-cli-001-runner-read-binding-pr192-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · STUDIO-CLI-001 projection reservation race
+
+Web PR #254 source commit `c290c9f` fixes a real client-projection custody
+race: when identical uploads compete on the custody uniqueness constraint, the
+losing request now releases its duplicate allowance reservation instead of
+committing it. If the compensating release cannot be confirmed, the route
+returns bounded service-unavailable. The race regression passed.
+
+The focused Studio projection/workspace contracts passed **21/21**, negative
+boundary contracts passed **8/8**, the full Web suite passed **900/924** with
+**24 explicit skips / 0 failures**, typecheck passed, and `git diff --check`
+passed. GitGuardian and Vercel Preview Comments passed. Web Verify run
+`39899676684` and Private runner qualification run `39899676731` failed before
+repository steps with `runner_id: 0` and empty runner names for every job;
+PR #254 remains open and unmerged pending the hosted runner/account gate.
+
+This is implementation evidence only. Keep `STUDIO-CLI-001` unchecked for
+hosted/audit qualification, authorized independent recipient/customer
+acceptance, and final release decision. No database migration, provider,
+Production, customer, deployment, registry publication, tag, or release action
+occurred. The additive bundle contains **154** files with manifest
+`sha256:89e26d4786b8b22d30217c8366484ce7339f5e75b64f13276313cd49d30c8149`
+and file SHA-256
+`1aca87069c115597e11ca251313266f920a18f72cc56fe5b86dba8be83cc9b53`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`.

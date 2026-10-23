@@ -9409,6 +9409,29 @@ changed. See
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## STUDIO-CLI-001 projection reservation race · 2026-10-23
+
+- **Source mapping:** Web PR #254 implementation commit `c290c9f`; source
+  branch preserved and PR remains open pending hosted validation.
+- **Contract mapping:** A losing identical client-projection upload now
+  releases its duplicate allowance reservation after the custody uniqueness
+  conflict; failed compensation returns bounded service-unavailable.
+- **Verification mapping:** Race regression passed; Studio
+  projection/workspace contracts **21/21**; negative-boundary contracts
+  **8/8**; full Web suite **900/924 with 24 explicit skips / 0 failures**;
+  typecheck and diff check passed. GitGuardian and Vercel Preview Comments
+  passed.
+- **Hosted boundary:** Verify `39899676684` and Private runner qualification
+  `39899676731` failed before repository steps with `runner_id: 0` and empty
+  runner names for every job.
+- **Acceptance mapping:** Keep `STUDIO-CLI-001` open for hosted/audit
+  qualification, authorized independent recipient/customer acceptance, and
+  final release decision. Score remains **244/36/280 (87.1%)**; nothing was
+  deleted.
+- **Evidence:** `evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:89e26d4786b8b22d30217c8366484ce7339f5e75b64f13276313cd49d30c8149`.
+
 ## ENT-CLI-001 private-runner read binding · 2026-10-23
 
 - **Source mapping:** CLI PR #192 implementation commit
