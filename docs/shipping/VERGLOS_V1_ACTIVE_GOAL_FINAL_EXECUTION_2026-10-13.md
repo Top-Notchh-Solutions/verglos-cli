@@ -1,5 +1,18 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Test-Mode inventory merged
+
+The redacted Test-Mode provider inventory and its bundle-source update merged
+normally in PR **#222** at CLI `main` merge commit
+`76dba49fb1f36bb467dd5c4dd39eae3a9be013c6`. The hosted platform matrix run
+`40011386284` completed **10/10** successfully, including the in-toto binding;
+the standard validator also passed. The Verglos self-scan run
+`40011386653` reproduced the known public-ledger boundary failure because the
+public repository retains `docs/shipping/**`; no bypass or history rewrite was
+used. The current score remains **244 checked / 36 open / 280 total (87.1%)**,
+with **13** AppSec-dependent and **23** non-AppSec rows. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-testmode-recheck-v3.json`.
+
 ## Latest continuation result · 2026-10-24 · current Test-Mode provider inventory
 
 The isolated Razorpay Test-Mode configuration accepted a redacted read-only
