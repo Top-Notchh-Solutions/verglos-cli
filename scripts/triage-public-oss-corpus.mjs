@@ -1,10 +1,12 @@
 import { createHash } from "node:crypto";
 import { writeFile } from "node:fs/promises";
-import { readBoundedJsonFile } from "./read-bounded-json.mjs";
+import { readBoundedJsonFileWithDigest } from "./read-bounded-json.mjs";
 
 const INPUT_SCHEMA = "verglos.private.public-oss-corpus-verification.v1";
 const OUTPUT_SCHEMA = "verglos.private.public-oss-corpus-triage.v1";
 const SEVERITIES = new Set(["critical", "high", "medium", "low", "info", "unknown"]);
+const COMMIT = /^[a-f0-9]{7,64}$/u;
+const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const MAX_FIXTURES = 64;
 const MAX_FINDINGS = 100_000;
 
@@ -21,8 +23,15 @@ export async function triagePublicOssCorpus(input) {
   let coverageGapCount = 0;
 
   for (const fixture of input.fixtures) {
-    if (!fixture.reportJson?.path || typeof fixture.name !== "string") throw new Error("fixture report reference is invalid");
-    const report = await readBoundedJsonFile(fixture.reportJson.path, `${fixture.name} report`);
+    if (!fixture.reportJson || typeof fixture.reportJson.path !== "string" || typeof fixture.name !== "string") throw new Error("fixture report reference is invalid");
+    if (!Number.isInteger(fixture.reportJson.bytes) || fixture.reportJson.bytes <= 0 || !SHA256.test(fixture.reportJson.sha256)) {
+      throw new Error(`fixture report integrity metadata is invalid: ${fixture.name}`);
+    }
+    const reportResult = await readBoundedJsonFileWithDigest(fixture.reportJson.path, `${fixture.name} report`);
+    if (reportResult.bytes !== fixture.reportJson.bytes || reportResult.sha256 !== fixture.reportJson.sha256) {
+      throw new Error(`fixture report integrity mismatch: ${fixture.name}`);
+    }
+    const report = reportResult.value;
     const findings = Array.isArray(report.findings) ? report.findings : [];
     if (findings.length > MAX_FINDINGS - findingCount) throw new Error("corpus findings exceed the bounded triage limit");
     const findingSummaries = findings.map((finding) => {
@@ -97,9 +106,15 @@ export async function triagePublicOssCorpusFile(inputPath, outputPath) {
 
 function validateInput(input) {
   if (!input || typeof input !== "object" || input.schema !== INPUT_SCHEMA) throw new Error("unsupported public-corpus verification schema");
-  if (typeof input.cliCommit !== "string" || input.cliCommit.length === 0 || input.cliCommit.length > 64) throw new Error("verification CLI commit is invalid");
+  if (typeof input.cliCommit !== "string" || !COMMIT.test(input.cliCommit)) throw new Error("verification CLI commit is invalid");
   if (!Array.isArray(input.fixtures) || input.fixtures.length === 0 || input.fixtures.length > MAX_FIXTURES) throw new Error("verification fixtures are invalid");
-  if (!Number.isInteger(input.fixtureCount) || input.fixtureCount < input.fixtures.length) throw new Error("verification fixture count is invalid");
+  if (!Number.isInteger(input.fixtureCount) || input.fixtureCount !== input.fixtures.length) throw new Error("verification fixture count is invalid");
+  if (typeof input.verifiedAt !== "string" || !Number.isFinite(new Date(input.verifiedAt).getTime())) throw new Error("verification timestamp is invalid");
+  for (const fixture of input.fixtures) {
+    if (!fixture || typeof fixture !== "object" || typeof fixture.name !== "string" || !COMMIT.test(fixture.commit)) {
+      throw new Error("verification fixture commit is invalid");
+    }
+  }
 }
 
 function summarizeFinding(fixtureName, finding) {

@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -16,12 +18,13 @@ async function fixtureReport(coverage = { status: "complete", limitations: [], f
 }
 
 function input(reportPath, overrides = {}) {
+  const reportBytes = readFileSync(reportPath);
   return {
     schema: "verglos.private.public-oss-corpus-verification.v1",
     verifiedAt: "2026-10-23T12:00:00.000Z",
     cliCommit: "78251d1ba47e505380b25ee146f1ca420f1e61a6",
     fixtureCount: 1,
-    fixtures: [{ name: "fixture", commit: "abc1234", reportJson: { path: reportPath } }],
+    fixtures: [{ name: "fixture", commit: "abc1234", reportJson: { path: reportPath, bytes: reportBytes.byteLength, sha256: `sha256:${createHash("sha256").update(reportBytes).digest("hex")}` } }],
     ...overrides,
   };
 }
@@ -55,4 +58,28 @@ test("triage records incomplete coverage as a coverage gap", async () => {
 
 test("triage rejects an invalid verification manifest", async () => {
   await assert.rejects(triagePublicOssCorpus({ schema: "wrong", fixtures: [] }), /unsupported public-corpus verification schema/u);
+});
+
+test("triage rejects a report whose verified digest or size changed", async () => {
+  const { root, reportPath } = await fixtureReport();
+  try {
+    const source = input(reportPath);
+    source.fixtures[0].reportJson.sha256 = `sha256:${"f".repeat(64)}`;
+    await assert.rejects(triagePublicOssCorpus(source), /integrity mismatch/u);
+
+    const resized = input(reportPath);
+    resized.fixtures[0].reportJson.bytes += 1;
+    await assert.rejects(triagePublicOssCorpus(resized), /integrity mismatch/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("triage rejects a manifest fixture-count mismatch", async () => {
+  const { root, reportPath } = await fixtureReport();
+  try {
+    await assert.rejects(triagePublicOssCorpus(input(reportPath, { fixtureCount: 2 })), /fixture count is invalid/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
 });

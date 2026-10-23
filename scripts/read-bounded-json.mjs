@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { constants } from "node:fs";
 import { lstat, open } from "node:fs/promises";
 
@@ -10,6 +11,26 @@ const MAX_INPUT_BYTES = 16 * 1024 * 1024;
  * an acceptance contract.
  */
 export async function readBoundedJsonFile(inputPath, label, maxBytes = MAX_INPUT_BYTES) {
+  const result = await readBoundedJsonFileWithDigest(inputPath, label, maxBytes);
+  return result.value;
+}
+
+export async function readBoundedJsonFileWithDigest(inputPath, label, maxBytes = MAX_INPUT_BYTES) {
+  const bytes = await readBoundedFile(inputPath, label, maxBytes);
+  let value;
+  try {
+    value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+  } catch {
+    throw new Error(`${label} must contain valid bounded UTF-8 JSON`);
+  }
+  return Object.freeze({
+    value,
+    bytes: bytes.byteLength,
+    sha256: `sha256:${createHash("sha256").update(bytes).digest("hex")}`,
+  });
+}
+
+export async function readBoundedFile(inputPath, label, maxBytes = MAX_INPUT_BYTES) {
   if (typeof inputPath !== "string" || inputPath.length === 0 || inputPath.length > 4096 || /[\u0000-\u001f\u007f]/u.test(inputPath)) {
     throw new Error(`${label} path is invalid`);
   }
@@ -25,11 +46,7 @@ export async function readBoundedJsonFile(inputPath, label, maxBytes = MAX_INPUT
     const bytes = await handle.readFile();
     const after = await handle.stat();
     if (bytes.byteLength > maxBytes || after.size !== bytes.byteLength || !sameIdentity(opened, after)) throw new Error(`${label} changed while being read`);
-    try {
-      return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
-    } catch {
-      throw new Error(`${label} must contain valid bounded UTF-8 JSON`);
-    }
+    return bytes;
   } finally {
     await handle.close();
   }
