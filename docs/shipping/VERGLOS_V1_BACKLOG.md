@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current Test-Mode provider inventory
+
+The isolated Razorpay Test-Mode configuration accepted a redacted read-only
+inventory check: plan and payment endpoints returned HTTP 200, with **2** plan
+records and **56** payment records (**22 captured, 20 failed, 9 created, 5
+refunded**). The method aggregate was **45 card, 8 netbanking, 2 wallet, and 1
+cardless_emi**. No provider/application write was performed. This is provider
+reachability evidence only; keep ACCEPT-003 unchecked for current checkout and
+signed-webhook binding, reviewer, and acceptance evidence. Score remains **244
+checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/razorpay-testmode-current-readonly-recheck-2026-10-24.md`.
+
+The additive acceptance bundle includes this inventory as **203/203** files,
+verifies with zero mismatches, passes secret scanning, and matches manifest
+`sha256:66e9751d29680e597d783eb22c277378d6bd94b16be78a9fc85806d78117a83a`.
+The provider-lifecycle, reviewer, customer/recipient, browser, field-CWV, and
+account-deletion gates remain open; no checkbox changed. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-testmode-recheck-v3.json`.
+
 ## 2026-10-24 · ACCEPT-008 provenance merged
 
 The ACCEPT-008 provenance implementation and additive 202-file bundle merged
