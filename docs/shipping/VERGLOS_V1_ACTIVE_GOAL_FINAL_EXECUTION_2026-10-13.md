@@ -124,9 +124,11 @@ the provider. The score remains **245 checked / 35 open / 280 total (87.5%)**,
 with **13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
 `docs/shipping/evidence/razorpay-testmode-qr-attempt-2026-10-24.md`.
 
-This is now an explicit provider credential blocker for the next no-charge
-Test-Mode lifecycle receipt; it does not block local implementation work and
-does not authorize using Production credentials or charging a real payment.
+This remains a historical failed QR attempt only. The current
+`.env.gates.testing` pair was subsequently accepted for the bound order
+receipt recorded above, so the credential blocker is superseded. The provider
+lifecycle gate remains open for terminal capture/webhook/refund evidence; no
+Production credentials or real payment are authorized.
 
 ## Latest continuation result · 2026-10-24 · current-head implementation regression
 

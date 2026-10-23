@@ -90,9 +90,9 @@ the current Pro monthly binding, but Razorpay rejected the first request with
 HTTP **401** `BAD_REQUEST_ERROR` / `Authentication failed`. No provider QR was
 created, no payment or webhook was attempted, no application or Production
 state changed, and no money was charged. The local Test-Mode credential pair
-needs replacement before a provider lifecycle receipt can be captured. Score
-remains **245/35/280 (87.5%)**, with 13 AppSec-dependent and 22 non-AppSec
-rows open. Evidence:
+was a historical failure only; the current `.env.gates.testing` pair has since
+produced a valid bound Test Mode order receipt. Score remains **245/35/280
+(87.5%)**, with 13 AppSec-dependent and 22 non-AppSec rows open. Evidence:
 `evidence/razorpay-testmode-qr-attempt-2026-10-24.md`.
 
 ## 2026-10-24 · current-head non-AppSec implementation regression

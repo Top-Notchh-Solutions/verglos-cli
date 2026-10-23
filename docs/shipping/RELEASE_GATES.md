@@ -79,9 +79,10 @@ remains **245/35/280 (87.5%)**. Evidence:
 The synthetic QR-create request reached the Test-Mode provider boundary but
 was rejected with HTTP **401** `BAD_REQUEST_ERROR` / `Authentication failed`.
 No QR, payment, refund, webhook, database, Production, or customer state was
-created, and no money was charged. Provider lifecycle evidence therefore stays
-closed pending a valid Test-Mode key/secret pair. Score remains **245/35/280
-(87.5%)**. Evidence:
+created, and no money was charged. This is a historical failed QR attempt;
+the current Test-Mode pair has since produced a valid bound order receipt.
+Provider lifecycle remains open pending terminal capture/webhook/refund
+evidence. Score remains **245/35/280 (87.5%)**. Evidence:
 `evidence/razorpay-testmode-qr-attempt-2026-10-24.md`.
 
 ## 2026-10-24 · current-head implementation gate recheck
