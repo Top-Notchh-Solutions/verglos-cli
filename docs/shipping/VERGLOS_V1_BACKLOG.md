@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · CLI merged-head full test
+
+After `pnpm install --frozen-lockfile` restored the workspace links, the CLI
+monorepo `pnpm test` (`turbo run test`) completed with **13/13 Turbo tasks
+successful**, **0 failed tasks**, in **1m14.252s**. Explicit Docker Hunt
+integration skips remain unclaimed because they require the opt-in host
+environment and pinned image. No external or release gate is inferred.
+Acceptance bundle v10 verifies **186 files / 0 mismatches** with manifest
+`sha256:fe3a09317d830d7188f0ce935f0238617f5f3b8d694b5c02b23ff7b0e9a1c936`;
+secret scanning passed. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`docs/shipping/evidence/cli-workspace-full-test-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB source-contract pass
 
 The current Web candidate `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` has a

@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · record CLI merged-head full test
+
+- **Decision:** Record the successful full local workspace test while keeping
+  opt-in Docker integration and all external/release gates explicit.
+- **Result:** `pnpm install --frozen-lockfile` repaired workspace links;
+  `pnpm test` completed **13/13 Turbo tasks successfully**, with 0 failed
+  tasks, in **1m14.252s**.
+- **Disposition:** No hosted CI, AppSec review, provider/Production,
+  customer, publication, or final release result is inferred. Acceptance
+  bundle v10 verifies **186 files / 0 mismatches** with manifest
+  `sha256:fe3a09317d830d7188f0ce935f0238617f5f3b8d694b5c02b23ff7b0e9a1c936`.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/cli-workspace-full-test-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile FINAL-WEB source contracts
 
 - **Decision:** Record the current Web public-truth, metadata, proof, and

@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · CLI merged-head full test
+
+After `pnpm install --frozen-lockfile` restored the workspace links, the CLI
+monorepo `pnpm test` (`turbo run test`) completed with **13/13 tasks
+successful**, **0 failed tasks**, in **1m14.252s**. The standard suite still
+reports explicit Docker Hunt integration skips because that host test requires
+`VERGLOS_HUNT_DOCKER_INTEGRATION=1` and a pinned image; those skips are not
+claimed as adversarial evidence.
+
+This strengthens local code-side evidence only. It does not open hosted CI,
+independent AppSec review, provider/Production, customer acceptance,
+publication, or final release gates. Acceptance bundle v10 contains **186
+files**, verifies with **0 mismatches**, and has manifest
+`sha256:fe3a09317d830d7188f0ce935f0238617f5f3b8d694b5c02b23ff7b0e9a1c936`;
+secret scanning passed. The score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`docs/shipping/evidence/cli-workspace-full-test-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · FINAL-WEB source-contract pass
 
 The current Web candidate `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` has a

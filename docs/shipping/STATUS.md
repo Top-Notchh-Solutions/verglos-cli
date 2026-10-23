@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · CLI merged-head full test
+
+The repaired workspace install and `pnpm test` completed with **13/13 Turbo
+tasks successful**, 0 failed tasks, in **1m14.252s**. Docker Hunt integration
+skips remain explicit and are not claimed as host adversarial evidence. This is
+local code-side verification only; external/release gates remain unchanged.
+Acceptance bundle v10 verifies **186 files / 0 mismatches** with manifest
+`sha256:fe3a09317d830d7188f0ce935f0238617f5f3b8d694b5c02b23ff7b0e9a1c936`.
+Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/cli-workspace-full-test-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB source-contract pass
 
 The current Web candidate `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` is clean;
