@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · PR #264 reconciliation and next non-AppSec queue item
+
+CLI PR #264 merged normally as
+`882fe001eb86615b936d5d8bc8391a4023fce298`; `origin/main` was verified at the
+same merge. The captured Test Mode provider/local-integration evidence is now
+reconciled across the private tracker. `STUDIO-CLI-001` remains the next
+unchecked row in file order, but its source contract is implemented and its
+remaining artifact is real recipient/customer acceptance. `DIST-002` is the
+next implementation-ready row; its publish/provenance code is implemented but
+trusted registry publication remains open. No checkbox changed. Score remains
+**245 checked / 35 open / 280 total (87.5%)**, with **13 AppSec-dependent / 22
+non-AppSec** rows open.
+
 ## 2026-10-24 · Test Mode provider capture and local entitlement replay
 
 The isolated local checkout completed a Razorpay **Test Mode** UPI flow using

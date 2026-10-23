@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · PR #264 merge and next non-AppSec routing
+
+CLI PR #264 merged normally as
+`882fe001eb86615b936d5d8bc8391a4023fce298` and is verified on `origin/main`.
+The provider/local Test Mode evidence is reconciled. `STUDIO-CLI-001` remains
+open only for its real recipient/customer acceptance boundary; `DIST-002` is
+the next implementation-ready row but remains open for trusted registry
+publication/provenance and final release conditions. Score remains
+**245/35/280 (87.5%)**; no checkbox changed.
+
 ## 2026-10-24 · Test Mode provider capture and local entitlement replay
 
 The isolated local checkout completed a Razorpay **Test Mode** UPI flow. The

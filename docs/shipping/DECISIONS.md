@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · reconcile PR #264 and route next non-AppSec target
+
+- **Decision:** Reconcile the captured Test Mode packet against the normal
+  merge and route the implementation-first queue by the active goal.
+- **Merge:** CLI PR #264 merged normally as
+  `882fe001eb86615b936d5d8bc8391a4023fce298`; `origin/main` matches.
+- **Routing:** `STUDIO-CLI-001` remains open for real recipient/customer
+  acceptance, not source implementation. `DIST-002` is the next
+  implementation-ready target, with trusted publication/provenance still
+  intentionally gated.
+- **Disposition:** No checkbox changed; score remains **245/35/280 (87.5%)**.
+
 ## 2026-10-24 · record Test Mode provider capture and local entitlement replay
 
 - **Decision:** Record the first complete no-money provider Test Mode capture
