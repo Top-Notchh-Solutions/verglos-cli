@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · ACCEPT-007 adjudication validator boundary
+
+- **Decision:** Add a digest-bound validator for the preregistered Hunt
+  adjudication study without treating synthetic input or owner assertions as
+  independent review.
+- **Contract:** Require a frozen 100-plus-sample manifest, reproducibility
+  command binding, exactly two distinct non-author reviewers per sample,
+  allowed labels, reason digests for environment failures/exclusions, and a
+  post-label resolution for every disagreement.
+- **Verification:** Validator contracts **6/6** and adjacent acceptance
+  contracts **63/63** passed; study-protocol, syntax, and diff checks passed.
+- **Disposition:** The actual study, independent reviewer sign-off,
+  Hunt/AppSec review, and final release decision remain open. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/accept-007-adjudication-validator-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 rollback input race hardening
 
 - **Decision:** Adopt the merged CLI `O_NOFOLLOW` open flag for rollback

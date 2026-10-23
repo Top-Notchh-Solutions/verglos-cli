@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-007 adjudication validator boundary
+
+The private shipping toolchain now validates a digest-bound frozen Hunt study
+manifest, reproducibility commands, two distinct non-author reviews per
+sample, allowed adjudication labels, and post-label disagreement resolution.
+Validator contracts passed **6/6** and the adjacent acceptance set passed
+**63/63**. This is implementation evidence only: no 100-sample study,
+independent reviewer sign-off, Hunt/AppSec result, provider action, customer
+acceptance, publication, or final release decision occurred. ACCEPT-007 stays
+open and the score remains **244/36/280 (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`evidence/accept-007-adjudication-validator-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 registry presence and trusted-publisher boundary
 
 Read-only npm queries return `E404` for `@verglos/hunt` and `@verglos/cli`;
