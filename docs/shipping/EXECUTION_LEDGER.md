@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## Acceptance bundle v11 integrity repair · 2026-10-23
+
+- **Finding:** The retained v10 manifest referenced an older byte count for the
+  CLI full-test evidence.
+- **Repair:** Generated additive bundle v11 with the current evidence and the
+  merged QUAL-WEB-006 dashboard-command evidence; v10 was not deleted or
+  overwritten.
+- **Verification:** Bundle builder/verifier tests **9/9**; v11 contains **187
+  files**, has **0 mismatches**, matches manifest
+  `sha256:339afa1e60b7280fe65f4188c515c019cb2844c0f976dc13da9dcf7d50cb5e0c`,
+  and passes secret scanning.
+- **Disposition:** Evidence integrity repaired; no backlog checkbox or score
+  change. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/acceptance-evidence-bundle-dashboard-command-v11-2026-10-23.md`.
+
 ## QUAL-WEB-006 dashboard capture command · 2026-10-23
 
 - **Implementation:** Web PR #257 merged normally at

@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## 2026-10-23 · acceptance bundle v11 integrity repair
+
+The current evidence files are bound by additive bundle
+`acceptance-evidence-bundle-2026-10-23-dashboard-command-v11.json` with **187
+files**, **0 mismatches**, secret scanning passed, and manifest
+`sha256:339afa1e60b7280fe65f4188c515c019cb2844c0f976dc13da9dcf7d50cb5e0c`.
+The v10 artifact remains retained as historical evidence. This mapping proves
+packet integrity only and does not prove external or release gates. Evidence:
+`evidence/acceptance-evidence-bundle-dashboard-command-v11-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 dashboard capture command
 
 The Web implementation commit `edb6af1`, merged by PR #257 as

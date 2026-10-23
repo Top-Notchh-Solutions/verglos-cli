@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · acceptance bundle v11 integrity repair
+
+The prior v10 manifest was retained, and additive v11 was regenerated against
+the current evidence after detecting its stale CLI evidence byte count. v11
+contains **187 files**, verifies with **0 mismatches**, matches manifest
+`sha256:339afa1e60b7280fe65f4188c515c019cb2844c0f976dc13da9dcf7d50cb5e0c`,
+and passes secret scanning. Bundle tests pass **9/9**. No checkbox or score
+changed; score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/acceptance-evidence-bundle-dashboard-command-v11-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 dashboard capture command
 
 Web PR #257 merged normally at `bfb3413`; the new dashboard capture parser

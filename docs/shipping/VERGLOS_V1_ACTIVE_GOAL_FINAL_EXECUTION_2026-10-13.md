@@ -1,5 +1,19 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · acceptance bundle v11 integrity repair
+
+The current acceptance manifest was rechecked and v10 was found to reference
+an older byte count for the CLI full-test evidence. v10 was retained; additive
+bundle v11 now contains **187 files**, includes the merged QUAL-WEB-006
+dashboard-command evidence, passes secret scanning, and verifies with
+**0 mismatches** and manifest
+`sha256:339afa1e60b7280fe65f4188c515c019cb2844c0f976dc13da9dcf7d50cb5e0c`.
+The bundle verifier tests pass **9/9**. This repairs evidence integrity only;
+the score remains **244 checked / 36 open / 280 total (87.1%)** and the open
+provider/customer/reviewer/browser/field/deletion gates remain explicit.
+Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-dashboard-command-v11-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-006 dashboard capture command
 
 Web PR #257 merged normally at `bfb3413516e8f11e6dcef04040387b3dbb130c8b`,
