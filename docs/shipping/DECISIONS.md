@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record attempted-order processing fix without closing gates
+
+- **Decision:** Merge the Web status-mapping fix normally and record it as
+  implementation evidence.
+- **Verification:** Source `9005d5e` merged in PR #269 at
+  `5c52423231e286b8e176535b8d97e14fa52bbb03`; focused tests passed **7/7**;
+  typecheck passed; Web Actions had no active or queued runs.
+- **Boundary:** Vercel Production deployment
+  `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` was queued at recording time. Do not
+  claim the new route is live until READY. No provider terminal event,
+  payment, customer, database, publication, or release state changed.
+- **Disposition:** No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-order-attempted-processing-fix-2026-10-24.md`.
+- **Bundle:** Additive v9 contains 235 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:a2c3aca4352f531cc585f07e417c27c3dbf49f79472da702d7cd25e11b24430c`.
+
 ## 2026-10-24 · retain provider gate after attempted read-back
 
 - **Decision:** Record the provider order transition to `attempted` and keep

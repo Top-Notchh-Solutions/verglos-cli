@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · attempted-order processing implementation merged
+
+The Web billing route now maps the real provider order state `attempted` to
+HTTP **202** `{status: "processing"}` with `Retry-After: 2`; it no longer
+misreports an attempted provider order as pending. The focused route contract
+passed **7/7**, Web typecheck passed, and the change merged normally as Web PR
+#269 (`5c52423231e286b8e176535b8d97e14fa52bbb03`, source `9005d5e`). Evidence:
+`docs/shipping/evidence/vercel-order-attempted-processing-fix-2026-10-24.md`.
+
+Vercel automatically created Production deployment
+`dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1`, but it was still **Queued** at the time of
+recording; no claim is made that this new route is live until that deployment
+is READY. Web Actions had **0 in-progress / 0 queued** runs. This is a genuine
+implementation advance, not a provider terminal event or release approval.
+The additive bundle v9 contains **235** hashed files, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:a2c3aca4352f531cc585f07e417c27c3dbf49f79472da702d7cd25e11b24430c`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-attempted-processing-v9.json`.
+No checkbox changed. The authoritative score remains **245 checked / 35 open /
+280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
+
 ## Latest continuation result · 2026-10-24 · provider order advanced to attempted
 
 The read-only Razorpay Test Mode Orders API now reports the app-bound

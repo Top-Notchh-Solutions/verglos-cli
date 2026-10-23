@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · attempted-order processing implementation merged
+
+Web PR #269 merged normally at `5c52423231e286b8e176535b8d97e14fa52bbb03`.
+The billing route now reports provider `attempted` as HTTP 202 `processing`
+with `Retry-After: 2`; focused tests passed **7/7** and typecheck passed. The
+automatic Vercel Production deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` was
+still queued at recording time, so the prior READY deployment remains the
+verified live surface. Web Actions had 0 active and 0 queued runs. Score stays
+**245/35/280 (87.5%)**; no checkbox changed. Evidence:
+`evidence/vercel-order-attempted-processing-fix-2026-10-24.md`.
+The additive bundle v9 verifies **235/235** files with zero mismatches and
+manifest `sha256:a2c3aca4352f531cc585f07e417c27c3dbf49f79472da702d7cd25e11b24430c`:
+`evidence/acceptance-evidence-bundle-2026-10-24-attempted-processing-v9.json`.
+
 ## 2026-10-24 · provider order advanced to attempted
 
 Read-only Razorpay Test Mode recheck now reports the bound order as
