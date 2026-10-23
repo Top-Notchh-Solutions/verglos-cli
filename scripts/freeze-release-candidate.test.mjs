@@ -7,6 +7,11 @@ import { freezeReleaseCandidate, freezeReleaseCandidateFile } from "./freeze-rel
 
 const digest = (value) => `sha256:${value.repeat(64).slice(0, 64)}`;
 const gates = { providerLifecycle: "open", customerConsent: "open", independentReview: "open", authenticatedBrowser: "passed", fieldCwv: "open", accountDeletion: "open", finalRelease: "open" };
+const artifactKinds = ["version", "schema", "migration", "manifest", "plan-catalog", "compatibility", "docs", "runbook", "notice", "sbom", "provenance", "rollback"];
+
+function completeArtifacts() {
+  return artifactKinds.map((kind, index) => ({ path: `release/${kind}.json`, kind, sha256: digest(String.fromCharCode(97 + (index % 6))), required: true, present: true }));
+}
 
 function run(overrides = {}) {
   return {
@@ -24,6 +29,7 @@ test("freeze stays blocked and lists open gates and missing artifacts", () => {
   assert.equal(report.freeze.status, "blocked");
   assert.equal(report.summary.openGateCount, 6);
   assert.deepEqual(report.missingArtifacts, ["release/provenance.json"]);
+  assert.deepEqual(report.missingArtifactKinds, artifactKinds);
 });
 
 test("recorded GO fails closed while the candidate is incomplete", () => {
@@ -32,11 +38,22 @@ test("recorded GO fails closed while the candidate is incomplete", () => {
 
 test("all artifacts and gates passed produce a ready-for-signoff manifest", () => {
   const report = freezeReleaseCandidate(run({
-    artifacts: [{ path: "release/SHA256SUMS", kind: "checksum", sha256: digest("c"), required: true, present: true }],
+    artifacts: completeArtifacts(),
     gates: Object.fromEntries(Object.keys(gates).map((name) => [name, "passed"])),
   }));
   assert.equal(report.freeze.status, "ready-for-signoff");
   assert.equal(report.freeze.goEligible, true);
+});
+
+test("freeze stays blocked when a required artifact category is absent", () => {
+  const report = freezeReleaseCandidate(run({
+    artifacts: [{ path: "release/SHA256SUMS", kind: "manifest", sha256: digest("c"), required: true, present: true }],
+    gates: Object.fromEntries(Object.keys(gates).map((name) => [name, "passed"])),
+  }));
+  assert.equal(report.freeze.status, "blocked");
+  assert.equal(report.summary.missingArtifactKindCount, artifactKinds.length - 1);
+  assert.equal(report.missingArtifactKinds.includes("manifest"), false);
+  assert.equal(report.missingArtifactKinds.includes("provenance"), true);
 });
 
 test("unsafe paths and invalid digests are rejected", () => {

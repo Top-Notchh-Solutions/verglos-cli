@@ -6,6 +6,20 @@ const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const COMMIT = /^[a-f0-9]{7,64}$/u;
 const GATE_STATES = new Set(["open", "passed"]);
 const DECISIONS = new Set(["open", "go", "no-go"]);
+const REQUIRED_ARTIFACT_KINDS = Object.freeze([
+  "version",
+  "schema",
+  "migration",
+  "manifest",
+  "plan-catalog",
+  "compatibility",
+  "docs",
+  "runbook",
+  "notice",
+  "sbom",
+  "provenance",
+  "rollback",
+]);
 const GATE_NAMES = Object.freeze([
   "providerLifecycle",
   "customerConsent",
@@ -33,7 +47,9 @@ export function freezeReleaseCandidate(input) {
   const gates = validateGates(run.gates);
   const openGates = GATE_NAMES.filter((name) => gates[name] === "open");
   const missingArtifacts = artifacts.filter((artifact) => artifact.required && artifact.present === false).map((artifact) => artifact.path);
-  const ready = openGates.length === 0 && missingArtifacts.length === 0;
+  const presentRequiredKinds = new Set(artifacts.filter((artifact) => artifact.required && artifact.present).map((artifact) => artifact.kind));
+  const missingArtifactKinds = REQUIRED_ARTIFACT_KINDS.filter((kind) => !presentRequiredKinds.has(kind));
+  const ready = openGates.length === 0 && missingArtifacts.length === 0 && missingArtifactKinds.length === 0;
   if (run.decision === "go" && !ready) throw new Error("GO cannot freeze a candidate while required artifacts or gates remain open");
 
   return Object.freeze({
@@ -46,9 +62,11 @@ export function freezeReleaseCandidate(input) {
       requiredArtifactCount: artifacts.filter((artifact) => artifact.required).length,
       presentArtifactCount: artifacts.filter((artifact) => artifact.present).length,
       missingArtifactCount: missingArtifacts.length,
+      missingArtifactKindCount: missingArtifactKinds.length,
       openGateCount: openGates.length,
     }),
     missingArtifacts: Object.freeze(missingArtifacts),
+    missingArtifactKinds: Object.freeze(missingArtifactKinds),
     openGates: Object.freeze(openGates),
     freeze: Object.freeze({
       status: ready ? "ready-for-signoff" : "blocked",
@@ -101,5 +119,5 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const outputPath = process.argv[3];
   if (!inputPath || !outputPath) throw new Error("usage: node scripts/freeze-release-candidate.mjs INPUT.json OUTPUT.json");
   const report = await freezeReleaseCandidateFile(inputPath, outputPath);
-  process.stdout.write(`${JSON.stringify({ schema: report.schema, status: report.freeze.status, openGates: report.summary.openGateCount, missingArtifacts: report.summary.missingArtifactCount })}\n`);
+  process.stdout.write(`${JSON.stringify({ schema: report.schema, status: report.freeze.status, openGates: report.summary.openGateCount, missingArtifacts: report.summary.missingArtifactCount, missingArtifactKinds: report.summary.missingArtifactKindCount })}\n`);
 }
