@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · attempted-order processing is live in Production
+
+Vercel deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` reached **READY** and is
+aliased to `https://verglos.com`. The merged Web implementation is now live;
+read-only smoke returned the expected public 200 responses and QR GET 405. No
+production payment or write occurred. No checkbox changed. Score remains
+**245 checked / 35 open / 280 total (87.5%)**, with **13 AppSec-dependent / 22
+non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/vercel-order-attempted-processing-production-ready-2026-10-24.md`.
+The additive bundle v10 verifies **236/236** files with zero mismatches and
+manifest `sha256:31fa442c619117957a10a562695f407592f3d0b7fd8f6cf983d8fc482d28a4ce`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-attempted-processing-v10.json`.
+
 ## 2026-10-24 · attempted-order processing implementation merged
 
 The Web billing route now maps provider order state `attempted` to HTTP **202**

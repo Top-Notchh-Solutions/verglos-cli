@@ -1,5 +1,24 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · attempted-order processing is live in Production
+
+Vercel deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` reached **READY** and is
+aliased to `https://verglos.com`. The merged Web commit `9005d5e` now runs in
+Production; the read-only smoke returned the expected 200 responses for the
+public surface and 405 for the unsafe GET against the POST-only QR route. No
+production payment or write occurred. Evidence:
+`docs/shipping/evidence/vercel-order-attempted-processing-production-ready-2026-10-24.md`.
+
+This confirms the implementation has shipped to the live Web runtime, but it
+does not create a terminal provider event or close provider, independent
+review, browser/field, deletion, AppSec/Hunt, customer/recipient, or final
+release gates. No checkbox changed. The authoritative score remains **245
+checked / 35 open / 280 total (87.5%)**, partitioned as **13 AppSec-dependent /
+22 non-AppSec**. Additive bundle v10 verifies **236/236** files with zero
+mismatches, secret scanning passed, and manifest
+`sha256:31fa442c619117957a10a562695f407592f3d0b7fd8f6cf983d8fc482d28a4ce`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-attempted-processing-v10.json`.
+
 ## Latest continuation result · 2026-10-24 · attempted-order processing implementation merged
 
 The Web billing route now maps the real provider order state `attempted` to

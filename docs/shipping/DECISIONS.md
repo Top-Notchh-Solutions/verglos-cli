@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record live Production deployment for attempted-order fix
+
+- **Decision:** Record the READY Vercel Production deployment as live Web
+  implementation evidence without invoking a production payment.
+- **Verification:** Deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` is aliased
+  to `https://verglos.com`; public read-only smoke passed; QR GET returned the
+  expected 405.
+- **Boundary:** The authenticated order-status path was not invoked with a
+  production order. Provider terminal lifecycle, customer/recipient,
+  independent review, browser/field, deletion, AppSec/Hunt, and final release
+  remain open.
+- **Disposition:** No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-order-attempted-processing-production-ready-2026-10-24.md`.
+- **Bundle:** Additive v10 contains 236 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:31fa442c619117957a10a562695f407592f3d0b7fd8f6cf983d8fc482d28a4ce`.
+
 ## 2026-10-24 · record attempted-order processing fix without closing gates
 
 - **Decision:** Merge the Web status-mapping fix normally and record it as
