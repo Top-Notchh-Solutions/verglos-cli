@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · QUAL-WEB-006 dashboard capture input boundary
+
+Web PR #259 merged normally as `42fe33eefd2d2ce23ec89512381af2b767de4e54`.
+The dashboard-release qualifier now uses a no-follow bounded regular-file
+reader with identity and size rechecks. Focused qualification passed **4/4**;
+the serial Web suite without database variables passed **904/928** with 24
+designed skips and 0 failures; typecheck and diff check passed.
+
+Hosted runs `39992347692` and `39992347755` failed before repository execution
+with zero steps in every job. This advances implementation only; QUAL-WEB-006
+remains unchecked for supported-browser/human screen-reader, field-CWV,
+independent-review, and final-acceptance evidence. No deployment, Production
+action, customer-data operation, release, deletion, or checkbox change is
+claimed. Score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-capture-read-boundary-pr259-2026-10-23.md`.
+
 ## 2026-10-23 · current CLI DIST requalification
 
 Exact current CLI `origin/main` head `7d07066f967a2e7899aca6b51f04f306b7071013`

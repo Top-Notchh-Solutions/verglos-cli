@@ -156,6 +156,7 @@ const paths = [
   "docs/shipping/evidence/qual-web-005-local-isolated-integration-2026-10-23.md",
   "docs/shipping/evidence/qual-web-005-migration-preflight-pr258-2026-10-23.md",
   "docs/shipping/evidence/dist-002-003-006-current-main-requalification-2026-10-23.md",
+  "docs/shipping/evidence/qual-web-006-dashboard-capture-read-boundary-pr259-2026-10-23.md",
   "docs/shipping/evidence/accept-003-qual-web005-bundle-integrity-v3-2026-10-23.md",
   "docs/shipping/evidence/accept-003-bundle-verifier-2026-10-23.md",
   "docs/shipping/evidence/accept-002-003-clean-current-story-run-2026-10-23.md",

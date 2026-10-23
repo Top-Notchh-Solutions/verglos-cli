@@ -1,5 +1,27 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · QUAL-WEB-006 capture input boundary
+
+Web PR #259 merged normally as `42fe33eefd2d2ce23ec89512381af2b767de4e54`,
+from source `987d34def25fd5ab32c832bdacd5750cd14f3a55`. The dashboard-release
+qualification command now reads capture JSON through a no-follow bounded
+regular-file handle and rechecks file identity and size after reading. The
+focused qualification suite passed **4/4**, including symlink and 8 MiB
+oversize rejection. The serial Web suite without database variables passed
+**904/928** with **24 designed skips and 0 failures**; typecheck and diff check
+passed.
+
+Hosted Verify run `39992347692` and private-runner run `39992347755` failed
+before repository execution with zero steps in every job; no hosted completion
+is claimed. This advances input-integrity implementation only. QUAL-WEB-006
+remains unchecked for supported-browser/human screen-reader, field-CWV,
+independent-review, and final-acceptance evidence. No deployment, Production
+action, customer-data operation, release, or deletion occurred. Score remains
+**244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-capture-read-boundary-pr259-2026-10-23.md`
+and the additive bundle recorded in
+`docs/shipping/evidence/acceptance-evidence-bundle-qual-web006-capture-boundary-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · current CLI DIST requalification
 
 The exact current CLI `origin/main` head `7d07066f967a2e7899aca6b51f04f306b7071013`
