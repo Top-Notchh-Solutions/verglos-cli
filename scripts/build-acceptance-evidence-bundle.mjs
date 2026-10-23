@@ -103,6 +103,7 @@ const paths = [
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-24-local-current.json",
   "docs/shipping/evidence/vercel-web-production-proof-route-fix-2026-10-24.md",
   "docs/shipping/evidence/vercel-web-production-cli-auth-route-fix-2026-10-24.md",
+  "docs/shipping/evidence/vercel-web-production-public-receipt-route-fix-2026-10-24.md",
   "docs/shipping/evidence/gate-artifact-inventory-2026-10-23.md",
   "docs/shipping/evidence/dist-001-pack-manifest-read-binding-pr174-2026-10-23.md",
   "docs/shipping/evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md",

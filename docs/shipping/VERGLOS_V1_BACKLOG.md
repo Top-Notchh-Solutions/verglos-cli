@@ -1,5 +1,25 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Production public receipt route boundary verified
+
+Production public-route audit found the declared `/record/verify/[receiptId]`
+page omitted from the Clerk public matcher. Web commit `f381c96` added
+`/record/verify(.*)` and the public-release smoke assertion; PR **#262** merged
+normally as `58c4832ab8c40362867854e916c0a7ce561f3e2e`. The exact fix and
+post-merge `main` Vercel Production deployment reported **READY**, owns the
+live `verglos.com` aliases, and generated **49/49** static pages. The forged
+all-zero receipt probe remained the expected HTTP **404** without enumerating or
+reading receipt data; no successful receipt view was fabricated. Local
+public-release smoke passed **12/12**, truth-registry **37/37**, and
+typecheck/diff checks passed. No payment, database, account, entitlement,
+webhook, customer, final CLI/npm release, or AppSec action occurred. Evidence:
+`docs/shipping/evidence/vercel-web-production-public-receipt-route-fix-2026-10-24.md`.
+The additive private bundle verifies **209/209** files with zero mismatches,
+passed secret scanning, and manifest
+`sha256:fe565dd9bded68ffda5ad57e7c0cabf581196653c3185fdf23815ed9941971ca`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-public-receipt-production-fix.json`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## 2026-10-24 · Production CLI-auth routing fix verified
 
 Production route audit found `/cli-auth` returning HTTP **404** despite its
