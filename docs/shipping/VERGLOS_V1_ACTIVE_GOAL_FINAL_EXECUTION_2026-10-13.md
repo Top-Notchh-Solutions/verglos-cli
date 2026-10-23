@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-003 current Preview bundle
+
+The additive ACCEPT-003 bundle was regenerated after the current Web Preview
+receipt was recorded. It contains **197/197** bounded evidence files, has zero
+per-file mismatches, matches manifest
+`sha256:e1bc6c513cdd3c884a6815ab3c7b4e9033925636e5b51444bd9761408d152008`,
+and passes secret scanning. It includes the `READY` Vercel Preview receipt
+for deployment `dpl_8aTPJdicafq8zSduHUYwiQcQHg7D`.
+
+This is the current reproducibility plus hosted Preview-provider evidence for
+ACCEPT-003. Provider lifecycle, customer consent, independent review,
+authenticated-browser, field-CWV, and account-deletion gates remain explicitly
+open; no Production promotion, customer acceptance, reviewer sign-off, final
+release approval, or backlog checkbox is inferred. The score remains **244
+checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-003-current-head-preview-bundle-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-23 · current Web Preview provider receipt
 
 Clean Web `origin/main` commit `42fe33eefd2d2ce23ec89512381af2b767de4e54`
