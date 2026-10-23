@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current Production landing browser qualification
+
+Live `https://verglos.com` on deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1`
+passed all six landing paths at desktop/mobile (**12/12**) with zero Axe,
+keyboard, responsive, or reduced-motion failures. Robots/sitemap were 200;
+max LCP/INP/FCP/TTFB/CLS were **792/48/792/271.4/0**. This is automated hosted
+evidence only; score remains **245/35/280 (87.5%)** and no checkbox changed.
+Evidence: `evidence/vercel-production-landing-browser-qualification-2026-10-24-v2.md`.
+Bundle v12 verifies **238/238** files with zero mismatches and manifest
+`sha256:6008914d5e13ca4079804219593680504d0c8d2221ea83873a83894243fbb831`.
+
 ## 2026-10-24 · alpha.4 public-OSS POC rerun
 
 The current alpha.4 CLI `aad2c743` built **8/8** packages and passed the

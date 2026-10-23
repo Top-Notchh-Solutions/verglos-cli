@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current Production landing qualification
+
+- **Decision:** Record the current live landing browser qualification as hosted
+  implementation evidence without treating automation as human/field evidence.
+- **Verification:** Deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1`; six paths ×
+  desktop/mobile **12/12**, zero Axe/keyboard/responsive/reduced-motion
+  failures, robots/sitemap 200, metrics within thresholds.
+- **Boundary:** No login, payment, webhook, database, customer, account, or
+  release write; human screen-reader/field-CWV, independent, provider,
+  customer, AppSec/Hunt, and final release remain open.
+- **Disposition:** No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-production-landing-browser-qualification-2026-10-24-v2.md`.
+- **Bundle:** Additive v12 verifies 238 hashed files with zero mismatches and
+  manifest `sha256:6008914d5e13ca4079804219593680504d0c8d2221ea83873a83894243fbb831`.
+
 ## 2026-10-24 · refresh public-OSS POC inputs on alpha.4
 
 - **Decision:** Rerun the owner-authorized public-OSS exact-commit corpus with
