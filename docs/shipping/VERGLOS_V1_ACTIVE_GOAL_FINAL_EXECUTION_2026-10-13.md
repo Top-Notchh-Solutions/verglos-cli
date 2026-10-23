@@ -52,6 +52,56 @@ in addition to the product rows whose own evidence is still incomplete. The
 public-open-source benchmark path is authorized now. The separately held
 security-review track is unchanged.
 
+## Latest continuation result · 2026-10-23 · post-retry acceptance evidence bundle
+
+The latest additive bundle
+`acceptance-evidence-bundle-2026-10-23-post-retry.json` contains **121**
+hashed evidence files. Its SHA-256 is
+`sha256:1582cd6b0e420fee51075c0a315b522dbd647d94bc448443f8632ec2364b7e85` and
+the secret scan passed. Provider lifecycle, customer consent, independent
+review, authenticated browser, field CWV, and account deletion remain open.
+
+This advances `ACCEPT-002`/`ACCEPT-003` reproducibility only. It does not claim
+external, provider, customer, reviewer, independent-review, or final-release
+acceptance, so no checkbox changed. The live score remains **244 checked / 36
+open / 280 total (87.1%)**. Earlier bundles and attempt artifacts were
+preserved; nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-post-retry-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · current acceptance bundle after story retry
+
+The passing exact-head story artifact is now included in additive bundle
+`acceptance-evidence-bundle-2026-10-23-current-retry.json` with **119** hashed
+files. Its SHA-256 is
+`sha256:1e6f58f68cfe634a5497987cd55789e9425ccaa1a81eeff03f51bbfa5efbc427` and
+the secret scan passed. Provider lifecycle, customer consent, independent
+review, authenticated browser, field CWV, and account deletion remain open.
+
+This advances `ACCEPT-002`/`ACCEPT-003` reproducibility only. No external,
+provider, customer, reviewer, independent-review, or final-release acceptance
+was claimed; no checkbox changed. The live score remains **244 checked / 36
+open / 280 total (87.1%)**. Prior bundles and story attempts were preserved and
+nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-current-retry-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · current-head acceptance story verification
+
+The twelve-story private verifier ran against clean CLI
+`3d4bca1f3d306a2d69798d0af58f1361cec69620` and Web
+`16ceddc9855e75e04f10ddd276fae16c7ef09e01` heads. After a lockfile-frozen
+dependency install repaired the isolated Web worktree, the passing retry
+recorded CLI **312/314** with 2 skips, Web **956/986** with 30 skips, and
+composed acceptance substrates **79/79**, with zero failures and complete
+twelve-story mappings. The passing artifact digest is
+`sha256:9dd4524885443f02db6094e18d46e0ffb726ad4839492ff350caae59612c745e`.
+
+This advances `ACCEPT-002`/`ACCEPT-003` substrate evidence only. The initial
+missing-`tsx` diagnostic artifact is preserved, and no hosted HTTP, provider,
+customer, reviewer, human-browser, field-CWV, migration, or Production
+acceptance is claimed. No checkbox changed. The live score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten.
+Evidence: `docs/shipping/evidence/acceptance-stories-current-head-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · current acceptance evidence bundle
 
 The protected private bundle builder generated additive artifact

@@ -1,5 +1,40 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · post-retry acceptance evidence bundle
+
+The latest additive private bundle contains **121** hashed files, SHA-256
+`1582cd6b0e420fee51075c0a315b522dbd647d94bc448443f8632ec2364b7e85`, and a
+passing secret scan. Provider, customer, independent-review, browser,
+field-CWV, and account-deletion gates remain open. This advances ACCEPT-002/003
+reproducibility only. No checkbox changed; the live score remains **244 checked
+/ 36 open / 280 total (87.1%)**. Earlier bundles were preserved; nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-post-retry-2026-10-23.md`.
+
+## 2026-10-23 · current acceptance bundle after story retry
+
+The passing current-head story artifact is now included in an additive
+119-file evidence bundle with SHA-256
+`1e6f58f68cfe634a5497987cd55789e9425ccaa1a81eeff03f51bbfa5efbc427`; its
+secret scan passed. Provider, customer, independent-review, browser,
+field-CWV, and account-deletion gates remain open. This advances ACCEPT-002/003
+reproducibility only. No checkbox changed; the live score remains **244 checked
+/ 36 open / 280 total (87.1%)**. Prior bundles were preserved; nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-current-retry-2026-10-23.md`.
+
+## 2026-10-23 · current-head acceptance story verification
+
+The exact-head twelve-story verifier now passes after a lockfile-frozen Web
+dependency install: CLI **312/314** with 2 skips, Web **956/986** with 30
+skips, and composed acceptance substrates **79/79**, with zero failures and
+complete story mappings. This is substrate/regression progress only for
+ACCEPT-002/003; external, provider, customer, reviewer, human-browser,
+field-CWV, migration, and Production acceptance remain open. No checkbox
+changed; the live score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-stories-current-head-2026-10-23.md`.
+
 ## 2026-10-23 · current acceptance evidence bundle
 
 The private bundle builder generated additive current evidence

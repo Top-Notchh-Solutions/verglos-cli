@@ -1,5 +1,41 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · post-retry acceptance evidence bundle
+
+The latest additive bundle contains **121** hashed files, has SHA-256
+`1582cd6b0e420fee51075c0a315b522dbd647d94bc448443f8632ec2364b7e85`, and
+passed its secret scan. Provider, customer, independent-review, browser,
+field-CWV, and account-deletion gates remain open. ACCEPT-002/003 remain open
+for their declared external/reviewer contracts. Score remains **244 checked /
+36 open / 280 total (87.1%)**. Earlier bundles and attempt artifacts were
+preserved; nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-evidence-bundle-post-retry-2026-10-23.md`.
+
+## 2026-10-23 · current acceptance bundle after story retry
+
+The passing story-verification artifact is now included in a new additive
+119-file bundle. Its SHA-256 is
+`1e6f58f68cfe634a5497987cd55789e9425ccaa1a81eeff03f51bbfa5efbc427`; the
+secret scan passed. Provider lifecycle, customer consent, independent review,
+authenticated browser, field-CWV, and account-deletion gates remain open.
+ACCEPT-002/003 remain open for their external/reviewer contracts. Score remains
+**244 checked / 36 open / 280 total (87.1%)**. Prior bundles and attempts were
+preserved; nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-evidence-bundle-current-retry-2026-10-23.md`.
+
+## 2026-10-23 · current-head acceptance story verification
+
+After installing the Web worktree dependencies from its lockfile, the exact-
+head twelve-story verifier passed CLI **312/314** with 2 skips, Web **956/986**
+with 30 skips, and composed acceptance substrates **79/79**, with zero
+failures and complete story mappings. The initial missing-`tsx` attempt is
+preserved separately; the passing retry is now the authoritative additive
+artifact. This advances ACCEPT-002/003 substrate evidence only; external,
+provider, customer, reviewer, human-browser, field-CWV, migration, and
+Production acceptance remain open. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-stories-current-head-2026-10-23.md`.
+
 ## 2026-10-23 · current acceptance evidence bundle
 
 Generated the additive current acceptance bundle with **117** hashed evidence

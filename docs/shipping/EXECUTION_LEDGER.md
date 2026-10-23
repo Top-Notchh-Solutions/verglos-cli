@@ -1,5 +1,50 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · post-retry acceptance evidence bundle
+
+- **Artifact:** Latest additive 121-file private reproducibility bundle.
+- **Integrity:** SHA-256 is
+  `sha256:1582cd6b0e420fee51075c0a315b522dbd647d94bc448443f8632ec2364b7e85`;
+  the secret scan passed.
+- **Open gates:** Provider lifecycle, customer consent, independent review,
+  authenticated browser, field CWV, and account deletion remain open.
+- **Disposition:** ACCEPT-002/003 reproducibility only. Earlier bundles and
+  attempt artifacts were preserved; no external/reviewer/final-release outcome
+  was claimed. Score remains **244/36/280 (87.1%)**. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-post-retry-2026-10-23.md`.
+
+## 2026-10-23 · current acceptance bundle after story retry
+
+- **Artifact:** Additive 119-file bundle containing the passing current-head
+  story verification.
+- **Integrity:** SHA-256 is
+  `sha256:1e6f58f68cfe634a5497987cd55789e9425ccaa1a81eeff03f51bbfa5efbc427`;
+  the secret scan passed.
+- **Open gates:** Provider lifecycle, customer consent, independent review,
+  authenticated browser, field CWV, and account deletion remain open.
+- **Disposition:** ACCEPT-002/003 reproducibility evidence only. Prior bundles
+  and story attempts remain preserved; no external/reviewer/final-release
+  outcome was claimed. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-current-retry-2026-10-23.md`.
+
+## 2026-10-23 · current-head acceptance story verification
+
+- **Heads:** Clean CLI `3d4bca1f` and Web `16ceddc9` worktrees.
+- **Verification:** CLI **312/314** with 2 skips, Web **956/986** with 30
+  skips, and composed Web acceptance substrates **79/79**; zero failures and
+  complete twelve-story mapping. The Web worktree was installed with its
+  frozen lockfile after the first no-`tsx` attempt.
+- **Artifacts:** Passing retry JSON is SHA-256
+  `sha256:9dd4524885443f02db6094e18d46e0ffb726ad4839492ff350caae59612c745e`.
+  The initial environment-failure artifact remains preserved separately.
+- **Disposition:** Substrate/regression evidence only for ACCEPT-002/003. No
+  hosted, provider, customer, reviewer, human-browser, field-CWV, migration,
+  or Production acceptance was claimed. Score remains **244/36/280 (87.1%)**.
+  Nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-stories-current-head-2026-10-23.md`.
+
 ## 2026-10-23 · current acceptance evidence bundle
 
 - **Artifact:** Generated additive `acceptance-evidence-bundle-2026-10-23-

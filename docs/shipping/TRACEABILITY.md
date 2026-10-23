@@ -1,5 +1,49 @@
 # Verglos V1 traceability
 
+## Post-retry acceptance evidence bundle · 2026-10-23
+
+- **Source mapping:** Latest additive private bundle contains 121 hashed
+  evidence files, including the passing exact-head story retry.
+- **Integrity mapping:** SHA-256 is
+  `sha256:1582cd6b0e420fee51075c0a315b522dbd647d94bc448443f8632ec2364b7e85`;
+  secret scan passed.
+- **Gate mapping:** Provider lifecycle, customer consent, independent review,
+  authenticated browser, field CWV, and account deletion remain open.
+- **Acceptance mapping:** ACCEPT-002/003 remain open for external/reviewer
+  acceptance; score remains **244/36/280 (87.1%)**; earlier bundles and
+  attempts were preserved.
+- **Evidence:** `evidence/acceptance-evidence-bundle-post-retry-2026-10-23.md`.
+
+## Current acceptance bundle after story retry · 2026-10-23
+
+- **Source mapping:** The passing current-head story artifact is included in a
+  new additive 119-file private evidence bundle.
+- **Integrity mapping:** Bundle SHA-256 is
+  `sha256:1e6f58f68cfe634a5497987cd55789e9425ccaa1a81eeff03f51bbfa5efbc427`;
+  secret scan passed.
+- **Gate mapping:** Provider lifecycle, customer consent, independent review,
+  authenticated browser, field CWV, and account deletion remain open.
+- **Acceptance mapping:** ACCEPT-002/003 remain open for external/reviewer
+  acceptance; score remains **244/36/280 (87.1%)**; prior bundles and attempts
+  were preserved.
+- **Evidence:** `evidence/acceptance-evidence-bundle-current-retry-2026-10-23.md`.
+
+## Current-head acceptance story verification · 2026-10-23
+
+- **Source mapping:** The twelve-story verifier ran on clean CLI `3d4bca1f` and
+  Web `16ceddc9` heads.
+- **Verification mapping:** CLI 312/314 with 2 skips, Web 956/986 with 30
+  skips, composed substrates 79/79, zero failures, and complete story mapping.
+- **Artifact mapping:** Passing retry JSON digest is
+  `sha256:9dd4524885443f02db6094e18d46e0ffb726ad4839492ff350caae59612c745e`.
+  The initial missing-dependency attempt remains preserved as a separate
+  diagnostic artifact.
+- **Acceptance mapping:** This does not prove hosted, provider, customer,
+  reviewer, human-browser, field-CWV, migration, or Production acceptance.
+  ACCEPT-002/003 remain open; score remains **244/36/280 (87.1%)**; nothing
+  was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-stories-current-head-2026-10-23.md`.
+
 ## Current acceptance evidence bundle · 2026-10-23
 
 - **Source mapping:** The protected bundle builder generated the additive

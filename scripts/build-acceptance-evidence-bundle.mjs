@@ -127,6 +127,10 @@ const paths = [
   "docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md",
   "docs/shipping/evidence/acceptance-input-read-boundaries-2026-10-23.md",
   "docs/shipping/evidence/acceptance-evidence-writer-boundaries-2026-10-23.md",
+  "docs/shipping/evidence/acceptance-stories-current-head-2026-10-23.md",
+  "docs/shipping/evidence/acceptance-stories-verification-2026-10-23-current-retry.json",
+  "docs/shipping/evidence/acceptance-evidence-bundle-current-2026-10-23.md",
+  "docs/shipping/evidence/acceptance-evidence-bundle-current-retry-2026-10-23.md",
   "docs/shipping/evidence/dist-002-003-npm-publication-observation-2026-10-23.md",
   "docs/shipping/evidence/dist-002-003-npm-publication-observation-2026-10-23.json",
 ];
