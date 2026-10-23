@@ -1,5 +1,27 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · QUAL-WEB-006 dashboard capture coverage merged
+
+Web PR #256 merged normally as `60f83c4e80e6b5e98b8f4b0c3f876ba1f6cb652f`,
+preserving source `417a75e3b702902262057c4648ceb4a5681c21a3`. The dashboard
+qualifier now fails closed on incomplete ready desktop/mobile, loading/error,
+responsive, announcement, and large-dataset coverage. Focused contracts passed
+**29/29**; full Web passed **904 with 24 documented skips and 0 failures**;
+typecheck passed; build generated **49/49** routes; and diff checks passed.
+Required hosted runs `39978078588` and `39978078507` failed before repository
+execution with zero steps/no runner. GitGuardian and Vercel Preview Comments
+passed; Vercel remained pending, so no hosted source qualification is claimed.
+QUAL-WEB-006 remains open for browser, human screen-reader, field-CWV,
+independent, customer/recipient where applicable, and final acceptance gates.
+No database, customer, provider, Production, deployment, or release action
+occurred. The additive bundle contains 173 hashed files with manifest
+`sha256:32600dd983efa60f6b36f4f7a0575aa06717a42e7e1f26b023a760946a5a1d61`
+and file SHA-256
+`818dc6f3cf21bd40e9443aa26cf4f78d666736e8656e76807c8d9bbd401e5adc`;
+secret scan passed. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/qual-web-006-dashboard-capture-coverage-pr256-merge-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-005 deletion scope boundary merged
 
 Web PR #255 merged normally as `5c48971efdc3aeb55f1fc391a9db5f9a78b84bb4`,

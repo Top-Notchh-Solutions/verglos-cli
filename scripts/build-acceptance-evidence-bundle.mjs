@@ -170,6 +170,7 @@ const paths = [
   "docs/shipping/evidence/dist-002-registry-response-boundary-pr193-2026-10-23.md",
   "docs/shipping/evidence/dist-002-registry-response-boundary-pr193-merge-2026-10-23.md",
   "docs/shipping/evidence/qual-web-005-store-scope-pr255-merge-2026-10-23.md",
+  "docs/shipping/evidence/qual-web-006-dashboard-capture-coverage-pr256-merge-2026-10-23.md",
   "docs/shipping/evidence/accept-011-012-bounded-corpus-read-binding-2026-10-23.md",
   "docs/shipping/evidence/dist-002-release-tag-read-binding-private-2026-10-23.md",
   "docs/shipping/evidence/dist-003-release-artifact-read-binding-private-2026-10-23.md",

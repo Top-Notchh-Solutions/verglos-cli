@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · merge QUAL-WEB-006 dashboard capture coverage
+
+- **Decision:** Promote Web PR #256's complete dashboard-capture coverage
+  contract through the normal merge path. Partial or malformed dashboard
+  captures cannot pass by presenting one green page.
+- **Implementation:** Merge commit
+  `60f83c4e80e6b5e98b8f4b0c3f876ba1f6cb652f` preserves source commit
+  `417a75e3b702902262057c4648ceb4a5681c21a3`.
+- **Verification:** Focused contracts **29/29**, full Web **904/24/0**,
+  typecheck, **49/49** route build, and diff checks passed. Hosted jobs failed
+  with zero steps/no runner; no hosted source result is claimed.
+- **Disposition:** Implementation progress only. QUAL-WEB-006 stays open for
+  browser, human screen-reader, field-CWV, independent, customer/recipient
+  where applicable, and final acceptance. No database, customer, provider,
+  Production, deployment, or release action occurred. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/qual-web-006-dashboard-capture-coverage-pr256-merge-2026-10-23.md`.
+
 ## 2026-10-23 · merge QUAL-WEB-005 deletion scope boundary
 
 - **Decision:** Promote Web PR #255's requested-kind scope guard through the

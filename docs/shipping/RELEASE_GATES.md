@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · QUAL-WEB-006 dashboard capture coverage merged
+
+Web PR #256 merged normally as
+`60f83c4e80e6b5e98b8f4b0c3f876ba1f6cb652f`, preserving source commit
+`417a75e3b702902262057c4648ceb4a5681c21a3`. The dashboard qualifier now
+requires complete ready desktop/mobile, loading/error, responsive,
+announcement, and large-dataset evidence per required path, while retaining
+the generic CWV/accessibility checks. Focused contracts passed **29/29**; full
+Web passed **904 / 24 / 0**; typecheck, build **49/49**, and diff checks passed.
+Hosted runs `39978078588` and `39978078507` failed before repository execution
+with zero steps/no runner; no hosted source qualification is claimed. Keep
+QUAL-WEB-006 open for browser, screen-reader, field-CWV, independent,
+customer/recipient where applicable, and final acceptance. No database,
+customer, provider, Production, deployment, or release action occurred. Score
+remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/qual-web-006-dashboard-capture-coverage-pr256-merge-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-005 deletion scope boundary merged
 
 Web PR #255 merged normally as

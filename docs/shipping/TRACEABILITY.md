@@ -1,5 +1,31 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-006 dashboard capture coverage merged · 2026-10-23
+
+- **Source mapping:** Web PR #256 merged normally as
+  `60f83c4e80e6b5e98b8f4b0c3f876ba1f6cb652f`, preserving source commit
+  `417a75e3b702902262057c4648ceb4a5681c21a3`.
+- **Contract mapping:** Required dashboard paths now need ready desktop/mobile,
+  loading, and error captures; responsive layout, state announcements, and
+  large-dataset threshold evidence; each capture is checked for CWV and
+  accessibility.
+- **Verification mapping:** Focused **29/29**; full Web **904 passed / 24
+  skipped / 0 failed**; typecheck; build **49/49** routes; and diff checks.
+- **Hosted mapping:** Runs `39978078588` and `39978078507` failed with zero
+  steps/no runner. GitGuardian and Vercel Preview Comments passed; Vercel was
+  pending. No hosted source qualification is claimed.
+- **Artifact mapping:** 173 hashed files; manifest SHA-256
+  `sha256:32600dd983efa60f6b36f4f7a0575aa06717a42e7e1f26b023a760946a5a1d61`;
+  bundle file SHA-256
+  `818dc6f3cf21bd40e9443aa26cf4f78d666736e8656e76807c8d9bbd401e5adc`;
+  secret scan passed.
+- **Acceptance mapping:** QUAL-WEB-006 remains open for browser,
+  screen-reader, field-CWV, independent, customer/recipient where applicable,
+  and final acceptance. Score remains **244/36/280 (87.1%)**. No database,
+  customer, provider, Production, deployment, or release action occurred.
+  Nothing was deleted or overwritten.
+- **Evidence:** `evidence/qual-web-006-dashboard-capture-coverage-pr256-merge-2026-10-23.md`.
+
 ## QUAL-WEB-005 deletion scope boundary merged · 2026-10-23
 
 - **Source mapping:** Web PR #255 merged normally as
