@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · PR #264 tracker reconciliation and queue routing
+
+Private shipping PR #264 merged normally as
+`882fe001eb86615b936d5d8bc8391a4023fce298` and is present on `origin/main`.
+The provider/local integration packet is now reconciled across the private
+shipping records. `STUDIO-CLI-001` is next in file order but needs real
+recipient/customer acceptance; `DIST-002` is the next implementation-ready
+target and still needs trusted registry publication/provenance. Score remains
+**245/35/280 (87.5%)**; no checkbox changed.
+
 ## 2026-10-24 · Test Mode provider capture and local entitlement replay
 
 The isolated local checkout completed a real Razorpay **Test Mode** UPI

@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## PR #264 reconciliation and next-row routing · 2026-10-24
+
+- **Merge:** CLI PR #264 merged normally as
+  `882fe001eb86615b936d5d8bc8391a4023fce298`; `origin/main` verified at that
+  commit.
+- **Tracker:** Active goal, backlog, status, release gates, decisions, and
+  traceability now carry the provider/local packet and exact merge identity.
+- **Routing:** `STUDIO-CLI-001` remains first by file order but is externally
+  acceptance-bound; `DIST-002` is the next implementation-ready target.
+- **Score:** **245/35/280 (87.5%)**, with 13 AppSec-held and 22 non-AppSec rows;
+  no checkbox changed.
+
 ## Test Mode provider capture and local entitlement replay · 2026-10-24
 
 - **Provider receipt:** Isolated Razorpay Test Mode UPI flow returned order

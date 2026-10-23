@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · PR #264 Test Mode provider/local integration mapping
+
+- **Source mapping:** Private shipping PR #264 merged normally into CLI
+  `origin/main` as `882fe001eb86615b936d5d8bc8391a4023fce298`; the packet maps
+  the isolated local checkout to the real Razorpay Test Mode order/payment
+  read-back and the separate local signed-handler replay.
+- **Verification mapping:** Provider Orders/Payments APIs returned HTTP 200
+  with order `paid` and UPI payment `captured`; the local webhook returned
+  HTTP 200 and owner-bound order status returned `paid` with a redacted local
+  entitlement key.
+- **Acceptance mapping:** This advances provider Test Mode and local billing
+  integration only. It is not an externally delivered webhook, real-money
+  Production payment, customer acceptance, independent review, or final
+  release decision. Score remains **245/35/280 (87.5%)**, partitioned as 13
+  AppSec-dependent and 22 non-AppSec rows.
+- **Evidence:** `evidence/razorpay-testmode-captured-upi-local-entitlement-2026-10-24.md`.
+- **Routing:** `STUDIO-CLI-001` is the next unchecked non-AppSec row; its
+  missing recipient/customer artifact is external. `DIST-002` is the next
+  implementation-ready row after it, with trusted publication still open.
+
 ## 2026-10-24 · current-head implementation mapping
 
 - **Source mapping:** CLI `7d07066f`, Web `791500d4`, private shipping
