@@ -1,5 +1,25 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Production receipt API route boundary verified
+
+Production public-route audit found the implemented bounded
+`/api/v1/receipts/[receiptId]` JSON endpoint omitted from the Clerk public
+matcher, so its prior boundary was an HTML `404`. Web commit `74239c8` added
+`/api/v1/receipts(.*)` and the public-release smoke assertion; PR **#264**
+merged normally as `9985f1f7030de66f5f8d07b01705f65c678f1369`. The merged `main`
+Vercel Production deployment reported **READY** and owns the live aliases.
+Read-only verification of a forged all-zero ID now returns the intended JSON
+`404` (`ok:false`, `reason:receipt not found`) with `application/json` and
+`no-store`, without receipt enumeration or data access. Local public-release
+smoke passed **12/12**, truth-registry **37/37**, typecheck, and diff checks
+passed. No receipt, payment, database, account, entitlement, webhook,
+customer, final CLI/npm release, or AppSec action occurred. Evidence:
+`docs/shipping/evidence/vercel-web-production-receipt-api-route-fix-2026-10-24.md`.
+This advances hosted/runtime implementation evidence but does not close a row
+without its provider, recipient/customer, independent-review, human/field, and
+final-release gates. Score remains **244 checked / 36 open / 280 total
+(87.1%)**.
+
 ## 2026-10-24 · Production handoff route boundary verified
 
 Production public-route audit found `/handoff/[handoffId]` returning HTTP **404**
