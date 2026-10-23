@@ -22,7 +22,10 @@ This advances the QUAL-WEB-005 implementation and test substrate only. The row
 remains unchecked for its declared Production migration/restore/rollback,
 legal-retention, customer-held-record, independent-review, and final
 acceptance conditions. No release version or backlog checkbox changed. Score
-remains **244 checked / 36 open / 280 total (87.1%)**.
+remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-migration-preflight-pr258-2026-10-23.md` and
+the additive 190-file bundle recorded in
+`docs/shipping/evidence/acceptance-evidence-bundle-qual-web005-migration-pr258-2026-10-23.md`.
 
 ## Latest continuation result · 2026-10-23 · public-pack self-scan contract repair
 
@@ -2970,7 +2973,7 @@ The explicit hold roots are:
 For this implementation-first closeout, the owner-directed **13-entry
 partition at the top of this file is the routing list**: it names the held
 rows and the independent-review gate that must remain at the boundary. The
-remaining **28-entry partition is the implementation queue**. This routing
+remaining **23-entry partition is the implementation queue**. This routing
 clarification does not waive any row's own external acceptance contract or
 turn an implementation defect into an AppSec dependency.
 
