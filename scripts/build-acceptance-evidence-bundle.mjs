@@ -44,7 +44,6 @@ const paths = [
   "docs/shipping/evidence/qual-web-005-worker-kind-boundary-pr235-2026-10-22.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-22-pr163-pr235-pr236.json",
   "docs/shipping/evidence/qual-web-006-measurement-boundary-pr236-2026-10-22.md",
-  "docs/shipping/evidence/qual-web-006-current-head-requalification-2026-10-22.md",
   "docs/shipping/evidence/studio-cli-001-current-head-requalification-pr167-pr241-2026-10-22.md",
   "docs/shipping/evidence/studio-cli-001-current-head-requalification-pr244-2026-10-22.md",
   "docs/shipping/evidence/accept-002-current-head-pr239-2026-10-22.md",
@@ -147,36 +146,51 @@ const paths = [
   "docs/shipping/evidence/qual-web-005-fresh-migrated-current-head-2026-10-23.md",
 ];
 
-const forbidden = [
+const FORBIDDEN = [
   /-----BEGIN (?:RSA |EC |OPENSSH |PRIVATE )?PRIVATE KEY-----/u,
   /(?:RAZORPAY_KEY_SECRET|CLERK_SECRET_KEY|DATABASE_URL)\s*=/u,
   /rzp_(?:test|live)_[A-Za-z0-9]{12,}/u,
 ];
 
-const files = paths.map((path) => {
-  const absolute = join(root, path);
-  if (!existsSync(absolute)) throw new Error(`evidence file missing: ${path}`);
-  const bytes = readFileSync(absolute);
-  const text = bytes.toString("utf8");
-  if (forbidden.some((pattern) => pattern.test(text))) throw new Error(`secret-like material found in evidence: ${path}`);
-  return { path, sha256: createHash("sha256").update(bytes).digest("hex"), bytes: bytes.byteLength };
-});
+export function buildAcceptanceEvidenceBundle({ bundleRoot = root, bundlePaths = paths, generatedAt = new Date().toISOString() } = {}) {
+  const resolvedRoot = resolve(bundleRoot);
+  if (!Array.isArray(bundlePaths) || bundlePaths.length === 0) throw new Error("evidence bundle paths are invalid");
+  if (typeof generatedAt !== "string" || !Number.isFinite(new Date(generatedAt).getTime())) throw new Error("evidence bundle generatedAt is invalid");
+  const seen = new Set();
+  const files = [...bundlePaths].sort().map((path) => {
+    if (typeof path !== "string" || path.length === 0 || path.startsWith("/") || path.includes("\\") || path.split("/").includes("..")) throw new Error(`evidence path is unsafe: ${path}`);
+    if (seen.has(path)) throw new Error(`duplicate evidence path: ${path}`);
+    seen.add(path);
+    const absolute = resolve(resolvedRoot, path);
+    if (absolute !== resolvedRoot && !absolute.startsWith(`${resolvedRoot}/`)) throw new Error(`evidence path escapes bundle root: ${path}`);
+    if (!existsSync(absolute)) throw new Error(`evidence file missing: ${path}`);
+    const bytes = readFileSync(absolute);
+    const text = bytes.toString("utf8");
+    if (FORBIDDEN.some((pattern) => pattern.test(text))) throw new Error(`secret-like material found in evidence: ${path}`);
+    return { path, sha256: createHash("sha256").update(bytes).digest("hex"), bytes: bytes.byteLength };
+  });
+  const manifestSha256 = `sha256:${createHash("sha256").update(JSON.stringify(files)).digest("hex")}`;
+  return {
+    schema: "verglos.private.acceptance-evidence-bundle.v1",
+    generatedAt,
+    manifestSha256,
+    files,
+    gateBoundary: {
+      technicalCorpus: "verified",
+      substrateRegression: "verified",
+      providerLifecycle: "open",
+      customerConsent: "open",
+      independentReview: "open",
+      authenticatedBrowser: "open",
+      fieldCwv: "open",
+      accountDeletion: "open",
+    },
+    note: "Private reproducibility manifest. It contains hashes and bounded evidence references, not source, credentials, customer data, or reviewer sign-off.",
+  };
+}
 
-const bundle = {
-  schema: "verglos.private.acceptance-evidence-bundle.v1",
-  generatedAt: new Date().toISOString(),
-  files,
-  gateBoundary: {
-    technicalCorpus: "verified",
-    substrateRegression: "verified",
-    providerLifecycle: "open",
-    customerConsent: "open",
-    independentReview: "open",
-    authenticatedBrowser: "open",
-    fieldCwv: "open",
-    accountDeletion: "open",
-  },
-  note: "Private reproducibility manifest. It contains hashes and bounded evidence references, not source, credentials, customer data, or reviewer sign-off.",
-};
-writeFileSync(output, `${JSON.stringify(bundle, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
-console.log(JSON.stringify({ schema: bundle.schema, fileCount: files.length, output: relative(root, output), secretScan: "passed", openGates: Object.entries(bundle.gateBoundary).filter(([, value]) => value === "open").map(([key]) => key) }));
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const bundle = buildAcceptanceEvidenceBundle();
+  writeFileSync(output, `${JSON.stringify(bundle, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
+  console.log(JSON.stringify({ schema: bundle.schema, fileCount: bundle.files.length, output: relative(root, output), manifestSha256: bundle.manifestSha256, secretScan: "passed", openGates: Object.entries(bundle.gateBoundary).filter(([, value]) => value === "open").map(([key]) => key) }));
+}
