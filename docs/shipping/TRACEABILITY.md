@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · STUDIO-CLI-001 Production migration mapping
+
+- **Implementation mapping:** Web PR #268 / merge
+  `98b5cf652623bf4f000ed93366b67a38154579e1` adds an inert-by-default,
+  exact-confirmation Production migration hook.
+- **Provider mapping:** Vercel deployment
+  `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` ran the reviewed migrations successfully
+  and is READY on the live aliases. The forged public acknowledgement now
+  returns safe JSON 400 `handoff unavailable` with `no-store`.
+- **Verification mapping:** Migration hook **1/1**, handoff **5/5**, public
+  smoke **12/12**, truth-registry **37/37**, typecheck, and diff check pass;
+  forged projection/collection probes remain bounded 404/401.
+- **Acceptance mapping:** The provider boundary is operational, but no real
+  recipient/customer acceptance or independent review is inferred. Score
+  remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md`.
+  The additive recheck bundle contains **214 files**, verifies with **0
+  mismatches**, passes secret scanning, and matches manifest
+  `sha256:04ef691741f48d33c75a234530b055d858927edd678d2409140570efa9523ada`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production handoff mapping
 
 - **Implementation mapping:** Web PR #267 / merge

@@ -1,5 +1,26 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · STUDIO-CLI-001 Production provider migration completed
+
+Web PR #268 merged normally as `98b5cf652623bf4f000ed93366b67a38154579e1` and
+added an inert-by-default, explicitly confirmed Production migration hook.
+Vercel build output recorded the reviewed `pnpm db:migrate` run and
+`migrations applied successfully!`. Deployment
+`dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` is READY and owns the live aliases.
+
+The forged public acknowledgement POST now returns HTTP 400 JSON
+`handoff unavailable` with `application/json` and `no-store`; forged
+projection and handoff collection probes return bounded 404/401 JSON. Local
+migration hook **1/1**, handoff **5/5**, public smoke **12/12**, truth
+registry **37/37**, typecheck, and diff checks passed. The provider boundary
+is operational, but no real handoff or recipient acceptance exists. Keep
+`STUDIO-CLI-001` unchecked; score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md`.
+The additive recheck bundle contains **214 files**, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:04ef691741f48d33c75a234530b055d858927edd678d2409140570efa9523ada`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production handoff acknowledgement boundary
 
 Web PR #266 exposed the public handoff acknowledgement route in Production;
