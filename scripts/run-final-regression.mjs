@@ -1,5 +1,6 @@
 import { writeFile } from "node:fs/promises";
-import { readBoundedJsonFile } from "./read-bounded-json.mjs";
+import { resolve } from "node:path";
+import { readBoundedFileWithDigest, readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const INPUT_SCHEMA = "verglos.private.final-regression.v1";
 const OUTPUT_SCHEMA = "verglos.private.final-regression-result.v1";
@@ -126,11 +127,41 @@ export function runFinalRegression(input, { now = new Date() } = {}) {
   });
 }
 
-export async function runFinalRegressionFile(inputPath, outputPath, options = {}) {
+export async function runFinalRegressionFile(inputPath, outputPath, { corpusRoot, evidenceRoot, requireCorpusReports = false, ...options } = {}) {
   const input = await readBoundedJsonFile(inputPath, "final regression input");
   const report = runFinalRegression(input, options);
+  await verifyRegressionBytes(input, { corpusRoot, evidenceRoot, requireCorpusReports });
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;
+}
+
+async function verifyRegressionBytes(input, { corpusRoot, evidenceRoot, requireCorpusReports }) {
+  if (corpusRoot !== undefined) {
+    if (typeof corpusRoot !== "string" || corpusRoot.length === 0) throw new Error("corpus root is invalid");
+    const root = resolve(corpusRoot);
+    for (const fixture of input.corpus.fixtures) {
+      if (typeof fixture.reportPath !== "string") {
+        if (requireCorpusReports) throw new Error(`corpus report path is required: ${fixture.name}`);
+        continue;
+      }
+      const absolute = resolve(root, fixture.reportPath);
+      if (absolute !== root && !absolute.startsWith(`${root}/`)) throw new Error(`corpus report path escapes corpus root: ${fixture.reportPath}`);
+      const result = await readBoundedFileWithDigest(absolute, `corpus report ${fixture.name}`);
+      if (result.sha256 !== fixture.reportSha256) throw new Error(`corpus report digest does not match bytes: ${fixture.name}`);
+    }
+  }
+  if (evidenceRoot !== undefined) {
+    if (typeof evidenceRoot !== "string" || evidenceRoot.length === 0) throw new Error("regression evidence root is invalid");
+    const root = resolve(evidenceRoot);
+    for (const [index, entry] of input.runs.entries()) {
+      for (const evidence of entry.evidence) {
+        const absolute = resolve(root, evidence.path);
+        if (absolute !== root && !absolute.startsWith(`${root}/`)) throw new Error(`regression evidence path escapes evidence root: ${evidence.path}`);
+        const result = await readBoundedFileWithDigest(absolute, `regression evidence ${index}`);
+        if (result.sha256 !== evidence.sha256) throw new Error(`regression evidence digest does not match bytes: ${evidence.path}`);
+      }
+    }
+  }
 }
 
 function validateInput(input) {
@@ -165,11 +196,13 @@ function validateCorpus(input) {
     names.add(fixture.name);
     if (typeof fixture.exactCommit !== "string" || !COMMIT.test(fixture.exactCommit)) throw new Error(`corpus fixture commit is invalid: ${fixture.name}`);
     if (typeof fixture.reportSha256 !== "string" || !SHA256.test(fixture.reportSha256)) throw new Error(`corpus report digest is invalid: ${fixture.name}`);
+    if (fixture.reportPath !== undefined && (typeof fixture.reportPath !== "string" || !SAFE_PATH.test(fixture.reportPath) || fixture.reportPath.startsWith(".env"))) throw new Error(`corpus report path is invalid: ${fixture.name}`);
     if (!Array.isArray(fixture.architectureShapes) || fixture.architectureShapes.length === 0 || fixture.architectureShapes.some((shape) => !ARCHITECTURE_SHAPES.includes(shape))) throw new Error(`corpus architecture shape is invalid: ${fixture.name}`);
     return Object.freeze({
       name: fixture.name,
       exactCommit: fixture.exactCommit,
       reportSha256: fixture.reportSha256,
+      ...(fixture.reportPath === undefined ? {} : { reportPath: fixture.reportPath }),
       architectureShapes: Object.freeze(unique(fixture.architectureShapes)),
     });
   });
@@ -266,6 +299,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const inputPath = process.argv[2];
   const outputPath = process.argv[3];
   if (!inputPath || !outputPath) throw new Error("usage: node scripts/run-final-regression.mjs INPUT.json OUTPUT.json");
-  const report = await runFinalRegressionFile(inputPath, outputPath);
+  const report = await runFinalRegressionFile(inputPath, outputPath, {
+    corpusRoot: process.env.VERGLOS_REGRESSION_CORPUS_ROOT ?? process.cwd(),
+    evidenceRoot: process.env.VERGLOS_REGRESSION_EVIDENCE_ROOT ?? process.cwd(),
+    requireCorpusReports: true,
+  });
   process.stdout.write(`${JSON.stringify({ schema: report.schema, recommendation: report.release.recommendation, goEligible: report.release.goEligible, runCount: report.summary.runCount, openGates: report.summary.openGateCount })}\n`);
 }

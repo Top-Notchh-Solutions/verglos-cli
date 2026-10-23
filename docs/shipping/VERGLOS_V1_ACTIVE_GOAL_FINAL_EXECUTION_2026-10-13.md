@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-014 regression byte binding
+
+The final-regression file runner now verifies every declared corpus report and
+scenario-evidence digest against actual bounded regular-file bytes under
+explicit roots. The CLI mode requires a report path for every fixture; missing
+paths, path escapes, symlinks, changed files, and mismatches fail closed. The
+focused final-regression/bounded-reader/freeze/reconciliation contracts passed
+**23/23**, including real temporary-root byte binding and mismatch rejection;
+syntax and diff checks passed.
+
+This advances ACCEPT-014 implementation only. It does not claim the actual
+frozen-corpus run, held-out correction, provider/customer acceptance,
+independent review, AppSec/Hunt review, or final release decision. No checkbox
+or external state changed, and nothing was deleted or overwritten. The
+additive bundle contains **166 hashed files** with manifest
+`sha256:d5b025e24311e1773ea1feca160a5cfdccc69ed1ada8b372545c32e1b8834150`
+and file SHA-256
+`20985c93ac2e9348c3b4df269c89e37aa4231b5ec8276a25c2a75fa551261716`.
+The live score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-014-regression-byte-binding-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-009/010 release byte binding
 
 The release reconciliation and candidate-freeze file runners now verify

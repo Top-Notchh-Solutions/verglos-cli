@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-014 regression byte binding · 2026-10-23
+
+- **Source mapping:** Private final-regression and bounded-reader file runners.
+- **Contract mapping:** Corpus reports and scenario evidence are verified
+  against bounded regular-file bytes under explicit roots; CLI mode requires
+  every fixture report path, while candidate CLI/Web binding and no-GO rules
+  remain enforced.
+- **Verification mapping:** Focused final-regression/bounded-reader/
+  freeze/reconciliation contracts **23/23**; temporary-root byte binding and
+  mismatch rejection passed; syntax and diff checks passed.
+- **Artifact mapping:** Additive bundle contains 166 hashed files with
+  manifest SHA-256
+  `sha256:d5b025e24311e1773ea1feca160a5cfdccc69ed1ada8b372545c32e1b8834150`
+  and bundle file SHA-256
+  `20985c93ac2e9348c3b4df269c89e37aa4231b5ec8276a25c2a75fa551261716`;
+  secret scan passed.
+- **Acceptance mapping:** Keep ACCEPT-014 open for the actual frozen-corpus
+  run, correction/provider/customer/independent-review gates, AppSec/Hunt
+  review, and final release decision. No checkbox or external state changed;
+  nothing was deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-014-regression-byte-binding-2026-10-23.md`.
+
 ## ACCEPT-009/010 release byte binding · 2026-10-23
 
 - **Source mapping:** Private bounded-reader, release-reconciliation, and

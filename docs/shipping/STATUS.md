@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-014 regression byte binding
+
+The final-regression file runner now verifies corpus reports and scenario
+evidence against actual bounded regular-file bytes under explicit roots. CLI
+execution requires a report path for every fixture; missing paths, escapes,
+symlinks, changed files, and digest mismatches fail closed. Focused contracts
+passed **23/23**, including real temporary-root binding and mismatch rejection;
+syntax and diff checks passed. The additive 166-file bundle has manifest
+`sha256:d5b025e24311e1773ea1feca160a5cfdccc69ed1ada8b372545c32e1b8834150`
+and file SHA-256
+`20985c93ac2e9348c3b4df269c89e37aa4231b5ec8276a25c2a75fa551261716`.
+This is implementation evidence only. Score remains **244 checked / 36 open /
+280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/accept-014-regression-byte-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009/010 release byte binding
 
 Release reconciliation and candidate-freeze file runners now verify declared

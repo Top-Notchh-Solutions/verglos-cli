@@ -1,8 +1,13 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import test from "node:test";
-import { runFinalRegression } from "./run-final-regression.mjs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { runFinalRegression, runFinalRegressionFile } from "./run-final-regression.mjs";
 
 const SHA = `sha256:${"a".repeat(64)}`;
+const bytesDigest = (value) => `sha256:${createHash("sha256").update(value).digest("hex")}`;
 const CLI = "2db1139337d60543fd59ec0b7e3130983d40e0a3";
 const WEB = "16ceddc9855e75e04f10ddd276fae16c7ef09e01";
 
@@ -101,4 +106,52 @@ test("final regression rejects unsafe or incomplete inputs", () => {
   assert.throws(() => runFinalRegression(input({ runs: input().runs.map((run, index) => index === 0 ? { ...run, webCommit: "f".repeat(40) } : run) })), /not bound to candidate Web commit/u);
   assert.throws(() => runFinalRegression(input({ runs: input().runs.map((run, index) => index === 0 ? { ...run, evidence: [{ path: "../secret.json", sha256: SHA }] } : run) })), /evidence path/u);
   assert.throws(() => runFinalRegression(input({ decision: "go", gates: { truthRegistry: "open", riskReview: "open", heldOutCorrection: "open", providerLifecycle: "open", finalRelease: "open" } })), /GO cannot/u);
+});
+
+test("final regression file binds corpus reports and evidence to actual bytes", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-final-regression-bindings-"));
+  const corpusRoot = join(directory, "corpus");
+  await mkdir(corpusRoot, { recursive: true });
+  const reportContents = "verified corpus report\n";
+  const evidenceContents = "scenario evidence\n";
+  await writeFile(join(corpusRoot, "report.json"), reportContents, "utf8");
+  await writeFile(join(directory, "evidence.md"), evidenceContents, "utf8");
+  const source = input({
+    corpus: {
+      ...input().corpus,
+      fixtures: input().corpus.fixtures.map((fixture, index) => ({
+        ...fixture,
+        reportPath: "report.json",
+        reportSha256: index === 0 ? bytesDigest(reportContents) : bytesDigest(reportContents),
+      })),
+    },
+    runs: input().runs.map((entry) => ({
+      ...entry,
+      evidence: [{ path: "evidence.md", sha256: bytesDigest(evidenceContents) }],
+    })),
+  });
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "output.json");
+  await writeFile(inputPath, `${JSON.stringify(source)}\n`, "utf8");
+  try {
+    const missingReportInput = join(directory, "missing-report-input.json");
+    const missingReportOutput = join(directory, "missing-report-output.json");
+    await writeFile(missingReportInput, `${JSON.stringify(input())}\n`, "utf8");
+    await assert.rejects(
+      runFinalRegressionFile(missingReportInput, missingReportOutput, { corpusRoot, evidenceRoot: directory, requireCorpusReports: true }),
+      /corpus report path is required/u,
+    );
+    const report = await runFinalRegressionFile(inputPath, outputPath, { corpusRoot, evidenceRoot: directory, requireCorpusReports: true });
+    assert.equal(report.matrix.complete, true);
+
+    const mismatchPath = join(directory, "mismatch.json");
+    const mismatchOutput = join(directory, "mismatch-output.json");
+    await writeFile(mismatchPath, `${JSON.stringify({ ...source, runs: source.runs.map((entry) => ({ ...entry, evidence: [{ path: "evidence.md", sha256: SHA }] })) })}\n`, "utf8");
+    await assert.rejects(
+      runFinalRegressionFile(mismatchPath, mismatchOutput, { corpusRoot, evidenceRoot: directory, requireCorpusReports: true }),
+      /regression evidence digest does not match bytes/u,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });

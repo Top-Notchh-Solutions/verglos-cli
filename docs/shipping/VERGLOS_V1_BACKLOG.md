@@ -1,5 +1,14 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-014 regression byte binding
+
+The final-regression runner now verifies corpus reports and scenario evidence
+against actual bounded regular-file bytes under explicit roots, with required
+fixture report paths in CLI mode. Focused contracts passed **23/23**; syntax
+and diff checks passed. No checkbox changed. Score remains **244 checked / 36
+open / 280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/accept-014-regression-byte-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009/010 release byte binding
 
 Release reconciliation and candidate-freeze file runners now bind declared
@@ -86,8 +95,12 @@ manifest SHA-256
 `sha256:12c47c5b3221150691d9947d668eb9376ea195a6f403cbf75d6b390b6b260e27`
 and a passing secret scan. ACCEPT-003 remains open for reviewer sign-off and
 external/hosted/provider/customer evidence. No checkbox changed; score remains
-**244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
-overwritten. Evidence:
+**244 checked / 36 open / 280 total (87.1%)**. The additive bundle contains
+166 hashed files with manifest
+`sha256:d5b025e24311e1773ea1feca160a5cfdccc69ed1ada8b372545c32e1b8834150`
+and file SHA-256
+`20985c93ac2e9348c3b4df269c89e37aa4231b5ec8276a25c2a75fa551261716`.
+Nothing was deleted or overwritten. Evidence:
 `docs/shipping/evidence/acceptance-evidence-bundle-accept-003-deterministic-final-2026-10-23.md`.
 
 ## 2026-10-23 · ACCEPT-003 bundle after ACCEPT-013 boundary fix
