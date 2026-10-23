@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Scope clarification · owner-authorized public OSS is not customer acceptance · 2026-10-23
+
+The owner-authorized public-open-source benchmark path is executable now. Local
+analysis of public JS/TS repositories at exact commits does **not** require
+external customer or recipient consent when it stays within the repository
+license/terms, uses redacted reports, makes no live-target attack, and makes no
+endorsement claim. The resulting evidence is owner-authorized OSS fixture
+evidence; it must not be labelled as a real customer's acceptance.
+
+Accordingly, the 23 non-AppSec partition is **22 product implementation/evidence
+rows plus one conditional external-POC artifact**. The conditional artifact is
+relevant only if the Verglos launch contract claims that a real external
+customer or recipient accepted a result. If the launch scope remains
+owner-authorized public OSS fixtures, no customer-consent artifact is requested
+for that OSS path and no synthetic consent is fabricated.
+
+Owner authorization also permits the work; it does not itself create an
+observed provider/Production receipt, human browser/screen-reader or field-CWV
+run, participant/commercial acceptance record, unresolved-license disposition,
+or final go/no-go decision. Continue the 22 implementation rows in source
+repositories and record those observed artifacts only where their row contract
+actually requires them. The score is unchanged at **244 checked / 36 open /
+280 total (87.1%)** until the corresponding row contracts are satisfied.
+
 ## Latest continuation result · 2026-10-23 · acceptance bundle v11 integrity repair
 
 The current acceptance manifest was rechecked and v10 was found to reference
