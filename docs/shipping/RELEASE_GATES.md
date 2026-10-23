@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-011/012 corpus boundary
+
+The authorized public-OSS corpus covers eight exact-commit full clones and all
+four architecture shapes, with **13,494 files**, **354 bounded observations**,
+and **0 coverage gaps**; triage tests pass **6/6**. This does not open the
+release gates: ACCEPT-010/QUAL-CLI-006, held-out correction, independent
+review, and final acceptance remain required. Next queue: ACCEPT-014. Score
+remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-011-architecture-corpus-2026-10-23.md` and
+`evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-010 freeze boundary
 
 The candidate-freeze contract passes **8/8** tests plus syntax and diff checks.

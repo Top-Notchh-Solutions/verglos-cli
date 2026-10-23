@@ -5571,6 +5571,16 @@ assumes the legacy `licenses` table. No checkbox changed; backlog remains
 **218 checked / 62 unchecked / 280 total (77.9%)**.
 - [ ] **ACCEPT-011** · private architecture-shaped TypeScript/JavaScript corpus · deps: ACCEPT-001, ACCEPT-010, all implementation/qualification gates through Epic 18, legal/license inventory · Only after the shipping candidate is complete, freeze full non-shallow public repositories spanning small, multi-user, multi-tenant/team, and enterprise-like architecture shapes; record commit, license, scope, and reproducible configuration privately. Commit(s): —. The private input now contains eight exact full-clone JS/TS fixtures covering all four required architecture shapes, including Payload and Vendure; evidence is `docs/shipping/evidence/accept-011-architecture-corpus-2026-10-23.md`. Row remains open for its declared dependency/freeze and final acceptance conditions.
 - [ ] **ACCEPT-012** · reproducible full-clone analysis and feedback triage · deps: ACCEPT-011, QUAL-CLI-006 · Run the current unreleased CLI source against each fixture, retain private reports/hashes, classify findings and coverage gaps, and record actionable product feedback without customer claims. Commit(s): —. The expanded 2026-10-23 run completed eight exact-commit scans, walked 13,494 files, produced 354 bounded observations across 23 rule groups, and found zero coverage gaps; evidence is `docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md`. Row remains open for ACCEPT-011/QUAL-CLI-006 and its remaining correction/review/acceptance contract.
+**ACCEPT-011/012 current disposition (2026-10-23; not checkboxes):** The
+owner-authorized expanded public-OSS run is complete across eight exact-commit
+full clones, all four architecture shapes, **13,494 files**, **354 bounded
+observations**, **23 rule groups**, and **0 coverage gaps**. The triage
+contract passes **6/6** and keeps all observations unadjudicated with customer
+acceptance unclaimed. Keep both rows unchecked for ACCEPT-010/QUAL-CLI-006,
+held-out correction, independent review, and final acceptance. The next
+implementation-first queue entry is `ACCEPT-014`. Evidence:
+`docs/shipping/evidence/accept-011-architecture-corpus-2026-10-23.md` and
+`docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
 - **ACCEPT-012 implementation addendum (2026-10-23):** The private
   `acceptance:corpus:triage` command now emits bounded rule-level feedback and
   coverage-gap statuses from the exact verification manifest. It classified

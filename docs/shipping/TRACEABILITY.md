@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## ACCEPT-011/012 public-OSS disposition · 2026-10-23
+
+- **Execution mapping:** Eight exact-commit full clones cover small,
+  multi-user, multi-tenant/team, and enterprise-like shapes; **13,494 files**
+  and **354 observations** across **23 rules** with **0 gaps**.
+- **Verification mapping:** Triage tests **6/6**; observations remain bounded
+  and unadjudicated, with customer acceptance not claimed.
+- **Acceptance mapping:** ACCEPT-010/QUAL-CLI-006, held-out correction,
+  independent review, and final acceptance remain open; next queue is
+  ACCEPT-014. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-011-architecture-corpus-2026-10-23.md` and
+  `evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
+
 ## ACCEPT-010 freeze disposition · 2026-10-23
 
 - **Implementation mapping:** Freeze requires twelve canonical artifact

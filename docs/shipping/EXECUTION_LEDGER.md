@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-011/012 public-OSS disposition · 2026-10-23
+
+- **Execution:** Eight exact-commit full clones across all four required
+  architecture shapes; **13,494 files**, **354 bounded observations**, **23
+  rule groups**, and **0 coverage gaps**.
+- **Verification:** Triage contract tests **6/6**; output is digest-only,
+  unadjudicated, `customerAcceptance: not-claimed`, and
+  `independentReview: required`.
+- **Disposition:** Rows remain open for ACCEPT-010/QUAL-CLI-006, held-out
+  correction, independent review, and final acceptance. Next queue: ACCEPT-014.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-011-architecture-corpus-2026-10-23.md` and
+  `evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
+
 ## ACCEPT-010 freeze disposition · 2026-10-23
 
 - **Implementation:** Candidate version, schema, migration, manifest,

@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-011/012 public-OSS disposition
+
+The authorized expanded corpus run covers eight exact-commit full clones and
+all four architecture shapes: **13,494 files**, **354 bounded observations**,
+**23 rule groups**, and **0 coverage gaps**. The triage contract passes **6/6**
+and keeps observations unadjudicated with customer acceptance unclaimed.
+ACCEPT-011/012 remain open for ACCEPT-010/QUAL-CLI-006, held-out correction,
+independent review, and final acceptance. Next queue: **ACCEPT-014**. Score
+remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-011-architecture-corpus-2026-10-23.md` and
+`evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-010 freeze disposition
 
 The candidate-freeze code-side contract is complete; current focused tests

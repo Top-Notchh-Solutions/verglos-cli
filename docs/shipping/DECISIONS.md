@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile ACCEPT-011/012 and advance the queue
+
+- **Decision:** Use the owner-authorized public-OSS path for the required
+  architecture corpus; do not call it customer acceptance or independent
+  adjudication.
+- **Result:** Eight exact-commit full clones, **13,494 files**, **354 bounded
+  observations**, **23 rule groups**, **0 coverage gaps**, and triage tests
+  **6/6**.
+- **Disposition:** ACCEPT-011/012 remain open for ACCEPT-010/QUAL-CLI-006,
+  held-out correction, independent review, and final acceptance. Advance the
+  queue to ACCEPT-014. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-011-architecture-corpus-2026-10-23.md` and
+  `evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile ACCEPT-010 and advance the queue
 
 - **Decision:** Treat the twelve-category candidate-freeze contract as complete
