@@ -1,5 +1,28 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · STUDIO-CLI-001 Production handoff acknowledgement boundary
+
+Web PR #266 exposed the public handoff acknowledgement route in Production;
+the first forged POST then showed an empty HTML HTTP 500 when its
+database/provider lookup failed. Web commit `2ef7dbb` adds a fail-closed JSON
+503 with `no-store` for provider/configuration failures while preserving the
+bounded 400 unavailable response. PR **#267** merged normally as
+`23267349b417e97d00339abc4a60c34c6e802f11`.
+
+Vercel Production deployment `dpl_HL3i3uTvo9EQrjPCvYxvbzS9hDyd` is READY and
+owns the live aliases. The forged public acknowledgement POST returned HTTP
+503 JSON `handoff service unavailable`; adjacent forged custody probes returned
+bounded `401/404` JSON responses. Local handoff contract **5/5**, public smoke
+**12/12**, truth-registry **37/37**, typecheck, and diff checks passed. This is
+real hosted boundary evidence, but the 503 records that the live handoff
+provider path is not operational yet. Keep `STUDIO-CLI-001` unchecked for
+provider operation and authorized recipient/customer acceptance; no checkbox
+changed. Score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-production-handoff-ack-boundary-pr267-2026-10-24.md`.
+The additive private bundle contains **213 files**, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:70b16325d016f5b00c2be3cf8c8cd2c1882bb30a56ce5d3afb03cdd6bafd7da4`.
+
 ## 2026-10-24 · Production landing browser qualification passed
 
 The Web landing capture harness now retries one real pointer/keyboard

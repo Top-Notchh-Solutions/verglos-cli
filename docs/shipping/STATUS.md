@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary hardened
+
+Web PR #267 merged normally as `23267349b`; its public acknowledgement route
+now returns bounded JSON 503 with `no-store` for provider/configuration
+failures instead of an HTML 500. Vercel deployment
+`dpl_HL3i3uTvo9EQrjPCvYxvbzS9hDyd` is READY and owns the live aliases. The
+forged public POST returned the expected bounded 503; adjacent forged custody
+probes returned bounded 401/404 JSON responses. Handoff route **5/5**, public
+smoke **12/12**, truth-registry **37/37**, typecheck, and diff checks passed.
+The 503 is an operational provider-path gap, not recipient acceptance.
+`STUDIO-CLI-001` remains open; score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/studio-cli-001-production-handoff-ack-boundary-pr267-2026-10-24.md`.
+The additive bundle contains **213 files**, verifies with **0 mismatches**,
+passes secret scanning, and matches manifest
+`sha256:70b16325d016f5b00c2be3cf8c8cd2c1882bb30a56ce5d3afb03cdd6bafd7da4`.
+
 ## 2026-10-24 · Production landing browser qualification passed
 
 Web PR #265 merged normally as `c72c08f`; its capture harness retries one real

@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## STUDIO-CLI-001 Production handoff acknowledgement boundary · 2026-10-24
+
+- **Implementation:** Web commit `2ef7dbb`; PR #267 merged normally as
+  `23267349b417e97d00339abc4a60c34c6e802f11`. Public provider/configuration
+  failures now produce bounded JSON 503 responses with `no-store`; invalid or
+  absent handoffs retain the 400 unavailable response.
+- **Provider receipt:** Vercel Production deployment
+  `dpl_HL3i3uTvo9EQrjPCvYxvbzS9hDyd` is READY and owns the live aliases. A
+  forged public acknowledgement POST returned JSON 503; forged projection and
+  handoff collection probes returned bounded 401/404 JSON responses.
+- **Verification:** Handoff route contract **5/5**, public-release smoke
+  **12/12**, truth-registry **37/37**, typecheck, and diff check passed.
+- **Disposition:** The live 503 records an operational provider-path gap; it
+  is not customer/recipient acceptance and no acknowledgement or database
+  write occurred. Keep `STUDIO-CLI-001` open. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/studio-cli-001-production-handoff-ack-boundary-pr267-2026-10-24.md`.
+  The additive bundle contains **213 files**, verifies with **0 mismatches**,
+  passes secret scanning, and matches manifest
+  `sha256:70b16325d016f5b00c2be3cf8c8cd2c1882bb30a56ce5d3afb03cdd6bafd7da4`.
+
 ## Web Production landing browser qualification · 2026-10-24
 
 - **Implementation:** Web commit `0856d8f`; PR #265 merged normally as

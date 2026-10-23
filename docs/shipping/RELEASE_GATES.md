@@ -1,5 +1,23 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · STUDIO-CLI-001 Production handoff provider boundary
+
+Web PR #267 merged normally as `23267349b`. Its public acknowledgement route
+now returns bounded JSON HTTP 503 with `Cache-Control: no-store` when the
+provider/configuration lookup fails, rather than exposing an HTML 500.
+Vercel deployment `dpl_HL3i3uTvo9EQrjPCvYxvbzS9hDyd` is READY and owns the
+live aliases. The forged public POST reached the route and returned the safe
+503; adjacent forged custody probes returned bounded 401/404 JSON responses.
+Handoff contract **5/5**, public smoke **12/12**, truth-registry **37/37**,
+typecheck, and diff checks passed. This opens a hosted route-boundary gate
+only; the provider path is still operationally unavailable, and recipient,
+customer, independent-review, human/field, and final-release gates remain
+closed. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/studio-cli-001-production-handoff-ack-boundary-pr267-2026-10-24.md`.
+The additive bundle contains **213 files**, verifies with **0 mismatches**,
+passes secret scanning, and matches manifest
+`sha256:70b16325d016f5b00c2be3cf8c8cd2c1882bb30a56ce5d3afb03cdd6bafd7da4`.
+
 ## 2026-10-24 · Production landing browser evidence
 
 Web PR #265 merged normally as `c72c08f`; the capture harness retains a

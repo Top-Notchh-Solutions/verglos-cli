@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · STUDIO-CLI-001 Production handoff mapping
+
+- **Implementation mapping:** Web PR #267 / merge
+  `23267349b417e97d00339abc4a60c34c6e802f11` maps the public handoff
+  acknowledgement boundary to an explicit fail-closed JSON 503 when its
+  provider/configuration path fails.
+- **Hosted mapping:** Vercel deployment
+  `dpl_HL3i3uTvo9EQrjPCvYxvbzS9hDyd` is READY. The forged public POST reaches
+  the handler and returns `503`, `application/json`, `no-store`; adjacent
+  forged custody probes return bounded 401/404 JSON responses.
+- **Verification mapping:** Handoff contract **5/5**, public smoke **12/12**,
+  truth-registry **37/37**, typecheck, diff check, and Vercel request logs
+  pass without an uncaught 500.
+- **Acceptance mapping:** The provider path is not operational for a handoff
+  lookup, and no recipient/customer acceptance, human/field evidence,
+  independent review, or final-release decision is inferred. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/studio-cli-001-production-handoff-ack-boundary-pr267-2026-10-24.md`.
+  The additive bundle contains **213 files**, verifies with **0 mismatches**,
+  passes secret scanning, and matches manifest
+  `sha256:70b16325d016f5b00c2be3cf8c8cd2c1882bb30a56ce5d3afb03cdd6bafd7da4`.
+
 ## 2026-10-24 · Production landing browser mapping
 
 - **Implementation mapping:** Web commit `0856d8f` / PR #265 merge `c72c08f`
