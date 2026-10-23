@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · local current-candidate release artifacts
+
+- **Source:** CLI exact head `3d4bca1f`, version `2.0.0-alpha.4`; build **8/8**
+  and typecheck **14/14** passed.
+- **Artifacts:** Seven npm archives plus checksums, notices, CycloneDX/SPDX
+  SBOMs, license records, clean-consumer evidence, release notes, and
+  metadata. Strict release verification passed **15 artifacts** and the exact
+  seven-package set.
+- **Freeze:** Additive freeze records 16/16 artifact entries present, zero
+  missing, and 7 open gates; status remains blocked/no-go. Freeze digest:
+  `sha256:5f89f57d3ca6a5f07fdee8cedd14fce1b1f83cc010aec42668d88ea80c88a028`.
+- **Bundle:** Additive bundle contains 126 hashed files, digest
+  `sha256:79eca4891419a75367295ca12adb4bb65dcb5eda739328acfbb6b2e52d95c09a`;
+  secret scan passed.
+- **Disposition:** Local preparation only. No publication, tag, provider,
+  Production, independent-review, or final-release action occurred. Score
+  remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-003-local-release-artifacts-2026-10-23.md`.
+
 ## 2026-10-23 · current release reconciliation and candidate freeze
 
 - **Reconciliation:** 22 partial rows, 7 open gates, 6 corrections, and 1

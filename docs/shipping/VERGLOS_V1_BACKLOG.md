@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · local current-candidate release artifacts
+
+The exact CLI candidate built **8/8** packages, passed **14/14** typechecks,
+and generated the seven archives plus checksum, SBOM, notices, license,
+clean-consumer, release-notes, and metadata artifacts. Strict verification
+passed **15 artifacts**. Candidate freeze now records **16/16 present** and
+zero missing, while seven external gates keep it blocked/no-go. This advances
+DIST-002/003 implementation only. No checkbox changed; the live score remains
+**244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/dist-003-local-release-artifacts-2026-10-23.md`.
+
 ## 2026-10-23 · current release reconciliation and candidate freeze
 
 The real current candidate now has a fail-closed reconciliation: **22 partial

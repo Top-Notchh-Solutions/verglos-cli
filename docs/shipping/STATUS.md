@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · local current-candidate release artifacts
+
+The exact CLI head `3d4bca1f` built **8/8** packages and passed **14/14**
+typechecks. The local release pipeline generated seven npm archives, checksums,
+notices, SBOMs, license records, clean-consumer evidence, release notes, and
+metadata; the strict verifier passed **15 artifacts** and the seven-package
+set. The additive freeze now records **16/16 artifacts present**, zero missing,
+and seven open gates, so status remains blocked/no-go. The new evidence bundle
+contains **126** hashed files, SHA-256
+`79eca4891419a75367295ca12adb4bb65dcb5eda739328acfbb6b2e52d95c09a`, and
+passed its secret scan. No publication, tag, provider, or Production action
+occurred. Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing
+was deleted or overwritten. Evidence:
+`evidence/dist-003-local-release-artifacts-2026-10-23.md`.
+
 ## 2026-10-23 · current release reconciliation and candidate freeze
 
 The real current candidate was reconciled across **22 partial rows**, **7 open

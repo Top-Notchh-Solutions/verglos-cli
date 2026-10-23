@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## Local current-candidate release artifacts · 2026-10-23
+
+- **Source mapping:** CLI exact head `3d4bca1f`, version `2.0.0-alpha.4`, with
+  build 8/8 and typecheck 14/14.
+- **Artifact mapping:** Seven npm archives and all local release sidecars were
+  generated; strict verification passed 15 artifacts and the exact seven-
+  package set. The freeze has 16/16 present and zero missing artifacts.
+- **Gate mapping:** Seven provider/customer/reviewer/browser/field/final gates
+  remain open; freeze is blocked/no-go.
+- **Bundle mapping:** 126 hashed files, SHA-256
+  `sha256:79eca4891419a75367295ca12adb4bb65dcb5eda739328acfbb6b2e52d95c09a`;
+  secret scan passed.
+- **Acceptance mapping:** No publication, tag, provider, Production,
+  independent-review, or final-release action occurred. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-003-local-release-artifacts-2026-10-23.md`.
+
 ## Current release reconciliation and candidate freeze · 2026-10-23
 
 - **Reconciliation mapping:** The exact current candidate produces 22 partial

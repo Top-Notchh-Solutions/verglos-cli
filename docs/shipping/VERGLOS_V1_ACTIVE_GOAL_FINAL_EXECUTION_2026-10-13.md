@@ -52,6 +52,27 @@ in addition to the product rows whose own evidence is still incomplete. The
 public-open-source benchmark path is authorized now. The separately held
 security-review track is unchanged.
 
+## Latest continuation result · 2026-10-23 · local current-candidate release artifacts
+
+The exact CLI candidate `3d4bca1f` (`2.0.0-alpha.4`) built **8/8** packages
+and passed **14/14** typechecks. The repository release pipeline generated the
+seven npm archives, `SHA256SUMS`, notices, CycloneDX/SPDX SBOMs, dependency and
+external-license records, clean-consumer verification, release notes, and
+release metadata. Strict verification passed **15 artifacts** with the exact
+seven-package set and matching notices.
+
+The additive freeze report now records **16/16 artifact entries present** and
+zero missing, but remains blocked/no-go for seven open gates. The current
+release-state bundle contains **126** hashed files, has SHA-256
+`sha256:79eca4891419a75367295ca12adb4bb65dcb5eda739328acfbb6b2e52d95c09a`,
+and passed its secret scan.
+
+This is local DIST-002/003 release preparation only. No npm publication, tag,
+provider, Production, independent-review, or final-release action occurred; no
+checkbox changed. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-003-local-release-artifacts-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · current release reconciliation and candidate freeze
 
 The exact current candidate (`3d4bca1f` CLI / `16ceddc9` Web /

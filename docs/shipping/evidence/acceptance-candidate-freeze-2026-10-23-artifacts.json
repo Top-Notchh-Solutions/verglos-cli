@@ -1,0 +1,145 @@
+{
+  "schema": "verglos.private.release-candidate-freeze.v1",
+  "generatedAt": "2026-10-23T02:55:51.237Z",
+  "candidate": {
+    "cliCommit": "3d4bca1f3d306a2d69798d0af58f1361cec69620",
+    "webCommit": "16ceddc9855e75e04f10ddd276fae16c7ef09e01",
+    "version": "2.0.0-alpha.4"
+  },
+  "artifacts": [
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/RELEASE_METADATA.json",
+      "kind": "release-sidecar",
+      "sha256": "sha256:8b57ce348bdf6c6ad9214da0a191934e25f2f8a509373c4f612e51a8aabf0a61",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/RELEASE_NOTES.md",
+      "kind": "release-sidecar",
+      "sha256": "sha256:d4376833418befd087da01978b19052e610803c2e852511ef7999132ff8a5bd6",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/SBOM.cdx.json",
+      "kind": "release-sidecar",
+      "sha256": "sha256:602623e823682e644a208602264ec4730bf9dee8a6f6e6a6f247825bda17061f",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/SBOM.spdx.json",
+      "kind": "release-sidecar",
+      "sha256": "sha256:45cbddbe4275735a20a7303e488ba01d50afd02acbb78bc0cb815c3a2e20e103",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/SHA256SUMS",
+      "kind": "release-sidecar",
+      "sha256": "sha256:85a5fc9827eaa497ea256ca20f9b194e07f4acac86d26b1db9c2ba6a9b2255a8",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/THIRD_PARTY_NOTICES",
+      "kind": "release-sidecar",
+      "sha256": "sha256:5f21dbbd6e95d108095d04d65536df5478c13842cbf78891ffe07c08d0b2664a",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/clean-consumer-verification.txt",
+      "kind": "release-sidecar",
+      "sha256": "sha256:fb93e4d9c33cff0059fd67ef5fddc3bebb0705c75538af53435d05b1904cdde5",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/dependency-license-inventory.json",
+      "kind": "release-sidecar",
+      "sha256": "sha256:0dad476f2388ea7ab9ba57f212b29d0adafb16ed84e86baf826ce274f9aae037",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/external-license-records.json",
+      "kind": "release-sidecar",
+      "sha256": "sha256:b54809c18447f437af49295291e17292f89bd2f88d0e5bb257af9ce0952a3c8a",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/verglos-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:1da7736859296a7d4c4d2abf7738e7f6af804c11420c0ee0ad32f72be63774df",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/verglos-entitlement-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:46c46e9b8bb6aff0654cbdd96fbba5fd9f647a64858fe3d06922ccb5cf4987f1",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/verglos-hunt-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:4ce77f168d7df36d2bba165b556a62614e420e68c159da12f7192152b10a3c67",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/verglos-mcp-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:7c3ca419833bdfa54dc308f8f0b9061a357cf6a8fb8f58d3f1ec4c55850fba51",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/verglos-reporter-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:1739724b1cd71215fd2bf81fbe33911a4a8cef6a847166c78c2d70438b9cc2a2",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/verglos-scanner-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:45da58362bdeaa77c9dcc6c0f3b5f9dcc3d186c3817f372b978afe0726d247b5",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-23.oV7Lyd/verglos-shared-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:5e1ff9f9d9e1fc8f882f26f95e6f09f312aef12620b78a239438000d18a99147",
+      "required": true,
+      "present": true
+    }
+  ],
+  "summary": {
+    "artifactCount": 16,
+    "requiredArtifactCount": 16,
+    "presentArtifactCount": 16,
+    "missingArtifactCount": 0,
+    "openGateCount": 7
+  },
+  "missingArtifacts": [],
+  "openGates": [
+    "providerLifecycle",
+    "customerConsent",
+    "independentReview",
+    "authenticatedBrowser",
+    "fieldCwv",
+    "accountDeletion",
+    "finalRelease"
+  ],
+  "freeze": {
+    "status": "blocked",
+    "decision": "no-go",
+    "goEligible": false
+  }
+}
