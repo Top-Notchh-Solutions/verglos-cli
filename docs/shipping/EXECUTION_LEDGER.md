@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## Production Cards-only checkout receipt · 2026-10-24
+
+- **Provider receipt:** Vercel deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf`
+  was READY on the live Production alias.
+- **Verification:** Read-only GET `/checkout` returned HTTP 200; the bounded
+  response rendered `Cards` and no UPI, Netbanking, Wallets, EMI, or Pay Later
+  labels. The CSP retained the declared Razorpay checkout origins.
+- **Disposition:** Presentation/configuration evidence only. No order,
+  payment, webhook, database, account, customer, publication, or final-release
+  state changed; no checkbox changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-production-checkout-card-only-2026-10-24.md`.
+
 ## Current candidate reconciliation and freeze · 2026-10-24
 
 - **Candidate:** CLI `aad2c743`, Web `98b5cf6`, version `2.0.0-alpha.4`.

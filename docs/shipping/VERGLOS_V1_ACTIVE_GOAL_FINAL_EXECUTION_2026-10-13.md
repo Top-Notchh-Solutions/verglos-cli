@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Production Cards-only checkout receipt
+
+The live Production checkout route returned HTTP **200** from deployment
+`dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf` at `2026-10-23T22:22:36Z`. Its bounded
+response contained the `Cards` label and no UPI, netbanking, wallet, EMI, or
+Pay Later labels; the response body digest is recorded in
+`docs/shipping/evidence/vercel-production-checkout-card-only-2026-10-24.md`.
+The CSP permits Razorpay only for the declared checkout surfaces.
+
+This is real Production presentation/configuration evidence for
+FINAL-WEB-003/005 and the provider boundary. It does not create an order,
+payment, webhook, commercial acceptance, human/field evidence,
+independent-review event, or final release approval. No checkbox changed; the
+authoritative score remains **245 checked / 35 open / 280 total (87.5%)**,
+partitioned as **13 AppSec-dependent / 22 non-AppSec** rows.
+
 ## Latest continuation result · 2026-10-24 · current candidate reconciliation and freeze
 
 The current alpha.4 candidate (`aad2c743` CLI / `98b5cf6` Web) was run through

@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Production Cards-only checkout receipt
+
+The live Production `/checkout` route returned HTTP **200** from deployment
+`dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf`; its bounded response rendered `Cards` and
+zero UPI, netbanking, wallet, EMI, or Pay Later labels. This advances the
+deployed presentation/configuration evidence for FINAL-WEB-003/005 and the
+provider boundary only. It does not prove a provider transaction, webhook,
+commercial acceptance, human/field evidence, independent review, or final
+release. No checkbox changed; score remains **245 checked / 35 open / 280
+total (87.5%)**. Evidence:
+`docs/shipping/evidence/vercel-production-checkout-card-only-2026-10-24.md`.
+
 ## 2026-10-24 · current-head non-AppSec implementation regression
 
 Current CLI/Web/private-shipping heads passed the local implementation

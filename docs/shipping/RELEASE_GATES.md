@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Production Cards-only checkout gate receipt
+
+The live `/checkout` route returned HTTP **200** from the READY Production
+deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf`. The bounded HTML rendered only
+the declared `Cards` payment label; UPI, Netbanking, Wallets, EMI, and Pay
+Later labels were absent. This opens deployed presentation/configuration
+evidence for FINAL-WEB-003/005 only. Provider lifecycle, commercial,
+human/field, independent-review, AppSec/Hunt, and final-release gates remain
+closed. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/vercel-production-checkout-card-only-2026-10-24.md`.
+
 ## 2026-10-24 · current candidate no-go reconciliation and freeze
 
 CLI `aad2c743` and Web `98b5cf6` at version `2.0.0-alpha.4` were reconciled
