@@ -1,5 +1,30 @@
 # Verglos V1 Execution Ledger
 
+## STUDIO-CLI-001 reservation race merged · 2026-10-23
+
+- **Source mapping:** Web PR #254 merged normally as
+  `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`, preserving source commit
+  `c290c9f49c10e47a3f1421f427f76f1fd7607622`.
+- **Contract mapping:** Duplicate projection losers release their allowance
+  reservation; ambiguous compensation fails closed with bounded service
+  unavailable.
+- **Verification mapping:** Focused **27/27**; full Web **900 passed / 24
+  skipped / 0 failed**; typecheck; **49/49** route build; diff checks.
+- **Hosted mapping:** Verify Web `39899676684` and Private runner
+  `39899676731` failed with zero steps/no runner. GitGuardian, Vercel, and
+  Preview Comments passed; no hosted source result claimed.
+- **Artifact mapping:** 174 hashed files, manifest
+  `sha256:89f9f6dd18168ac7b9527f900c5e6c5fc2757b8f05bcbe4923129f7161a33a54`,
+  bundle SHA-256
+  `0c6572a37ea9403c4d3dd5b19249193eaad52e456308645706dde4f77a33a377`,
+  secret scan passed.
+- **Acceptance mapping:** STUDIO-CLI-001 remains open for hosted/audit,
+  independent recipient/customer, and final acceptance. Score remains
+  **244/36/280 (87.1%)**. No database, provider, Production, customer,
+  deployment, publication, tag, or release action occurred; nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/studio-cli-001-projection-race-pr254-merge-2026-10-23.md`.
+
 ## QUAL-WEB-006 dashboard capture coverage merged · 2026-10-23
 
 - **Source mapping:** Web PR #256 merged normally as

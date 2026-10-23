@@ -1,5 +1,25 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · STUDIO-CLI-001 reservation race merged
+
+Web PR #254 merged normally as `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`,
+preserving source `c290c9f49c10e47a3f1421f427f76f1fd7607622`. Duplicate
+client-projection custody uploads now release the losing allowance reservation
+and fail closed if compensation is ambiguous. Focused contracts passed
+**27/27**; full Web passed **900 / 24 / 0**; typecheck, build (**49/49** routes),
+and diff checks passed. Verify/runner jobs failed before repository execution
+with zero steps/no runner; no hosted source qualification is claimed. No
+checkbox changed and no database, provider, Production, customer, deployment,
+publication, tag, or release action occurred. STUDIO-CLI-001 remains open for
+hosted/audit, independent recipient/customer, and final gates. The additive
+bundle contains 174 hashed files with manifest
+`sha256:89f9f6dd18168ac7b9527f900c5e6c5fc2757b8f05bcbe4923129f7161a33a54`
+and file SHA-256
+`0c6572a37ea9403c4d3dd5b19249193eaad52e456308645706dde4f77a33a377`;
+secret scan passed. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/studio-cli-001-projection-race-pr254-merge-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 dashboard capture coverage merged
 
 Web PR #256 merged normally as `60f83c4e80e6b5e98b8f4b0c3f876ba1f6cb652f`,

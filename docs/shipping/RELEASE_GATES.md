@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · STUDIO-CLI-001 reservation race merged
+
+Web PR #254 merged normally as
+`0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`, preserving source commit
+`c290c9f49c10e47a3f1421f427f76f1fd7607622`. Duplicate projection custody
+uploads now release the losing allowance reservation and fail closed when
+compensation is ambiguous. Focused contracts passed **27/27**; full Web passed
+**900 / 24 / 0**; typecheck, build **49/49**, and diff checks passed. Hosted
+runs `39899676684` and `39899676731` failed before repository execution with
+zero steps/no runner; no hosted source qualification is claimed. Keep
+STUDIO-CLI-001 open for hosted/audit, independent recipient/customer, and final
+acceptance. No database, provider, Production, customer, deployment,
+publication, tag, or release action occurred. Score remains **244/36/280
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/studio-cli-001-projection-race-pr254-merge-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 dashboard capture coverage merged
 
 Web PR #256 merged normally as

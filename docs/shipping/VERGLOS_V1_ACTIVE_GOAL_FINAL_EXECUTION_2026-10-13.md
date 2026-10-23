@@ -1,5 +1,33 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · STUDIO-CLI-001 reservation race merged
+
+Web PR #254 merged normally into `main` as merge commit
+`0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`, preserving source commit
+`c290c9f49c10e47a3f1421f427f76f1fd7607622`. The client-projection custody
+route now releases an already-reserved allowance when a duplicate upload loses
+the uniqueness race, and returns bounded service-unavailable if compensation
+cannot be confirmed. Focused Studio/client-projection/usage contracts passed
+**27/27**; full Web passed **900 / 24 / 0**; typecheck passed; build generated
+**49/49** routes; and diff checks passed.
+
+Verify Web run `39899676684` and Private runner run `39899676731` failed before
+repository execution with zero steps and no runner execution. GitGuardian,
+Vercel, and Vercel Preview Comments passed; no hosted source qualification is
+claimed from the failed runner jobs. No database migration, provider,
+Production, customer, deployment, registry publication, tag, or release
+action occurred. This advances STUDIO-CLI-001 implementation only; hosted/audit
+qualification, authorized independent recipient/customer acceptance, and final
+acceptance remain open. No backlog checkbox or external state changed, and
+nothing was deleted or overwritten. The additive bundle contains **174 hashed
+files** with manifest
+`sha256:89f9f6dd18168ac7b9527f900c5e6c5fc2757b8f05bcbe4923129f7161a33a54`
+and file SHA-256
+`0c6572a37ea9403c4d3dd5b19249193eaad52e456308645706dde4f77a33a377`;
+secret scan passed. The live score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-projection-race-pr254-merge-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-006 dashboard capture coverage merged
 
 Web PR #256 merged normally into `main` as merge commit

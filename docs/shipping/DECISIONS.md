@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · merge STUDIO-CLI-001 reservation race hardening
+
+- **Decision:** Promote Web PR #254's duplicate projection reservation
+  compensation through the normal merge path.
+- **Implementation:** Merge commit
+  `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` preserves source commit
+  `c290c9f49c10e47a3f1421f427f76f1fd7607622`.
+- **Verification:** Focused contracts **27/27**, full Web **900/24/0**,
+  typecheck, **49/49** route build, and diff checks passed. Hosted jobs failed
+  with zero steps/no runner; no hosted source result is claimed.
+- **Disposition:** Implementation progress only. STUDIO-CLI-001 stays open for
+  hosted/audit, independent recipient/customer, and final acceptance. No
+  database, provider, Production, customer, deployment, publication, tag, or
+  release action occurred. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/studio-cli-001-projection-race-pr254-merge-2026-10-23.md`.
+
 ## 2026-10-23 · merge QUAL-WEB-006 dashboard capture coverage
 
 - **Decision:** Promote Web PR #256's complete dashboard-capture coverage
