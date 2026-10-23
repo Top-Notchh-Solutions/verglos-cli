@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Production migration and post-deploy smoke gate
+
+Vercel Production deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf` completed and
+was aliased to `https://verglos.com`. The explicit reviewed migration hook ran
+successfully; the read-only ledger check found **44** applied entries, all six
+QUAL-WEB-005 support tables, and zero deletion requests/jobs/receipts. The
+post-deploy smoke returned five expected 200 responses and the expected 405
+method boundary for the QR route. The one-shot migration trigger was removed
+after the run. This opens real Production migration/surface evidence only;
+account-deletion acceptance, provider lifecycle, human/field-CWV,
+customer/recipient, independent review, AppSec/Hunt, and final go/no-go remain
+closed. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/vercel-production-migration-and-smoke-2026-10-24.md`.
+
 ## 2026-10-24 · live Production surface recheck
 
 Latest READY Vercel deployments were observed. Five unauthenticated public GET

@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · reviewed Production migration and smoke
+
+The Web Production deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf` completed
+successfully and was aliased to `https://verglos.com`. The explicit reviewed
+production hook ran `pnpm db:migrate`; a read-only database check found **44**
+applied migration-ledger entries, all six QUAL-WEB-005 support tables, and
+zero deletion requests/jobs/receipts. The deployed build generated **49/49**
+routes. Post-deploy smoke returned 200 for `/`, `/proof`, `/llms.txt`,
+`/robots.txt`, and `/sitemap.xml`, and 405 for an unsafe GET to the POST-only
+QR route. The one-shot migration trigger variables were removed after the
+successful run.
+
+This is real Production migration and runtime evidence. It advances
+`QUAL-WEB-005` and final Web smoke implementation evidence, but it does not
+claim destructive account-deletion acceptance, customer/recipient acceptance,
+human screen-reader/field-CWV evidence, independent review, AppSec/Hunt, npm
+publication, or final go/no-go. No checkbox changed. The authoritative score
+remains **245 checked / 35 open / 280 total (87.5%)**, partitioned as **13
+AppSec-dependent / 22 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/vercel-production-migration-and-smoke-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · live Production read-only recheck
 
 The latest READY Vercel deployments were rechecked without credentials or

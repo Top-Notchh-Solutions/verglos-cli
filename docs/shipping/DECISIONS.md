@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · execute reviewed Production migration and smoke
+
+- **Decision:** Apply the reviewed, non-destructive Web migration set through
+  the explicit Vercel Production hook, then run read-only post-deploy smoke.
+- **Verification:** Deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf` reached
+  `READY`; the migration ledger reports **44** applied entries and all six
+  QUAL-WEB-005 support tables; deletion requests/jobs/receipts remain zero;
+  five public routes returned 200 and the POST-only QR route returned 405.
+- **Safety:** No account deletion, payment, webhook, customer, npm, or GitHub
+  Actions operation was performed. The one-shot migration trigger variables
+  were removed after the successful deployment so later deploys do not run
+  migrations implicitly.
+- **Disposition:** Record real Production evidence, but keep dependent rows
+  open. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-production-migration-and-smoke-2026-10-24.md`.
+
 ## 2026-10-24 · record live Production surface recheck
 
 - **Decision:** Recheck the latest READY Vercel Production surface using only
