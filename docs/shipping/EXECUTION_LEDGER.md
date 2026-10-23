@@ -1,5 +1,34 @@
 # Verglos V1 Execution Ledger
 
+## Web Vercel Production and Preview receipts · 2026-10-23
+
+- **Production:** Vercel deployment `dpl_Cij5ABETkTpdRz2hmAs7Yfhtxz3Y` is
+  `READY`, bound to Web `main` commit
+  `bfb3413516e8f11e6dcef04040387b3dbb130c8b`, with `verglos.com` and
+  `www.verglos.com` aliases.
+- **Preview:** Vercel deployment `dpl_CxJs2TbwEB1SnxTt74Bb1NsTneA5` is
+  `READY`, bound to PR #257 commit `edb6af1`.
+- **Runtime receipt:** protected read-only `vercel curl` requests to both root
+  routes returned HTTP 200 with the expected security headers.
+- **Boundary:** provider execution is observed; no customer, human/field,
+  independent review, AppSec/Hunt, npm publication, or final release decision
+  is inferred. Score remains **244/36/280 (87.1%)**.
+- **Bundle:** additive v13 includes **189 files**, verifies with **0
+  mismatches**, matches manifest
+  `sha256:51167653c2e800b9576a2f075034d0c7f482405b6f29780478997333de785120`,
+  and passes secret scanning. v12 remains retained unchanged.
+- **Evidence:** `evidence/vercel-web-production-preview-receipts-2026-10-23.md`.
+
+## CLI hosted platform-matrix receipt · 2026-10-23
+
+- GitHub Actions run `39985823350` completed with `success` at exact workflow
+  head `c721bae783b775c23340217eaa441255695472db`.
+- The in-toto binding and all nine Ubuntu/Windows/macOS × Node 20/22/24 jobs
+  completed successfully.
+- This does not claim npm publication, CLI Production release, customer
+  acceptance, independent Hunt/AppSec review, or final go/no-go. Evidence:
+  `evidence/cli-platform-matrix-run-39985823350-2026-10-23.md`.
+
 ## Acceptance bundle v11 integrity repair · 2026-10-23
 
 - **Finding:** The retained v10 manifest referenced an older byte count for the
