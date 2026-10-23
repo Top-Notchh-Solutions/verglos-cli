@@ -912,6 +912,26 @@ own complete contract is satisfied:
   conversations, paid pilots, checkout, campaign, publication, deployment,
   npm release, tags, pushes, and Production migrations.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-012 triage integrity binding
+
+Private commit `c46bbdfd` closes a concrete implementation gap in the
+`acceptance:corpus:triage` path. Triage now reads each report through the
+bounded regular-file helper, compares the manifest-declared byte count and
+SHA-256 to the bytes actually consumed, and rejects substituted or changed
+reports before classification. The validator also requires exact fixture-count
+agreement, bounded hexadecimal CLI/fixture commits, and a valid verification
+timestamp. Read/triage tests passed **6/6**; the adjacent acceptance set passed
+**43/43**; study-protocol, syntax, and diff checks passed.
+
+The implementation slice is recorded in
+`docs/shipping/evidence/accept-012-triage-integrity-boundary-2026-10-23.md` and
+the additive evidence bundle contains **137** unique hashed files with
+manifest `sha256:080873aa5fc877e469686691881cd89ca025cf412c9dc79e6e6f225bf77f250a`.
+This does not claim the actual corpus rerun, adjudication, independent review,
+customer acceptance, provider action, or final release. No checkbox changed,
+no provider/Production/publication state changed, and nothing was deleted. The
+live score remains **244 checked / 36 open / 280 total (87.1%)**.
+
 For these 22 implementation rows, inspect the real source contract first and implement
 missing production logic, schema/migration/workflow/artifact behavior,
 regression coverage, and privacy/authorization boundaries in `verglos-web`

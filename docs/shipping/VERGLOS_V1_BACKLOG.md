@@ -5156,6 +5156,19 @@ assumes the legacy `licenses` table. No checkbox changed; backlog remains
   unadjudicated and customer acceptance is not claimed. Focused triage tests
   pass **3/3**. Evidence:
   `docs/shipping/evidence/accept-012-public-oss-triage-2026-10-23.md`.
+- **ACCEPT-012 integrity-boundary addendum (2026-10-23):** Private commit
+  `c46bbdfd` binds triage to each verification manifest report's exact byte
+  count and SHA-256 digest through the bounded regular-file reader. It also
+  requires exact fixture-count agreement, valid hexadecimal source commits,
+  and a valid verification timestamp. Read/triage tests pass **6/6** and the
+  adjacent acceptance set passes **43/43**; the additive evidence bundle has
+  **137** unique files with manifest
+  `sha256:080873aa5fc877e469686691881cd89ca025cf412c9dc79e6e6f225bf77f250a`.
+  This is implementation progress only: keep `ACCEPT-012` unchecked for the
+  strengthened exact-corpus rerun, `ACCEPT-011`/`QUAL-CLI-006`, held-out
+  correction, independent review, and final acceptance. Score remains
+  **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+  `docs/shipping/evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-013** · false-positive and false-truth correction loop · deps: ACCEPT-012, QUAL-CLI-004/006, QUAL-WEB-005/006 · Use a held-out fixture split and review each high-impact finding/claim; correct rules, copy, and evidence contracts without tuning against the final holdout. Commit(s): Private `14d916df` plus boundary fix `daf6524f` add `scripts/run-acceptance-correction-loop.mjs`, package command `acceptance:correction:run`, and 6 focused contract tests. The protocol substrate is complete; the row remains open for the actual preregistered held-out run, dependent qualification, independent review, and final acceptance. Evidence: `docs/shipping/evidence/accept-013-held-out-correction-loop-2026-10-23.md`.
 - [ ] **ACCEPT-014** · final regression corpus and go/no-go evidence · deps: ACCEPT-013, GITHUB-WEB-004, PLAN-WEB-015 · Re-run the frozen corpus across plan/user/tenant scenarios, compare report and performance deltas, reconcile truth/risk/gates, and issue a dated release recommendation. Commit(s): Private `acceptance:release:regress` implementation in `scripts/run-final-regression.mjs`; focused contract tests pass **4/4**. Evidence: `docs/shipping/evidence/accept-014-final-regression-contract-2026-10-23.md`. Row remains open for the actual frozen-corpus scenario run, dependent correction/provider gates, and final decision.
 

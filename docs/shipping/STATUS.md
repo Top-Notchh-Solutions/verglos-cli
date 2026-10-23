@@ -12000,6 +12000,22 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · ACCEPT-012 triage report integrity binding
+
+Private commit `c46bbdfd` binds public-OSS triage to the exact report bytes
+declared by its verification manifest. The bounded reader returns the parsed
+value, byte count, and SHA-256; triage compares both digest and size before
+classifying observations. Exact fixture-count, source-commit, and timestamp
+validation were tightened as well. Read/triage tests passed **6/6** and the
+adjacent acceptance contracts passed **43/43**; study-protocol, syntax, and
+diff checks passed.
+
+Keep `ACCEPT-012` open for the strengthened exact-corpus rerun, its declared
+dependencies, held-out correction, independent review, and final acceptance.
+No external state changed and nothing was deleted. Score remains **244 checked /
+36 open / 280 total (87.1%)**. Evidence:
+`evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 rollback-evidence manifest read binding merged
 
 CLI PR #176 merged normally as `fe7ea848c7e9e5b5ec12245c288ce44b7cc4a793`

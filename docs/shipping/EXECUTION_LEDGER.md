@@ -15235,3 +15235,18 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   state changed and nothing was deleted. Score remains **239/41/280
   (85.4%)**.
 - **Evidence:** `evidence/dist-002-release-tag-read-binding-pr177-2026-10-23.md`.
+
+## ACCEPT-012 triage integrity binding · 2026-10-23
+
+- **Source:** Private implementation commit `c46bbdfd`.
+- **Contract mapping:** Public-OSS triage now binds each report to the
+  verification manifest's exact byte count and SHA-256 through bounded
+  regular-file reads; manifest fixture counts, source commits, and timestamps
+  are validated strictly.
+- **Verification:** Read/triage **6/6**, adjacent acceptance **43/43**, study
+  protocol, syntax, and diff checks passed.
+- **Boundary:** This is implementation progress only. Keep `ACCEPT-012` open
+  for its exact-corpus rerun, dependencies, correction loop, independent
+  review, and final acceptance. No external state changed and nothing was
+  deleted. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.

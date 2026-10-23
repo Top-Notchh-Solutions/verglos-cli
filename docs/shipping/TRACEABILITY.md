@@ -9361,6 +9361,22 @@ changed. See
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## ACCEPT-012 triage integrity boundary · 2026-10-23
+
+- **Source mapping:** Private commit `c46bbdfd`.
+- **Contract mapping:** `acceptance:corpus:triage` consumes bounded report
+  bytes and refuses a report when its verified manifest digest or byte count
+  differs. The manifest count, source commits, and verification timestamp are
+  fail-closed validated.
+- **Verification mapping:** Read/triage contracts **6/6** and adjacent
+  acceptance contracts **43/43** passed; study-protocol, syntax, and diff
+  checks passed.
+- **Acceptance mapping:** This does not close `ACCEPT-012`; the exact corpus
+  rerun, dependencies, correction/independent review, and final acceptance
+  remain open. No checkbox or external state changed; nothing was deleted.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.
+
 ## DIST-003 / DIST-006 / QUAL-CLI-006 exact merged-main requalification · 2026-10-22
 
 - **Source mapping:** Exact merged CLI `c1f5e9b72d54467fc606da00735b704ada74f24c`.
