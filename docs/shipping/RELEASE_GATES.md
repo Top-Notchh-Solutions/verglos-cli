@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current candidate no-go reconciliation and freeze
+
+CLI `aad2c743` and Web `98b5cf6` at version `2.0.0-alpha.4` were reconciled
+against the current evidence. All 22 non-AppSec rows remain `partial`, and the
+recorded release recommendation is **no-go**. The candidate freeze verifies
+24/24 artifacts, all 12 required artifact kinds, and zero missing artifacts.
+Provider lifecycle, independent review, authenticated-browser acceptance,
+field-CWV, account deletion, and final release remain open. This is a
+reproducible blocked freeze, not a release approval. Score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/acceptance-release-reconciliation-freeze-2026-10-24.md`.
+
 ## 2026-10-24 · Production migration and post-deploy smoke gate
 
 Vercel Production deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf` completed and

@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## Current candidate reconciliation and freeze · 2026-10-24
+
+- **Candidate:** CLI `aad2c743`, Web `98b5cf6`, version `2.0.0-alpha.4`.
+- **Verification:** Reconciliation processed all 22 non-AppSec rows as
+  `partial` and recorded `no-go`; freeze verified 24/24 artifacts, all 12
+  required kinds, and zero missing artifacts.
+- **Open gates:** Provider lifecycle, independent review,
+  authenticated-browser acceptance, field-CWV, account deletion, and final
+  release.
+- **Disposition:** Current candidate is reproducibly blocked. No npm publish,
+  tag, GitHub release, payment, customer data, or deletion occurred. Score
+  remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24.md`.
+
 ## Production migration and post-deploy smoke · 2026-10-24
 
 - **Provider receipt:** Vercel deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf`

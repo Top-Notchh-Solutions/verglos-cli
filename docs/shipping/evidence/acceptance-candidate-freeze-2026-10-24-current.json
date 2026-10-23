@@ -1,0 +1,202 @@
+{
+  "schema": "verglos.private.release-candidate-freeze.v1",
+  "generatedAt": "2026-10-23T22:14:00.730Z",
+  "candidate": {
+    "cliCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+    "webCommit": "98b5cf652623bf4f000ed93366b67a38154579e1",
+    "version": "2.0.0-alpha.4"
+  },
+  "artifacts": [
+    {
+      "path": ".worktrees/cli-nonappsec-current-20261023/packages/cli/package.json",
+      "kind": "version",
+      "sha256": "sha256:1f0071129e3df6ed89df5bfd873f7a8e3206f656cd43b0e493c42dfe5b143ca8",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".worktrees/cli-nonappsec-current-20261023/packages/shared/src/schema.ts",
+      "kind": "schema",
+      "sha256": "sha256:beadfeec3931bb8cc56e2b9cfd3e845442820aade5ec1a224f30d4b89365cc75",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".worktrees/audit-web-nonappsec-20261023/drizzle/meta/_journal.json",
+      "kind": "migration",
+      "sha256": "sha256:dbfafb393e47edd78bef1823082ea184554c2d72406ddcf03458c97515200efd",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/SHA256SUMS",
+      "kind": "manifest",
+      "sha256": "sha256:5b40743fa4db1397b6720feeee33e917846c6d3b1917ac0254eac450e28ec1ea",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".worktrees/audit-web-nonappsec-20261023/src/lib/entitlement/capabilities.ts",
+      "kind": "plan-catalog",
+      "sha256": "sha256:f667a058c2da2b749b7cfcf0496c64b32b15a3420c707a43d2f61ad70f0a4f8f",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".worktrees/cli-nonappsec-current-20261023/packages/shared/src/upgrade-compat-corpus.test.ts",
+      "kind": "compatibility",
+      "sha256": "sha256:10abe3edc9928d8e777b3509786f6daf5deb7ceaaab63c90310b647c8db3e223",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/RELEASE_NOTES.md",
+      "kind": "docs",
+      "sha256": "sha256:baf042493341051b11a1fd1028b5099031dab41f6d05b7b01b7efae442747320",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".worktrees/audit-web-nonappsec-20261023/docs/deployment-runbook.md",
+      "kind": "runbook",
+      "sha256": "sha256:94027f8ea3be26c1cfdcf6099de580e8904170d6711e31453f5de4f2c68f18d8",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/THIRD_PARTY_NOTICES",
+      "kind": "notice",
+      "sha256": "sha256:5f21dbbd6e95d108095d04d65536df5478c13842cbf78891ffe07c08d0b2664a",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/SBOM.cdx.json",
+      "kind": "sbom",
+      "sha256": "sha256:15edbe5413f69a143c41fdb78054410aae0cbf8472f430614df593aa05d13c5d",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/RELEASE_METADATA.json",
+      "kind": "provenance",
+      "sha256": "sha256:f3ee55c0cee25bceb2e7d3ab3c7579100f2677f6c3c6f2f34edb84fc7ccac0f9",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".worktrees/record-vercel-preview-20261023/docs/shipping/evidence/dist-006-local-rollback-rehearsal-2026-10-23.md",
+      "kind": "rollback",
+      "sha256": "sha256:5173c6c5660a6fc82c986fa7738cf27be0af07c79097f7222fe79e6ab46b785c",
+      "required": true,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/SBOM.spdx.json",
+      "kind": "release-sidecar",
+      "sha256": "sha256:bdd19605af47107b22e45cb065a9fcc561f99fef1f20269981c3f1d2971dc34f",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/clean-consumer-verification.txt",
+      "kind": "release-sidecar",
+      "sha256": "sha256:fb93e4d9c33cff0059fd67ef5fddc3bebb0705c75538af53435d05b1904cdde5",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/dependency-license-inventory.json",
+      "kind": "release-sidecar",
+      "sha256": "sha256:0dad476f2388ea7ab9ba57f212b29d0adafb16ed84e86baf826ce274f9aae037",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/external-license-records.json",
+      "kind": "release-sidecar",
+      "sha256": "sha256:b54809c18447f437af49295291e17292f89bd2f88d0e5bb257af9ce0952a3c8a",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".worktrees/record-vercel-preview-20261023/docs/shipping/evidence/vercel-production-migration-and-smoke-2026-10-24.md",
+      "kind": "provider-receipt",
+      "sha256": "sha256:e9d018eb4f8ffae0522028c6bd1f81effd9b2715922dd17d35591d473a079692",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/verglos-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:27c6ad371e54a740be9de8fc1bf005197eccb4e9311701fcbb13d9166b5c6bef",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/verglos-entitlement-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:ace7d4a6d19126fac558e5fcd4a3b7f4ac5bc038a7c399ca44a0ed33e96974f5",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/verglos-hunt-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:4ce77f168d7df36d2bba165b556a62614e420e68c159da12f7192152b10a3c67",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/verglos-mcp-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:7c3ca419833bdfa54dc308f8f0b9061a357cf6a8fb8f58d3f1ec4c55850fba51",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/verglos-reporter-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:1739724b1cd71215fd2bf81fbe33911a4a8cef6a847166c78c2d70438b9cc2a2",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/verglos-scanner-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:45da58362bdeaa77c9dcc6c0f3b5f9dcc3d186c3817f372b978afe0726d247b5",
+      "required": false,
+      "present": true
+    },
+    {
+      "path": ".local-evidence/verglos-release-candidate-2026-10-24-aad2c743/verglos-shared-2.0.0-alpha.4.tgz",
+      "kind": "npm-archive",
+      "sha256": "sha256:5e1ff9f9d9e1fc8f882f26f95e6f09f312aef12620b78a239438000d18a99147",
+      "required": false,
+      "present": true
+    }
+  ],
+  "summary": {
+    "artifactCount": 24,
+    "requiredArtifactCount": 12,
+    "presentArtifactCount": 24,
+    "missingArtifactCount": 0,
+    "missingArtifactKindCount": 0,
+    "openGateCount": 6
+  },
+  "missingArtifacts": [],
+  "missingArtifactKinds": [],
+  "openGates": [
+    "providerLifecycle",
+    "independentReview",
+    "authenticatedBrowser",
+    "fieldCwv",
+    "accountDeletion",
+    "finalRelease"
+  ],
+  "freeze": {
+    "status": "blocked",
+    "decision": "no-go",
+    "goEligible": false
+  }
+}

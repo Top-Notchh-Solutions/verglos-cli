@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current candidate no-go and complete freeze artifacts
+
+- **Decision:** Reconcile the current alpha.4 candidate and freeze its
+  digest-bound artifacts without publishing or approving release.
+- **Verification:** CLI `aad2c743`, Web `98b5cf6`; **22/22** non-AppSec rows are
+  `partial`; **24/24** freeze artifacts are present; all 12 required kinds are
+  present; six gates remain open; recommendation is recorded **no-go**.
+- **Disposition:** Keep the candidate blocked. Do not publish npm, create a
+  tag, approve final release, or claim customer/independent/field acceptance.
+  Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24.md`.
+
 ## 2026-10-24 · execute reviewed Production migration and smoke
 
 - **Decision:** Apply the reviewed, non-destructive Web migration set through
