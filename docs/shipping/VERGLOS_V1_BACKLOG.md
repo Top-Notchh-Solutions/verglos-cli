@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-003 bundle integrity
+
+The current packet bundle contains **179 listed files**. Read-only verification
+found **0 per-file mismatches**, manifest recomputation passed, and secret
+scanning passed. Manifest:
+`sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`;
+bundle file SHA-256:
+`c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
+No checkbox changed: ACCEPT-003 remains open for reviewer, hosted, and
+external acceptance artifacts. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-003-qual-web005-bundle-integrity-v3-2026-10-23.md`.
+
 ## 2026-10-23 · current merged Web deletion contracts
 
 Authoritative Web `main` `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` passed the
@@ -9,10 +22,10 @@ passed. No checkbox changed: QUAL-WEB-005 remains open for migrated
 database/authenticated route execution, legal/retention and customer-held
 disposition, Production restore/rollback, reconciliation, independent review,
 and final acceptance. Score remains **244 checked / 36 open / 280 total
-(87.1%)**. The additive packet bundle contains **178 hashed files**, manifest
-`sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+(87.1%)**. The additive packet bundle contains **179 hashed files**, manifest
+`sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`,
 and passed its secret scan. Bundle file SHA-256:
-`a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+`c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
 Nothing was deleted or overwritten. Evidence:
 `docs/shipping/evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`.
 

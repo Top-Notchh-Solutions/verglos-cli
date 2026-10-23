@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-003 packet bundle integrity · 2026-10-23
+
+- **Verification:** Read-only recomputation over **179 files** found **0
+  mismatches**; the canonical manifest matched and secret scanning passed.
+- **Artifact:** Manifest
+  `sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`;
+  bundle file SHA-256
+  `c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
+- **Disposition:** Integrity progress only; no row checked. Score remains
+  **244/36/280 (87.1%)**. Reviewer, hosted/provider, customer, browser,
+  field-CWV, account-deletion, independent-review, AppSec/Hunt, and
+  final-release gates remain open.
+- **Evidence:** `evidence/accept-003-qual-web005-bundle-integrity-v3-2026-10-23.md`.
+
 ## Current merged Web deletion contracts · 2026-10-23
 
 - **Source:** Web `main` `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`, clean
@@ -10,10 +24,10 @@
 - **Disposition:** QUAL-WEB-005 implementation evidence only; no row checked.
   Score remains **244/36/280 (87.1%)**. No database, deletion, customer,
   provider, Production, deployment, or release action occurred.
-- **Bundle:** 178 hashed files; manifest
-  `sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`;
+- **Bundle:** 179 hashed files; manifest
+  `sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`;
   secret scan passed. Bundle file SHA-256:
-  `a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+  `c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
 - **Evidence:** `evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`.
 
 ## Current merged CLI public corpus · 2026-10-23

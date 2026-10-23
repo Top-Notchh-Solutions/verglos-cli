@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · verify ACCEPT-003 packet integrity
+
+- **Decision:** Verify the regenerated acceptance packet read-only, preserving
+  prior artifacts and refusing to overwrite them.
+- **Result:** **179 files**, **0 mismatches**, manifest recomputation passed,
+  and secret scanning passed. Manifest
+  `sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`;
+  bundle file SHA-256
+  `c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
+- **Disposition:** Integrity progress only; no checkbox or score changed.
+  Reviewer, hosted/provider, customer, browser, field-CWV, account-deletion,
+  independent-review, AppSec/Hunt, and final-release gates remain open. Score
+  remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-003-qual-web005-bundle-integrity-v3-2026-10-23.md`.
+
 ## 2026-10-23 · run current merged Web deletion contracts
 
 - **Decision:** Re-run the current merged Web privacy/deletion contract surface
@@ -11,10 +26,10 @@
   no checkbox or score changed, and no deletion, customer, provider,
   Production, deployment, or release action occurred. Score remains
   **244/36/280 (87.1%)**.
-- **Bundle:** The packet bundle contains 178 hashed files, manifest
-  `sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+- **Bundle:** The packet bundle contains 179 hashed files, manifest
+  `sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`;
   and passed its secret scan. Bundle file SHA-256:
-  `a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+  `c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
 - **Evidence:** `evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`.
 
 ## 2026-10-23 · execute current merged CLI public corpus

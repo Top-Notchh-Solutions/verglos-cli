@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 packet bundle integrity · 2026-10-23
+
+- **Artifact mapping:** Current packet bundle has **179 files**, manifest
+  `sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`,
+  and bundle file SHA-256
+  `c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
+- **Verification mapping:** Every listed file matched its recorded bytes and
+  SHA-256; manifest recomputation and secret scan passed.
+- **Acceptance mapping:** Integrity progress only; held acceptance gates
+  remain open. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-003-qual-web005-bundle-integrity-v3-2026-10-23.md`.
+
 ## Current merged Web deletion contracts · 2026-10-23
 
 - **Source mapping:** Web `main`
@@ -10,10 +22,10 @@
   migrated database, authenticated route, legal/customer-held, Production,
   reconciliation, independent-review, and final-acceptance gates remain open.
   Score remains **244/36/280 (87.1%)**.
-- **Artifact mapping:** Additive packet bundle has 178 hashed files, manifest
-  `sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+- **Artifact mapping:** Additive packet bundle has 179 hashed files, manifest
+  `sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`;
   and a passed secret scan. Bundle file SHA-256:
-  `a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+  `c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
 - **Evidence:** `evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`.
 
 ## Current merged CLI public corpus · 2026-10-23

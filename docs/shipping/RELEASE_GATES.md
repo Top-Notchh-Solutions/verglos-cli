@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-003 bundle integrity
+
+The current packet bundle contains **179 files**; read-only verification found
+**0 mismatches**, manifest recomputation passed, and secret scanning passed.
+Manifest:
+`sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`;
+bundle file SHA-256:
+`c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
+This is integrity evidence only and does not check any external/reviewer or
+held release gate. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-003-qual-web005-bundle-integrity-v3-2026-10-23.md`.
+
 ## 2026-10-23 · current merged Web deletion contracts
 
 The authoritative Web `main` `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`
@@ -11,10 +23,10 @@ independent review, and final acceptance remain open. Score remains
 **244/36/280 (87.1%)**. No database, deletion, provider, Production,
 deployment, customer, or release action occurred. Evidence:
 `evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`. The
-additive packet bundle contains 178 hashed files, manifest
-`sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+additive packet bundle contains 179 hashed files, manifest
+`sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`,
 and passed its secret scan. Bundle file SHA-256:
-`a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+`c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
 
 ## 2026-10-23 · current merged CLI public corpus
 

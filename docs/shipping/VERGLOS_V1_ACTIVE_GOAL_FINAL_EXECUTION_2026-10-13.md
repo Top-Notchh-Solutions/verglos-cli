@@ -1,5 +1,19 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-003 bundle integrity
+
+The current packet bundle was verified read-only across **179 listed files**:
+**0 per-file mismatches**, manifest recomputation passed, and secret scanning
+passed. Manifest:
+`sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`;
+bundle file SHA-256:
+`c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
+This advances `ACCEPT-003` integrity evidence only; reviewer, hosted/provider,
+customer, browser, field-performance, account-deletion, independent review,
+AppSec/Hunt, and final-release gates remain open. Score remains **244 checked /
+36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-003-qual-web005-bundle-integrity-v3-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · current merged Web deletion contracts
 
 The authoritative Web `main` head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`
@@ -10,11 +24,11 @@ and authenticated route integrations. `pnpm typecheck` passed. No database URL
 was sourced, no Docker PostgreSQL container was running, and no deletion or
 other state mutation occurred.
 
-The additive packet bundle regenerated with this evidence contains **178
+The additive packet bundle regenerated with this evidence contains **179
 hashed files**, manifest
-`sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+`sha256:358cd4820cc38425eb2945f2b345c3b183e7d37e3430145cd4a110239209c603`,
 and passed its secret scan. The generated bundle file SHA-256 is
-`a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+`c372448e61f5b554178de3e1927fca3a7078961c41256839c0a3405b82cd27e3`.
 
 This strengthens `QUAL-WEB-005` implementation evidence only. The row remains
 open for its migrated isolated database execution, authenticated deletion
