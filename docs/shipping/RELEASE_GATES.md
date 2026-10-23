@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · current implementation gate disposition
+
+QUAL-WEB-006 input integrity is implemented by Web PR #259 (`42fe33e`) and
+verified with focused tests **4/4** plus serial Web verification **904/928**
+with 24 designed skips and 0 failures. DIST-002/003/006 are requalified at
+CLI head `7d07066f` with build 8/8, typecheck 14/14, full Turbo test 13/13,
+and focused contracts 45/45.
+
+The hosted Web runs `39992347692` and `39992347755` failed before repository
+execution with zero steps in every job. These implementation results do not
+open human screen-reader/field-CWV, legal/trusted publication, provider,
+attestation, independent-review, customer, or final-release gates. Score
+remains **244/36/280 (87.1%)**; no deployment, publication, customer-data,
+deletion, or checkbox change occurred. Evidence:
+`evidence/qual-web-006-dashboard-capture-read-boundary-pr259-2026-10-23.md` and
+`evidence/dist-002-003-006-current-main-requalification-2026-10-23.md`.
+
 ## 2026-10-23 · observed Web Vercel provider receipts
 
 Vercel Production deployment `dpl_Cij5ABETkTpdRz2hmAs7Yfhtxz3Y` is `READY`

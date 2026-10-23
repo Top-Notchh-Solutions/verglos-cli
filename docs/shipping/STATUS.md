@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · current implementation continuation: Web capture boundary and CLI distribution requalification
+
+Web PR #259 merged as `42fe33e`; its QUAL-WEB-006 dashboard capture reader
+now rejects symlinked and oversized inputs through bounded no-follow handles.
+Focused tests passed **4/4** and the serial Web suite passed **904/928** with
+24 designed skips and 0 failures. CLI exact head `7d07066f` passed build 8/8,
+typecheck 14/14, full Turbo test 13/13, and DIST-002/003/006 contracts 45/45.
+
+Hosted Web runs `39992347692` and `39992347755` failed before repository
+execution with zero steps in every job; no hosted completion is claimed.
+Additive bundle `acceptance-evidence-bundle-2026-10-23-qual-web006-capture-boundary.json`
+contains **192 files**, verifies with 0 mismatches, matches manifest
+`sha256:b20be39bb9f9b629f7c845f51f813b8a51dd28a5ac4c1144cfd4c74c59edb19d`,
+and passes secret scanning. Score remains **244/36/280 (87.1%)**. No
+deployment, publication, customer-data operation, deletion, or checkbox change
+occurred. Evidence:
+`evidence/qual-web-006-dashboard-capture-read-boundary-pr259-2026-10-23.md`.
+
 ## 2026-10-23 · observed Web Vercel provider receipts
 
 Vercel reports the merged Web `main` commit

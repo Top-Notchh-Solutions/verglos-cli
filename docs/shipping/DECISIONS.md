@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · current implementation continuation
+
+- **Decision:** Merge the QUAL-WEB-006 capture-input boundary and record the
+  current CLI distribution requalification through normal review paths.
+- **Verification:** Web PR #259 merged as `42fe33e`; focused dashboard tests
+  passed 4/4 and serial Web verification passed 904/928 with 24 designed skips
+  and 0 failures. CLI head `7d07066f` passed build 8/8, typecheck 14/14, full
+  Turbo test 13/13, and focused DIST-002/003/006 contracts 45/45.
+- **Hosted disposition:** Runs `39992347692` and `39992347755` failed before
+  repository execution with zero steps in every job; no hosted result is
+  inferred.
+- **Gate disposition:** Keep QUAL-WEB-006, DIST-002, DIST-003, and DIST-006
+  unchecked for their remaining human/field, legal/trusted publication,
+  provider, external attestation, independent-review, and final-acceptance
+  conditions. Score remains **244/36/280 (87.1%)**. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/qual-web-006-dashboard-capture-read-boundary-pr259-2026-10-23.md`
+  and `evidence/dist-002-003-006-current-main-requalification-2026-10-23.md`.
+
 ## 2026-10-23 · repair acceptance bundle v11 integrity
 
 - **Decision:** Retain v10 for historical traceability and add v11 after its

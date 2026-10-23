@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-23 · current implementation mappings
+
+- **QUAL-WEB-006:** Web PR #259 / merge `42fe33e` maps the dashboard capture
+  input contract to bounded no-follow regular-file reads, identity/size
+  rechecks, and symlink/oversize regressions (**4/4**). It does not map to
+  human screen-reader, supported-browser/field-CWV, independent-review, or
+  final-acceptance evidence.
+- **DIST-002/003/006:** CLI head `7d07066f` maps trusted publication,
+  release-artifact, and rollback code paths to build 8/8, typecheck 14/14,
+  full Turbo test 13/13, and focused contracts 45/45. It does not map to an
+  actual registry/provider event or final release decision.
+- **Score:** **244 checked / 36 open / 280 total (87.1%)**; partition is 13
+  AppSec-dependent and 23 non-AppSec, with 0 unmapped rows. Evidence:
+  `evidence/qual-web-006-dashboard-capture-read-boundary-pr259-2026-10-23.md`
+  and `evidence/dist-002-003-006-current-main-requalification-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance bundle v11 integrity repair
 
 The current evidence files are bound by additive bundle
