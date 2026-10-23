@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain STUDIO-CLI-001 after Production handoff probe
+
+- **Decision:** Merge the public handoff provider-failure hardening through
+  the normal Web path and record the exact Vercel Production boundary; do not
+  turn a forged 503 probe into recipient acceptance.
+- **Implementation:** Web PR #267 merged normally as
+  `23267349b417e97d00339abc4a60c34c6e802f11`.
+- **Verification:** Vercel deployment
+  `dpl_HL3i3uTvo9EQrjPCvYxvbzS9hDyd` is READY. The forged public POST returns
+  bounded JSON 503 with `no-store`; local handoff contract 5/5, public smoke
+  12/12, truth-registry 37/37, typecheck, and diff check pass.
+- **Disposition:** Keep `STUDIO-CLI-001` unchecked because the live provider
+  path is not operational and the authorized recipient/customer acceptance
+  record is absent. No database/customer/payment/entitlement state changed;
+  nothing was deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/studio-cli-001-production-handoff-ack-boundary-pr267-2026-10-24.md`.
+  The additive bundle contains **213 files**, verifies with **0 mismatches**,
+  passes secret scanning, and matches manifest
+  `sha256:70b16325d016f5b00c2be3cf8c8cd2c1882bb30a56ce5d3afb03cdd6bafd7da4`.
+
 ## 2026-10-24 · reconcile Production landing browser qualification
 
 - **Decision:** Merge the delayed-INP-observation harness fix and record the

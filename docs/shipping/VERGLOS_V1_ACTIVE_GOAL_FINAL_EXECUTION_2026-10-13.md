@@ -1,5 +1,36 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 Production handoff boundary hardened
+
+Web PR #266 first exposed the public handoff acknowledgement handler in
+Production. Its forged probe then revealed an unbounded HTML HTTP 500 when the
+database/provider lookup failed. Web commit `2ef7dbb` now catches that public
+provider/configuration boundary and returns bounded JSON HTTP 503 with
+`Cache-Control: no-store`, preserving the existing fail-closed HTTP 400 for
+invalid or unavailable handoffs. PR **#267** merged normally as
+`23267349b417e97d00339abc4a60c34c6e802f11`.
+
+The exact merged source was promoted to Vercel Production deployment
+`dpl_HL3i3uTvo9EQrjPCvYxvbzS9hDyd`, reported **READY**, and now owns the live
+aliases. The forged public POST at
+`/api/v1/handoffs/33333333-3333-4333-8333-333333333333/acknowledge` returned
+HTTP **503** JSON `{"ok":false,"reason":"handoff service unavailable"}` with
+`application/json` and `no-store`. Adjacent forged custody probes returned
+bounded `401/404` JSON responses; no acknowledgement, customer, payment,
+entitlement, account, or database write occurred.
+
+The route contract passed **5/5**, public-release smoke **12/12**,
+truth-registry **37/37**, typecheck, and diff checks passed. The live 503 is
+recorded honestly as a provider-path operational gap, not as successful
+recipient acceptance. `STUDIO-CLI-001` remains unchecked for the operational
+handoff path plus independent authorized recipient/customer acceptance. Score
+remains **244 checked / 36 open / 280 total (87.1%)**, partitioned as **13
+AppSec-dependent / 23 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/studio-cli-001-production-handoff-ack-boundary-pr267-2026-10-24.md`.
+The additive private bundle contains **213 files**, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:70b16325d016f5b00c2be3cf8c8cd2c1882bb30a56ce5d3afb03cdd6bafd7da4`.
+
 ## Latest continuation result · 2026-10-24 · Production landing browser qualification passed
 
 The landing-release capture harness now retries one real pointer/keyboard
