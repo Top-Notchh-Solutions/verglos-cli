@@ -9434,6 +9434,19 @@ changed. See
   (87.1%)**.
 - **Evidence:** `evidence/accept-003-bundle-symlink-boundary-2026-10-23.md`.
 
+## ACCEPT-006 rubric digest binding · 2026-10-23
+
+- **Source mapping:** Private implementation commit `fca46980`.
+- **Contract mapping:** `acceptance:comprehension:score` rejects a rubric or
+  forbidden-term payload that does not match the declared artifact digest.
+- **Verification mapping:** Adjacent acceptance contracts **48/48** passed;
+  study-protocol, syntax, and diff checks passed.
+- **Acceptance mapping:** This does not close `ACCEPT-006`; participant,
+  aggregate, independent-review, and final-acceptance evidence remain open. No
+  checkbox or external state changed; nothing was deleted. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-006-rubric-digest-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source mapping:** Private commit `f1b74154`.

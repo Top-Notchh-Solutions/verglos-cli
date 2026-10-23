@@ -12062,6 +12062,17 @@ nothing was deleted. Score remains **244 checked / 36 open / 280 total
 (87.1%)**. Evidence:
 `evidence/accept-003-bundle-symlink-boundary-2026-10-23.md`.
 
+## 2026-10-23 · ACCEPT-006 rubric digest binding
+
+Private commit `fca46980` binds the comprehension artifact digest to its
+canonical rubric payload and rejects rubric tampering without a digest update.
+The adjacent acceptance set passed **48/48**, including the tampering
+regression. Keep `ACCEPT-006` open for the participant run, aggregate evidence,
+independent scoring review, and final acceptance. No external state changed and
+nothing was deleted. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`evidence/accept-006-rubric-digest-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009 future-date reconciliation boundary
 
 Private commit `f1b74154` rejects a release reconciliation whose `completedAt`

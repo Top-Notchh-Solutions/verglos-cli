@@ -965,6 +965,21 @@ independent review, and final sign-off remain open. No checkbox, provider,
 Production, publication, customer, or release state changed, and nothing was
 deleted. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-006 rubric digest binding
+
+Private commit `fca46980` closes a comprehension-scorer integrity gap: the
+artifact digest now covers the canonical subject, decision, rubric, and
+forbidden-term payload. Rubric tampering without a digest update is rejected.
+The adjacent acceptance set passed **48/48**, including the tampering
+regression; study-protocol, syntax, and diff checks passed.
+
+Evidence: `docs/shipping/evidence/accept-006-rubric-digest-boundary-2026-10-23.md`.
+This is implementation progress only; the participant run, aggregate evidence,
+independent review, and final acceptance remain open. No checkbox, provider,
+Production, publication, customer, recipient, or release state changed, and
+nothing was deleted. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-014 Web candidate binding
 
 Private commit `1391acf4` closes a candidate-integrity gap in final regression:

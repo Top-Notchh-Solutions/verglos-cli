@@ -131,6 +131,7 @@ const paths = [
   "docs/shipping/evidence/accept-003-bundle-symlink-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-005-authorized-workflow-date-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-006-comprehension-boundary-2026-10-23.md",
+  "docs/shipping/evidence/accept-006-rubric-digest-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-008-commercial-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-014-final-regression-contract-2026-10-23.md",
   "docs/shipping/evidence/accept-014-web-candidate-binding-2026-10-23.md",

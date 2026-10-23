@@ -15304,6 +15304,18 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   nothing was deleted. Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-003-bundle-symlink-boundary-2026-10-23.md`.
 
+## ACCEPT-006 rubric digest binding · 2026-10-23
+
+- **Source:** Private implementation commit `fca46980`.
+- **Contract mapping:** The comprehension artifact digest now covers subject,
+  decision, rubric, and forbidden terms; rubric tampering fails closed.
+- **Verification:** Adjacent acceptance contracts **48/48**, study protocol,
+  syntax, and diff checks passed.
+- **Boundary:** Keep `ACCEPT-006` open for the participant run, aggregate
+  evidence, independent scoring review, and final acceptance. No external state
+  changed and nothing was deleted. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-006-rubric-digest-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source:** Private implementation commit `f1b74154`.
