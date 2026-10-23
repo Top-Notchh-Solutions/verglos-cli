@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · QUAL-WEB-006 dashboard contract recheck
+
+Current Web `9005d5e` passed the fail-closed dashboard contract **4/4** and
+`pnpm typecheck`, covering all 13 authenticated paths and ready/loading/error,
+large-dataset, malformed-input, duplicate-path, symlink, and oversized-capture
+boundaries. This is synthetic owner-fixture implementation evidence only; the
+real authenticated browser, human/field-CWV, independent-review, and final
+acceptance gates remain open. Score remains **245/35/280 (87.5%)** and no
+checkbox changed. Evidence:
+`evidence/qual-web-006-dashboard-contract-current-web-2026-10-24.md`.
+The additive bundle v18 verifies **243/243** files with zero mismatches and
+manifest `sha256:cf44b15b03902b99b263e5e31d42d061d94a8dbca8806ba6ff6c27a6b98a65d5`.
+
 ## 2026-10-24 · distribution implementation verification
 
 CLI `aad2c743` passed the local distribution slice: build **8/8**, strict

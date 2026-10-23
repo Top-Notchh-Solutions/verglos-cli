@@ -1,5 +1,24 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · QUAL-WEB-006 dashboard contract recheck
+
+Current Web `9005d5ed5182b1d29159c0bb65c8ac696928baed` passed the fail-closed
+dashboard qualification contract **4/4** and `pnpm typecheck`. The contract
+covers all thirteen authenticated dashboard paths plus ready desktop/mobile,
+loading, error, large-dataset, malformed-input, duplicate-path, symlink, and
+oversized-capture boundaries. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-contract-current-web-2026-10-24.md`.
+
+This is synthetic owner-fixture implementation evidence only. It is not an
+actual authenticated browser capture, human screen-reader review,
+supported-browser/field-CWV result, independent review, or final acceptance.
+No checkbox changed; the score remains **245 checked / 35 open / 280 total
+(87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
+The additive bundle v18 verifies **243/243** files with zero mismatches,
+passes secret scanning, and matches manifest
+`sha256:cf44b15b03902b99b263e5e31d42d061d94a8dbca8806ba6ff6c27a6b98a65d5`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-dashboard-v18.json`.
+
 ## Latest continuation result · 2026-10-24 · distribution implementation verification
 
 The current CLI `aad2c74395a5c381c955ab9dfab7462295564840` completed the

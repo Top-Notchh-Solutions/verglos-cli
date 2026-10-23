@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record QUAL-WEB-006 dashboard contract recheck
+
+- **Decision:** Record the current Web dashboard qualification contract as
+  additive implementation evidence.
+- **Evidence:** Web `9005d5e` passed the fail-closed dashboard contract **4/4**
+  and typecheck across all thirteen authenticated paths and required unsafe-
+  input boundaries.
+- **Boundary:** The passing fixture is synthetic and owner-controlled. It is
+  not a real authenticated browser capture, human screen-reader review,
+  field-CWV result, independent review, or final acceptance.
+- **Disposition:** Keep `QUAL-WEB-006` open; no checkbox changed. Score remains
+  **245/35/280 (87.5%)**.
+- **Evidence file:** `evidence/qual-web-006-dashboard-contract-current-web-2026-10-24.md`.
+- **Bundle:** Additive v18 contains **243** hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:cf44b15b03902b99b263e5e31d42d061d94a8dbca8806ba6ff6c27a6b98a65d5`.
+
 ## 2026-10-24 · record distribution implementation verification
 
 - **Decision:** Record the current CLI distribution artifact verification as
