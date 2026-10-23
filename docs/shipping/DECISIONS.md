@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain release rows after local candidate verification
+
+- **Decision:** Generate and verify a fresh current-head alpha.4 candidate
+  locally, while keeping the public release unreleased.
+- **Verification:** Seven public archives, eight required sidecars, checksums,
+  origin metadata, notices, current-version SBOMs, clean-consumer execution,
+  release-sidecar tests **14/14**, and CLI build **8/8** passed.
+- **Disposition:** Treat this as implementation evidence only. Do not convert
+  it into npm publication, registry attestation, provider lifecycle,
+  customer/recipient, independent-review, AppSec/Hunt, or final-release
+  evidence. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/current-head-release-artifact-candidate-2026-10-24.md`.
+
 ## 2026-10-24 · retain provider rows after rejected Test-Mode QR attempt
 
 - **Decision:** Exercise one synthetic Razorpay QR create request with the

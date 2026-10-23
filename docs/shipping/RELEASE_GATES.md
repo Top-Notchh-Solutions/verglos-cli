@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current-head local release artifact gate
+
+CLI PR #241 merged normally as `8e87c81d`. The fresh local `2.0.0-alpha.4`
+candidate verified **7/7** public archives, **8/8** sidecars, checksums, origin
+metadata, package notices, current-version SBOM metadata, and clean-consumer
+execution: **15/15 artifacts passed**. Dependency inventory reports **0**
+review blockers. This opens local release-artifact implementation evidence only;
+trusted npm publication/attestation, provider lifecycle, customer/recipient,
+independent review, AppSec/Hunt, and final go/no-go remain closed. Score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/current-head-release-artifact-candidate-2026-10-24.md`.
+
 ## 2026-10-24 · Razorpay Test-Mode provider attempt
 
 The synthetic QR-create request reached the Test-Mode provider boundary but
