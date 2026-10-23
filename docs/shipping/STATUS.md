@@ -131,6 +131,19 @@ publication/provenance, and release acceptance. Score remains **244 checked /
 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
 `evidence/dist-002-release-environment-state-2026-10-23.md`.
 
+**DIST-002/003 npm preflight identity binding (2026-10-23; not a checkbox):**
+CLI commit `9e793fd84b74d1ba873de8011033d1898cbb0eb2` was pushed normally and
+opened as PR #190. The publisher now requires exact registry package
+name/version metadata before treating a package as already published, with
+malformed and mismatched responses rejected. Focused release contracts passed
+**17/17** and diff check passed. The configured owner-managed `NPM_TOKEN` is
+not consumed by the OIDC workflow. No tag, publication, provider, Production,
+customer, or final release action occurred. Keep DIST-002/003 open for actual
+trusted publication/attestation and final acceptance. Score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
+
+Evidence: `evidence/dist-002-npm-preflight-identity-boundary-pr190-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 additive current evidence bundle
 
 The protected bundle builder generated an additive **130-file** private

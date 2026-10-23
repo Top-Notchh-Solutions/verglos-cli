@@ -2901,3 +2901,22 @@ and final acceptance. No external state changed; nothing was deleted. The 13
 AppSec-held entries remain unchanged. Score remains **239 checked / 41 open /
 280 total (85.4%)**. Evidence:
 `docs/shipping/evidence/dist-002-release-tag-read-binding-pr177-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-002/003 npm preflight identity binding
+
+CLI commit `9e793fd84b74d1ba873de8011033d1898cbb0eb2` was pushed normally on
+the fresh source branch `codex/dist002-npm-preflight-20261023` and opened as
+PR #190. The public publisher now parses a registry `200` response and
+requires exact package-name/version equality with the validated archive before
+skipping publication; malformed or mismatched metadata fails closed.
+
+The focused release suite passed **17/17**, including the new mismatched-
+identity regression, plus `git diff --check`. The owner-managed `NPM_TOKEN`
+secret is present, but the protected publication workflow remains OIDC-based
+and does not consume that long-lived token. No tag, npm publication, provider,
+Production, customer, or final release action occurred. Keep `DIST-002` and
+`DIST-003` unchecked for the actual trusted publication/attestation and final
+acceptance. The 13 AppSec-held rows remain unchanged. Live score remains
+**244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/dist-002-npm-preflight-identity-boundary-pr190-2026-10-23.md`.

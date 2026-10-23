@@ -162,6 +162,21 @@
   nothing was deleted or overwritten.
 - **Evidence:** `evidence/dist-002-release-environment-state-2026-10-23.md`.
 
+## DIST-002/003 npm preflight identity binding · 2026-10-23
+
+- **Source mapping:** CLI commit `9e793fd84b74d1ba873de8011033d1898cbb0eb2`,
+  PR #190, branch `codex/dist002-npm-preflight-20261023`.
+- **Contract mapping:** The publication preflight parses a successful registry
+  response and binds its package identity to the validated archive before an
+  already-published skip; malformed and mismatched responses are rejected.
+- **Verification mapping:** Four adjacent release contract files passed
+  **17/17** and `git diff --check` passed.
+- **Acceptance mapping:** This is code-side progress only. No tag, npm write,
+  provider/Production action, customer action, or final release sign-off
+  occurred. Keep DIST-002/003 unchecked for trusted publication, immutable
+  attestation, and final acceptance. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-002-npm-preflight-identity-boundary-pr190-2026-10-23.md`.
+
 ## ACCEPT-003 additive current evidence bundle · 2026-10-23
 
 - **Source mapping:** Protected bundle builder includes the four latest

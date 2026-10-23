@@ -161,6 +161,21 @@
   Score remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
 - **Evidence:** `evidence/dist-002-release-environment-state-2026-10-23.md`.
 
+## DIST-002/003 npm preflight identity binding · 2026-10-23
+
+- **Source:** CLI commit `9e793fd84b74d1ba873de8011033d1898cbb0eb2`, fresh
+  branch `codex/dist002-npm-preflight-20261023`, PR #190.
+- **Implementation:** A registry `200` is accepted as already published only
+  after its JSON body matches the exact archive package name and version;
+  malformed or mismatched metadata fails closed.
+- **Verification:** Focused release suite **17/17** and `git diff --check`
+  passed.
+- **Boundary:** The configured owner-managed NPM token is not used by the
+  OIDC workflow. No tag, publication, provider, Production, customer, or
+  final release action occurred. Keep DIST-002/003 open. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted.
+- **Evidence:** `evidence/dist-002-npm-preflight-identity-boundary-pr190-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 additive current evidence bundle
 
 - **Artifact:** Additive private bundle with **130** hashed evidence files.

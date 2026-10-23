@@ -149,6 +149,24 @@ checked / 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten.
 Evidence:
 `docs/shipping/evidence/dist-002-release-environment-state-2026-10-23.md`.
 
+## 2026-10-23 · DIST-002/003 npm preflight identity binding
+
+CLI commit `9e793fd84b74d1ba873de8011033d1898cbb0eb2` was pushed normally on
+fresh branch `codex/dist002-npm-preflight-20261023` and opened as PR #190. The
+publisher now binds a registry `200` response to the exact package name and
+version in the validated archive; malformed or mismatched metadata fails
+closed. Focused release contracts passed **17/17**, including the new
+regression, and `git diff --check` passed.
+
+This advances DIST-002/003 implementation only. The owner-managed
+`NPM_TOKEN` is configured but is not consumed by the OIDC publication path.
+No tag, npm publication, provider, Production, customer, or final release
+action occurred. Keep both rows unchecked for trusted publication,
+attestation, and final acceptance. Score remains **244 checked / 36 open /
+280 total (87.1%)**. Nothing was deleted or overwritten.
+
+Evidence: `evidence/dist-002-npm-preflight-identity-boundary-pr190-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 additive current evidence bundle
 
 The protected bundle builder generated an additive **130-file** private
