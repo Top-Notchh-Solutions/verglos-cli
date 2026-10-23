@@ -26,3 +26,7 @@
   The package must exist before its trusted-publisher relationship can be
   managed. This configuration is external npm state; it was not fabricated or
   changed by this session.
+- **GitHub release environment:** The `release` environment exists and has a
+  required reviewer (`anuragyadav-git`) plus branch-policy protection. No
+  `VERGLOS_FINAL_RELEASE_READY` repository variable is present, so the merged
+  workflow remains fail-closed before any publication step.
