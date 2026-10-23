@@ -1,5 +1,27 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-008 commercial provenance
+
+Private commit `0533b21106bf3081d5bca6fc60efc238fd902114` now requires every
+commercial event to declare a digest-bound provenance class:
+`owner-controlled-synthetic`, `observed-commercial-evidence`, or
+`consenting-recipient`. The report exposes the class (or
+`mixed-commercial-sources`) and keeps `acceptanceStatus: open`; relabeling an
+event without regenerating its digest fails closed. The frozen commercial
+protocol documents that synthetic fixtures are validator/integration evidence,
+not commercial acceptance.
+
+Focused commercial coverage passes **9/9**; the adjacent acceptance contract
+set passes **63/63**; study-protocol, syntax, and diff checks pass. This
+advances the ACCEPT-008 implementation/provenance boundary only. No plan
+agreement, checkout, billing/provider receipt, recipient response,
+independent review, or final release decision was fabricated. The score
+remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-008-commercial-provenance-2026-10-24.md` and
+the additive **202-file** bundle with zero mismatches, passed secret scan, and
+manifest `sha256:900880de803ab12d1e9d9ff6ee200d1e530536a1ddf37d0140496d5669124d6b`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-accept-008-provenance.json`.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-003 current Preview bundle
 
 The additive ACCEPT-003 bundle was regenerated after the current Web Preview
