@@ -17,6 +17,25 @@ release approval, or backlog checkbox is inferred. The score remains **244
 checked / 36 open / 280 total (87.1%)**. Evidence:
 `docs/shipping/evidence/accept-003-current-head-preview-bundle-2026-10-24.md`.
 
+## Latest continuation result · 2026-10-24 · ACCEPT-005 public-OSS contract
+
+The private authorized-workflow validator now has a distinct
+`owner-authorized-public-oss` subject kind for the owner-approved local
+benchmark path. It binds the exact repository commit, bounded scope, and
+license/terms evidence digest while retaining no-source-upload, redaction,
+retention/expiry, and evidence-byte checks. Its output remains
+`customerAcceptance: not-claimed`; the external customer-owner path is
+unchanged. Focused validator coverage passes **9/9**, syntax and diff checks
+pass, and the additive packet verifies **199/199** files with zero mismatches,
+manifest
+`sha256:1e4018b49c47688e12d95aca9a6f39475f5130a5165872fa2a1983e40e947e2e`,
+and secret scanning passed. This advances the approved public-OSS execution
+path only; it does not create customer/recipient POC, independent review,
+provider/Production, or final release evidence. The score remains **244
+checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-005-public-oss-workflow-contract-2026-10-24.md`
+and `docs/shipping/evidence/accept-005-public-oss-workflow-bundle-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-23 · current Web Preview provider receipt
 
 Clean Web `origin/main` commit `42fe33eefd2d2ce23ec89512381af2b767de4e54`
