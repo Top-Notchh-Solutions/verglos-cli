@@ -31,6 +31,31 @@ export function publicationDecision(status) {
   throw new Error(`npm registry preflight returned unexpected HTTP status ${status}`);
 }
 
+/**
+ * A registry 200 is only authoritative when its body is bound to the exact
+ * package/version represented by the archive being considered.  This keeps a
+ * proxy, mirror, or malformed registry response from being mistaken for an
+ * already-published release.
+ */
+export async function validatePublishedMetadata(response, expectedName, expectedVersion) {
+  let metadata;
+  try {
+    metadata = JSON.parse(await response.text());
+  } catch {
+    throw new Error("npm registry preflight returned invalid package metadata");
+  }
+  if (
+    metadata === null
+    || typeof metadata !== "object"
+    || Array.isArray(metadata)
+    || metadata.name !== expectedName
+    || metadata.version !== expectedVersion
+  ) {
+    throw new Error("npm registry preflight package identity does not match the release archive");
+  }
+  return metadata;
+}
+
 async function readBoundedArchive(archivePath) {
   const entry = await lstat(archivePath);
   if (!entry.isFile() || entry.size <= 0 || entry.size > MAX_ARCHIVE_BYTES) {
@@ -98,6 +123,7 @@ export async function publishPublicPackage(options) {
   }
   const decision = publicationDecision(response.status);
   if (decision === "already-published") {
+    await validatePublishedMetadata(response, manifest.name, manifest.version);
     console.log(`::notice::${manifest.name}@${manifest.version} already published — skipping`);
     return Object.freeze({ status: decision, packageName: manifest.name, version: manifest.version, endpoint });
   }
