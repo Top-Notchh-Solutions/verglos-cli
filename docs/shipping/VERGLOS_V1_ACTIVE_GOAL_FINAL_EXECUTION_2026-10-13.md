@@ -52,6 +52,23 @@ in addition to the product rows whose own evidence is still incomplete. The
 public-open-source benchmark path is authorized now. The separately held
 security-review track is unchanged.
 
+## Latest continuation result · 2026-10-23 · current acceptance evidence bundle
+
+The protected private bundle builder generated additive artifact
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-23-current.json`
+with **117** hashed evidence files. Its SHA-256 is
+`sha256:9833c305076b4e0c560dfb2db9ec9c3415e8e658e380d03f15ae48e833a331d` and
+the secret scan passed. Technical corpus and substrate regression are verified;
+provider lifecycle, customer consent, independent review, authenticated
+browser, field CWV, and account deletion remain open.
+
+This advances `ACCEPT-003` reproducibility only. It does not create reviewer,
+customer, provider, independent-review, or final-release evidence, so no
+checkbox changed. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Historical bundles were preserved and nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-current-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · acceptance evidence-writer boundaries
 
 The private acceptance-story verifier and acceptance-evidence bundle builder

@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · current acceptance evidence bundle
+
+The private bundle builder generated additive current evidence
+`acceptance-evidence-bundle-2026-10-23-current.json` containing **117** hashed
+files. Its SHA-256 is
+`sha256:9833c305076b4e0c560dfb2db9ec9c3415e8e658e380d03f15ae48e833a331d`, and
+its secret scan passed. Technical corpus/substrate regression are verified;
+provider, customer, independent-review, browser, field-CWV, and account-
+deletion gates remain open. This advances ACCEPT-003 reproducibility only. No
+checkbox changed; the live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-current-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance evidence-writer boundaries
 
 The private acceptance-story verifier and evidence-bundle builder now refuse

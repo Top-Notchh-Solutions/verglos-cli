@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · current acceptance evidence bundle
+
+Generated the additive current acceptance bundle with **117** hashed evidence
+files, SHA-256
+`9833c305076b4e0c560dfb2db9ec9c3415e8e658e380d03f15ae48e833a331d2`, and a
+passing secret scan. Technical corpus and substrate regression are marked
+verified; provider, customer, independent-review, browser, field-CWV, and
+account-deletion gates remain explicitly open. This advances ACCEPT-003
+reproducibility only. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Historical bundles were preserved; nothing was deleted or
+overwritten. Evidence:
+`evidence/acceptance-evidence-bundle-current-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance evidence-writer boundaries
 
 The private acceptance-story verifier and evidence-bundle builder now use

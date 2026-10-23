@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## Current acceptance evidence bundle · 2026-10-23
+
+- **Source mapping:** The protected bundle builder generated the additive
+  current 117-file private reproducibility manifest.
+- **Integrity mapping:** The artifact has SHA-256
+  `sha256:9833c305076b4e0c560dfb2db9ec9c3415e8e658e380d03f15ae48e833a331d2`
+  and passed the bundle secret scan.
+- **Gate mapping:** Technical corpus and substrate regression are verified;
+  provider, customer, independent-review, browser, field-CWV, and
+  account-deletion gates are open.
+- **Acceptance mapping:** ACCEPT-003 remains open for reviewer/external/hosted
+  evidence and final acceptance. Score remains **244/36/280 (87.1%)**; no
+  historical bundle was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-current-2026-10-23.md`.
+
 ## Acceptance evidence-writer boundaries · 2026-10-23
 
 - **Source mapping:** The private story verifier and evidence-bundle builder

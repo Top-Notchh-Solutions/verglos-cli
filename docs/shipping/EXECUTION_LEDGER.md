@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · current acceptance evidence bundle
+
+- **Artifact:** Generated additive `acceptance-evidence-bundle-2026-10-23-
+  current.json` with 117 hashed files.
+- **Integrity:** SHA-256 is
+  `sha256:9833c305076b4e0c560dfb2db9ec9c3415e8e658e380d03f15ae48e833a331d2`;
+  the bundle secret scan passed.
+- **Gate map:** Technical corpus and substrate regression are verified;
+  provider lifecycle, customer consent, independent review, authenticated
+  browser, field CWV, and account deletion remain open.
+- **Disposition:** This is ACCEPT-003 reproducibility evidence only. No
+  reviewer, customer, provider, independent-review, or final-release outcome
+  was claimed. Score remains **244/36/280 (87.1%)**. Historical bundles were
+  preserved; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-current-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance evidence-writer boundaries
 
 - **Implementation:** The private story verifier and evidence-bundle builder
