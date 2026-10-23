@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · refresh public-OSS POC inputs on alpha.4
+
+- **Decision:** Rerun the owner-authorized public-OSS exact-commit corpus with
+  the current alpha.4 CLI candidate before any release publication.
+- **Verification:** Build **8/8**; corpus **8/8 fixtures / 13,494 files / 351
+  findings / 23 rule groups / 0 coverage gaps** across all four architecture
+  shapes.
+- **Boundary:** Keep reports private and redacted; no telemetry, source upload,
+  customer claim, provider action, independent review, AppSec/Hunt result, or
+  final release decision is inferred.
+- **Disposition:** ACCEPT-011/012 evidence refreshed; no checkbox changed;
+  score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-011-012-current-cli-aad2c743-public-corpus-2026-10-24.md`.
+- **Bundle:** Additive v11 verifies 237 hashed files with zero mismatches and
+  manifest `sha256:43180f9f8a8ffafd4acbee93b621ca3eeb1184680ffefe1f8b3ee732d59e4097`.
+
 ## 2026-10-24 · record live Production deployment for attempted-order fix
 
 - **Decision:** Record the READY Vercel Production deployment as live Web

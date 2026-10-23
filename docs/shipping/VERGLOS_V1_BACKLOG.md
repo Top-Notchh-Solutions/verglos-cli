@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · alpha.4 public-OSS POC rerun
+
+Current alpha.4 CLI `aad2c74395a5c381c955ab9dfab7462295564840` built **8/8**
+packages and completed the owner-authorized exact-commit public JS/TS corpus:
+**8 fixtures / 13,494 files / 351 findings / 23 rule groups / 0 coverage gaps**
+across all four architecture shapes. Reports remain private and redacted;
+telemetry and source upload were disabled. This advances ACCEPT-011/012
+against the current candidate but does not create customer, provider,
+independent-review, human/field, AppSec/Hunt, or final-release evidence. No
+checkbox changed. Score remains **245 checked / 35 open / 280 total (87.5%)**,
+with **13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/accept-011-012-current-cli-aad2c743-public-corpus-2026-10-24.md`.
+The additive bundle v11 verifies **237/237** files with zero mismatches, passes
+secret scanning, and has manifest
+`sha256:43180f9f8a8ffafd4acbee93b621ca3eeb1184680ffefe1f8b3ee732d59e4097`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-alpha4-corpus-v11.json`.
+
 ## 2026-10-24 · attempted-order processing is live in Production
 
 Vercel deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` reached **READY** and is

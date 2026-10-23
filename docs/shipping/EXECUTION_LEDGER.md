@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Alpha.4 public-OSS POC rerun · 2026-10-24
+
+- **Implementation:** Current CLI candidate `aad2c743` built successfully in
+  all **8/8** packages.
+- **Execution:** Eight exact-commit public JS/TS fixtures completed with
+  **13,494 files walked**, **351 findings**, **23 rule groups**, all four
+  architecture shapes, and **0 coverage gaps**.
+- **Boundary:** Telemetry disabled, no source upload, private redacted derived
+  reports only. This is not customer consent, provider/Production action,
+  independent review, human/field evidence, AppSec/Hunt, or final release.
+- **Disposition:** ACCEPT-011/012 POC inputs refreshed against alpha.4; no
+  checkbox changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-011-012-current-cli-aad2c743-public-corpus-2026-10-24.md`.
+- **Bundle:** Additive v11 contains 237 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:43180f9f8a8ffafd4acbee93b621ca3eeb1184680ffefe1f8b3ee732d59e4097`.
+
 ## Attempted-order processing live in Production · 2026-10-24
 
 - **Deployment:** Vercel `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` reached READY and

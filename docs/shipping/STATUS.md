@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · alpha.4 public-OSS POC rerun
+
+The current alpha.4 CLI `aad2c743` built **8/8** packages and passed the
+owner-authorized exact-commit public corpus: **8 fixtures, 13,494 files, 351
+findings, 23 rule groups, and 0 coverage gaps** across all required architecture
+shapes. This is private redacted POC input; no customer, provider, independent,
+field, AppSec/Hunt, or release evidence is inferred. Score remains **245/35/280
+(87.5%)** and no checkbox changed. Evidence:
+`evidence/accept-011-012-current-cli-aad2c743-public-corpus-2026-10-24.md`.
+Bundle v11 verifies **237/237** files with zero mismatches and manifest
+`sha256:43180f9f8a8ffafd4acbee93b621ca3eeb1184680ffefe1f8b3ee732d59e4097`.
+
 ## 2026-10-24 · attempted-order processing is live in Production
 
 Vercel deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` reached READY and is
