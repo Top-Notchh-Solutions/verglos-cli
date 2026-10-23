@@ -20,8 +20,8 @@ the additive bundle
 
 The hosted receipt and its verified 196-file bundle are now also carried by
 private-shipping commit `4cfe082e` on PR #210, preserving the exact run and
-manifest without deleting or overwriting any prior record. PR #211 remains
-open as the separate evidence-only review.
+manifest without deleting or overwriting any prior record. PR #211 was closed
+as superseded; its branch and commits remain retained.
 
 The required Verglos self-scan still fails at `Audit public boundary`. The
 public repository currently contains the retained `docs/shipping/**` ledger in
