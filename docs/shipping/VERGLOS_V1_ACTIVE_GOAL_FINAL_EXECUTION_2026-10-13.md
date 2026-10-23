@@ -1,5 +1,24 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · current CLI DIST requalification
+
+The exact current CLI `origin/main` head `7d07066f967a2e7899aca6b51f04f306b7071013`
+passed the release implementation substrate: frozen-lockfile install, build
+**8/8**, typecheck **14/14**, full Turbo test **13/13**, and the focused
+DIST-002/003/006 contract set **45/45**. The rollback rehearsal covered all
+five provider boundaries and preserved two historical records without calling
+an npm registry, signing provider, Hunt feed provider, or Vercel.
+
+This advances current-main implementation qualification only. DIST-002,
+DIST-003, and DIST-006 remain unchecked for protected/trusted publication,
+legal/license disposition, external attestation/release evidence, provider
+action, and final acceptance. No tag, registry publication, Production
+mutation, customer-data operation, or release version was created. Score
+remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/dist-002-003-006-current-main-requalification-2026-10-23.md`
+and the additive bundle recorded in
+`docs/shipping/evidence/acceptance-evidence-bundle-dist-current-requalification-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-005 migration preflight and isolated integration
 
 Web PR #258 merged normally as `7941cbfa23f8849daca402e0c3d5d4d8c1eb30e2`,
