@@ -76,3 +76,9 @@ test("packed manifest audit binds archive reads to bounded regular-file handles"
   assert.match(source, /readBoundedRegularFile\(archive, MAX_RELEASE_ARTIFACT_BYTES/u);
   assert.doesNotMatch(source, /readFile\(archive\)/u);
 });
+
+test("packed manifest audit binds repository license reads to bounded regular-file handles", async () => {
+  const source = await readFile("scripts/check-packed-manifests.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(join\(repositoryRoot, "LICENSE"\), MAX_RELEASE_ARTIFACT_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(join\(repositoryRoot, "LICENSE"\)\)/u);
+});
