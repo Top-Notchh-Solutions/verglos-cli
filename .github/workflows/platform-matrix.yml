@@ -53,6 +53,19 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Verify Hunt fixture verdicts
+        shell: bash
+        run: node scripts/verify-hunt-fixtures.mjs | tee hunt-fixture-${{ matrix.os }}-node-${{ matrix.node }}.log
+
+      - name: Upload Hunt fixture evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: hunt-fixtures-${{ matrix.os }}-node-${{ matrix.node }}-${{ github.sha }}
+          path: hunt-fixture-${{ matrix.os }}-node-${{ matrix.node }}.log
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Qualify clean public package consumer
         shell: bash
         run: |
@@ -79,6 +92,25 @@ jobs:
         with:
           name: upgrade-rollback-${{ matrix.os }}-node-${{ matrix.node }}-${{ github.sha }}
           path: upgrade-rollback-${{ matrix.os }}-node-${{ matrix.node }}.log
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Qualify bounded release rollback and revocation rehearsal
+        shell: bash
+        run: |
+          set -euo pipefail
+          output_dir=".artifacts/release-rollback-${{ matrix.os }}-node-${{ matrix.node }}"
+          node scripts/release-rollback-evidence.mjs "$output_dir" | tee "release-rollback-${{ matrix.os }}-node-${{ matrix.node }}.log"
+
+      - name: Upload release rollback and revocation evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-rollback-${{ matrix.os }}-node-${{ matrix.node }}-${{ github.sha }}
+          path: |
+            release-rollback-${{ matrix.os }}-node-${{ matrix.node }}.log
+            .artifacts/release-rollback-${{ matrix.os }}-node-${{ matrix.node }}/report.json
+            .artifacts/release-rollback-${{ matrix.os }}-node-${{ matrix.node }}/run.log
           if-no-files-found: error
           retention-days: 14
 

@@ -2,6 +2,7 @@ import { createHash, randomUUID } from "node:crypto";
 import { homedir, hostname, userInfo } from "node:os";
 import { dirname, join } from "node:path";
 import { access, chmod, lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
+import { fetchJsonResponse } from "./http-response.js";
 
 export interface Credentials {
   licenseKey?: string;
@@ -22,6 +23,12 @@ export interface Credentials {
    * working. See docs/architecture/entitlement.md for the flow.
    */
   entitlementToken?: string;
+  privateRunner?: {
+    tenantId: string;
+    runnerId: string;
+    credential: string;
+    credentialExpiresAt: string;
+  };
 }
 
 // Resolve the active home at operation time. CI, embedded callers, and
@@ -50,14 +57,6 @@ async function writePrivateJson(path: string, value: unknown): Promise<void> {
     if (handle) await handle.close().catch(() => undefined);
     await unlink(temporary).catch(() => undefined);
   }
-}
-
-async function readBoundedJson(response: Response): Promise<unknown> {
-  const length = Number(response.headers.get("content-length") ?? "0");
-  if (Number.isFinite(length) && length > MAX_UNLOCK_RESPONSE_BYTES) return null;
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength > MAX_UNLOCK_RESPONSE_BYTES) return null;
-  try { return JSON.parse(new TextDecoder().decode(bytes)); } catch { return null; }
 }
 
 async function readLocalJson(path: string, maxBytes: number): Promise<string> {
@@ -151,7 +150,7 @@ export async function refreshUnlockToken(
   });
 
   try {
-    const res = await fetch(`${apiOrigin}/api/license/unlock`, {
+    const { response: res, json } = await fetchJsonResponse(`${apiOrigin}/api/license/unlock`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -159,11 +158,11 @@ export async function refreshUnlockToken(
         fingerprint,
         machineId: getMachineId(),
       }),
-    });
+    }, { timeoutMs: 8000, maxBytes: MAX_UNLOCK_RESPONSE_BYTES });
 
     if (!res.ok) return false;
 
-    const data = (await readBoundedJson(res)) as {
+    const data = json as {
       token: string;
       expiresAt: string;
     };

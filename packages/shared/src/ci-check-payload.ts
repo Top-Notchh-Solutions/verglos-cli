@@ -5,6 +5,7 @@ import { SubjectIdSchema } from "./subject.js";
 
 const DIGEST = /^sha256:[a-f0-9]{64}$/u;
 const GIT_COMMIT = /^(?:[a-f0-9]{40}|[a-f0-9]{64})$/u;
+const MAX_RECORD_URL_LENGTH = 2048;
 
 export type CiCheckPayloadInput = Readonly<{
   releaseDecision: ReleaseDecisionDocument;
@@ -43,9 +44,10 @@ function subjectDigest(subjectId: string): string | null {
 }
 
 function safeHttpsUrl(value: string): URL | null {
+  if (typeof value !== "string" || value.length === 0 || value.length > MAX_RECORD_URL_LENGTH || /[\u0000-\u001f\u007f]/u.test(value)) return null;
   try {
     const url = new URL(value);
-    if (url.protocol !== "https:" || url.username || url.password || url.hash) return null;
+    if (url.protocol !== "https:" || url.username || url.password || url.hash || url.search) return null;
     return url;
   } catch {
     return null;

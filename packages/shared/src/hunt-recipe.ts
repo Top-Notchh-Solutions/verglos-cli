@@ -3,6 +3,7 @@ import { ContentDigestSchema, SubjectIdSchema } from "./subject.js";
 import { StableContractIdSchema } from "./engine.js";
 
 const noControls = (value: string) => !/[\u0000-\u001f\u007f]/.test(value);
+export const HuntRuleIdSchema = z.string().min(1).max(128).regex(/^[A-Za-z][A-Za-z0-9]*(?:[._:-][A-Za-z0-9]+)*$/u);
 
 function parseNetworkOrigin(value: string): URL | undefined {
   try { return new URL(value); } catch { return undefined; }
@@ -20,15 +21,50 @@ export const HuntResourceLimitsSchema = z.object({
   if (value.cpuMs > value.timeoutMs) ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["cpuMs"], message: "CPU-time limit cannot exceed the wall-clock timeout" });
 });
 
+const HuntFixtureRefSchema = z.object({
+  fixtureId: StableContractIdSchema,
+  expectedVerdict: z.enum(["confirmed", "not-reproduced", "inconclusive", "environment-error", "not-supported"]),
+}).strict();
+
+/**
+ * Every executable recipe must name the bounded controls that qualify it.
+ * These are references to fixture implementations, never raw target input or
+ * source content. The expected verdict mapping keeps infrastructure failure
+ * and unsupported coverage from being reported as a security result.
+ */
+export const HuntFixtureContractSchema = z.object({
+  positive: HuntFixtureRefSchema,
+  negative: HuntFixtureRefSchema,
+  timeout: HuntFixtureRefSchema,
+  infrastructureFailure: HuntFixtureRefSchema,
+  unsupported: HuntFixtureRefSchema,
+}).strict().superRefine((value, ctx) => {
+  const expected = {
+    positive: "confirmed",
+    negative: "not-reproduced",
+    timeout: "inconclusive",
+    infrastructureFailure: "environment-error",
+    unsupported: "not-supported",
+  } as const;
+  const ids = Object.values(value).map((fixture) => fixture.fixtureId);
+  if (new Set(ids).size !== ids.length) ctx.addIssue({ code: z.ZodIssueCode.custom, path: [], message: "Hunt fixture IDs must be unique" });
+  for (const [kind, fixture] of Object.entries(value) as Array<[keyof typeof expected, (typeof value)[keyof typeof value]]>) {
+    if (fixture.expectedVerdict !== expected[kind]) ctx.addIssue({ code: z.ZodIssueCode.custom, path: [kind, "expectedVerdict"], message: `${kind} fixture has an invalid expected verdict` });
+  }
+});
+
 export const HuntRecipeSchema = z.object({
   schemaId: z.literal("urn:verglos:schema:hunt-recipe"),
   schemaVersion: z.literal("1.0.0"),
   recipeId: StableContractIdSchema,
-  ruleId: StableContractIdSchema,
+  // Scanner rule IDs are stable public identifiers but retain their
+  // human-readable uppercase form (for example D1-001 and AGENT-001).
+  ruleId: HuntRuleIdSchema,
   targetSubjectId: SubjectIdSchema,
   imageDigest: ContentDigestSchema,
   command: z.array(z.string().min(1).max(4096).refine(noControls, "command contains control characters")).min(1).max(32),
   assertions: z.array(z.string().min(1).max(4096).refine(noControls, "assertion contains control characters")).min(1).max(64),
+  fixtures: HuntFixtureContractSchema,
   inputs: z.record(z.string().min(1).max(128).refine(noControls, "input name contains control characters"), z.string().max(4096).refine(noControls, "input contains control characters")).optional(),
   isolation: z.enum(["none", "restricted-process", "container", "gvisor", "microvm"]),
   limits: HuntResourceLimitsSchema,

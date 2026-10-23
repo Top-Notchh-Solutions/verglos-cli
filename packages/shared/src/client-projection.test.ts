@@ -29,3 +29,9 @@ test("refuses workspace/record drift and expired approvals", () => {
   assert.deepEqual(admitClientProjectionUpload({ actorOrganizationId: "org_acme", projection: { ...base, recordDigest: `sha256:${"c".repeat(64)}` }, approval, now: "2026-10-06T01:00:00.000Z" }), { ok: false, reason: "record_mismatch" });
   assert.deepEqual(admitClientProjectionUpload({ actorOrganizationId: "org_acme", projection: base, approval, now: "2026-10-07T00:00:00.000Z" }), { ok: false, reason: "approval_expired" });
 });
+
+test("refuses malformed approval JSON without throwing", () => {
+  assert.deepEqual(admitClientProjectionUpload({ actorOrganizationId: "org_acme", projection: base, approval: null, now: "2026-10-06T01:00:00.000Z" }), { ok: false, reason: "approval_required" });
+  assert.deepEqual(admitClientProjectionUpload({ actorOrganizationId: "org_acme", projection: base, approval: {}, now: "2026-10-06T01:00:00.000Z" }), { ok: false, reason: "approval_mismatch" });
+  assert.deepEqual(admitClientProjectionUpload({ actorOrganizationId: "org_acme", projection: base, approval: { ...approval, issuedAt: 123 }, now: "2026-10-06T01:00:00.000Z" }), { ok: false, reason: "approval_mismatch" });
+});

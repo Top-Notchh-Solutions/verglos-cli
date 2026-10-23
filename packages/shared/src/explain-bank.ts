@@ -103,6 +103,20 @@ export const EXPLAIN_BANK: Record<string, ExplainEntry> = {
     fix: "Use textContent for plain text, or sanitize trusted HTML with DOMPurify.",
     refs: ["CWE-79"],
   },
+  "D1-008": {
+    rule: "D1-008",
+    title: "Prototype pollution via unfiltered object merge",
+    domain: "D1",
+    severity: "high",
+    confidence: "high",
+    why: "Object.assign invokes the __proto__ setter on a plain object. An attacker-controlled key can change the object's prototype and influence later authorization or configuration checks.",
+    fix: "Reject __proto__, constructor, and prototype keys before merging, or merge into a null-prototype object with an explicit allowlist.",
+    refs: ["CWE-1321"],
+    example: {
+      bad: "Object.assign({}, req.body)",
+      good: "Object.fromEntries(Object.entries(req.body).filter(([key]) => !['__proto__', 'constructor', 'prototype'].includes(key)))",
+    },
+  },
 
   // ─── D3 · Authorization & access control ────────────────────────────────
   "D3-001": {

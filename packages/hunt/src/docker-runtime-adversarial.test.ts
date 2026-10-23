@@ -63,7 +63,16 @@ integrationTest("Docker runtime does not expose the host Docker socket", async (
 integrationTest("Docker runtime does not expose kernel device nodes", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
   try {
-    const result = await runFixture(root, ["/bin/sh", "-c", "test ! -e /dev/kmsg"]);
+    const result = await runFixture(root, ["/bin/sh", "-c", "test ! -e /dev/kmsg && test ! -e /dev/mem && test ! -e /dev/kmem && test ! -e /dev/fuse && test ! -e /dev/sda"]);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+integrationTest("Docker runtime drops effective Linux capabilities", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "test -z \"$(awk '/^CapEff:/{print $2}' /proc/self/status | tr -d 0)\" && test -z \"$(awk '/^CapBnd:/{print $2}' /proc/self/status | tr -d 0)\""]);
     assert.equal(result.status, "completed");
     assert.equal(result.exitCode, 0);
   } finally { await rm(root, { recursive: true, force: true }); }
@@ -143,6 +152,15 @@ integrationTest("Docker runtime bounds writable tmpfs capacity", async () => {
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+integrationTest("Docker runtime mounts the writable scratch area with restrictive flags", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "options=$(awk '$2 == \"/tmp\" {print $4}' /proc/mounts); echo \"$options\" | grep -q noexec && echo \"$options\" | grep -q nosuid && echo \"$options\" | grep -q nodev"]);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 integrationTest("Docker runtime exposes the approved memory ceiling", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
   try {
@@ -152,12 +170,30 @@ integrationTest("Docker runtime exposes the approved memory ceiling", async () =
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-namespaceIntegrationTest("Docker runtime keeps PID and IPC namespaces private", async () => {
+integrationTest("Docker runtime exposes bounded PID and CPU cgroups", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
+  try {
+    const result = await runFixture(root, ["/bin/sh", "-c", "test \"$(cat /sys/fs/cgroup/pids.max)\" -le 16 && cpu=$(awk '{print $1}' /sys/fs/cgroup/cpu.max) && test \"$cpu\" != max && test \"$cpu\" -le 100000"]);
+    assert.equal(result.status, "completed");
+    assert.equal(result.exitCode, 0);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+namespaceIntegrationTest("Docker runtime keeps PID, IPC, mount, network, and UTS namespaces private", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-adversarial-"));
   try {
     const hostPidNamespace = await readlink("/proc/self/ns/pid");
     const hostIpcNamespace = await readlink("/proc/self/ns/ipc");
-    const script = `test "$(readlink /proc/self/ns/pid)" != "${hostPidNamespace}" && test "$(readlink /proc/self/ns/ipc)" != "${hostIpcNamespace}"`;
+    const hostMountNamespace = await readlink("/proc/self/ns/mnt");
+    const hostNetworkNamespace = await readlink("/proc/self/ns/net");
+    const hostUtsNamespace = await readlink("/proc/self/ns/uts");
+    const script = [
+      `test "$(readlink /proc/self/ns/pid)" != "${hostPidNamespace}"`,
+      `test "$(readlink /proc/self/ns/ipc)" != "${hostIpcNamespace}"`,
+      `test "$(readlink /proc/self/ns/mnt)" != "${hostMountNamespace}"`,
+      `test "$(readlink /proc/self/ns/net)" != "${hostNetworkNamespace}"`,
+      `test "$(readlink /proc/self/ns/uts)" != "${hostUtsNamespace}"`,
+    ].join(" && ");
     const result = await runFixture(root, ["/bin/sh", "-c", script], 5_000);
     assert.equal(result.status, "completed");
     assert.equal(result.exitCode, 0);

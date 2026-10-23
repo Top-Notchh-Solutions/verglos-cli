@@ -26,6 +26,12 @@ import { executeRecordAttest, SIGSTORE_NETWORK_ORIGINS } from "./record-sigstore
 import { executeHunt } from "./hunt.js";
 import { executeHuntRecipe, runHuntRecipe } from "./hunt-execute.js";
 import { executeHuntRecipeVerification } from "./hunt-recipe-verify.js";
+import { executeHuntScout } from "./hunt-scout.js";
+import { executeHuntHypothesis } from "./hunt-hypothesis.js";
+import { executeHuntWorker } from "./hunt-worker.js";
+import { executeHuntProof } from "./hunt-proof.js";
+import { executeHuntRetest } from "./hunt-retest.js";
+import { executeHuntReleaseAudit } from "./hunt-release-audit.js";
 import { executeWhoami } from "./whoami.js";
 import { executeLogin } from "./login.js";
 import { validateLicense } from "./license-api.js";
@@ -78,6 +84,7 @@ import { transferEvidence, inspectEvidence } from "./evidence-transfer.js";
 import { executeRecordVerify } from "./record-verify.js";
 import { executeRecordCreate } from "./record-create.js";
 import { executeRecordProject } from "./record-project.js";
+import { executeClientProjectionUpload } from "./client-projection-upload.js";
 import { executeRecordSign } from "./record-sign.js";
 import { executeConfigInspect } from "./config-inspect.js";
 import { executeRecordHeader } from "./record-header.js";
@@ -89,7 +96,7 @@ import { fetchOrganizationPolicy } from "./organization-policy-fetch.js";
 import { executeClientProjection } from "./client-projection.js";
 import { executeReleaseRollbackPlan, executeReleaseRollbackRehearsal } from "./release-rollback-plan.js";
 import { executeCiCheckPayload } from "./ci-check-payload.js";
-import { pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
+import { enrollPrivateRunner, pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
 const require = createRequire(import.meta.url);
 const { version } = require("../package.json") as { version: string };
 const program = new Command();
@@ -164,7 +171,7 @@ if (args.includes("--update")) {
 
 program
   .name("verglos")
-  .description("The evidence agent for AI-generated code")
+  .description("Local-first security decision layer between code changes and release")
   .version(version, "-v, --version", "Print installed CLI version")
   .option("--update", "Update Verglos CLI to the latest npm version")
   .option(
@@ -181,7 +188,7 @@ program
     `
 Command groups:
   Scan       scan, secrets, deps, score
-  Hunt       hunt — verify findings in a local sandbox (shell — v2.0.0-beta)
+  Hunt       hunt — verify findings with signed bounded recipes
   Attest     attest — retired compatibility shell; use record create/sign/verify
   Fix & CI   fix, ci, hook, precommit
   Session    login, whoami, activate
@@ -267,6 +274,54 @@ organizationPolicy.command("fetch <organizationId> <repositoryId>")
       else if (!opts.quiet) console.error(error instanceof Error ? error.message : "Organization policy fetch failed.");
       process.exitCode = 78;
     }
+  });
+
+const privateRunner = program.command("runner").description("Poll a bounded private runner without executing remote commands");
+privateRunner.command("enroll <tenantId> <runnerId> <enrollmentToken>")
+  .description("Redeem a one-time private-runner enrollment secret into a runner-only credential")
+  .option("--endpoint <path>", "Relative API path override for the enrollment endpoint")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (tenantId: string, runnerId: string, enrollmentToken: string, opts: { endpoint?: string; json?: boolean; quiet?: boolean }) => {
+    const result = await enrollPrivateRunner({ tenantId, runnerId, enrollmentToken, endpoint: opts.endpoint });
+    if (opts.json) console.log(JSON.stringify(result));
+    else if (!opts.quiet) console.log(result.status === "enrolled" ? `Private runner enrolled: ${result.runnerId}` : `Private runner enrollment ${result.status}: ${result.reason}`);
+    if (result.status === "error") process.exitCode = 78;
+  });
+privateRunner.command("poll <tenantId> <runnerId>")
+  .description("Poll one signed, short-lived private-runner job; never executes or uploads results")
+  .requiredOption("--trusted-key <path>", "Ed25519 public key used to verify the job signature")
+  .requiredOption("--target <subjectId>", "Allowlisted target subject (repeat for each target)", collectRepeated, [])
+  .option("--replay-cache <path>", "Mode-0600 local replay cache path")
+  .option("--endpoint <path>", "Relative API path override for the poll endpoint")
+  .option("--now <iso>", "Fixed current time for deterministic qualification")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (tenantId: string, runnerId: string, opts: { trustedKey: string; target: string[]; replayCache?: string; endpoint?: string; now?: string; json?: boolean; quiet?: boolean }) => {
+    const result = await pollPrivateRunnerJob({ tenantId, runnerId, trustedKeyPath: opts.trustedKey, allowedTargets: opts.target, replayPath: opts.replayCache, endpoint: opts.endpoint, now: opts.now });
+    const safe = privateRunnerResultSummary(result);
+    if (opts.json) console.log(JSON.stringify(safe));
+    else if (!opts.quiet) {
+      if (result.status === "ready") console.log(`Private runner job admitted: ${result.job.jobId} (execution not performed)`);
+      else if (result.status === "empty") console.log("No private runner job available.");
+      else console.error(`Private runner poll ${result.status}: ${"reason" in result ? result.reason : "unknown"}`);
+    }
+    if (result.status === "error" || result.status === "denied") process.exitCode = 78;
+  });
+
+privateRunner.command("upload-result <resultPath>")
+  .description("Upload a bounded source-free private-runner result projection")
+  .option("--endpoint <path>", "Relative API path override for the result endpoint")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (resultPath: string, opts: { endpoint?: string; json?: boolean; quiet?: boolean }) => {
+    let input: unknown;
+    try { input = JSON.parse(await readFileBytes(resultPath, "utf8")); }
+    catch { input = undefined; }
+    const result = await uploadPrivateRunnerResult({ result: input, endpoint: opts.endpoint });
+    if (opts.json) console.log(JSON.stringify(result));
+    else if (!opts.quiet) console.log(result.status === "uploaded" ? `Private runner result uploaded: ${result.resultDigest}` : `Private runner result upload ${result.status}: ${result.reason}`);
+    if (result.status === "error") process.exitCode = 78;
   });
 
 const evidence = program.command("evidence").description("Import and export standards evidence");
@@ -434,6 +489,15 @@ record.command("project-client <projectionPath> <approvalPath>")
   .action(async (projectionPath: string, approvalPath: string, opts: { organization: string; json?: boolean; quiet?: boolean }) => {
     process.exit(await executeClientProjection(projectionPath, approvalPath, opts.organization, opts.json, opts.quiet));
   });
+record.command("upload-client <projectionPath> <approvalPath>")
+  .description("Upload an approved redacted client projection without source or raw record bytes")
+  .requiredOption("--organization <id>", "Actor organization identifier")
+  .requiredOption("--project <id>", "Hosted project identifier")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (projectionPath: string, approvalPath: string, opts: { organization: string; project: string; json?: boolean; quiet?: boolean }) => {
+    process.exit(await executeClientProjectionUpload(projectionPath, approvalPath, opts.organization, opts.project, opts.json, opts.quiet));
+  });
 record.command("header <storeRoot> <manifestPath>")
   .description("Show the verified decision-first Release Record header")
   .option("--json", "Emit machine-readable JSON")
@@ -544,7 +608,7 @@ program
     "--verify-secrets",
     "Hit GitHub / Stripe APIs to prove matched keys are live (opt-in — makes network calls)",
   )
-  .option("--hunt", "After scanning, hand eligible findings to hunt (shell — v2.0.0-beta)")
+  .option("--hunt", "After scanning, print a signed Hunt execution handoff (does not auto-approve or execute)")
   .option(
     "--no-telemetry",
     "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
@@ -691,7 +755,7 @@ program
   .option("--record-manifest-digest <digest>", "Verified sha256 digest of the Release Record manifest")
   .option("--record-url <url>", "HTTPS URL for the verified Release Record")
   .option("--commit <sha>", "Repository commit bound to the Release Decision")
-  .option("--hunt", "Gate on verified criticals only (shell — v2.0.0-beta)")
+  .option("--hunt", "Gate on verified criticals only through the approved bounded Hunt path")
   .option(
     "--no-telemetry",
     "Do not send scan metadata (also toggled by VERGLOS_TELEMETRY=0)",
@@ -723,7 +787,7 @@ program
         const ok = await requireCapability("ci.hunt_gate", "`verglos ci --hunt`", {
           asPlan,
           extraLine:
-            "Verified-only CI gating ships in v2.0.0-beta. This alpha can still run standard CI.",
+            "Paid capability verified. A signed recipe, trust store, approval receipt, and exact binding are still required; use `verglos hunt --execute` for the bounded run.",
         });
         if (!ok) process.exit(1);
       }
@@ -903,7 +967,7 @@ program
 
 const huntCommand = program
   .command("hunt")
-  .description("Verify findings in a local sandbox [Pro] (shell — v2.0.0-beta)")
+  .description("Run an approved signed Hunt recipe in a bounded local runtime [Pro]")
   .option("--severity <level>", "Severity filter to hunt (default: critical,high)")
   .option("--sandbox <adapter>", "Sandbox adapter: auto, docker")
   .option("--dry-run", "Parse options without running sandbox verification")
@@ -956,6 +1020,110 @@ const huntCommand = program
       process.exit(code);
     },
   );
+
+huntCommand
+  .command("scout [project]")
+  .description("Build a bounded local target manifest without executing project code")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (project = ".", _opts: { json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { json?: boolean; quiet?: boolean };
+    process.exit(await executeHuntScout(project, opts.json, opts.quiet));
+  });
+
+huntCommand
+  .command("hypothesis <manifestPath>")
+  .description("Map an exact finding and Scout manifest to a registered playbook without executing it")
+  .requiredOption("--finding-id <id>", "Finding identity to bind")
+  .requiredOption("--rule-id <id>", "Exact scanner rule identity")
+  .requiredOption("--subject-id <id>", "Exact subject identity from Scout")
+  .option("--location <path>", "Relative finding location")
+  .option("--line <number>", "Finding line number")
+  .option("--severity <level>", "Finding severity")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (manifestPath: string, _opts: { findingId: string; ruleId: string; subjectId: string; location?: string; line?: string; severity?: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { findingId: string; ruleId: string; subjectId: string; location?: string; line?: string; severity?: string; json?: boolean; quiet?: boolean };
+    process.exit(await executeHuntHypothesis({ manifestPath, ...opts }));
+  });
+
+huntCommand
+  .command("worker <hypothesisPath>")
+  .description("Execute one supported Attack-Hypothesis through the bounded Hunt worker")
+  .requiredOption("--report <path>", "Local scanner report containing the exact finding")
+  .requiredOption("--recipe <path>", "Signed local Hunt recipe selected by the hypothesis")
+  .requiredOption("--trust-store <path>", "Local Hunt trust store for the signed recipe")
+  .requiredOption("--approval <path>", "Approved Hunt receipt bound to the target")
+  .requiredOption("--observation-id <id>", "Observation identity for the execution binding")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (hypothesisPath: string, _opts: { report: string; recipe: string; trustStore: string; approval: string; observationId: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { report: string; recipe: string; trustStore: string; approval: string; observationId: string; json?: boolean; quiet?: boolean };
+    const executionAuthorized = await requireCapability("hunt.critical", "`verglos hunt worker`", {
+      asPlan: process.env.VERGLOS_AS_PLAN,
+      output: opts.json ? "json" : opts.quiet ? "quiet" : undefined,
+      extraLine: "Execution still requires a supported hypothesis, signed recipe, approved receipt, and bounded runtime.",
+    });
+    if (!executionAuthorized) process.exit(1);
+    process.exit(await executeHuntWorker({ hypothesisPath, reportPath: opts.report, recipePath: opts.recipe, trustStorePath: opts.trustStore, approvalPath: opts.approval, observationId: opts.observationId, json: opts.json, quiet: opts.quiet }));
+  });
+
+huntCommand
+  .command("proof <hypothesisPath>")
+  .description("Replay one supported Hunt hypothesis and run its bounded counterexample control")
+  .requiredOption("--report <path>", "Local scanner report containing the exact finding")
+  .requiredOption("--recipe <path>", "Signed local Hunt recipe selected by the hypothesis")
+  .requiredOption("--trust-store <path>", "Local Hunt trust store for the signed recipe")
+  .requiredOption("--approval <path>", "Approved Hunt receipt bound to the target")
+  .requiredOption("--observation-id <id>", "Observation identity for the proof binding")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (hypothesisPath: string, _opts: { report: string; recipe: string; trustStore: string; approval: string; observationId: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { report: string; recipe: string; trustStore: string; approval: string; observationId: string; json?: boolean; quiet?: boolean };
+    const executionAuthorized = await requireCapability("hunt.critical", "`verglos hunt proof`", {
+      asPlan: process.env.VERGLOS_AS_PLAN,
+      output: opts.json ? "json" : opts.quiet ? "quiet" : undefined,
+      extraLine: "Proof still requires a supported hypothesis, signed recipe, approved receipt, and bounded runtime.",
+    });
+    if (!executionAuthorized) process.exit(1);
+    process.exit(await executeHuntProof({ hypothesisPath, reportPath: opts.report, recipePath: opts.recipe, trustStorePath: opts.trustStore, approvalPath: opts.approval, observationId: opts.observationId, json: opts.json, quiet: opts.quiet }));
+  });
+
+huntCommand
+  .command("retest <hypothesisPath>")
+  .description("Re-run the same supported Hunt proof after an approved remediation scope")
+  .requiredOption("--report <path>", "Local post-remediation scanner report containing the exact finding")
+  .requiredOption("--recipe <path>", "Signed local Hunt recipe selected by the post-remediation hypothesis")
+  .requiredOption("--trust-store <path>", "Local Hunt trust store for the signed recipe")
+  .requiredOption("--approval <path>", "Approved Hunt execute receipt bound to the post-remediation target")
+  .requiredOption("--remediation <path>", "Non-mutating remediation proposal for the before subject")
+  .requiredOption("--remediation-approval <path>", "Approved mutate receipt bound to the proposal subject and files")
+  .requiredOption("--before-subject-id <id>", "Exact subject identity before the approved remediation scope")
+  .requiredOption("--observation-id <id>", "Observation identity for the retest binding")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (hypothesisPath: string, _opts: { report: string; recipe: string; trustStore: string; approval: string; remediation: string; remediationApproval: string; beforeSubjectId: string; observationId: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { report: string; recipe: string; trustStore: string; approval: string; remediation: string; remediationApproval: string; beforeSubjectId: string; observationId: string; json?: boolean; quiet?: boolean };
+    const executionAuthorized = await requireCapability("hunt.critical", "`verglos hunt retest`", {
+      asPlan: process.env.VERGLOS_AS_PLAN,
+      output: opts.json ? "json" : opts.quiet ? "quiet" : undefined,
+      extraLine: "Retest still requires a supported hypothesis, signed recipe, approved remediation scope, execute approval, and bounded runtime.",
+    });
+    if (!executionAuthorized) process.exit(1);
+    process.exit(await executeHuntRetest({ hypothesisPath, reportPath: opts.report, recipePath: opts.recipe, trustStorePath: opts.trustStore, approvalPath: opts.approval, remediationPath: opts.remediation, remediationApprovalPath: opts.remediationApproval, beforeSubjectId: opts.beforeSubjectId, observationId: opts.observationId, json: opts.json, quiet: opts.quiet }));
+  });
+
+huntCommand
+  .command("audit <evidencePath>")
+  .description("Audit a bounded Hunt proof/retest against an existing complete Release Record")
+  .requiredOption("--record-store <path>", "Complete Release Record store containing manifest.json and members")
+  .option("--record-manifest <path>", "Explicit Release Record manifest path")
+  .option("--json", "Emit machine-readable JSON")
+  .option("--quiet", "Suppress human output")
+  .action(async (evidencePath: string, _opts: { recordStore: string; recordManifest?: string; json?: boolean; quiet?: boolean }, command: Command) => {
+    const opts = command.optsWithGlobals() as { recordStore: string; recordManifest?: string; json?: boolean; quiet?: boolean };
+    process.exit(await executeHuntReleaseAudit(evidencePath, opts.recordStore, opts.recordManifest, opts.json, opts.quiet));
+  });
 
 huntCommand
   .command("verify-recipe <recipePath>")

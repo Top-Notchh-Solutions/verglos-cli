@@ -4,11 +4,11 @@ import { validateLicense } from "./license-api.js";
 
 test("license validation prefers a bounded v2 token and keeps v1 validation compatibility", async () => {
   const originalFetch = globalThis.fetch;
-  const calls: Array<{ url: string; method: string; authorization?: string }> = [];
+  const calls: Array<{ url: string; method: string; authorization?: string; redirect?: string }> = [];
   globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
     const url = String(input);
     const headers = new Headers(init?.headers);
-    calls.push({ url, method: init?.method ?? "GET", authorization: headers.get("authorization") ?? undefined });
+    calls.push({ url, method: init?.method ?? "GET", authorization: headers.get("authorization") ?? undefined, redirect: init?.redirect });
     if (url.endsWith("/api/v1/license/validate")) {
       return Response.json({ valid: true, plan: "pro", entitlement_token: "legacy.header.signature" });
     }
@@ -24,6 +24,8 @@ test("license validation prefers a bounded v2 token and keeps v1 validation comp
       ["https://verglos.test/api/v2/entitlement/token", "POST"],
     ]);
     assert.equal(calls[1]?.authorization, "Bearer vg_test_license");
+    assert.equal(calls[0]?.redirect, "error");
+    assert.equal(calls[1]?.redirect, "error");
   } finally {
     globalThis.fetch = originalFetch;
   }

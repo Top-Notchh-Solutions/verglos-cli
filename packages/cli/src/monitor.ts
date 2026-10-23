@@ -182,6 +182,7 @@ export async function executeMonitorRegister(
           : {}),
       },
       body: JSON.stringify(registration),
+      redirect: "error",
       signal: controller.signal,
     });
   } catch {

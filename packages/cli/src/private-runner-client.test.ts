@@ -1,14 +1,20 @@
 import assert from "node:assert/strict";
 import { generateKeyPairSync, sign } from "node:crypto";
-import { chmod, lstat, mkdtemp, mkdir, writeFile, readFile } from "node:fs/promises";
+import { chmod, lstat, mkdtemp, mkdir, rm, writeFile, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { privateRunnerJobSigningBytes, type PrivateRunnerJob } from "@verglos/shared";
-import { pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
+import { enrollPrivateRunner, pollPrivateRunnerJob, privateRunnerResultSummary, readBoundedPrivateRunnerFile, uploadPrivateRunnerResult } from "./private-runner-client.js";
 
 const home = await mkdtemp(join(tmpdir(), "verglos-private-runner-client-"));
 process.env.HOME = home;
+const runnerCredential = `prc_${"a".repeat(43)}`;
+
+async function writeRunnerCredentials(): Promise<void> {
+  await mkdir(join(home, ".verglos"), { recursive: true });
+  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "owner-license-sentinel", privateRunner: { tenantId: "org_acme", runnerId: "runner_1", credential: runnerCredential, credentialExpiresAt: "2099-01-01T00:00:00.000Z" } }));
+}
 
 async function assertPrivateMode(path: string, expected: number): Promise<void> {
   const actual = (await lstat(path)).mode & 0o777;
@@ -27,6 +33,38 @@ function makeJob(privateKey: ReturnType<typeof generateKeyPairSync>["privateKey"
   return { ...unsigned, signature: sign(null, privateRunnerJobSigningBytes(unsigned), privateKey).toString("base64") };
 }
 
+function abortError(): Error {
+  const error = new Error("response body timed out");
+  error.name = "AbortError";
+  return error;
+}
+
+function responseThatWaitsForAbort(signal: AbortSignal): Response {
+  return new Response(new ReadableStream<Uint8Array>({
+    pull() {
+      return new Promise<void>((_resolve, reject) => {
+        if (signal.aborted) {
+          reject(abortError());
+          return;
+        }
+        signal.addEventListener("abort", () => reject(abortError()), { once: true });
+      });
+    },
+  }), { status: 200 });
+}
+
+async function withDeadline<T>(promise: Promise<T>, timeoutMs = 250): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise<T>((_resolve, reject) => { timer = setTimeout(() => reject(new Error("test deadline exceeded")), timeoutMs); }),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 test("private runner poll uses authenticated GET, verifies, admits, and persists only replay state", async () => {
   const keys = generateKeyPairSync("ed25519");
   const root = await mkdtemp(join(tmpdir(), "verglos-runner-fixture-"));
@@ -34,16 +72,16 @@ test("private runner poll uses authenticated GET, verifies, admits, and persists
   const replayPath = join(root, "replay.json");
   await chmod(root, 0o755);
   await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
-  await mkdir(join(home, ".verglos"), { recursive: true });
-  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
-  const calls: Array<{ url: string; method: string | undefined; authorization: string | null }> = [];
+  await writeRunnerCredentials();
+  const calls: Array<{ url: string; method: string | undefined; authorization: string | null; redirect: string | undefined }> = [];
   const result = await pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath, now: "2026-10-06T00:01:00.000Z", fetchImpl: async (input, init) => {
-    calls.push({ url: String(input), method: init?.method, authorization: new Headers(init?.headers).get("authorization") });
+    calls.push({ url: String(input), method: init?.method, authorization: new Headers(init?.headers).get("authorization"), redirect: init?.redirect });
     return new Response(JSON.stringify({ job: makeJob(keys.privateKey) }), { status: 200 });
   } });
   assert.equal(result.status, "ready");
   assert.equal(calls[0]?.method, "GET");
-  assert.equal(calls[0]?.authorization, "Bearer license-sentinel");
+  assert.equal(calls[0]?.authorization, `Bearer ${runnerCredential}`);
+  assert.equal(calls[0]?.redirect, "error");
   assert.equal((await readFile(replayPath, "utf8")).includes("job_1"), true);
   await assertPrivateMode(root, 0o700);
   await assertPrivateMode(replayPath, 0o600);
@@ -59,8 +97,7 @@ test("private runner poll refuses a locally replayed job and never executes it",
   const replayPath = join(root, "replay.json");
   await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
   await writeFile(replayPath, JSON.stringify({ jobIds: ["job_1"], nonces: ["nonce_123456789012"] }));
-  await mkdir(join(home, ".verglos"), { recursive: true });
-  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
+  await writeRunnerCredentials();
   const result = await pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath, now: "2026-10-06T00:01:00.000Z", fetchImpl: async () => new Response(JSON.stringify({ job: makeJob(keys.privateKey) }), { status: 200 }) });
   assert.deepEqual(result, { status: "denied", endpoint: "https://example.test/api/v1/private-runner/jobs?tenant_id=org_acme&runner_id=runner_1", reason: "replayed_local" });
 });
@@ -70,12 +107,38 @@ test("private runner poll rejects malformed signatures before admission", async 
   const root = await mkdtemp(join(tmpdir(), "verglos-runner-signature-"));
   const keyPath = join(root, "runner-public.pem");
   await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
-  await mkdir(join(home, ".verglos"), { recursive: true });
-  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "license-sentinel" }));
+  await writeRunnerCredentials();
   const job = makeJob(keys.privateKey);
   const result = await pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath: join(root, "replay.json"), now: "2026-10-06T00:01:00.000Z", fetchImpl: async () => new Response(JSON.stringify({ job: { ...job, targetSubjectId: "subject_other" } }), { status: 200 }) });
   assert.equal(result.status, "denied");
   assert.equal(result.status === "denied" ? result.reason : "", "invalid_signature");
+});
+
+test("private runner poll keeps its timeout active while reading a response body", async () => {
+  const keys = generateKeyPairSync("ed25519");
+  const root = await mkdtemp(join(tmpdir(), "verglos-runner-body-timeout-"));
+  const keyPath = join(root, "runner-public.pem");
+  await writeFile(keyPath, keys.publicKey.export({ type: "spki", format: "pem" }));
+  await writeRunnerCredentials();
+  const result = await withDeadline(pollPrivateRunnerJob({ tenantId: "org_acme", runnerId: "runner_1", trustedKeyPath: keyPath, allowedTargets: ["subject_app"], replayPath: join(root, "replay.json"), timeoutMs: 10, fetchImpl: async (_input, init) => responseThatWaitsForAbort(init?.signal as AbortSignal) }));
+  assert.deepEqual(result, { status: "error", endpoint: "https://example.test/api/v1/private-runner/jobs?tenant_id=org_acme&runner_id=runner_1", reason: "network" });
+});
+
+test("private runner poll refuses a same-origin route override before reading credentials", async () => {
+  let called = false;
+  const result = await pollPrivateRunnerJob({
+    tenantId: "org_acme",
+    runnerId: "runner_1",
+    trustedKeyPath: "/tmp/not-read",
+    allowedTargets: ["subject_app"],
+    endpoint: "/api/license/unlock",
+    fetchImpl: async () => {
+      called = true;
+      return new Response();
+    },
+  });
+  assert.deepEqual(result, { status: "error", reason: "invalid_input" });
+  assert.equal(called, false);
 });
 
 test("private runner result upload uses authenticated POST and sends only the shared projection", async () => {
@@ -87,7 +150,8 @@ test("private runner result upload uses authenticated POST and sends only the sh
   const response = await uploadPrivateRunnerResult({ result, fetchImpl: async (input, init) => {
     assert.equal(String(input), "https://example.test/api/v1/private-runner/results");
     assert.equal(init?.method, "POST");
-    assert.equal(new Headers(init?.headers).get("authorization"), "Bearer license-sentinel");
+    assert.equal(init?.redirect, "error");
+    assert.equal(new Headers(init?.headers).get("authorization"), `Bearer ${runnerCredential}`);
     requestBody = String(init?.body);
     return new Response(JSON.stringify({ ok: true, resultDigest: `sha256:${"c".repeat(64)}`, idempotent: false }), { status: 201 });
   } });
@@ -101,4 +165,70 @@ test("private runner result upload refuses malformed projections before network"
   const response = await uploadPrivateRunnerResult({ result: { protocolVersion: "1.0.0", jobId: "job_1", command: "rm -rf" }, fetchImpl: async () => { called = true; return new Response(); } });
   assert.deepEqual(response, { status: "error", reason: "invalid_result" });
   assert.equal(called, false);
+});
+
+test("private runner result upload refuses a malformed successful response", async () => {
+  const result = {
+    protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
+    startedAt: "2026-10-06T00:01:00.000Z", finishedAt: "2026-10-06T00:01:01.000Z", evidenceDigest: `sha256:${"b".repeat(64)}`, findingCount: 2, coverage: "complete",
+  } as const;
+  const response = await uploadPrivateRunnerResult({ result, fetchImpl: async () => new Response(JSON.stringify({ ok: true, resultDigest: "not-a-digest", idempotent: false }), { status: 201 }) });
+  assert.deepEqual(response, { status: "error", endpoint: "https://example.test/api/v1/private-runner/results", reason: "http" });
+});
+
+test("private runner result upload keeps its timeout active while reading a response body", async () => {
+  const result = {
+    protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
+    startedAt: "2026-10-06T00:01:00.000Z", finishedAt: "2026-10-06T00:01:01.000Z", evidenceDigest: `sha256:${"b".repeat(64)}`, findingCount: 2, coverage: "complete",
+  } as const;
+  const response = await withDeadline(uploadPrivateRunnerResult({ result, timeoutMs: 10, fetchImpl: async (_input, init) => responseThatWaitsForAbort(init?.signal as AbortSignal) }));
+  assert.deepEqual(response, { status: "error", endpoint: "https://example.test/api/v1/private-runner/results", reason: "network" });
+});
+
+test("private runner result upload refuses a same-origin route override before network access", async () => {
+  const result = await uploadPrivateRunnerResult({
+    result: {
+      protocolVersion: "1.0.0", jobId: "job_1", tenantId: "org_acme", runnerId: "runner_1", state: "completed",
+      startedAt: "2026-10-06T00:01:00.000Z", finishedAt: "2026-10-06T00:01:01.000Z", evidenceDigest: `sha256:${"b".repeat(64)}`, findingCount: 2, coverage: "complete",
+    },
+    endpoint: "/api/license/unlock",
+    fetchImpl: async () => { throw new Error("network must not be reached"); },
+  });
+  assert.deepEqual(result, { status: "error", reason: "invalid_input" });
+});
+
+test("private runner enrollment redeems once, stores the runner credential, and never sends the owner license", async () => {
+  await writeFile(join(home, ".verglos", "credentials.json"), JSON.stringify({ apiUrl: "https://example.test", licenseKey: "owner-license-sentinel" }));
+  const credential = `prc_${"b".repeat(43)}`;
+  const result = await enrollPrivateRunner({ tenantId: "org_acme", runnerId: "runner_1", enrollmentToken: `pr_${"c".repeat(43)}`, fetchImpl: async (input, init) => {
+    assert.equal(String(input), "https://example.test/api/v1/private-runner/enroll");
+    assert.equal(init?.method, "POST");
+    assert.equal(new Headers(init?.headers).get("authorization"), null);
+    assert.equal(JSON.parse(String(init?.body)).enrollmentToken, `pr_${"c".repeat(43)}`);
+    return new Response(JSON.stringify({ ok: true, tenantId: "org_acme", runnerId: "runner_1", runnerCredential: credential, credentialExpiresAt: "2099-01-01T00:00:00.000Z" }), { status: 201 });
+  } });
+  assert.deepEqual(result, { status: "enrolled", endpoint: "https://example.test/api/v1/private-runner/enroll", tenantId: "org_acme", runnerId: "runner_1", credentialExpiresAt: "2099-01-01T00:00:00.000Z" });
+  const stored = JSON.parse(await readFile(join(home, ".verglos", "credentials.json"), "utf8")) as { licenseKey: string; privateRunner: { credential: string } };
+  assert.equal(stored.licenseKey, "owner-license-sentinel");
+  assert.equal(stored.privateRunner.credential, credential);
+});
+
+test("private runner file reader accepts a bounded regular file and enforces the size limit", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-private-runner-file-"));
+  const path = join(root, "key.pem");
+  await writeFile(path, "runner-key\n", "utf8");
+  try {
+    assert.equal((await readBoundedPrivateRunnerFile(path, 64, "fixture")).toString("utf8"), "runner-key\n");
+    await assert.rejects(readBoundedPrivateRunnerFile(path, 4, "fixture"), /fixture/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("private runner file reader uses an opened handle through the final read check", async () => {
+  const source = await readFile(new URL("./private-runner-client.ts", import.meta.url), "utf8");
+  assert.match(source, /open\(path, constants\.O_RDONLY \| \(constants\.O_NOFOLLOW \?\? 0\)\)/u);
+  assert.match(source, /const final = await handle\.stat\(\)/u);
+  assert.match(source, /bytes\.byteLength !== final\.size/u);
+  assert.doesNotMatch(source, /readFile\(path\)/u);
 });

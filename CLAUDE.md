@@ -2,7 +2,7 @@
 
 Canonical positioning:
 
-> Verglos scans AI-assisted JavaScript and TypeScript locally today, with v2 hunt verification and signed evidence moving through the alpha and beta track.
+> Verglos scans AI-assisted JavaScript and TypeScript locally, with a bounded A1/A2 Hunt verification path and signed evidence moving through the qualification track.
 
 Short form: The evidence agent for AI-generated code.
 
@@ -22,7 +22,7 @@ Short form: The evidence agent for AI-generated code.
 ## CLI trio
 
 - `verglos scan` — Free, deterministic local SAST/SCA scanner.
-- `verglos hunt` — Pro shell in alpha; functional local sandbox verification lands in v2.0.0-beta.
+- `verglos hunt` — Pro capability. The public package contains bounded signed-recipe execution through restricted-process A1 probes and pinned-Docker A2 reference harnesses. Final acceptance remains qualification-gated.
 - `verglos attest` — Studio shell in alpha; functional Ed25519 signing lands in v2.0.0-beta.
 
 ## Plan summary
@@ -34,14 +34,15 @@ Short form: The evidence agent for AI-generated code.
 
 ## Code split
 
-Public Apache-2.0 packages: `scanner`, `cli`, `reporter`, `shared`, `mcp`, `entitlement`.
+Public Apache-2.0 packages: `scanner`, `cli`, `reporter`, `shared`, `mcp`, `entitlement`, `hunt`.
 
-Private v2.0.0-beta packages: `hunt`, `hunt-rules`, `attest`, `sandbox-adapters`, `agency-dashboard-backend`. In alpha, `packages/hunt` and `packages/attest` are interface scaffolds only.
+Private or hosted-only surfaces: `attest`, `sandbox-adapters` beyond the public Docker adapter, and `agency-dashboard-backend`. `packages/hunt` is public bounded runtime code, not an autonomous pentester.
 
 ## Shipping rules
 
 - No AI attribution in commits, PR text, code comments, or docs.
 - One logical step per commit.
 - Do not invent customers, revenue, maturity, published metrics, or traction.
-- Do not implement hunt proof synthesis, sandbox runtime, signing logic, or the ICP-300 v2 scan campaign in alpha.
-- `hunt` and `attest` shells exit `78` for entitled users and point to v2.0.0-beta.
+- Do not claim complete customer-code coverage, general remote DAST, autonomous AI attacking agents, or a host/OS isolation guarantee. A2 reference harnesses are sanitized public fixtures and do not establish final customer acceptance.
+- Hunt execution requires an exact supported recipe, trust verification, approval receipt, entitlement, and execution binding. The convenience command remains fail-closed until its release gates pass; the explicit signed execution path is the qualification surface.
+- `attest` remains a partial/qualification surface until its signing, hosted publication, and verification gates are complete.

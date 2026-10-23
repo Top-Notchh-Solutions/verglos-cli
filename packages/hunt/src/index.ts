@@ -8,6 +8,9 @@ export * from "./docker-runner.js";
 export * from "./docker-sandbox-adapter.js";
 export * from "./restricted-process-adapter.js";
 export * from "./supported-recipe-catalog.js";
+export * from "./attack-hypothesis.js";
+export * from "./attack-worker.js";
+export * from "./target-harness.js";
 
 export async function runHunt(
   report: ScanResult,
@@ -152,6 +155,7 @@ function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined 
     if (!compatible) return undefined;
   }
   if (outcome.assurance !== undefined && !isAssurance(outcome.assurance)) return undefined;
+  if (outcome.usage !== undefined && !isUsage(outcome.usage)) return undefined;
   return {
     findingId: outcome.findingId,
     verdict: outcome.verdict,
@@ -165,7 +169,18 @@ function validateAdapterOutcome(value: unknown): HuntFindingOutcome | undefined 
     ...(outcome.executionStatus === undefined ? {} : { executionStatus: outcome.executionStatus }),
     ...(outcome.canonicalVerdict === undefined ? {} : { canonicalVerdict: outcome.canonicalVerdict }),
     ...(outcome.assurance === undefined ? {} : { assurance: Object.freeze({ ...(outcome.assurance as HuntFindingOutcome["assurance"]) }) }),
+    ...(outcome.usage === undefined ? {} : { usage: Object.freeze({ ...(outcome.usage as HuntFindingOutcome["usage"]) }) }),
   } as HuntFindingOutcome;
+}
+
+function isUsage(value: unknown): value is NonNullable<HuntFindingOutcome["usage"]> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const usage = value as Record<string, unknown>;
+  const keys = Object.keys(usage).sort();
+  if (keys.join(",") !== "cpuMs,diskBytes,networkRequests,peakMemoryBytes,processes") return false;
+  return ["cpuMs", "diskBytes", "networkRequests", "peakMemoryBytes", "processes"].every((key) =>
+    Number.isSafeInteger(usage[key]) && Number(usage[key]) >= 0,
+  );
 }
 
 function isAssurance(value: unknown): value is NonNullable<HuntFindingOutcome["assurance"]> {

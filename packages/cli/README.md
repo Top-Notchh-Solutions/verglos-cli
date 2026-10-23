@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Top-Notchh-Solutions/verglos-cli/main/.github/assets/hero.svg" alt="Verglos — security scanning for AI-generated code" width="100%">
+  <img src="https://raw.githubusercontent.com/Top-Notchh-Solutions/verglos-cli/main/.github/assets/hero.svg" alt="Verglos — the security decision layer for AI-generated code" width="100%">
 </p>
 
 <p align="center">
@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-  <strong>Verglos scans AI-assisted JavaScript and TypeScript locally today, with v2 hunt verification and signed evidence moving through the alpha and beta track.</strong><br>
-  <sub>Free scanner forever. Hunt and attest are v2 alpha shells until beta functionality lands.</sub>
+  <strong>Verglos is the local-first security decision layer between AI-assisted code changes and release.</strong><br>
+  <sub>Scan JavaScript and TypeScript locally, then verify selected findings only through approved, trusted, bounded Hunt recipes.</sub>
 </p>
 
 <p align="center">
@@ -199,12 +199,21 @@ verglos monitor register --webhook https://your.app/verglos-alerts
 
 ### `verglos mcp` — MCP server for AI agents
 
-Exposes Verglos tools (`scan`, `check_package`, `check_before_write`, `explain_finding`) to Cursor, Claude Code, Windsurf, and Cline.
+Exposes Verglos tools (`scan`, `check_package`, `check_before_write`, `explain_finding`, and approval-bound Hunt tools) to Cursor, Claude Code, Windsurf, and Cline.
 
 ```bash
 verglos mcp                    # start stdio server (agents call this)
 verglos mcp --print-config     # print the JSON to paste into your agent config
 ```
+
+Hunt execution requires a verified Pro-or-higher entitlement, an exact
+time-bounded approval receipt, a signed supported recipe, a trusted recipe
+store, and matching subject/rule/observation bindings. The finding/report
+tools never synthesize commands or widen scope. Completed results include the
+source-free execution digests and schema-validated verification attempts used
+by the CLI; unavailable or unattempted execution is explicit. A projection is
+not itself a signed `.vgl` Release Record and must not be treated as release
+evidence until attached to a complete record.
 
 ### `verglos hook` · `verglos precommit` — pre-commit gate
 
@@ -220,7 +229,7 @@ verglos attest --report verglos-report.json --sign
 verglos attest --verify-url https://verglos.com/verify
 ```
 
-In v2.0.0-alpha this is a shell and exits `78` for Studio users. Functional Ed25519 signing, portable JSON+HTML bundles, and public verify URLs ship in v2.0.0-beta.
+`attest` is retained as a compatibility shell. Use `record create`, `record sign`, `record verify`, and `record pack` for the supported portable evidence workflow.
 
 ### Utilities
 
@@ -274,14 +283,14 @@ jobs:
 | `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes | Yes |
 | Pre-commit hook | Yes | Yes | Yes | Yes | Yes |
 | `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes | Yes |
-| **`verglos hunt` on Critical + High** | No | Alpha shell | Alpha shell | Beta | Beta |
+| **Signed `verglos hunt` on Critical + High** | No | A1 bounded fixture path | A1 bounded fixture path | A1 bounded fixture path | A1 bounded fixture path |
 | **`verglos hunt` on Medium** | No | No | No | Beta | Beta |
 | **MCP hunt tools** | No | Alpha shell | Alpha shell | Beta | Beta |
 | **`verglos fix`** | No | Yes | Yes | Yes | Yes |
-| **`verglos ci --hunt`** | No | Alpha path | Alpha path | Beta | Beta |
+| **`verglos ci --hunt`** | No | Paid capability + explicit binding | Paid capability + explicit binding | Paid capability + explicit binding | Paid capability + explicit binding |
 | **CI score threshold** | No | Yes | Yes | Yes | Yes |
 | **Continuous CVE monitoring** | No | Yes | Yes | Yes | Yes |
-| **`verglos attest`** | No | No | No | Alpha shell | Beta |
+| **`verglos attest` compatibility shell** | No | No | No | Legacy shell | Legacy shell |
 | **Public verify URL** | No | No | No | Beta | Beta |
 | **White-label report** | No | No | No | Beta | Beta |
 | **Firecracker sandbox adapter** | No | No | No | Beta | Beta |

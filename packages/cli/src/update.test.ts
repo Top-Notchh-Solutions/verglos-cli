@@ -9,6 +9,7 @@ import { runCliFixture } from "./cli-fixture.js";
 
 const cliEntry = join(process.cwd(), "src", "index.ts");
 const tsx = fileURLToPath(import.meta.resolve("tsx"));
+const CURRENT_CLI_VERSION = (JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8")) as { version: string }).version;
 
 async function runUpdateProcess(mode: "current" | "newer" | "offline" | "install-fail", args: readonly string[]) {
   const root = await mkdtemp(join(tmpdir(), "verglos-update-process-"));
@@ -23,7 +24,7 @@ async function runUpdateProcess(mode: "current" | "newer" | "offline" | "install
     const mode = process.env.VERGLOS_TEST_UPDATE_MODE;
     globalThis.fetch = async () => {
       if (mode === "offline") throw new Error("offline fixture");
-      const version = mode === "current" ? "2.0.0-alpha.1" : "99.0.0";
+      const version = mode === "current" ? ${JSON.stringify(CURRENT_CLI_VERSION)} : "99.0.0";
       return new Response(JSON.stringify({ version }), { status: 200, headers: { "content-type": "application/json" } });
     };
     childProcess.spawn = (command, spawnArgs, options) => {
@@ -94,13 +95,13 @@ test("update JSON process uses the injected registry and installer without leaki
   const current = await runUpdateProcess("current", ["update", "--json", "--quiet"]);
   assert.equal(current.exitCode, 0);
   assert.equal(current.stderr, "");
-  assert.deepEqual(JSON.parse(current.stdout), { status: "ok", currentVersion: "2.0.0-alpha.1", latestVersion: "2.0.0-alpha.1", updated: false });
+  assert.deepEqual(JSON.parse(current.stdout), { status: "ok", currentVersion: CURRENT_CLI_VERSION, latestVersion: CURRENT_CLI_VERSION, updated: false });
   assert.equal(current.spawn, undefined);
 
   const newer = await runUpdateProcess("newer", ["--update", "--json"]);
   assert.equal(newer.exitCode, 0);
   assert.equal(newer.stderr, "");
-  assert.deepEqual(JSON.parse(newer.stdout), { status: "ok", currentVersion: "2.0.0-alpha.1", latestVersion: "99.0.0", updated: true });
+  assert.deepEqual(JSON.parse(newer.stdout), { status: "ok", currentVersion: CURRENT_CLI_VERSION, latestVersion: "99.0.0", updated: true });
   assert.deepEqual(newer.spawn, { command: process.platform === "win32" ? "npm.cmd" : "npm", args: ["install", "-g", "verglos@latest"], stdio: "ignore" });
 });
 
@@ -108,7 +109,7 @@ test("historic update alias preserves human output and quiet suppression", async
   const human = await runUpdateProcess("current", ["--update"]);
   assert.equal(human.exitCode, 0);
   assert.equal(human.stderr, "");
-  assert.equal(human.stdout.trim(), "Verglos CLI is already up to date (2.0.0-alpha.1).");
+  assert.equal(human.stdout.trim(), `Verglos CLI is already up to date (${CURRENT_CLI_VERSION}).`);
   assert.equal(human.spawn, undefined);
 
   const quiet = await runUpdateProcess("current", ["--update", "--quiet"]);

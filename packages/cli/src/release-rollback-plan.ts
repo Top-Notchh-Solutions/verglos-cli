@@ -1,4 +1,6 @@
-import { lstat, readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { constants } from "node:fs";
+import { lstat, open } from "node:fs/promises";
 import { decideReleaseRollback, type ReleaseReference } from "@verglos/shared";
 
 const MAX_BYTES = 64 * 1024;
@@ -13,6 +15,10 @@ const REQUIRED_REHEARSAL_KINDS = new Set([
   "signing-identity",
   "web-deployment",
 ] as const);
+
+function sha256(value: string | Buffer): string {
+  return `sha256:${createHash("sha256").update(value).digest("hex")}`;
+}
 
 type RollbackRehearsalOperation = Readonly<{
   id: string;
@@ -35,6 +41,31 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function parseReference(value: unknown): ReleaseReference {
   if (!isRecord(value)) throw new Error("rollback reference must be an object");
   return value as unknown as ReleaseReference;
+}
+
+async function readBoundedRegularFile(path: string, message: string): Promise<Buffer> {
+  const entry = await lstat(path);
+  if (!entry.isFile() || entry.size > MAX_BYTES) throw new Error(message);
+  const handle = await open(path, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
+  try {
+    const opened = await handle.stat();
+    if (!opened.isFile() || (entry.ino !== 0 && opened.ino !== 0 && (entry.dev !== opened.dev || entry.ino !== opened.ino))) {
+      throw new Error(`${message} changed during validation`);
+    }
+    if (opened.size > MAX_BYTES) throw new Error(message);
+    const bytes = await handle.readFile();
+    const final = await handle.stat();
+    if (!final.isFile()
+      || (opened.ino !== 0 && final.ino !== 0 && (opened.dev !== final.dev || opened.ino !== final.ino))
+      || final.size !== opened.size
+      || bytes.byteLength !== final.size
+      || bytes.byteLength > MAX_BYTES) {
+      throw new Error(`${message} changed during read`);
+    }
+    return bytes;
+  } finally {
+    await handle.close();
+  }
 }
 
 function parseRehearsalManifest(value: unknown): RollbackRehearsalManifest {
@@ -83,9 +114,7 @@ function parseRehearsalManifest(value: unknown): RollbackRehearsalManifest {
 }
 
 async function readReference(path: string): Promise<ReleaseReference> {
-  const entry = await lstat(path);
-  if (!entry.isFile() || entry.size > MAX_BYTES) throw new Error("release reference must be a bounded regular file");
-  const value: unknown = JSON.parse(await readFile(path, "utf8"));
+  const value: unknown = JSON.parse((await readBoundedRegularFile(path, "release reference must be a bounded regular file")).toString("utf8"));
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("release reference must be a JSON object");
   return value as ReleaseReference;
 }
@@ -125,9 +154,9 @@ export async function executeReleaseRollbackRehearsal(input: Readonly<{
   quiet?: boolean;
 }>): Promise<number> {
   try {
-    const entry = await lstat(input.manifestPath);
-    if (!entry.isFile() || entry.size > MAX_BYTES) throw new Error("rollback rehearsal manifest must be a bounded regular file");
-    const manifest = parseRehearsalManifest(JSON.parse(await readFile(input.manifestPath, "utf8")));
+    const manifestBytes = await readBoundedRegularFile(input.manifestPath, "rollback rehearsal manifest must be a bounded regular file");
+    const manifestDigest = sha256(manifestBytes);
+    const manifest = parseRehearsalManifest(JSON.parse(manifestBytes.toString("utf8")));
     const historicalBefore = manifest.historicalRecords.map((record) => `${record.id}:${record.digest}`);
     const operations: Array<Record<string, unknown>> = [];
     for (const operation of manifest.operations) {
@@ -140,7 +169,7 @@ export async function executeReleaseRollbackRehearsal(input: Readonly<{
         preserveHistoricalRecords: true,
       });
       if (!decision.allowed) {
-        const report = { status: "failed", failedOperation: operation.id, reason: decision.reason, operations, historicalRecordsPreserved: true };
+        const report = { status: "failed", manifestDigest, failedOperation: operation.id, reason: decision.reason, operations, historicalRecordsPreserved: true };
         if (input.json) console.log(JSON.stringify(report));
         else if (!input.quiet) console.error(`Rollback rehearsal denied: ${decision.reason}.`);
         return 78;
@@ -149,7 +178,7 @@ export async function executeReleaseRollbackRehearsal(input: Readonly<{
     }
     const historicalAfter = manifest.historicalRecords.map((record) => `${record.id}:${record.digest}`);
     const historicalRecordsPreserved = JSON.stringify(historicalBefore) === JSON.stringify(historicalAfter);
-    const report = { status: historicalRecordsPreserved ? "passed" : "failed", operationCount: operations.length, operations, historicalRecordCount: manifest.historicalRecords.length, historicalRecordsPreserved };
+    const report = { status: historicalRecordsPreserved ? "passed" : "failed", manifestDigest, operationCount: operations.length, operations, historicalRecordCount: manifest.historicalRecords.length, historicalRecordsPreserved };
     if (input.json) console.log(JSON.stringify(report));
     else if (!input.quiet) console.log(historicalRecordsPreserved ? `Rollback rehearsal passed for ${operations.length} operations. Historical records preserved.` : "Rollback rehearsal failed: historical records changed.");
     return historicalRecordsPreserved ? 0 : 78;

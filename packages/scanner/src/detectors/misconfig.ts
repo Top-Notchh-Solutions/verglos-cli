@@ -81,6 +81,15 @@ const SENSITIVE_LOG_CONTEXT = new RegExp(
   "i",
 );
 
+// A fixed notice cannot expose a runtime secret. Keep dynamic expressions,
+// concatenation, and multi-argument logs in scope for D8-001.
+const STATIC_CONSOLE_MESSAGE =
+  /^\s*console\.log\s*\(\s*(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`)\s*\)\s*;?\s*$/;
+
+function isStaticConsoleMessage(line: string): boolean {
+  return STATIC_CONSOLE_MESSAGE.test(line) && !line.includes("${");
+}
+
 function nearbyContext(lines: string[], index: number, radius: number): string {
   const start = Math.max(0, index - radius);
   const end = Math.min(lines.length, index + radius + 1);
@@ -275,7 +284,11 @@ export const misconfigDetector: Detector = {
           });
         }
 
-        if (/console\.log\s*\(/i.test(line) && SENSITIVE_LOG_CONTEXT.test(line)) {
+        if (
+          /console\.log\s*\(/i.test(line) &&
+          !isStaticConsoleMessage(line) &&
+          SENSITIVE_LOG_CONTEXT.test(line)
+        ) {
           findings.push({
             id: randomUUID(),
             detector: "misconfig",

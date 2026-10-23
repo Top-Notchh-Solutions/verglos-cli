@@ -133,6 +133,22 @@ test("AUTH-003: does NOT fire when crypto.timingSafeEqual is used in the same fi
   assert.equal(hit.length, 0);
 });
 
+test("AUTH-003: does NOT fire on empty URL password/hash component checks", async () => {
+  const files = fixture(`
+    export function isSafeOrigin(value: string) {
+      const parsed = new URL(value);
+      return parsed.password === "" && parsed.hash === "";
+    }
+    export function check(password: string, input: string) {
+      return password === input;
+    }
+  `);
+  const findings = await deepAuthDetector.run(files, tmpRoot);
+  const hit = findings.filter((f) => f.rule === "AUTH-003");
+  assert.equal(hit.length, 1);
+  assert.equal(hit[0]?.line, 7);
+});
+
 // ── AUTH-004: session/cookie missing flags ────────────────────────────────
 
 test("AUTH-004: fires on cookie block with none of httpOnly/secure/sameSite", async () => {

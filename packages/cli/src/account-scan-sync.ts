@@ -37,6 +37,7 @@ export async function sendAccountScanSync(
         finding_high: result.score.counts.high,
         cli_version: options.cliVersion,
       }),
+      redirect: "error",
       signal: controller.signal,
     });
   } catch {

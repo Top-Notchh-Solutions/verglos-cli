@@ -69,6 +69,7 @@ const MAX_TIMEOUT = 15 * 60 * 1000;
 const MAX_OUTPUT = 1 * 1024 * 1024;
 const MAX_MEMORY = 4096;
 const MAX_PROCESSES = 256;
+const MAX_JOB_LIFETIME_MS = 30 * 60 * 1000;
 
 function validDate(value: unknown): value is string {
   return typeof value === "string" && Number.isFinite(Date.parse(value));
@@ -87,6 +88,7 @@ function validShape(job: PrivateRunnerJob): boolean {
       && ID.test(job.jobId) && ID.test(job.tenantId) && ID.test(job.runnerId) && ID.test(job.recipeId)
       && ID.test(job.targetSubjectId) && DIGEST.test(job.targetDigest)
       && validDate(job.issuedAt) && validDate(job.expiresAt) && NONCE.test(job.nonce)
+      && Date.parse(job.expiresAt) - Date.parse(job.issuedAt) <= MAX_JOB_LIFETIME_MS
       && (job.network.mode === "denied" || job.network.mode === "allowlisted")
       && Array.isArray(job.network.destinations)
       && job.network.destinations.length <= 16 && job.network.destinations.every((value) => /^https:\/\//u.test(value) && value.length <= 512)

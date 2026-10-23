@@ -7,7 +7,7 @@ import {
   loadCredentials,
   saveCredentials,
 } from "./credentials.js";
-import { readJsonResponse } from "./http-response.js";
+import { fetchJsonResponse } from "./http-response.js";
 
 /**
  * `verglos login` — device-code flow.
@@ -47,32 +47,17 @@ const LOGIN_TIMEOUT_MS = 15 * 60 * 1000;
 const DEFAULT_POLL_MS = 3000;
 const REQUEST_TIMEOUT_MS = 8000;
 
-async function fetchWithTimeout(
-  url: string,
-  init: RequestInit,
-  timeoutMs = REQUEST_TIMEOUT_MS,
-): Promise<Response> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    return await fetch(url, { ...init, signal: controller.signal });
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 async function startDeviceFlow(apiUrl: string): Promise<StartResponse> {
-  const res = await fetchWithTimeout(`${apiUrl}/api/v1/cli-auth/start`, {
+  const { response: res, json: body } = await fetchJsonResponse(`${apiUrl}/api/v1/cli-auth/start`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: "{}",
-  });
+  }, { timeoutMs: REQUEST_TIMEOUT_MS });
   if (!res.ok) {
     throw new Error(
       `Could not start device-code flow (HTTP ${res.status}). Try again in a moment.`,
     );
   }
-  const body = await readJsonResponse(res);
   if (!body || typeof body !== "object") throw new Error("Device-code response was invalid.");
   return body as StartResponse;
 }
@@ -82,13 +67,12 @@ async function pollOnce(
   deviceCode: string,
 ): Promise<StatusResponse | null> {
   try {
-    const res = await fetchWithTimeout(
+    const { response: res, json: body } = await fetchJsonResponse(
       `${apiUrl}/api/v1/cli-auth/status?device_code=${encodeURIComponent(deviceCode)}`,
       { method: "GET" },
-      REQUEST_TIMEOUT_MS,
+      { timeoutMs: REQUEST_TIMEOUT_MS },
     );
     if (!res.ok) return null;
-    const body = await readJsonResponse(res);
     return body && typeof body === "object" ? body as StatusResponse : null;
   } catch {
     return null;

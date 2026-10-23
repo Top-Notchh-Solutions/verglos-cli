@@ -15,6 +15,7 @@ export async function fetchLatestVersion(): Promise<string | null> {
   try {
     const response = await fetch(REGISTRY_LATEST_URL, {
       signal: controller.signal,
+      redirect: "error",
       headers: {
         accept: "application/json",
       },

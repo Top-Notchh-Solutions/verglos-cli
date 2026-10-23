@@ -37,5 +37,5 @@ test("fixture validator is deterministic and bounded", () => {
     error: "unsupported-schema",
   });
   assert.deepEqual(validateContractFixtureJson("{"), { valid: false, error: "malformed-json" });
-  assert.equal(supportedContractFixtureSchemaIds().length, 12);
+  assert.equal(supportedContractFixtureSchemaIds().length, 15);
 });

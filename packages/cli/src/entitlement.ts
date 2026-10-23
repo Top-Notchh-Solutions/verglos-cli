@@ -4,7 +4,12 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 import chalk from "chalk";
 import { verifyEntitlement } from "@verglos/entitlement";
-import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
+import {
+  DEFAULT_API_URL,
+  getTrustedApiOrigin,
+  loadCredentials,
+} from "./credentials.js";
+import { readJsonResponse } from "./http-response.js";
 import { normalizeTier, type Tier } from "./tier-defaults.js";
 
 /**
@@ -127,11 +132,16 @@ async function writeCache(entry: CachedCapabilities): Promise<void> {
 async function fetchWithTimeout(
   url: string,
   init: RequestInit,
-): Promise<Response> {
+  consume: (response: Response) => Promise<CapabilitiesResponse | null>,
+): Promise<CapabilitiesResponse | null> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   try {
-    return await fetch(url, { ...init, signal: controller.signal });
+    const response = await fetch(url, { ...init, redirect: "error", signal: controller.signal });
+    // Keep the deadline active until the bounded response reader has consumed
+    // the body. Headers arriving is not completion of an authenticated
+    // capability response.
+    return await consume(response);
   } finally {
     clearTimeout(timer);
   }
@@ -149,18 +159,15 @@ async function fetchFromServer(
   if (asPlan) url.searchParams.set("as_plan", asPlan);
 
   try {
-    const res = await fetchWithTimeout(url.toString(), {
+    return await fetchWithTimeout(url.toString(), {
       method: "GET",
       headers: licenseKey
         ? { authorization: `Bearer ${licenseKey}` }
         : {},
+    }, async (response) => {
+      if (!response.ok) return null;
+      return parseCapabilitiesResponse(await readJsonResponse(response, MAX_CAPABILITIES_RESPONSE_BYTES));
     });
-    if (!res.ok) return null;
-    const length = Number(res.headers.get("content-length") ?? "0");
-    if (Number.isFinite(length) && length > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
-    const bytes = await res.arrayBuffer();
-    if (bytes.byteLength > MAX_CAPABILITIES_RESPONSE_BYTES) return null;
-    return parseCapabilitiesResponse(JSON.parse(new TextDecoder().decode(bytes)));
   } catch {
     return null;
   }

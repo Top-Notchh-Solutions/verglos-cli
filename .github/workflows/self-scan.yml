@@ -55,11 +55,19 @@ jobs:
       - name: Test dependency license inventory and SBOM coverage
         run: node --test scripts/license-inventory.test.mjs
 
+      - name: Validate external engine and content license records
+        run: |
+          node scripts/validate-external-license-records.mjs
+          node --test scripts/external-license-records.test.mjs
+
       - name: Check third-party notices drift
         run: |
           node scripts/generate-third-party-notices.mjs > generated-third-party-notices
+          node --test scripts/generate-third-party-notices.test.mjs
           test -s generated-third-party-notices
           grep -q '^THIRD-PARTY NOTICES$' generated-third-party-notices
+          grep -q '^EXTERNAL ENGINE AND CONTENT RECORDS$' generated-third-party-notices
+          grep -q '^engine\.trivy — Trivy$' generated-third-party-notices
 
       - name: Check CycloneDX SBOM drift
         run: |
@@ -81,6 +89,7 @@ jobs:
             generated-third-party-notices
             generated-sbom.json
             generated-spdx.json
+            licenses/external-content-records.json
           if-no-files-found: error
           retention-days: 14
 
@@ -89,7 +98,7 @@ jobs:
 
       - name: Qualify clean public package archives
         run: |
-          node --test scripts/pack-public-packages.test.mjs scripts/package-surface-audit.test.mjs
+          node --test scripts/pack-public-packages.test.mjs scripts/package-surface-audit.test.mjs scripts/check-packed-manifests.test.mjs
           node scripts/pack-public-packages.mjs .artifacts/public-packages
           node scripts/check-packed-manifests.mjs .artifacts/public-packages
 
@@ -107,6 +116,20 @@ jobs:
           path: |
             .artifacts/public-packages/*.tgz
             .artifacts/public-packages/clean-consumer-verification.txt
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Verify Hunt fixture verdicts
+        run: |
+          set -o pipefail
+          node scripts/verify-hunt-fixtures.mjs | tee hunt-fixture-verification.log
+
+      - name: Upload Hunt fixture evidence
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: hunt-fixtures-${{ github.sha }}
+          path: hunt-fixture-verification.log
           if-no-files-found: error
           retention-days: 14
 
@@ -136,6 +159,9 @@ jobs:
 
       - name: Test release artifact verifier
         run: node --test scripts/verify-release-artifacts.test.mjs scripts/package-surface-audit.test.mjs
+
+      - name: Verify release rollback/revocation rehearsal
+        run: node scripts/verify-release-rollback-rehearsal.mjs
 
       - name: Typecheck
         run: pnpm typecheck

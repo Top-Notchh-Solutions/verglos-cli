@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/assets/hero.svg" alt="Verglos — security scanning for AI-generated code" width="100%">
+  <img src=".github/assets/hero.svg" alt="Verglos — the security decision layer for AI-generated code" width="100%">
 </p>
 
 <p align="center">
@@ -21,8 +21,8 @@
 </p>
 
 <p align="center">
-  <strong>Verglos scans AI-assisted JavaScript and TypeScript locally today, with v2 hunt verification and signed evidence moving through the alpha and beta track.</strong><br>
-  <sub>The evidence agent for AI-generated code. Free scanner forever. Hunt and attest are v2 alpha shells until beta functionality lands.</sub>
+  <strong>Verglos is the local-first security decision layer between AI-assisted code changes and release.</strong><br>
+  <sub>Scan JavaScript and TypeScript locally, then verify selected findings only through approved, trusted, bounded Hunt recipes.</sub>
 </p>
 
 <p align="center">
@@ -70,11 +70,12 @@ Open the HTML to drill into every finding, or ship the JSON to CI.
 
 ## What Verglos catches
 
-Verglos is a three-command CLI: `scan` finds deterministic SAST/SCA issues locally today. `hunt` and `attest` are the v2 track: alpha shells now, with functional local verification and signed evidence landing in beta.
+Verglos is a local security decision layer: `scan` finds deterministic SAST/SCA issues, `hunt` verifies a selected finding through a signed bounded recipe, and Release Record commands preserve portable evidence. The legacy `attest` command remains a compatibility shell; use `record create`, `record sign`, `record verify`, and `record pack` for the supported evidence path.
 
 - **`verglos scan`** — fast, deterministic, local, and free.
-- **`verglos hunt`** — Pro shell in v2.0.0-alpha; functional local sandbox verification lands in v2.0.0-beta.
-- **`verglos attest`** — Studio shell in v2.0.0-alpha; functional Ed25519 signing lands in v2.0.0-beta.
+- **`verglos scan --hunt`** — writes the scan report and prints the exact signed-execution handoff; it never auto-approves or executes a recipe.
+- **`verglos hunt --execute`** — Pro capability for the shipped A1 bounded runtime, with signed recipe, trust-store, approval, and subject/observation bindings.
+- **`verglos record ...`** — create, sign, verify, export, and package portable Release Records.
 
 Verglos ships **SAST** (static application security testing — code-side detectors) and **SCA** (software composition analysis — dependency + supply-chain) in one CLI. AI-provenance is layered on top; production DAST remains out of scope.
 
@@ -160,6 +161,7 @@ verglos scan --all             # include low-confidence findings
 verglos scan --strict          # include test-file findings in the score
 verglos scan --no-provenance   # skip AI-authorship analysis (fastest)
 verglos scan --verify-secrets  # ping GitHub/Stripe to prove matched keys are live
+verglos scan --hunt             # print the signed Hunt execution handoff
 ```
 
 Writes `verglos-report.html` (open in a browser) and `verglos-report.json` (ship to CI or a dashboard).
@@ -177,7 +179,7 @@ Useful for shell pipelines: `if [ "$(verglos score)" -lt 70 ]; then …`
 ```bash
 verglos ci                     # blocks on any critical (Free)
 verglos ci --threshold 80      # blocks if score < 80 (Pro)
-verglos ci --hunt              # shell: verified-only gating ships in v2.0.0-beta
+verglos ci --hunt              # require paid Hunt capability; signed execution needs explicit bindings
 verglos ci --quiet             # suppress output
 ```
 
@@ -193,7 +195,68 @@ verglos hunt --finding D4-004-1
 verglos hunt --dry-run
 ```
 
-In v2.0.0-alpha this is a shell and exits `78` for Pro/Studio users. Functional per-detector proof synthesis and sandbox execution ship in v2.0.0-beta.
+For the Scout/Context phase, build a bounded local target manifest before
+planning a Hunt. Scout reads package metadata and source text statically,
+reports relative entrypoints, routes/API candidates, dependency boundaries,
+MCP tool names, and candidate sinks, and never executes project code or uploads
+source:
+
+```bash
+verglos hunt scout . --json
+```
+
+Use the Scout envelope to create an execution-free Attack-Hypothesis plan for
+an exact finding. The planner selects only a registered public playbook and
+reports the target references, proposed bindings, and required trust,
+entitlement, and approval gates; it never executes a command or approves
+itself:
+
+```bash
+verglos hunt hypothesis scout.json \
+  --finding-id finding-123 \
+  --rule-id D1-003 \
+  --subject-id "$VERGLOS_SUBJECT_ID" \
+  --json
+```
+
+An unsupported rule or incomplete target context is reported explicitly. A
+signed recipe, trusted feed, entitlement, approval, observation binding, and
+bounded worker are still required before any Hunt execution.
+
+Once those gates are independently available, execute one hypothesis through
+the bounded worker with the exact scanner report, signed recipe, trust store,
+approval receipt, and observation identity:
+
+```bash
+verglos hunt worker hypothesis.json \
+  --report report.json \
+  --recipe recipe.json \
+  --trust-store trust-store.json \
+  --approval approval.json \
+  --observation-id urn:uuid:12345678-1234-4123-8123-123456789abc \
+  --json
+```
+
+The worker rechecks the finding, subject, rule, catalog projection, signed
+recipe, entitlement, approval, and observation binding before selecting the
+declared restricted-process or pinned Docker adapter. Its result identifies a
+candidate worker outcome; independent proof/counterexample and approved
+remediation retest remain explicit subsequent gates.
+
+The no-argument command validates the Pro capability and explains the required binding. Execution is explicit and fail-closed:
+
+```bash
+verglos hunt --execute-report verglos-report.json \
+  --execute-recipe signed-recipe.json \
+  --execute-trust-store trust-store.json \
+  --execute-approval approval.json \
+  --execute-rule-id hunt.a1.utf8-contains \
+  --execute-subject-id "$VERGLOS_SUBJECT_ID" \
+  --execute-observation-id "$VERGLOS_OBSERVATION_ID" \
+  --json
+```
+
+The shipped public runtime supports the bounded A1 fixture-probe catalog: UTF-8 containment, path-traversal shape, command-injection shape, private/local SSRF target classification, tenant-boundary mismatch, SQL/NoSQL injection shape, safe XSS shape, and agent/MCP tool-boundary mismatch. It also admits the ten approved A2 target-harness families: SQL/NoSQL injection, command injection, path traversal, SSRF, Agent/MCP boundaries, XSS, authorization/tenant checks, prototype-pollution object merges, synthetic credential-use, and disposable supply-chain admission behavior. A2 runs only a signed recipe's exact `.verglos/hunt/<family>.mjs` entrypoint in a pinned Node container with read-only project input, denied network, dropped capabilities, and bounded resources. The harness must emit one bounded JSON result line; arbitrary model-generated shell and unsigned content are rejected. The Docker adapter reports A2 assurance and its explicit host-daemon/platform limitation. A confirmed result exits `1`; a clean supported result exits `0`; invalid or unauthorized input exits `78`.
 
 ### `verglos attest` — signed evidence bundle `Studio`
 
@@ -202,7 +265,7 @@ verglos attest --report verglos-report.json --sign
 verglos attest --verify-url https://verglos.com/verify
 ```
 
-In v2.0.0-alpha this is a shell and exits `78` for Studio users. Functional Ed25519 signing, portable JSON+HTML bundles, and public verify URLs ship in v2.0.0-beta.
+`attest` is retained as a compatibility shell. The supported portable evidence workflow is `record create`, `record sign`, `record verify`, and `record pack`; hosted custody and public verification remain separately qualified product gates.
 
 ### `verglos fix` — auto-remediation `Pro`
 
@@ -329,14 +392,14 @@ jobs:
 | `verglos ci` (block on any critical) | Yes | Yes | Yes | Yes | Yes |
 | Pre-commit hook | Yes | Yes | Yes | Yes | Yes |
 | `verglos secrets` / `deps` / `score` | Yes | Yes | Yes | Yes | Yes |
-| **`verglos hunt` on Critical + High** | — | Alpha shell | Alpha shell | Beta | Beta |
+| **Signed `verglos hunt` on Critical + High** | — | A1 bounded fixture path | A1 bounded fixture path | A1 bounded fixture path | A1 bounded fixture path |
 | **`verglos hunt` on Medium** | — | — | — | Beta | Beta |
 | **MCP hunt tools** | — | Alpha shell | Alpha shell | Beta | Beta |
 | **`verglos fix`** | — | Yes | Yes | Yes | Yes |
-| **`verglos ci --hunt`** | — | Alpha path | Alpha path | Beta | Beta |
+| **`verglos ci --hunt`** | — | Paid capability + explicit binding | Paid capability + explicit binding | Paid capability + explicit binding | Paid capability + explicit binding |
 | **CI score threshold** | — | Yes | Yes | Yes | Yes |
 | **Continuous CVE monitoring** | — | Yes | Yes | Yes | Yes |
-| **`verglos attest`** | — | — | — | Alpha shell | Beta |
+| **`verglos attest` compatibility shell** | — | — | — | Legacy shell | Legacy shell |
 | **Public verify URL** | — | — | — | Beta | Beta |
 | **White-label report** | — | — | — | Beta | Beta |
 | **Firecracker sandbox adapter** | — | — | — | Beta | Beta |
@@ -349,9 +412,9 @@ Upgrade Pro or Team at **[verglos.com/checkout](https://verglos.com/checkout)**.
 
 ## What's new in 2.0.0
 
-- Added `verglos hunt` shell (Pro+, exit `78` in alpha).
-- Added `verglos attest` shell (Studio, exit `78` in alpha).
-- Added `packages/hunt` and `packages/attest` alpha interfaces; Hunt now includes bounded recipe/trust/redaction/Docker runtime boundaries while supported recipes and hosted Attest remain gated.
+- Added the public bounded A1 Hunt fixture-probe catalog, seven signed A2 target-harness descriptors, seven sanitized reference harness fixtures, and the explicit signed execution path (`verglos hunt --execute`).
+- Added the `scan --hunt` handoff; it never invents approvals or executes unsigned content.
+- Kept `verglos attest` as a compatibility shell; Release Record commands provide the supported portable evidence path.
 - Added `verified` on every finding (`null` until hunt runs).
 - Added verified-state rendering in HTML, terminal, and JSON reports.
 - Added five MCP stubs: `verglos_hunt_finding`, `verglos_hunt_report`, `verglos_hunt_before_write`, `verglos_hunt_explain_verdict`, and `verglos_attest`.
@@ -406,7 +469,7 @@ Full disclosure: **[verglos.com/account/docs#privacy](https://verglos.com/accoun
 
 ## Repo layout
 
-This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages are published under the `@verglos` scope plus the `verglos` bin; Hunt and Attest remain alpha surfaces, with supported Hunt recipe content and hosted Attest workflows gated for beta.
+This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages are published under the `@verglos` scope plus the `verglos` bin. Hunt has bounded A1 fixture probes plus an approved A2 target-harness protocol with signed execution bindings; hosted trust, licensing, and acceptance gates remain separate. `attest` is a compatibility shell while Release Records are the supported evidence workflow.
 
 | Package | What it does |
 |---|---|
@@ -416,8 +479,8 @@ This is the CLI monorepo (`Top-Notchh-Solutions/verglos-cli`). Public packages a
 | **`packages/shared`** | Types, config schema, fingerprint, plan matrix |
 | **`packages/entitlement`** | License verification client, capability caching |
 | **`packages/mcp`** | Model Context Protocol server for AI coding agents |
-| **`packages/hunt`** | Local sandbox verification interfaces; implementation ships in v2.0.0-beta |
-| **`packages/attest`** | Signed evidence bundle interfaces; implementation ships in v2.0.0-beta |
+| **`packages/hunt`** | Bounded Hunt adapters, A1 fixture probes, A2 target-harness catalog/protocol, trust/approval bindings, and execution runtime |
+| **`packages/attest`** | Compatibility interfaces; supported portable evidence is implemented by CLI Release Record commands |
 
 The web app + billing lives in a separate repo (`verglos-web`). Docs and planning notes live in `Top-Notchh-Solutions/verglos-archive` (private).
 

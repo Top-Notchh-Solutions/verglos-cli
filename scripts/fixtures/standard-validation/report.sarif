@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Verglos standard-validation fixture",
+          "version": "1.0.0",
+          "rules": [
+            {
+              "id": "fixture.safe-boundary",
+              "shortDescription": {
+                "text": "Bounded qualification fixture"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "fixture.safe-boundary",
+          "level": "warning",
+          "message": {
+            "text": "Synthetic qualification finding"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "fixtures/standard-validation/input.js"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

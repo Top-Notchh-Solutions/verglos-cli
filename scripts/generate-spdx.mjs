@@ -12,7 +12,10 @@ function spdxDownloadLocation(source) {
   // SPDX downloadLocation accepts a URI or NOASSERTION. npm manifests often
   // use GitHub's shorthand `owner/repository`; retaining that string would
   // produce an invalid SPDX document, so preserve only URI-shaped sources.
-  return /^(?:[A-Za-z][A-Za-z0-9+.-]*):\/\//u.test(value) || value === "NOASSERTION" ? value : "NOASSERTION";
+  // SPDX Tools' verifier accepts web URLs and the SPDX git+git@ form, but
+  // rejects otherwise URI-shaped values such as git+ssh://. Preserve those
+  // sources as NOASSERTION rather than emitting an invalid SPDX document.
+  return /^(?:https?|git\+git@):\/\//u.test(value) || /^git\+git@[A-Za-z0-9.\-]+:[A-Za-z0-9/\\.@_\-]+$/u.test(value) || value === "NOASSERTION" ? value : "NOASSERTION";
 }
 const { stdout } = await run("node", [join(root, "scripts/license-inventory.mjs")], { cwd: root, maxBuffer: 16 * 1024 * 1024 });
 const inventory = JSON.parse(stdout);

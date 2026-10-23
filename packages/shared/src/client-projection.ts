@@ -46,6 +46,20 @@ const WITHHELD_LIMITATION = "Limitation details withheld from this public projec
 function validId(value: unknown): value is string { return typeof value === "string" && ID.test(value); }
 function validDigest(value: unknown): value is string { return typeof value === "string" && DIGEST.test(value); }
 
+function approvalShape(value: unknown): value is ClientUploadApproval {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const approval = value as Record<string, unknown>;
+  return approval.action === "client-projection-upload"
+    && validId(approval.approvalId)
+    && validId(approval.organizationId)
+    && validId(approval.clientWorkspaceId)
+    && validDigest(approval.recordDigest)
+    && validDigest(approval.projectionDigest)
+    && validId(approval.approvedBy)
+    && typeof approval.issuedAt === "string"
+    && typeof approval.expiresAt === "string";
+}
+
 function validateSafeFields(raw: Record<string, unknown>): "private_field" | "unsupported_field" | "invalid_projection" | null {
   for (const key of Object.keys(raw)) {
     if (PRIVATE_FIELDS.has(key)) return "private_field";
@@ -67,7 +81,7 @@ export function clientProjectionDigest(projection: ClientProjection): string {
 export function admitClientProjectionUpload(input: Readonly<{
   actorOrganizationId: string;
   projection: unknown;
-  approval?: ClientUploadApproval;
+  approval?: unknown;
   now: string;
 }>): ClientProjectionDecision {
   if (!input.projection || typeof input.projection !== "object" || Array.isArray(input.projection)) return { ok: false, reason: "invalid_projection" };
@@ -82,9 +96,8 @@ export function admitClientProjectionUpload(input: Readonly<{
   const projection = Object.freeze({ ...raw, schemaId: CLIENT_PROJECTION_SCHEMA.id, schemaVersion: CLIENT_PROJECTION_SCHEMA.version, organizationId, clientWorkspaceId, recordDigest });
   const bytes = Buffer.byteLength(canonicalizeJson(projection), "utf8");
   if (bytes > MAX_PROJECTION_BYTES) return { ok: false, reason: "projection_too_large" };
-  if (!input.approval) return { ok: false, reason: "approval_required" };
+  if (!approvalShape(input.approval)) return { ok: false, reason: input.approval ? "approval_mismatch" : "approval_required" };
   const approval = input.approval;
-  if (approval.action !== "client-projection-upload") return { ok: false, reason: "approval_mismatch" };
   if (approval.organizationId !== organizationId) return { ok: false, reason: "approval_mismatch" };
   if (approval.clientWorkspaceId !== clientWorkspaceId) return { ok: false, reason: "workspace_mismatch" };
   if (approval.recordDigest !== recordDigest) return { ok: false, reason: "record_mismatch" };

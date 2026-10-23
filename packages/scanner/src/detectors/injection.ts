@@ -85,6 +85,16 @@ const INJECTION_PATTERNS: InjectionPattern[] = [
     fix: "Validate paths against an allowlist. Use path.resolve and check prefix.",
   },
   {
+    name: "Prototype pollution (unfiltered object merge)",
+    rule: "D1-008",
+    domain: "D1",
+    pattern: /Object\.assign\s*\(\s*\{\}\s*,\s*(?:req\.body|request\.body|requestBody|userInput|payload)\s*\)/i,
+    severity: "high",
+    description: "Unfiltered request data is merged into a plain object and may allow prototype pollution.",
+    why: "Object.assign invokes the __proto__ setter on a plain object. An attacker-controlled key can change the object's prototype and influence later authorization or configuration checks.",
+    fix: "Reject __proto__, constructor, and prototype keys before merging, or merge into a null-prototype object with an explicit allowlist.",
+  },
+  {
     name: "Mass assignment",
     rule: "D3-001",
     domain: "D3",

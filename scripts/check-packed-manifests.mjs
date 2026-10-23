@@ -4,7 +4,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { posix } from "node:path";
 import { auditPackageSurface, auditPublicPackageSet, isForbiddenPublicPackagePath } from "./package-surface-audit.mjs";
-import { readBoundedFile } from "./read-bounded-json.mjs";
+import { MAX_RELEASE_ARTIFACT_BYTES, readBoundedRegularFile } from "./release-artifact-files.mjs";
 
 const root = resolve(process.argv[2] ?? "");
 const repositoryRoot = fileURLToPath(new URL("..", import.meta.url));
@@ -29,7 +29,7 @@ function readTarEntries(archiveBytes) {
   }
   return entries;
 }
-const authoritativeLicense = await readBoundedFile(join(repositoryRoot, "LICENSE"), "repository LICENSE");
+const authoritativeLicense = await readBoundedRegularFile(join(repositoryRoot, "LICENSE"), MAX_RELEASE_ARTIFACT_BYTES, "repository license");
 if (!process.argv[2]) throw new Error("packed artifact directory is required");
 if (!(await lstat(root)).isDirectory()) throw new Error("packed artifact root must be a directory");
 const archives = (await readdir(root)).filter((name) => name.endsWith(".tgz")).sort();
@@ -39,7 +39,8 @@ const failures = [];
 
 for (const name of archives) {
   const archive = join(root, name);
-  const entries = readTarEntries(await readBoundedFile(archive, `packed artifact ${name}`));
+  if (!(await lstat(archive)).isFile()) throw new Error(`packed artifact is not a regular file: ${name}`);
+  const entries = readTarEntries(await readBoundedRegularFile(archive, MAX_RELEASE_ARTIFACT_BYTES, `packed artifact ${name}`));
   let manifest;
   try {
     const packageManifest = entries.find((entry) => entry.name === "package/package.json");
@@ -53,8 +54,13 @@ for (const name of archives) {
   const seenMembers = new Set();
   for (const entry of entries) {
     const isDirectory = entry.type === "5" || entry.name.endsWith("/");
+    const isRegularFile = entry.type === "0" || entry.type === "\0";
     const path = entry.name.replaceAll("\\", "/").replace(/\/$/u, "");
     if (path === "package") continue;
+    if (!isDirectory && !isRegularFile) {
+      failures.push(`${name}: archive contains a non-regular member ${path}`);
+      continue;
+    }
     if (!path.startsWith("package/")) {
       failures.push(`${name}: archive entry is outside package/: ${path}`);
       continue;
@@ -67,7 +73,7 @@ for (const name of archives) {
     if (seenMembers.has(member)) failures.push(`${name}: archive repeats member path ${member}`);
     seenMembers.add(member);
     if (isForbiddenPublicPackagePath(member)) failures.push(`${name}: forbidden packaged path ${member}`);
-    if (!isDirectory) packageFiles.push(member);
+    if (isRegularFile) packageFiles.push(member);
   }
   failures.push(...auditPackageSurface(manifest, packageFiles));
   if (Object.values({ ...manifest.dependencies, ...manifest.optionalDependencies }).some((value) => typeof value === "string" && value.startsWith("workspace:"))) {

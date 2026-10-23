@@ -6,6 +6,13 @@ import { createHuntTestTrustStore, HUNT_TEST_TRUST_KEY_ID } from "./hunt-trust-t
 
 const subjectId = `urn:verglos:subject:artifact:sha256:${"a".repeat(64)}`;
 const finding = { id: "critical-1", severity: "critical", title: "critical", description: "fixture", detector: "deep-auth", confidence: "certain", category: "auth" } as never;
+const fixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
 
 function recipe(inputs: Readonly<Record<string, string>> = { value: "synthetic-safe-value", needle: "safe" }): HuntRecipe {
   return parseHuntRecipe({
@@ -17,6 +24,7 @@ function recipe(inputs: Readonly<Record<string, string>> = { value: "synthetic-s
     imageDigest: { algorithm: "sha256", value: "b".repeat(64) },
     command: ["verglos-probe", "utf8-contains"],
     assertions: ["probe result is true"],
+    fixtures,
     inputs,
     isolation: "restricted-process",
     limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 1, outputBytes: 128, processes: 1, maxNetworkRequests: 0 },
@@ -27,12 +35,16 @@ function recipe(inputs: Readonly<Record<string, string>> = { value: "synthetic-s
   });
 }
 
+function fixtureRecipe(command: string, inputs: Readonly<Record<string, string>>): HuntRecipe {
+  return parseHuntRecipe({ ...recipe(inputs), recipeId: `a1-${command}`, ruleId: `hunt.a1.${command}`, command: ["verglos-probe", command] });
+}
+
 function binding(selected: HuntRecipe) {
   const approval = createApprovalReceipt({ requestId: "723e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: subjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2026-01-01T01:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
   return bindHuntExecution({ recipe: selected, trust: createHuntTestTrustStore(selected), approval, ruleId: selected.ruleId, subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", at: "2026-01-01T00:02:00Z" });
 }
 
-test("A1 adapter runs only the fixed built-in pure probe and labels its non-isolation boundary", async () => {
+test("A1 adapter runs a bounded built-in pure fixture probe and labels its non-isolation boundary", async () => {
   const selected = recipe();
   const result = await new RestrictedProcessAdapter(selected).execute({ finding, projectRoot: "/not-read", timeoutMs: 2_000, binding: binding(selected) });
   assert.equal(result.verdict, "true");
@@ -46,7 +58,7 @@ test("A1 adapter runs only the fixed built-in pure probe and labels its non-isol
     sourceAccess: "none",
     network: "denied",
     processLimit: 1,
-    limitation: "A1 runs a trusted built-in pure probe in a bounded worker harness; it is not a security or OS isolation boundary",
+    limitation: "A1 runs a trusted built-in pure fixture probe in a bounded worker harness; it does not execute target code and is not a security or OS isolation boundary",
   });
 });
 
@@ -58,11 +70,34 @@ test("A1 adapter returns not-reproduced without exposing synthetic input", async
   assert.doesNotMatch(JSON.stringify(result), /sensitive-synthetic-canary/u);
 });
 
+test("A1 adapter runs the additional deterministic fixture probes", async () => {
+  const cases = [
+    [fixtureRecipe("path-traversal", { path: "../../etc/passwd" }), true],
+    [fixtureRecipe("command-injection", { input: "safe; echo unsafe" }), true],
+    [fixtureRecipe("ssrf-target", { url: "http://169.254.169.254/latest/meta-data" }), true],
+    [fixtureRecipe("tenant-boundary", { authorizedTenant: "tenant-a", requestedTenant: "tenant-b" }), true],
+    [fixtureRecipe("sql-injection", { input: "' OR '1'='1" }), true],
+    [fixtureRecipe("xss-safe", { html: "<img src=x onerror=alert(1)>" }), true],
+    [fixtureRecipe("agent-boundary", { allowlist: "read,write", tool: "delete" }), true],
+    [fixtureRecipe("path-traversal", { path: "safe/file.txt" }), false],
+    [fixtureRecipe("sql-injection", { input: "SELECT * FROM users WHERE id = $1" }), false],
+    [fixtureRecipe("xss-safe", { html: "<p>safe text</p>" }), false],
+    [fixtureRecipe("agent-boundary", { allowlist: "read,write", tool: "read" }), false],
+  ] as const;
+  for (const [selected, expected] of cases) {
+    const result = await new RestrictedProcessAdapter(selected).execute({ finding, projectRoot: "/not-read", timeoutMs: 2_000, binding: binding(selected) });
+    assert.equal(result.verdict, expected ? "true" : "false");
+    assert.equal(result.canonicalVerdict, expected ? "confirmed" : "not-reproduced");
+    assert.equal(result.assurance?.sourceAccess, "none");
+    assert.equal(result.assurance?.network, "denied");
+  }
+});
+
 test("A1 adapter rejects arbitrary command, network, process, and binding drift", async () => {
-  assert.throws(() => new RestrictedProcessAdapter(parseHuntRecipe({ ...recipe(), command: ["node", "model-output.js"] })), /built-in pure probe/);
+  assert.throws(() => new RestrictedProcessAdapter(parseHuntRecipe({ ...recipe(), command: ["node", "model-output.js"] })), /supported built-in fixture probe/);
   assert.throws(() => new RestrictedProcessAdapter(parseHuntRecipe({ ...recipe(), limits: { ...recipe().limits, processes: 2 } })), /one-worker/);
   assert.throws(() => new RestrictedProcessAdapter(parseHuntRecipe({ ...recipe(), cleanup: "on-success" })), /unconditional cleanup/);
   const selected = recipe();
   const adapter = new RestrictedProcessAdapter(selected);
-  await assert.rejects(() => adapter.execute({ finding, projectRoot: "/not-read", timeoutMs: 2_000, binding: { ...binding(selected), command: ["node", "other.js"] } }), /built-in probe/);
+  await assert.rejects(() => adapter.execute({ finding, projectRoot: "/not-read", timeoutMs: 2_000, binding: { ...binding(selected), command: ["node", "other.js"] } }), /supported built-in fixture probe/);
 });

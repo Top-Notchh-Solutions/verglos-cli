@@ -10,11 +10,16 @@ import {
 } from "@verglos/shared";
 import type { HuntFindingOutcome, SandboxAdapter } from "./types.js";
 
-const BUILT_IN_COMMAND = ["verglos-probe", "utf8-contains"] as const;
+const BUILT_IN_COMMAND_PREFIX = "verglos-probe";
 const BUILT_IN_ASSERTION = "probe result is true";
-const A1_LIMITATION = "A1 runs a trusted built-in pure probe in a bounded worker harness; it is not a security or OS isolation boundary";
+const A1_LIMITATION = "A1 runs a trusted built-in pure fixture probe in a bounded worker harness; it does not execute target code and is not a security or OS isolation boundary";
 
-interface WorkerResult { readonly matched: boolean }
+interface WorkerResult {
+  readonly matched: boolean;
+  readonly cpuMs: number;
+  readonly peakMemoryBytes: number;
+}
+type BuiltInProbe = "utf8-contains" | "path-traversal" | "command-injection" | "ssrf-target" | "tenant-boundary" | "sql-injection" | "xss-safe" | "agent-boundary";
 
 /**
  * A1 adapter for trusted, built-in pure probes only.
@@ -27,10 +32,13 @@ interface WorkerResult { readonly matched: boolean }
 export class RestrictedProcessAdapter implements SandboxAdapter {
   readonly id = "restricted-process" as const;
   private readonly recipe: HuntRecipe;
+  private readonly inputs: Readonly<Record<string, string>>;
 
-  constructor(recipe: HuntRecipe) {
+  constructor(recipe: HuntRecipe, options: { readonly inputs?: Readonly<Record<string, string>> } = {}) {
     this.recipe = parseHuntRecipe(recipe);
     validateRestrictedRecipe(this.recipe);
+    this.inputs = options.inputs ?? this.recipe.inputs ?? {};
+    validateRestrictedInputs(this.recipe.command[1] as BuiltInProbe, this.inputs);
   }
 
   async prepare(): Promise<void> {}
@@ -38,11 +46,8 @@ export class RestrictedProcessAdapter implements SandboxAdapter {
   async execute(input: { readonly finding: Finding; readonly projectRoot: string; readonly timeoutMs: number; readonly binding: HuntExecutionBinding }): Promise<HuntFindingOutcome> {
     validateBinding(this.recipe, input.binding);
     const timeoutMs = Math.min(input.timeoutMs, input.binding.limits.timeoutMs, input.binding.limits.cpuMs);
-    const result = await runBuiltInProbe({
-      probe: "utf8-contains",
-      value: this.recipe.inputs?.value ?? "",
-      needle: this.recipe.inputs?.needle ?? "",
-    }, timeoutMs, input.binding.limits.memoryMb);
+    const probe = this.recipe.command[1] as BuiltInProbe;
+    const result = await runBuiltInProbe({ probe, ...this.inputs }, timeoutMs, input.binding.limits.memoryMb);
     const timedOut = result === "timed-out";
     const matched = timedOut ? undefined : result.matched;
     const canonicalVerdict = classifyHuntOutcome({
@@ -57,16 +62,23 @@ export class RestrictedProcessAdapter implements SandboxAdapter {
       verdict: timedOut ? "not_attemptable" : matched ? "true" : "false",
       canonicalVerdict,
       reason: timedOut
-        ? "A1 built-in pure probe exceeded its declared CPU/time bound"
+        ? "A1 built-in fixture probe exceeded its declared CPU/time bound"
         : matched
-          ? "A1 built-in pure probe satisfied its fixed assertion"
-          : "A1 built-in pure probe did not satisfy its fixed assertion",
+          ? "A1 built-in fixture probe satisfied its fixed assertion"
+          : "A1 built-in fixture probe did not satisfy its fixed assertion",
       durationMs: result === "timed-out" ? timeoutMs : result.durationMs,
       evidenceDigest: huntEvidenceDigest({ stdout: evidence, stderr: "", truncated: false }),
       outputBytes: Buffer.byteLength(evidence, "utf8"),
       truncated: false,
       redacted: true,
       executionStatus: timedOut ? "timed-out" : "completed",
+      usage: timedOut ? undefined : {
+        cpuMs: Math.min(result.cpuMs, this.recipe.limits.cpuMs),
+        peakMemoryBytes: Math.min(result.peakMemoryBytes, this.recipe.limits.memoryMb * 1024 * 1024),
+        diskBytes: 0,
+        processes: 1,
+        networkRequests: 0,
+      },
       assurance: Object.freeze({
         class: "A1",
         isolation: "restricted-process",
@@ -84,28 +96,51 @@ export class RestrictedProcessAdapter implements SandboxAdapter {
 
 function validateRestrictedRecipe(recipe: HuntRecipe): void {
   if (recipe.isolation !== "restricted-process") throw new Error("A1 adapter requires restricted-process isolation");
-  if (recipe.command.length !== BUILT_IN_COMMAND.length || recipe.command.some((part, index) => part !== BUILT_IN_COMMAND[index])) {
-    throw new Error("A1 adapter accepts only a built-in pure probe identifier");
-  }
+  if (recipe.command.length !== 2 || recipe.command[0] !== BUILT_IN_COMMAND_PREFIX || !isBuiltInProbe(recipe.command[1])) throw new Error("A1 adapter accepts only a supported built-in fixture probe identifier");
   if (recipe.assertions.length !== 1 || recipe.assertions[0] !== BUILT_IN_ASSERTION) throw new Error("A1 adapter requires its fixed built-in assertion");
   if (recipe.network.mode !== "denied" || recipe.network.destinations.length !== 0 || recipe.limits.maxNetworkRequests !== 0) throw new Error("A1 adapter requires denied network");
   if (recipe.limits.processes !== 1) throw new Error("A1 adapter requires a one-worker process limit");
   if (recipe.limits.memoryMb < 16) throw new Error("A1 adapter requires at least 16 MB for the bounded worker runtime");
   if (recipe.cleanup !== "always") throw new Error("A1 adapter requires unconditional cleanup");
   if (recipe.redaction !== "required") throw new Error("A1 adapter requires output redaction");
-  if (!recipe.inputs || Object.keys(recipe.inputs).sort().join(",") !== "needle,value" || !recipe.inputs.needle) throw new Error("A1 built-in probe requires only bounded value and needle inputs");
+  if (!recipe.inputs) throw new Error("A1 built-in fixture probe requires its exact bounded inputs");
+  validateRestrictedInputs(recipe.command[1] as BuiltInProbe, recipe.inputs);
+}
+
+function validateRestrictedInputs(probe: BuiltInProbe, inputs: Readonly<Record<string, string>>): void {
+  const requiredInputs = requiredInputNames(probe);
+  if (Object.keys(inputs).sort().join(",") !== [...requiredInputs].sort().join(",") || Object.values(inputs).some((value) => value.length === 0 || value.length > 4096 || /[\u0000-\u001f\u007f]/u.test(value))) {
+    throw new Error("A1 built-in fixture probe requires its exact bounded inputs");
+  }
 }
 
 function validateBinding(recipe: HuntRecipe, binding: HuntExecutionBinding): void {
   if (binding.recipeDigest !== huntRecipeDigest(recipe)) throw new Error("A1 adapter recipe digest does not match the execution binding");
   if (binding.isolation !== "restricted-process") throw new Error("A1 adapter binding must declare restricted-process isolation");
-  if (binding.command.length !== BUILT_IN_COMMAND.length || binding.command.some((part, index) => part !== BUILT_IN_COMMAND[index])) throw new Error("A1 adapter binding does not select the built-in probe");
+  if (binding.command.length !== 2 || binding.command[0] !== BUILT_IN_COMMAND_PREFIX || !isBuiltInProbe(binding.command[1])) throw new Error("A1 adapter binding does not select a supported built-in fixture probe");
   if (binding.assertions.length !== 1 || binding.assertions[0] !== BUILT_IN_ASSERTION) throw new Error("A1 adapter binding does not select the fixed assertion");
   if (binding.network.mode !== "denied" || binding.network.destinations.length !== 0 || binding.limits.maxNetworkRequests !== 0) throw new Error("A1 adapter binding must deny network");
   if (binding.limits.processes !== 1) throw new Error("A1 adapter binding exceeds its process limit");
 }
 
-async function runBuiltInProbe(workerData: { readonly probe: "utf8-contains"; readonly value: string; readonly needle: string }, timeoutMs: number, memoryMb: number): Promise<WorkerResult & { readonly durationMs: number } | "timed-out"> {
+function isBuiltInProbe(value: string | undefined): value is BuiltInProbe {
+  return value === "utf8-contains" || value === "path-traversal" || value === "command-injection" || value === "ssrf-target" || value === "tenant-boundary" || value === "sql-injection" || value === "xss-safe" || value === "agent-boundary";
+}
+
+function requiredInputNames(probe: BuiltInProbe): readonly string[] {
+  switch (probe) {
+    case "utf8-contains": return ["needle", "value"];
+    case "path-traversal": return ["path"];
+    case "command-injection": return ["input"];
+    case "ssrf-target": return ["url"];
+    case "tenant-boundary": return ["authorizedTenant", "requestedTenant"];
+    case "sql-injection": return ["input"];
+    case "xss-safe": return ["html"];
+    case "agent-boundary": return ["allowlist", "tool"];
+  }
+}
+
+async function runBuiltInProbe(workerData: { readonly probe: BuiltInProbe; readonly [key: string]: string }, timeoutMs: number, memoryMb: number): Promise<WorkerResult & { readonly durationMs: number } | "timed-out"> {
   const started = Date.now();
   const worker = new Worker(new URL("./restricted-probe-worker.js", import.meta.url), {
     workerData,
@@ -131,11 +166,11 @@ async function runBuiltInProbe(workerData: { readonly probe: "utf8-contains"; re
     worker.once("message", (value: unknown) => {
       finish(() => {
         void worker.terminate();
-        if (!value || typeof value !== "object" || Array.isArray(value) || typeof (value as Record<string, unknown>).matched !== "boolean") {
+        if (!value || typeof value !== "object" || Array.isArray(value) || typeof (value as Record<string, unknown>).matched !== "boolean" || !Number.isSafeInteger((value as Record<string, unknown>).cpuMs) || Number((value as Record<string, unknown>).cpuMs) < 0 || !Number.isSafeInteger((value as Record<string, unknown>).peakMemoryBytes) || Number((value as Record<string, unknown>).peakMemoryBytes) < 0) {
           reject(new Error("A1 built-in probe returned an invalid result"));
           return;
         }
-        resolve({ matched: (value as WorkerResult).matched, durationMs: Math.max(0, Date.now() - started) });
+        resolve({ matched: (value as WorkerResult).matched, cpuMs: (value as WorkerResult).cpuMs, peakMemoryBytes: (value as WorkerResult).peakMemoryBytes, durationMs: Math.max(0, Date.now() - started) });
       });
     });
     worker.once("error", () => finish(() => reject(new Error("A1 built-in probe failed"))));

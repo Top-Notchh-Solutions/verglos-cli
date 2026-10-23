@@ -3,14 +3,23 @@ import { mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 import { canonicalizeJson, createApprovalReceipt, parseHuntRecipe, type HuntRecipe } from "@verglos/shared";
 import { createTestHuntTrustStore, TEST_HUNT_TRUST_KEY_ID } from "../../shared/src/hunt-trust-test-support.js";
+import { HUNT_TARGET_HARNESS_IMAGE_DIGEST, TARGET_HARNESS_ASSERTION } from "@verglos/hunt";
 import { executeHuntRecipe } from "./hunt-execute.js";
 import type { HuntRuntimeLoader } from "./hunt-runtime.js";
 
 const subjectId = `urn:verglos:subject:repository-tree:sha256:${"a".repeat(64)}`;
-// The Hunt runtime is intentionally not a public CLI dependency. The CLI test
-// task builds this private fixture explicitly before loading its dist output.
+const fixtures = {
+  positive: { fixtureId: "positive", expectedVerdict: "confirmed" },
+  negative: { fixtureId: "negative", expectedVerdict: "not-reproduced" },
+  timeout: { fixtureId: "timeout", expectedVerdict: "inconclusive" },
+  infrastructureFailure: { fixtureId: "infrastructure-failure", expectedVerdict: "environment-error" },
+  unsupported: { fixtureId: "unsupported", expectedVerdict: "not-supported" },
+} as const;
+// The Hunt runtime is a separately built public package. The CLI test task
+// builds it before loading the CLI execution path.
 const localHuntRuntime: HuntRuntimeLoader = () => import("../../hunt/dist/index.js");
 
 function recipe(inputs: Readonly<Record<string, string>> = { needle: "unsafe", value: "fixture contains unsafe" }): HuntRecipe {
@@ -23,6 +32,7 @@ function recipe(inputs: Readonly<Record<string, string>> = { needle: "unsafe", v
     imageDigest: { algorithm: "sha256", value: "b".repeat(64) },
     command: ["verglos-probe", "utf8-contains"],
     assertions: ["probe result is true"],
+    fixtures,
     inputs,
     isolation: "restricted-process",
     limits: { timeoutMs: 2_000, cpuMs: 1_500, memoryMb: 64, diskMb: 16, outputBytes: 1_024, processes: 1, maxNetworkRequests: 0 },
@@ -33,14 +43,47 @@ function recipe(inputs: Readonly<Record<string, string>> = { needle: "unsafe", v
   });
 }
 
-async function makeInputs(root: string, selected = recipe()): Promise<{ reportPath: string; recipePath: string; trustStorePath: string; approvalPath: string }> {
+const A2_FAMILIES = [
+  { recipeId: "a2-sql-nosql-injection-harness", ruleId: "D1-001", harness: "sql-nosql-injection" },
+  { recipeId: "a2-command-injection-harness", ruleId: "D1-003", harness: "command-injection" },
+  { recipeId: "a2-path-traversal-harness", ruleId: "D1-006", harness: "path-traversal" },
+  { recipeId: "a2-ssrf-harness", ruleId: "D9-002", harness: "ssrf" },
+  { recipeId: "a2-agent-mcp-harness", ruleId: "AGENT-001", harness: "agent-mcp" },
+  { recipeId: "a2-xss-harness", ruleId: "D1-004", harness: "xss" },
+  { recipeId: "a2-authorization-harness", ruleId: "D3-001", harness: "authorization" },
+  { recipeId: "a2-prototype-pollution-harness", ruleId: "D1-008", harness: "prototype-pollution" },
+  { recipeId: "a2-secrets-credential-use-harness", ruleId: "D4-001", harness: "secret-credential-use" },
+  { recipeId: "a2-supply-chain-harness", ruleId: "D6-001", harness: "supply-chain" },
+] as const;
+
+function a2Recipe(family: (typeof A2_FAMILIES)[number]): HuntRecipe {
+  return parseHuntRecipe({
+    schemaId: "urn:verglos:schema:hunt-recipe",
+    schemaVersion: "1.0.0",
+    recipeId: family.recipeId,
+    ruleId: family.ruleId,
+    targetSubjectId: subjectId,
+    imageDigest: { algorithm: "sha256", value: HUNT_TARGET_HARNESS_IMAGE_DIGEST.slice("sha256:".length) },
+    command: ["node", `/workspace/.verglos/hunt/${family.harness}.mjs`],
+    assertions: [TARGET_HARNESS_ASSERTION],
+    fixtures,
+    isolation: "container",
+    limits: { timeoutMs: 10_000, cpuMs: 9_000, memoryMb: 256, diskMb: 128, outputBytes: 16_384, processes: 8, maxNetworkRequests: 0 },
+    cleanup: "always",
+    network: { mode: "denied", destinations: [], reason: "A2 local reference harness" },
+    redaction: "required",
+    signature: { status: "verified", signer: TEST_HUNT_TRUST_KEY_ID },
+  });
+}
+
+async function makeInputs(root: string, selected = recipe(), projectRoot = root): Promise<{ reportPath: string; recipePath: string; trustStorePath: string; approvalPath: string }> {
   const reportPath = join(root, "report.json");
   const recipePath = join(root, "recipe.json");
   const trustStorePath = join(root, "trust-store.json");
   const approvalPath = join(root, "approval.json");
   const at = new Date().toISOString();
   const approval = createApprovalReceipt({ requestId: "523e4567-e89b-12d3-a456-426614174000", action: "execute", actor: "human", target: subjectId, files: [], network: [], policyEffect: "hunt", requestedAt: "2026-01-01T00:00:00Z", expiresAt: "2099-01-01T00:00:00Z" }, { decision: "approved", decidedBy: "human", decidedAt: "2026-01-01T00:01:00Z" });
-  await writeFile(reportPath, `${canonicalizeJson({ projectRoot: root, projectType: "node", scannedAt: at, durationMs: 1, findings: [{ id: "critical-1", severity: "critical", title: "fixture", description: "fixture" }] })}\n`);
+  await writeFile(reportPath, `${canonicalizeJson({ projectRoot, projectType: "node", scannedAt: at, durationMs: 1, findings: [{ id: "critical-1", detector: "hunt", rule: selected.ruleId, severity: "critical", title: "fixture", description: "fixture" }] })}\n`);
   await writeFile(recipePath, `${canonicalizeJson(selected)}\n`);
   await writeFile(trustStorePath, `${canonicalizeJson(createTestHuntTrustStore(selected, { at }))}\n`);
   await writeFile(approvalPath, `${canonicalizeJson(approval)}\n`);
@@ -76,6 +119,21 @@ test("HUNT-009 executes the fixed A1 recipe with exact trust and approval bindin
     assert.match(String((license.textDigest as Record<string, unknown>).value), /^[a-f0-9]{64}$/u);
     assert.doesNotMatch(JSON.stringify(result.output), /licenseText|Fixture license text/u);
     assert.deepEqual((result.output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.canonicalVerdict), ["confirmed"]);
+    const execution = result.output.execution as Record<string, unknown>;
+    assert.equal(execution.subjectId, subjectId);
+    assert.equal(execution.observationId, "urn:uuid:123e4567-e89b-12d3-a456-426614174000");
+    assert.equal(execution.ruleId, "hunt.a1.utf8-contains");
+    assert.match(String(execution.recipeDigest), /^sha256:[a-f0-9]{64}$/u);
+    assert.match(String(execution.trustPolicyDigest), /^sha256:[a-f0-9]{64}$/u);
+    assert.match(String(execution.approvalRequestDigest), /^sha256:[a-f0-9]{64}$/u);
+    const attempts = result.output.verificationAttempts as Array<Record<string, unknown>>;
+    assert.equal(attempts.length, 1);
+    assert.equal(attempts[0]?.subjectId, subjectId);
+    assert.equal(attempts[0]?.observationId, execution.observationId);
+    assert.equal(attempts[0]?.ruleId, execution.ruleId);
+    assert.equal(attempts[0]?.verdict, "confirmed");
+    assert.equal(attempts[0]?.executed, true);
+    assert.equal((result.output.outcomes as Array<Record<string, unknown>>)[0]?.verificationAttemptId, attempts[0]?.attemptId);
     assert.doesNotMatch(JSON.stringify(result.output), /unsafe|fixture contains/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -91,8 +149,51 @@ test("HUNT-009 preserves a negative probe as not-reproduced without leaking inpu
       const code = await executeHuntRecipe({ ...inputs, ruleId: "hunt.a1.utf8-contains", subjectId, observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000", json: true, runtimeLoader: localHuntRuntime });
       assert.equal(code, 0);
     } finally { console.log = originalLog; }
-    assert.equal(JSON.parse(logs[0] ?? "{}").outcomes[0].canonicalVerdict, "not-reproduced");
+    const output = JSON.parse(logs[0] ?? "{}") as Record<string, unknown>;
+    assert.equal((output.outcomes as Array<Record<string, unknown>>)[0]?.canonicalVerdict, "not-reproduced");
+    assert.equal((output.verificationAttempts as Array<Record<string, unknown>>)[0]?.verdict, "not_reproduced");
     assert.doesNotMatch(logs.join("\n"), /sensitive-synthetic-canary/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("HUNT-009 reaches every signed A2 target harness through the public CLI path", { skip: process.env.VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION !== "1" ? "set VERGLOS_HUNT_DOCKER_TARGET_INTEGRATION=1 to run the A2 CLI Docker qualification" : false }, async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-hunt-execute-a2-"));
+  try {
+    const targetRoot = fileURLToPath(new URL("../../hunt/fixtures/target-code/", import.meta.url));
+    for (const family of A2_FAMILIES) {
+      const selected = a2Recipe(family);
+      const inputs = await makeInputs(root, selected, targetRoot);
+      const logs: string[] = [];
+      const originalLog = console.log;
+      console.log = (...values: unknown[]) => logs.push(values.join(" "));
+      try {
+        const code = await executeHuntRecipe({
+          ...inputs,
+          ruleId: family.ruleId,
+          subjectId,
+          observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+          json: true,
+          runtimeLoader: localHuntRuntime,
+        });
+        assert.equal(code, 1, family.recipeId);
+      } finally { console.log = originalLog; }
+      const output = JSON.parse(logs[0] ?? "{}") as Record<string, unknown>;
+      assert.equal(output.status, "completed", family.recipeId);
+      assert.equal(output.executionAuthorized, true, family.recipeId);
+      assert.equal(output.recipeId, family.recipeId);
+      assert.equal(output.sandbox, "docker", family.recipeId);
+      assert.deepEqual((output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.canonicalVerdict), ["confirmed"], family.recipeId);
+      assert.deepEqual((output.outcomes as Array<Record<string, unknown>>).map((outcome) => outcome.assurance), [{
+        class: "A2",
+        isolation: "container",
+        securityBoundary: true,
+        sourceAccess: "read-only",
+        network: "denied",
+        processLimit: 8,
+        limitation: "A2 runs a signed recipe in a pinned Docker container with read-only project input, denied network, dropped capabilities, and bounded resources; host Docker daemon/VM policy and platform-specific kernel differences remain outside this result",
+      }], family.recipeId);
+      assert.doesNotMatch(logs.join("\n"), /OR 1=1/u, family.recipeId);
+    }
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -118,7 +219,7 @@ test("HUNT-009 fails closed for binding drift and symlinked inputs", async () =>
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test("HUNT-009 rejects binding drift before loading the private runtime", async () => {
+test("HUNT-009 rejects binding drift before loading the public runtime", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-execute-preflight-"));
   try {
     let runtimeLoaded = false;
@@ -134,10 +235,40 @@ test("HUNT-009 rejects binding drift before loading the private runtime", async 
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test("HUNT-009 denies execution when the private runtime is unavailable", async () => {
+test("HUNT-010 rejects a report finding whose rule would widen the approved recipe", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-mcp-hunt-binding-drift-"));
+  const logs: string[] = [];
+  const originalLog = console.log;
+  try {
+    const inputs = await makeInputs(root);
+    await writeFile(inputs.reportPath, `${canonicalizeJson({
+      projectRoot: root,
+      projectType: "node",
+      scannedAt: new Date().toISOString(),
+      durationMs: 1,
+      findings: [{ id: "critical-1", detector: "hunt", rule: "hunt.other-rule", severity: "critical", title: "fixture", description: "fixture" }],
+    })}\n`);
+    console.log = (...values: unknown[]) => logs.push(values.join(" "));
+    const code = await executeHuntRecipe({
+      ...inputs,
+      ruleId: "hunt.a1.utf8-contains",
+      subjectId,
+      observationId: "urn:uuid:123e4567-e89b-12d3-a456-426614174000",
+      json: true,
+      runtimeLoader: localHuntRuntime,
+    });
+    assert.equal(code, 78);
+    assert.deepEqual(JSON.parse(logs[0] ?? "{}"), { status: "denied", reason: "hunt execution input or authorization is invalid" });
+  } finally {
+    console.log = originalLog;
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("HUNT-009 denies execution when the public runtime is unavailable", async () => {
   const root = await mkdtemp(join(tmpdir(), "verglos-hunt-runtime-missing-"));
   try {
-    const result = await run(root, { runtimeLoader: async () => { throw new Error("private runtime absent"); } });
+    const result = await run(root, { runtimeLoader: async () => { throw new Error("public runtime absent"); } });
     assert.equal(result.code, 78);
     assert.deepEqual(result.output, { status: "denied", reason: "hunt execution input or authorization is invalid" });
   } finally { await rm(root, { recursive: true, force: true }); }

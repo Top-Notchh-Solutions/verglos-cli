@@ -18,6 +18,7 @@ export const VERIFICATION_ATTEMPT_SCHEMA = {
 
 const UUID_URN = /^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const SAFE_TEXT = /^[^\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]+$/;
+const RULE_ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$/;
 const ShortTextSchema = z.string().min(1).max(512).regex(SAFE_TEXT);
 const TextSchema = z.string().min(1).max(4096).regex(SAFE_TEXT);
 const TimestampSchema = z.string().datetime({ offset: true });
@@ -57,6 +58,7 @@ const ApprovalSchema = z
   .object({
     required: z.boolean(),
     status: z.enum(["not-required", "approved", "denied", "not-requested"]),
+    requestDigest: ContentDigestSchema.optional(),
     actor: ShortTextSchema.optional(),
     approvedAt: TimestampSchema.optional(),
   })
@@ -178,6 +180,8 @@ const AttemptBaseSchema = z
     attemptId: z.string().regex(UUID_URN),
     subjectId: SubjectIdSchema,
     observationId: ObservationIdSchema,
+    findingId: ShortTextSchema.optional(),
+    ruleId: z.string().regex(RULE_ID).optional(),
     recipe: RecipeSchema,
     approval: ApprovalSchema,
     sandbox: SandboxSchema,

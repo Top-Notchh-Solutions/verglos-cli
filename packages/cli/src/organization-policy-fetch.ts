@@ -1,9 +1,33 @@
-import { DEFAULT_API_URL, loadCredentials } from "./credentials.js";
+import { DEFAULT_API_URL, getTrustedApiOrigin, loadCredentials } from "./credentials.js";
+import { readBoundedResponse } from "./http-response.js";
 import { readOrganizationPolicyCache, writeOrganizationPolicyCache } from "./organization-policy-cache.js";
 import { resolveOrganizationPolicy, type OrganizationPolicyCacheEntry, type OrganizationPolicyPublicKey } from "@verglos/shared";
 
 const MAX_RESPONSE_BYTES = 1 * 1024 * 1024;
 const DEFAULT_TIMEOUT_MS = 8_000;
+const MAX_TIMEOUT_MS = 10_000;
+const POLICY_SCOPE_ID = /^[A-Za-z0-9][A-Za-z0-9._:/-]{0,255}$/u;
+
+function isValidPolicyScopeId(value: string): boolean {
+  return POLICY_SCOPE_ID.test(value);
+}
+
+function expectedPolicyEndpoint(organizationId: string, repositoryId: string): string {
+  return `/api/v1/organizations/${encodeURIComponent(organizationId)}/repositories/${encodeURIComponent(repositoryId)}/policy`;
+}
+
+function isSafePolicyEndpoint(value: unknown, expected: string): value is string {
+  return typeof value === "string"
+    && value === expected
+    && value.length > 0
+    && value.length <= 2048
+    && value.startsWith("/")
+    && !value.startsWith("//")
+    && !value.includes("\\")
+    && !value.includes("?")
+    && !value.includes("#")
+    && !/[\u0000-\u001f\u007f]/u.test(value);
+}
 
 export type OrganizationPolicyFetchResult = Readonly<{
   resolved: boolean;
@@ -27,6 +51,13 @@ export async function fetchOrganizationPolicy(input: Readonly<{
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
 }>): Promise<OrganizationPolicyFetchResult> {
+  if (!isValidPolicyScopeId(input.organizationId) || !isValidPolicyScopeId(input.repositoryId)) {
+    return { resolved: false, reason: "invalid-scope" };
+  }
+  const timeoutMs = input.timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  if (!Number.isSafeInteger(timeoutMs) || timeoutMs <= 0 || timeoutMs > MAX_TIMEOUT_MS) {
+    return { resolved: false, reason: "timeout-out-of-bounds" };
+  }
   const now = input.now ?? new Date().toISOString();
   const scope = { organizationId: input.organizationId, repositoryId: input.repositoryId };
   let cached: OrganizationPolicyCacheEntry | undefined;
@@ -37,23 +68,29 @@ export async function fetchOrganizationPolicy(input: Readonly<{
   let status: number | undefined;
   if (!input.offline) {
     const creds = await loadCredentials();
-    const apiUrl = input.apiUrl ?? creds.apiUrl ?? DEFAULT_API_URL;
+    const apiUrl = getTrustedApiOrigin(input.apiUrl ?? creds.apiUrl ?? DEFAULT_API_URL);
+    if (!apiUrl) return { resolved: false, reason: "unsafe-api-url" };
     const licenseKey = input.licenseKey ?? creds.licenseKey;
     if (!licenseKey) return { resolved: false, reason: "no-license" };
-    const endpoint = input.endpoint ?? `/api/v1/organizations/${encodeURIComponent(input.organizationId)}/repositories/${encodeURIComponent(input.repositoryId)}/policy`;
+    const expectedEndpoint = expectedPolicyEndpoint(input.organizationId, input.repositoryId);
+    const endpoint = input.endpoint ?? expectedEndpoint;
+    // The endpoint override is retained for test/self-hosted routing, but it
+    // must remain the exact bound organization/repository policy route. A
+    // same-origin alternate path could otherwise receive the bearer token or
+    // return a policy for a different server-side contract.
+    if (!isSafePolicyEndpoint(endpoint, expectedEndpoint)) return { resolved: false, reason: "unsafe-policy-endpoint" };
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), input.timeoutMs ?? DEFAULT_TIMEOUT_MS);
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
       const response = await (input.fetchImpl ?? fetch)(`${apiUrl}${endpoint}`, {
         method: "GET",
         headers: { Accept: "application/json", Authorization: `Bearer ${licenseKey}` },
+        redirect: "error",
         signal: controller.signal,
       });
       status = response.status;
-      const length = Number(response.headers.get("content-length") ?? "0");
-      if (Number.isFinite(length) && length > MAX_RESPONSE_BYTES) return { resolved: false, reason: "response-too-large", status };
-      const bytes = await response.arrayBuffer();
-      if (bytes.byteLength > MAX_RESPONSE_BYTES) return { resolved: false, reason: "response-too-large", status };
+      const bytes = await readBoundedResponse(response, MAX_RESPONSE_BYTES);
+      if (bytes === undefined) return { resolved: false, reason: "response-too-large", status };
       if (response.ok) {
         try { remote = JSON.parse(new TextDecoder().decode(bytes)); }
         catch { return { resolved: false, reason: "response-invalid-json", status }; }

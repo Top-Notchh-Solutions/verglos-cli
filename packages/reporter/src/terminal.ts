@@ -58,7 +58,7 @@ function verifiedSummary(findings: Finding[]): string {
   const eligible = findings.filter((f) => f.severity !== "info");
   const verified = eligible.filter((f) => f.verified === "true").length;
   const total = eligible.length;
-  return `  Verified   ${verified}/${total}   run ${chalk.cyan("`verglos hunt`")} to verify (Pro — v2.0.0-beta)`;
+  return `  Verified   ${verified}/${total}   use ${chalk.cyan("`verglos hunt --execute`")} with a signed recipe and approval (Pro)`;
 }
 
 /** Renders the AI-provenance block. Silent when there's nothing to say. */

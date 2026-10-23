@@ -1,29 +1,34 @@
 name: Publish
 
 on:
-  workflow_dispatch:
-    inputs:
-      promote_latest:
-        description: "Move npm latest dist-tags to the package.json versions"
-        required: false
-        default: false
-        type: boolean
   push:
     tags:
       - "v*"
 
 permissions:
+  actions: read
+  attestations: none
+  checks: none
   contents: read
+  deployments: none
+  discussions: none
   id-token: write # OIDC — Trusted Publisher + npm provenance
+  issues: none
+  packages: none
+  pages: none
+  pull-requests: none
+  security-events: none
+  statuses: none
 
 jobs:
   publish:
     name: Publish npm packages
     runs-on: ubuntu-latest
+    # Final V1 publication is intentionally stable-only. Prerelease tags are
+    # candidate artifacts and must never reach the public registry.
+    if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-')
     # The repository's `release` environment must require an explicit
-    # reviewer before any registry mutation.  Keeping this at the job level
-    # places the gate in front of both tag-triggered publication and the
-    # deliberate dist-tag promotion workflow.
+    # reviewer before any registry mutation.
     environment:
       name: release
     concurrency:
@@ -31,12 +36,23 @@ jobs:
       cancel-in-progress: false
 
     steps:
+      - name: Verify final shipping readiness
+        env:
+          FINAL_RELEASE_READY: ${{ vars.VERGLOS_FINAL_RELEASE_READY }}
+        run: |
+          set -euo pipefail
+          if [[ "${FINAL_RELEASE_READY}" != "true" ]]; then
+            echo "::error::VERGLOS_FINAL_RELEASE_READY must be true after the complete shipping goal is satisfied"
+            exit 1
+          fi
+
       - name: Checkout
         uses: actions/checkout@v5
 
       - name: Verify immutable release tag
-        if: ${{ github.event_name == 'push' }}
-        run: node scripts/verify-release-tag.mjs "$GITHUB_REF_NAME"
+        run: |
+          TAG_COMMIT="$(git rev-list -n 1 "$GITHUB_REF")"
+          node scripts/verify-release-tag.mjs "$GITHUB_REF_NAME" "$GITHUB_SHA" "$TAG_COMMIT"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v5
@@ -52,62 +68,33 @@ jobs:
 
       # Install all platform-specific lock entries for license evidence; this does not declare them as supported product targets.
       - name: Configure cross-platform license evidence
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node -e 'const fs=require("node:fs"); const p=JSON.parse(fs.readFileSync("package.json","utf8")); p.pnpm={...(p.pnpm||{}),supportedArchitectures:{os:["current","aix","android","darwin","freebsd","linux","netbsd","openbsd","openharmony","sunos","win32"],cpu:["current","arm","arm64","ia32","loong64","mips64el","ppc64","riscv64","s390x","x64"]}}; fs.writeFileSync("package.json",JSON.stringify(p,null,2)+"\n");'
 
-      - name: Promote package versions to npm latest
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.promote_latest }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
-            echo "::error::NPM_TOKEN repository secret is required to move npm dist-tags."
-            exit 1
-          fi
-
-          for PKG_DIR in \
-            packages/shared \
-            packages/scanner \
-            packages/reporter \
-            packages/mcp \
-            packages/entitlement \
-            packages/cli
-          do
-            PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-            PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-            npm dist-tag add "${PKG_NAME}@${PKG_VER}" latest
-          done
-
       - name: Install dependencies
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm build
 
       - name: Typecheck
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm typecheck
 
       - name: Test
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: pnpm test
 
       - name: Test release artifact verifier
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
-        run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-third-party-notices.test.mjs scripts/license-inventory.test.mjs scripts/package-surface-audit.test.mjs
+        run: node --test scripts/verify-release-artifacts.test.mjs scripts/generate-release-notes.test.mjs scripts/generate-release-origin.test.mjs scripts/generate-release-checksums.test.mjs scripts/generate-third-party-notices.test.mjs scripts/license-inventory.test.mjs scripts/package-surface-audit.test.mjs scripts/check-packed-manifests.test.mjs scripts/external-license-records.test.mjs scripts/publish-public-package.test.mjs
+
+      - name: Verify release rollback/revocation rehearsal
+        run: node scripts/verify-release-rollback-rehearsal.mjs
 
       - name: Audit package contents
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/check-package-contents.mjs
 
       - name: Audit public boundary
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: node scripts/check-public-boundary.mjs
 
       - name: Pack smoke test
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           set -euo pipefail
           AUDIT_DIR=$(mktemp -d)
@@ -122,7 +109,6 @@ jobs:
           node scripts/check-packed-manifests.mjs "$AUDIT_DIR"
 
       - name: Prepare release packages and licensing evidence
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           set -euo pipefail
           RELEASE_DIR=$(mktemp -d)
@@ -132,26 +118,25 @@ jobs:
           node scripts/generate-third-party-notices.mjs > "$RELEASE_DIR/THIRD_PARTY_NOTICES"
           node scripts/generate-sbom.mjs > "$RELEASE_DIR/SBOM.cdx.json"
           node scripts/generate-spdx.mjs > "$RELEASE_DIR/SBOM.spdx.json"
+          node scripts/validate-external-license-records.mjs
+          cp licenses/external-content-records.json "$RELEASE_DIR/external-license-records.json"
 
       - name: Verify clean consumer install
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           node --test scripts/verify-clean-consumer.test.mjs
           node scripts/verify-clean-consumer.mjs "$RELEASE_DIR" > "$RELEASE_DIR/clean-consumer-verification.txt"
+          node scripts/generate-release-notes.mjs "$RELEASE_DIR" --source-commit "$GITHUB_SHA" --release-tag "$GITHUB_REF_NAME"
+          node scripts/generate-release-origin.mjs "$RELEASE_DIR" --source-commit "$GITHUB_SHA" --release-tag "$GITHUB_REF_NAME"
 
       - name: Prepare release checksums
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
           set -euo pipefail
-          cd "$RELEASE_DIR"
-          sha256sum ./*.tgz ./THIRD_PARTY_NOTICES ./SBOM.cdx.json ./SBOM.spdx.json ./dependency-license-inventory.json ./clean-consumer-verification.txt > SHA256SUMS
+          node scripts/generate-release-checksums.mjs "$RELEASE_DIR"
 
       - name: Verify release checksums
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
-        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR" --require-six
+        run: node scripts/verify-release-artifacts.mjs "$RELEASE_DIR" --require-seven
 
       - name: Upload release artifacts
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         uses: actions/upload-artifact@v4
         with:
           name: verglos-npm-artifacts-${{ github.sha }}
@@ -161,8 +146,11 @@ jobs:
             ${{ env.RELEASE_DIR }}/THIRD_PARTY_NOTICES
             ${{ env.RELEASE_DIR }}/SBOM.cdx.json
             ${{ env.RELEASE_DIR }}/SBOM.spdx.json
+            ${{ env.RELEASE_DIR }}/external-license-records.json
             ${{ env.RELEASE_DIR }}/clean-consumer-verification.txt
+            ${{ env.RELEASE_DIR }}/RELEASE_NOTES.md
             ${{ env.RELEASE_DIR }}/dependency-license-inventory.json
+            ${{ env.RELEASE_DIR }}/RELEASE_METADATA.json
           if-no-files-found: error
           retention-days: 14
 
@@ -176,80 +164,34 @@ jobs:
       # a public repository." Visibility toggle:
       # https://github.com/Top-Notchh-Solutions/verglos-cli/settings.
       #
-      # Each publish step is idempotent: if the exact package@version
-      # is already on npm, the step logs a notice and exits 0. This
-      # protects against re-runs after a tag move / re-push and
-      # against partial-failure recovery (e.g. shared already
-      # published, scanner still needed).
+      # Each publish step is idempotent: the bounded preflight skips only an
+      # explicit registry 200 for the exact package@version. Registry errors
+      # fail closed instead of being mistaken for an unpublished version.
 
       - name: Publish shared package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
-          PKG_DIR=packages/shared
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-shared-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-shared-$(node -p "require('./packages/shared/package.json').version").tgz" latest
 
       - name: Publish scanner package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
-          PKG_DIR=packages/scanner
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-scanner-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-scanner-$(node -p "require('./packages/scanner/package.json').version").tgz" latest
 
       - name: Publish reporter package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
-          PKG_DIR=packages/reporter
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-reporter-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-reporter-$(node -p "require('./packages/reporter/package.json').version").tgz" latest
 
       - name: Publish mcp package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
-          PKG_DIR=packages/mcp
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-mcp-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-mcp-$(node -p "require('./packages/mcp/package.json').version").tgz" latest
 
       - name: Publish entitlement package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
-          PKG_DIR=packages/entitlement
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-entitlement-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-entitlement-$(node -p "require('./packages/entitlement/package.json').version").tgz" latest
+
+      - name: Publish Hunt package
+        run: |
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-hunt-$(node -p "require('./packages/hunt/package.json').version").tgz" latest
 
       - name: Publish CLI package
-        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.promote_latest }}
         run: |
-          PKG_DIR=packages/cli
-          PKG_NAME=$(node -p "require('./${PKG_DIR}/package.json').name")
-          PKG_VER=$(node -p "require('./${PKG_DIR}/package.json').version")
-          if npm view "${PKG_NAME}@${PKG_VER}" version >/dev/null 2>&1; then
-            echo "::notice::${PKG_NAME}@${PKG_VER} already published — skipping"
-            exit 0
-          fi
-          npm publish "${RELEASE_DIR}/verglos-${PKG_VER}.tgz" --access public --provenance --tag alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-$(node -p "require('./packages/cli/package.json').version").tgz" latest

@@ -1,0 +1,138 @@
+{
+  "schemaId": "urn:verglos:artifact:external-license-records",
+  "schemaVersion": "1.0.0",
+  "generatedBy": "verglos-cli",
+  "purpose": "Bounded provenance and redistribution facts for external engines, imported formats, first-party fixtures, and signed recipe content.",
+  "legalClearance": "not-asserted",
+  "distributionPolicy": {
+    "externalEnginesBundled": false,
+    "runtimeDownloads": false,
+    "recipeContentBundledInNpm": false,
+    "rawExternalLicenseTextBundled": false
+  },
+  "records": [
+    {
+      "id": "engine.detect-secrets-format",
+      "kind": "engine-format",
+      "identity": "detect-secrets baseline format",
+      "versionPolicy": "Import compatibility only; no detect-secrets executable or package is bundled or installed by the public packages.",
+      "sourceUrl": "https://github.com/Yelp/detect-secrets",
+      "license": {
+        "spdxId": "MIT",
+        "licenseUrl": "https://github.com/Yelp/detect-secrets/blob/master/LICENSE"
+      },
+      "modification": "format-parser-only",
+      "publicDistribution": "not-redistributed",
+      "trademarkNotice": "detect-secrets is an upstream project name; no endorsement is implied.",
+      "legalReview": "recorded-for-review"
+    },
+    {
+      "id": "engine.trivy",
+      "kind": "engine",
+      "identity": "Trivy",
+      "versionPolicy": "Pinned OCI image digest in the adapter; the npm packages do not install or bundle the engine.",
+      "sourceUrl": "https://github.com/aquasecurity/trivy",
+      "license": {
+        "spdxId": "Apache-2.0",
+        "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+      },
+      "immutableReference": "sha256:62b1e65e8869bc4b4c6aa4fa2b21595256c7c2f6018a9d9ad61caf87187c1969",
+      "modification": "not-modified-by-verglos",
+      "publicDistribution": "not-redistributed",
+      "trademarkNotice": "Trivy and Aqua Security names remain upstream marks; no endorsement is implied.",
+      "legalReview": "recorded-for-review"
+    },
+    {
+      "id": "fixture.hunt-reference",
+      "kind": "fixture",
+      "identity": "Verglos sanitized Hunt reference fixtures",
+      "versionPolicy": "Versioned with the reviewed repository commit and used only for deterministic qualification.",
+      "sourceUrl": "https://github.com/Top-Notchh-Solutions/verglos-cli",
+      "sourcePath": "fixtures/target-code/.verglos/hunt/",
+      "license": {
+        "spdxId": "Apache-2.0",
+        "licenseUrl": "https://github.com/Top-Notchh-Solutions/verglos-cli/blob/main/LICENSE"
+      },
+      "modification": "first-party-sanitized",
+      "publicDistribution": "first-party",
+      "trademarkNotice": "Fixture names are descriptive and do not imply third-party sponsorship.",
+      "legalReview": "recorded-for-review"
+    },
+    {
+      "id": "format.cyclonedx",
+      "kind": "standard",
+      "identity": "CycloneDX SBOM format",
+      "versionPolicy": "Generated release sidecar format; Verglos does not bundle an external CycloneDX implementation.",
+      "sourceUrl": "https://cyclonedx.org/specification/overview/",
+      "license": {
+        "spdxId": "NOASSERTION",
+        "licenseUrl": "https://cyclonedx.org/terms-of-use/"
+      },
+      "modification": "generator-compatibility-only",
+      "publicDistribution": "format-only",
+      "trademarkNotice": "CycloneDX is used as a format name only; no OWASP endorsement is implied.",
+      "legalReview": "recorded-for-review"
+    },
+    {
+      "id": "format.sarif",
+      "kind": "standard",
+      "identity": "Static Analysis Results Interchange Format",
+      "versionPolicy": "Imported document format only; Verglos does not redistribute an external implementation.",
+      "sourceUrl": "https://www.oasis-open.org/standards",
+      "license": {
+        "spdxId": "NOASSERTION",
+        "licenseUrl": "https://www.oasis-open.org/policies-guidelines/ipr/"
+      },
+      "modification": "parser-compatibility-only",
+      "publicDistribution": "format-only",
+      "trademarkNotice": "SARIF is used as a format name only; no standards-body endorsement is implied.",
+      "legalReview": "recorded-for-review"
+    },
+    {
+      "id": "format.spdx",
+      "kind": "standard",
+      "identity": "SPDX document format",
+      "versionPolicy": "Generated release sidecar format; Verglos does not bundle an external SPDX implementation.",
+      "sourceUrl": "https://spdx.dev/specifications/",
+      "license": {
+        "spdxId": "NOASSERTION",
+        "licenseUrl": "https://spdx.dev/legal-documents/"
+      },
+      "modification": "generator-compatibility-only",
+      "publicDistribution": "format-only",
+      "trademarkNotice": "SPDX is used as a format name only; no Linux Foundation endorsement is implied.",
+      "legalReview": "recorded-for-review"
+    },
+    {
+      "id": "recipe.signed-content",
+      "kind": "recipe-content",
+      "identity": "Signed Hunt recipe and license evidence",
+      "versionPolicy": "Exact recipe and license digests are checked at execution; recipe content is supplied by an approved feed, not bundled in npm archives.",
+      "sourceUrl": "https://github.com/Top-Notchh-Solutions/verglos-cli",
+      "sourcePath": "packages/shared/src/hunt-recipe-trust.ts",
+      "license": {
+        "spdxId": "NOASSERTION",
+        "licenseUrl": "https://github.com/Top-Notchh-Solutions/verglos-cli/blob/main/packages/shared/src/hunt-recipe-trust.ts"
+      },
+      "modification": "runtime-declared-per-recipe",
+      "publicDistribution": "not-redistributed",
+      "trademarkNotice": "Recipe publishers retain responsibility for their names and marks.",
+      "legalReview": "recorded-for-review"
+    },
+    {
+      "id": "tool.in-toto-verifier",
+      "kind": "tooling",
+      "identity": "in-toto release verifier",
+      "versionPolicy": "CI-only verifier pinned by the platform-matrix workflow; it is not included in npm packages.",
+      "sourceUrl": "https://github.com/in-toto/in-toto",
+      "license": {
+        "spdxId": "Apache-2.0",
+        "licenseUrl": "https://github.com/in-toto/in-toto/blob/develop/LICENSE"
+      },
+      "modification": "ci-only-use",
+      "publicDistribution": "not-redistributed",
+      "trademarkNotice": "in-toto is an upstream project name; no endorsement is implied.",
+      "legalReview": "recorded-for-review"
+    }
+  ]
+}

@@ -53,8 +53,8 @@ export async function executeHunt(opts: HuntOptions = {}): Promise<number> {
   }
 
   const parsed = {
-    status: "unavailable",
-    reason: "beta_shell",
+    status: "requires_execution_binding",
+    reason: "signed_recipe_and_approval_required",
     severity: severity ?? "critical,high",
     sandbox: sandbox ?? "auto",
     dryRun: Boolean(opts.dryRun),
@@ -63,7 +63,7 @@ export async function executeHunt(opts: HuntOptions = {}): Promise<number> {
   if (opts.json) console.log(JSON.stringify(parsed));
   else if (!opts.quiet) {
     console.log(chalk.bold("verglos hunt") + chalk.gray(" — the evidence agent for AI-generated code"));
-    console.log(chalk.gray("Shipping in v2.0.0-beta. Track: verglos.com/hunt"));
+    console.log(chalk.gray("Hunt runs only approved, signed recipes in a bounded local runtime."));
     console.log("");
     console.log(chalk.gray("Parsed options"));
     console.log(`  ${chalk.gray("Severity ")} ${parsed.severity}`);

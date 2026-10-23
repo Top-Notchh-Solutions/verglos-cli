@@ -1,26 +1,106 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { readdir, writeFile } from "node:fs/promises";
+import { readFile, readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateExternalLicenseRecordsFile } from "./external-license-records.mjs";
 import { readPackageLicenseTexts } from "./package-license-text.mjs";
-import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const run = promisify(execFile);
 const root = fileURLToPath(new URL("..", import.meta.url));
+const externalLicenseRecords = await validateExternalLicenseRecordsFile(process.env.VERGLOS_EXTERNAL_LICENSE_RECORDS_PATH);
 // Windows exposes pnpm through a .cmd shim; Node's direct child-process
 // launcher does not resolve that shim when given the bare command name.
 // Keep the invocation explicit so release packaging works on every supported
 // platform, including the Windows consumer matrix.
 const pnpmCommand = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
-const { stdout } = await run(pnpmCommand, ["licenses", "list", "--json"], {
-  cwd: root,
-  maxBuffer: 16 * 1024 * 1024,
-  timeout: 120_000,
-  killSignal: "SIGKILL",
-  shell: process.platform === "win32",
-});
-const grouped = JSON.parse(stdout);
+
+function packageSource(manifest) {
+  if (typeof manifest.homepage === "string" && manifest.homepage.trim()) return manifest.homepage.trim();
+  if (typeof manifest.repository === "string" && manifest.repository.trim()) return manifest.repository.trim();
+  if (manifest.repository && typeof manifest.repository.url === "string" && manifest.repository.url.trim()) return manifest.repository.url.trim();
+  return "";
+}
+
+async function collectLocalLicenseGroups() {
+  const virtualStore = join(root, "node_modules", ".pnpm");
+  const records = new Map();
+  const stores = await readdir(virtualStore, { withFileTypes: true });
+  for (const store of stores) {
+    if (!store.isDirectory()) continue;
+    const moduleRoot = join(virtualStore, store.name, "node_modules");
+    const children = await readdir(moduleRoot, { withFileTypes: true }).catch((error) => {
+      if (error?.code === "ENOENT") return [];
+      throw error;
+    });
+    for (const child of children) {
+      if (child.name.startsWith(".")) continue;
+      const packageRoots = child.name.startsWith("@")
+        ? (await readdir(join(moduleRoot, child.name), { withFileTypes: true }))
+          .filter((entry) => entry.isDirectory())
+          .map((entry) => join(moduleRoot, child.name, entry.name))
+        : [join(moduleRoot, child.name)];
+      for (const packagePath of packageRoots) {
+        let manifest;
+        try { manifest = JSON.parse(await readFile(join(packagePath, "package.json"), "utf8")); }
+        catch (error) {
+          if (error?.code === "ENOENT") continue;
+          throw new Error(`Cannot read installed package manifest at '${packagePath}': ${error.message}`);
+        }
+        if (typeof manifest.name !== "string" || typeof manifest.version !== "string") continue;
+        const key = `${manifest.name}@${manifest.version}`;
+        const record = records.get(key) ?? {
+          name: manifest.name,
+          version: manifest.version,
+          license: typeof manifest.license === "string" ? manifest.license.trim() : "UNKNOWN",
+          homepage: packageSource(manifest),
+          paths: [],
+        };
+        if (record.license !== (typeof manifest.license === "string" ? manifest.license.trim() : "UNKNOWN") || record.homepage !== packageSource(manifest)) {
+          throw new Error(`Conflicting installed license metadata for '${key}'`);
+        }
+        if (!record.paths.includes(packagePath)) record.paths.push(packagePath);
+        records.set(key, record);
+      }
+    }
+  }
+  const grouped = new Map();
+  const byLicense = new Map();
+  for (const record of records.values()) {
+    const license = record.license || "UNKNOWN";
+    const key = `${license}\0${record.name}\0${record.homepage}`;
+    const item = grouped.get(key) ?? { name: record.name, versions: [], paths: [], homepage: record.homepage };
+    item.versions.push(record.version);
+    item.paths.push(...record.paths);
+    grouped.set(key, item);
+    const licenseItems = byLicense.get(license) ?? [];
+    if (!licenseItems.includes(item)) licenseItems.push(item);
+    byLicense.set(license, licenseItems);
+  }
+  return Object.fromEntries(byLicense);
+}
+
+let grouped;
+if (process.env.VERGLOS_NOTICE_FORCE_LOCAL_SCAN === "1") {
+  grouped = await collectLocalLicenseGroups();
+} else {
+  try {
+    const { stdout } = await run(pnpmCommand, ["licenses", "list", "--json"], {
+      cwd: root,
+      maxBuffer: 16 * 1024 * 1024,
+      timeout: 120_000,
+      killSignal: "SIGKILL",
+      shell: process.platform === "win32",
+    });
+    grouped = JSON.parse(stdout);
+  } catch {
+    // pnpm's license command depends on a package-index file in its global
+    // store. The installed virtual store already contains the exact package
+    // manifests and paths needed for notices, so fall back to that local
+    // evidence while preserving the same fail-closed license text handling.
+    grouped = await collectLocalLicenseGroups();
+  }
+}
 const entries = [];
 const packageLocations = new Map();
 for (const [license, packages] of Object.entries(grouped ?? {})) {
@@ -53,7 +133,7 @@ for (const item of inventory.bundledComponents ?? []) {
       if (!child.isDirectory() || child.name === "node_modules" || child.name.startsWith(".")) continue;
       const packagePath = join(parentPath, child.name);
       try {
-        const manifest = await readBoundedJsonFile(join(packagePath, "package.json"), `${packagePath} package.json`);
+        const manifest = JSON.parse(await readFile(join(packagePath, "package.json"), "utf8"));
         if (manifest.name === item.name && manifest.version === item.version) nestedPaths.push(packagePath);
       } catch (error) {
         if (error?.code !== "ENOENT") throw new Error(`Cannot inspect nested notice package at '${packagePath}': ${error.message}`);
@@ -99,6 +179,30 @@ for (const entry of entries) {
   }
   lines.push("");
 }
-const output = `${lines.join("\n").replaceAll(/\r\n?/g, "\n").replaceAll(/[ \t]+\n/g, "\n").trimEnd()}\n`;
+lines.push("EXTERNAL ENGINE AND CONTENT RECORDS");
+lines.push("");
+lines.push("This section records bounded provenance and public-distribution facts for external engines, imported formats, fixtures, and signed recipe content. It does not assert legal clearance or reproduce upstream license text.");
+lines.push(`Legal clearance: ${externalLicenseRecords.legalClearance}`);
+lines.push(`External engines bundled: ${externalLicenseRecords.distributionPolicy.externalEnginesBundled ? "yes" : "no"}`);
+lines.push(`Runtime downloads: ${externalLicenseRecords.distributionPolicy.runtimeDownloads ? "yes" : "no"}`);
+lines.push(`Recipe content bundled in npm: ${externalLicenseRecords.distributionPolicy.recipeContentBundledInNpm ? "yes" : "no"}`);
+lines.push("");
+for (const record of externalLicenseRecords.records) {
+  lines.push("================================================================================");
+  lines.push(`${record.id} — ${record.identity}`);
+  lines.push(`Kind: ${record.kind}`);
+  lines.push(`Version policy: ${record.versionPolicy}`);
+  lines.push(`License: ${record.license.spdxId}`);
+  lines.push(`License source: ${record.license.licenseUrl}`);
+  lines.push(`Source: ${record.sourceUrl}`);
+  if (record.sourcePath) lines.push(`Source path: ${record.sourcePath}`);
+  if (record.immutableReference) lines.push(`Immutable reference: ${record.immutableReference}`);
+  lines.push(`Modification: ${record.modification}`);
+  lines.push(`Public distribution: ${record.publicDistribution}`);
+  lines.push(`Trademark: ${record.trademarkNotice}`);
+  lines.push(`Legal review: ${record.legalReview}`);
+  lines.push("");
+}
+const output = `${lines.join("\n").replaceAll(/[ \t]+\n/g, "\n").trimEnd()}\n`;
 if (process.argv.includes("--write")) await writeFile(join(root, "THIRD_PARTY_NOTICES"), output, { encoding: "utf8", mode: 0o644 });
 process.stdout.write(output);

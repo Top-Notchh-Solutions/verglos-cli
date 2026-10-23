@@ -3,17 +3,19 @@ import { promisify } from "node:util";
 import { cp, mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { readBoundedFile, readBoundedJsonFile } from "./read-bounded-json.mjs";
+import { readBoundedRegularFile, MAX_RELEASE_ARTIFACT_BYTES } from "./release-artifact-files.mjs";
 
 const run = promisify(execFile);
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
+const packageNames = ["shared", "scanner", "reporter", "mcp", "entitlement", "hunt", "cli"];
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
-const npmOptions = { shell: process.platform === "win32", timeout: 180_000, maxBuffer: 8 * 1024 * 1024 };
-const packageNames = ["shared", "scanner", "reporter", "mcp", "entitlement", "cli"];
-const PUBLIC_NOTICE = "THIRD_PARTY_NOTICES";
-const PRIVATE_DIST_NAMES = /(?:^|\/)(?:cli-fixture|fixture-engine|fixture-validator)(?:\.[^/]+)?$/u;
+const npmOptions = { cwd: root, maxBuffer: 4 * 1024 * 1024, shell: process.platform === "win32" };
 const manifests = new Map();
-for (const name of packageNames) manifests.set(name, await readBoundedJsonFile(join(root, "packages", name, "package.json"), `${name} package manifest`));
+for (const name of packageNames) {
+  const manifestPath = join(root, "packages", name, "package.json");
+  const manifestBytes = await readBoundedRegularFile(manifestPath, MAX_RELEASE_ARTIFACT_BYTES, `package ${name} manifest`);
+  manifests.set(name, JSON.parse(manifestBytes.toString("utf8")));
+}
 const versions = new Map([...manifests.values()].map((manifest) => [manifest.name, manifest.version]));
 const privateWorkspacePackages = new Set([...manifests.values()].filter((manifest) => manifest.private === true).map((manifest) => manifest.name));
 const destination = resolve(process.argv[2] ?? "");
@@ -27,23 +29,16 @@ try {
     const stage = join(stagingRoot, name);
     await cp(join(source, "dist"), join(stage, "dist"), {
       recursive: true,
-      filter: (path) => !/\.test\./u.test(path) && !PRIVATE_DIST_NAMES.test(path.replaceAll("\\", "/")),
+      filter: (path) => !/\.test\./u.test(path) && !/[\\/]cli-fixture\.[^/\\]+$/u.test(path),
     });
     for (const file of ["README.md", "LICENSE", "NOTICE"]) {
       try { await cp(join(source, file), join(stage, file)); } catch { /* optional package metadata */ }
     }
-    await cp(join(root, PUBLIC_NOTICE), join(stage, PUBLIC_NOTICE));
     // Each npm archive is independently redistributable. Package-local terms
     // take precedence; otherwise carry the repository's Apache license into
     // the staged archive instead of relying on the source checkout.
-    try {
-      const packageLicense = await readBoundedFile(join(source, "LICENSE"), `${name} package LICENSE`);
-      await writeFile(join(stage, "LICENSE"), packageLicense);
-    } catch (error) {
-      if (error?.code !== "ENOENT") throw error;
-      const repositoryLicense = await readBoundedFile(join(root, "LICENSE"), "repository LICENSE");
-      await writeFile(join(stage, "LICENSE"), repositoryLicense);
-    }
+    try { await readBoundedRegularFile(join(stage, "LICENSE"), MAX_RELEASE_ARTIFACT_BYTES, `staged ${name} license`); }
+    catch { await cp(join(root, "LICENSE"), join(stage, "LICENSE")); }
     await writeFile(join(stage, "THIRD_PARTY_NOTICES"), thirdPartyNotices, { encoding: "utf8", mode: 0o644 });
     const manifest = manifests.get(name);
     manifest.files = [...new Set([...(Array.isArray(manifest.files) ? manifest.files : []), "THIRD_PARTY_NOTICES"])];
@@ -59,8 +54,6 @@ try {
         }
       }
     }
-    const files = Array.isArray(manifest.files) ? manifest.files.filter((file) => typeof file === "string") : [];
-    if (!files.includes(PUBLIC_NOTICE)) manifest.files = [...files, PUBLIC_NOTICE];
     await writeFile(join(stage, "package.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     await run(npmCommand, ["pack", stage, "--pack-destination", destination, "--ignore-scripts"], npmOptions);
   }

@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
-import { mkdtemp, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import { executeReleaseRollbackPlan, executeReleaseRollbackRehearsal } from "./release-rollback-plan.js";
 
@@ -20,6 +21,39 @@ test("rollback-plan fails closed without approval", async () => {
   const ref = JSON.stringify({ kind: "web-deployment", identity: "verglos.com", immutableRef: "https://vercel.com/deployments/abc" });
   await writeFile(join(root, "current.json"), ref); await writeFile(join(root, "target.json"), JSON.stringify({ kind: "web-deployment", identity: "verglos.com", immutableRef: "https://vercel.com/deployments/def" }));
   assert.equal(await executeReleaseRollbackPlan({ currentPath: join(root, "current.json"), targetPath: join(root, "target.json"), reason: "operator review", approved: false, json: true, quiet: true }), 78);
+});
+
+test("rollback inputs refuse symlinked references and rehearsal manifests", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-rollback-symlink-"));
+  const reference = join(root, "reference.json");
+  const target = join(root, "target.json");
+  const linkedReference = join(root, "linked-reference.json");
+  const manifest = join(root, "manifest.json");
+  const linkedManifest = join(root, "linked-manifest.json");
+  await writeFile(reference, JSON.stringify({ kind: "npm-package", identity: "verglos", immutableRef: "v2.0.0-alpha.1" }));
+  await writeFile(target, JSON.stringify({ kind: "npm-package", identity: "verglos", immutableRef: `sha256:${"a".repeat(64)}` }));
+  await writeFile(manifest, JSON.stringify({ operations: [], historicalRecords: [] }));
+  await symlink(reference, linkedReference);
+  await symlink(manifest, linkedManifest);
+
+  const lines: string[] = [];
+  const original = console.log;
+  console.log = (value?: unknown) => lines.push(String(value));
+  try {
+    assert.equal(await executeReleaseRollbackPlan({ currentPath: linkedReference, targetPath: target, reason: "operator review", approved: true, json: true, quiet: true }), 78);
+    assert.deepEqual(JSON.parse(lines[0]!), { allowed: false, reason: "invalid-input" });
+    assert.equal(await executeReleaseRollbackRehearsal({ manifestPath: linkedManifest, json: true, quiet: true }), 78);
+    assert.deepEqual(JSON.parse(lines[1]!), { status: "invalid-input", historicalRecordsPreserved: false });
+  } finally {
+    console.log = original;
+  }
+});
+
+test("rollback bounded reads recheck the opened handle after reading", async () => {
+  const source = await readFile(join(dirname(fileURLToPath(import.meta.url)), "../src/release-rollback-plan.ts"), "utf8");
+  assert.match(source, /const final = await handle\.stat\(\)/u);
+  assert.match(source, /final\.size !== opened\.size/u);
+  assert.match(source, /bytes\.byteLength !== final\.size/u);
 });
 
 test("rollback-rehearsal covers every provider boundary and preserves historical records", async () => {
@@ -47,8 +81,9 @@ test("rollback-rehearsal covers every provider boundary and preserves historical
   } finally {
     console.log = original;
   }
-  const report = JSON.parse(lines[0]!) as { status: string; operationCount: number; historicalRecordCount: number; historicalRecordsPreserved: boolean; operations: Array<{ id: string; action: string }> };
+  const report = JSON.parse(lines[0]!) as { status: string; manifestDigest: string; operationCount: number; historicalRecordCount: number; historicalRecordsPreserved: boolean; operations: Array<{ id: string; action: string }> };
   assert.equal(report.status, "passed");
+  assert.match(report.manifestDigest, /^sha256:[a-f0-9]{64}$/u);
   assert.equal(report.operationCount, 5);
   assert.equal(report.historicalRecordCount, 2);
   assert.equal(report.historicalRecordsPreserved, true);
@@ -76,7 +111,13 @@ test("rollback-rehearsal fails closed when one operation is not approved", async
   } finally {
     console.log = original;
   }
-  assert.deepEqual(JSON.parse(lines[0]!), { status: "failed", failedOperation: "npm", reason: "approval-required", operations: [], historicalRecordsPreserved: true });
+  const report = JSON.parse(lines[0]!) as { status: string; manifestDigest: string; failedOperation: string; reason: string; operations: unknown[]; historicalRecordsPreserved: boolean };
+  assert.equal(report.status, "failed");
+  assert.match(report.manifestDigest, /^sha256:[a-f0-9]{64}$/u);
+  assert.equal(report.failedOperation, "npm");
+  assert.equal(report.reason, "approval-required");
+  assert.deepEqual(report.operations, []);
+  assert.equal(report.historicalRecordsPreserved, true);
 });
 
 test("rollback-rehearsal rejects an incomplete or duplicated provider-boundary set", async () => {
@@ -102,4 +143,22 @@ test("rollback-rehearsal rejects an incomplete or duplicated provider-boundary s
     console.log = original;
   }
   assert.deepEqual(JSON.parse(lines[0]!), { status: "invalid-input", historicalRecordsPreserved: false });
+});
+
+test("canonical release rollback rehearsal covers every provider boundary", async () => {
+  const manifestPath = join(dirname(fileURLToPath(import.meta.url)), "../../../scripts/fixtures/release-rollback-rehearsal.json");
+  const lines: string[] = [];
+  const original = console.log;
+  console.log = (value?: unknown) => lines.push(String(value));
+  try {
+    assert.equal(await executeReleaseRollbackRehearsal({ manifestPath, json: true, quiet: true }), 0);
+  } finally {
+    console.log = original;
+  }
+  const report = JSON.parse(lines[0]!) as { status: string; operationCount: number; historicalRecordCount: number; historicalRecordsPreserved: boolean; operations: Array<{ id: string; action: string }> };
+  assert.equal(report.status, "passed");
+  assert.equal(report.operationCount, 5);
+  assert.equal(report.historicalRecordCount, 2);
+  assert.equal(report.historicalRecordsPreserved, true);
+  assert.deepEqual(report.operations.map((operation) => [operation.id, operation.action]), [["npm", "rollback"], ["engine", "rollback"], ["hunt", "rollback"], ["signing", "revoke"], ["web", "rollback"]]);
 });

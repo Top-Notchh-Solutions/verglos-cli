@@ -7,18 +7,23 @@ import { join } from "node:path";
 import { test } from "node:test";
 
 const run = promisify(execFile);
-test("clean public pack contains six archives without compiled tests or CLI process fixtures", async () => {
+test("clean public pack contains seven archives without compiled tests or CLI process fixtures", async () => {
   const output = await mkdtemp(join(tmpdir(), "verglos-public-pack-"));
   try {
     const { stdout: expectedNotices } = await run(process.execPath, ["scripts/generate-third-party-notices.mjs"], { maxBuffer: 16 * 1024 * 1024 });
     await run(process.execPath, ["scripts/pack-public-packages.mjs", output], { maxBuffer: 8 * 1024 * 1024 });
     const archives = (await readdir(output)).filter((name) => name.endsWith(".tgz"));
-    assert.equal(archives.length, 6);
+    assert.equal(archives.length, 7);
     for (const archive of archives) {
       const { stdout } = await run("tar", ["-tzf", join(output, archive)]);
       assert.doesNotMatch(stdout, /(^|\/)[^/]*\.test\./u);
       assert.doesNotMatch(stdout, /(?:^|\/)(?:cli-fixture|fixture-engine|fixture-validator)(?:\.[^/]+)?$/u);
       assert.doesNotMatch(stdout, /workspace:/);
+      if (archive.startsWith("verglos-shared-")) {
+        const { stdout: manifestText } = await run("tar", ["-xOf", join(output, archive), "package/package.json"]);
+        assert.deepEqual(JSON.parse(manifestText).files, ["dist", "THIRD_PARTY_NOTICES"]);
+        assert.doesNotMatch(stdout, /(^|\/)fixtures\//u);
+      }
       const { stdout: license } = await run("tar", ["-xOf", join(output, archive), "package/LICENSE"], { encoding: "buffer" });
       assert.deepEqual(license, await readFile("LICENSE"), `${archive} must carry the repository license byte-for-byte`);
       const { stdout: notices } = await run("tar", ["-xOf", join(output, archive), "package/THIRD_PARTY_NOTICES"]);
@@ -34,4 +39,16 @@ test("public packer fails closed for private workspace dependencies", async () =
   assert.match(source, /readBoundedJsonFile/u);
   assert.match(source, /readBoundedFile/u);
   assert.match(source, /const npmCommand/u);
+});
+
+test("public packer binds source manifest reads to bounded regular-file handles", async () => {
+  const source = await readFile("scripts/pack-public-packages.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(manifestPath, MAX_RELEASE_ARTIFACT_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(join\(root, "packages", name, "package\.json"\)/u);
+});
+
+test("public packer binds staged license reads to bounded regular-file handles", async () => {
+  const source = await readFile("scripts/pack-public-packages.mjs", "utf8");
+  assert.match(source, /readBoundedRegularFile\(join\(stage, "LICENSE"\), MAX_RELEASE_ARTIFACT_BYTES/u);
+  assert.doesNotMatch(source, /readFile\(join\(stage, "LICENSE"\)\)/u);
 });
