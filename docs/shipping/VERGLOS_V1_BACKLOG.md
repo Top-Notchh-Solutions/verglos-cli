@@ -17,6 +17,9 @@ customer-held-record disposition, independent review, and final acceptance.
 Hosted PR checks failed before repository execution with zero steps; no hosted
 completion, Production action, customer-data operation, release, or checkbox
 change is claimed. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+Evidence:
+`docs/shipping/evidence/qual-web-005-migration-preflight-pr258-2026-10-23.md` and
+`docs/shipping/evidence/acceptance-evidence-bundle-qual-web005-migration-pr258-2026-10-23.md`.
 
 ## 2026-10-23 · CLI merged-head full test
 
