@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · live Production read-only recheck
+
+The READY Production deployment passed the current unauthenticated route
+recheck: six public routes returned 200 and the POST-only QR route returned
+the expected 405. No write occurred. Score remains **245/35/280 (87.5%)**.
+Evidence:
+`evidence/vercel-live-production-readonly-recheck-2026-10-24T2247Z.md`.
+The additive bundle verifies **233/233** files with zero mismatches, passes
+secret scanning, and matches manifest
+`sha256:aeecc463080b41bd053dc92330cf91044823e39da89835d03ba2066fba28ea7f`:
+`evidence/acceptance-evidence-bundle-2026-10-24-production-recheck-v6.json`.
+
 ## 2026-10-24 · app-bound Cards payment pending OTP
 
 The current Cards-only app route created a bound Test Mode order and the hosted

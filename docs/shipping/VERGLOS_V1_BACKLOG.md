@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · live Production read-only recheck
+
+The current READY Production deployment passed a fresh unauthenticated route
+audit: six public routes returned 200 and the POST-only QR route returned the
+expected 405. No write occurred and no checkbox changed. Score remains
+**245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/vercel-live-production-readonly-recheck-2026-10-24T2247Z.md`.
+The additive bundle contains **233** hashed files, verifies with zero
+mismatches, passes secret scanning, and matches manifest
+`sha256:aeecc463080b41bd053dc92330cf91044823e39da89835d03ba2066fba28ea7f`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-recheck-v6.json`.
+
 ## 2026-10-24 · app-bound Cards payment pending OTP
 
 The current app-bound Cards-only provider run reached Razorpay’s **Sending OTP**

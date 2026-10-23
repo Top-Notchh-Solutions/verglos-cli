@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · live Production read-only recheck
+
+The current READY Vercel Production deployment was rechecked at
+`https://verglos.com`: `/`, `/proof`, `/checkout`, `/llms.txt`, `/robots.txt`,
+and `/sitemap.xml` returned their expected 200 responses, while the
+POST-only QR route returned the expected GET 405. This is fresh Production
+surface evidence only; no payment, customer, account, database, publication,
+or release write occurred. The score remains **245 checked / 35 open / 280
+total (87.5%)**. Evidence:
+`docs/shipping/evidence/vercel-live-production-readonly-recheck-2026-10-24T2247Z.md`.
+The additive bundle now contains **233** hashed files, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:aeecc463080b41bd053dc92330cf91044823e39da89835d03ba2066fba28ea7f`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-recheck-v6.json`.
+
 ## Latest continuation result · 2026-10-24 · app-bound Cards payment pending OTP
 
 The current app-bound Cards-only run advanced beyond card-form validation. The

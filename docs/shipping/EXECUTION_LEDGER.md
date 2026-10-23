@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## Live Production read-only recheck · 2026-10-24
+
+- **Observation:** READY Production served six expected public 200 responses;
+  the POST-only QR route returned the expected GET 405.
+- **Boundary:** Read-only unauthenticated requests only; no payment, customer,
+  account, database, publication, or release write occurred.
+- **Disposition:** Surface evidence advanced; non-surface gates and score
+  remain unchanged at **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-live-production-readonly-recheck-2026-10-24T2247Z.md`.
+- **Bundle:** Additive v6 contains 233 hashed files, has zero mismatches, passes
+  secret scanning, and matches manifest
+  `sha256:aeecc463080b41bd053dc92330cf91044823e39da89835d03ba2066fba28ea7f`.
+
 ## App-bound Cards payment pending OTP · 2026-10-24
 
 - **Provider state:** Current app-bound Cards-only order reached the provider’s
