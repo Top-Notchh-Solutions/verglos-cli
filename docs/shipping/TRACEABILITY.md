@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## ACCEPT-010 freeze disposition · 2026-10-23
+
+- **Implementation mapping:** Freeze requires twelve canonical artifact
+  categories and binds present artifacts to their bytes/digests; `go` remains
+  fail-closed while requirements are incomplete.
+- **Verification mapping:** Focused tests **8/8**, syntax, and diff check passed.
+- **Acceptance mapping:** Candidate freeze, dependent provider/independent
+  review, and final sign-off remain missing; next queue is ACCEPT-011. Score
+  remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 reconciler disposition · 2026-10-23
 
 - **Implementation mapping:** Reconciler binds candidate commits, row states,

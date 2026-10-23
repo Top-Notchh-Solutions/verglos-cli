@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-010 freeze disposition · 2026-10-23
+
+- **Implementation:** Candidate version, schema, migration, manifest,
+  plan-catalog, compatibility, docs, runbook, notice, SBOM, provenance, and
+  rollback categories are required and bound; incomplete `go` remains closed.
+- **Verification:** Current focused tests **8/8**, syntax, and diff checks passed.
+- **Disposition:** Actual candidate freeze, dependent provider/independent
+  review, and final sign-off remain open. Next queue: ACCEPT-011. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 reconciler disposition · 2026-10-23
 
 - **Implementation:** Candidate/row/evidence binding, open-gate checks,

@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-010 freeze disposition
+
+The candidate-freeze code-side contract is complete; current focused tests
+pass **8/8**, with syntax and diff checks passing. It requires all twelve
+artifact categories and fails closed on incomplete artifacts or open `go`.
+ACCEPT-010 remains open for the actual candidate freeze, dependent
+provider/independent-review gates, and final sign-off. Next queue:
+**ACCEPT-011**. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009 reconciler disposition
 
 The release-gate reconciler code-side contract is complete; current focused

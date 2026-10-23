@@ -5462,6 +5462,13 @@ implementation-first queue entry is `ACCEPT-010`. Evidence:
   candidate freeze, dependent provider/independent-review gates, and final
   sign-off. Score remains **244 checked / 36 open / 280 total (87.1%)**.
   Evidence: `docs/shipping/evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+**ACCEPT-010 current freeze disposition (2026-10-23; not a checkbox):** The
+current candidate-freeze regression suite passes **8/8**, with syntax and diff
+checks passing; the code-side twelve-category artifact and fail-closed `go`
+contract is complete. Keep the row unchecked for the actual candidate freeze,
+dependent provider/independent-review gates, and final sign-off. The next
+implementation-first queue entry is `ACCEPT-011`. Evidence:
+`docs/shipping/evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
 
 ## Epic 20 — Held final landing/marketing pass
 

@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-010 freeze boundary
+
+The candidate-freeze contract passes **8/8** tests plus syntax and diff checks.
+This does not open ACCEPT-010: actual candidate freeze, dependent
+provider/independent-review gates, and final sign-off remain required. Next
+queue: ACCEPT-011. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009 reconciler boundary
 
 The release-gate reconciler passes **8/8** tests plus syntax and diff checks.

@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile ACCEPT-010 and advance the queue
+
+- **Decision:** Treat the twelve-category candidate-freeze contract as complete
+  code-side; keep incomplete candidates and `go` decisions fail-closed.
+- **Result:** Current focused tests **8/8**, syntax, and diff checks passed.
+- **Disposition:** ACCEPT-010 remains open for the actual candidate freeze,
+  dependent provider/independent review, and final sign-off. Advance the queue
+  to ACCEPT-011. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile ACCEPT-009 and advance the queue
 
 - **Decision:** Treat the release-gate reconciler as complete code-side; keep
