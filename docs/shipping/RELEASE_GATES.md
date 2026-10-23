@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-006 dashboard contract recheck
+
+Current Web `9005d5e` passed the fail-closed dashboard qualification contract
+**4/4** and typecheck. This advances the implementation contract for
+`QUAL-WEB-006` only; it does not substitute for actual authenticated browser,
+human screen-reader, field-CWV, independent-review, or final-acceptance
+evidence. No checkbox changed. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-contract-current-web-2026-10-24.md`.
+The additive bundle v18 verifies **243/243** files with zero mismatches and
+manifest `sha256:cf44b15b03902b99b263e5e31d42d061d94a8dbca8806ba6ff6c27a6b98a65d5`.
+
 ## 2026-10-24 · distribution implementation verification
 
 The current CLI `aad2c743` passed build **8/8**, strict dependency-license

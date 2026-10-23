@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-006 dashboard contract recheck · 2026-10-24
+
+- **Source:** Web `9005d5ed5182b1d29159c0bb65c8ac696928baed`.
+- **Verification:** Fail-closed dashboard qualification contract **4/4** and
+  `pnpm typecheck` passed; all thirteen authenticated paths and required
+  ready/loading/error/large-dataset and unsafe-input boundaries are covered.
+- **Boundary:** Synthetic owner-fixture implementation evidence only. No real
+  authenticated browser capture, human screen-reader review, field-CWV,
+  independent review, Production/database/customer operation, or release
+  acceptance occurred.
+- **Disposition:** `QUAL-WEB-006` implementation contract reverified; row
+  remains open and no checkbox changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-contract-current-web-2026-10-24.md`.
+- **Bundle:** Additive v18 contains **243** hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:cf44b15b03902b99b263e5e31d42d061d94a8dbca8806ba6ff6c27a6b98a65d5`.
+
 ## Distribution implementation verification · 2026-10-24
 
 - **Source:** CLI `aad2c74395a5c381c955ab9dfab7462295564840`.
