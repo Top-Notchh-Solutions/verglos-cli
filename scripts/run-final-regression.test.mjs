@@ -36,6 +36,7 @@ function input(overrides = {}) {
     runs: scenarios.map(([fixture, plan, userRole, tenantMode]) => ({
       fixture,
       sourceCommit: CLI,
+      webCommit: WEB,
       scenario: { plan, userRole, tenantMode },
       baseline: measurement(),
       candidate: measurement(),
@@ -90,6 +91,7 @@ test("final regression rejects unsafe or incomplete inputs", () => {
   assert.deepEqual(incomplete.matrix.missingPlans, ["enterprise"]);
   assert.deepEqual(incomplete.matrix.missingUserRoles, ["viewer"]);
   assert.throws(() => runFinalRegression(input({ runs: input().runs.map((run, index) => index === 0 ? { ...run, sourceCommit: "f".repeat(40) } : run) })), /not bound/u);
+  assert.throws(() => runFinalRegression(input({ runs: input().runs.map((run, index) => index === 0 ? { ...run, webCommit: "f".repeat(40) } : run) })), /not bound to candidate Web commit/u);
   assert.throws(() => runFinalRegression(input({ runs: input().runs.map((run, index) => index === 0 ? { ...run, evidence: [{ path: "../secret.json", sha256: SHA }] } : run) })), /evidence path/u);
   assert.throws(() => runFinalRegression(input({ decision: "go", gates: { truthRegistry: "open", riskReview: "open", heldOutCorrection: "open", providerLifecycle: "open", finalRelease: "open" } })), /GO cannot/u);
 });

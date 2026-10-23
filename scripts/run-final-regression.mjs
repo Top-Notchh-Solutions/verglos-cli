@@ -181,6 +181,7 @@ function validateScenarioRun(input, index, candidate, fixtureMap) {
   if (!input || typeof input !== "object") throw new Error(`regression run ${index} is invalid`);
   if (typeof input.fixture !== "string" || !fixtureMap.has(input.fixture)) throw new Error(`regression run ${index} fixture is invalid`);
   if (typeof input.sourceCommit !== "string" || input.sourceCommit !== candidate.cliCommit) throw new Error(`regression run ${index} is not bound to candidate CLI commit`);
+  if (typeof input.webCommit !== "string" || input.webCommit !== candidate.webCommit) throw new Error(`regression run ${index} is not bound to candidate Web commit`);
   const scenario = input.scenario;
   if (!scenario || typeof scenario !== "object" || !PLANS.includes(scenario.plan) || !USER_ROLES.includes(scenario.userRole) || !TENANT_MODES.includes(scenario.tenantMode)) throw new Error(`regression run ${index} scenario is invalid`);
   const baseline = validateMeasurement(input.baseline, `regression run ${index} baseline`);
@@ -189,6 +190,7 @@ function validateScenarioRun(input, index, candidate, fixtureMap) {
   return Object.freeze({
     fixture: input.fixture,
     sourceCommit: input.sourceCommit,
+    webCommit: input.webCommit,
     scenario: Object.freeze({ plan: scenario.plan, userRole: scenario.userRole, tenantMode: scenario.tenantMode }),
     baseline,
     candidate: candidateMeasurement,
@@ -237,6 +239,7 @@ function compareScenario(entry, threshold) {
     fixture: entry.fixture,
     scenario: entry.scenario,
     sourceCommit: entry.sourceCommit,
+    webCommit: entry.webCommit,
     evidence: entry.evidence,
     baseline: Object.freeze({ status: entry.baseline.status, coverage: entry.baseline.coverage, filesWalked: entry.baseline.filesWalked, findingCount: entry.baseline.findingCount, durationMs: entry.baseline.durationMs }),
     candidate: Object.freeze({ status: entry.candidate.status, coverage: entry.candidate.coverage, filesWalked: entry.candidate.filesWalked, findingCount: entry.candidate.findingCount, durationMs: entry.candidate.durationMs, exitCode: entry.candidate.exitCode }),
