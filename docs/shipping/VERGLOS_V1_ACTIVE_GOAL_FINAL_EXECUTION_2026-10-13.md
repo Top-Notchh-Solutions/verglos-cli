@@ -16,6 +16,23 @@ the score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
 the additive bundle
 `docs/shipping/evidence/acceptance-evidence-bundle-cli-platform-matrix-39993289161-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · public-boundary promotion status
+
+The hosted receipt and its verified 196-file bundle are now also carried by
+private-shipping commit `4cfe082e` on PR #210, preserving the exact run and
+manifest without deleting or overwriting any prior record. PR #211 remains
+open as the separate evidence-only review.
+
+The required Verglos self-scan still fails at `Audit public boundary`. The
+public repository currently contains the retained `docs/shipping/**` ledger in
+its reachable history (9,397 historical path objects observed). The original
+main-based branch hits Node's child-process output limit; the boundary fix in
+`61c83511` removes that diagnostic limit and then exposes the existing
+forbidden-path policy conflict. No shipping checkbox is changed, no history
+is rewritten, and no check is bypassed. Score remains **244 checked / 36 open /
+280 total (87.1%)** until the repository's public/private ledger policy is
+resolved.
+
 ## Latest continuation result · 2026-10-23 · DIST-006 contract-suite verification
 
 ## Latest continuation result · 2026-10-23 · DIST-006 contract-suite verification
