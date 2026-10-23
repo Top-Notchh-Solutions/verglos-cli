@@ -15586,3 +15586,44 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   `sha256:e2adf0e7ebf9def36e4432ca97db3b712ccb3cc4cdeb76cdd98e8d9116fbdccc`;
   bundle file SHA-256
   `326012076c9d37c6d5fe3e3177d73b1ffb3e38d53933ff986a958f1081d98d92`.
+
+## DIST-003/006 consumer archive staging · 2026-10-23
+
+- **Source mapping:** `stage-bounded-archives.mjs` snapshots release archives
+  through bounded regular-file handles before npm consumer or rollback use;
+  packed-manifest auditing reads the license and archives through the same
+  boundary.
+- **Contract mapping:** Symlinked source archives are rejected before staging;
+  downstream consumers receive only private regular-file snapshots.
+- **Verification mapping:** Combined release, bounded-reader, staging,
+  consumer, workflow, and bundle contracts **17/17**; six-archive
+  packed-manifest audit, syntax, and diff checks passed.
+- **Acceptance mapping:** Keep DIST-003/006 unchecked for live
+  consumer/provider rollback, deployment revocation, trusted publication,
+  independent review, and final acceptance. No npm publication, provider,
+  Production, customer, deployment, tag, or release-sign-off action occurred.
+  Nothing was deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:276473d50800b36f1f6046658077596eaab4dc856529caebadfe07fcc4b784c0`;
+  bundle file SHA-256
+  `a1bbfe42fc012dba391766fde01702fda9a01afc2d0b6e318d7519f387db1596`.
+
+## DIST-003/006 local rehearsal refresh · 2026-10-23
+
+- **Runtime mapping:** The real clean-consumer run installed six staged
+  archives, imported all libraries, executed Verglos `2.0.0-alpha.1`, and
+  confirmed no external-engine cache; rollback passed
+  `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`.
+- **Boundary mapping:** This is local rehearsal evidence only; authenticated
+  provider/registry rollback, deployment revocation, trusted publication,
+  independent review, and final acceptance remain open.
+- **Acceptance mapping:** Keep DIST-003/006 unchecked. No npm publication,
+  provider, Production, customer, deployment, tag, or release-sign-off action
+  occurred. Nothing was deleted or overwritten. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`;
+  rerun bundle manifest
+  `sha256:28d34e5df8e3f09ca6bb9b4185e5552aadb3c13fcfbe02840097068a56dd3d2d`;
+  bundle file SHA-256
+  `87d74afefd75aa331d14e49aa33faae9a139cef3df0c2a161bbae353bdd15680`.

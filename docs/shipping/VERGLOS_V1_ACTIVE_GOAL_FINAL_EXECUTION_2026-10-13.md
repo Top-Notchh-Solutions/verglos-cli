@@ -3160,3 +3160,44 @@ and file SHA-256
 Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/dist-003-release-artifact-read-binding-private-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-003/006 consumer archive staging
+
+The clean-consumer and upgrade/rollback verifiers now snapshot release
+archives through bounded regular-file handles into private temporary staging
+before passing paths to npm. The packed-manifest auditor also reads the
+repository license and every archive through the same opened-handle boundary.
+
+The combined release, bounded-reader, staging, clean-consumer, workflow, and
+bundle contracts passed **17/17**; the six-archive packed-manifest audit
+passed; syntax and `git diff --check` passed. This is implementation evidence
+only. Live consumer installation, authenticated provider/registry rollback,
+deployment revocation, independent review, and final release decision remain
+unperformed. Keep `DIST-003` and `DIST-006` unchecked. No npm publication,
+provider, Production, customer, deployment, tag, or release-sign-off action
+occurred. The additive bundle contains **158** files with manifest
+`sha256:276473d50800b36f1f6046658077596eaab4dc856529caebadfe07fcc4b784c0`
+and file SHA-256
+`a1bbfe42fc012dba391766fde01702fda9a01afc2d0b6e318d7519f387db1596`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-003/006 local rehearsal refresh
+
+The real local clean-consumer run installed all six staged archives, imported
+all libraries, executed Verglos `2.0.0-alpha.1`, and confirmed no external
+engine cache. The real upgrade/rollback rehearsal passed
+`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`. These are local rehearsal results only;
+authenticated provider/registry rollback, deployment revocation, independent
+review, and final release decision remain open.
+
+`DIST-003` and `DIST-006` remain unchecked. No npm publication, provider,
+Production, customer, deployment, tag, or release-sign-off action occurred.
+The rerun bundle contains **158** files with manifest
+`sha256:28d34e5df8e3f09ca6bb9b4185e5552aadb3c13fcfbe02840097068a56dd3d2d`
+and file SHA-256
+`87d74afefd75aa331d14e49aa33faae9a139cef3df0c2a161bbae353bdd15680`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`.

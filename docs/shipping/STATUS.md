@@ -12057,6 +12057,41 @@ deleted or overwritten. Score remains **244 checked / 36 open / 280 total
 
 Evidence: `evidence/dist-003-release-artifact-read-binding-private-2026-10-23.md`.
 
+## 2026-10-23 · DIST-003/006 consumer archive staging
+
+Clean-consumer and upgrade/rollback verification now stage exact bytes read
+through bounded regular-file handles before npm receives archive paths; the
+packed-manifest auditor uses the same boundary. Combined release,
+bounded-reader, staging, consumer, workflow, and bundle contracts passed
+**17/17**, and the six-archive packed-manifest audit passed.
+
+This is implementation evidence only. `DIST-003` and `DIST-006` remain
+unchecked for live consumer/provider rollback, deployment revocation, trusted
+publication, independent review, and final acceptance. No npm publication,
+provider, Production, customer, deployment, tag, or release-sign-off action
+occurred; nothing was deleted or overwritten. Score remains **244 checked / 36
+open / 280 total (87.1%)**.
+
+Evidence: `evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`.
+
+## 2026-10-23 · DIST-003/006 local rehearsal refresh
+
+The real clean-consumer run installed six staged archives, imported all
+libraries, executed Verglos `2.0.0-alpha.1`, and confirmed no external-engine
+cache. The real local upgrade/rollback rehearsal passed
+`1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`.
+
+These are local rehearsal results only. `DIST-003` and `DIST-006` remain
+unchecked for authenticated provider/registry rollback, deployment
+revocation, trusted publication, independent review, and final acceptance. No
+npm publication, provider, Production, customer, deployment, tag, or
+release-sign-off action occurred; nothing was deleted or overwritten. Score
+remains **244 checked / 36 open / 280 total (87.1%)**.
+
+Evidence: `evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`;
+rerun bundle manifest
+`sha256:28d34e5df8e3f09ca6bb9b4185e5552aadb3c13fcfbe02840097068a56dd3d2d`.
+
 ## 2026-10-23 · DIST-002 release-tag read binding
 
 The private release-tag verifier now reads all six public package manifests

@@ -3,6 +3,7 @@ import { mkdtemp, readdir, rm, writeFile, lstat } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
+import { stageBoundedArchives } from "./stage-bounded-archives.mjs";
 
 const run = promisify(execFile);
 const archiveRoot = resolve(process.argv[2] ?? "");
@@ -21,14 +22,11 @@ if (archives.length !== expectedPackages.length) throw new Error(`expected ${exp
 for (const packageInfo of expectedPackages) {
   if (archives.filter(packageInfo.matches).length !== 1) throw new Error(`release must contain exactly one ${packageInfo.name} archive`);
 }
-for (const name of archives) {
-  if (!(await lstat(join(archiveRoot, name))).isFile()) throw new Error(`package archive must be a regular file: ${name}`);
-}
 
 const consumer = await mkdtemp(join(tmpdir(), "verglos-clean-consumer-"));
 try {
   await writeFile(join(consumer, "package.json"), JSON.stringify({ name: "verglos-release-consumer", private: true, version: "1.0.0" }));
-  const paths = archives.map((name) => join(archiveRoot, name));
+  const paths = await stageBoundedArchives(archives.map((name) => join(archiveRoot, name)), join(consumer, "release-archives"));
   await run(npmCommand, ["install", "--ignore-scripts", "--no-audit", "--no-fund", "--no-package-lock", ...paths], { ...npmOptions, cwd: consumer, timeout: 180_000, maxBuffer: 8 * 1024 * 1024 });
   const cli = join(consumer, "node_modules", "verglos", "dist", "index.js");
   const result = await run(process.execPath, [cli, "--version"], { cwd: consumer, timeout: 15_000, maxBuffer: 1024 * 1024 });

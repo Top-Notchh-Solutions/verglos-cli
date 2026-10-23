@@ -9427,6 +9427,39 @@ changed. See
   additive bundle manifest
   `sha256:e2adf0e7ebf9def36e4432ca97db3b712ccb3cc4cdeb76cdd98e8d9116fbdccc`.
 
+## DIST-003/006 consumer archive staging · 2026-10-23
+
+- **Source mapping:** `stage-bounded-archives.mjs` snapshots release archives
+  through bounded regular-file handles; clean-consumer, rollback, and packed
+  manifest verification use the staged or opened bytes.
+- **Contract mapping:** Symlinked source archives are rejected before npm or
+  tar receives a pathname, and staged files are private regular files.
+- **Verification mapping:** Combined release/bounded-reader/staging/
+  consumer/workflow/bundle contracts **17/17**; six-archive packed-manifest
+  audit, syntax, and diff checks passed.
+- **Acceptance mapping:** Keep DIST-003/006 open for live consumer/provider
+  rollback, deployment revocation, trusted publication, independent review,
+  and final acceptance. Score remains **244/36/280 (87.1%)**; nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:276473d50800b36f1f6046658077596eaab4dc856529caebadfe07fcc4b784c0`.
+
+## DIST-003/006 local rehearsal refresh · 2026-10-23
+
+- **Runtime mapping:** The real clean-consumer run installed six staged
+  archives, imported all libraries, executed Verglos `2.0.0-alpha.1`, and
+  confirmed no external-engine cache; rollback passed
+  `1.8.3 -> 2.0.0-alpha.1 -> 1.8.3`.
+- **Boundary mapping:** These are local rehearsal results; authenticated
+  provider/registry rollback, deployment revocation, trusted publication,
+  independent review, and final acceptance remain open.
+- **Acceptance mapping:** DIST-003/006 remain unchecked. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-003-006-consumer-archive-staging-private-2026-10-23.md`;
+  rerun bundle manifest
+  `sha256:28d34e5df8e3f09ca6bb9b4185e5552aadb3c13fcfbe02840097068a56dd3d2d`.
+
 ## DIST-002 release-tag read binding · 2026-10-23
 
 - **Source mapping:** Private `scripts/verify-release-tag.mjs` now uses the
