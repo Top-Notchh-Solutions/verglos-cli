@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## Attempted-order processing live in Production · 2026-10-24
+
+- **Deployment:** Vercel `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` reached READY and
+  was aliased to `https://verglos.com`.
+- **Verification:** Read-only public smoke passed for the expected routes; the
+  unsafe GET to the POST-only QR route returned 405. No production payment or
+  write occurred.
+- **Disposition:** Live Web implementation evidence advanced; provider
+  terminal lifecycle, customer/recipient, independent review, browser/field,
+  deletion, AppSec/Hunt, and final release remain open. No checkbox changed;
+  score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-order-attempted-processing-production-ready-2026-10-24.md`.
+- **Bundle:** Additive v10 contains 236 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:31fa442c619117957a10a562695f407592f3d0b7fd8f6cf983d8fc482d28a4ce`.
+
 ## Attempted-order processing implementation merged · 2026-10-24
 
 - **Implementation:** Web source `9005d5e` maps provider order state

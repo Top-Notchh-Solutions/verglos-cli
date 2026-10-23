@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · attempted-order processing Production deployment READY
+
+The merged Web status mapping is live in Vercel Production deployment
+`dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1`, aliased to `https://verglos.com`. The
+read-only public smoke passed, including the expected 405 for an unsafe GET to
+the QR route. This advances live Web implementation evidence only; provider
+terminal lifecycle, independent review, browser/field-CWV, account deletion,
+AppSec/Hunt, customer/recipient, and final release remain open. Score remains
+**245/35/280 (87.5%)**; no checkbox changed. Evidence:
+`evidence/vercel-order-attempted-processing-production-ready-2026-10-24.md`.
+The additive bundle v10 verifies **236/236** files with zero mismatches and
+manifest `sha256:31fa442c619117957a10a562695f407592f3d0b7fd8f6cf983d8fc482d28a4ce`.
+
 ## 2026-10-24 · attempted-order processing implementation
 
 The merged Web route now exposes the provider `attempted` state as HTTP 202

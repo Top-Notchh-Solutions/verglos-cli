@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · attempted-order processing is live in Production
+
+Vercel deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` reached READY and is
+aliased to `https://verglos.com`. Read-only smoke returned 200 for the public
+surface and the expected 405 method boundary for the QR route. No production
+payment or write occurred; score remains **245/35/280 (87.5%)** and no
+checkbox changed. Evidence:
+`evidence/vercel-order-attempted-processing-production-ready-2026-10-24.md`.
+The additive bundle v10 verifies **236/236** files with zero mismatches and
+manifest `sha256:31fa442c619117957a10a562695f407592f3d0b7fd8f6cf983d8fc482d28a4ce`.
+
 ## 2026-10-24 · attempted-order processing implementation merged
 
 Web PR #269 merged normally at `5c52423231e286b8e176535b8d97e14fa52bbb03`.
