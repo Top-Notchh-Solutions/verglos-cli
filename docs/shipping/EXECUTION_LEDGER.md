@@ -15278,6 +15278,20 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   state changed and nothing was deleted. Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
 
+## ACCEPT-014 Web-candidate binding · 2026-10-23
+
+- **Source:** Private implementation commit `1391acf4`.
+- **Contract mapping:** Each final-regression scenario now carries and
+  validates the exact candidate Web commit in addition to the CLI commit; the
+  binding is retained in the bounded result.
+- **Verification:** Adjacent acceptance contracts **46/46**, study protocol,
+  syntax, and diff checks passed.
+- **Boundary:** Keep `ACCEPT-014` open for the actual frozen-corpus matrix,
+  correction/provider gates, independent review, and final decision. No
+  external state changed and nothing was deleted. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source:** Private implementation commit `f1b74154`.

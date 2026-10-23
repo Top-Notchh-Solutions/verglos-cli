@@ -965,6 +965,21 @@ independent review, and final sign-off remain open. No checkbox, provider,
 Production, publication, customer, or release state changed, and nothing was
 deleted. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-014 Web candidate binding
+
+Private commit `1391acf4` closes a candidate-integrity gap in final regression:
+the declared exact Web commit is now required on every scenario run, alongside
+the CLI commit, and is preserved in the bounded result. A mismatched Web
+candidate is rejected. The adjacent acceptance set passed **46/46**, including
+the mismatch regression; study-protocol, syntax, and diff checks passed.
+
+Evidence: `docs/shipping/evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+This advances the implementation contract only; the actual frozen-corpus
+matrix, correction/provider gates, independent review, and final decision
+remain open. No checkbox, provider, Production, publication, customer,
+recipient, or release state changed, and nothing was deleted. The live score
+remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-009 future-date boundary
 
 Private commit `f1b74154` hardens `acceptance:release:reconcile` so a report

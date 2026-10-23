@@ -12040,6 +12040,17 @@ changed and nothing was deleted. Score remains **244 checked / 36 open / 280
 total (87.1%)**. Evidence:
 `evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
 
+## 2026-10-23 · ACCEPT-014 Web-candidate binding
+
+Private commit `1391acf4` binds every final-regression scenario to the exact
+candidate Web commit as well as the CLI commit. The adjacent acceptance set
+passed **46/46**, including a candidate-Web mismatch regression. Keep
+`ACCEPT-014` open for the actual frozen-corpus matrix, correction/provider
+gates, independent review, and final decision. No external state changed and
+nothing was deleted. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009 future-date reconciliation boundary
 
 Private commit `f1b74154` rejects a release reconciliation whose `completedAt`

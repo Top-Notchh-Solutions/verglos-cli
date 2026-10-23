@@ -9407,6 +9407,20 @@ changed. See
   **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
 
+## ACCEPT-014 Web-candidate binding · 2026-10-23
+
+- **Source mapping:** Private implementation commit `1391acf4`.
+- **Contract mapping:** `acceptance:release:regress` rejects any scenario not
+  bound to both the exact candidate CLI commit and exact candidate Web commit,
+  and retains the Web binding in the output.
+- **Verification mapping:** Adjacent acceptance contracts **46/46** passed;
+  study-protocol, syntax, and diff checks passed.
+- **Acceptance mapping:** This does not close `ACCEPT-014`; the frozen-corpus
+  matrix, correction/provider gates, independent review, and final decision
+  remain open. No checkbox or external state changed; nothing was deleted.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source mapping:** Private commit `f1b74154`.
