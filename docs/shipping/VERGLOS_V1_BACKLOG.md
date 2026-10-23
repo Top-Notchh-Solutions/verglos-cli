@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current Preview checkout receipt
+
+The current Web Preview deployment served `/checkout` with HTTP **200**, the
+expected security headers, and a CSP permitting the Razorpay checkout origin
+for script, connect, frame, and form actions. This is read-only hosted route
+evidence; no checkout, payment, webhook, database, entitlement, account, or
+Production write occurred. The additive bundle verifies **204/204** files with
+zero mismatches and passed secret scanning, manifest
+`sha256:ec44445fc794eed900f6e89c8e0fa012d54b11b673775a4d6b4b80cbf5540db0`.
+Keep ACCEPT-003 unchecked for authenticated checkout/payment lifecycle,
+review, and acceptance evidence. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/vercel-web-current-head-checkout-preview-2026-10-24.md`
+and `docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-checkout-preview-v4.json`.
+
 ## 2026-10-24 · Test-Mode inventory merged
 
 The redacted Test-Mode provider inventory and bundle-source update merged

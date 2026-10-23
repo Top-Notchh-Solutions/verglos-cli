@@ -121,6 +121,7 @@ const paths = [
   "docs/shipping/evidence/qual-web-006-dashboard-capture-command-pr257-2026-10-23.md",
   "docs/shipping/evidence/vercel-web-production-preview-receipts-2026-10-23.md",
   "docs/shipping/evidence/vercel-web-current-head-preview-2026-10-23.md",
+  "docs/shipping/evidence/vercel-web-current-head-checkout-preview-2026-10-24.md",
   "docs/shipping/evidence/cli-platform-matrix-run-39985823350-2026-10-23.md",
   "docs/shipping/evidence/cli-platform-matrix-run-39993289161-2026-10-23.md",
   "docs/shipping/evidence/acceptance-evidence-bundle-cli-platform-matrix-39993289161-2026-10-23.md",
