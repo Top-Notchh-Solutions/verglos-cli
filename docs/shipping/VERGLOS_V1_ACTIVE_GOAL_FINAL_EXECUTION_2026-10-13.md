@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-003 current bundle disposition
+
+The ACCEPT-003 source contract is implemented in the private shipping
+toolchain: deterministic sorted manifests, duplicate/path/secret rejection,
+bounded no-follow regular-file reads, byte and SHA-256 binding, manifest
+recomputation, and checked-in regression coverage. The current additive bundle
+v8 contains **184 files**, verifies with **0 mismatches**, and passes secret
+scanning under manifest
+`sha256:cf67a55b0b4d661ab38c33ebc38ac5cd7c668b417f0ac5d94d9e05595bb29393`.
+The implementation source audit found no missing code-side ACCEPT-003 slice.
+
+ACCEPT-003 remains open only for its declared reviewer sign-off and
+hosted/provider/customer acceptance artifacts; no reviewer or external result
+is being inferred from local evidence. The next implementation-first queue
+entry is `ACCEPT-005`. The live score remains **244 checked / 36 open / 280
+total (87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-005 isolated database integration
 
 The current Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` was run against

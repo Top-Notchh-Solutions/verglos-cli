@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-003 current bundle disposition
+
+The private bundle builder/verifier code-side contract is complete. Bundle v8
+contains **184 files**, reports **0 mismatches**, and passes secret scanning
+with manifest
+`sha256:cf67a55b0b4d661ab38c33ebc38ac5cd7c668b417f0ac5d94d9e05595bb29393`.
+ACCEPT-003 remains open for reviewer sign-off and hosted/provider/customer
+acceptance artifacts; the next implementation-first queue item is ACCEPT-005.
+Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/acceptance-evidence-bundle-2026-10-23-qual-web005-current-0c2b306-v8.json`.
+
 ## 2026-10-23 · QUAL-WEB-005 isolated current-head integration
 
 The authoritative Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` passed

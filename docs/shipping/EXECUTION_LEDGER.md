@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-003 current bundle disposition · 2026-10-23
+
+- **Implementation:** Bundle builder/verifier contract is complete, including
+  deterministic manifests, bounded no-follow reads, digest/byte binding, and
+  secret scanning.
+- **Artifact:** Bundle v8 contains **184 files**, **0 mismatches**, and manifest
+  `sha256:cf67a55b0b4d661ab38c33ebc38ac5cd7c668b417f0ac5d94d9e05595bb29393`.
+- **Disposition:** ACCEPT-003 remains open for reviewer sign-off and
+  hosted/provider/customer acceptance. Next queue: ACCEPT-005. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/acceptance-evidence-bundle-2026-10-23-qual-web005-current-0c2b306-v8.json`.
+
 ## QUAL-WEB-005 isolated current-head integration · 2026-10-23
 
 - **Source:** Web `main` `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` in a clean

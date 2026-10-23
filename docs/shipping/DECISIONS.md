@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile ACCEPT-003 and advance the queue
+
+- **Decision:** Treat the current bundle/verifier implementation as complete
+  code-side and do not rework it to manufacture a checkbox change.
+- **Result:** Bundle v8 has **184 files**, **0 mismatches**, secret scanning
+  passed, and manifest
+  `sha256:cf67a55b0b4d661ab38c33ebc38ac5cd7c668b417f0ac5d94d9e05595bb29393`.
+- **Disposition:** ACCEPT-003 remains open for reviewer sign-off and
+  hosted/provider/customer acceptance. Advance the implementation-first queue
+  to ACCEPT-005. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/acceptance-evidence-bundle-2026-10-23-qual-web005-current-0c2b306-v8.json`.
+
 ## 2026-10-23 · run QUAL-WEB-005 against an isolated local database
 
 - **Decision:** Use a fresh local Docker `verglos_test` database for the

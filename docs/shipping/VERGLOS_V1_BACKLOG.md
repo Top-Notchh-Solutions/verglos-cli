@@ -5377,6 +5377,14 @@ Evidence/problem: external validation is deliberately last. It validates the com
   bundle-builder secret scan passed. This strengthens reproducibility only;
   reviewer sign-off and hosted/external acceptance remain open. Evidence:
   `docs/shipping/evidence/accept-003-bundle-integrity-verification-2026-10-23.md`.
+**ACCEPT-003 current bundle v8 addendum (2026-10-23; not a checkbox):** The
+current additive bundle contains **184** bounded files and the checked-in
+verifier reports **0 mismatches**, matching manifest
+`sha256:cf67a55b0b4d661ab38c33ebc38ac5cd7c668b417f0ac5d94d9e05595bb29393`;
+secret scanning passed. The code-side bundle contract is complete. Keep the
+row unchecked for reviewer sign-off and hosted/provider/customer acceptance
+artifacts. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-23-qual-web005-current-0c2b306-v8.json`.
 - [x] **ACCEPT-004** · external authorized workflow protocol · deps: ACCEPT-003 · Freeze recruitment/questions/consent/data handling/success criteria for qualified teams without scraping or bulk outreach. No external contact without authorization. Commit(s): Private `454a0cf` adds the frozen protocol, per-repository consent-record template, and `pnpm acceptance:protocol:check` validator. It requires named owner consent, exact commit/scope, bounded network/data handling, expiry/revocation, founder approval, redacted evidence, and deletion/expiry recording. No external contact was performed; ACCEPT-005 onward remain open.
 - [ ] **ACCEPT-005** · run authorized external repository workflows · deps: ACCEPT-004 + founder authorization · Validate real release reconciliation without publishing findings; record product failures separately from requested scope. Private `acceptance:workflow:validate` now implements the exact consent/scope/redaction/deletion contract; focused tests pass **4/4**. First-party/public-fixture qualification is not external consented-team/recipient acceptance and does not close this row. Evidence: `docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md` and `docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`. Row remains open for the actual named-owner workflow and expiry/deletion record.
 - **ACCEPT-005 validator boundary addendum (2026-10-23):** Private `10e39268` rejects non-string consent/execution dates; focused workflow tests pass **5/5**. The external named-owner workflow and deletion/expiry record remain open. Evidence: `docs/shipping/evidence/accept-005-authorized-workflow-date-boundary-2026-10-23.md`.
