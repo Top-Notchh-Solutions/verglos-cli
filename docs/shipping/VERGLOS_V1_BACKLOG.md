@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-008 commercial evidence provenance
+
+Private commit `0533b21106bf3081d5bca6fc60efc238fd902114` requires every
+commercial event to declare a digest-bound provenance class:
+`owner-controlled-synthetic`, `observed-commercial-evidence`, or
+`consenting-recipient`. Reports expose the class (or
+`mixed-commercial-sources`) and keep `acceptanceStatus: open`; changing the
+class without a new event digest fails closed. Focused commercial coverage
+passes **9/9**, the adjacent acceptance contract set passes **63/63**, and
+study-protocol, syntax, and diff checks pass. Keep `ACCEPT-008` unchecked:
+this is implementation/provenance evidence, not actual plan, checkout,
+provider, recipient, independent-review, or final-acceptance evidence. Score
+remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-008-commercial-provenance-2026-10-24.md`.
+
 ## 2026-10-23 · current Web Preview provider receipt
 
 Clean Web `origin/main` commit `42fe33eefd2d2ce23ec89512381af2b767de4e54`
