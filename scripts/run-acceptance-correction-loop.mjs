@@ -235,6 +235,7 @@ function validatePartition(value, label, fixtureNames) {
 }
 
 function validDate(value, label) {
+  if (!(value instanceof Date) && typeof value !== "string") throw new Error(`${label} is invalid`);
   const date = value instanceof Date ? value : new Date(value);
   if (!Number.isFinite(date.getTime())) throw new Error(`${label} is invalid`);
   return date;

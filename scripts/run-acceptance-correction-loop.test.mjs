@@ -87,3 +87,9 @@ test("rejects corrections created after the holdout freeze", () => {
     corrections: [{ id: "late", kind: "evidence", status: "applied", sourceObservationIds: ["train-finding"], changedPaths: ["docs/evidence.md"], createdAt: REVIEWED }],
   })), /created after holdout freeze/u);
 });
+
+test("rejects non-string protocol dates instead of coercing them", () => {
+  assert.throws(() => runAcceptanceCorrectionLoop(input({
+    split: { ...input().split, holdoutFrozenAt: null },
+  })), /holdoutFrozenAt is invalid/u);
+});
