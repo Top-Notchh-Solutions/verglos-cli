@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-003 evidence-bundle size boundary
+
+The acceptance-evidence bundle reader now enforces a 16 MiB per-file bound
+before opening, while reading, and after reading each evidence file. It reads
+through bounded chunks from the opened descriptor and rechecks regular-file
+identity and final byte count before hashing. Oversized or changing files fail
+closed.
+
+Bundle-builder and bounded-reader focused contracts passed **6/6**; the full
+adjacent acceptance contract suite passed **57/57**; study-protocol, syntax,
+and diff checks passed. This advances ACCEPT-003 implementation only. No
+backlog checkbox or external state changed, and nothing was deleted or
+overwritten. The additive bundle contains **168 hashed files** with manifest
+`sha256:6d4a7ec05185b49344f243736c9318dc8907a8d7022419d8498546797729ee9f`
+and file SHA-256
+`5ddee2a7d8c6f4b4aa4fb8438dc3cc9141b77e0ea71b2403dc21bee9f954d231`.
+Provider, Production, customer/recipient, independent-review, AppSec/Hunt,
+and final-release gates remain open. The live score remains **244 checked / 36
+open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-003-bundle-size-boundary-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-005 authorized workflow byte binding
 
 The authorized-workflow file runner now verifies execution-report,

@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
-import { constants, fstatSync, lstatSync, openSync, readFileSync, closeSync, writeFileSync } from "node:fs";
+import { constants, fstatSync, lstatSync, openSync, readSync, closeSync, writeFileSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
+const MAX_EVIDENCE_BYTES = 16 * 1024 * 1024;
 const output = process.env.VERGLOS_ACCEPTANCE_BUNDLE_OUTPUT
   ?? join(root, "docs/shipping/evidence/acceptance-evidence-bundle-2026-10-03.json");
 
@@ -178,6 +179,7 @@ const paths = [
   "docs/shipping/evidence/accept-009-010-release-byte-binding-2026-10-23.md",
   "docs/shipping/evidence/accept-014-regression-byte-binding-2026-10-23.md",
   "docs/shipping/evidence/accept-005-authorized-workflow-byte-binding-2026-10-23.md",
+  "docs/shipping/evidence/accept-003-bundle-size-boundary-2026-10-23.md",
   "THIRD_PARTY_NOTICES",
 ];
 
@@ -232,18 +234,33 @@ function readEvidenceFile(absolute, path) {
     throw error;
   }
   if (!before.isFile()) throw new Error(`evidence path must be a regular file: ${path}`);
+  if (before.size > MAX_EVIDENCE_BYTES) throw new Error(`evidence file exceeds size limit: ${path}`);
   let descriptor;
   try {
     descriptor = openSync(absolute, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
     const opened = fstatSync(descriptor);
-    if (!opened.isFile() || !sameIdentity(before, opened)) throw new Error(`evidence file changed while opening: ${path}`);
-    const bytes = readFileSync(descriptor);
+    if (!opened.isFile() || opened.size > MAX_EVIDENCE_BYTES || !sameIdentity(before, opened)) throw new Error(`evidence file changed or exceeds size limit while opening: ${path}`);
+    const bytes = readBoundedDescriptor(descriptor, path);
     const after = fstatSync(descriptor);
-    if (after.size !== bytes.byteLength || !sameIdentity(opened, after)) throw new Error(`evidence file changed while reading: ${path}`);
+    if (after.size > MAX_EVIDENCE_BYTES || after.size !== bytes.byteLength || !sameIdentity(opened, after)) throw new Error(`evidence file changed or exceeds size limit while reading: ${path}`);
     return bytes;
   } finally {
     if (descriptor !== undefined) closeSync(descriptor);
   }
+}
+
+function readBoundedDescriptor(descriptor, path) {
+  const chunks = [];
+  let total = 0;
+  while (true) {
+    const buffer = Buffer.allocUnsafe(Math.min(64 * 1024, MAX_EVIDENCE_BYTES + 1 - total));
+    const bytesRead = readSync(descriptor, buffer, 0, buffer.byteLength, null);
+    if (bytesRead === 0) break;
+    total += bytesRead;
+    if (total > MAX_EVIDENCE_BYTES) throw new Error(`evidence file exceeds size limit while reading: ${path}`);
+    chunks.push(buffer.subarray(0, bytesRead));
+  }
+  return Buffer.concat(chunks, total);
 }
 
 function sameIdentity(left, right) {

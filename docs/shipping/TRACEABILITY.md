@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 evidence-bundle size boundary · 2026-10-23
+
+- **Source mapping:** Private acceptance-evidence bundle reader and focused
+  regression test.
+- **Contract mapping:** Every bundled evidence file is bounded to 16 MiB and
+  read through a regular-file descriptor with no-follow, identity, and final
+  byte-count checks; oversized or changing files fail closed.
+- **Verification mapping:** Bundle/bounded-reader contracts **6/6**; adjacent
+  acceptance contracts **57/57**; study-protocol, syntax, and diff checks
+  passed.
+- **Artifact mapping:** 168 hashed bundle files; manifest SHA-256
+  `sha256:6d4a7ec05185b49344f243736c9318dc8907a8d7022419d8498546797729ee9f`;
+  bundle file SHA-256
+  `5ddee2a7d8c6f4b4aa4fb8438dc3cc9141b77e0ea71b2403dc21bee9f954d231`;
+  secret scan passed.
+- **Acceptance mapping:** ACCEPT-003 remains open for reviewer and required
+  external/hosted acceptance gates, including provider/customer,
+  independent-review, AppSec/Hunt, and final release decisions. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/accept-003-bundle-size-boundary-2026-10-23.md`.
+
 ## ACCEPT-005 authorized workflow byte binding · 2026-10-23
 
 - **Source mapping:** Private authorized-workflow and bounded-reader file

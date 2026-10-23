@@ -54,3 +54,16 @@ test("bundle builder rejects symlinked evidence paths", async () => {
     await rm(root, { recursive: true, force: true });
   }
 });
+
+test("bundle builder rejects oversized evidence files", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-acceptance-bundle-"));
+  try {
+    await writeFile(join(root, "large.md"), Buffer.alloc(16 * 1024 * 1024 + 1, 0x61));
+    assert.throws(
+      () => buildAcceptanceEvidenceBundle({ bundleRoot: root, bundlePaths: ["large.md"] }),
+      /size limit/u,
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
