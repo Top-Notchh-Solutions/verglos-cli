@@ -1,5 +1,30 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-003 provider-state bundle addendum
+
+The additive private reproducibility bundle now contains **131 hashed files**
+and passed its secret scan. Its SHA-256 is
+`sha256:032d70f250a9f79fe3df50861f37372024792e6494c4d13637243afdc5f9cb27`.
+It includes the read-only GitHub release-environment and npm registry state
+record. Provider lifecycle, customer consent, independent review, browser,
+field-CWV, and account-deletion gates remain open. No checkbox changed; score
+remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-provider-state-2026-10-23.md`.
+
+## 2026-10-23 · DIST-002 release-environment/provider state
+
+Read-only GitHub inspection confirms the `release` environment has required
+reviewer `anuragyadav-git` and protected-branch deployment policy. The
+`VERGLOS_FINAL_RELEASE_READY` variable is absent, and npm still returns E404
+for `@verglos/hunt@2.0.0-alpha.4` and `verglos@2.0.0-alpha.4`. No provider
+mutation or registry write was attempted. This advances provider preparation
+only; DIST-002/003 remain open for final readiness, trusted publication,
+provenance, and release acceptance. No checkbox changed; score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted or overwritten.
+Evidence:
+`docs/shipping/evidence/dist-002-release-environment-state-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 additive current evidence bundle
 
 The protected bundle builder generated an additive **130-file** private

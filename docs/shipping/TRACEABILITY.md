@@ -1,5 +1,31 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 provider-state bundle addendum · 2026-10-23
+
+- **Source mapping:** The bundle includes the read-only current release-
+  environment and npm registry observation.
+- **Integrity mapping:** 131 hashed files; SHA-256
+  `sha256:032d70f250a9f79fe3df50861f37372024792e6494c4d13637243afdc5f9cb27`;
+  secret scan passed.
+- **Gate mapping:** Provider lifecycle, customer consent, independent review,
+  authenticated browser, field CWV, and account deletion remain open.
+- **Acceptance mapping:** ACCEPT-003 remains reproducibility evidence only;
+  score remains **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-provider-state-2026-10-23.md`.
+
+## DIST-002 release-environment/provider state · 2026-10-23
+
+- **Provider mapping:** GitHub `release` environment requires reviewer
+  `anuragyadav-git` and protected branches.
+- **Readiness mapping:** `VERGLOS_FINAL_RELEASE_READY` is absent; no final
+  release authorization was asserted.
+- **Registry mapping:** Read-only npm queries return E404 for the candidate
+  Hunt and CLI packages; no registry mutation occurred.
+- **Acceptance mapping:** DIST-002/003 remain open for trusted publication,
+  provenance, and final acceptance. Score remains **244/36/280 (87.1%)**;
+  nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-002-release-environment-state-2026-10-23.md`.
+
 ## ACCEPT-003 additive current evidence bundle · 2026-10-23
 
 - **Source mapping:** Protected bundle builder includes the four latest

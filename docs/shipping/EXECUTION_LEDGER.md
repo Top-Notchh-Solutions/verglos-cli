@@ -1,5 +1,32 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-003 provider-state bundle addendum
+
+- **Artifact:** Additive private bundle with **131** hashed files.
+- **Integrity:** SHA-256
+  `sha256:032d70f250a9f79fe3df50861f37372024792e6494c4d13637243afdc5f9cb27`;
+  secret scan passed.
+- **Coverage:** Includes the read-only GitHub release-environment and npm
+  registry state record; provider, customer, independent-review, browser,
+  field-CWV, and account-deletion gates remain open.
+- **Disposition:** ACCEPT-003 reproducibility only; no final-release outcome
+  was claimed. Score remains **244/36/280 (87.1%)**. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-provider-state-2026-10-23.md`.
+
+## 2026-10-23 · DIST-002 release-environment/provider state
+
+- **Environment:** GitHub `release` environment has required reviewer
+  `anuragyadav-git` and protected-branch policy.
+- **Readiness:** `VERGLOS_FINAL_RELEASE_READY` is absent by design while the
+  goal remains open.
+- **Registry:** Read-only npm queries return E404 for the Hunt and CLI
+  candidate versions; no registry write was attempted.
+- **Disposition:** Provider preparation only. DIST-002/003 remain open for
+  final readiness, trusted publication/provenance, and release acceptance.
+  Score remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-002-release-environment-state-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 additive current evidence bundle
 
 - **Artifact:** Additive private bundle with **130** hashed evidence files.
