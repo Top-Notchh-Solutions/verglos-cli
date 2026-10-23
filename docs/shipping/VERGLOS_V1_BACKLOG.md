@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · app-bound Cards fixture boundary
+
+The current order route returned HTTP **200** with Cards-only methods, and the
+bound Test Mode order returned provider HTTP **200**, status `created`, and the
+canonical 280,943-paise amount. Its provider payments read-back returned HTTP
+**200** with **0** payment records. The hosted Cards fixture reached the card
+form but produced no terminal payment, OTP, handler, or webhook.
+
+This advances current app-bound provider evidence only; no money moved and no
+checkbox changed. Score remains **245 checked / 35 open / 280 total (87.5%)**,
+partitioned as **13 AppSec-dependent / 22 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/razorpay-testmode-card-fixture-boundary-2026-10-24.md`.
+
 ## 2026-10-24 · current checkout-bound Test Mode order
 
 The current checkout route created one real synthetic Razorpay Test Mode
