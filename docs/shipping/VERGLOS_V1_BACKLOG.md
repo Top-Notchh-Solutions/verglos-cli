@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current CLI public-OSS execution
+
+The owner-authorized public-OSS path ran eight exact-commit full clones with
+CLI `7d07066f967a2e7899aca6b51f04f306b7071013`, telemetry disabled, and source
+upload disabled. Verification passed **8 fixtures / 13,494 files walked / 0
+coverage gaps** across all four required architecture shapes; bounded triage
+produced **351 findings / 23 rule groups**. Reports remain private local
+derived artifacts and customer/recipient acceptance is not claimed.
+
+This advances ACCEPT-011/012 POC inputs only. Their dependency,
+adjudication, independent-review, AppSec/Hunt, and final-acceptance contracts
+remain open, as do ACCEPT-005/006/008. No checkbox changed; score remains
+**244 checked / 36 open / 280 total (87.1%)**, partitioned as **13
+AppSec-dependent / 23 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md`.
+
 ## 2026-10-24 · Production public-surface recheck
 
 The current Vercel Production deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL`

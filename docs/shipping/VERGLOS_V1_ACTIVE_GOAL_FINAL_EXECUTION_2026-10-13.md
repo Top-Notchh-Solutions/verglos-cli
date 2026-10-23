@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current CLI public-OSS execution
+
+The owner-authorized public-OSS path ran the eight exact-commit full clones
+against CLI `7d07066f967a2e7899aca6b51f04f306b7071013`, with telemetry disabled
+and source upload disabled. Verification passed for **8 fixtures / 13,494
+files walked / 0 coverage gaps** across all four required architecture shapes;
+bounded triage produced **351 findings / 23 rule groups**. Reports remain
+private local derived artifacts and no customer or recipient claim is made.
+
+This materially advances ACCEPT-011/012 POC inputs but does not close their
+dependency, adjudication, independent-review, AppSec/Hunt, or final-acceptance
+contracts, and does not close ACCEPT-005/006/008. No checkbox changed; score
+remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Production public-surface recheck
 
 The current Vercel Production deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL`

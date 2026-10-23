@@ -228,6 +228,7 @@ const paths = [
   "docs/shipping/evidence/accept-003-bundle-size-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-007-adjudication-validator-2026-10-23.md",
   "docs/shipping/evidence/vercel-web-production-public-surface-recheck-2026-10-24.md",
+  "docs/shipping/evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];
 

@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-011/012 current CLI public-OSS execution · 2026-10-24
+
+- **Execution:** CLI `7d07066f967a2e7899aca6b51f04f306b7071013` scanned eight
+  owner-authorized exact-commit full clones with telemetry and source upload
+  disabled.
+- **Verification:** **13,494 files walked**, **351 findings**, **23 rule
+  groups**, all four required architecture shapes, and **0 coverage gaps**.
+- **Disposition:** Reports remain private local derived artifacts. This is
+  POC input evidence only; no customer/recipient, adjudication,
+  independent-review, AppSec/Hunt, or final-release claim is made. No
+  checkbox changed; score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md`.
+
 ## Web Production public-surface recheck · 2026-10-24
 
 - **Provider receipt:** Vercel deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL`

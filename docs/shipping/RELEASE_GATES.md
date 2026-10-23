@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current CLI public-OSS POC input gate
+
+The owner-authorized public-OSS run completed eight exact-commit full clones
+with CLI `7d07066f`, covering **13,494 files**, **351 bounded observations**,
+all four architecture shapes, and **0 coverage gaps**. This opens technical
+POC input evidence only. It does not open adjudication, customer/recipient,
+independent-review, AppSec/Hunt, human/field, or final go/no-go gates. Score
+remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md`.
+
 ## 2026-10-24 · Production public-surface gate
 
 Vercel deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` reported `READY`.
