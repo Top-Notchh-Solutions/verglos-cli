@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · run clean current-head acceptance stories
+
+- **Decision:** Re-run the twelve-story private substrate harness against
+  explicit clean merged CLI/Web heads instead of the dirty user checkouts.
+- **Result:** CLI **315/317 passed / 2 skipped**, Web **960/990 passed / 30
+  skipped**, composed substrates **83/83**, story coverage **12/12**, all
+  commands exit 0.
+- **Disposition:** Substrate evidence only; no checkbox or score changed.
+  Score remains **244/36/280 (87.1%)** and external/hosted/provider/customer,
+  reviewer, browser-human, field-CWV, account-deletion, AppSec/Hunt, and final
+  gates remain open.
+- **Bundle:** 182 files; manifest
+  `sha256:23881734baf8563532829e34b21aaef2454f778dfb1735dd4a4f37001fc35329`;
+  bundle SHA-256
+  `06fef9f06eac5ee95e8f668ac8836066196be97814f096979f7b16ad414a1a72`.
+- **Evidence:** `evidence/accept-002-003-clean-current-story-run-2026-10-23.md`.
+
 ## 2026-10-23 · implement ACCEPT-003 reusable verifier
 
 - **Decision:** Make bundle integrity verification reproducible through a

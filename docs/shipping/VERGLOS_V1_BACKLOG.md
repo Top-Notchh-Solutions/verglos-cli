@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · clean 12-story substrate run
+
+Clean exact merged CLI/Web heads completed the private acceptance harness:
+CLI **315/317 passed with 2 skips**, Web **960/990 passed with 30 skips**,
+composed substrates **83/83 passed**, and **12/12** story mappings executed
+with all commands exiting 0. No checkbox changed: this is repository-owned
+substrate evidence, not hosted/provider/customer/reviewer/browser-human,
+field-CWV, account-deletion, AppSec/Hunt, or final acceptance. Score remains
+**244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-002-003-clean-current-story-run-2026-10-23.md`.
+Current packet: **182 files**, manifest
+`sha256:23881734baf8563532829e34b21aaef2454f778dfb1735dd4a4f37001fc35329`,
+bundle SHA-256
+`06fef9f06eac5ee95e8f668ac8836066196be97814f096979f7b16ad414a1a72`.
+
 ## 2026-10-23 · ACCEPT-003 reusable verifier
 
 Added the checked-in acceptance-bundle verifier and package command. Verifier

@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## Clean 12-story substrate run · 2026-10-23
+
+- **Source mapping:** Clean CLI `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`
+  and Web `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` worktrees.
+- **Verification mapping:** CLI **315/317** with 2 skips, Web **960/990** with
+  30 skips, composed substrates **83/83**, and **12/12** story mappings;
+  zero failures and all commands exited 0.
+- **Acceptance mapping:** Substrate/regression evidence only; external,
+  hosted, provider, customer, reviewer, browser-human, field-CWV,
+  account-deletion, AppSec/Hunt, and final gates remain open. Score remains
+  **244/36/280 (87.1%)**.
+- **Artifact mapping:** Current packet has 182 files, manifest
+  `sha256:23881734baf8563532829e34b21aaef2454f778dfb1735dd4a4f37001fc35329`,
+  bundle SHA-256
+  `06fef9f06eac5ee95e8f668ac8836066196be97814f096979f7b16ad414a1a72`.
+- **Evidence:** `evidence/accept-002-003-clean-current-story-run-2026-10-23.md`.
+
 ## ACCEPT-003 reusable bundle verifier · 2026-10-23
 
 - **Implementation mapping:** `scripts/verify-acceptance-evidence-bundle.mjs`

@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · clean 12-story substrate run
+
+Clean exact merged CLI/Web heads completed the private twelve-story harness:
+CLI **315/317 passed with 2 skips**, Web **960/990 passed with 30 skips**,
+composed substrates **83/83**, and all **12/12** mappings executed with zero
+command failures. This does not check hosted/provider/customer/reviewer,
+browser-human, field-CWV, account-deletion, AppSec/Hunt, or final release
+gates. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-002-003-clean-current-story-run-2026-10-23.md`. Current
+packet: 182 files, manifest
+`sha256:23881734baf8563532829e34b21aaef2454f778dfb1735dd4a4f37001fc35329`,
+bundle SHA-256
+`06fef9f06eac5ee95e8f668ac8836066196be97814f096979f7b16ad414a1a72`.
+
 ## 2026-10-23 · ACCEPT-003 reusable verifier
 
 The checked-in bounded verifier is implemented. Its tests pass **4/4**, the

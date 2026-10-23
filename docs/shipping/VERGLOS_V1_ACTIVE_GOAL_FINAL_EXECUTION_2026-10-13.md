@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · clean 12-story substrate run
+
+The private acceptance harness ran against clean exact merged heads CLI
+`c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web
+`0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`: CLI **315/317 passed with 2
+skips**, Web **960/990 passed with 30 skips**, and composed
+Studio/Enterprise/Team/quality substrates **83/83 passed**. All **12/12**
+story mappings executed and every command exited 0. This strengthens
+ACCEPT-002/003 substrate evidence only; hosted, provider, customer, reviewer,
+browser-human, field-performance, account-deletion, AppSec/Hunt, and final
+release gates remain open. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`docs/shipping/evidence/accept-002-003-clean-current-story-run-2026-10-23.md`.
+The current packet bundle contains **182 files**, manifest
+`sha256:23881734baf8563532829e34b21aaef2454f778dfb1735dd4a4f37001fc35329`,
+and its bundle file SHA-256 is
+`06fef9f06eac5ee95e8f668ac8836066196be97814f096979f7b16ad414a1a72`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-003 reusable verifier
 
 Implemented `scripts/verify-acceptance-evidence-bundle.mjs` and the
