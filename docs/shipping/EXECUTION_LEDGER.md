@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## Current-head acceptance-story verification · 2026-10-24
+
+- **Sources:** clean CLI `aad2c74395a5c381c955ab9dfab7462295564840` and Web
+  `9005d5ed5182b1d29159c0bb65c8ac696928baed` worktrees.
+- **Command:** `env -u TEST_DATABASE_URL -u DATABASE_URL
+  -u DATABASE_URL_UNPOOLED VERGLOS_TELEMETRY=0 pnpm --silent
+  acceptance:stories:verify` with explicit CLI/Web roots.
+- **Results:** CLI **310/312** pass with 2 documented skips; Web **960/990**
+  pass with 30 documented skips; composed substrates **83/83**; all **12/12**
+  story mappings executed; zero failures.
+- **Boundary:** Local substrate/regression evidence only. No hosted HTTP,
+  provider, customer, reviewer, browser-human, field-CWV, migration, or
+  production acceptance is claimed. No checkbox changed; score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/acceptance-stories-current-head-2026-10-24.md` and
+  `evidence/acceptance-stories-verification-2026-10-24-current-head.json`.
+- **Bundle:** Additive v13 contains 240 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:9009ad22dac6db8de8c56801d53e3eaf44a91e67d579e9c1b44ecae874ef2001`.
+
 ## Current Production landing browser qualification · 2026-10-24
 
 - **Deployment:** `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` at `https://verglos.com`.

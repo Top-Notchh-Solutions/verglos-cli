@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current-head acceptance-story verification
+
+The clean current CLI/Web sources passed the local acceptance-story substrate
+run: CLI **310/312** with two documented skips, Web **960/990** with 30
+documented skips, and composed substrates **83/83**. All **12/12** mappings
+executed with zero failures. This strengthens implementation evidence only;
+hosted/provider/customer, independent-review, human/field-CWV,
+account-deletion, AppSec/Hunt, and final-release gates remain open. Score stays
+**245/35/280 (87.5%)**; no checkbox changed. Evidence:
+`evidence/acceptance-stories-current-head-2026-10-24.md`.
+The additive bundle v13 verifies **240/240** files with zero mismatches and
+manifest `sha256:9009ad22dac6db8de8c56801d53e3eaf44a91e67d579e9c1b44ecae874ef2001`.
+
 ## 2026-10-24 · current Production landing browser qualification
 
 The READY Production deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` passed
