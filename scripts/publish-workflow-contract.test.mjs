@@ -47,6 +47,10 @@ test("publish workflow verifies the same public artifact boundaries as release c
   assert.match(workflow, /if:\s*startsWith\(github\.ref, 'refs\/tags\/v'\) && !contains\(github\.ref_name, '-'\)/u, "publication must reject prerelease tags");
   assert.match(workflow, /VERGLOS_FINAL_RELEASE_READY/u, "publication must require explicit final shipping readiness");
   assert.ok(workflow.indexOf("Verify final shipping readiness") < workflow.indexOf("publish-public-package.mjs"), "final readiness must be checked before publication");
+  const publishCommands = workflow.split(/\r?\n/u).filter((line) => line.includes("publish-public-package.mjs") && line.trimStart().startsWith("node scripts/"));
+  assert.equal(publishCommands.length, 7, "the stable release must publish exactly seven public packages");
+  for (const command of publishCommands) assert.match(command, /\slatest\s*$/u, "stable publication must update the latest dist-tag");
+  assert.doesNotMatch(workflow, /publish-public-package\.mjs[^\n]*\salpha\s*$/mu, "stable publication must not use the prerelease dist-tag");
   assert.match(workflow, /verify-release-tag\.mjs "[$]GITHUB_REF_NAME"/u);
   assert.match(workflow, /TAG_COMMIT="\$\(git rev-list -n 1 "\$GITHUB_REF"\)"/u, "publication must resolve the exact tag commit");
   assert.match(workflow, /verify-release-tag\.mjs "[$]GITHUB_REF_NAME" "[$]GITHUB_SHA" "[$]TAG_COMMIT"/u, "publication must bind the event SHA to the resolved tag SHA");
