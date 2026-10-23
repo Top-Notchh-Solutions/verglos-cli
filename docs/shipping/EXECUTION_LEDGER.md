@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-002/003 npm CI secret rotation
+
+- **Observed owner action:** The GitHub Actions repository secret `NPM_TOKEN`
+  was replaced for `Top-Notchh-Solutions/verglos-cli` using the GitHub CLI.
+  The secret name was read back with `gh secret list`; the token value was not
+  printed or stored.
+- **Provider boundary:** No workflow dispatch, tag creation, or npm registry
+  write occurred. Secret presence does not prove npm organization/package
+  permission; that remains an authorized-release observation.
+- **Disposition:** Keep public publication paused until whole-goal completion;
+  keep `DIST-002`/`DIST-003` open. Score remains **244/36/280 (87.1%)**.
+  Nothing was deleted. Evidence:
+  `evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 alpha.4 partial provider publication
 
 - **Release event:** PR #184 merged normally at

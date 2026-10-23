@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## DIST-002/003 npm CI secret rotation · 2026-10-23
+
+- **Source/provider mapping:** Repository secret `NPM_TOKEN` in
+  `Top-Notchh-Solutions/verglos-cli` was replaced by the owner and confirmed
+  present through the GitHub CLI; the value is intentionally not recorded.
+- **Verification mapping:** No release workflow, tag, or npm write was
+  triggered. Effective npm organization/package permission remains unverified
+  until an authorized release attempt.
+- **Acceptance mapping:** `DIST-002`/`DIST-003` remain open. Publication is
+  paused until the whole shipping goal is complete. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
+
 ## FINAL-WEB-007/008 public release integration qualification · 2026-10-23
 
 - **Source mapping:** Web PR #247 head `d02ac18`; normal merge commits

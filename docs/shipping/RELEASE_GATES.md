@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · DIST-002/003 npm CI secret rotation
+
+The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`
+secret and confirmed its presence without exposing its value. No workflow,
+tag, or registry write was triggered. The credential's effective npm
+organization/package permission remains unverified; public publication stays
+paused until whole-goal completion. `DIST-002` and `DIST-003` remain open, and
+the current score is **244/36/280 (87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
+
 ## 2026-10-23 · FINAL-WEB-007/008 public release integration gate
 
 PR #247 head `d02ac18` preserves normal merge commits for PR #245 and PR #246

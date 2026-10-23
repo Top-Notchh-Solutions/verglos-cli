@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-002/003 npm CI secret rotation
+
+The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`
+secret. The secret name was confirmed by `gh secret list`; its value is not
+stored in this tracker. No workflow was dispatched, tag was created, or npm
+registry write occurred. This removes the stale-secret configuration concern,
+but effective npm organization/package permission remains unverified until an
+authorized release attempt. Public publication remains paused until the whole
+shipping goal is complete. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-002-003-npm-secret-rotation-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 alpha.4 partial provider publication
 
 PR #184 merged normally at `ed318f06b97771f45cc6970f745868fb1aa09404` and the
