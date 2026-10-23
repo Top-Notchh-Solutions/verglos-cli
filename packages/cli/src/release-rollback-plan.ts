@@ -54,7 +54,14 @@ async function readBoundedRegularFile(path: string, message: string): Promise<Bu
     }
     if (opened.size > MAX_BYTES) throw new Error(message);
     const bytes = await handle.readFile();
-    if (bytes.byteLength > MAX_BYTES) throw new Error(message);
+    const final = await handle.stat();
+    if (!final.isFile()
+      || (opened.ino !== 0 && final.ino !== 0 && (opened.dev !== final.dev || opened.ino !== final.ino))
+      || final.size !== opened.size
+      || bytes.byteLength !== final.size
+      || bytes.byteLength > MAX_BYTES) {
+      throw new Error(`${message} changed during read`);
+    }
     return bytes;
   } finally {
     await handle.close();
