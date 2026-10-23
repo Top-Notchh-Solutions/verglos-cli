@@ -5055,6 +5055,16 @@ Evidence/problem: external validation is deliberately last. It validates the com
   36 open / 280 total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-010** · GA release candidate freeze · deps: ACCEPT-009 + all critical gates · Freeze versions, schemas, migrations, manifests, plan catalog, compatibility, docs, runbooks, notices, SBOM, provenance, and rollback. Commit(s): —
+- **ACCEPT-010 artifact-kind addendum (2026-10-23):** Private `199e6095`
+  hardens the freeze contract to require a present, required artifact in all
+  twelve canonical categories: version, schema, migration, manifest,
+  plan-catalog, compatibility, docs, runbook, notice, SBOM, provenance, and
+  rollback. A present checksum/manifest alone can no longer report
+  `ready-for-signoff`; missing categories are listed separately. The adjacent
+  acceptance set passes **46/46**. Keep `ACCEPT-010` unchecked for the actual
+  candidate freeze, dependent provider/independent-review gates, and final
+  sign-off. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+  Evidence: `docs/shipping/evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
 
 ## Epic 20 — Held final landing/marketing pass
 

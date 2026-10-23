@@ -15265,6 +15265,19 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   changed and nothing was deleted. Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md`.
 
+## ACCEPT-010 complete freeze-artifact inventory · 2026-10-23
+
+- **Source:** Private implementation commit `199e6095`.
+- **Contract mapping:** Candidate freeze now requires a present, required
+  artifact in each of twelve canonical categories and reports missing kinds
+  separately from missing paths.
+- **Verification:** Adjacent acceptance contracts **46/46**, study protocol,
+  syntax, and diff checks passed.
+- **Boundary:** Keep `ACCEPT-010` open for the actual candidate freeze,
+  dependent provider/independent-review gates, and final sign-off. No external
+  state changed and nothing was deleted. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source:** Private implementation commit `f1b74154`.

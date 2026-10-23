@@ -948,6 +948,23 @@ Production, publication, customer, recipient, or release state changed, and
 nothing was deleted. The live score remains **244 checked / 36 open / 280
 total (87.1%)**.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-010 artifact inventory
+
+Private commit `199e6095` closes a concrete freeze-contract gap: a candidate
+can no longer become `ready-for-signoff` with only an arbitrary checksum or
+partial artifact list. The contract now requires present, required artifacts in
+all twelve canonical categories: version, schema, migration, manifest,
+plan-catalog, compatibility, docs, runbook, notice, SBOM, provenance, and
+rollback. Missing categories are reported separately, and GO remains
+fail-closed. The adjacent acceptance set passed **46/46**, including the
+incomplete-kind regression; study-protocol, syntax, and diff checks passed.
+
+Evidence: `docs/shipping/evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+This is implementation progress only; the actual freeze, dependent gates,
+independent review, and final sign-off remain open. No checkbox, provider,
+Production, publication, customer, or release state changed, and nothing was
+deleted. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-009 future-date boundary
 
 Private commit `f1b74154` hardens `acceptance:release:reconcile` so a report

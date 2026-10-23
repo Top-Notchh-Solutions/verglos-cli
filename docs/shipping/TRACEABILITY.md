@@ -9392,6 +9392,21 @@ changed. See
   **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md`.
 
+## ACCEPT-010 complete freeze-artifact inventory · 2026-10-23
+
+- **Source mapping:** Private implementation commit `199e6095`.
+- **Contract mapping:** `acceptance:release:freeze` refuses readiness unless
+  required present artifacts cover version, schema, migration, manifest,
+  plan-catalog, compatibility, docs, runbook, notice, SBOM, provenance, and
+  rollback.
+- **Verification mapping:** Adjacent acceptance contracts **46/46** passed;
+  study-protocol, syntax, and diff checks passed.
+- **Acceptance mapping:** This does not close `ACCEPT-010`; actual freeze,
+  dependent gates, independent review, and final sign-off remain open. No
+  checkbox or external state changed; nothing was deleted. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source mapping:** Private commit `f1b74154`.

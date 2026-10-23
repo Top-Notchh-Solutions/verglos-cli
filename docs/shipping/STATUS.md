@@ -12028,6 +12028,18 @@ review, and final acceptance. No external state changed and nothing was
 deleted. Score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
 `evidence/accept-012-current-head-digest-bound-rerun-2026-10-23.md`.
 
+## 2026-10-23 · ACCEPT-010 complete freeze-artifact inventory
+
+Private commit `199e6095` requires present, required artifacts in twelve
+canonical freeze categories: version, schema, migration, manifest,
+plan-catalog, compatibility, docs, runbook, notice, SBOM, provenance, and
+rollback. The adjacent acceptance set passed **46/46**, including the
+incomplete-kind regression. Keep `ACCEPT-010` open for the actual freeze,
+dependent gates, independent review, and final sign-off. No external state
+changed and nothing was deleted. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`evidence/accept-010-artifact-kind-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009 future-date reconciliation boundary
 
 Private commit `f1b74154` rejects a release reconciliation whose `completedAt`

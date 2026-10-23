@@ -120,6 +120,7 @@ const paths = [
   "docs/shipping/evidence/accept-009-release-reconciler-2026-10-23.md",
   "docs/shipping/evidence/accept-009-reconciliation-date-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-010-candidate-freeze-2026-10-23.md",
+  "docs/shipping/evidence/accept-010-artifact-kind-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-012-public-oss-triage-2026-10-23.md",
   "docs/shipping/evidence/accept-011-architecture-corpus-2026-10-23.md",
   "docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md",
