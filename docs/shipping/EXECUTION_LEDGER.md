@@ -15,6 +15,11 @@
 - **Bundle:** Additive v19 contains **244** hashed files, verifies with zero
   mismatches, passes secret scanning, and matches manifest
   `sha256:0ac911d9fb9d3280b57d51eb69a34d4dd9cd2573f00b108f24a88f3a8094013a`.
+- **Readiness recheck:** `VERGLOS_FINAL_RELEASE_READY` is absent from the
+  release environment; `NPM_TOKEN` remains unused. Bundle v20 supersedes v19,
+  verifies 244 files with zero mismatches and passed secret scanning, and
+  matches manifest
+  `sha256:4cdf892359036d86a15a82a28ea47511f991ed17dee021112d264b63444dbf1d`.
 
 ## QUAL-WEB-006 dashboard contract recheck · 2026-10-24
 

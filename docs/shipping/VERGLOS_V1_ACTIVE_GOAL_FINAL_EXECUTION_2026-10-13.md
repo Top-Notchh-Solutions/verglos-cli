@@ -18,6 +18,11 @@ The additive bundle v19 verifies **244/244** files with zero mismatches,
 passes secret scanning, and matches manifest
 `sha256:0ac911d9fb9d3280b57d51eb69a34d4dd9cd2573f00b108f24a88f3a8094013a`:
 `docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-npm-observation-v19.json`.
+The release environment has no `VERGLOS_FINAL_RELEASE_READY` variable; the
+owner `NPM_TOKEN` secret is present but unused. Additive bundle v20 supersedes
+v19 and verifies **244/244** files with zero mismatches, secret scanning passed,
+and manifest `sha256:4cdf892359036d86a15a82a28ea47511f991ed17dee021112d264b63444dbf1d`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-release-readiness-v20.json`.
 
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-006 dashboard contract recheck
 

@@ -8,6 +8,8 @@
 - **Packages checked:** **7**
 - **Accepted:** **0/7**
 - **Provider writes:** none
+- **Release environment:** `VERGLOS_FINAL_RELEASE_READY` is absent.
+- **Owner secret:** `NPM_TOKEN` exists, but this observation did not consume it.
 
 The read-only npm observation found:
 
@@ -25,5 +27,6 @@ This is a truthful registry/publication boundary record, not a publication
 attempt. No npm token, tag, GitHub Actions workflow, registry write, or release
 sign-off was used. `DIST-002/003/006` remain open for the trusted complete
 seven-package publication and immutable provenance bound to the approved
-candidate. The authoritative score remains **245 checked / 35 open / 280
+candidate; the publish workflow remains stable-only and requires the explicit
+release-ready variable. The authoritative score remains **245 checked / 35 open / 280
 total (87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
