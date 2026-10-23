@@ -1,11 +1,13 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const run = promisify(execFile);
 const root = fileURLToPath(new URL("..", import.meta.url));
+const cliManifest = JSON.parse(await readFile(join(root, "packages/cli/package.json"), "utf8"));
+if (typeof cliManifest.version !== "string" || cliManifest.version.length === 0) throw new Error("CLI package version is required for SBOM metadata");
 const { stdout } = await run("node", [join(root, "scripts/license-inventory.mjs")], { cwd: root, maxBuffer: 16 * 1024 * 1024 });
 const inventory = JSON.parse(stdout);
 const components = [];
@@ -44,7 +46,7 @@ const bom = {
   bomFormat: "CycloneDX",
   specVersion: "1.5",
   version: 1,
-  metadata: { component: { type: "application", name: "verglos-monorepo", version: "2.0.0-alpha.1" } },
+  metadata: { component: { type: "application", name: "verglos-monorepo", version: cliManifest.version } },
   components,
 };
 const output = `${JSON.stringify(bom, null, 2)}\n`;
