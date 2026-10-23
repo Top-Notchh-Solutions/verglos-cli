@@ -10,6 +10,7 @@ test("SPDX SBOM is deterministic with unique package identifiers", async () => {
   assert.deepEqual(a, b);
   assert.equal(a.spdxVersion, "SPDX-2.3");
   assert.equal(a.dataLicense, "CC0-1.0");
+  assert.equal(a.documentNamespace, "https://verglos.com/spdx/verglos-monorepo-2.0.0-alpha.4");
   assert.equal(new Set(a.packages.map((p) => p.SPDXID)).size, a.packages.length);
   assert.ok(a.packages.length > 0);
   const describes = a.relationships.filter((r) => r.spdxElementId === "SPDXRef-DOCUMENT" && r.relationshipType === "DESCRIBES");

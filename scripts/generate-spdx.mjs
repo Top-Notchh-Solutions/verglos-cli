@@ -1,11 +1,13 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const run = promisify(execFile);
 const root = fileURLToPath(new URL("..", import.meta.url));
+const cliManifest = JSON.parse(await readFile(join(root, "packages/cli/package.json"), "utf8"));
+if (typeof cliManifest.version !== "string" || cliManifest.version.length === 0) throw new Error("CLI package version is required for SPDX metadata");
 function spdxDownloadLocation(source) {
   if (typeof source !== "string" || !source.trim()) return "NOASSERTION";
   const value = source.trim();
@@ -37,7 +39,7 @@ for (const entry of inventory.bundledComponents ?? []) {
 for (const packageEntry of packages) relationships.push({ spdxElementId: "SPDXRef-DOCUMENT", relationshipType: "DESCRIBES", relatedSpdxElement: packageEntry.SPDXID });
 packages.sort((a, b) => a.SPDXID.localeCompare(b.SPDXID));
 relationships.sort((a, b) => a.spdxElementId.localeCompare(b.spdxElementId) || a.relatedSpdxElement.localeCompare(b.relatedSpdxElement));
-const doc = { SPDXID: "SPDXRef-DOCUMENT", spdxVersion: "SPDX-2.3", dataLicense: "CC0-1.0", creationInfo: { created: "1970-01-01T00:00:00Z", creators: ["Tool: verglos-license-tools"] }, name: "verglos-monorepo", documentNamespace: "https://verglos.com/spdx/verglos-monorepo-2.0.0-alpha.1", packages, relationships };
+const doc = { SPDXID: "SPDXRef-DOCUMENT", spdxVersion: "SPDX-2.3", dataLicense: "CC0-1.0", creationInfo: { created: "1970-01-01T00:00:00Z", creators: ["Tool: verglos-license-tools"] }, name: "verglos-monorepo", documentNamespace: `https://verglos.com/spdx/verglos-monorepo-${cliManifest.version}`, packages, relationships };
 const output = `${JSON.stringify(doc, null, 2)}\n`;
 if (process.argv.includes("--write")) await writeFile(join(root, "SBOM.spdx.json"), output, { encoding: "utf8", mode: 0o644 });
 process.stdout.write(output);
