@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · QUAL-WEB-005 current-head local integration qualification
+
+- **Source:** Clean Web exact head `16ceddc9`.
+- **Verification:** Focused deletion/tenant-boundary suite: 43 tests, **42
+  passed / 0 failed / 1 skipped**. The skip was the authenticated deletion
+  route's explicit missing-migrated-schema preflight (`users`,
+  `organizations`).
+- **Boundary:** Only the disposable local `verglos_test` container was used;
+  the hosted Neon URL was not sourced. Passing integration fixtures were
+  temporary/transaction-scoped.
+- **Disposition:** QUAL-WEB-005 implementation evidence only; complete
+  migrated route E2E, legal/customer-held-record, Production migration/
+  restore/rollback, reconciliation, independent review, and final acceptance
+  remain open. Score remains **244/36/280 (87.1%)**. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/qual-web-005-local-current-head-integration-2026-10-23.md`.
+
 ## 2026-10-23 · local current-candidate release artifacts
 
 - **Source:** CLI exact head `3d4bca1f`, version `2.0.0-alpha.4`; build **8/8**

@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## QUAL-WEB-005 current-head local integration qualification · 2026-10-23
+
+- **Source mapping:** Clean Web exact head `16ceddc9`.
+- **Verification mapping:** Focused deletion/tenant-boundary suite recorded 43
+  tests with **42 passed, 0 failed, and 1 explicit schema-preflight skip**.
+- **Boundary mapping:** The run used only disposable local `verglos_test`
+  PostgreSQL fixtures; the hosted Neon URL was not used. Integration fixtures
+  were temporary/transaction-scoped.
+- **Acceptance mapping:** This does not close `QUAL-WEB-005`; migrated route
+  E2E, legal/customer-held-record disposition, Production migration/
+  restore/rollback, reconciliation, independent review, and final acceptance
+  remain open. Score remains **244/36/280 (87.1%)**; nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/qual-web-005-local-current-head-integration-2026-10-23.md`.
+
 ## Local current-candidate release artifacts · 2026-10-23
 
 - **Source mapping:** CLI exact head `3d4bca1f`, version `2.0.0-alpha.4`, with

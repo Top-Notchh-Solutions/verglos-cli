@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · QUAL-WEB-005 current-head local integration qualification
+
+The clean Web head `16ceddc9` passed the focused deletion/tenant-boundary
+suite with **42 passed / 0 failed / 1 skipped** across 43 tests. The run used
+only the disposable local `verglos_test` container; the authenticated
+deletion-route case skipped because the container lacks the migrated `users`
+and `organizations` tables. The hosted Neon URL was not used. This is
+implementation evidence only: `QUAL-WEB-005` remains open for its complete
+migrated route E2E, legal/customer-held-record disposition, Production
+migration/restore/rollback, reconciliation, independent review, and final
+acceptance. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted or overwritten. Evidence:
+`evidence/qual-web-005-local-current-head-integration-2026-10-23.md`.
+
 ## 2026-10-23 · local current-candidate release artifacts
 
 The exact CLI head `3d4bca1f` built **8/8** packages and passed **14/14**
