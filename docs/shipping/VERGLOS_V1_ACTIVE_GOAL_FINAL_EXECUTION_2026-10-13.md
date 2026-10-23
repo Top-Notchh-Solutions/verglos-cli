@@ -1,5 +1,28 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Production CLI-auth routing fix shipped
+
+The Production public-route audit found `/cli-auth` returning HTTP **404** even
+though the public-release manifest includes it and the page explicitly
+redirects unauthenticated users to `/login`. Web commit `d05ddbd` added
+`/cli-auth(.*)` to the Clerk public matcher and added a regression assertion to
+the public-release smoke contract. Web PR **#261** merged normally as
+`2f88ec0964d44d0ebfdfcbba1fec9637c7de98f0`.
+
+The exact fix and post-merge `main` Vercel Production deployments reported
+**READY**. Live read-only verification now returns `307` from `/cli-auth` to
+`/login?redirect_url=%2Fcli-auth`, preserves a supplied code in the bounded
+redirect, and keeps `/`, `/proof`, and `/checkout` at HTTP **200**. Vercel
+completed the Production build with **49/49** static pages. Local
+public-release smoke passed **12/12**, truth-registry passed **37/37**, and
+typecheck/diff checks passed. No payment, database, account, entitlement,
+webhook, customer, final CLI/npm release, or AppSec action occurred. Evidence:
+`docs/shipping/evidence/vercel-web-production-cli-auth-route-fix-2026-10-24.md`.
+The additive private evidence bundle verifies **208/208** files with zero
+mismatches, passed secret scanning, and manifest
+`sha256:c14d7a8660cbd062c5d5f255257a597349250e88578d5ffceba497527d61b1c9`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-cli-auth-production-fix.json`.
+
 ## Latest continuation result · 2026-10-24 · Production routing fix shipped
 
 Production execution found and corrected a real hosted defect: `verglos.com/proof`
