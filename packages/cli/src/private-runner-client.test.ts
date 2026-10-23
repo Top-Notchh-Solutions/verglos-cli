@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { generateKeyPairSync, sign } from "node:crypto";
-import { chmod, lstat, mkdtemp, mkdir, writeFile, readFile } from "node:fs/promises";
+import { chmod, lstat, mkdtemp, mkdir, rm, writeFile, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { privateRunnerJobSigningBytes, type PrivateRunnerJob } from "@verglos/shared";
-import { enrollPrivateRunner, pollPrivateRunnerJob, privateRunnerResultSummary, uploadPrivateRunnerResult } from "./private-runner-client.js";
+import { enrollPrivateRunner, pollPrivateRunnerJob, privateRunnerResultSummary, readBoundedPrivateRunnerFile, uploadPrivateRunnerResult } from "./private-runner-client.js";
 
 const home = await mkdtemp(join(tmpdir(), "verglos-private-runner-client-"));
 process.env.HOME = home;
@@ -211,4 +211,24 @@ test("private runner enrollment redeems once, stores the runner credential, and 
   const stored = JSON.parse(await readFile(join(home, ".verglos", "credentials.json"), "utf8")) as { licenseKey: string; privateRunner: { credential: string } };
   assert.equal(stored.licenseKey, "owner-license-sentinel");
   assert.equal(stored.privateRunner.credential, credential);
+});
+
+test("private runner file reader accepts a bounded regular file and enforces the size limit", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-private-runner-file-"));
+  const path = join(root, "key.pem");
+  await writeFile(path, "runner-key\n", "utf8");
+  try {
+    assert.equal((await readBoundedPrivateRunnerFile(path, 64, "fixture")).toString("utf8"), "runner-key\n");
+    await assert.rejects(readBoundedPrivateRunnerFile(path, 4, "fixture"), /fixture/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("private runner file reader uses an opened handle through the final read check", async () => {
+  const source = await readFile(new URL("./private-runner-client.ts", import.meta.url), "utf8");
+  assert.match(source, /open\(path, constants\.O_RDONLY \| \(constants\.O_NOFOLLOW \?\? 0\)\)/u);
+  assert.match(source, /const final = await handle\.stat\(\)/u);
+  assert.match(source, /bytes\.byteLength !== final\.size/u);
+  assert.doesNotMatch(source, /readFile\(path\)/u);
 });
