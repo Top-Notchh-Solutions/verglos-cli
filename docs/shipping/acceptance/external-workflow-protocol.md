@@ -15,6 +15,14 @@ Public technical fixtures may be used for engineering regression, but they do
 not count as customer acceptance, comprehension, commercial acceptance, or a
 customer POC.
 
+The separate owner-authorized public-OSS benchmark path uses
+`subjectKind: owner-authorized-public-oss`. It binds the exact repository
+commit, applicable license/terms evidence digest, owner authorization, bounded
+scope, redaction, and retention/expiry record. It does not require a
+third-party customer consent record because it is not presented as customer
+acceptance. The validator must still emit `customerAcceptance: not-claimed`;
+an external customer POC remains a separate gate.
+
 ## Recruitment and contact rules
 
 - No scraping, bulk outreach, purchased lists, unsolicited scanning, or

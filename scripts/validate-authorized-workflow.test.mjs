@@ -94,6 +94,31 @@ test("authorized workflow rejects a malformed CLI version", () => {
   assert.throws(() => validateAuthorizedWorkflow(input({ execution: { ...input().execution, version: "latest" } }), { now: "2026-10-23T12:00:00.000Z" }), /version is invalid/u);
 });
 
+test("owner-authorized public OSS workflow binds license evidence without claiming customer acceptance", () => {
+  const source = input({
+    consent: {
+      ...input().consent,
+      subjectKind: "owner-authorized-public-oss",
+      licenseId: "MIT",
+      licenseEvidenceDigest: SHA,
+      findingsMayBeStored: true,
+    },
+    execution: { ...input().execution, retentionMode: "derived-redacted" },
+  });
+  const report = validateAuthorizedWorkflow(source, { now: "2026-10-23T12:00:00.000Z" });
+  assert.equal(report.summary.accepted, true);
+  assert.equal(report.gate.customerAcceptance, "not-claimed");
+  assert.equal(report.gate.publicOssBenchmark, "authorized");
+  assert.equal(report.consent.licenseId, "MIT");
+  assert.equal(report.consent.licenseEvidenceDigest, SHA);
+});
+
+test("owner-authorized public OSS workflow rejects missing or malformed license binding", () => {
+  const base = { ...input().consent, subjectKind: "owner-authorized-public-oss" };
+  assert.throws(() => validateAuthorizedWorkflow(input({ consent: base }), { now: "2026-10-23T12:00:00.000Z" }), /license identifier is invalid/u);
+  assert.throws(() => validateAuthorizedWorkflow(input({ consent: { ...base, licenseId: "MIT", licenseEvidenceDigest: "sha256:bad" } }), { now: "2026-10-23T12:00:00.000Z" }), /license evidence digest is invalid/u);
+});
+
 test("authorized workflow rejects non-string approval dates instead of coercing them", () => {
   assert.throws(() => validateAuthorizedWorkflow(input({ consent: { ...input().consent, approvedAt: null } }), { now: "2026-10-23T12:00:00.000Z" }), /owner approval time is invalid/u);
 });

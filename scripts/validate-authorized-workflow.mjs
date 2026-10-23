@@ -8,7 +8,7 @@ const COMMIT = /^[a-f0-9]{7,64}$/u;
 const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u;
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const SAFE_PATH = /^(?!\/)(?!.*\.\.)[^\u0000-\u001f]{1,512}$/u;
-const SUBJECT_KINDS = new Set(["external-repository-owner"]);
+const SUBJECT_KINDS = new Set(["external-repository-owner", "owner-authorized-public-oss"]);
 const NETWORK_MODES = new Set(["denied", "allowlisted"]);
 const RETENTION_MODES = new Set(["digest-only", "derived-redacted", "raw"]);
 const OUTCOMES = new Set(["passed", "failed"]);
@@ -57,6 +57,9 @@ export function validateAuthorizedWorkflow(input, { now = new Date() } = {}) {
       networkMode: consent.networkMode,
       findingsMayBeStored: consent.findingsMayBeStored,
       expiresAt: consent.expiresAt.toISOString(),
+      ...(consent.subjectKind === "owner-authorized-public-oss"
+        ? { licenseId: consent.licenseId, licenseEvidenceDigest: consent.licenseEvidenceDigest }
+        : {}),
     }),
     execution: Object.freeze({
       cliCommit: execution.cliCommit,
@@ -79,6 +82,7 @@ export function validateAuthorizedWorkflow(input, { now = new Date() } = {}) {
       workflowStatus: accepted ? "accepted" : "failed",
       customerAcceptance: "not-claimed",
       independentReview: "required",
+      publicOssBenchmark: consent.subjectKind === "owner-authorized-public-oss" ? "authorized" : "not-applicable",
     }),
   });
 }
@@ -114,6 +118,7 @@ async function verifyEvidenceBytes(input, { evidenceRoot, requireEvidenceFiles }
 
 function validateConsent(input, now) {
   if (!input || typeof input !== "object" || !SUBJECT_KINDS.has(input.subjectKind)) throw new Error("authorized workflow consent subject is invalid");
+  const publicOss = input.subjectKind === "owner-authorized-public-oss";
   const repositoryUrl = validRepositoryUrl(input.repositoryUrl);
   if (typeof input.exactCommit !== "string" || !COMMIT.test(input.exactCommit)) throw new Error("authorized workflow consent commit is invalid");
   if (!SHA256.test(input.ownerIdentityDigest) || !SHA256.test(input.scopeDigest)) throw new Error("authorized workflow consent identity/scope digest is invalid");
@@ -125,10 +130,14 @@ function validateConsent(input, now) {
   const approvedAt = validDate(input.approvedAt, "owner approval time");
   const founderApprovedAt = validDate(input.founderApprovedAt, "founder approval time");
   const expiresAt = validDate(input.expiresAt, "consent expiry");
+  if (publicOss) {
+    if (typeof input.licenseId !== "string" || !/^[A-Za-z0-9][A-Za-z0-9.+-]{0,63}$/u.test(input.licenseId)) throw new Error("public OSS license identifier is invalid");
+    if (!SHA256.test(input.licenseEvidenceDigest)) throw new Error("public OSS license evidence digest is invalid");
+  }
   if (approvedAt > now || founderApprovedAt > now || expiresAt <= now || expiresAt <= approvedAt || expiresAt <= founderApprovedAt) throw new Error("authorized workflow consent window is invalid");
   if (typeof input.revocationChannel !== "string" || input.revocationChannel.trim().length === 0 || input.revocationChannel.length > 512) throw new Error("authorized workflow revocation channel is invalid");
   if (input.revokedAt !== undefined && input.revokedAt !== null) throw new Error("revoked consent cannot authorize a workflow");
-  return { subjectKind: input.subjectKind, repositoryUrl, exactCommit: input.exactCommit, ownerIdentityDigest: input.ownerIdentityDigest, scopeDigest: input.scopeDigest, permittedPaths, permittedCommands, networkMode: network.mode, networkDestinations: network.destinations, findingsMayBeStored: input.findingsMayBeStored, allowedEvidenceFields, expiresAt };
+  return { subjectKind: input.subjectKind, repositoryUrl, exactCommit: input.exactCommit, ownerIdentityDigest: input.ownerIdentityDigest, scopeDigest: input.scopeDigest, permittedPaths, permittedCommands, networkMode: network.mode, networkDestinations: network.destinations, findingsMayBeStored: input.findingsMayBeStored, allowedEvidenceFields, expiresAt, ...(publicOss ? { licenseId: input.licenseId, licenseEvidenceDigest: input.licenseEvidenceDigest } : {}) };
 }
 
 function validateExecution(input, consent, now) {
