@@ -37,7 +37,12 @@ const MAX_CORRECTIONS = 4096;
  */
 export function runAcceptanceCorrectionLoop(input, { now = new Date() } = {}) {
   const run = validateInput(input);
-  const generatedAt = validDate(now, "now").toISOString();
+  const currentTime = validDate(now, "now");
+  const generatedAt = currentTime.toISOString();
+  const holdoutFrozenAt = validDate(run.split.holdoutFrozenAt, "holdoutFrozenAt");
+  const holdoutReviewAt = validDate(run.split.holdoutReviewAt, "holdoutReviewAt");
+  if (holdoutFrozenAt > currentTime) throw new Error("holdoutFrozenAt is in the future");
+  if (holdoutReviewAt > currentTime) throw new Error("holdoutReviewAt is in the future");
   const fixtureMap = new Map(run.corpus.fixtures.map((fixture) => [fixture.name, fixture]));
   const observationMap = new Map(run.observations.map((observation) => [observation.id, observation]));
   const trainSet = new Set(run.split.train);
@@ -54,7 +59,8 @@ export function runAcceptanceCorrectionLoop(input, { now = new Date() } = {}) {
   for (const observation of highImpact) {
     const adjudication = adjudicationMap.get(observation.id);
     const reviewedAt = validDate(adjudication.reviewedAt, `adjudication ${observation.id} reviewedAt`);
-    const frozenAt = validDate(run.split.holdoutFrozenAt, "holdoutFrozenAt");
+    const frozenAt = holdoutFrozenAt;
+    if (reviewedAt > currentTime) throw new Error(`adjudication ${observation.id} is in the future`);
     if (trainSet.has(observation.fixture) && reviewedAt > frozenAt) {
       throw new Error(`training adjudication occurs after holdout freeze: ${observation.id}`);
     }
@@ -70,7 +76,8 @@ export function runAcceptanceCorrectionLoop(input, { now = new Date() } = {}) {
       throw new Error(`correction ${correction.id} references a holdout observation`);
     }
     const createdAt = validDate(correction.createdAt, `correction ${correction.id} createdAt`);
-    if (createdAt > validDate(run.split.holdoutFrozenAt, "holdoutFrozenAt")) {
+    if (createdAt > currentTime) throw new Error(`correction ${correction.id} is in the future`);
+    if (createdAt > holdoutFrozenAt) {
       throw new Error(`correction ${correction.id} was created after holdout freeze`);
     }
     return Object.freeze({
@@ -103,7 +110,6 @@ export function runAcceptanceCorrectionLoop(input, { now = new Date() } = {}) {
     const outcome = adjudicationMap.get(observation.id).outcome;
     return outcome === "inconclusive" || outcome === "environment_error";
   }).map((observation) => observation.id);
-  const holdoutReviewAt = validDate(run.split.holdoutReviewAt, "holdoutReviewAt");
   for (const observation of highImpact) {
     const reviewedAt = validDate(adjudicationMap.get(observation.id).reviewedAt, `adjudication ${observation.id} reviewedAt`);
     if (reviewedAt > holdoutReviewAt) throw new Error(`adjudication occurs after declared holdout review: ${observation.id}`);
