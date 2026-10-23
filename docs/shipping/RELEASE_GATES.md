@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-014 regression boundary
+
+The final-regression contract passes **6/6** tests plus syntax and diff checks.
+This does not open ACCEPT-014: the actual frozen-corpus matrix, correction/
+provider gates, independent review, and final decision remain required. No GO
+is claimed. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-011/012 corpus boundary
 
 The authorized public-OSS corpus covers eight exact-commit full clones and all

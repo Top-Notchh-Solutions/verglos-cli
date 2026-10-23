@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-014 regression disposition · 2026-10-23
+
+- **Implementation:** Exact CLI/Web candidate binding, frozen-corpus matrix,
+  plan/role/tenant coverage, bounded deltas, and fail-closed gate handling are
+  complete.
+- **Verification:** Current focused tests **6/6**, syntax, and diff checks passed.
+- **Disposition:** Actual frozen-corpus run, correction/provider gates,
+  independent review, and final decision remain open; no GO was fabricated.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+
 ## ACCEPT-011/012 public-OSS disposition · 2026-10-23
 
 - **Execution:** Eight exact-commit full clones across all four required

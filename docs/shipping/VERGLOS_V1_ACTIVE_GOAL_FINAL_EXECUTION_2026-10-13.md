@@ -115,6 +115,23 @@ checked / 36 open / 280 total (87.1%)**. Evidence:
 `docs/shipping/evidence/accept-011-architecture-corpus-2026-10-23.md` and
 `docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-014 regression disposition
+
+The ACCEPT-014 final-regression contract is implemented and its current
+focused suite passes **6/6**; syntax and diff checks pass. It binds every
+scenario to exact CLI and Web candidate commits, the frozen corpus manifest,
+plan/role/tenant coverage, bounded finding/file/duration deltas, and open
+truth/risk/correction/provider/release gates; incomplete or failed inputs
+produce `no-go`. The implementation source audit found no missing code-side
+ACCEPT-014 slice.
+
+ACCEPT-014 remains open for the actual frozen-corpus matrix run, dependent
+correction/provider gates, independent review, and final decision. No GO or
+release recommendation was fabricated. The implementation-first queue has
+now completed its non-AppSec source-contract pass; the score remains **244
+checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-009 reconciler disposition
 
 The ACCEPT-009 release-gate reconciler is implemented and its current focused

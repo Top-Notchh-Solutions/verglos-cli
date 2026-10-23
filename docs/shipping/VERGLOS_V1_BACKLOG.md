@@ -5637,6 +5637,13 @@ implementation-first queue entry is `ACCEPT-014`. Evidence:
   review, and final decision. Score remains **244 checked / 36 open / 280
   total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+**ACCEPT-014 current regression disposition (2026-10-23; not a checkbox):** The
+current final-regression suite passes **6/6**, with syntax and diff checks
+passing; the code-side exact CLI/Web candidate binding, matrix, delta, and
+fail-closed decision contract is complete. Keep the row unchecked for the
+actual frozen-corpus matrix, dependent correction/provider gates, independent
+review, and final decision. Evidence:
+`docs/shipping/evidence/accept-014-web-candidate-binding-2026-10-23.md`.
 
 ## Non-commit founder/external gates
 

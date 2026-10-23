@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## ACCEPT-014 regression disposition · 2026-10-23
+
+- **Implementation mapping:** Regression binds exact CLI/Web candidates, the
+  frozen corpus, scenario matrix, deltas, and open truth/risk/correction/
+  provider/release gates.
+- **Verification mapping:** Focused tests **6/6**, syntax, and diff check passed.
+- **Acceptance mapping:** Actual matrix run, correction/provider gates,
+  independent review, and final decision remain missing; no GO is claimed.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+
 ## ACCEPT-011/012 public-OSS disposition · 2026-10-23
 
 - **Execution mapping:** Eight exact-commit full clones cover small,

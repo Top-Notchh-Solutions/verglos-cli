@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile ACCEPT-014 source contract
+
+- **Decision:** Treat final regression as complete code-side; keep the actual
+  matrix and final decision fail-closed until its evidence exists.
+- **Result:** Current focused tests **6/6**, syntax, and diff checks passed.
+- **Disposition:** Frozen-corpus run, correction/provider gates, independent
+  review, and final decision remain open; no GO was fabricated. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile ACCEPT-011/012 and advance the queue
 
 - **Decision:** Use the owner-authorized public-OSS path for the required

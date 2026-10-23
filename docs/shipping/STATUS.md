@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-014 regression disposition
+
+The final-regression code-side contract is complete; current focused tests pass
+**6/6**, with syntax and diff checks passing. It binds exact CLI/Web candidates,
+the frozen corpus, matrix coverage, deltas, and open gates, and fails closed on
+incomplete inputs. ACCEPT-014 remains open for the actual frozen-corpus run,
+dependent correction/provider gates, independent review, and final decision.
+No GO was fabricated. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-014-web-candidate-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-011/012 public-OSS disposition
 
 The authorized expanded corpus run covers eight exact-commit full clones and
