@@ -1,5 +1,31 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-007 adjudication validator
+
+Added `scripts/validate-hunt-adjudication.mjs` and the
+`acceptance:hunt:validate` command. The validator requires a digest-bound
+frozen sample manifest of at least 100 findings, reproducibility command
+metadata bound to each sample, exactly two distinct reviewers per sample who
+are not the implementation author, one allowed label per review, and a
+post-label resolution for every disagreement. Environment failures and
+out-of-scope exclusions require reason digests. Its report contains aggregate
+counts and digest-only sample metadata; it does not copy findings, commands,
+source, payloads, or reviewer identity.
+
+Validator contracts passed **6/6**; the full adjacent acceptance contract
+suite passed **63/63**; study-protocol, syntax, and diff checks passed. This
+advances ACCEPT-007 implementation only. No 100-sample study or independent
+reviewer sign-off was fabricated; no backlog checkbox or external state
+changed, and nothing was deleted or overwritten. The additive bundle contains
+**169 hashed files** with manifest
+`sha256:629c72f9ec7b335fb4dc870230a1445381d796ade7794fa8cf29ea2d0cb82666`
+and file SHA-256
+`f588523c47e4b8a1408645b36ee157694c6d6c8f86dd76a008fbd18099ef2175`.
+Provider, Production, customer/recipient, independent-review, AppSec/Hunt,
+and final-release gates remain open. The live score remains **244 checked / 36
+open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-007-adjudication-validator-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-003 evidence-bundle size boundary
 
 The acceptance-evidence bundle reader now enforces a 16 MiB per-file bound

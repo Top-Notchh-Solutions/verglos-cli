@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-007 adjudication validator
+
+Added the Hunt-adjudication validator and `acceptance:hunt:validate` command.
+It binds a frozen 100-plus-sample manifest and reproducibility commands,
+requires two distinct non-author reviewers per sample, enforces the four
+protocol labels and post-label disagreement resolutions, and emits only
+digest-bound metadata plus aggregates. Validator contracts passed **6/6** and
+the adjacent acceptance contract set passed **63/63**; study-protocol, syntax,
+and diff checks passed. The additive 169-file bundle has manifest
+`sha256:629c72f9ec7b335fb4dc870230a1445381d796ade7794fa8cf29ea2d0cb82666`
+and file SHA-256
+`f588523c47e4b8a1408645b36ee157694c6d6c8f86dd76a008fbd18099ef2175`.
+No 100-sample study, independent sign-off, provider, Production,
+customer/recipient, publication, or final release action occurred. Score
+remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`evidence/accept-007-adjudication-validator-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 evidence-bundle size boundary
 
 The acceptance-evidence bundle reader now enforces a 16 MiB per-file limit

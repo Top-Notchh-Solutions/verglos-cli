@@ -1,5 +1,27 @@
 # Verglos V1 traceability
 
+## ACCEPT-007 adjudication validator · 2026-10-23
+
+- **Source mapping:** Private Hunt-adjudication validator, package command,
+  and regression tests.
+- **Contract mapping:** A frozen 100-plus-sample manifest and command manifest
+  are digest-bound; each sample has exactly two distinct non-author reviewers;
+  labels, reason digests, frozen review windows, and disagreement resolutions
+  are fail-closed.
+- **Verification mapping:** Hunt-adjudication contracts **6/6**; adjacent
+  acceptance contracts **63/63**; study-protocol, syntax, and diff checks
+  passed.
+- **Artifact mapping:** 169 hashed bundle files; manifest SHA-256
+  `sha256:629c72f9ec7b335fb4dc870230a1445381d796ade7794fa8cf29ea2d0cb82666`;
+  bundle file SHA-256
+  `f588523c47e4b8a1408645b36ee157694c6d6c8f86dd76a008fbd18099ef2175`;
+  secret scan passed.
+- **Acceptance mapping:** ACCEPT-007 remains open for the actual 100-sample
+  study, independent reviewer sign-off, Hunt/AppSec review, and final
+  acceptance. Score remains **244/36/280 (87.1%)**; nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/accept-007-adjudication-validator-2026-10-23.md`.
+
 ## ACCEPT-003 evidence-bundle size boundary · 2026-10-23
 
 - **Source mapping:** Private acceptance-evidence bundle reader and focused

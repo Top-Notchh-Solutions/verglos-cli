@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-007 adjudication validator · 2026-10-23
+
+- **Source mapping:** Private Hunt-adjudication validator, package command,
+  and regression tests.
+- **Contract mapping:** The validator binds a frozen 100-plus-sample manifest
+  and reproducibility commands, requires two distinct non-author reviewers per
+  sample, and fail-closes invalid labels, timing, reason digests, and
+  disagreement coverage.
+- **Verification mapping:** Hunt-adjudication contracts **6/6**; adjacent
+  acceptance contracts **63/63**; study-protocol, syntax, and diff checks
+  passed.
+- **Artifact mapping:** Additive bundle contains 169 hashed files with
+  manifest SHA-256
+  `sha256:629c72f9ec7b335fb4dc870230a1445381d796ade7794fa8cf29ea2d0cb82666`
+  and bundle file SHA-256
+  `f588523c47e4b8a1408645b36ee157694c6d6c8f86dd76a008fbd18099ef2175`;
+  secret scan passed.
+- **Acceptance mapping:** Keep ACCEPT-007 open for the actual study,
+  independent reviewer sign-off, Hunt/AppSec review, and final release gates.
+  No checkbox or external state changed; nothing was deleted or overwritten.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-007-adjudication-validator-2026-10-23.md`.
+
 ## ACCEPT-003 evidence-bundle size boundary · 2026-10-23
 
 - **Source mapping:** Private acceptance-evidence bundle reader and focused
