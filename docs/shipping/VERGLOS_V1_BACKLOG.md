@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-006 private contract-suite verification
+
+The rebuilt local checkout completed `pnpm build` with **8/8** Turbo tasks;
+the focused rollback evidence test passed **2/2**, and the complete private
+shipping contract suite passed **171/171**. The rollback rehearsal exercised
+all five bounded provider-boundary decisions and preserved two historical
+records. This is implementation/regression evidence only: `DIST-006` remains
+unchecked for authenticated provider action, independent review, and final
+release acceptance. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-006-private-contract-suite-2026-10-23.md` and
+`docs/shipping/evidence/acceptance-evidence-bundle-dist006-private-suite-2026-10-23.md`.
+
 ## 2026-10-23 · QUAL-WEB-006 dashboard capture input boundary
 
 Web PR #259 merged normally as `42fe33eefd2d2ce23ec89512381af2b767de4e54`.

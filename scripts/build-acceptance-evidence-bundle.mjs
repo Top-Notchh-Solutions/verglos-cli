@@ -170,6 +170,8 @@ const paths = [
   "docs/shipping/evidence/dist-002-003-npm-publication-observation-2026-10-23.json",
   "docs/shipping/evidence/qual-web-005-local-current-head-integration-2026-10-23.md",
   "docs/shipping/evidence/dist-006-local-rollback-rehearsal-2026-10-23.md",
+  "docs/shipping/evidence/dist-006-private-contract-suite-2026-10-23.md",
+  "docs/shipping/evidence/acceptance-evidence-bundle-dist006-private-suite-2026-10-23.md",
   "docs/shipping/evidence/studio-cli-001-current-head-contract-2026-10-23.md",
   "docs/shipping/evidence/dist-002-current-publish-contract-2026-10-23.md",
   "docs/shipping/evidence/dist-002-release-environment-state-2026-10-23.md",
