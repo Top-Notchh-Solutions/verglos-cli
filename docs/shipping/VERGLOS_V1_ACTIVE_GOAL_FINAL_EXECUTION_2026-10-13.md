@@ -17,7 +17,10 @@ advances the ACCEPT-008 implementation/provenance boundary only. No plan
 agreement, checkout, billing/provider receipt, recipient response,
 independent review, or final release decision was fabricated. The score
 remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
-`docs/shipping/evidence/accept-008-commercial-provenance-2026-10-24.md`.
+`docs/shipping/evidence/accept-008-commercial-provenance-2026-10-24.md` and
+the additive **202-file** bundle with zero mismatches, passed secret scan, and
+manifest `sha256:900880de803ab12d1e9d9ff6ee200d1e530536a1ddf37d0140496d5669124d6b`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-accept-008-provenance.json`.
 
 ## Latest continuation result · 2026-10-24 · ACCEPT-003 current Preview bundle
 

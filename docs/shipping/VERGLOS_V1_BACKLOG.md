@@ -13,7 +13,11 @@ study-protocol, syntax, and diff checks pass. Keep `ACCEPT-008` unchecked:
 this is implementation/provenance evidence, not actual plan, checkout,
 provider, recipient, independent-review, or final-acceptance evidence. Score
 remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
-`docs/shipping/evidence/accept-008-commercial-provenance-2026-10-24.md`.
+`docs/shipping/evidence/accept-008-commercial-provenance-2026-10-24.md` and
+the additive **202-file** bundle, verified with zero mismatches and a passed
+secret scan, manifest
+`sha256:900880de803ab12d1e9d9ff6ee200d1e530536a1ddf37d0140496d5669124d6b`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-accept-008-provenance.json`.
 
 ## 2026-10-23 · current Web Preview provider receipt
 
