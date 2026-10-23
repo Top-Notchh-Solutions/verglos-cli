@@ -4,6 +4,7 @@ import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 const INPUT_SCHEMA = "verglos.private.authorized-workflow.v1";
 const OUTPUT_SCHEMA = "verglos.private.authorized-workflow-result.v1";
 const COMMIT = /^[a-f0-9]{7,64}$/u;
+const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u;
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const SAFE_PATH = /^(?!\/)(?!.*\.\.)[^\u0000-\u001f]{1,512}$/u;
 const SUBJECT_KINDS = new Set(["external-repository-owner"]);
@@ -113,7 +114,7 @@ function validateExecution(input, consent, now) {
   const completedAt = validDate(input.completedAt, "workflow completion time");
   if (completedAt > now || completedAt > consent.expiresAt) throw new Error("authorized workflow completed outside the consent window");
   if (typeof input.cliCommit !== "string" || !COMMIT.test(input.cliCommit)) throw new Error("authorized workflow CLI commit is invalid");
-  if (typeof input.version !== "string" || input.version.length === 0 || input.version.length > 128) throw new Error("authorized workflow version is invalid");
+  if (typeof input.version !== "string" || !VERSION.test(input.version)) throw new Error("authorized workflow version is invalid");
   if (!SHA256.test(input.cloneDigest) || !SHA256.test(input.reportDigest) || !SHA256.test(input.evidenceDigest)) throw new Error("authorized workflow digest is invalid");
   const requestedPaths = relativePaths(input.requestedPaths, "requested paths");
   for (const path of requestedPaths) if (!consent.permittedPaths.includes(path) && !consent.permittedPaths.includes(".")) throw new Error(`requested path is outside consent: ${path}`);

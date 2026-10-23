@@ -85,6 +85,10 @@ test("authorized workflow rejects secret-like records and mismatched commit", ()
   assert.throws(() => validateAuthorizedWorkflow(input({ execution: { ...input().execution, commands: ["DATABASE_URL=secret"] } }), now), /secret-like/u);
 });
 
+test("authorized workflow rejects a malformed CLI version", () => {
+  assert.throws(() => validateAuthorizedWorkflow(input({ execution: { ...input().execution, version: "latest" } }), { now: "2026-10-23T12:00:00.000Z" }), /version is invalid/u);
+});
+
 test("authorized workflow rejects non-string approval dates instead of coercing them", () => {
   assert.throws(() => validateAuthorizedWorkflow(input({ consent: { ...input().consent, approvedAt: null } }), { now: "2026-10-23T12:00:00.000Z" }), /owner approval time is invalid/u);
 });
