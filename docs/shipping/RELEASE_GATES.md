@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · provider order advanced to attempted
+
+The bound Test Mode Cards-only order now reads `attempted`; the Payments API
+returns one `created` payment with `captured: false`. This advances provider
+read-back only; no capture, signed webhook, refund, entitlement, or release
+gate opened. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/razorpay-testmode-card-provider-attempted-2026-10-24.md`.
+The additive bundle verifies **234/234** files with zero mismatches, passes
+secret scanning, and matches manifest
+`sha256:0d772e077852728b032b1d55052a1f6d6e8cbc4545450652884c19f654aa6887`:
+`evidence/acceptance-evidence-bundle-2026-10-24-provider-attempted-v7.json`.
+
 ## 2026-10-24 · live Production read-only recheck
 
 The READY Production deployment passed a fresh unauthenticated route audit:

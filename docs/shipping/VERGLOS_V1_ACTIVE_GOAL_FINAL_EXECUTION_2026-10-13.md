@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · provider order advanced to attempted
+
+The read-only Razorpay Test Mode Orders API now reports the app-bound
+Cards-only order as **`attempted`**. The Payments API returned one card payment
+with status **`created`** and `captured: false`. This is stronger provider
+progress after the hosted `Sending OTP` state, but it is not capture, failure,
+refund, webhook, or entitlement evidence. No money, Production, customer,
+database, or checkbox state changed. Score remains **245 checked / 35 open /
+280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/razorpay-testmode-card-provider-attempted-2026-10-24.md`.
+The additive bundle now contains **234** hashed files, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:0d772e077852728b032b1d55052a1f6d6e8cbc4545450652884c19f654aa6887`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-provider-attempted-v7.json`.
+
 ## Latest continuation result · 2026-10-24 · live Production read-only recheck
 
 The current READY Vercel Production deployment was rechecked at

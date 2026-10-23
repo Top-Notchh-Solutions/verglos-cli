@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · provider order advanced to attempted
+
+The bound Test Mode Cards-only order now reads `attempted`; its single card
+payment remains `created` and `captured: false`. This advances provider
+read-back only; no terminal event or checkbox change occurred. Score remains
+**245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/razorpay-testmode-card-provider-attempted-2026-10-24.md`.
+The additive bundle contains **234** hashed files, verifies with zero
+mismatches, passes secret scanning, and matches manifest
+`sha256:0d772e077852728b032b1d55052a1f6d6e8cbc4545450652884c19f654aa6887`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-provider-attempted-v7.json`.
+
 ## 2026-10-24 · live Production read-only recheck
 
 The current READY Production deployment passed a fresh unauthenticated route

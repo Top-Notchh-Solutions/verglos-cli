@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain provider gate after attempted read-back
+
+- **Decision:** Record the provider order transition to `attempted` and keep
+  the lifecycle gate open.
+- **Verification:** Read-only Orders API reported `attempted`; Payments API
+  returned one `card` payment with `created` and `captured: false`.
+- **Boundary:** No capture, webhook, refund, entitlement, money, Production,
+  customer, database, guessed OTP, or fabricated event occurred.
+- **Evidence:** `evidence/razorpay-testmode-card-provider-attempted-2026-10-24.md`.
+- **Bundle:** Additive v7 contains 234 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:0d772e077852728b032b1d55052a1f6d6e8cbc4545450652884c19f654aa6887`.
+
 ## 2026-10-24 · retain gates after current Production recheck
 
 - **Decision:** Record the current READY Production surface as read-only
