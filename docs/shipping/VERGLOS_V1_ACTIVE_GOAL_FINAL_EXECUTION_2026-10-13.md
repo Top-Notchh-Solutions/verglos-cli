@@ -52,6 +52,26 @@ in addition to the product rows whose own evidence is still incomplete. The
 public-open-source benchmark path is authorized now. The separately held
 security-review track is unchanged.
 
+## Latest continuation result · 2026-10-23 · acceptance input-read boundaries
+
+The private acceptance file runners now share
+`scripts/read-bounded-json.mjs`, which rejects non-regular and oversized JSON
+inputs, opens with `O_RDONLY | O_NOFOLLOW` when available, rechecks opened-file
+identity and size, and parses only the opened bytes as fatal UTF-8 JSON. The
+boundary is applied to authorized workflow, public-OSS triage, comprehension,
+commercial acceptance, release-gate reconciliation, candidate freeze, and
+final regression inputs. Focused contracts passed **31/31**, including the
+dedicated regular-file, symlink, and oversized-input coverage; syntax,
+study-protocol, and diff checks passed.
+
+This advances implementation for `ACCEPT-005`, `ACCEPT-006`, `ACCEPT-008`,
+`ACCEPT-009`, `ACCEPT-010`, `ACCEPT-012`, and `ACCEPT-014` only. The actual
+participant, customer, commercial, provider, independent-review, publication,
+and final-release artifacts remain open, so no checkbox changed. The live score
+remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/acceptance-input-read-boundaries-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · DIST-006 rollback no-follow hardening
 
 CLI PR #189 merged normally into `main` as

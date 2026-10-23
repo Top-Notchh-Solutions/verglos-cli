@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 export const COMPREHENSION_QUESTION_IDS = Object.freeze([
   "artifact-subject",
@@ -66,7 +67,7 @@ export function scoreComprehensionRun(input, { now = new Date() } = {}) {
 }
 
 export async function scoreComprehensionFile(inputPath, outputPath, options = {}) {
-  const input = JSON.parse(await readFile(inputPath, "utf8"));
+  const input = await readBoundedJsonFile(inputPath, "comprehension run input");
   const report = scoreComprehensionRun(input, options);
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;

@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · acceptance input-read boundaries
+
+- **Implementation:** Added the shared `read-bounded-json.mjs` reader and
+  applied it to the authorized-workflow, public-OSS-triage, comprehension,
+  commercial-acceptance, release-reconciliation, candidate-freeze, and final-
+  regression file runners. Reads are bounded, regular-file-only, no-follow
+  when supported, and rechecked through the opened handle.
+- **Verification:** The focused suite passed **31/31**, including dedicated
+  symlink and oversized-input tests. Syntax, study-protocol, and diff checks
+  passed.
+- **Disposition:** Code-side progress only for ACCEPT-005/006/008/009/010/
+  012/014. No participant, customer, provider, independent-review,
+  publication, or final-release artifact was created; those rows remain open.
+  Score remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-input-read-boundaries-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance artifact overwrite boundaries
 
 - **Implementation:** Freeze, release-gate reconciliation, comprehension

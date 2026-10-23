@@ -1,0 +1,40 @@
+import { constants } from "node:fs";
+import { lstat, open } from "node:fs/promises";
+
+const MAX_INPUT_BYTES = 16 * 1024 * 1024;
+
+/**
+ * Read a JSON manifest through the opened regular-file handle. The initial
+ * lstat bounds the caller-visible path, while O_NOFOLLOW and the opened-handle
+ * identity/size checks prevent a path swap from changing the bytes consumed by
+ * an acceptance contract.
+ */
+export async function readBoundedJsonFile(inputPath, label, maxBytes = MAX_INPUT_BYTES) {
+  if (typeof inputPath !== "string" || inputPath.length === 0 || inputPath.length > 4096 || /[\u0000-\u001f\u007f]/u.test(inputPath)) {
+    throw new Error(`${label} path is invalid`);
+  }
+  if (!Number.isInteger(maxBytes) || maxBytes <= 0 || maxBytes > MAX_INPUT_BYTES) throw new Error(`${label} size limit is invalid`);
+
+  const before = await lstat(inputPath);
+  if (!before.isFile() || before.size > maxBytes) throw new Error(`${label} must be a bounded regular file`);
+
+  const handle = await open(inputPath, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
+  try {
+    const opened = await handle.stat();
+    if (!opened.isFile() || opened.size > maxBytes || !sameIdentity(before, opened)) throw new Error(`${label} changed while being opened`);
+    const bytes = await handle.readFile();
+    const after = await handle.stat();
+    if (bytes.byteLength > maxBytes || after.size !== bytes.byteLength || !sameIdentity(opened, after)) throw new Error(`${label} changed while being read`);
+    try {
+      return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+    } catch {
+      throw new Error(`${label} must contain valid bounded UTF-8 JSON`);
+    }
+  } finally {
+    await handle.close();
+  }
+}
+
+function sameIdentity(left, right) {
+  return left.dev === right.dev && left.ino === right.ino;
+}

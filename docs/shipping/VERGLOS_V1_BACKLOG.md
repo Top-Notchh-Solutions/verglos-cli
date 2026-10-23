@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · acceptance input-read boundaries
+
+The private acceptance file runners now use a shared bounded regular-file JSON
+reader with no-follow opened-handle reads when supported, identity/size
+rechecks, fatal UTF-8 parsing, and dedicated symlink/oversized-input tests.
+The focused suite passed **31/31**, with syntax, study-protocol, and diff
+checks passing. This advances implementation only for ACCEPT-005/006/008/009/
+010/012/014; their actual participant, commercial, provider, independent-
+review, publication, and final-release artifacts remain open. No checkbox
+changed; the live score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-input-read-boundaries-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance artifact overwrite boundaries
 
 Freeze, release-gate reconciliation, comprehension-score, and commercial-

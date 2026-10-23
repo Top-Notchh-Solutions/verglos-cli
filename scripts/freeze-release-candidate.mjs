@@ -1,4 +1,5 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const SCHEMA = "verglos.private.release-candidate-freeze.v1";
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
@@ -58,7 +59,7 @@ export function freezeReleaseCandidate(input) {
 }
 
 export async function freezeReleaseCandidateFile(inputPath, outputPath) {
-  const input = JSON.parse(await readFile(inputPath, "utf8"));
+  const input = await readBoundedJsonFile(inputPath, "release candidate freeze input");
   const report = freezeReleaseCandidate(input);
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;

@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 export const COMMERCIAL_EVIDENCE_KINDS = Object.freeze([
   "plan-agreement",
@@ -78,7 +79,7 @@ export function validateCommercialAcceptance(input, { now = new Date() } = {}) {
 }
 
 export async function validateCommercialAcceptanceFile(inputPath, outputPath, options = {}) {
-  const input = JSON.parse(await readFile(inputPath, "utf8"));
+  const input = await readBoundedJsonFile(inputPath, "commercial acceptance input");
   const report = validateCommercialAcceptance(input, options);
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;

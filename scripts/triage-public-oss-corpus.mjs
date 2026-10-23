@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
-import { lstat, readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const INPUT_SCHEMA = "verglos.private.public-oss-corpus-verification.v1";
 const OUTPUT_SCHEMA = "verglos.private.public-oss-corpus-triage.v1";
@@ -21,7 +22,7 @@ export async function triagePublicOssCorpus(input) {
 
   for (const fixture of input.fixtures) {
     if (!fixture.reportJson?.path || typeof fixture.name !== "string") throw new Error("fixture report reference is invalid");
-    const report = JSON.parse(await readFile(await regularFile(fixture.reportJson.path, `${fixture.name} report`), "utf8"));
+    const report = await readBoundedJsonFile(fixture.reportJson.path, `${fixture.name} report`);
     const findings = Array.isArray(report.findings) ? report.findings : [];
     if (findings.length > MAX_FINDINGS - findingCount) throw new Error("corpus findings exceed the bounded triage limit");
     const findingSummaries = findings.map((finding) => {
@@ -88,7 +89,7 @@ export async function triagePublicOssCorpus(input) {
 }
 
 export async function triagePublicOssCorpusFile(inputPath, outputPath) {
-  const input = JSON.parse(await readFile(inputPath, "utf8"));
+  const input = await readBoundedJsonFile(inputPath, "public OSS corpus input");
   const report = await triagePublicOssCorpus(input);
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;
@@ -99,12 +100,6 @@ function validateInput(input) {
   if (typeof input.cliCommit !== "string" || input.cliCommit.length === 0 || input.cliCommit.length > 64) throw new Error("verification CLI commit is invalid");
   if (!Array.isArray(input.fixtures) || input.fixtures.length === 0 || input.fixtures.length > MAX_FIXTURES) throw new Error("verification fixtures are invalid");
   if (!Number.isInteger(input.fixtureCount) || input.fixtureCount < input.fixtures.length) throw new Error("verification fixture count is invalid");
-}
-
-async function regularFile(path, label) {
-  const stat = await lstat(path).catch(() => null);
-  if (!stat?.isFile()) throw new Error(`${label} must be a regular file`);
-  return path;
 }
 
 function summarizeFinding(fixtureName, finding) {

@@ -1,4 +1,5 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const INPUT_SCHEMA = "verglos.private.final-regression.v1";
 const OUTPUT_SCHEMA = "verglos.private.final-regression-result.v1";
@@ -125,7 +126,7 @@ export function runFinalRegression(input, { now = new Date() } = {}) {
 }
 
 export async function runFinalRegressionFile(inputPath, outputPath, options = {}) {
-  const input = JSON.parse(await readFile(inputPath, "utf8"));
+  const input = await readBoundedJsonFile(inputPath, "final regression input");
   const report = runFinalRegression(input, options);
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;

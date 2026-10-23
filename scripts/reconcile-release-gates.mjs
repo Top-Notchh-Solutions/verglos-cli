@@ -1,4 +1,5 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const SCHEMA = "verglos.private.release-gate-reconciliation.v1";
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
@@ -88,7 +89,7 @@ export function reconcileReleaseGates(input, { now = new Date() } = {}) {
 }
 
 export async function reconcileReleaseGatesFile(inputPath, outputPath, options = {}) {
-  const input = JSON.parse(await readFile(inputPath, "utf8"));
+  const input = await readBoundedJsonFile(inputPath, "release-gate reconciliation input");
   const report = reconcileReleaseGates(input, options);
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;

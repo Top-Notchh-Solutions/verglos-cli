@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## Acceptance input-read boundaries · 2026-10-23
+
+- **Source mapping:** `scripts/read-bounded-json.mjs` is used by the seven
+  private acceptance file runners that consume JSON manifests.
+- **Contract mapping:** Each input is size-bounded, a regular file, opened
+  without following symlinks when supported, identity/size rechecked through
+  the handle, and decoded as fatal UTF-8 JSON.
+- **Verification mapping:** Focused contracts passed **31/31**, with syntax,
+  study-protocol, and diff checks passing.
+- **Acceptance mapping:** This does not assert customer, participant,
+  provider, independent-review, publication, or final-release outcomes.
+  ACCEPT-005/006/008/009/010/012/014 remain open; score remains **244/36/280
+  (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-input-read-boundaries-2026-10-23.md`.
+
 ## Acceptance artifact overwrite boundaries · 2026-10-23
 
 - **Source mapping:** Freeze, release-gate reconciliation, comprehension, and

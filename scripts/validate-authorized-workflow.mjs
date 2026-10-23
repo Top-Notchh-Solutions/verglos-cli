@@ -1,4 +1,5 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const INPUT_SCHEMA = "verglos.private.authorized-workflow.v1";
 const OUTPUT_SCHEMA = "verglos.private.authorized-workflow-result.v1";
@@ -81,7 +82,7 @@ export function validateAuthorizedWorkflow(input, { now = new Date() } = {}) {
 }
 
 export async function validateAuthorizedWorkflowFile(inputPath, outputPath, options = {}) {
-  const input = JSON.parse(await readFile(inputPath, "utf8"));
+  const input = await readBoundedJsonFile(inputPath, "authorized workflow input");
   const report = validateAuthorizedWorkflow(input, options);
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;
