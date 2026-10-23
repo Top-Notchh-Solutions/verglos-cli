@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · QUAL-WEB-005 fresh isolated deletion E2E
+
+Current Web head `791500d4` passed the authenticated deletion route and worker
+integration against a fresh local `postgres:16-alpine` `verglos_test` database:
+**2/2**, **0 failures**, **0 skips**. The run covered auth/CORS and malformed
+input boundaries, digest/request idempotency, legal-hold blocking, bounded
+deletion, terminal receipt behavior, and synthetic fixture cleanup. This
+advances `QUAL-WEB-005` only; its Production, legal/customer-held,
+consent-inventory, restore/rollback, independent-review, and final-acceptance
+contracts remain open. Score remains **245 checked / 35 open / 280 total
+(87.5%)**. Evidence:
+`docs/shipping/evidence/qual-web-005-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## 2026-10-24 · public-OSS customer-consent scope disposition
 
 The current V1 launch contract uses only owner-authorized public OSS exact-commit

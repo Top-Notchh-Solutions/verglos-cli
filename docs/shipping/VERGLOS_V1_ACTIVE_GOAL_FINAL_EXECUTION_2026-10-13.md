@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · QUAL-WEB-005 isolated deletion E2E
+
+The current merged Web head `791500d4` was exercised against a fresh local
+`postgres:16-alpine` `verglos_test` database. The reviewed local bootstrap and
+migrations applied successfully; the authenticated deletion route and worker
+integration passed **2/2**, with **0 failures / 0 skips**, covering auth/CORS and
+malformed-input boundaries, digest and request idempotency, legal-hold blocking,
+bounded deletion, terminal receipt behavior, and fixture cleanup.
+
+This advances `QUAL-WEB-005`'s non-production authenticated deletion contract,
+but does not claim Production deletion, legal/customer-held disposition,
+consent inventory, restore/rollback acceptance, independent review, or final
+release approval. The score remains **245 checked / 35 open / 280 total
+(87.5%)**, with 13 AppSec-dependent and 22 open non-AppSec rows. Evidence:
+`docs/shipping/evidence/qual-web-005-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · customer-consent scope disposition
 
 The current V1 launch contract is explicitly limited to owner-authorized public

@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record QUAL-WEB-005 isolated deletion E2E
+
+- **Decision:** Record the current Web deletion route/worker run as valid
+  non-production evidence after a fresh local migration bootstrap.
+- **Verification:** Web `791500d4`; **2/2** integration tests passed with zero
+  failures and zero skips, including idempotency, hold, deletion, and receipt
+  boundaries.
+- **Boundary:** Do not convert this local fixture run into Production,
+  customer-held-record, consent, rollback, independent-review, or final-release
+  acceptance. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-005-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## 2026-10-24 · close customer-consent row for current public-OSS scope
 
 - **Decision:** The current V1 launch contract uses only owner-authorized,

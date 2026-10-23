@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-005 isolated deletion gate evidence
+
+Web `791500d4` passed the authenticated deletion route and worker integration
+**2/2** on a fresh local migrated test database. This opens non-production
+deletion implementation evidence only. Production deletion, legal/customer-held
+record disposition, consent inventory, rollback/restore, independent review,
+and final go/no-go remain closed. Score remains **245/35/280 (87.5%)**.
+Evidence: `evidence/qual-web-005-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## 2026-10-24 · customer-consent scope gate disposition
 
 The current V1 launch contract is limited to owner-authorized public OSS
