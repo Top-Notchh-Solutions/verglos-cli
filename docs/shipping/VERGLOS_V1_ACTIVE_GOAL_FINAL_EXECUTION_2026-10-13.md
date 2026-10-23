@@ -35,8 +35,6 @@ resolved.
 
 ## Latest continuation result · 2026-10-23 · DIST-006 contract-suite verification
 
-## Latest continuation result · 2026-10-23 · DIST-006 contract-suite verification
-
 The rebuilt exact local checkout `d013796e` completed `pnpm build` with **8/8**
 Turbo tasks. The focused rollback evidence test passed **2/2**, and the full
 private shipping contract suite passed **171/171**. The rollback rehearsal
