@@ -5605,6 +5605,18 @@ artifacts. Evidence:
   independent scoring review, and final acceptance. Score remains **244
   checked / 36 open / 280 total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-006-rubric-digest-boundary-2026-10-23.md`.
+- **ACCEPT-006 participant-provenance addendum (2026-10-24; not a
+  checkbox):** Private commit `85e0b211` requires every comprehension
+  participant to declare `consenting-participant` or
+  `owner-controlled-synthetic`. Synthetic fixtures are explicitly classified
+  and cannot upgrade `acceptanceStatus`, which remains open. Focused scorer
+  coverage passes **11/11** and the adjacent acceptance suite passes **51/51**;
+  the additive packet verifies **200/200** files with **0** mismatches, manifest
+  `sha256:ddd711361fb444e5879f4251a53c86ae82c504486eaa9d51ad92d6b37f3702db`,
+  and secret scanning passed. Keep ACCEPT-006 unchecked for the real
+  preregistered participant run, redacted aggregate, independent scoring
+  review, and final acceptance. Evidence:
+  `docs/shipping/evidence/accept-006-participant-provenance-2026-10-24.md`.
 **ACCEPT-006 current scorer disposition (2026-10-23; not a checkbox):** The
 current scorer regression suite passes **9/9**, with syntax and diff checks
 passing; the code-side rubric, digest, consent-window, participant-identity,

@@ -36,6 +36,22 @@ checked / 36 open / 280 total (87.1%)**. Evidence:
 `docs/shipping/evidence/accept-005-public-oss-workflow-contract-2026-10-24.md`
 and `docs/shipping/evidence/accept-005-public-oss-workflow-bundle-2026-10-24.md`.
 
+## Latest continuation result · 2026-10-24 · ACCEPT-006 participant provenance
+
+The comprehension scorer now requires an explicit participant provenance kind:
+`consenting-participant` or `owner-controlled-synthetic`. Synthetic contract
+fixtures are classified as such and cannot be mistaken for participant
+acceptance; the result keeps `acceptanceStatus: open`. Focused scorer coverage
+passes **11/11**, the adjacent acceptance suite passes **51/51**, and the
+study-protocol, syntax, and diff checks pass. The additive packet verifies
+**200/200** files with zero mismatches, manifest
+`sha256:ddd711361fb444e5879f4251a53c86ae82c504486eaa9d51ad92d6b37f3702db`,
+and secret scanning passed. This advances the ACCEPT-006 implementation and
+provenance boundary only; no participant identity, participant answer,
+independent review, or final acceptance was fabricated. The score remains
+**244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-006-participant-provenance-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-23 · current Web Preview provider receipt
 
 Clean Web `origin/main` commit `42fe33eefd2d2ce23ec89512381af2b767de4e54`
