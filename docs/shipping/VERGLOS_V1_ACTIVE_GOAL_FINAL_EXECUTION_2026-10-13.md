@@ -1,5 +1,32 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Production receipt API route fix shipped
+
+The Production public-route audit found the implemented bounded JSON receipt
+endpoint returning the middleware HTML `404` because Clerk omitted
+`/api/v1/receipts` from its public matcher. Web commit `74239c8` added the
+public matcher entry and the public-release smoke assertion. Web PR **#264**
+merged normally as `9985f1f7030de66f5f8d07b01705f65c678f1369`.
+
+The merged `main` Vercel Production deployment
+`verglos-m2zim7kjt-anuragyadav20062002s-projects.vercel.app` reported **READY**
+and owns the live `verglos.com`, `www.verglos.com`, and
+`verglos-web.vercel.app` aliases. Read-only verification of the forged
+all-zero receipt ID now returns HTTP **404** as the intended JSON
+`{\"ok\":false,\"reason\":\"receipt not found\"}` response with
+`application/json` and `no-store`, proving the request reaches the bounded
+route handler without enumerating receipt data. Local public-release smoke
+passed **12/12**, truth-registry **37/37**, typecheck, and diff checks passed.
+No receipt, database, payment, account, entitlement, webhook, customer, final
+CLI/npm release, or AppSec action occurred. Evidence:
+`docs/shipping/evidence/vercel-web-production-receipt-api-route-fix-2026-10-24.md`.
+
+This advances real hosted/runtime implementation evidence but does not close
+a checkbox by itself; provider lifecycle, customer/recipient acceptance,
+independent review, human/field, and final-release gates remain open under the
+row contracts. The score remains **244 checked / 36 open / 280 total (87.1%)**,
+partitioned as **13 AppSec-dependent / 23 non-AppSec** rows.
+
 ## Latest continuation result · 2026-10-24 · Production handoff route fix shipped
 
 The Production public-route audit found `/handoff/[handoffId]` returning HTTP
