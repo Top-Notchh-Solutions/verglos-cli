@@ -29,10 +29,11 @@ const SECRET_LIKE = [
  * exact artifact under test.
  */
 export function scoreComprehensionRun(input, { now = new Date() } = {}) {
+  rejectSecretLike(input);
   const run = validateRun(input);
   const completedAt = parseDate(run.completedAt, "completedAt");
-  const currentTime = now instanceof Date ? now : new Date(now);
-  if (!Number.isFinite(currentTime.getTime())) throw new Error("now must be a valid date");
+  const currentTime = now instanceof Date ? now : parseDate(now, "now");
+  if (completedAt > currentTime) throw new Error("completedAt is in the future");
 
   const artifact = validateArtifact(run.artifact);
   const participants = run.participants.map((participant) => scoreParticipant(participant, artifact, completedAt));
@@ -81,6 +82,12 @@ function validateRun(input) {
   }
   if (!Array.isArray(input.participants) || input.participants.length === 0 || input.participants.length > MAX_PARTICIPANTS) {
     throw new Error("comprehension run requires a bounded participant list");
+  }
+  const participantDigests = new Set();
+  for (const participant of input.participants) {
+    if (!participant || typeof participant !== "object" || typeof participant.participantDigest !== "string" || !SHA256.test(participant.participantDigest)) continue;
+    if (participantDigests.has(participant.participantDigest)) throw new Error("comprehension run contains duplicate participant identity");
+    participantDigests.add(participant.participantDigest);
   }
   return input;
 }
@@ -173,6 +180,10 @@ function normalizeTerm(value) {
 
 function digestText(value) {
   return `sha256:${createHash("sha256").update(value, "utf8").digest("hex")}`;
+}
+
+function rejectSecretLike(input) {
+  if (SECRET_LIKE.some((pattern) => pattern.test(JSON.stringify(input)))) throw new Error("comprehension input contains secret-like material");
 }
 
 function parseDate(value, label) {

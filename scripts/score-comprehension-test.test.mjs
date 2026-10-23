@@ -104,3 +104,16 @@ test("comprehension score file refuses to overwrite an existing report", async (
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("rejects future completion timestamps", () => {
+  assert.throws(() => scoreComprehensionRun(run({ completedAt: "2026-10-20T12:00:00.000Z" }), { now: "2026-10-19T12:01:00.000Z" }), /completedAt is in the future/u);
+});
+
+test("rejects duplicate participant identities instead of inflating the aggregate", () => {
+  const source = run({ participants: [run().participants[0], { ...run().participants[0] }] });
+  assert.throws(() => scoreComprehensionRun(source), /duplicate participant identity/u);
+});
+
+test("rejects secret-like material in the artifact or protocol input", () => {
+  assert.throws(() => scoreComprehensionRun(run({ artifact: { ...artifact, subject: "DATABASE_URL=must-not-be-recorded" } })), /secret-like material/u);
+});
