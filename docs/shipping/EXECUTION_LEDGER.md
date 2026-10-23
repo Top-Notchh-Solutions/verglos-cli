@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## Production migration and post-deploy smoke · 2026-10-24
+
+- **Provider receipt:** Vercel deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf`
+  reached `READY` and was aliased to `https://verglos.com`.
+- **Migration receipt:** The explicit reviewed hook ran `pnpm db:migrate` and
+  reported success; read-only verification found **44** migration-ledger
+  entries, all six QUAL-WEB-005 support tables, and zero deletion
+  requests/jobs/receipts.
+- **Smoke receipt:** Five public routes returned 200; the POST-only QR route
+  returned 405 with zero response bytes. Response hashes are in the evidence
+  artifact.
+- **Disposition:** Real Production evidence is recorded. No deletion,
+  payment, webhook, customer, npm, or GitHub Actions operation occurred; no
+  checkbox changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-production-migration-and-smoke-2026-10-24.md`.
+
 ## Current-head non-AppSec implementation regression · 2026-10-24
 
 - **Sources:** CLI `7d07066f`, Web `791500d4`, private shipping `7e8a9ba9`.
