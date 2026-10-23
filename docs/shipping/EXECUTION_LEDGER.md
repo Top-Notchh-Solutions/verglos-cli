@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## Provider order advanced to attempted · 2026-10-24
+
+- **Provider read-back:** Bound Cards-only order is `attempted`; its single
+  card payment is `created` with `captured: false`.
+- **Boundary:** No terminal event, webhook, entitlement, refund, Production,
+  customer, database, or money state changed.
+- **Disposition:** Provider lifecycle remains open; score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/razorpay-testmode-card-provider-attempted-2026-10-24.md`.
+- **Bundle:** Additive v7 contains 234 hashed files, has zero mismatches, passes
+  secret scanning, and matches manifest
+  `sha256:0d772e077852728b032b1d55052a1f6d6e8cbc4545450652884c19f654aa6887`.
+
 ## Live Production read-only recheck · 2026-10-24
 
 - **Observation:** READY Production served six expected public 200 responses;

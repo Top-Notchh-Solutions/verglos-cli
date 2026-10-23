@@ -171,6 +171,7 @@ const paths = [
   "docs/shipping/evidence/razorpay-testmode-bound-order-2026-10-24.md",
   "docs/shipping/evidence/razorpay-testmode-card-fixture-boundary-2026-10-24.md",
   "docs/shipping/evidence/razorpay-testmode-card-otp-boundary-2026-10-24.md",
+  "docs/shipping/evidence/razorpay-testmode-card-provider-attempted-2026-10-24.md",
   "docs/shipping/evidence/vercel-live-production-readonly-recheck-2026-10-24T2247Z.md",
   "docs/shipping/evidence/acceptance-input-read-boundaries-2026-10-23.md",
   "docs/shipping/evidence/acceptance-evidence-writer-boundaries-2026-10-23.md",
