@@ -2953,3 +2953,24 @@ unchecked for authenticated rollback/revocation and final acceptance. Score
 remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
 overwritten. Evidence:
 `docs/shipping/evidence/dist-006-rollback-handle-recheck-pr191-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · ACCEPT-009/010/014 candidate-version binding
+
+Private shipping commit `049eee35` now validates candidate versions against the
+bounded SemVer contract in release reconciliation, candidate freeze, and final
+regression validation. Each validator has a malformed-version regression.
+The adjacent acceptance/release suite passed **58/58**, study-protocol
+validation passed, syntax checks passed, and `git diff --check` passed.
+
+This is implementation evidence only. `ACCEPT-009`, `ACCEPT-010`, and
+`ACCEPT-014` remain unchecked for their actual acceptance evidence,
+provider/hosted execution where required, independent review,
+customer/recipient acceptance where required, and final release decision. No
+provider, registry, Production, customer, deployment, publication, or release
+sign-off state changed. The additive evidence bundle contains **149** files
+with manifest `sha256:c02346be7c586a6db044f8c66f64a017b85ac079f5cf113ef54a168e7c842eeb`
+and file SHA-256
+`43fafbf54256a8e81e4ed5b29f2bb78a82fffd2e9d4180bc6d44e2ec0e0b37f2`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/accept-009-010-014-version-binding-2026-10-23.md`.

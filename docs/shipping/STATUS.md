@@ -12039,6 +12039,20 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · ACCEPT-009/010/014 candidate-version binding
+
+Private shipping commit `049eee35` now enforces the bounded SemVer candidate
+identity in release reconciliation, candidate freeze, and final regression
+validation. The adjacent acceptance/release contracts passed **58/58**;
+study-protocol validation, syntax checks, and `git diff --check` passed.
+
+This does not close the three rows: actual acceptance, provider/hosted
+execution where required, independent review, customer/recipient acceptance
+where required, and final release decision remain open. No external state
+changed and nothing was deleted or overwritten. Score remains **244 checked /
+36 open / 280 total (87.1%)**. Evidence:
+`evidence/accept-009-010-014-version-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-012 triage report integrity binding
 
 Private commit `c46bbdfd` binds public-OSS triage to the exact report bytes

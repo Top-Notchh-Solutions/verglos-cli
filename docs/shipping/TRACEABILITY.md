@@ -9409,6 +9409,20 @@ changed. See
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## ACCEPT-009 / ACCEPT-010 / ACCEPT-014 candidate-version binding · 2026-10-23
+
+- **Source mapping:** Private shipping commit `049eee35`.
+- **Contract mapping:** Reconciliation, candidate freeze, and final regression
+  validators reject candidate versions outside the bounded SemVer contract.
+- **Verification mapping:** Adjacent acceptance/release contracts **58/58**,
+  study-protocol validation, syntax checks, and diff check passed.
+- **Acceptance mapping:** This is code-side evidence only. Keep all three rows
+  unchecked for actual acceptance, provider/hosted execution where required,
+  independent review, customer/recipient acceptance where required, and final
+  release decision. Score remains **244/36/280 (87.1%)**. Nothing was deleted
+  or overwritten.
+- **Evidence:** `evidence/accept-009-010-014-version-binding-2026-10-23.md`.
+
 ## ACCEPT-012 triage integrity boundary · 2026-10-23
 
 - **Source mapping:** Private commit `c46bbdfd`.

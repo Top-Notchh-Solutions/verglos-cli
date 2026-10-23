@@ -15397,3 +15397,19 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   external state changed and nothing was deleted. Score remains
   **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
+## ACCEPT-009 / ACCEPT-010 / ACCEPT-014 candidate-version binding · 2026-10-23
+
+- **Source mapping:** Private shipping implementation commit `049eee35`.
+- **Contract mapping:** Release reconciliation, candidate freeze, and final
+  regression validation now require the bounded SemVer candidate version;
+  malformed-version regressions cover all three validators.
+- **Verification mapping:** Adjacent acceptance/release contracts **58/58**,
+  study-protocol validation, syntax checks, and `git diff --check` passed.
+- **Acceptance mapping:** Keep `ACCEPT-009`, `ACCEPT-010`, and `ACCEPT-014`
+  open for actual acceptance, provider/hosted execution where required,
+  independent review, customer/recipient acceptance where required, and final
+  release decision. No external state changed and nothing was deleted or
+  overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-009-010-014-version-binding-2026-10-23.md`;
+  additive bundle manifest `sha256:c02346be7c586a6db044f8c66f64a017b85ac079f5cf113ef54a168e7c842eeb`.
