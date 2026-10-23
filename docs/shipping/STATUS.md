@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · current release reconciliation and candidate freeze
+
+The real current candidate was reconciled across **22 partial rows**, **7 open
+gates**, **6 corrections**, and **1 rollback item**. The recommendation is
+`no-go` with `goEligible: false`. The candidate-freeze report records **10
+required artifacts**, **3 present**, **7 missing**, and status `blocked` with
+decision `no-go`. The additive release-state evidence bundle contains **124**
+hashed files, SHA-256
+`dad85399192b5ae255350540a221068c5e539d746049a0294025d886fe3c8fda`, and a
+passing secret scan. No publication, provider, customer, Production,
+reviewer, or final-release action occurred. Score remains **244 checked / 36
+open / 280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-release-state-artifacts-2026-10-23.md`.
+
 ## 2026-10-23 · post-retry acceptance evidence bundle
 
 The latest additive bundle contains **121** hashed files, has SHA-256

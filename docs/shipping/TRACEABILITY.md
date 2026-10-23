@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## Current release reconciliation and candidate freeze · 2026-10-23
+
+- **Reconciliation mapping:** The exact current candidate produces 22 partial
+  rows, 7 open gates, 6 corrections, 1 rollback item, and a fail-closed
+  `no-go` recommendation. Digest:
+  `sha256:6c208f72c48ce47710cd7dc01b1200d2fc188fa45a23427a191dc58e0666fefb`.
+- **Freeze mapping:** The same candidate has 10 required artifacts, 3 present,
+  7 missing, and a blocked `no-go` freeze. Digest:
+  `sha256:cfe3c9035ba266351e619c70f5b642713654123b799d6c129d88f2ef15d32ada`.
+- **Bundle mapping:** The release-state bundle has 124 hashed files and digest
+  `sha256:dad85399192b5ae255350540a221068c5e539d746049a0294025d886fe3c8fda`;
+  secret scan passed.
+- **Acceptance mapping:** No provider, customer, reviewer, Production,
+  publication, or final-release action was claimed. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-release-state-artifacts-2026-10-23.md`.
+
 ## Post-retry acceptance evidence bundle · 2026-10-23
 
 - **Source mapping:** Latest additive private bundle contains 121 hashed

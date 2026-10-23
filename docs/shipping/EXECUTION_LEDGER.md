@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · current release reconciliation and candidate freeze
+
+- **Reconciliation:** 22 partial rows, 7 open gates, 6 corrections, and 1
+  rollback item; requested and recommended decision `no-go`, `goEligible:
+  false`. Report SHA-256:
+  `sha256:6c208f72c48ce47710cd7dc01b1200d2fc188fa45a23427a191dc58e0666fefb`.
+- **Freeze:** 10 required artifacts, 3 present, 7 missing; status `blocked`,
+  decision `no-go`, `goEligible: false`. Report SHA-256:
+  `sha256:cfe3c9035ba266351e619c70f5b642713654123b799d6c129d88f2ef15d32ada`.
+- **Bundle:** Additive release-state bundle contains 124 hashed files, SHA-256
+  `sha256:dad85399192b5ae255350540a221068c5e539d746049a0294025d886fe3c8fda`;
+  secret scan passed.
+- **Disposition:** Current-state evidence only. No publication, provider,
+  customer, Production, reviewer, or final-release action occurred. Score
+  remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-release-state-artifacts-2026-10-23.md`.
+
 ## 2026-10-23 · post-retry acceptance evidence bundle
 
 - **Artifact:** Latest additive 121-file private reproducibility bundle.

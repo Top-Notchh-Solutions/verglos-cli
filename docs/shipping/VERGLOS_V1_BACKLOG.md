@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · current release reconciliation and candidate freeze
+
+The real current candidate now has a fail-closed reconciliation: **22 partial
+rows**, **7 open gates**, **6 corrections**, and **1 rollback item**, with
+recommendation `no-go` and `goEligible: false`. Candidate freeze records **10
+required artifacts**, **3 present**, **7 missing**, and `blocked`/`no-go` state.
+The additive release-state bundle contains **124** hashed files and passed its
+secret scan. This is current-state evidence only; no checkbox changed. The live
+score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-release-state-artifacts-2026-10-23.md`.
+
 ## 2026-10-23 · post-retry acceptance evidence bundle
 
 The latest additive private bundle contains **121** hashed files, SHA-256

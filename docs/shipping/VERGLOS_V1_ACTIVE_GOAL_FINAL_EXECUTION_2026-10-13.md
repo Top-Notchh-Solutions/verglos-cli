@@ -52,6 +52,28 @@ in addition to the product rows whose own evidence is still incomplete. The
 public-open-source benchmark path is authorized now. The separately held
 security-review track is unchanged.
 
+## Latest continuation result · 2026-10-23 · current release reconciliation and candidate freeze
+
+The exact current candidate (`3d4bca1f` CLI / `16ceddc9` Web /
+`2.0.0-alpha.4`) was run through the real release contracts. Reconciliation
+records **22 partial rows**, **7 open gates**, **6 corrections**, and **1
+rollback item**, with `no-go` recommendation and `goEligible: false`. Its
+SHA-256 is
+`sha256:6c208f72c48ce47710cd7dc01b1200d2fc188fa45a23427a191dc58e0666fefb`.
+
+Candidate freeze records **10 required artifacts**, **3 present**, **7
+missing**, and `blocked`/`no-go` state. Its SHA-256 is
+`sha256:cfe3c9035ba266351e619c70f5b642713654123b799d6c129d88f2ef15d32ada`.
+The additive release-state bundle contains **124** hashed files, has SHA-256
+`sha256:dad85399192b5ae255350540a221068c5e539d746049a0294025d886fe3c8fda`,
+and passed its secret scan.
+
+This is truthful current-state evidence, not release approval. No provider,
+customer, reviewer, Production, publication, or final-release action occurred;
+no checkbox changed. The live score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-release-state-artifacts-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · post-retry acceptance evidence bundle
 
 The latest additive bundle
