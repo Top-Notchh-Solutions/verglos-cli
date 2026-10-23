@@ -1,5 +1,44 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Production routing fix shipped
+
+Production execution found and corrected a real hosted defect: `verglos.com/proof`
+returned HTTP **404** because the Clerk public-route matcher omitted `/proof`,
+even though the public proof page was implemented. Web commit `6228bcc` added
+the route to the public allowlist; Web PR **#260** merged normally as
+`fb6ff569e4a7bf108d95b5a7680c9f4130bbf8d5`. The owner-managed Vercel
+Production deployment from the fix reported **READY**, and the post-merge
+`main` deployment `verglos-6f0mwxc43-anuragyadav20062002s-projects.vercel.app`
+also reported **READY** and became the live Production alias.
+
+Read-only Production verification returned HTTP **200** for `/`, `/proof`,
+`/checkout`, `/llms.txt`, `/robots.txt`, and `/sitemap.xml`; `/proof` contained
+the expected `Public proof assets` page. Vercel reported valid Production
+runtime configuration and **49/49** generated static pages. Local fix checks
+passed truth-registry **37/37**, public-release smoke **12/12**, typecheck, and
+diff checks. No payment, database, account, entitlement, webhook, customer,
+final CLI/npm release, or customer acceptance action was performed. This is
+real hosted Production evidence and advances FINAL-WEB-006/007/008, but their
+declared acceptance, human/field, independent-review, dependency, and final
+release gates remain open. Evidence:
+`docs/shipping/evidence/vercel-web-production-proof-route-fix-2026-10-24.md`.
+The additive private evidence bundle now verifies **207/207** files with zero
+mismatches, passed secret scanning, and manifest
+`sha256:3d8d0c2231b7ebb119a6b58f0321ee3e63a24cdb1b93b4901f588f33ad78c6e8`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-proof-route-fix.json`.
+
+## Latest continuation result · 2026-10-24 · local acceptance substrates verified
+
+The clean current CLI/Web heads completed the full local acceptance-substrate
+verifier with all commands passing: CLI **310/312** passed with 2 designed
+skips, Web **960/990** passed with 30 designed skips, and composed acceptance
+substrates **83/83** passed. This is regression/substrate evidence only; it
+does not claim hosted, provider, customer, reviewer, browser-human, field-CWV,
+migration, or Production acceptance. Evidence:
+`docs/shipping/evidence/acceptance-stories-verification-2026-10-24-local-current.json`.
+The score remains **244 checked / 36 open / 280 total (87.1%)**, partitioned
+as **13 AppSec-dependent / 23 non-AppSec** rows.
+
 ## Latest continuation result · 2026-10-24 · owner-controlled human review recorded
 
 At **2026-10-24 01:18:38 IST** (`2026-10-23T19:48:38Z`), Anurag Yadav,
