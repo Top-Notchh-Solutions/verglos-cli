@@ -1,5 +1,28 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-003 bundle addendum for ACCEPT-013
+
+The additive private evidence bundle now contains **133 hashed files** with
+SHA-256
+`6b82339aa010f2dfead3c540c1586baad74943603d76540827aee8a0f30ba53a`; its
+secret scan passed and includes the ACCEPT-013 correction-loop record.
+Provider, customer, independent-review, browser, field-CWV, and
+account-deletion gates remain open. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-evidence-bundle-accept-013-2026-10-23.md`.
+
+## 2026-10-23 · ACCEPT-013 held-out correction-loop implementation
+
+Private commit `14d916df` adds the fail-closed `acceptance:correction:run`
+protocol for disjoint train/holdout partitions, high-impact adjudication,
+pre-freeze-only corrections, immutable candidate binding, and digest-only
+results. Focused correction-loop, corpus-triage, and final-regression
+contracts passed **12/12**. The ACCEPT-013 row remains open for the actual
+held-out run, dependent qualification, independent review, and final
+acceptance. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted or overwritten. Evidence:
+`evidence/accept-013-held-out-correction-loop-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 QUAL-WEB-005 bundle addendum
 
 The additive private reproducibility bundle now contains **132 hashed files**

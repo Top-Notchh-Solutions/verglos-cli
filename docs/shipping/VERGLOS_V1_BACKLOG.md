@@ -1,5 +1,33 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-003 bundle addendum for ACCEPT-013
+
+The additive private evidence bundle now contains **133 hashed files** with
+SHA-256
+`sha256:6b82339aa010f2dfead3c540c1586baad74943603d76540827aee8a0f30ba53a`;
+its secret scan passed. It includes the ACCEPT-013 correction-loop
+implementation record. Provider lifecycle, customer consent, independent
+review, browser, field-CWV, and account-deletion gates remain open. No
+checkbox changed; score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-accept-013-2026-10-23.md`.
+
+## 2026-10-23 · ACCEPT-013 held-out correction-loop implementation
+
+Private commit `14d916df` adds the fail-closed
+`acceptance:correction:run` protocol. It enforces a complete disjoint
+train/holdout split, exact candidate/corpus binding, review of every
+high-impact finding or claim, pre-freeze-only training corrections, and an
+immutable final holdout review with no post-freeze tuning. The output is
+digest-only. Focused correction-loop, corpus-triage, and final-regression
+contracts passed **12/12**. This is implementation progress only:
+`ACCEPT-013` remains unchecked for the actual preregistered held-out run,
+independent review, dependent qualification evidence, and final acceptance.
+No provider, customer, Production, publication, or deployment action
+occurred; nothing was deleted or overwritten. Score remains **244 checked / 36
+open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-013-held-out-correction-loop-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 QUAL-WEB-005 bundle addendum
 
 The additive private reproducibility bundle now contains **132 hashed files**
@@ -5054,7 +5082,7 @@ assumes the legacy `licenses` table. No checkbox changed; backlog remains
   unadjudicated and customer acceptance is not claimed. Focused triage tests
   pass **3/3**. Evidence:
   `docs/shipping/evidence/accept-012-public-oss-triage-2026-10-23.md`.
-- [ ] **ACCEPT-013** · false-positive and false-truth correction loop · deps: ACCEPT-012, QUAL-CLI-004/006, QUAL-WEB-005/006 · Use a held-out fixture split and review each high-impact finding/claim; correct rules, copy, and evidence contracts without tuning against the final holdout. Commit(s): —
+- [ ] **ACCEPT-013** · false-positive and false-truth correction loop · deps: ACCEPT-012, QUAL-CLI-004/006, QUAL-WEB-005/006 · Use a held-out fixture split and review each high-impact finding/claim; correct rules, copy, and evidence contracts without tuning against the final holdout. Commit(s): Private `14d916df` adds `scripts/run-acceptance-correction-loop.mjs`, package command `acceptance:correction:run`, and 5 focused contract tests. The protocol substrate is complete; the row remains open for the actual preregistered held-out run, dependent qualification, independent review, and final acceptance. Evidence: `docs/shipping/evidence/accept-013-held-out-correction-loop-2026-10-23.md`.
 - [ ] **ACCEPT-014** · final regression corpus and go/no-go evidence · deps: ACCEPT-013, GITHUB-WEB-004, PLAN-WEB-015 · Re-run the frozen corpus across plan/user/tenant scenarios, compare report and performance deltas, reconcile truth/risk/gates, and issue a dated release recommendation. Commit(s): Private `acceptance:release:regress` implementation in `scripts/run-final-regression.mjs`; focused contract tests pass **4/4**. Evidence: `docs/shipping/evidence/accept-014-final-regression-contract-2026-10-23.md`. Row remains open for the actual frozen-corpus scenario run, dependent correction/provider gates, and final decision.
 
 ## Non-commit founder/external gates

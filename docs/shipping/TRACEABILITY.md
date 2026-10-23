@@ -1,5 +1,35 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 bundle addendum for ACCEPT-013 · 2026-10-23
+
+- **Artifact mapping:** Additive private bundle contains 133 hashed files;
+  SHA-256 `sha256:6b82339aa010f2dfead3c540c1586baad74943603d76540827aee8a0f30ba53a`;
+  secret scan passed.
+- **Coverage mapping:** Bundle includes the ACCEPT-013 held-out correction-loop
+  implementation evidence.
+- **Gate mapping:** Provider lifecycle, customer consent, independent review,
+  authenticated browser, field CWV, and account deletion remain open.
+- **Acceptance mapping:** ACCEPT-003 remains reproducibility only; score
+  remains **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-013-2026-10-23.md`.
+
+## ACCEPT-013 held-out correction-loop implementation · 2026-10-23
+
+- **Source mapping:** Private commit `14d916df`; script
+  `scripts/run-acceptance-correction-loop.mjs`; package command
+  `acceptance:correction:run`.
+- **Protocol mapping:** Complete disjoint train/holdout coverage, exact
+  candidate/corpus binding, high-impact adjudication, pre-freeze-only
+  corrections, and explicit no-post-freeze tuning.
+- **Verification mapping:** New correction-loop tests plus adjacent
+  corpus-triage/final-regression contracts passed **12/12**; syntax and diff
+  checks passed.
+- **Acceptance mapping:** This is repository-owned implementation evidence;
+  the actual held-out run, independent review, dependent qualification, and
+  final acceptance remain open. Score remains **244/36/280 (87.1%)**; nothing
+  was deleted or overwritten.
+- **Evidence:** `evidence/accept-013-held-out-correction-loop-2026-10-23.md`.
+
 ## ACCEPT-003 QUAL-WEB-005 bundle addendum · 2026-10-23
 
 - **Source mapping:** Bundle includes the fresh migrated current-head
