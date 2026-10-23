@@ -4,6 +4,7 @@ import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 const INPUT_SCHEMA = "verglos.private.acceptance-correction-loop.v1";
 const OUTPUT_SCHEMA = "verglos.private.acceptance-correction-loop-result.v1";
 const COMMIT = /^[a-f0-9]{7,64}$/u;
+const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u;
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
 const SAFE_ID = /^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$/u;
 const SAFE_PATH = /^(?!\/)(?!.*\.\.)[^\u0000-\u001f]{1,512}$/u;
@@ -177,7 +178,7 @@ function validateInput(input) {
   for (const key of ["cliCommit", "webCommit"]) {
     if (typeof input.candidate[key] !== "string" || !COMMIT.test(input.candidate[key])) throw new Error(`candidate ${key} is invalid`);
   }
-  if (typeof input.candidate.version !== "string" || input.candidate.version.length === 0 || input.candidate.version.length > 128) throw new Error("candidate version is invalid");
+  if (typeof input.candidate.version !== "string" || !VERSION.test(input.candidate.version)) throw new Error("candidate version is invalid");
   if (!input.corpus || typeof input.corpus !== "object" || typeof input.corpus.manifestSha256 !== "string" || !SHA256.test(input.corpus.manifestSha256)) throw new Error("correction-loop corpus is invalid");
   if (!Array.isArray(input.corpus.fixtures) || input.corpus.fixtures.length < 2 || input.corpus.fixtures.length > MAX_FIXTURES) throw new Error("correction-loop fixtures are invalid");
   const fixtureNames = new Set();

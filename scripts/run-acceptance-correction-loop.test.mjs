@@ -99,3 +99,7 @@ test("rejects a future holdout review timestamp", () => {
     split: { ...input().split, holdoutReviewAt: "2026-10-23T13:00:00.000Z" },
   }), { now: "2026-10-23T12:00:00.000Z" }), /holdoutReviewAt is in the future/u);
 });
+
+test("rejects a malformed candidate version", () => {
+  assert.throws(() => runAcceptanceCorrectionLoop(input({ candidate: { ...CANDIDATE, version: "latest" } })), /candidate version is invalid/u);
+});
