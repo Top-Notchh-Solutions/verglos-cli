@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · attempted-order processing implementation
+
+The merged Web route now exposes the provider `attempted` state as HTTP 202
+`processing` with `Retry-After: 2`; focused tests passed **7/7** and typecheck
+passed. Vercel created Production deployment
+`dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1`, still queued at recording time. This
+advances code-level provider/runtime evidence only. Provider terminal
+lifecycle, independent review, authenticated browser, field-CWV, account
+deletion, AppSec/Hunt, and final release gates remain open. Score remains
+**245/35/280 (87.5%)**; no checkbox changed. Evidence:
+`evidence/vercel-order-attempted-processing-fix-2026-10-24.md`.
+Additive bundle v9 verifies **235/235** files with zero mismatches and
+manifest `sha256:a2c3aca4352f531cc585f07e417c27c3dbf49f79472da702d7cd25e11b24430c`:
+`evidence/acceptance-evidence-bundle-2026-10-24-attempted-processing-v9.json`.
+
 ## 2026-10-24 · provider order advanced to attempted
 
 The bound Test Mode Cards-only order now reads `attempted`; the Payments API

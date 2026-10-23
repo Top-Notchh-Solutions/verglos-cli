@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · attempted-order processing implementation merged
+
+The Web billing route now maps provider order state `attempted` to HTTP **202**
+`processing` with `Retry-After: 2`, preserving the webhook as the terminal
+authority. Focused route tests passed **7/7**, typecheck passed, and Web PR #269
+merged normally at `5c52423231e286b8e176535b8d97e14fa52bbb03` from `9005d5e`.
+Vercel Production deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` was still
+queued when recorded, so this is implementation evidence and not a live-route
+claim. No checkbox changed. Score remains **245 checked / 35 open / 280 total
+(87.5%)** with **13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/vercel-order-attempted-processing-fix-2026-10-24.md`.
+The additive bundle v9 verifies **235/235** files with zero mismatches and
+manifest `sha256:a2c3aca4352f531cc585f07e417c27c3dbf49f79472da702d7cd25e11b24430c`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-attempted-processing-v9.json`.
+
 ## 2026-10-24 · provider order advanced to attempted
 
 The bound Test Mode Cards-only order now reads `attempted`; its single card

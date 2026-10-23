@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## Attempted-order processing implementation merged · 2026-10-24
+
+- **Implementation:** Web source `9005d5e` maps provider order state
+  `attempted` to HTTP 202 `processing` with `Retry-After: 2`; the signed
+  payment webhook remains terminal authority.
+- **Verification:** Focused route contract **7/7**, typecheck passed, and PR
+  #269 merged normally at `5c52423231e286b8e176535b8d97e14fa52bbb03`.
+- **Deployment boundary:** Vercel Production deployment
+  `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` was queued at recording time; no live
+  claim until READY. Web Actions had zero active and queued runs.
+- **Disposition:** Genuine implementation progress; no provider terminal
+  event, payment, customer, database, publication, release, or checkbox state
+  changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-order-attempted-processing-fix-2026-10-24.md`.
+- **Bundle:** Additive v9 contains 235 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:a2c3aca4352f531cc585f07e417c27c3dbf49f79472da702d7cd25e11b24430c`.
+
 ## Provider order advanced to attempted · 2026-10-24
 
 - **Provider read-back:** Bound Cards-only order is `attempted`; its single
