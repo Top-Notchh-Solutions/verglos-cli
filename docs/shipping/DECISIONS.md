@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record Test Mode provider capture and local entitlement replay
+
+- **Decision:** Record the first complete no-money provider Test Mode capture
+  through the local checkout and its separate local signed-handler replay.
+- **Result:** Razorpay read-back returned the bound order **`paid`** and one
+  UPI payment **`captured`**, amount **280,943 paise / INR**. The local webhook
+  route returned HTTP 200 for the identified replay and the owner-bound status
+  route returned `paid` with a redacted local entitlement key.
+- **Boundary:** This is a genuine Test Mode provider receipt. The local replay
+  is not an externally delivered webhook. No live key, real money, Production
+  payment, stable release, customer data, or Actions run was used.
+- **Disposition:** Advance provider/local integration evidence only. Keep
+  row-specific publication, independent/customer/browser/field/AppSec, and
+  final-release gates open; no checkbox changed. Score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/razorpay-testmode-captured-upi-local-entitlement-2026-10-24.md`.
+- **Bundle:** Additive v21 contains **245** hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:465405259f87018bfaa5843696aa7948f5b212cea2771fdc66eb2f2a506cc89b`.
+
 ## 2026-10-24 · record npm alpha.4 publication observation
 
 - **Decision:** Record the registry state without attempting publication.

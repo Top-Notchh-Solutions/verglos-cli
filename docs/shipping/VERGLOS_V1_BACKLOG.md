@@ -1,5 +1,25 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Test Mode provider capture and local entitlement replay
+
+The isolated local checkout completed a Razorpay **Test Mode** UPI flow using
+the synthetic owner fixture and documented `success@razorpay` test identifier.
+Read-only provider APIs returned the bound order as **`paid`** and its one UPI
+payment as **`captured`**, amount **280,943 paise / INR**. A separately
+identified HMAC-signed local replay of that exact provider capture was accepted
+by the isolated webhook route, after which owner-bound order status returned
+**`paid`** with a redacted local entitlement key. This is real Test Mode
+provider evidence plus local signed-handler integration evidence; the replay is
+not represented as an externally delivered webhook. No real money, live key,
+Production payment, stable release, customer data, or checkbox change occurred.
+Score remains **245 checked / 35 open / 280 total (87.5%)**, partitioned as
+**13 AppSec-dependent / 22 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/razorpay-testmode-captured-upi-local-entitlement-2026-10-24.md`.
+The additive bundle v21 verifies **245/245** files with zero mismatches, passes
+secret scanning, and matches manifest
+`sha256:465405259f87018bfaa5843696aa7948f5b212cea2771fdc66eb2f2a506cc89b`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-testmode-captured-v21.json`.
+
 ## 2026-10-24 · current acceptance/release contract suite
 
 The clean current CLI `aad2c74395a5c381c955ab9dfab7462295564840` passed the

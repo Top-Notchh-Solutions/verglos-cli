@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Test Mode provider capture and local entitlement replay
+
+The isolated local checkout completed a real Razorpay **Test Mode** UPI
+fixture. Provider read-back returned the bound order **`paid`** and one UPI
+payment **`captured`** for **280,943 paise / INR**. The local isolated webhook
+route accepted a separately identified signed replay of that provider capture,
+and the owner-bound status route returned **`paid`** with a redacted local
+entitlement key. No real money, live key, Production payment, or external
+webhook delivery was claimed. No checkbox changed; score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/razorpay-testmode-captured-upi-local-entitlement-2026-10-24.md`.
+Additive bundle v21 verifies **245/245** files with zero mismatches, passes
+secret scanning, and matches manifest
+`sha256:465405259f87018bfaa5843696aa7948f5b212cea2771fdc66eb2f2a506cc89b`.
+
 ## 2026-10-24 · npm alpha.4 publication observation
 
 The read-only npm verifier accepted **0/7** packages for candidate
