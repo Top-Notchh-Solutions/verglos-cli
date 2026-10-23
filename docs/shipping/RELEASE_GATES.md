@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current-head implementation gate recheck
+
+CLI build/typecheck/full tests, Web serial/public/truth/typecheck, and the
+private shipping contract suite (**179/179**) pass at the current heads. This
+keeps the code-side gate green only; provider publication/attestation,
+participant/commercial, human/field, independent-review, AppSec/Hunt, and
+final go/no-go gates remain closed. Score remains **245/35/280 (87.5%)**.
+Evidence: `evidence/current-head-nonappsec-implementation-regression-2026-10-24.md`.
+
 ## 2026-10-24 · live Production provider gate recheck
 
 Vercel inspection reported a `READY` Production deployment on the live

@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current-head non-AppSec implementation regression
+
+CLI current head passed build **8/8**, typecheck **14/14**, and full Turbo
+tests; Web serial/public-release/truth/typecheck passed; private shipping
+contracts passed **179/179** with zero failures/skips. This confirms current
+code-side implementation only. Score remains **245/35/280 (87.5%)** with 13
+AppSec-dependent and 22 non-AppSec rows open. Evidence:
+`evidence/current-head-nonappsec-implementation-regression-2026-10-24.md`.
+
 ## 2026-10-24 · live Production provider recheck
 
 Vercel inspection confirmed a `READY` Production deployment for the live

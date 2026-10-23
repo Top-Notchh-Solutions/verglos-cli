@@ -1,5 +1,24 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-head implementation regression
+
+The current CLI head `7d07066f`, Web head `791500d4`, and private shipping
+head `7e8a9ba9` were rechecked locally. CLI build/typecheck passed **8/8** and
+**14/14** with the full Turbo test command exiting `0`; Web serial,
+public-release smoke **12/12**, truth registry **37/37**, and typecheck all
+exited successfully; the private shipping contract suite passed **179/179**
+with zero failures or skips. The deterministic license/SBOM checks were run
+after installing all lockfile optional-package metadata locally.
+
+This confirms the current code-side implementation substrate for the non-AppSec
+queue. It does not create provider publication/attestation, participant or
+commercial acceptance, authenticated deletion, human/field evidence,
+independent review, AppSec/Hunt evidence, or final release approval. No
+checkbox changed. The authoritative score remains **245 checked / 35 open /
+280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22 open
+non-AppSec** rows. Evidence:
+`docs/shipping/evidence/current-head-nonappsec-implementation-regression-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · live Production provider recheck
 
 Vercel inspection confirmed the live `verglos-web` Production deployment is

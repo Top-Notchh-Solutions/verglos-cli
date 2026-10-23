@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-head implementation mapping
+
+- **Source mapping:** CLI `7d07066f`, Web `791500d4`, private shipping
+  `7e8a9ba9`.
+- **Verification mapping:** CLI build/typecheck/full tests pass; Web
+  serial/public/truth/typecheck pass; private shipping suite passes **179/179**.
+- **Acceptance mapping:** This proves current code-side implementation only;
+  it does not prove provider publication, participant/commercial, human/field,
+  independent-review, AppSec/Hunt, or final-release gates. Score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/current-head-nonappsec-implementation-regression-2026-10-24.md`.
+
 ## 2026-10-24 · live Production provider mapping
 
 - **Provider mapping:** Vercel inspection reported a `READY` Production

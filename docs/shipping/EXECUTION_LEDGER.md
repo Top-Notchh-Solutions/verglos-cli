@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+## Current-head non-AppSec implementation regression · 2026-10-24
+
+- **Sources:** CLI `7d07066f`, Web `791500d4`, private shipping `7e8a9ba9`.
+- **Verification:** CLI build **8/8**, typecheck **14/14**, full Turbo tests
+  exit `0`; Web serial/public-release/truth/typecheck pass; private shipping
+  suite **179/179**, zero failures/skips.
+- **Disposition:** Current code-side contracts are green. No provider,
+  registry, database, payment, customer, publication, or release state
+  changed; no checkbox changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/current-head-nonappsec-implementation-regression-2026-10-24.md`.
+
 ## Live Production provider recheck · 2026-10-24
 
 - **Provider receipt:** Vercel inspection reported a `READY` Production
