@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-002 registry response boundary merged
+
+CLI PR #193 merged normally as `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`,
+preserving source commit `dedcc90dc38d4593eab72e86655e127416753ab7`. All 12
+required hosted checks passed across the platform matrix, official
+standard/provenance validation, in-toto, and self-scan. The complete local
+release-contract suite passed **60/60**; build, typecheck, and diff checks
+passed. No checkbox changed. No package, tag, release, workflow dispatch, or
+provider write occurred. DIST-002 remains open for provider/trusted-publisher
+lifecycle, immutable publication/provenance, and final acceptance. The
+additive bundle contains 171 hashed files with manifest
+`sha256:818410f546af981a4455ab2d5bde8dabe65750f760c4f4f64f51c8048b660b18`
+and file SHA-256
+`b7c4af43b86616dab67c3461f844243369ddd44e06b3b9d237ba1cf3376d6f83`;
+secret scan passed. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-002-registry-response-boundary-pr193-merge-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 bounded registry metadata preflight
 
 CLI PR #193 at exact head `dedcc90dc38d4593eab72e86655e127416753ab7` adds a

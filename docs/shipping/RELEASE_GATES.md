@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · DIST-002 registry response boundary merged
+
+CLI PR #193 merged normally into `main` as
+`c0f0db6ab8ab223d0eead310bf827fc11da59bbd`, preserving source commit
+`dedcc90dc38d4593eab72e86655e127416753ab7`. All 12 hosted checks passed
+across Ubuntu/macOS/Windows Node 20/22/24, official standard/provenance,
+in-toto, and self-scan. Local release-contract tests passed **60/60** and
+build/typecheck/diff checks passed. This completes the DIST-002 code-side
+boundary only. No package, tag, release, workflow dispatch, or provider write
+occurred. Keep DIST-002 open for provider/trusted-publisher lifecycle,
+immutable publication/provenance, customer/recipient acceptance,
+independent review, AppSec/Hunt, and final release decision. Score remains
+**244/36/280 (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/dist-002-registry-response-boundary-pr193-merge-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 bounded registry metadata preflight
 
 CLI PR #193 at exact head `dedcc90dc38d4593eab72e86655e127416753ab7` adds a

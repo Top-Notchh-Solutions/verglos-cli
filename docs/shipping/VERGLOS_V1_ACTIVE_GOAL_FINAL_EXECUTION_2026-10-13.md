@@ -1,5 +1,30 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · DIST-002 registry response boundary merged
+
+CLI PR #193 merged normally into `main` as merge commit
+`c0f0db6ab8ab223d0eead310bf827fc11da59bbd`, preserving source commit
+`dedcc90dc38d4593eab72e86655e127416753ab7`. All 12 required hosted checks
+passed: Ubuntu/macOS/Windows Node 20/22/24, official standard/provenance,
+in-toto release binding, and Verglos self-scan. The bounded npm registry
+metadata preflight implementation passed the complete local release-contract
+suite **60/60**, build (8 successful tasks), typecheck (14 successful tasks),
+and `git diff --check`.
+
+No npm package was published, no tag/release was created, and no provider
+write or workflow dispatch occurred. This completes the DIST-002 code-side
+implementation slice only; provider/trusted-publisher lifecycle, immutable
+publication/provenance, customer/recipient acceptance, independent review,
+AppSec/Hunt, and final release gates remain open. No backlog checkbox or
+external state changed, and nothing was deleted or overwritten. The additive
+bundle contains **171 hashed files** with manifest
+`sha256:818410f546af981a4455ab2d5bde8dabe65750f760c4f4f64f51c8048b660b18`
+and file SHA-256
+`b7c4af43b86616dab67c3461f844243369ddd44e06b3b9d237ba1cf3376d6f83`;
+secret scan passed. The live score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/dist-002-registry-response-boundary-pr193-merge-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · DIST-002 bounded registry metadata preflight
 
 CLI PR #193 at exact head `dedcc90dc38d4593eab72e86655e127416753ab7`

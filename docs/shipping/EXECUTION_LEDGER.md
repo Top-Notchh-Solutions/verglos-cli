@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## DIST-002 registry response boundary merged · 2026-10-23
+
+- **Source mapping:** CLI PR #193 merged normally as
+  `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`, preserving source commit
+  `dedcc90dc38d4593eab72e86655e127416753ab7`.
+- **Contract mapping:** Merged npm registry metadata preflight reads are
+  bounded to 1 MiB with bounded UTF-8 streaming, reader cancellation, and
+  fail-closed oversized/invalid response handling.
+- **Verification mapping:** All 12 hosted checks passed; local release
+  contracts **60/60**; build 8 successful tasks; typecheck 14 successful
+  tasks; `git diff --check` passed.
+- **Artifact mapping:** Additive bundle contains 171 hashed files with
+  manifest SHA-256
+  `sha256:818410f546af981a4455ab2d5bde8dabe65750f760c4f4f64f51c8048b660b18`
+  and bundle file SHA-256
+  `b7c4af43b86616dab67c3461f844243369ddd44e06b3b9d237ba1cf3376d6f83`;
+  secret scan passed.
+- **Acceptance mapping:** No publication, tag/release, provider write,
+  customer/recipient acceptance, independent review, AppSec/Hunt review, or
+  final release was claimed. No checkbox or external state changed; nothing
+  was deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-002-registry-response-boundary-pr193-merge-2026-10-23.md`.
+
 ## DIST-002 bounded registry metadata preflight · 2026-10-23
 
 - **Source mapping:** CLI PR #193, exact head

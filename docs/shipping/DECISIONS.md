@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · merge DIST-002 registry response boundary
+
+- **Decision:** Promote CLI PR #193's bounded npm registry metadata
+  preflight implementation through the normal merge path.
+- **Implementation:** Merge commit
+  `c0f0db6ab8ab223d0eead310bf827fc11da59bbd` preserves source commit
+  `dedcc90dc38d4593eab72e86655e127416753ab7`; the 1 MiB response limit,
+  bounded UTF-8 stream, reader cancellation, and fail-closed handling are now
+  on `main`.
+- **Verification:** All 12 hosted checks passed; local release-contract
+  tests **60/60**, build, typecheck, and diff checks passed.
+- **Disposition:** Implementation slice merged; provider/trusted-publisher
+  lifecycle, publication/provenance, customer/recipient acceptance,
+  independent review, AppSec/Hunt, and final release remain open. No package,
+  tag, release, or provider write occurred. Score remains **244/36/280
+  (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-002-registry-response-boundary-pr193-merge-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 bounded registry metadata preflight
 
 - **Decision:** Bound npm registry metadata reads before JSON parsing, using

@@ -1,5 +1,28 @@
 # Verglos V1 traceability
 
+## DIST-002 registry response boundary merged · 2026-10-23
+
+- **Source mapping:** CLI PR #193 merged normally as
+  `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`, preserving source commit
+  `dedcc90dc38d4593eab72e86655e127416753ab7`.
+- **Contract mapping:** The merged npm registry preflight bounds metadata to
+  1 MiB, uses bounded UTF-8 streaming with reader cancellation, and fails
+  closed on oversized or invalid response bytes.
+- **Verification mapping:** All 12 hosted checks passed; local release
+  contracts **60/60**; build 8 successful tasks; typecheck 14 successful
+  tasks; `git diff --check` passed.
+- **Artifact mapping:** 171 hashed bundle files; manifest SHA-256
+  `sha256:818410f546af981a4455ab2d5bde8dabe65750f760c4f4f64f51c8048b660b18`;
+  bundle file SHA-256
+  `b7c4af43b86616dab67c3461f844243369ddd44e06b3b9d237ba1cf3376d6f83`;
+  secret scan passed.
+- **Acceptance mapping:** No npm publication, tag/release, provider write,
+  customer/recipient acceptance, independent review, AppSec/Hunt review, or
+  final release decision is claimed. DIST-002 remains open for its external
+  lifecycle and acceptance gates. Score remains **244/36/280 (87.1%)**;
+  nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-002-registry-response-boundary-pr193-merge-2026-10-23.md`.
+
 ## DIST-002 bounded registry metadata preflight · 2026-10-23
 
 - **Source mapping:** CLI PR #193, exact head
