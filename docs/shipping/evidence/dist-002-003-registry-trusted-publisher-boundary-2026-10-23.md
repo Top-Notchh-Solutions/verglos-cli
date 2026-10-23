@@ -19,3 +19,10 @@
   `VERGLOS_FINAL_RELEASE_READY` remains unset until the complete shipping goal
   and final release decision are satisfied. Score remains **244 checked / 36
   open / 280 total (87.1%)**. Nothing was deleted.
+- **Required provider configuration:** For each public package, npm's GitHub
+  trusted publisher must point to organization `Top-Notchh-Solutions`,
+  repository `verglos-cli`, workflow filename `publish.yml`, and environment
+  `release`, with direct `npm publish` and `npm dist-tag` permissions enabled.
+  The package must exist before its trusted-publisher relationship can be
+  managed. This configuration is external npm state; it was not fabricated or
+  changed by this session.
