@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-005 workflow-validator boundary
+
+- **Implementation:** Private commit `10e39268` makes non-string
+  consent/execution dates fail closed in the authorized-workflow validator.
+- **Verification:** Workflow suite **5/5**; combined bundle-builder,
+  correction-loop, corpus-triage, final-regression, and workflow suites
+  **21/21**; syntax and diff checks passed.
+- **Artifact:** Regenerated private bundle contains **134 unique files** with
+  content-manifest SHA-256
+  `sha256:96933c3bf1d52ee07a631b1ff70c99373f680da418395dcec7b7b6f61e1516bb`;
+  secret scan passed.
+- **Disposition:** ACCEPT-005 remains open for the actual named-owner
+  consented workflow and deletion/expiry evidence. Score remains **244/36/280
+  (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-005-date-fix-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 deterministic bundle manifest
 
 - **Implementation:** Private commit `97bf5989` hardens the evidence-bundle

@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-005 workflow-validator boundary
+
+Private commit `10e39268` hardens the authorized-workflow validator to reject
+non-string consent/execution dates instead of coercing them. The focused
+ACCEPT-005 suite passes **5/5**; the combined bundle-builder,
+correction-loop, corpus-triage, final-regression, and workflow suites pass
+**21/21**. The regenerated private bundle contains **134 unique hashed files**
+with content-manifest SHA-256
+`sha256:96933c3bf1d52ee07a631b1ff70c99373f680da418395dcec7b7b6f61e1516bb`;
+secret scan passed. ACCEPT-005 remains open for the actual named external
+owner's consented workflow, redacted result, and deletion/expiry artifact.
+The live score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing
+was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-accept-005-date-fix-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-003 deterministic bundle manifest
 
 Private commit `97bf5989` hardens the evidence-bundle builder to reject

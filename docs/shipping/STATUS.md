@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-005 workflow-validator boundary
+
+Private commit `10e39268` hardens the authorized-workflow validator against
+coerced non-string dates. The focused workflow suite passes **5/5** and the
+combined current bounded suite passes **21/21**. The regenerated bundle has
+**134 unique files**, content-manifest SHA-256
+`96933c3bf1d52ee07a631b1ff70c99373f680da418395dcec7b7b6f61e1516bb`, and a
+passing secret scan. ACCEPT-005 remains open for the actual external-owner
+workflow and deletion/expiry artifact. Score remains **244 checked / 36 open /
+280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-evidence-bundle-accept-005-date-fix-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 deterministic bundle manifest
 
 Private commit `97bf5989` hardens the evidence-bundle builder against

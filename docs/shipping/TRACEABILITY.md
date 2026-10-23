@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## ACCEPT-005 workflow-validator boundary · 2026-10-23
+
+- **Source mapping:** Private commit `10e39268` and
+  `scripts/validate-authorized-workflow.mjs`.
+- **Contract mapping:** Non-string consent/execution dates now fail closed;
+  valid exact-commit, scope, network, retention, redaction, and deletion
+  boundaries remain enforced.
+- **Verification mapping:** Workflow suite **5/5**; combined current bounded
+  suite **21/21**; syntax and diff checks passed.
+- **Artifact mapping:** 134 unique bundle files; content-manifest SHA-256
+  `sha256:96933c3bf1d52ee07a631b1ff70c99373f680da418395dcec7b7b6f61e1516bb`;
+  secret scan passed.
+- **Acceptance mapping:** ACCEPT-005 remains open for actual named-owner
+  consented workflow and deletion/expiry evidence. Score remains **244/36/280
+  (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-accept-005-date-fix-2026-10-23.md`.
+
 ## ACCEPT-003 deterministic bundle manifest · 2026-10-23
 
 - **Source mapping:** Private commit `97bf5989` and

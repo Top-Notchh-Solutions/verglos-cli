@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-005 workflow-validator boundary
+
+Private commit `10e39268` hardens the authorized-workflow validator to reject
+non-string consent/execution dates instead of coercing them. The focused
+ACCEPT-005 suite passes **5/5**; the combined bundle-builder,
+correction-loop, corpus-triage, final-regression, and workflow suites pass
+**21/21**. The regenerated private bundle contains **134 unique hashed files**
+with content-manifest SHA-256
+`sha256:96933c3bf1d52ee07a631b1ff70c99373f680da418395dcec7b7b6f61e1516bb`;
+secret scan passed. ACCEPT-005 remains open for the actual named external
+owner's consented workflow, redacted result, and deletion/expiry artifact.
+No checkbox changed; score remains **244 checked / 36 open / 280 total
+(87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-accept-005-date-fix-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 deterministic bundle manifest
 
 Private commit `97bf5989` hardens the evidence-bundle builder to reject
@@ -4985,6 +5000,7 @@ Evidence/problem: external validation is deliberately last. It validates the com
 - **ACCEPT-003 deterministic bundle addendum (2026-10-23):** Private `97bf5989` adds duplicate/path-boundary/secret-content checks, sorted entries, and a deterministic content-manifest digest. The regenerated bundle contains **133 unique files** and passes its secret scan; focused bundle-builder coverage is **3/3**. Keep the row unchecked for reviewer sign-off and external/hosted/provider/customer evidence. Evidence: `docs/shipping/evidence/acceptance-evidence-bundle-accept-003-deterministic-2026-10-23.md`.
 - [x] **ACCEPT-004** · external authorized workflow protocol · deps: ACCEPT-003 · Freeze recruitment/questions/consent/data handling/success criteria for qualified teams without scraping or bulk outreach. No external contact without authorization. Commit(s): Private `454a0cf` adds the frozen protocol, per-repository consent-record template, and `pnpm acceptance:protocol:check` validator. It requires named owner consent, exact commit/scope, bounded network/data handling, expiry/revocation, founder approval, redacted evidence, and deletion/expiry recording. No external contact was performed; ACCEPT-005 onward remain open.
 - [ ] **ACCEPT-005** · run authorized external repository workflows · deps: ACCEPT-004 + founder authorization · Validate real release reconciliation without publishing findings; record product failures separately from requested scope. Private `acceptance:workflow:validate` now implements the exact consent/scope/redaction/deletion contract; focused tests pass **4/4**. First-party/public-fixture qualification is not external consented-team/recipient acceptance and does not close this row. Evidence: `docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md` and `docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`. Row remains open for the actual named-owner workflow and expiry/deletion record.
+- **ACCEPT-005 validator boundary addendum (2026-10-23):** Private `10e39268` rejects non-string consent/execution dates; focused workflow tests pass **5/5**. The external named-owner workflow and deletion/expiry record remain open. Evidence: `docs/shipping/evidence/accept-005-authorized-workflow-date-boundary-2026-10-23.md`.
 - **ACCEPT-005 blocker addendum (2026-10-22):** The protocol validator passes, but reports `externalContact: not-performed` and `customerAcceptance: open`. The row still requires a named external owner's consent record, exact founder authorization, reproducible redacted release reconciliation, and fixture/evidence expiry or deletion proof. Adjacent merged-head truth checks pass **35/35**, **4/4**, and **4/4**; no checkbox changed. Evidence: `docs/shipping/evidence/accept-005-current-blocker-audit-2026-10-22.md`.
 - **ACCEPT-005 current-head qualification addendum (2026-10-22):** Clean merged CLI/Web scans exited **0** with CLI **78 findings / score 67 high** and Web **22 findings / score 73 medium**; both coverage states are incomplete because provenance was skipped. This updates first-party evidence only and does not close the external workflow row. Evidence: `docs/shipping/evidence/accept-005-current-head-first-party-qualification-2026-10-22.md`.
 - [ ] **ACCEPT-006** · report comprehension test · deps: ACCEPT-003/005 · Developers/leads/recipients answer exact artifact, decision, change, remaining risk, authenticity, and limitations within the defined gate. Commit(s): private `6430a38d` adds the bounded six-question scorer and `423daecc` adds its regression coverage. Implementation substrate is complete; the row remains open for the preregistered consenting participant run, aggregate result, independent scoring review, and final acceptance. Evidence: `docs/shipping/evidence/accept-006-comprehension-scorer-2026-10-19.md`.
