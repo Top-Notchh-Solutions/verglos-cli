@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## Test Mode provider capture and local entitlement replay · 2026-10-24
+
+- **Provider receipt:** Isolated Razorpay Test Mode UPI flow returned order
+  **`paid`** and one payment **`captured`**, amount **280,943 paise / INR**.
+- **Application receipt:** A separately identified HMAC-signed local replay of
+  that exact provider capture returned HTTP 200 from the local webhook route;
+  the owner-bound order-status route then returned `paid` with a redacted local
+  entitlement key.
+- **Boundary:** The provider capture is a real no-money Test Mode receipt. The
+  local replay is integration evidence, not an externally delivered webhook.
+  No live key, Production payment, stable release, customer data, or Actions
+  run was used.
+- **Disposition:** Provider Test Mode and local billing integration advanced;
+  row-specific independent/customer/browser/field/AppSec/final-release gates
+  remain open. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/razorpay-testmode-captured-upi-local-entitlement-2026-10-24.md`.
+- **Bundle:** Additive v21 contains **245** hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:465405259f87018bfaa5843696aa7948f5b212cea2771fdc66eb2f2a506cc89b`.
+
 ## npm alpha.4 publication observation · 2026-10-24
 
 - **Candidate:** CLI `aad2c74395a5c381c955ab9dfab7462295564840`, version

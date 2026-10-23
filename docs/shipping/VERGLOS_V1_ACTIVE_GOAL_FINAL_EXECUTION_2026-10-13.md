@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Test Mode provider capture and local entitlement replay
+
+The isolated local checkout completed a documented Razorpay **Test Mode** UPI
+flow using the synthetic owner fixture and the provider's `success@razorpay`
+test identifier. Read-only provider APIs returned the bound order as
+**`paid`** and its one UPI payment as **`captured`**, for **280,943 paise / INR**.
+No real money, live key, or Production payment was used. Evidence:
+`docs/shipping/evidence/razorpay-testmode-captured-upi-local-entitlement-2026-10-24.md`.
+
+The local isolated webhook route then accepted a separately identified,
+HMAC-signed replay of that exact provider capture and owner-bound
+`/api/razorpay/order-status` returned **`paid`** with a redacted local
+entitlement key. This is local signed-handler integration evidence, not a
+claim that Razorpay delivered an external webhook. No checkbox changed; the
+score remains **245 checked / 35 open / 280 total (87.5%)**, partitioned as
+**13 AppSec-dependent / 22 non-AppSec**.
+The additive bundle v21 verifies **245/245** files with zero mismatches,
+passes secret scanning, and matches manifest
+`sha256:465405259f87018bfaa5843696aa7948f5b212cea2771fdc66eb2f2a506cc89b`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-testmode-captured-v21.json`.
+
 ## Latest continuation result · 2026-10-24 · npm alpha.4 publication observation
 
 The read-only npm verifier checked the seven-package `2.0.0-alpha.4`
