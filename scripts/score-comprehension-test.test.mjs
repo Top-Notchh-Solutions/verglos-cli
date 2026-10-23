@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -7,7 +8,6 @@ import { COMPREHENSION_QUESTION_IDS, scoreComprehensionFile, scoreComprehensionR
 
 const participantDigest = `sha256:${"a".repeat(64)}`;
 const artifact = {
-  digest: `sha256:${"b".repeat(64)}`,
   subject: "release-candidate/2026-10-19",
   decision: "no-go",
   rubric: {
@@ -20,6 +20,8 @@ const artifact = {
   },
   forbiddenTerms: ["customer acceptance", "production deletion", "appsec pass"],
 };
+
+artifact.digest = `sha256:${createHash("sha256").update(JSON.stringify({ subject: artifact.subject, decision: artifact.decision, rubric: artifact.rubric, forbiddenTerms: artifact.forbiddenTerms }), "utf8").digest("hex")}`;
 
 function answers(extra = {}) {
   return COMPREHENSION_QUESTION_IDS.map((questionId) => ({
@@ -116,4 +118,9 @@ test("rejects duplicate participant identities instead of inflating the aggregat
 
 test("rejects secret-like material in the artifact or protocol input", () => {
   assert.throws(() => scoreComprehensionRun(run({ artifact: { ...artifact, subject: "DATABASE_URL=must-not-be-recorded" } })), /secret-like material/u);
+});
+
+test("rejects a rubric changed without updating the artifact digest", () => {
+  const source = run({ artifact: { ...artifact, rubric: { ...artifact.rubric, "remaining-risk": [["provider"], ["acceptance", "hidden"]] } } });
+  assert.throws(() => scoreComprehensionRun(source), /artifact digest does not match rubric payload/u);
 });

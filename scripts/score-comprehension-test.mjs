@@ -107,6 +107,7 @@ function validateArtifact(input) {
   }
   if (!Array.isArray(input.forbiddenTerms) || input.forbiddenTerms.length === 0) throw new Error("comprehension forbiddenTerms are required");
   for (const term of input.forbiddenTerms) validateTerm(term, "forbiddenTerms");
+  if (input.digest !== digestText(canonicalArtifactPayload(input))) throw new Error("comprehension artifact digest does not match rubric payload");
   return input;
 }
 
@@ -180,6 +181,10 @@ function normalizeTerm(value) {
 
 function digestText(value) {
   return `sha256:${createHash("sha256").update(value, "utf8").digest("hex")}`;
+}
+
+function canonicalArtifactPayload(input) {
+  return JSON.stringify({ subject: input.subject, decision: input.decision, rubric: input.rubric, forbiddenTerms: input.forbiddenTerms });
 }
 
 function rejectSecretLike(input) {
