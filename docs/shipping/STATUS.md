@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · app-bound Cards payment pending OTP
+
+The current Cards-only app route created a bound Test Mode order and the hosted
+fixture reached **Sending OTP**. Provider read-back found one payment with
+status `created` and `captured: false`; no webhook or entitlement followed.
+No money or Production state moved. Score remains **245/35/280 (87.5%)**, with
+13 AppSec-dependent and 22 non-AppSec rows open. Evidence:
+`evidence/razorpay-testmode-card-otp-boundary-2026-10-24.md`.
+The additive bundle verifies **232/232** hashed files with zero mismatches,
+passes secret scanning, and matches manifest
+`sha256:f5665472dd29caf774761adc5455bd7ca626e72a8574e6b8695f10659c75f0dc`:
+`evidence/acceptance-evidence-bundle-2026-10-24-card-otp-boundary-v5.json`.
+
 ## 2026-10-24 · app-bound Cards fixture boundary
 
 The current app order route and provider order lookup returned HTTP **200**;

@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## App-bound Cards payment pending OTP · 2026-10-24
+
+- **Provider state:** Current app-bound Cards-only order reached the provider’s
+  Sending OTP state; read-only payment lookup returned one `created` payment
+  with `captured: false`.
+- **Boundary:** No OTP, handler response, signed webhook, entitlement, refund,
+  Production, customer, or deletion state was produced. No money moved.
+- **Disposition:** Provider lifecycle remains open; no checkbox changed. Score
+  remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/razorpay-testmode-card-otp-boundary-2026-10-24.md`.
+- **Bundle:** Additive v5 contains 232 hashed files, has zero mismatches, passes
+  secret scanning, and matches manifest
+  `sha256:f5665472dd29caf774761adc5455bd7ca626e72a8574e6b8695f10659c75f0dc`.
+
 ## App-bound Cards fixture boundary · 2026-10-24
 
 - **Application/provider:** Current order route HTTP 200; Cards-only Test Mode
