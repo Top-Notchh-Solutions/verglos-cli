@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## DIST-003 release-notes sidecar · 2026-10-23
+
+- **Source mapping:** CLI PR #188 source `51b60b8d` merged normally into
+  `main` as `1369384fcdf579fce41c172139b0858f07698869`.
+- **Contract mapping:** `RELEASE_NOTES.md` is generated from the exact seven
+  archives, carries source/tag/package bindings, and is required by the
+  release-origin, checksum, upload, and strict verification paths.
+- **Verification mapping:** Release-contract suite **53/53**, diff check,
+  official validators, Verglos self-scan, in-toto, and all Ubuntu/macOS/
+  Windows Node 20/22/24 checks passed.
+- **Acceptance mapping:** The readiness variable remains unset and no
+  registry write occurred. `DIST-002`/`DIST-003` remain open; score remains
+  **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/dist-003-release-notes-pr188-2026-10-23.md`.
+
 ## DIST-002 stable publication dist-tag correction · 2026-10-23
 
 - **Source mapping:** CLI PR #187 source `cf796c78` merged normally into

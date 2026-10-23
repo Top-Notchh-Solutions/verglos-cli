@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-003 release-notes sidecar merged
+
+PR #188 merged normally into CLI `main` at `1369384f` after the full
+release-contract suite (**53/53**) and all hosted validators, self-scan,
+in-toto, and Ubuntu/macOS/Windows Node 20/22/24 checks passed. The workflow
+now generates and verifies `RELEASE_NOTES.md__ bound to the exact source,
+tag, and seven-package set, and includes it in checksums and release metadata.
+`VERGLOS_FINAL_RELEASE_READY` remains unset. No tag, npm write, deployment,
+package version, or final release decision occurred. Score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-003-release-notes-pr188-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 stable publication dist-tag correction merged
 
 PR #187 merged normally into CLI `main` at `f310e8a0` after all hosted

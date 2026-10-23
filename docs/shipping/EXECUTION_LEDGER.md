@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-003 release-notes sidecar merged
+
+- **Implementation:** Added `scripts/generate-release-notes.mjs` and its
+  contract tests. The workflow generates `RELEASE_NOTES.md__ from all seven
+  archives and binds the exact source commit, release tag, and versions.
+- **Artifact binding:** The notes are required by release-origin generation,
+  checksums, upload, and strict artifact verification.
+- **Merge:** PR #188 merged normally at
+  `1369384fcdf579fce41c172139b0858f07698869` from `51b60b8d`; no squash or
+  branch/file deletion was used.
+- **Verification:** Release-contract suite passed **53/53**, diff check
+  passed, and all hosted validators, self-scan, in-toto, and the complete
+  Ubuntu/macOS/Windows Node 20/22/24 matrix passed.
+- **Boundary:** `VERGLOS_FINAL_RELEASE_READY` remains unset. No tag, npm
+  write, deployment, package version, or final release decision occurred.
+  Keep `DIST-002`/`DIST-003` open. Score remains **244/36/280 (87.1%)**.
+  Nothing was deleted. Evidence:
+  `evidence/dist-003-release-notes-pr188-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 stable publication dist-tag correction merged
 
 - **Implementation:** CLI PR #187 changed every stable-only publication

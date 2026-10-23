@@ -99,6 +99,23 @@ publication and provenance. The score remains **244 checked / 36 open / 280
 total (87.1%)**, and nothing was deleted. Evidence:
 `docs/shipping/evidence/dist-002-stable-latest-dist-tag-pr187-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · verified release-notes sidecar
+
+CLI PR #188 merged normally into `main` at
+`1369384fcdf579fce41c172139b0858f07698869` from source `51b60b8d` after
+the complete hosted matrix and release-contract suite (**53/53**) passed. The
+workflow now generates `RELEASE_NOTES.md__ from all seven public archives,
+binds its exact source commit, release tag, and package versions, and includes
+it in upload, `SHA256SUMS`, `RELEASE_METADATA.json`, and strict
+verification.
+
+`VERGLOS_FINAL_RELEASE_READY` remains unset. No tag, release dispatch, npm
+registry write, deployment, package version, or final release decision
+occurred. `DIST-002`/`DIST-003` remain open for complete current-
+candidate publication, provenance, and final acceptance. The score remains
+**244 checked / 36 open / 280 total (87.1%)**, and nothing was deleted.
+Evidence: `docs/shipping/evidence/dist-003-release-notes-pr188-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · prerelease-publication block
 
 CLI PR #185, commit `4890a1c7`, makes the protected publication job stable-only:

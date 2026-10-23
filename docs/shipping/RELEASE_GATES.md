@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · DIST-003 release-notes sidecar merged
+
+PR #188 merged normally at `1369384f` after the complete hosted check set
+passed. `RELEASE_NOTES.md` is now generated from the seven public archives,
+bound to source/tag/package versions, included in `SHA256SUMS` and
+`RELEASE_METADATA.json`, and checked before publication. The readiness
+variable remains unset, so no publication can run. `DIST-002`/`DIST-003`
+remain open; score is **244/36/280 (87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-003-release-notes-pr188-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 stable publication dist-tag correction merged
 
 PR #187 merged normally at `f310e8a0` after all hosted checks passed. The

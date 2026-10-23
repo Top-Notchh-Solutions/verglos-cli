@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · DIST-003 release-notes sidecar merged
+
+CLI PR #188 merged normally into `main` at `1369384f` after all hosted
+checks and the **53/53** release-contract suite passed. The release workflow
+now generates `RELEASE_NOTES.md__ from the seven package archives, binds its
+source/tag/version fields, and includes it in checksums, origin metadata, and
+strict verification. `DIST-002`/`DIST-003` remain open for actual
+publication/provenance and final acceptance. No checkbox changed; the live
+score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted. Evidence:
+`docs/shipping/evidence/dist-003-release-notes-pr188-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 stable publication dist-tag correction merged
 
 CLI PR #187 merged normally into `main` at `f310e8a0` after all hosted
