@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current acceptance/release contract suite
+
+The current CLI head passed **63/63** local acceptance/release contract tests
+with zero failures, skips, or cancellations. This is implementation-contract
+evidence only; no external/provider/customer, human/field, account-deletion,
+AppSec/Hunt, or final-release state is inferred. Score remains **245/35/280
+(87.5%)** and no checkbox changed. Evidence:
+`evidence/acceptance-contracts-current-head-2026-10-24.md`.
+The additive bundle v16 verifies **241/241** files with zero mismatches and
+manifest `sha256:8b3e57f1b5510a7183bfbf18e2a847d5b4a0081f08ea41a65af5e0d200363ef1`.
+
 ## 2026-10-24 · current-head acceptance-story verification
 
 The clean current CLI/Web sources passed the local acceptance-story substrate

@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current acceptance/release contract suite
+
+The current CLI implementation contracts passed **63/63** locally with zero
+failures, skips, or cancellations. This strengthens fail-closed implementation
+evidence only; provider/customer, independent-review, human/field-CWV,
+account-deletion, AppSec/Hunt, and final-release gates remain open. Score stays
+**245/35/280 (87.5%)**; no checkbox changed. Evidence:
+`evidence/acceptance-contracts-current-head-2026-10-24.md`.
+The additive bundle v16 verifies **241/241** files with zero mismatches and
+manifest `sha256:8b3e57f1b5510a7183bfbf18e2a847d5b4a0081f08ea41a65af5e0d200363ef1`.
+
 ## 2026-10-24 · current-head acceptance-story verification
 
 The clean current CLI/Web sources passed the local acceptance-story substrate

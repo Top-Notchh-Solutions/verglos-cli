@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current acceptance/release contract suite
+
+The clean current CLI `aad2c74395a5c381c955ab9dfab7462295564840` passed the
+local acceptance/release contract suite **63/63**, with zero failures, skips,
+or cancellations. The run covered backlog partitioning, candidate freeze,
+release reconciliation, final-regression matrix/delta binding, held-out
+correction protection, comprehension scoring, authorized workflow consent and
+scope, commercial evidence, corpus triage, unsafe-path rejection, and
+byte/digest binding. Evidence:
+`docs/shipping/evidence/acceptance-contracts-current-head-2026-10-24.md`.
+The additive bundle v16 verifies **241/241** files with zero mismatches and
+manifest
+`sha256:8b3e57f1b5510a7183bfbf18e2a847d5b4a0081f08ea41a65af5e0d200363ef1`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-current-head-v16.json`.
+
+This is implementation-contract evidence only; no hosted/provider/customer,
+independent-review, human/field-CWV, account-deletion, AppSec/Hunt, or
+final-release state is inferred. No checkbox changed; the score remains **245
+checked / 35 open / 280 total (87.5%)**, partitioned as **13 AppSec-dependent /
+22 non-AppSec**.
+
 ## Latest continuation result · 2026-10-24 · current-head acceptance-story verification
 
 The clean current CLI `aad2c74395a5c381c955ab9dfab7462295564840` and Web
