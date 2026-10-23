@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { constants } from "node:fs";
 import { lstat, open } from "node:fs/promises";
 import { decideReleaseRollback, type ReleaseReference } from "@verglos/shared";
 
@@ -45,7 +46,7 @@ function parseReference(value: unknown): ReleaseReference {
 async function readBoundedRegularFile(path: string, message: string): Promise<Buffer> {
   const entry = await lstat(path);
   if (!entry.isFile() || entry.size > MAX_BYTES) throw new Error(message);
-  const handle = await open(path, "r");
+  const handle = await open(path, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
   try {
     const opened = await handle.stat();
     if (!opened.isFile() || (entry.ino !== 0 && opened.ino !== 0 && (entry.dev !== opened.dev || entry.ino !== opened.ino))) {
