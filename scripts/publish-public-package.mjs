@@ -8,6 +8,7 @@ import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
 export const DEFAULT_NPM_REGISTRY = "https://registry.npmjs.org";
+export const MAX_REGISTRY_METADATA_BYTES = 1024 * 1024;
 const MAX_ARCHIVE_BYTES = 128 * 1024 * 1024;
 const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u;
 const PACKAGE_NAME = /^(?:@[a-z0-9][a-z0-9._~-]*\/[a-z0-9][a-z0-9._~-]*|[a-z0-9][a-z0-9._~-]*)$/u;
@@ -39,8 +40,9 @@ export function publicationDecision(status) {
  */
 export async function validatePublishedMetadata(response, expectedName, expectedVersion) {
   let metadata;
+  const body = await readBoundedResponseText(response);
   try {
-    metadata = JSON.parse(await response.text());
+    metadata = JSON.parse(body);
   } catch {
     throw new Error("npm registry preflight returned invalid package metadata");
   }
@@ -54,6 +56,34 @@ export async function validatePublishedMetadata(response, expectedName, expected
     throw new Error("npm registry preflight package identity does not match the release archive");
   }
   return metadata;
+}
+
+async function readBoundedResponseText(response) {
+  if (!response || typeof response !== "object") throw new Error("npm registry preflight returned an invalid response");
+  if (!response.body || typeof response.body.getReader !== "function") {
+    const body = await response.text();
+    if (Buffer.byteLength(body, "utf8") > MAX_REGISTRY_METADATA_BYTES) throw new Error("npm registry preflight response exceeds size limit");
+    return body;
+  }
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder("utf-8", { fatal: true });
+  const chunks = [];
+  let total = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (!(value instanceof Uint8Array)) throw new Error("npm registry preflight returned invalid response bytes");
+      total += value.byteLength;
+      if (total > MAX_REGISTRY_METADATA_BYTES) throw new Error("npm registry preflight response exceeds size limit");
+      chunks.push(decoder.decode(value, { stream: true }));
+    }
+    chunks.push(decoder.decode());
+    return chunks.join("");
+  } catch (error) {
+    await reader.cancel().catch(() => undefined);
+    throw error;
+  }
 }
 
 async function readBoundedArchive(archivePath) {

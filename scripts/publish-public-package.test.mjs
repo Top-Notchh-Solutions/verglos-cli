@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
 import { promisify } from "node:util";
-import { packageVersionUrl, publicationDecision, publishPublicPackage, validatePublishedMetadata } from "./publish-public-package.mjs";
+import { MAX_REGISTRY_METADATA_BYTES, packageVersionUrl, publicationDecision, publishPublicPackage, validatePublishedMetadata } from "./publish-public-package.mjs";
 
 const execFileAsync = promisify(execFile);
 
@@ -106,6 +106,13 @@ test("npm publication preflight rejects a 200 response with a mismatched registr
       /invalid package metadata/u,
     );
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test("npm publication preflight rejects an oversized registry metadata response", async () => {
+  await assert.rejects(
+    validatePublishedMetadata(new Response("x".repeat(MAX_REGISTRY_METADATA_BYTES + 1), { status: 200 }), "@verglos/shared", "2.0.0-alpha.1"),
+    /response exceeds size limit/u,
+  );
 });
 
 test("npm publication extracts a validated archive snapshot before publishing", async () => {
