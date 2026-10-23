@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · STUDIO-CLI-001 projection reservation race
+
+Web PR #254 at `c290c9f49c10e47a3f1421f427f76f1fd7607622` releases a losing
+duplicate client-projection allowance reservation and fails closed with `503`
+if release is ambiguous. Focused Studio/client-projection/usage tests passed
+**27/27**; typecheck passed; build generated **49/49** routes. Vercel and
+GitGuardian passed. Five hosted jobs failed with zero steps and no logs, so
+hosted completion and merge are not claimed. The additive 169-file bundle has
+manifest
+`sha256:da0ea80a6ef3543bb848c1c5a5c912e87991893f747ff32715f88b1f540fc85e`
+and file SHA-256
+`1f865f9d6766ee22003b54b0684f6bcbf74b363995906953a5ac81a92105d622`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-007 adjudication validator
 
 Added the Hunt-adjudication validator and `acceptance:hunt:validate` command.

@@ -1,5 +1,27 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · STUDIO-CLI-001 projection reservation race
+
+Web PR #254 at exact head `c290c9f49c10e47a3f1421f427f76f1fd7607622` now
+releases a record-allowance reservation when a duplicate client-projection
+insert loses a race, and returns `503` if that release is ambiguous instead of
+claiming idempotent success. The focused Studio/client-projection/usage suite
+passed **27/27**; Web typecheck passed; production build generated **49/49**
+routes.
+
+PR #254's Vercel and GitGuardian checks passed. Its five hosted jobs failed
+after roughly two seconds with zero steps and no logs, so no hosted source
+result is claimed and the PR is not claimed as merged. This advances
+STUDIO-CLI-001 implementation only; customer/recipient acceptance and the
+hosted audit artifact remain open. No backlog checkbox or external state
+changed, and nothing was deleted or overwritten. The additive bundle contains
+**169 hashed files** with manifest
+`sha256:da0ea80a6ef3543bb848c1c5a5c912e87991893f747ff32715f88b1f540fc85e`
+and file SHA-256
+`1f865f9d6766ee22003b54b0684f6bcbf74b363995906953a5ac81a92105d622`.
+The live score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-007 adjudication validator
 
 Added `scripts/validate-hunt-adjudication.mjs` and the

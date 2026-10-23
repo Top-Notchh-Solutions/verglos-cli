@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## STUDIO-CLI-001 projection reservation race · 2026-10-23
+
+- **Source mapping:** Web PR #254, exact head
+  `c290c9f49c10e47a3f1421f427f76f1fd7607622`.
+- **Contract mapping:** The duplicate-insert loser releases its allowance
+  reservation; an ambiguous release returns `503` and cannot be reported as
+  idempotent success.
+- **Verification mapping:** Focused Studio/client-projection/usage tests
+  **27/27**; typecheck passed; build generated **49/49** routes. Vercel and
+  GitGuardian passed; hosted jobs failed with zero steps and no logs.
+- **Artifact mapping:** Additive bundle contains 169 hashed files with
+  manifest SHA-256
+  `sha256:da0ea80a6ef3543bb848c1c5a5c912e87991893f747ff32715f88b1f540fc85e`
+  and bundle file SHA-256
+  `1f865f9d6766ee22003b54b0684f6bcbf74b363995906953a5ac81a92105d622`;
+  secret scan passed.
+- **Acceptance mapping:** Keep STUDIO-CLI-001 open for hosted/audit and
+  customer/recipient acceptance. No checkbox or external state changed;
+  nothing was deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`.
+
 ## ACCEPT-007 adjudication validator · 2026-10-23
 
 - **Source mapping:** Private Hunt-adjudication validator, package command,

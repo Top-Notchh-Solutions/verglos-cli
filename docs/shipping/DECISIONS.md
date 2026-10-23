@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · STUDIO-CLI-001 duplicate-projection reservation race
+
+- **Decision:** A losing duplicate custody insert must release its reserved
+  record allowance; an ambiguous release must fail closed with `503`.
+- **Verification:** Web PR #254 exact head
+  `c290c9f49c10e47a3f1421f427f76f1fd7607622`; focused tests **27/27**,
+  typecheck, and **49/49** route build passed. Vercel and GitGuardian passed;
+  five hosted jobs had zero steps and no logs.
+- **Disposition:** Implementation progress only. Hosted/audit and
+  customer/recipient acceptance remain open; score remains **244/36/280
+  (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-007 adjudication validator boundary
 
 - **Decision:** Add a digest-bound validator for the preregistered Hunt

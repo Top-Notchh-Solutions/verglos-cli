@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · STUDIO-CLI-001 duplicate-projection reservation race
+
+Web PR #254 at exact head `c290c9f49c10e47a3f1421f427f76f1fd7607622` fixes the
+allowance reservation leak on duplicate projection races and fails closed when
+release is ambiguous. Local focused tests **27/27**, typecheck, and build
+**49/49** passed. Vercel and GitGuardian passed; five hosted jobs failed with
+zero steps and no logs. This does not claim merge, hosted completion,
+customer/recipient acceptance, provider action, or final release. Score
+remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/studio-cli-001-projection-race-pr254-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-007 adjudication validator boundary
 
 The private shipping toolchain now validates a digest-bound frozen Hunt study

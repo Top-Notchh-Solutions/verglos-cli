@@ -24,6 +24,9 @@
 - `git diff --check`: passed.
 - GitGuardian Security Checks: passed.
 - Vercel Preview Comments: passed.
+- Continuation focused Studio/client-projection/usage suite: **27/27 passed**.
+- Continuation `pnpm build`: passed; static generation completed **49/49**
+  routes.
 
 ## Hosted boundary
 
