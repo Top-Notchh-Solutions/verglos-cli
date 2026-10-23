@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · acceptance evidence-writer boundaries
+
+- **Implementation:** The private story verifier and evidence-bundle builder
+  now use exclusive `wx` output creation; the bundle input list includes the
+  current acceptance-boundary evidence records.
+- **Verification:** Syntax checks, an isolated first/second bundle-write test,
+  original-output preservation check, and diff check passed.
+- **Disposition:** This advances ACCEPT-003 implementation only. No reviewer,
+  customer, participant, provider, independent-review, publication, or final-
+  release evidence was created. Score remains **244/36/280 (87.1%)**. Nothing
+  was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-writer-boundaries-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance input-read boundaries
 
 - **Implementation:** Added the shared `read-bounded-json.mjs` reader and

@@ -99,6 +99,6 @@ const result = {
 };
 
 mkdirSync(resolve(outputPath, ".."), { recursive: true });
-writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8");
+writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
 process.stdout.write(`${JSON.stringify(result)}\n`);
 if (!result.allCommandsPassed) process.exitCode = 1;

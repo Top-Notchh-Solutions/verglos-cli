@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## Acceptance evidence-writer boundaries · 2026-10-23
+
+- **Source mapping:** The private story verifier and evidence-bundle builder
+  create JSON outputs exclusively and the bundle includes the current boundary
+  evidence records.
+- **Verification mapping:** Syntax checks, isolated second-write refusal, byte-
+  preservation, and diff check passed.
+- **Acceptance mapping:** ACCEPT-003 remains open for the reproducible bundle,
+  reviewer sign-off, external/hosted evidence, and final acceptance. Score
+  remains **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-writer-boundaries-2026-10-23.md`.
+
 ## Acceptance input-read boundaries · 2026-10-23
 
 - **Source mapping:** `scripts/read-bounded-json.mjs` is used by the seven

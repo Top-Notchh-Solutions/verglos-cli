@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · acceptance evidence-writer boundaries
+
+The private acceptance-story verifier and evidence-bundle builder now use
+exclusive `wx` output creation, so a second run fails with `EEXIST` instead of
+replacing prior evidence. The current bundle list includes the new acceptance
+boundary records. Syntax checks, isolated second-write verification, and diff
+check passed. This advances ACCEPT-003 implementation only; reviewer,
+customer, participant, provider, independent-review, publication, and final-
+release artifacts remain open. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/acceptance-evidence-writer-boundaries-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance input-read boundaries
 
 The private acceptance file runners now read JSON through a shared bounded

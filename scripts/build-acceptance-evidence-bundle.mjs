@@ -125,6 +125,8 @@ const paths = [
   "docs/shipping/evidence/accept-012-architecture-corpus-triage-2026-10-23.md",
   "docs/shipping/evidence/accept-014-final-regression-contract-2026-10-23.md",
   "docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md",
+  "docs/shipping/evidence/acceptance-input-read-boundaries-2026-10-23.md",
+  "docs/shipping/evidence/acceptance-evidence-writer-boundaries-2026-10-23.md",
   "docs/shipping/evidence/dist-002-003-npm-publication-observation-2026-10-23.md",
   "docs/shipping/evidence/dist-002-003-npm-publication-observation-2026-10-23.json",
 ];
@@ -160,5 +162,5 @@ const bundle = {
   },
   note: "Private reproducibility manifest. It contains hashes and bounded evidence references, not source, credentials, customer data, or reviewer sign-off.",
 };
-writeFileSync(output, `${JSON.stringify(bundle, null, 2)}\n`, "utf8");
+writeFileSync(output, `${JSON.stringify(bundle, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
 console.log(JSON.stringify({ schema: bundle.schema, fileCount: files.length, output: relative(root, output), secretScan: "passed", openGates: Object.entries(bundle.gateBoundary).filter(([, value]) => value === "open").map(([key]) => key) }));

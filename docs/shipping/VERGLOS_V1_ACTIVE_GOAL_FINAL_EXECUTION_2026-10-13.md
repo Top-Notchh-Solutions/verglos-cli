@@ -52,6 +52,22 @@ in addition to the product rows whose own evidence is still incomplete. The
 public-open-source benchmark path is authorized now. The separately held
 security-review track is unchanged.
 
+## Latest continuation result · 2026-10-23 · acceptance evidence-writer boundaries
+
+The private acceptance-story verifier and acceptance-evidence bundle builder
+now create JSON outputs exclusively with `wx` semantics, refusing `EEXIST`
+instead of replacing an existing evidence file. The bundle input list includes
+the current acceptance input/writer boundary evidence records. Syntax checks,
+an isolated second-write verification, byte-preservation check, and diff check
+passed.
+
+This advances `ACCEPT-003` implementation only. Reviewer, external/hosted,
+customer, participant, provider, independent-review, publication, and final-
+release artifacts remain open, so no checkbox changed. The live score remains
+**244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-writer-boundaries-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · acceptance input-read boundaries
 
 The private acceptance file runners now share

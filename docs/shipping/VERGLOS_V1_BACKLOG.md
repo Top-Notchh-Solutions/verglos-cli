@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · acceptance evidence-writer boundaries
+
+The private acceptance-story verifier and evidence-bundle builder now refuse
+to replace an existing JSON output, and the bundle input list includes the
+current acceptance-boundary records. Syntax checks, isolated second-write
+refusal, byte-preservation, and diff check passed. This is implementation
+progress only for ACCEPT-003; reviewer, external/hosted, customer, provider,
+independent-review, and final-release evidence remain open. No checkbox
+changed; the live score remains **244 checked / 36 open / 280 total (87.1%)**.
+Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-writer-boundaries-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance input-read boundaries
 
 The private acceptance file runners now use a shared bounded regular-file JSON
