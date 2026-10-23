@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · current-head acceptance contract suite
+
+The exact merged private-shipping head `4f803a0af31385994c8cd7d27dfe593a1fa239c9`
+passed the focused acceptance implementation contracts **48/48**, covering
+backlog partitioning, authorized workflows, comprehension scoring, commercial
+evidence, release reconciliation/candidate freeze, and final regression. This
+is implementation evidence for `ACCEPT-005/006/008/009/010/014`; those rows
+remain unchecked for their declared external/provider/recipient/review/field
+and final-release artifacts. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`docs/shipping/evidence/acceptance-contracts-current-head-2026-10-23.md`.
+
 ## 2026-10-23 · hosted CLI platform matrix
 
 GitHub Actions Platform matrix run `39993289161` completed successfully at

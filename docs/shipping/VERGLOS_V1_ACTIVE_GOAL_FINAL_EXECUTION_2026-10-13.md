@@ -1,5 +1,18 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · current-head acceptance contracts
+
+The exact merged private-shipping head `4f803a0af31385994c8cd7d27dfe593a1fa239c9`
+passed the focused contract suite for backlog partitioning, authorized
+workflow, comprehension scoring, commercial evidence, release reconciliation,
+candidate freeze, and final regression behavior: **48/48 tests passed**, with
+zero failures or skips. This confirms the code-side fail-closed implementation
+for `ACCEPT-005`, `ACCEPT-006`, `ACCEPT-008`, `ACCEPT-009`, `ACCEPT-010`, and
+`ACCEPT-014`; it does not create external/provider/Production/recipient,
+independent-review, human/field, or final-release evidence. The score remains
+**244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/acceptance-contracts-current-head-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · hosted CLI platform matrix
 
 GitHub Actions Platform matrix run `39993289161` completed successfully at
