@@ -44,7 +44,7 @@ if (requireSevenPublicPackages) {
   const versions = new Set(archiveManifests.map((manifest) => manifest.version));
   if (versions.size !== 1 || [...versions][0] === undefined) throw new Error("strict release packages must share one version");
 }
-const requiredSidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "external-license-records.json", "clean-consumer-verification.txt", "RELEASE_METADATA.json"];
+const requiredSidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "external-license-records.json", "clean-consumer-verification.txt", "RELEASE_NOTES.md", "RELEASE_METADATA.json"];
 for (const name of requiredSidecars) if (!files.includes(name)) throw new Error(`release artifact directory is missing ${name}`);
 if (files.some((name) => !name.endsWith(".tgz") && !requiredSidecars.includes(name))) throw new Error("release artifact directory contains an unexpected file");
 for (const name of files) {
@@ -105,6 +105,7 @@ for (const name of requiredSidecars) {
       if (failures.length > 0) throw new Error(`external-license-records.json is invalid: ${failures.join("; ")}`);
     }
     if (name === "clean-consumer-verification.txt" && !/^clean consumer installed 7 archives, imported all libraries, executed Verglos \d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?, confirmed no external engine installation(?:, and executed signed [A-Za-z0-9._-]+ through the bounded [A-Za-z0-9-]+ runtime with an isolated Pro capability fixture)?$/u.test(content.trim())) throw new Error("clean-consumer-verification.txt does not prove the seven-package consumer flow");
+    if (name === "RELEASE_NOTES.md" && !/^# Verglos v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?\n\nRelease version: \d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?\nRelease tag: v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?\nSource commit: [a-f0-9]{40}\n\n## Package set\n/mu.test(content)) throw new Error("RELEASE_NOTES.md has an invalid release binding");
     if (name === "RELEASE_METADATA.json" && content.length === 0) throw new Error("RELEASE_METADATA.json must not be empty");
   } catch (error) {
     if (error instanceof SyntaxError) throw new Error(`${name} is not valid JSON`);

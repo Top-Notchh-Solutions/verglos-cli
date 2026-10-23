@@ -29,6 +29,7 @@ test("publish workflow verifies the same public artifact boundaries as release c
     "clean-consumer-verification.txt",
     "dependency-license-inventory.json",
     "RELEASE_METADATA.json",
+    "RELEASE_NOTES.md",
   ]) {
     assert.match(workflow, new RegExp(`RELEASE_DIR\\s*\\}\\}/${artifact.replaceAll(".", "[.]")}`, "u"), artifact);
   }
@@ -36,6 +37,7 @@ test("publish workflow verifies the same public artifact boundaries as release c
   assert.ok(workflow.indexOf("verify-release-artifacts.mjs \"$RELEASE_DIR\"") < workflow.indexOf("Upload release artifacts"), "release artifacts must be verified before upload");
   assert.ok(workflow.indexOf("Upload release artifacts") < workflow.indexOf("publish-public-package.mjs"), "release evidence must be uploaded before publication");
   assert.match(workflow, /generate-third-party-notices\.mjs/u);
+  assert.match(workflow, /generate-release-notes\.mjs/u);
   assert.match(workflow, /generate-sbom\.mjs/u);
   assert.match(workflow, /generate-spdx\.mjs/u);
   assert.match(workflow, /docs\/shipping|\.env|id_rsa|id_ed25519/u);

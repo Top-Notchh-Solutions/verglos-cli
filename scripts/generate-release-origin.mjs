@@ -21,6 +21,7 @@ const REQUIRED_SIDECARS = [
   "dependency-license-inventory.json",
   "external-license-records.json",
   "clean-consumer-verification.txt",
+  "RELEASE_NOTES.md",
 ];
 const MANIFEST_NAME = "RELEASE_METADATA.json";
 

@@ -18,11 +18,12 @@ const packages = [
   ["@verglos/entitlement", "verglos-entitlement.tgz"],
   ["@verglos/hunt", "verglos-hunt.tgz"],
 ];
-const sidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "external-license-records.json", "clean-consumer-verification.txt"];
+const sidecars = ["THIRD_PARTY_NOTICES", "SBOM.cdx.json", "SBOM.spdx.json", "dependency-license-inventory.json", "external-license-records.json", "clean-consumer-verification.txt", "RELEASE_NOTES.md"];
 
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), "verglos-release-origin-"));
   await writeFile(join(root, "THIRD_PARTY_NOTICES"), "THIRD-PARTY NOTICES\n");
+  await writeFile(join(root, "RELEASE_NOTES.md"), "# Verglos v2.0.0-alpha.1\n\nRelease version: 2.0.0-alpha.1\nRelease tag: v2.0.0-alpha.1\nSource commit: " + "b".repeat(40) + "\n\n## Package set\n");
   for (const [name, archive] of packages) {
     await mkdir(join(root, "package"));
     await writeFile(join(root, "package", "package.json"), JSON.stringify({ name, version: "2.0.0-alpha.1" }));
@@ -41,7 +42,7 @@ test("release origin binds the exact source and every archive/sidecar digest", a
     const metadata = JSON.parse(await readFile(join(root, "RELEASE_METADATA.json"), "utf8"));
     assert.equal(metadata.schemaId, "urn:verglos:artifact:release-origin");
     assert.deepEqual(metadata.source, { commit: "b".repeat(40), tag: "v2.0.0-alpha.1" });
-    assert.equal(metadata.artifacts.length, 13);
+    assert.equal(metadata.artifacts.length, 14);
     assert.deepEqual(new Set(metadata.artifacts.map((artifact) => artifact.name)), new Set((await readdir(root)).filter((name) => name !== "RELEASE_METADATA.json")));
     assert.ok(metadata.artifacts.every((artifact) => /^[a-f0-9]{64}$/u.test(artifact.sha256)));
   } finally {
