@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · QUAL-WEB-006 dashboard capture command
+
+Web PR #257 merged normally at `bfb3413516e8f11e6dcef04040387b3dbb130c8b`,
+preserving `edb6af1`. The new `qualify:dashboard-release` command requires the
+exact thirteen authenticated dashboard routes and complete desktop/mobile
+ready, loading/error, and large-dataset capture coverage. Focused tests pass
+**3/3**, with typecheck and diff checks passing. This is implementation
+evidence only; browser, human screen-reader, supported-browser/field-CWV,
+independent review, and final acceptance remain open. Score remains
+**244/36/280 (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`evidence/qual-web-006-dashboard-capture-command-pr257-2026-10-23.md`.
+
 ## 2026-10-23 · CLI full-test boundary
 
 The merged CLI workspace passes `pnpm test` with **13/13 Turbo tasks

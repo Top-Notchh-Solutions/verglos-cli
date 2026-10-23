@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-23 · QUAL-WEB-006 dashboard capture command
+
+The Web implementation commit `edb6af1`, merged by PR #257 as
+`bfb3413516e8f11e6dcef04040387b3dbb130c8b`, maps to `QUAL-WEB-006` through
+`scripts/dashboard-release-qualification.ts` and its **3/3** regression suite.
+The command requires the exact thirteen authenticated dashboard routes and
+fails closed on incomplete ready/loading/error/large-dataset evidence. This
+mapping proves the code-side contract only; it does not prove browser, human,
+field-CWV, independent, or final acceptance gates. Evidence:
+`evidence/qual-web-006-dashboard-capture-command-pr257-2026-10-23.md`.
+
 ## CLI merged-head full test · 2026-10-23
 
 - **Verification mapping:** The merged CLI workspace passed `pnpm test` with

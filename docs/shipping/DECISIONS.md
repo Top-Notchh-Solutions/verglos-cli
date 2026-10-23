@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · merge QUAL-WEB-006 dashboard capture command
+
+- **Decision:** Promote Web PR #257's strict dashboard capture parser and
+  source-audit command through the normal merge path; retain the backlog row
+  open until actual browser and human/field evidence exists.
+- **Implementation:** Merge commit
+  `bfb3413516e8f11e6dcef04040387b3dbb130c8b` preserves `edb6af1`.
+- **Verification:** Focused tests **3/3**, typecheck, and diff check passed.
+  Hosted checks failed before repository steps under the existing runner/
+  Actions condition; no hosted result is claimed.
+- **Disposition:** `QUAL-WEB-006` remains open for authenticated browser
+  capture, human screen-reader, supported-browser/field-CWV, independent
+  review, and final acceptance. No database, customer, provider, Production,
+  deployment, or release action occurred. Nothing was deleted or overwritten.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-capture-command-pr257-2026-10-23.md`.
+
 ## 2026-10-23 · record CLI merged-head full test
 
 - **Decision:** Record the successful full local workspace test while keeping
