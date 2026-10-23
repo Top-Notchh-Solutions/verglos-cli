@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · live Production provider mapping
+
+- **Provider mapping:** Vercel inspection reported a `READY` Production
+  deployment on the live `verglos.com` aliases.
+- **Runtime mapping:** Five read-only public routes returned expected HTTP 200
+  responses; response sizes, content types, and body hashes are recorded.
+- **Acceptance mapping:** This confirms current hosted/runtime behavior only;
+  it does not prove customer/recipient, authenticated deletion, commercial,
+  human/field-CWV, independent-review, AppSec/Hunt, or final-release gates.
+  Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-live-production-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-005 deletion mapping
 
 - **Source mapping:** Web `791500d4` is the current merged implementation.

@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record live Production provider recheck
+
+- **Decision:** Record the live Vercel surface observation as fresh provider
+  evidence without treating read-only probes as acceptance.
+- **Verification:** The linked Production deployment reported `READY`; five
+  public routes returned expected HTTP 200 responses with bounded hashes.
+- **Disposition:** No provider write or customer/account/database/payment/
+  release-publication state changed. No checkbox changed; score remains
+  **245/35/280 (87.5%)**. Customer/recipient, human/field, independent,
+  AppSec/Hunt, and final-release gates remain governed by their own contracts.
+- **Evidence:** `evidence/vercel-live-production-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · record QUAL-WEB-005 isolated deletion E2E
 
 - **Decision:** Record the current Web deletion route/worker run as valid
