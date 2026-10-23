@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## Current merged Web deletion contracts · 2026-10-23
+
+- **Source:** Web `main` `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`, clean
+  detached worktree.
+- **Verification:** focused serial privacy/deletion contracts **45 passed / 2
+  skipped / 0 failed**; `pnpm typecheck` passed. Skips were the two explicit
+  PostgreSQL-backed cases without an isolated `verglos_test` database.
+- **Disposition:** QUAL-WEB-005 implementation evidence only; no row checked.
+  Score remains **244/36/280 (87.1%)**. No database, deletion, customer,
+  provider, Production, deployment, or release action occurred.
+- **Bundle:** 178 hashed files; manifest
+  `sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`;
+  secret scan passed. Bundle file SHA-256:
+  `a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+- **Evidence:** `evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`.
+
 ## Current merged CLI public corpus · 2026-10-23
 
 - **Source:** CLI `main` `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`; build

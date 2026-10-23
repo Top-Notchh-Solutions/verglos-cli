@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## Current merged Web deletion contracts · 2026-10-23
+
+- **Source mapping:** Web `main`
+  `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`, clean detached worktree.
+- **Verification mapping:** Focused privacy/deletion contracts **45/47** with
+  **0 failures** and **2 explicit database skips**; `pnpm typecheck` passed.
+- **Acceptance mapping:** Strengthens QUAL-WEB-005 implementation only. The
+  migrated database, authenticated route, legal/customer-held, Production,
+  reconciliation, independent-review, and final-acceptance gates remain open.
+  Score remains **244/36/280 (87.1%)**.
+- **Artifact mapping:** Additive packet bundle has 178 hashed files, manifest
+  `sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+  and a passed secret scan. Bundle file SHA-256:
+  `a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+- **Evidence:** `evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`.
+
 ## Current merged CLI public corpus · 2026-10-23
 
 - **Source mapping:** CLI `main` `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`;

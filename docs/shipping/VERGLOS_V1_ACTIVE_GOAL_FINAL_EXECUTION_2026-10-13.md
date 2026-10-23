@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · current merged Web deletion contracts
+
+The authoritative Web `main` head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`
+was checked in a clean detached worktree. The focused current-head
+privacy/deletion contract run passed **45/47**, with **0 failures** and **2
+explicit database-environment skips** for the PostgreSQL-backed deletion-job
+and authenticated route integrations. `pnpm typecheck` passed. No database URL
+was sourced, no Docker PostgreSQL container was running, and no deletion or
+other state mutation occurred.
+
+The additive packet bundle regenerated with this evidence contains **178
+hashed files**, manifest
+`sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+and passed its secret scan. The generated bundle file SHA-256 is
+`a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+
+This strengthens `QUAL-WEB-005` implementation evidence only. The row remains
+open for its migrated isolated database execution, authenticated deletion
+route result, legal/retention and customer-held-record disposition,
+authorized Production migration/restore/rollback, reconciliation, independent
+review, and final acceptance. The next non-AppSec queue entry remains
+`ACCEPT-003`; the score remains **244 checked / 36 open / 280 total (87.1%)**.
+Evidence: `docs/shipping/evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · current merged CLI public corpus
 
 The owner-authorized public-OSS path ran against merged CLI `main`

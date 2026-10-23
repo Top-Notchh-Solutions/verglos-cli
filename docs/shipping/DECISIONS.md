@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · run current merged Web deletion contracts
+
+- **Decision:** Re-run the current merged Web privacy/deletion contract surface
+  in a clean worktree without sourcing the owner-provided environment or
+  touching a database.
+- **Result:** Web `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; **45/47 passed,
+  0 failed, 2 explicit database skips**; typecheck passed.
+- **Disposition:** Implementation evidence only. QUAL-WEB-005 remains open;
+  no checkbox or score changed, and no deletion, customer, provider,
+  Production, deployment, or release action occurred. Score remains
+  **244/36/280 (87.1%)**.
+- **Bundle:** The packet bundle contains 178 hashed files, manifest
+  `sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+  and passed its secret scan. Bundle file SHA-256:
+  `a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+- **Evidence:** `evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`.
+
 ## 2026-10-23 · execute current merged CLI public corpus
 
 - **Decision:** Use the owner-authorized public-OSS path for local exact-commit

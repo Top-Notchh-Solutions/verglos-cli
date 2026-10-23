@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · current merged Web deletion contracts
+
+The authoritative Web `main` `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`
+passed the focused privacy/deletion contract set **45/47**, with **0 failures
+and 2 explicit database skips**; `pnpm typecheck` passed. This does not check
+the QUAL-WEB-005 release gate: migrated database/authenticated route,
+legal/retention, customer-held, Production restore/rollback, reconciliation,
+independent review, and final acceptance remain open. Score remains
+**244/36/280 (87.1%)**. No database, deletion, provider, Production,
+deployment, customer, or release action occurred. Evidence:
+`evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`. The
+additive packet bundle contains 178 hashed files, manifest
+`sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+and passed its secret scan. Bundle file SHA-256:
+`a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+
 ## 2026-10-23 · current merged CLI public corpus
 
 The owner-authorized public-OSS run completed against CLI `c0f0db6` after an

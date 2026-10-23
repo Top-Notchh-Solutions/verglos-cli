@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · current merged Web deletion contracts
+
+Authoritative Web `main` `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` passed the
+focused current-head privacy/deletion contract run **45/47**, with **0
+failures** and **2 explicit database-environment skips**; `pnpm typecheck`
+passed. No database URL was sourced and no state mutation occurred. This is
+implementation evidence only: QUAL-WEB-005 remains open for migrated
+database/authenticated route execution, legal/retention, customer-held
+disposition, Production restore/rollback, reconciliation, independent review,
+and acceptance. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+The additive packet bundle contains **178 hashed files**, manifest
+`sha256:2b4d0efd4b01d792b6420b71f85807a5790fbf6aa276bd9d0382dd984abb012b`,
+and passed its secret scan. The bundle file SHA-256 is
+`a6f01f3bdc6c076f4d819dec951322d78129e171141f5eb6a93b6fdf23b7cb6d`.
+Evidence:
+`evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md`.
+
 ## 2026-10-23 · current merged CLI public corpus
 
 The owner-authorized public-OSS run used CLI `c0f0db6` after a clean **8/8**

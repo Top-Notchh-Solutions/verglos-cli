@@ -146,6 +146,7 @@ const paths = [
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-23-current-retry.json",
   "docs/shipping/evidence/acceptance-evidence-bundle-current-2026-10-23.md",
   "docs/shipping/evidence/acceptance-evidence-bundle-current-retry-2026-10-23.md",
+  "docs/shipping/evidence/qual-web-005-current-head-contract-0c2b306-2026-10-23.md",
   "docs/shipping/evidence/acceptance-release-reconciliation-2026-10-23-current.json",
   "docs/shipping/evidence/acceptance-candidate-freeze-2026-10-23-current.json",
   "docs/shipping/evidence/acceptance-release-state-artifacts-2026-10-23.md",
