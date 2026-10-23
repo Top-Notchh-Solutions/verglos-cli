@@ -11,7 +11,7 @@ Studio/Enterprise/Team/quality substrates passed **83/83**. All **12/12**
 story mappings executed, with zero failures and complete coverage. Evidence:
 `docs/shipping/evidence/acceptance-stories-verification-2026-10-24-current-head.json`
 and `docs/shipping/evidence/acceptance-stories-current-head-2026-10-24.md`.
-The additive bundle v13 verifies **240/240** files with zero mismatches and
+The additive bundle v15 verifies **240/240** files with zero mismatches and
 manifest
 `sha256:9009ad22dac6db8de8c56801d53e3eaf44a91e67d579e9c1b44ecae874ef2001`:
 `docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-current-head-v15.json`.
