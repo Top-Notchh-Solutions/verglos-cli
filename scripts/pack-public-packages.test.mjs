@@ -27,7 +27,7 @@ test("clean public pack contains seven archives without compiled tests or CLI pr
       const { stdout: license } = await run("tar", ["-xOf", join(output, archive), "package/LICENSE"], { encoding: "buffer" });
       assert.deepEqual(license, await readFile("LICENSE"), `${archive} must carry the repository license byte-for-byte`);
       const { stdout: notices } = await run("tar", ["-xOf", join(output, archive), "package/THIRD_PARTY_NOTICES"]);
-      assert.deepEqual(notices, await readFile("THIRD_PARTY_NOTICES", "utf8"), `${archive} must carry the generated notices byte-for-byte`);
+      assert.deepEqual(notices, expectedNotices, `${archive} must carry the generated notices byte-for-byte`);
     }
   } finally { await rm(output, { recursive: true, force: true }); }
 });
@@ -36,8 +36,8 @@ test("public packer fails closed for private workspace dependencies", async () =
   const source = await readFile("scripts/pack-public-packages.mjs", "utf8");
   assert.match(source, /privateWorkspacePackages/);
   assert.match(source, /cannot depend on private workspace package/);
-  assert.match(source, /readBoundedJsonFile/u);
-  assert.match(source, /readBoundedFile/u);
+  assert.match(source, /readBoundedRegularFile/u);
+  assert.match(source, /MAX_RELEASE_ARTIFACT_BYTES/u);
   assert.match(source, /const npmCommand/u);
 });
 
