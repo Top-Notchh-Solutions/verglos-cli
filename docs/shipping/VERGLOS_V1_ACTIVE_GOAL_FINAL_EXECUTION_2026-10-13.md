@@ -1,5 +1,40 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · hosted CLI platform matrix
+
+GitHub Actions Platform matrix run `39993289161` completed successfully at
+merged head `550451c50dd550937be139317a5a5712e98a78e8`. The in-toto release
+binding and all nine Ubuntu/Windows/macOS × Node 20/22/24 cells returned
+`completed / success`; 30 non-expired hosted artifacts were observed.
+
+This is the hosted validation evidence ACCEPT-003 was missing at this stage.
+It does not create npm publication, a tag, a Production CLI release,
+customer acceptance, independent Hunt/AppSec review, or final go/no-go. The
+row remains open for reviewer sign-off and its provider/acceptance conditions;
+the score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/cli-platform-matrix-run-39993289161-2026-10-23.md` and
+the additive bundle
+`docs/shipping/evidence/acceptance-evidence-bundle-cli-platform-matrix-39993289161-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · public-boundary promotion status
+
+The hosted receipt and its verified 196-file bundle are now also carried by
+private-shipping commit `4cfe082e` on PR #210, preserving the exact run and
+manifest without deleting or overwriting any prior record. PR #211 remains
+open as the separate evidence-only review.
+
+The required Verglos self-scan still fails at `Audit public boundary`. The
+public repository currently contains the retained `docs/shipping/**` ledger in
+its reachable history (9,397 historical path objects observed). The original
+main-based branch hits Node's child-process output limit; the boundary fix in
+`61c83511` removes that diagnostic limit and then exposes the existing
+forbidden-path policy conflict. No shipping checkbox is changed, no history
+is rewritten, and no check is bypassed. Score remains **244 checked / 36 open /
+280 total (87.1%)** until the repository's public/private ledger policy is
+resolved.
+
+## Latest continuation result · 2026-10-23 · DIST-006 contract-suite verification
+
 ## Latest continuation result · 2026-10-23 · DIST-006 contract-suite verification
 
 The rebuilt exact local checkout `d013796e` completed `pnpm build` with **8/8**

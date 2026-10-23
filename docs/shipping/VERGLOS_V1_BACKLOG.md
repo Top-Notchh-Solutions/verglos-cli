@@ -1,5 +1,31 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · hosted CLI platform matrix
+
+GitHub Actions Platform matrix run `39993289161` completed successfully at
+merged head `550451c50dd550937be139317a5a5712e98a78e8`. The in-toto release
+binding and all nine Ubuntu/Windows/macOS × Node 20/22/24 cells returned
+`completed / success`; 30 non-expired hosted artifacts were observed.
+
+This adds hosted validation evidence for ACCEPT-003. The row remains
+unchecked for reviewer sign-off and its provider/customer/final-acceptance
+conditions. No publication, Production CLI release, customer acceptance,
+independent Hunt/AppSec review, final go/no-go, deletion, or checkbox change
+is claimed. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+Evidence: `docs/shipping/evidence/cli-platform-matrix-run-39993289161-2026-10-23.md`.
+
+## 2026-10-23 · hosted receipt promotion status
+
+The hosted matrix receipt and verified 196-file bundle are also carried by
+private-shipping commit `4cfe082e` on PR #210; PR #211 remains open as the
+separate evidence-only review. Required self-scan still fails at the public
+boundary because this public repository retains `docs/shipping/**` in its
+reachable history (9,397 historical path objects observed). Commit `61c83511`
+removes the child-process buffer failure and exposes that existing policy
+conflict explicitly. No history, evidence, branch, or checkbox was deleted or
+bypassed. Score remains **244 checked / 36 open / 280 total (87.1%)** pending
+resolution of the repository's public/private ledger policy.
+
 ## 2026-10-23 · DIST-006 private contract-suite verification
 
 The rebuilt local checkout completed `pnpm build` with **8/8** Turbo tasks;
