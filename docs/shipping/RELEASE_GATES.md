@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web full regression gate
+
+Web PR #268 merge `98b5cf6` passed the full serial suite at **904/928**, with
+24 designed skips and 0 failures. Migration hook **1/1**, public smoke
+**12/12**, truth **37/37**, typecheck, and diff checks passed. This keeps the
+code-side gate green but does not open recipient/customer, reviewer,
+field-CWV, independent-review, or final-release gates. Score remains
+**244/36/280 (87.1%)**. Evidence:
+`evidence/web-full-serial-regression-pr268-2026-10-24.md`.
+The additive regression bundle contains **215 files**, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:e66807f9fb38de3b5beaea8d55b1112562710c7de9a1d452105b40c65167446a`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production provider migration recheck
 
 Web PR #268 merged normally as `98b5cf6`; its explicitly confirmed Vercel

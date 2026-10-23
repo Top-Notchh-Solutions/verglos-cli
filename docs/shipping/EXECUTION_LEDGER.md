@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## Web full serial regression after Production migration hook · 2026-10-24
+
+- **Source:** Web PR #268 merged head `98b5cf652623bf4f000ed93366b67a38154579e1`.
+- **Verification:** `pnpm test:serial` passed **904/928** with 24 designed
+  skips and 0 failures in **10.765 seconds**; migration hook **1/1**, public
+  smoke **12/12**, truth-registry **37/37**, typecheck, and diff checks passed.
+- **Disposition:** Current Web implementation is regression-green; this does
+  not substitute for recipient, reviewer, field-CWV, independent-review, or
+  final-release evidence. No checkbox changed. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/web-full-serial-regression-pr268-2026-10-24.md`.
+  The additive regression bundle contains **215 files**, verifies with **0
+  mismatches**, passes secret scanning, and matches manifest
+  `sha256:e66807f9fb38de3b5beaea8d55b1112562710c7de9a1d452105b40c65167446a`.
+
 ## STUDIO-CLI-001 Production migration and handoff recheck · 2026-10-24
 
 - **Provider action:** Web PR #268 merged normally as

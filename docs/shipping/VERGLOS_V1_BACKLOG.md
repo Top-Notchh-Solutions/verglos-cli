@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web full serial regression after Production migration hook
+
+Web PR #268 merged head `98b5cf6` passed a fresh `pnpm test:serial` run with
+**904 passed / 24 designed skips / 0 failures** out of **928** tests in
+10.765 seconds. Migration-hook contract **1/1**, public smoke **12/12**,
+truth-registry **37/37**, typecheck, and diff checks also passed. This is
+current implementation evidence only; no acceptance checkbox changed. Score
+remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/web-full-serial-regression-pr268-2026-10-24.md`.
+The additive regression bundle contains **215 files**, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:e66807f9fb38de3b5beaea8d55b1112562710c7de9a1d452105b40c65167446a`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production provider migration completed
 
 Web PR #268 merged normally as `98b5cf652623bf4f000ed93366b67a38154579e1` and

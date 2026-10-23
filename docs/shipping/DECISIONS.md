@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain rows after Web full regression
+
+- **Decision:** Record the fresh serial Web regression as current code-side
+  evidence; do not convert it into acceptance or release sign-off.
+- **Verification:** Web PR #268 merge `98b5cf6` passed **904/928** tests with
+  24 designed skips and 0 failures; migration hook 1/1, public smoke 12/12,
+  truth 37/37, typecheck, and diff passed.
+- **Disposition:** No checkbox changed. Recipient/customer, reviewer,
+  field-CWV, independent-review, and final-release evidence remain separate.
+  Score remains **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/web-full-serial-regression-pr268-2026-10-24.md`.
+  The additive regression bundle contains **215 files**, verifies with **0
+  mismatches**, passes secret scanning, and matches manifest
+  `sha256:e66807f9fb38de3b5beaea8d55b1112562710c7de9a1d452105b40c65167446a`.
+
 ## 2026-10-24 · retain STUDIO-CLI-001 after Production migration recheck
 
 - **Decision:** Use the explicit reviewed Vercel build hook to apply the
