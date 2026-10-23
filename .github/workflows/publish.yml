@@ -168,28 +168,28 @@ jobs:
 
       - name: Publish shared package
         run: |
-          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-shared-$(node -p "require('./packages/shared/package.json').version").tgz" alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-shared-$(node -p "require('./packages/shared/package.json').version").tgz" latest
 
       - name: Publish scanner package
         run: |
-          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-scanner-$(node -p "require('./packages/scanner/package.json').version").tgz" alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-scanner-$(node -p "require('./packages/scanner/package.json').version").tgz" latest
 
       - name: Publish reporter package
         run: |
-          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-reporter-$(node -p "require('./packages/reporter/package.json').version").tgz" alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-reporter-$(node -p "require('./packages/reporter/package.json').version").tgz" latest
 
       - name: Publish mcp package
         run: |
-          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-mcp-$(node -p "require('./packages/mcp/package.json').version").tgz" alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-mcp-$(node -p "require('./packages/mcp/package.json').version").tgz" latest
 
       - name: Publish entitlement package
         run: |
-          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-entitlement-$(node -p "require('./packages/entitlement/package.json').version").tgz" alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-entitlement-$(node -p "require('./packages/entitlement/package.json').version").tgz" latest
 
       - name: Publish Hunt package
         run: |
-          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-hunt-$(node -p "require('./packages/hunt/package.json').version").tgz" alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-hunt-$(node -p "require('./packages/hunt/package.json').version").tgz" latest
 
       - name: Publish CLI package
         run: |
-          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-$(node -p "require('./packages/cli/package.json').version").tgz" alpha
+          node scripts/publish-public-package.mjs "${RELEASE_DIR}/verglos-$(node -p "require('./packages/cli/package.json').version").tgz" latest
