@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -36,6 +36,20 @@ test("bundle builder fails closed on secret-like evidence material", async () =>
   try {
     await writeFile(join(root, "secret.md"), "DATABASE_URL=not-a-real-value\n");
     assert.throws(() => buildAcceptanceEvidenceBundle({ bundleRoot: root, bundlePaths: ["secret.md"] }), /secret-like material/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("bundle builder rejects symlinked evidence paths", async () => {
+  const root = await mkdtemp(join(tmpdir(), "verglos-acceptance-bundle-"));
+  try {
+    await writeFile(join(root, "real.md"), "safe\n");
+    await symlink(join(root, "real.md"), join(root, "link.md"));
+    assert.throws(
+      () => buildAcceptanceEvidenceBundle({ bundleRoot: root, bundlePaths: ["link.md"] }),
+      /regular file|changed while opening/u,
+    );
   } finally {
     await rm(root, { recursive: true, force: true });
   }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { constants, fstatSync, lstatSync, openSync, readFileSync, closeSync, writeFileSync } from "node:fs";
 import { join, relative, resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
@@ -172,8 +172,7 @@ export function buildAcceptanceEvidenceBundle({ bundleRoot = root, bundlePaths =
     seen.add(path);
     const absolute = resolve(resolvedRoot, path);
     if (absolute !== resolvedRoot && !absolute.startsWith(`${resolvedRoot}/`)) throw new Error(`evidence path escapes bundle root: ${path}`);
-    if (!existsSync(absolute)) throw new Error(`evidence file missing: ${path}`);
-    const bytes = readFileSync(absolute);
+    const bytes = readEvidenceFile(absolute, path);
     const text = bytes.toString("utf8");
     if (FORBIDDEN.some((pattern) => pattern.test(text))) throw new Error(`secret-like material found in evidence: ${path}`);
     return { path, sha256: createHash("sha256").update(bytes).digest("hex"), bytes: bytes.byteLength };
@@ -196,6 +195,33 @@ export function buildAcceptanceEvidenceBundle({ bundleRoot = root, bundlePaths =
     },
     note: "Private reproducibility manifest. It contains hashes and bounded evidence references, not source, credentials, customer data, or reviewer sign-off.",
   };
+}
+
+function readEvidenceFile(absolute, path) {
+  let before;
+  try {
+    before = lstatSync(absolute);
+  } catch (error) {
+    if (error?.code === "ENOENT") throw new Error(`evidence file missing: ${path}`);
+    throw error;
+  }
+  if (!before.isFile()) throw new Error(`evidence path must be a regular file: ${path}`);
+  let descriptor;
+  try {
+    descriptor = openSync(absolute, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
+    const opened = fstatSync(descriptor);
+    if (!opened.isFile() || !sameIdentity(before, opened)) throw new Error(`evidence file changed while opening: ${path}`);
+    const bytes = readFileSync(descriptor);
+    const after = fstatSync(descriptor);
+    if (after.size !== bytes.byteLength || !sameIdentity(opened, after)) throw new Error(`evidence file changed while reading: ${path}`);
+    return bytes;
+  } finally {
+    if (descriptor !== undefined) closeSync(descriptor);
+  }
+}
+
+function sameIdentity(left, right) {
+  return left.dev === right.dev && left.ino === right.ino;
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
