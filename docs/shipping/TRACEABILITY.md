@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## DIST-002 final-release readiness gate · 2026-10-23
+
+- **Source mapping:** CLI PR #186, commit `447237fa`, modifies the protected
+  publication workflow and its contract test.
+- **Contract mapping:** The publish job requires the explicit repository
+  variable `VERGLOS_FINAL_RELEASE_READY=true` in addition to stable-tag,
+  protected-environment, immutable-tag, OIDC, and no-long-lived-token gates.
+- **Verification mapping:** Local contract tests **2/2** and diff check passed;
+  hosted PR checks were queued and no merge or release occurred.
+- **Acceptance mapping:** `DIST-002`/`DIST-003` remain open. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/dist-002-pr186-final-readiness-gate-2026-10-23.md`.
+
 ## DIST-002 PR #185 merge · 2026-10-23
 
 - **Source mapping:** PR #185 merged normally into CLI `main` as

@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-002 final-release readiness gate proposed
+
+CLI PR #186, commit `447237fa`, adds a fail-closed requirement for repository
+variable `VERGLOS_FINAL_RELEASE_READY=true` before npm publication. The
+variable is intentionally unset while shipping rows remain open. Local
+workflow contract tests passed **2/2** and diff check passed; PR checks were
+queued and no merge or release is claimed. Score remains **244 checked / 36
+open / 280 total (87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-002-pr186-final-readiness-gate-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 PR #185 merged
 
 PR #185 merged normally into CLI `main` at `f6f47dc2` without squash or branch

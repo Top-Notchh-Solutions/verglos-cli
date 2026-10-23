@@ -92,6 +92,18 @@ the score is **244 checked / 36 open / 280 total (87.1%)**, and nothing was
 deleted. Evidence:
 `docs/shipping/evidence/dist-002-pr185-merge-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · final-release readiness gate
+
+CLI PR #186, commit `447237fa`, adds a fail-closed repository-variable gate:
+`VERGLOS_FINAL_RELEASE_READY=true` is required before the protected publish
+workflow can reach npm. The variable is intentionally unset while shipping
+rows remain open. Local workflow contract tests passed **2/2** and diff check
+passed; hosted checks were queued and no merge or release occurred. No tag,
+workflow dispatch, registry write, deployment, or package version was created.
+`DIST-002`/`DIST-003` remain open, the score is **244 checked / 36 open / 280
+total (87.1%)**, and nothing was deleted. Evidence:
+`docs/shipping/evidence/dist-002-pr186-final-readiness-gate-2026-10-23.md`.
+
 ## Execution-input manifest · 2026-10-23
 
 All safe authorization, fixture, product-decision, and test/Preview/Production

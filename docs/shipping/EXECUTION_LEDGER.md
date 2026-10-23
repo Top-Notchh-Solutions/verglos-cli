@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-002 final-release readiness gate proposed
+
+- **Implementation:** CLI PR #186, commit `447237fa`, requires
+  `VERGLOS_FINAL_RELEASE_READY=true` before any npm publication step. The
+  variable remains unset while the private shipping goal has open rows.
+- **Verification:** Local workflow contract tests passed **2/2** and diff check
+  passed. Hosted PR checks were queued; no merge is claimed.
+- **Boundary:** No tag, workflow dispatch, npm write, deployment, or package
+  version was created. Keep `DIST-002`/`DIST-003` open. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted. Evidence:
+  `evidence/dist-002-pr186-final-readiness-gate-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002 PR #185 merged
 
 - **Merge:** PR #185 merged normally into CLI `main` at `f6f47dc2`; no squash,
