@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current candidate reconciliation and freeze
+
+The current alpha.4 candidate (`aad2c743` CLI / `98b5cf6` Web) was run through
+the real fail-closed release reconciler and candidate-freeze contracts. The
+reconciler processed all **22** non-AppSec rows as `partial` and recorded a
+**no-go** recommendation; no row was promoted to `shipped`. The freeze
+verified **24/24** digest-bound artifacts, all 12 required artifact kinds, and
+zero missing artifacts.
+
+The six remaining open gates are provider lifecycle, independent review,
+authenticated-browser acceptance, field-CWV evidence, account-deletion
+acceptance, and final release. This is current candidate evidence, not final
+release approval. No npm publication, tag, GitHub release, payment, customer
+data use, or deletion occurred. The authoritative score remains **245 checked
+/ 35 open / 280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22
+non-AppSec** rows. Evidence:
+`docs/shipping/evidence/acceptance-release-reconciliation-freeze-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · reviewed Production migration and smoke
 
 The Web Production deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf` completed

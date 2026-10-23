@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current candidate reconciliation and freeze
+
+The current candidate (`aad2c743` CLI / `98b5cf6` Web / `2.0.0-alpha.4`) was
+run through the fail-closed reconciliation and freeze contracts. All **22**
+non-AppSec rows remain explicitly `partial`; the recorded recommendation is
+**no-go**. The freeze verified **24/24** digest-bound artifacts, all 12
+required artifact kinds, and zero missing artifacts. Six gates remain open:
+provider lifecycle, independent review, authenticated-browser acceptance,
+field-CWV, account deletion, and final release. Score remains
+**245/35/280 (87.5%)**, with 13 AppSec-dependent and 22 non-AppSec rows open.
+Evidence: `evidence/acceptance-release-reconciliation-freeze-2026-10-24.md`.
+
 ## 2026-10-24 · Production migration and post-deploy smoke
 
 Vercel Production deployment `dpl_EAgP2Crg4EmSJgWVLeQpMWCss9Uf` completed
