@@ -1,6 +1,6 @@
 {
   "name": "verglos",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.4",
   "description": "Local-first security decision layer between code changes and release. Scan AI-assisted JS/TS repositories and produce bounded evidence without uploading source.",
   "type": "module",
   "bin": {

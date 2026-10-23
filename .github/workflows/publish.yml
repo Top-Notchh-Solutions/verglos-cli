@@ -107,12 +107,12 @@ jobs:
           node scripts/generate-spdx.mjs > "$RELEASE_DIR/SBOM.spdx.json"
           node scripts/validate-external-license-records.mjs
           cp licenses/external-content-records.json "$RELEASE_DIR/external-license-records.json"
-          node scripts/generate-release-origin.mjs "$RELEASE_DIR" --source-commit "$GITHUB_SHA" --release-tag "$GITHUB_REF_NAME"
 
       - name: Verify clean consumer install
         run: |
           node --test scripts/verify-clean-consumer.test.mjs
           node scripts/verify-clean-consumer.mjs "$RELEASE_DIR" > "$RELEASE_DIR/clean-consumer-verification.txt"
+          node scripts/generate-release-origin.mjs "$RELEASE_DIR" --source-commit "$GITHUB_SHA" --release-tag "$GITHUB_REF_NAME"
 
       - name: Prepare release checksums
         run: |
