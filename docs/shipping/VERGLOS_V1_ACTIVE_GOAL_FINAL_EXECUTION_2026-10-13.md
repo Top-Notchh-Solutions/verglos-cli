@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · FINAL-WEB source-contract pass
+
+The current Web candidate `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` has a
+clean worktree. The focused public-truth, metadata, proof, and release-smoke
+suite passes **54/54**; `pnpm typecheck` and `git diff --check` pass. The
+source audit confirms the implementation surfaces for `FINAL-WEB-001`,
+`FINAL-WEB-002`, `FINAL-WEB-003`, `FINAL-WEB-005`, `FINAL-WEB-006`,
+`FINAL-WEB-007`, and `FINAL-WEB-008` are present and bound to the public truth
+registry, canonical plan terms, proof-origin boundary, and route smoke.
+
+These rows remain unchecked for their declared ACCEPT-003/009/010 and
+FINAL-WEB-001 dependencies, hosted/provider execution, human/field evidence,
+independent review, founder truth-freeze, and final acceptance. FINAL-WEB-004
+remains in the AppSec-dependent partition. No external result or release GO is
+inferred. Acceptance bundle v9 contains **185 files**, verifies with **0
+mismatches**, has a matching manifest
+`sha256:887886a275bff9dfc9c962a745df5adc12541ad42ded55a1dba7ed50328d774d`,
+and passes secret scanning. The score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/final-web-source-contracts-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-003 current bundle disposition
 
 The ACCEPT-003 source contract is implemented in the private shipping

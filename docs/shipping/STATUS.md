@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · FINAL-WEB source-contract pass
+
+The current Web candidate `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` is clean;
+the focused public-truth, metadata, proof, and release-smoke suite passes
+**54/54**, with typecheck and diff checks passing. FINAL-WEB-001/002/003/005/006/
+007/008 implementation surfaces are present and truth-registry-bound. Their
+acceptance dependencies, hosted/provider execution, human/field evidence,
+independent review, and final sign-off remain open; FINAL-WEB-004 remains
+AppSec-dependent. Acceptance bundle v9 verifies **185 files / 0 mismatches**
+with manifest `sha256:887886a275bff9dfc9c962a745df5adc12541ad42ded55a1dba7ed50328d774d`.
+Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/final-web-source-contracts-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-014 regression disposition
 
 The final-regression code-side contract is complete; current focused tests pass

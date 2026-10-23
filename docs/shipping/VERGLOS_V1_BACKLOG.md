@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · FINAL-WEB source-contract pass
+
+The current Web candidate `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` has a
+clean worktree. The focused public-truth, metadata, proof, and release-smoke
+suite passes **54/54**; `pnpm typecheck` and `git diff --check` pass. The
+implementation surfaces for FINAL-WEB-001/002/003/005/006/007/008 are bound to
+the public truth registry, canonical plan terms, proof-origin validation, and
+route/release smoke.
+
+This is source-contract evidence only. Those rows remain unchecked for their
+declared acceptance dependencies, hosted/provider execution, human/field
+evidence, independent review, founder truth-freeze, and final acceptance.
+FINAL-WEB-004 remains AppSec-dependent. No external result or release GO is
+claimed. Acceptance bundle v9 contains **185 files**, verifies with **0
+mismatches**, and its manifest is
+`sha256:887886a275bff9dfc9c962a745df5adc12541ad42ded55a1dba7ed50328d774d`;
+secret scanning passed. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence: `docs/shipping/evidence/final-web-source-contracts-2026-10-23.md`.
+
 ## 2026-10-23 · clean 12-story substrate run
 
 Clean exact merged CLI/Web heads completed the private acceptance harness:
