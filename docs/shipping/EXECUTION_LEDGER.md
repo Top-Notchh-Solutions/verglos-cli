@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-005 isolated deletion E2E · 2026-10-24
+
+- **Execution:** Web `791500d4` ran the route and worker integration against a
+  fresh local `postgres:16-alpine` `verglos_test` database after reviewed local
+  bootstrap and migrations.
+- **Verification:** **2/2 passed**, **0 failures / 0 skips**; auth/CORS,
+  malformed input, digest/request idempotency, legal holds, bounded deletion,
+  terminal receipts, and fixture cleanup were exercised.
+- **Disposition:** Non-production authenticated deletion evidence only.
+  Production/legal/customer-held, consent-inventory, rollback, independent,
+  and final-release contracts remain open; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-005-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## Customer/recipient-consent scope disposition · 2026-10-24
 
 - **Decision:** Close the customer/recipient-consent row as not applicable to

@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · QUAL-WEB-005 isolated deletion E2E
+
+Web head `791500d4` passed the authenticated deletion route and worker tests
+**2/2** against a fresh local `postgres:16-alpine` test database after the
+reviewed migration bootstrap. This advances non-production deletion evidence;
+Production/legal/customer-held, rollback, independent-review, and final-release
+gates remain open. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-005-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## 2026-10-24 · customer-consent scope disposition
 
 The current V1 launch contract uses only owner-authorized public OSS exact-commit

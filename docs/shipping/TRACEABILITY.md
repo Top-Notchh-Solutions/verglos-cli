@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · QUAL-WEB-005 deletion mapping
+
+- **Source mapping:** Web `791500d4` is the current merged implementation.
+- **Execution mapping:** Fresh local `postgres:16-alpine` migrations plus route
+  and worker integration passed **2/2** with zero failures/skips.
+- **Acceptance mapping:** This proves non-production authenticated deletion
+  behavior only; Production/legal/customer-held, rollback, independent-review,
+  and final-release evidence remain open. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-005-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## 2026-10-24 · customer-consent scope mapping
 
 - **Scope mapping:** The current V1 launch contract is limited to
