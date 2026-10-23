@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-008 commercial boundary
+
+The commercial validator passes **7/7** tests plus syntax and diff checks. This
+does not open ACCEPT-008: actual commercial evidence and independent/final
+acceptance remain required. Next queue: ACCEPT-009. Score remains
+**244/36/280 (87.1%)**. Evidence:
+`evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-006 scorer boundary
 
 The comprehension scorer passes **9/9** tests plus syntax and diff checks. This

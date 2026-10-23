@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile ACCEPT-008 and advance the queue
+
+- **Decision:** Treat the commercial-evidence validator as complete code-side;
+  do not synthesize commercial or customer events from hypotheses.
+- **Result:** Current focused tests **7/7**, syntax, and diff checks passed.
+- **Disposition:** ACCEPT-008 remains open for actual commercial evidence and
+  independent/final acceptance. Advance the queue to ACCEPT-009. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile ACCEPT-006 and advance the queue
 
 - **Decision:** Treat the comprehension scorer as complete code-side; do not

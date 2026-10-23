@@ -49,6 +49,22 @@ is `ACCEPT-008`; the score remains **244 checked / 36 open / 280 total
 (87.1%)**. Evidence:
 `docs/shipping/evidence/accept-006-comprehension-boundary-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-008 commercial validator disposition
+
+The ACCEPT-008 commercial-evidence validator is implemented and its current
+focused suite passes **7/7**; syntax and diff checks pass. It validates
+agreement/checkout, repeat-use, support, hosted-cost, recipient-value, and
+allowance evidence, with bounded approval windows, numeric allowance checks,
+future-date rejection, secret scanning, and evidence-digest binding. The
+implementation source audit found no missing code-side ACCEPT-008 slice.
+
+ACCEPT-008 remains open for actual commercial evidence and independent/final
+acceptance. No plan agreement, checkout, billing, customer, provider, or
+Production state was fabricated. The next implementation-first queue entry is
+`ACCEPT-009`; the score remains **244 checked / 36 open / 280 total (87.1%)**.
+Evidence:
+`docs/shipping/evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-005 isolated database integration
 
 The current Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` was run against

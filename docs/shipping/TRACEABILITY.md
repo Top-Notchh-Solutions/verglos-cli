@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## ACCEPT-008 commercial validator disposition · 2026-10-23
+
+- **Implementation mapping:** Validator covers commercial event kinds,
+  bounded approval windows, allowances, secret rejection, date boundaries, and
+  digest binding.
+- **Verification mapping:** Focused tests **7/7**, syntax, and diff check passed.
+- **Acceptance mapping:** Actual commercial evidence and independent/final
+  acceptance remain missing; next queue is ACCEPT-009. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+
 ## ACCEPT-006 scorer disposition · 2026-10-23
 
 - **Implementation mapping:** The scorer enforces the canonical six-question

@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-008 commercial validator disposition
+
+The commercial-evidence validator code-side contract is complete; current
+focused tests pass **7/7**, with syntax and diff checks passing. ACCEPT-008
+remains open for actual commercial evidence and independent/final acceptance;
+no plan agreement, checkout, billing, customer, provider, or Production state
+was fabricated. Next queue: **ACCEPT-009**. Score remains **244/36/280
+(87.1%)**. Evidence:
+`evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-006 scorer disposition
 
 The comprehension scorer code-side contract is complete; current tests pass

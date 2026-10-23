@@ -5419,6 +5419,13 @@ independent scoring review. The next implementation-first queue entry is
   unchecked for actual commercial evidence and independent/final acceptance.
   Score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+**ACCEPT-008 current validator disposition (2026-10-23; not a checkbox):** The
+current commercial-evidence regression suite passes **7/7**, with syntax and
+diff checks passing; the code-side commercial evidence, approval-window,
+allowance, secret, and digest-binding contract is complete. Keep the row
+unchecked for actual commercial evidence and independent/final acceptance. The
+next implementation-first queue entry is `ACCEPT-009`. Evidence:
+`docs/shipping/evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-009** · truth registry/release-gate reconciliation · deps: ACCEPT-002-008 · Update shipped/partial/planned labels strictly from evidence, list failed gates and rollback/correction work, and make a documented go/no-go. Commit(s): —
 - **ACCEPT-009 implementation addendum (2026-10-23):** Private
   `scripts/reconcile-release-gates.mjs` now validates candidate commits,

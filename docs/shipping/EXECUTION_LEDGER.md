@@ -1,5 +1,15 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-008 commercial validator disposition · 2026-10-23
+
+- **Implementation:** Commercial evidence kinds, approval windows, numeric
+  allowances, secret boundaries, future-date checks, and evidence-digest
+  binding are complete.
+- **Verification:** Current focused tests **7/7**, syntax, and diff checks passed.
+- **Disposition:** Actual commercial evidence and independent/final acceptance
+  remain open. Next queue: ACCEPT-009. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
+
 ## ACCEPT-006 scorer disposition · 2026-10-23
 
 - **Implementation:** Six-question rubric, bounded answer digests,
