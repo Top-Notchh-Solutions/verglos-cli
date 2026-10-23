@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current-head non-AppSec implementation regression
+
+Current CLI/Web/private-shipping heads passed the local implementation
+regression: CLI build **8/8**, typecheck **14/14**, full Turbo tests exit `0`;
+Web serial/public-release/truth/typecheck all pass; private shipping contracts
+pass **179/179**. This is code-side evidence only and does not close rows whose
+contracts require provider publication, participants, human/field evidence,
+independent review, AppSec/Hunt, or final release. No checkbox changed. Score
+remains **245 checked / 35 open / 280 total (87.5%)**, with 13 AppSec-dependent
+and 22 open non-AppSec rows. Evidence:
+`docs/shipping/evidence/current-head-nonappsec-implementation-regression-2026-10-24.md`.
+
 ## 2026-10-24 · live Production provider recheck
 
 Vercel inspection reported the live `verglos-web` Production deployment

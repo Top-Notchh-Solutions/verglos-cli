@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain non-AppSec rows after current-head regression
+
+- **Decision:** Record the fresh local regression as current implementation
+  evidence; do not promote passing code tests into external acceptance.
+- **Verification:** CLI build/typecheck/full tests, Web serial/public/truth/
+  typecheck, and private shipping **179/179** all passed.
+- **Disposition:** Provider publication/attestation, participant/commercial,
+  human/field, independent-review, AppSec/Hunt, and final-release artifacts
+  remain governed by their row contracts. No checkbox changed; score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/current-head-nonappsec-implementation-regression-2026-10-24.md`.
+
 ## 2026-10-24 · record live Production provider recheck
 
 - **Decision:** Record the live Vercel surface observation as fresh provider

@@ -232,6 +232,7 @@ const paths = [
   "docs/shipping/evidence/customer-acceptance-scope-disposition-2026-10-24.md",
   "docs/shipping/evidence/qual-web-005-fresh-local-deletion-e2e-2026-10-24.md",
   "docs/shipping/evidence/vercel-live-production-recheck-2026-10-24.md",
+  "docs/shipping/evidence/current-head-nonappsec-implementation-regression-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];
 
