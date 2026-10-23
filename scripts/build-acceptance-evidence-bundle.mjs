@@ -118,6 +118,7 @@ const paths = [
   "docs/shipping/evidence/final-web-008-machine-readable-release-smoke-pr250-2026-10-23.md",
   "docs/shipping/evidence/final-web-008-page-extension-inventory-pr250-2026-10-23.md",
   "docs/shipping/evidence/accept-009-release-reconciler-2026-10-23.md",
+  "docs/shipping/evidence/accept-009-reconciliation-date-boundary-2026-10-23.md",
   "docs/shipping/evidence/accept-010-candidate-freeze-2026-10-23.md",
   "docs/shipping/evidence/accept-012-public-oss-triage-2026-10-23.md",
   "docs/shipping/evidence/accept-011-architecture-corpus-2026-10-23.md",

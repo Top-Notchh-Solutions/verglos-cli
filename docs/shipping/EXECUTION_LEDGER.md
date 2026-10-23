@@ -15250,3 +15250,16 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   review, and final acceptance. No external state changed and nothing was
   deleted. Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.
+
+## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
+
+- **Source:** Private implementation commit `f1b74154`.
+- **Contract mapping:** Release reconciliation now refuses a `completedAt`
+  later than the run clock before it evaluates rows, gates, or decisions.
+- **Verification:** Adjacent acceptance contracts **44/44**, study protocol,
+  syntax, and diff checks passed.
+- **Boundary:** Keep `ACCEPT-009` open for actual acceptance/hosted/provider/
+  customer evidence, independent review, and final release decision. No
+  external state changed and nothing was deleted. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.

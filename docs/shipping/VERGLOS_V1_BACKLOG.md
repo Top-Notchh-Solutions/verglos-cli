@@ -5046,6 +5046,14 @@ Evidence/problem: external validation is deliberately last. It validates the com
   The row remains unchecked for the actual acceptance/hosted/provider/customer
   evidence, independent review, and final release decision. Evidence:
   `docs/shipping/evidence/accept-009-release-reconciler-2026-10-23.md`.
+- **ACCEPT-009 date-boundary addendum (2026-10-23):** Private `f1b74154`
+  rejects a reconciliation `completedAt` later than the run clock, preventing
+  future-dated release state from appearing current. The adjacent acceptance
+  set passes **44/44**, including the new future-date regression. The row
+  remains unchecked for actual acceptance/hosted/provider/customer evidence,
+  independent review, and final release decision. Score remains **244 checked /
+  36 open / 280 total (87.1%)**. Evidence:
+  `docs/shipping/evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-010** · GA release candidate freeze · deps: ACCEPT-009 + all critical gates · Freeze versions, schemas, migrations, manifests, plan catalog, compatibility, docs, runbooks, notices, SBOM, provenance, and rollback. Commit(s): —
 
 ## Epic 20 — Held final landing/marketing pass

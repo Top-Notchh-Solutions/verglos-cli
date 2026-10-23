@@ -932,6 +932,20 @@ customer acceptance, provider action, or final release. No checkbox changed,
 no provider/Production/publication state changed, and nothing was deleted. The
 live score remains **244 checked / 36 open / 280 total (87.1%)**.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-009 future-date boundary
+
+Private commit `f1b74154` hardens `acceptance:release:reconcile` so a report
+cannot claim a `completedAt` later than the clock supplied for the run. The
+adjacent acceptance set passed **44/44**, including the future-date regression;
+study-protocol, syntax, and diff checks passed. Evidence:
+`docs/shipping/evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
+This is implementation progress only. `ACCEPT-009` remains open for actual
+acceptance/hosted/provider/customer evidence, independent review, and final
+release decision. No checkbox, provider/Production/publication state changed,
+and nothing was deleted. The live score remains **244 checked / 36 open / 280
+total (87.1%)**.
+
 For these 22 implementation rows, inspect the real source contract first and implement
 missing production logic, schema/migration/workflow/artifact behavior,
 regression coverage, and privacy/authorization boundaries in `verglos-web`

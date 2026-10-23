@@ -9377,6 +9377,20 @@ changed. See
   Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.
 
+## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
+
+- **Source mapping:** Private commit `f1b74154`.
+- **Contract mapping:** `acceptance:release:reconcile` rejects a completion
+  timestamp later than the supplied run clock, preventing future-dated state
+  from being treated as current.
+- **Verification mapping:** Adjacent acceptance contracts **44/44** passed;
+  study-protocol, syntax, and diff checks passed.
+- **Acceptance mapping:** This does not close `ACCEPT-009`; actual acceptance,
+  hosted/provider/customer evidence, independent review, and final release
+  decision remain open. No checkbox or external state changed; nothing was
+  deleted. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
 ## DIST-003 / DIST-006 / QUAL-CLI-006 exact merged-main requalification · 2026-10-22
 
 - **Source mapping:** Exact merged CLI `c1f5e9b72d54467fc606da00735b704ada74f24c`.

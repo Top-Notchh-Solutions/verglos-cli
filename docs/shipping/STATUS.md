@@ -12016,6 +12016,17 @@ No external state changed and nothing was deleted. Score remains **244 checked /
 36 open / 280 total (87.1%)**. Evidence:
 `evidence/accept-012-triage-integrity-boundary-2026-10-23.md`.
 
+## 2026-10-23 · ACCEPT-009 future-date reconciliation boundary
+
+Private commit `f1b74154` rejects a release reconciliation whose `completedAt`
+is later than the run clock. The adjacent acceptance contracts passed
+**44/44**, including the future-date regression; study-protocol, syntax, and
+diff checks passed. Keep `ACCEPT-009` open for actual acceptance/hosted/
+provider/customer evidence, independent review, and final release decision.
+No external state changed and nothing was deleted. Score remains **244 checked /
+36 open / 280 total (87.1%)**. Evidence:
+`evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 rollback-evidence manifest read binding merged
 
 CLI PR #176 merged normally as `fe7ea848c7e9e5b5ec12245c288ce44b7cc4a793`
