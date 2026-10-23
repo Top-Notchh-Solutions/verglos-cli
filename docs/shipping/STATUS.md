@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · QUAL-WEB-006 dashboard capture command
+
+Web PR #257 merged normally at `bfb3413`; the new dashboard capture parser
+requires the exact thirteen authenticated routes and complete ready/loading/
+error/large-dataset coverage. Focused tests pass **3/3**, with typecheck and
+diff checks passing. This is code-side evidence only; browser, human,
+field-CWV, independent, and final acceptance remain open. Score remains
+**244/36/280 (87.1%)**. Evidence:
+`evidence/qual-web-006-dashboard-capture-command-pr257-2026-10-23.md`.
+
 ## 2026-10-23 · CLI merged-head full test
 
 The repaired workspace install and `pnpm test` completed with **13/13 Turbo

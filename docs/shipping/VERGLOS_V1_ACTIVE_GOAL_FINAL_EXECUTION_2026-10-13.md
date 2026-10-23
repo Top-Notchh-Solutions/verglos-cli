@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · QUAL-WEB-006 dashboard capture command
+
+Web PR #257 merged normally at `bfb3413516e8f11e6dcef04040387b3dbb130c8b`,
+preserving implementation commit `edb6af1`. The new
+`qualify:dashboard-release` command parses and source-audits browser-produced
+dashboard captures, requires the exact thirteen authenticated dashboard
+routes, and fails closed on missing desktop/mobile ready, loading/error, or
+large-dataset coverage. Its focused regression suite passes **3/3**;
+`pnpm typecheck` and `git diff --check` pass. This strengthens the
+code-side `QUAL-WEB-006` contract only. The row remains open for actual
+authenticated browser, human screen-reader, supported-browser/field-CWV,
+independent-review, and final-acceptance evidence. The hosted PR checks failed
+before repository steps under the existing runner/Actions condition. Score
+remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-capture-command-pr257-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · CLI merged-head full test
 
 After `pnpm install --frozen-lockfile` restored the workspace links, the CLI

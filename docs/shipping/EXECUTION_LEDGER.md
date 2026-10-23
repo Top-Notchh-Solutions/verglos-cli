@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-006 dashboard capture command · 2026-10-23
+
+- **Implementation:** Web PR #257 merged normally at
+  `bfb3413516e8f11e6dcef04040387b3dbb130c8b`, preserving `edb6af1`. The
+  `qualify:dashboard-release` command strictly parses and source-audits the
+  exact thirteen authenticated dashboard routes and complete state/data
+  coverage.
+- **Verification:** Focused tests **3/3**, typecheck, and diff check passed.
+- **Disposition:** Code-side progress only. Browser, human screen-reader,
+  supported-browser/field-CWV, independent review, and final acceptance remain
+  open. Hosted checks failed before repository steps under the existing
+  runner/Actions condition. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-capture-command-pr257-2026-10-23.md`.
+
 ## CLI merged-head full test · 2026-10-23
 
 - **Preparation:** `pnpm install --frozen-lockfile` restored workspace links.

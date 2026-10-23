@@ -5302,6 +5302,8 @@ Evidence/problem: compilation cannot qualify a release-security product. The int
 
 **QUAL-WEB-006 current merged-head requalification addendum (2026-10-22; not a checkbox):** Exact Web `02f5aba95c4172255cc522730c6ffecc1598cbda` passed accessibility/performance/truth contracts **66/66** and source public-release smoke (**16 routes / 22 of 22 claims / 2 proof assets / 0 issues**). The direct landing qualifier correctly refused missing browser-capture input, so no browser, field-CWV, or human screen-reader evidence is inferred. Keep the row unchecked for supported-browser capture, human screen-reader, large/complete states, field CWV, independent review, and final acceptance. Evidence: `docs/shipping/evidence/qual-web-006-current-head-requalification-2026-10-22.md`.
 
+**QUAL-WEB-006 dashboard capture command addendum (2026-10-23; not a checkbox):** Web PR #257 merged normally at `bfb3413516e8f11e6dcef04040387b3dbb130c8b`, preserving `edb6af1`. The new `qualify:dashboard-release` parser/source audit requires the exact thirteen authenticated dashboard routes and complete desktop/mobile ready, loading/error, and large-dataset coverage; focused tests pass **3/3**, typecheck and diff checks pass. Keep the row unchecked for actual authenticated browser capture, human screen-reader, supported-browser/field-CWV, independent review, and final acceptance. Evidence: `docs/shipping/evidence/qual-web-006-dashboard-capture-command-pr257-2026-10-23.md`.
+
 ### QUAL-WEB-006 malformed runtime boundary repair · 2026-10-22
 
 Web commits `3170094` and `dfa417f` make missing measurement arrays and
