@@ -1,5 +1,28 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Production handoff route fix shipped
+
+The Production public-route audit found `/handoff/[handoffId]` returning HTTP
+**404** even though the page is explicitly a public recipient surface. Web
+commit `4d091d2` added `/handoff(.*)` to the Clerk public matcher and the
+public-release smoke contract; Web PR **#263** merged normally as
+`73d4c9a4b1f0594eecd0689d4495269893e2b5c0`.
+
+The post-merge Vercel Production deployment reported **READY**, owns the live
+`verglos.com` aliases, and generated **49/49** static pages. Live read-only
+verification now renders `/handoff/<forged-id>` at HTTP **200** with the
+`Acknowledge a delivery` page, while the forged receipt route remains safely
+404, `/cli-auth` remains a bounded 307 login redirect, and `/proof` remains
+200. Local public-release smoke passed **12/12**, truth-registry **37/37**,
+and typecheck/diff checks passed. No token was submitted and no handoff,
+payment, database, account, entitlement, webhook, customer, final CLI/npm
+release, or AppSec action occurred. Evidence:
+`docs/shipping/evidence/vercel-web-production-handoff-route-fix-2026-10-24.md`.
+The additive private evidence bundle verifies **210/210** files with zero
+mismatches, passed secret scanning, and manifest
+`sha256:37198414c5ad98eb7ba59b3d19c2907210b7feccc453b999e557e59ecd0cae3a`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-handoff-production-fix.json`.
+
 ## Latest continuation result · 2026-10-24 · Production public receipt route fix shipped
 
 The Production public-route audit found that the declared public
