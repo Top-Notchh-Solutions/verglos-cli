@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-head acceptance-story verification
+
+- **Decision:** Record the current local acceptance-story substrate run against
+  the clean merged CLI/Web heads.
+- **Verification:** CLI `aad2c743` passed **310/312** with two documented
+  skips; Web `9005d5e` passed **960/990** with 30 documented skips; composed
+  substrates passed **83/83**; all **12/12** mappings executed with zero
+  failures.
+- **Boundary:** Telemetry and database environment were disabled. This run did
+  not invoke hosted HTTP, payment providers, customer data, reviewers,
+  browser-human/field-CWV, migrations, or Production writes.
+- **Disposition:** Implementation/regression evidence refreshed; no checkbox
+  changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/acceptance-stories-current-head-2026-10-24.md` and
+  `evidence/acceptance-stories-verification-2026-10-24-current-head.json`.
+- **Bundle:** Additive v13 verifies 240 hashed files with zero mismatches and
+  manifest `sha256:9009ad22dac6db8de8c56801d53e3eaf44a91e67d579e9c1b44ecae874ef2001`.
+
 ## 2026-10-24 · record current Production landing qualification
 
 - **Decision:** Record the current live landing browser qualification as hosted

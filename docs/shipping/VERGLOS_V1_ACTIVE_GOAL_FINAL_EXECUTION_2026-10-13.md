@@ -1,5 +1,27 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-head acceptance-story verification
+
+The clean current CLI `aad2c74395a5c381c955ab9dfab7462295564840` and Web
+`9005d5ed5182b1d29159c0bb65c8ac696928baed` worktrees passed the local,
+telemetry-disabled acceptance-story substrate run with no database/provider
+environment. CLI package tests passed **310/312** with **2 documented skips**;
+Web tests passed **960/990** with **30 documented skips**; composed
+Studio/Enterprise/Team/quality substrates passed **83/83**. All **12/12**
+story mappings executed, with zero failures and complete coverage. Evidence:
+`docs/shipping/evidence/acceptance-stories-verification-2026-10-24-current-head.json`
+and `docs/shipping/evidence/acceptance-stories-current-head-2026-10-24.md`.
+The additive bundle v13 verifies **240/240** files with zero mismatches and
+manifest
+`sha256:9009ad22dac6db8de8c56801d53e3eaf44a91e67d579e9c1b44ecae874ef2001`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-current-head-v15.json`.
+
+This is stronger current-head implementation/regression evidence only. It does
+not create hosted/provider/customer, independent-review, human/field-CWV,
+AppSec/Hunt, account-deletion, or final-release evidence. No checkbox changed;
+the score remains **245 checked / 35 open / 280 total (87.5%)**, partitioned as
+**13 AppSec-dependent / 22 non-AppSec**.
+
 ## Latest continuation result · 2026-10-24 · current Production landing qualification
 
 The current READY Vercel deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` at

@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current-head acceptance-story verification
+
+The clean current CLI `aad2c74395a5c381c955ab9dfab7462295564840` and Web
+`9005d5ed5182b1d29159c0bb65c8ac696928baed` sources passed the local
+telemetry-disabled acceptance-story substrate run: CLI **310/312** with two
+documented skips, Web **960/990** with 30 documented skips, and composed
+Studio/Enterprise/Team/quality substrates **83/83**. All **12/12** frozen
+story mappings executed with zero failures. This refreshes ACCEPT-002/003
+implementation evidence only; hosted/provider/customer, independent review,
+human/field-CWV, account-deletion, AppSec/Hunt, and final-release gates remain
+open. No checkbox changed. Score remains **245 checked / 35 open / 280 total
+(87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/acceptance-stories-current-head-2026-10-24.md` and
+`docs/shipping/evidence/acceptance-stories-verification-2026-10-24-current-head.json`.
+The additive bundle v13 verifies **240/240** files with zero mismatches and
+manifest
+`sha256:9009ad22dac6db8de8c56801d53e3eaf44a91e67d579e9c1b44ecae874ef2001`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-current-head-v15.json`.
+
 ## 2026-10-24 · current Production landing browser qualification
 
 The READY Production deployment `dpl_2ij33gVtBZwcYSkwhY2g6uRAcfk1` passed the
