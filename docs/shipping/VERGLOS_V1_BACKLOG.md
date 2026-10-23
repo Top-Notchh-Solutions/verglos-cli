@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · current Web Preview provider receipt
+
+Clean Web `origin/main` commit `42fe33eefd2d2ce23ec89512381af2b767de4e54`
+produced Vercel Preview deployment `dpl_8aTPJdicafq8zSduHUYwiQcQHg7D`, reported
+`READY`, with **49/49** static pages generated. Protected read-only smoke
+returned HTTP 200 for the root, proof, machine-readable, sitemap, and robots
+routes with the expected security headers. This advances current Preview
+provider evidence only; no Production/customer/final-release claim is made.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/vercel-web-current-head-preview-2026-10-23.md`.
+
 ## 2026-10-23 · Web current-head contract suite
 
 Clean Web `origin/main` head `42fe33eefd2d2ce23ec89512381af2b767de4e54`
