@@ -88,6 +88,21 @@ No checkbox changed in this audit. The live score remains **244 checked / 36
 open / 280 total (87.1%)**. Nothing was deleted. Current implementation and
 acceptance boundaries remain recorded in the backlog and evidence ledger.
 
+## Latest continuation result · 2026-10-23 · registry/trusted-publisher state
+
+Read-only npm queries still return `E404 Not Found` for `@verglos/hunt` and
+`@verglos/cli`, while the local CLI source contains the seven-package release
+set, including `@verglos/hunt@2.0.0-alpha.4`. The owner-confirmed GitHub
+`NPM_TOKEN` secret exists, but the protected workflow is intentionally OIDC-only
+and does not consume it; wiring it in would violate the no-long-lived-token
+release contract. No registry write, tag, deployment, or release occurred.
+
+This is an exact provider-state artifact for DIST-002/003, not a code
+qualification substitute. The rows remain open for trusted-publisher setup,
+complete publication/provenance, and final acceptance. Score remains **244
+checked / 36 open / 280 total (87.1%)**. Nothing was deleted. Evidence:
+`docs/shipping/evidence/dist-002-003-registry-trusted-publisher-boundary-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · npm CI secret rotation
 
 The owner replaced the public CLI repository's GitHub Actions `NPM_TOKEN`

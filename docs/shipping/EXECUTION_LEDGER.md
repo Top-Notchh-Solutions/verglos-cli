@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-002/003 registry presence and trusted-publisher boundary
+
+- **Observation:** Read-only `npm view` checks return `E404 Not Found` for
+  `@verglos/hunt` and `@verglos/cli`; the local source still contains the
+  seven-package release set, including `@verglos/hunt@2.0.0-alpha.4`.
+- **Credential boundary:** The owner-confirmed `NPM_TOKEN` Actions secret is
+  present but not consumed. The protected publish workflow uses OIDC and
+  `id-token: write`; adding a long-lived token would regress DIST-002.
+- **Disposition:** No registry write, tag, workflow dispatch, deployment, or
+  release occurred. Keep DIST-002/003 open for provider trusted-publisher
+  setup, complete publication/provenance, and final acceptance. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted.
+- **Evidence:** `evidence/dist-002-003-registry-trusted-publisher-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 rollback no-follow hardening merged
 
 - **Implementation:** CLI PR #189 adds `O_NOFOLLOW` to rollback reference and

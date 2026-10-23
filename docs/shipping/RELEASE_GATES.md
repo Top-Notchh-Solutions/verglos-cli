@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · DIST-002/003 registry presence and trusted-publisher boundary
+
+Read-only npm queries return `E404` for `@verglos/hunt` and `@verglos/cli`;
+no package write, tag, workflow dispatch, or release occurred. The source
+contains the Hunt package, but its registry/trusted-publisher state is not yet
+present. The protected workflow remains OIDC-only; the owner-confirmed
+`NPM_TOKEN` secret is intentionally unused. Keep `DIST-002`/`DIST-003` open
+for provider setup, complete publication/provenance, and final acceptance.
+Score is **244/36/280 (87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-002-003-registry-trusted-publisher-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 rollback no-follow hardening merged
 
 CLI PR #189 merged normally as `6ad18792` from `3d4bca1f`. Rollback input

@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-002/003 registry presence and trusted-publisher boundary
+
+Read-only npm checks still return `E404 Not Found` for both
+`@verglos/hunt` and `@verglos/cli`; no registry write or release action was
+performed. The source repository contains `packages/hunt` at
+`@verglos/hunt@2.0.0-alpha.4`. The owner-confirmed `NPM_TOKEN` secret exists,
+but the protected workflow intentionally uses OIDC and does not consume it;
+wiring it in would regress the no-long-lived-token contract. `DIST-002` and
+`DIST-003` remain open for provider trusted-publisher/package setup, complete
+publication, provenance, and final acceptance. Score remains **244 checked / 36
+open / 280 total (87.1%)**. Nothing was deleted. Evidence:
+`evidence/dist-002-003-registry-trusted-publisher-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 rollback no-follow hardening merged
 
 CLI PR #189 merged normally into `main` as `6ad18792` from source
