@@ -1,5 +1,29 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · observed Web Vercel provider receipts
+
+Vercel reports the merged Web `main` commit
+`bfb3413516e8f11e6dcef04040387b3dbb130c8b` deployed to Production as
+`dpl_Cij5ABETkTpdRz2hmAs7Yfhtxz3Y`, `READY`, with the `verglos.com` and
+`www.verglos.com` aliases. The associated PR #257 Preview deployment is also
+`READY` at `dpl_CxJs2TbwEB1SnxTt74Bb1NsTneA5`. Read-only protected requests to
+both roots returned HTTP 200. This opens the observed Web provider boundary
+only; browser-human, field-CWV, customer, independent, deletion, AppSec, and
+final-release gates remain separate. Score remains **244/36/280 (87.1%)**.
+The additive acceptance bundle v13 contains **189 files**, verifies with **0
+mismatches**, matches manifest
+`sha256:51167653c2e800b9576a2f075034d0c7f482405b6f29780478997333de785120`,
+and passes secret scanning; v12 remains retained unchanged. Evidence:
+`evidence/vercel-web-production-preview-receipts-2026-10-23.md` and
+`evidence/acceptance-evidence-bundle-2026-10-23-provider-and-actions-v13.json`.
+
+The GitHub Actions Platform matrix run `39985823350` also completed
+successfully at exact workflow head `c721bae783b775c23340217eaa441255695472db`:
+the in-toto binding and all nine Ubuntu/Windows/macOS × Node 20/22/24 jobs were
+green. This is hosted validation only; no publication or release decision is
+inferred. Evidence:
+`evidence/cli-platform-matrix-run-39985823350-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance bundle v11 integrity repair
 
 The prior v10 manifest was retained, and additive v11 was regenerated against

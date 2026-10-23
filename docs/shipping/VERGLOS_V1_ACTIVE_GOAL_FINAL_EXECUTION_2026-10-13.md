@@ -1,5 +1,36 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · observed Web Vercel provider receipts
+
+Vercel now has an observed Production receipt for the merged Web candidate:
+deployment `dpl_Cij5ABETkTpdRz2hmAs7Yfhtxz3Y` is `READY`, bound by the provider
+to exact commit `bfb3413516e8f11e6dcef04040387b3dbb130c8b` on `main`, with
+`verglos.com` and `www.verglos.com` aliases. A protected read-only `vercel
+curl` request to the Production root returned **HTTP 200** with the expected
+security headers. The associated Preview receipt is
+`dpl_CxJs2TbwEB1SnxTt74Bb1NsTneA5`, also `READY`, bound to PR #257 commit
+`edb6af1`.
+
+This is the first current provider/Production receipt observed in this
+continuation. It advances the Web provider boundary only; it does not claim
+authenticated browser, human screen-reader, supported-browser/field-CWV,
+customer, independent-review, deletion, AppSec/Hunt, or final go/no-go
+acceptance. No npm version, tag, or public CLI release was created. Evidence:
+`docs/shipping/evidence/vercel-web-production-preview-receipts-2026-10-23.md`.
+Additive acceptance bundle v13 now includes both current provider receipts and
+the hosted matrix receipt: **189 files**, **0 mismatches**, manifest
+`sha256:51167653c2e800b9576a2f075034d0c7f482405b6f29780478997333de785120`,
+and secret scanning passed. v12 remains retained unchanged.
+The score remains **244 checked / 36 open / 280 total (87.1%)**.
+
+The previously live GitHub Actions Platform matrix now also completed
+successfully: run `39985823350` finished the in-toto binding and all nine
+Ubuntu/Windows/macOS × Node 20/22/24 jobs green at exact workflow head
+`c721bae783b775c23340217eaa441255695472db`. This is hosted validation evidence
+only; it does not create an npm publication, CLI Production release, customer
+acceptance, independent Hunt/AppSec review, or final go/no-go. Evidence:
+`docs/shipping/evidence/cli-platform-matrix-run-39985823350-2026-10-23.md`.
+
 ## Scope clarification · owner-authorized public OSS is not customer acceptance · 2026-10-23
 
 The owner-authorized public-open-source benchmark path is executable now. Local

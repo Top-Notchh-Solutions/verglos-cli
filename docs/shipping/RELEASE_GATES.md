@@ -1,5 +1,27 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · observed Web Vercel provider receipts
+
+Vercel Production deployment `dpl_Cij5ABETkTpdRz2hmAs7Yfhtxz3Y` is `READY`
+and is bound to Web `main` commit
+`bfb3413516e8f11e6dcef04040387b3dbb130c8b`; the PR #257 Preview deployment
+`dpl_CxJs2TbwEB1SnxTt74Bb1NsTneA5` is also `READY`. Protected read-only root
+requests returned HTTP 200 for both. This records provider execution only; it
+does not open human, field-CWV, customer, independent-review, AppSec/Hunt, or
+final-release acceptance. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/vercel-web-production-preview-receipts-2026-10-23.md`. Additive
+acceptance bundle v13 includes the current receipts, verifies **189 files / 0
+mismatches**, matches manifest
+`sha256:51167653c2e800b9576a2f075034d0c7f482405b6f29780478997333de785120`,
+and passes secret scanning; v12 remains retained unchanged.
+
+GitHub Actions Platform matrix run `39985823350` separately completed the
+in-toto binding and all nine Ubuntu/Windows/macOS × Node 20/22/24 jobs at exact
+workflow head `c721bae783b775c23340217eaa441255695472db`. This is hosted
+validation only and does not open publication, customer, independent review,
+AppSec/Hunt, or final-release gates. Evidence:
+`evidence/cli-platform-matrix-run-39985823350-2026-10-23.md`.
+
 ## 2026-10-23 · acceptance bundle v11 integrity repair
 
 The retained v10 bundle had one stale CLI evidence byte binding. Additive v11
