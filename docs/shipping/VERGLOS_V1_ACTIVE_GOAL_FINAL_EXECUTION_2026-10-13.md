@@ -1,5 +1,17 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · Web current-head contracts
+
+Clean Web `origin/main` head `42fe33eefd2d2ce23ec89512381af2b767de4e54`
+passed the current public-surface and qualification contracts: **37/37**
+truth-registry tests and **51/51** proof, public-release, landing, dashboard,
+privacy, and accessibility/performance tests passed, with zero failures or
+skips. This confirms the code-side Web implementation boundaries for the
+remaining non-AppSec surfaces; it does not create human/field, Production,
+recipient/customer, independent-review, or final-release evidence. The score
+remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/web-nonappsec-contracts-current-head-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · current-head acceptance contracts
 
 The exact merged private-shipping head `4f803a0af31385994c8cd7d27dfe593a1fa239c9`

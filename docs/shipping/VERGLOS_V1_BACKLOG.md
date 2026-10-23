@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · Web current-head contract suite
+
+Clean Web `origin/main` head `42fe33eefd2d2ce23ec89512381af2b767de4e54`
+passed **37/37** truth-registry tests and **51/51** proof/public-release/
+landing/dashboard/qualification tests. This is code-side evidence for the
+remaining Web implementation surfaces; rows remain unchecked for human/field,
+Production, recipient/customer, independent-review, and final-release
+artifacts. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+Evidence: `docs/shipping/evidence/web-nonappsec-contracts-current-head-2026-10-23.md`.
+
 ## 2026-10-23 · current-head acceptance contract suite
 
 The exact merged private-shipping head `4f803a0af31385994c8cd7d27dfe593a1fa239c9`
