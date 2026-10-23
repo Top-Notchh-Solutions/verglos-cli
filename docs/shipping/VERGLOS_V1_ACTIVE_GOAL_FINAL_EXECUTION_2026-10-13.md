@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · public-pack self-scan contract repair
+
+PR #202 merged normally as `9d7be93cc2855ee371b880df1b0bc8319312bf97`.
+The public-pack self-scan regression contract now compares each archive's
+`THIRD_PARTY_NOTICES` against the exact notices generated for that pack run,
+and its source-boundary assertions use the current `readBoundedRegularFile`
+contract. The focused public-pack, package-surface, and packed-manifest suite
+passes **17/17** locally.
+
+Hosted Platform matrix run `39988772880` passed the in-toto binding and all
+Ubuntu/Windows/macOS × Node 20/22/24 cells at exact head
+`aff676e42c03cd6fec1bcd8890bba394cd45e138`. Hosted self-scan run
+`39988772455` passed the clean archive, consumer, fixture, full test, pinned
+Hunt, artifact-verifier, rollback, and typecheck stages. It then failed at the
+existing public-boundary audit because `git rev-list --objects HEAD` exceeded
+the command's stdout buffer; the reachable branch history includes the
+intentionally retained `docs/shipping/**` ledger. No shipping files were
+deleted or rewritten, and no backlog checkbox is changed by this CI repair.
+The boundary disposition remains explicit rather than being hidden or
+bypassed. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · observed Web Vercel provider receipts
 
 Vercel now has an observed Production receipt for the merged Web candidate:
