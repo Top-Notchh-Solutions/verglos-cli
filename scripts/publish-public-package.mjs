@@ -116,35 +116,18 @@ export async function publishPublicPackage(options) {
 }
 
 async function extractManifestFromBytes(bytes) {
-  const { spawn } = await import("node:child_process");
-  return await new Promise((resolveOutput, reject) => {
-    const child = spawn("tar", ["-xOf", "-", "package/package.json"], { stdio: ["pipe", "pipe", "pipe"] });
-    const chunks = [];
-    let total = 0;
-    let stderr = "";
-    let settled = false;
-    const fail = (error) => {
-      if (settled) return;
-      settled = true;
-      child.kill();
-      reject(error);
-    };
-    child.stdout.on("data", (chunk) => {
-      total += chunk.length;
-      if (total > 1024 * 1024) return fail(new Error("npm publication package manifest is too large"));
-      chunks.push(chunk);
+  const snapshotDirectory = await mkdtemp(join(tmpdir(), "verglos-public-manifest-"));
+  const snapshotPath = join(snapshotDirectory, "archive.tgz");
+  try {
+    await writeFile(snapshotPath, bytes, { mode: 0o600 });
+    const { stdout } = await execFileAsync("tar", ["-xOf", snapshotPath, "package/package.json"], {
+      encoding: "utf8",
+      maxBuffer: 1024 * 1024,
     });
-    child.stderr.on("data", (chunk) => { stderr += chunk.toString("utf8").slice(0, 4096); });
-    child.on("error", fail);
-    child.on("close", (code) => {
-      if (settled) return;
-      settled = true;
-      if (code !== 0) reject(new Error(`tar could not read package manifest${stderr ? `: ${stderr}` : ""}`));
-      else resolveOutput(Buffer.concat(chunks).toString("utf8"));
-    });
-    child.stdin.on("error", fail);
-    child.stdin.end(bytes);
-  });
+    return stdout;
+  } finally {
+    await rm(snapshotDirectory, { recursive: true, force: true });
+  }
 }
 
 function sameFile(left, right) {
