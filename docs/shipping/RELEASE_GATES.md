@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · distribution implementation verification
+
+The current CLI `aad2c743` passed build **8/8**, strict dependency-license
+inventory with **0** review blockers, external license records **8/8**, public
+archive generation **7/7**, packed-manifest verification **7/7**, clean-consumer
+verification, focused release contracts **29/29**, and rollback rehearsal.
+This advances the implementation side of `DIST-002/003/006` only. Trusted
+publication/registry receipt, independent review, and final release
+authorization remain open; no checkbox changed. Score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/dist-002-003-006-current-cli-cross-platform-local-2026-10-24.md`.
+The additive bundle v17 verifies **242/242** files with zero mismatches and
+manifest `sha256:1b80c345a49a548e122f21d398ba0e3c2df8ce91be4d4a69b48a6688b78a0547`.
+
 ## 2026-10-24 · current acceptance/release contract suite
 
 The current CLI implementation contracts passed **63/63** locally with zero

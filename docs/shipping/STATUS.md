@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · distribution implementation verification
+
+CLI `aad2c743` passed the local distribution slice: build **8/8**, strict
+license inventory with **254** lockfile package versions and **0** review
+blockers, external license records **8/8**, public archives **7/7**, packed
+manifests **7/7**, clean-consumer verification, focused release tests **29/29**,
+and rollback rehearsal. This is local implementation evidence for
+`DIST-002/003/006`; no npm publication, provider/Production write, customer
+action, independent review, or release authorization occurred. No checkbox
+changed. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/dist-002-003-006-current-cli-cross-platform-local-2026-10-24.md`.
+The additive bundle v17 verifies **242/242** files with zero mismatches and
+manifest `sha256:1b80c345a49a548e122f21d398ba0e3c2df8ce91be4d4a69b48a6688b78a0547`.
+
 ## 2026-10-24 · current acceptance/release contract suite
 
 The current CLI head passed **63/63** local acceptance/release contract tests
