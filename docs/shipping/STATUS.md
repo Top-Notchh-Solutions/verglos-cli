@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-005 validator disposition
+
+The authorized-workflow validator code-side contract is complete; its current
+regression suite passes **7/7**, with syntax and diff checks passing. ACCEPT-005
+remains open for a real named external owner’s consented workflow, redacted
+result, and deletion/expiry artifact. Public or first-party fixtures do not
+close that row. Next queue: **ACCEPT-006**. Score remains **244/36/280
+(87.1%)**. Evidence:
+`evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 current bundle disposition
 
 The private bundle builder/verifier code-side contract is complete. Bundle v8

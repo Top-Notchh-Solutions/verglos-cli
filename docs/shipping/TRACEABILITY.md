@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## ACCEPT-005 validator disposition · 2026-10-23
+
+- **Implementation mapping:** The validator binds exact repository/commit,
+  owner/founder approvals, scope, expiry/revocation, permitted execution,
+  redaction, bounded digests, and deletion/expiry evidence.
+- **Verification mapping:** Validator tests **7/7**, syntax, and diff check
+  passed.
+- **Acceptance mapping:** The real named external-owner workflow and its
+  redacted/deletion artifacts remain missing; next queue is ACCEPT-006. Score
+  remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
+
 ## ACCEPT-003 current bundle disposition · 2026-10-23
 
 - **Implementation mapping:** Checked-in bundle builder/verifier covers

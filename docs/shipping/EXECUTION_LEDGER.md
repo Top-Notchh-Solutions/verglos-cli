@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-005 validator disposition · 2026-10-23
+
+- **Implementation:** Exact repository/commit, consent, scope, expiry,
+  redaction, bounded-digest, and deletion/expiry validation is complete.
+- **Verification:** Current validator tests **7/7**, syntax check, and diff
+  check passed.
+- **Disposition:** The external named-owner workflow has not been performed;
+  ACCEPT-005 remains open for its consented run, redacted result, and
+  deletion/expiry artifact. Next queue: ACCEPT-006. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
+
 ## ACCEPT-003 current bundle disposition · 2026-10-23
 
 - **Implementation:** Bundle builder/verifier contract is complete, including

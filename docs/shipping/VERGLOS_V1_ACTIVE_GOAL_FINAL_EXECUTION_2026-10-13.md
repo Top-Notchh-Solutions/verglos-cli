@@ -17,6 +17,22 @@ is being inferred from local evidence. The next implementation-first queue
 entry is `ACCEPT-005`. The live score remains **244 checked / 36 open / 280
 total (87.1%)**.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-005 workflow contract disposition
+
+The ACCEPT-005 validator is implemented and its current regression suite passes
+**7/7**; syntax and diff checks pass. It binds repository URL and exact commit,
+owner/founder approvals, scope, expiry/revocation, permitted paths/commands,
+redaction, bounded digests, and deletion/expiry evidence without claiming
+customer acceptance. The implementation source audit found no missing
+code-side ACCEPT-005 slice.
+
+ACCEPT-005 remains open for the actual named external owner’s consented
+workflow, redacted result, and deletion/expiry artifact. The first-party and
+public-fixture runs do not satisfy that external contract. The next
+implementation-first queue entry is `ACCEPT-006`; the score remains **244
+checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-005 isolated database integration
 
 The current Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` was run against

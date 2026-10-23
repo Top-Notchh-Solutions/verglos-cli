@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile ACCEPT-005 and advance the queue
+
+- **Decision:** Treat the authorized-workflow validator as complete code-side;
+  do not claim external acceptance from owner-controlled or public fixtures.
+- **Result:** Current validator tests **7/7**, syntax, and diff checks passed.
+- **Disposition:** ACCEPT-005 remains open for the named external-owner
+  consented workflow, redacted result, and deletion/expiry artifact. Advance
+  the implementation-first queue to ACCEPT-006. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile ACCEPT-003 and advance the queue
 
 - **Decision:** Treat the current bundle/verifier implementation as complete

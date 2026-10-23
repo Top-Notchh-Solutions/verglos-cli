@@ -1,5 +1,14 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-005 validator boundary
+
+The code-side authorized-workflow validator passes **7/7** tests plus syntax
+and diff checks. This does not open the ACCEPT-005 gate: a real named external
+owner’s consented workflow, redacted result, and deletion/expiry artifact are
+still required. Public/first-party fixtures are not substituted. Next queue:
+ACCEPT-006. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 bundle disposition
 
 The code-side evidence-bundle contract is complete. Bundle v8 contains **184
