@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile ACCEPT-009 and advance the queue
+
+- **Decision:** Treat the release-gate reconciler as complete code-side; keep
+  `go` fail-closed while required evidence remains open.
+- **Result:** Current focused tests **8/8**, syntax, and diff checks passed.
+- **Disposition:** ACCEPT-009 remains open for acceptance/hosted/provider/
+  customer evidence, independent review, and final release decision. Advance
+  the queue to ACCEPT-010. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile ACCEPT-008 and advance the queue
 
 - **Decision:** Treat the commercial-evidence validator as complete code-side;

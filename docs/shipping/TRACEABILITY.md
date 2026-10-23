@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## ACCEPT-009 reconciler disposition · 2026-10-23
+
+- **Implementation mapping:** Reconciler binds candidate commits, row states,
+  evidence bytes/digests, open gates, correction/rollback work, and requested
+  decisions; `go` fails closed while requirements remain open.
+- **Verification mapping:** Focused tests **8/8**, syntax, and diff check passed.
+- **Acceptance mapping:** Actual acceptance/hosted/provider/customer evidence,
+  independent review, and final release decision remain missing; next queue is
+  ACCEPT-010. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
 ## ACCEPT-008 commercial validator disposition · 2026-10-23
 
 - **Implementation mapping:** Validator covers commercial event kinds,

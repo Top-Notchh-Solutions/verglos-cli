@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-009 reconciler boundary
+
+The release-gate reconciler passes **8/8** tests plus syntax and diff checks.
+This does not open ACCEPT-009: actual acceptance/hosted/provider/customer
+evidence, independent review, and the final release decision remain required.
+Next queue: ACCEPT-010. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-008 commercial boundary
 
 The commercial validator passes **7/7** tests plus syntax and diff checks. This

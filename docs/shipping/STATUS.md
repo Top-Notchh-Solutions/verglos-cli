@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-009 reconciler disposition
+
+The release-gate reconciler code-side contract is complete; current focused
+tests pass **8/8**, with syntax and diff checks passing. It fails closed on
+open gates and future-dated or unsupported release state. ACCEPT-009 remains
+open for actual acceptance/hosted/provider/customer evidence, independent
+review, and the final release decision. Next queue: **ACCEPT-010**. Score
+remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-008 commercial validator disposition
 
 The commercial-evidence validator code-side contract is complete; current

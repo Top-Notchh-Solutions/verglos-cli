@@ -65,6 +65,21 @@ Production state was fabricated. The next implementation-first queue entry is
 Evidence:
 `docs/shipping/evidence/accept-008-commercial-payload-boundary-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-009 reconciler disposition
+
+The ACCEPT-009 release-gate reconciler is implemented and its current focused
+suite passes **8/8**; syntax and diff checks pass. It binds candidate commits,
+row states, evidence bytes/digests, open gates, correction/rollback work, and
+requested decisions, rejects future-dated reports, and fails closed on a
+recorded `go` while any required gate remains open. The implementation source
+audit found no missing code-side ACCEPT-009 slice.
+
+ACCEPT-009 remains open for the actual acceptance/hosted/provider/customer
+evidence, independent review, and final release decision. The next
+implementation-first queue entry is `ACCEPT-010`; the score remains **244
+checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-005 isolated database integration
 
 The current Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` was run against

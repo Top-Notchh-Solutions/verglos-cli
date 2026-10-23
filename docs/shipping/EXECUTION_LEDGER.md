@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-009 reconciler disposition · 2026-10-23
+
+- **Implementation:** Candidate/row/evidence binding, open-gate checks,
+  correction/rollback state, future-date rejection, and fail-closed decision
+  handling are complete.
+- **Verification:** Current focused tests **8/8**, syntax, and diff checks passed.
+- **Disposition:** Acceptance/hosted/provider/customer evidence, independent
+  review, and final release decision remain open. Next queue: ACCEPT-010. Score
+  remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+
 ## ACCEPT-008 commercial validator disposition · 2026-10-23
 
 - **Implementation:** Commercial evidence kinds, approval windows, numeric

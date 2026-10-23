@@ -5443,6 +5443,14 @@ next implementation-first queue entry is `ACCEPT-009`. Evidence:
   independent review, and final release decision. Score remains **244 checked /
   36 open / 280 total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+**ACCEPT-009 current reconciler disposition (2026-10-23; not a checkbox):** The
+current focused reconciler suite passes **8/8**, with syntax and diff checks
+passing; the code-side candidate, row-state, evidence-byte, open-gate,
+correction/rollback, and fail-closed decision contract is complete. Keep the
+row unchecked for actual acceptance/hosted/provider/customer evidence,
+independent review, and the final release decision. The next
+implementation-first queue entry is `ACCEPT-010`. Evidence:
+`docs/shipping/evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-010** · GA release candidate freeze · deps: ACCEPT-009 + all critical gates · Freeze versions, schemas, migrations, manifests, plan catalog, compatibility, docs, runbooks, notices, SBOM, provenance, and rollback. Commit(s): —
 - **ACCEPT-010 artifact-kind addendum (2026-10-23):** Private `199e6095`
   hardens the freeze contract to require a present, required artifact in all
