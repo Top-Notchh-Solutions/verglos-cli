@@ -1,9 +1,10 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
-import { readFile, readdir, writeFile } from "node:fs/promises";
+import { readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readPackageLicenseTexts } from "./package-license-text.mjs";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const run = promisify(execFile);
 const root = fileURLToPath(new URL("..", import.meta.url));
@@ -52,7 +53,7 @@ for (const item of inventory.bundledComponents ?? []) {
       if (!child.isDirectory() || child.name === "node_modules" || child.name.startsWith(".")) continue;
       const packagePath = join(parentPath, child.name);
       try {
-        const manifest = JSON.parse(await readFile(join(packagePath, "package.json"), "utf8"));
+        const manifest = await readBoundedJsonFile(join(packagePath, "package.json"), `${packagePath} package.json`);
         if (manifest.name === item.name && manifest.version === item.version) nestedPaths.push(packagePath);
       } catch (error) {
         if (error?.code !== "ENOENT") throw new Error(`Cannot inspect nested notice package at '${packagePath}': ${error.message}`);

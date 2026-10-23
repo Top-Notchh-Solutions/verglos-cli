@@ -3225,6 +3225,29 @@ Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/accept-002-stories-coherent-head-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · DIST-002/003 license inventory and notices read binding
+
+The license inventory now reads workspace, virtual-store, nested bundled
+manifests, and the pnpm lockfile through bounded regular-file handles; license
+and NOTICE text collection uses the same opened-file boundary with its 512 KiB
+limit. Third-party notice generation uses bounded nested-manifest reads.
+
+The full supported-architecture inventory reports **254 lockfile package
+versions / 250 package entries / 1 bundled component** and preserves **7
+explicit review blockers**. License inventory, notices, package-license,
+bounded-reader, and bundle contracts passed **15/15**; syntax and diff checks
+passed. This is DIST-002/003 license-evidence implementation only. The seven
+review blockers remain open. No legal opinion, npm publication, provider,
+Production, customer, deployment, tag, immutable attestation, independent
+review, or release-sign-off action occurred. The additive bundle contains
+**162** files with manifest
+`sha256:7011061d397b47a260e0fd7f1ddf30c5a4f6252971b898e820be1b58c5e21425`
+and file SHA-256
+`bb9998dfd4e28dc958ef289ddba0b65e2fc52fcfb45fe163a4f618672ec76f16`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-002-003-license-read-binding-private-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · DIST-003/006 local rehearsal refresh
 
 The real local clean-consumer run installed all six staged archives, imported

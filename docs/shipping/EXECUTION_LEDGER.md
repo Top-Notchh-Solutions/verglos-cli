@@ -15667,3 +15667,23 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   `sha256:93820e1b4dd44193fdbaaa8a1680fb228222c8f70f015cc70f84659a8ea8537d`;
   bundle file SHA-256
   `8561a5428c80eca4b61ea6a4bb33417b64e3d263b2abfe06315c38e9c9c0ae23`.
+
+## DIST-002/003 license inventory and notices read binding · 2026-10-23
+
+- **Source mapping:** License inventory, nested notice discovery, and license
+  text collection now use bounded opened regular-file reads with the existing
+  512 KiB license-text limit.
+- **Verification mapping:** Full supported-architecture inventory reports
+  254 lockfile versions, 250 package entries, 1 bundled component, and 7
+  explicit review blockers; license/notices/package-license/bounded-reader/
+  bundle contracts **15/15**, syntax and diff checks passed.
+- **Boundary mapping:** The seven blockers remain open. No legal opinion, npm
+  publication, provider, Production, customer, deployment, tag, immutable
+  attestation, independent review, or release-sign-off action occurred.
+- **Acceptance mapping:** Keep DIST-002/003 unchecked. Nothing was deleted or
+  overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-002-003-license-read-binding-private-2026-10-23.md`;
+  bundle manifest
+  `sha256:7011061d397b47a260e0fd7f1ddf30c5a4f6252971b898e820be1b58c5e21425`;
+  bundle file SHA-256
+  `bb9998dfd4e28dc958ef289ddba0b65e2fc52fcfb45fe163a4f618672ec76f16`.

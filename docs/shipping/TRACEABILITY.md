@@ -9496,6 +9496,23 @@ changed. See
   bundle manifest
   `sha256:93820e1b4dd44193fdbaaa8a1680fb228222c8f70f015cc70f84659a8ea8537d`.
 
+## DIST-002/003 license inventory and notices read binding · 2026-10-23
+
+- **Source mapping:** License inventory, nested notice discovery, and license
+  text collection now use bounded opened regular-file reads.
+- **Verification mapping:** Full supported-architecture inventory: 254
+  lockfile versions, 250 package entries, 1 bundled component, and 7 explicit
+  review blockers preserved; license/notices/package-license/bounded-reader/
+  bundle contracts **15/15**.
+- **Boundary mapping:** The seven blockers remain open; no legal opinion,
+  publication, provider, Production, customer, independent review, or release
+  sign-off is claimed.
+- **Acceptance mapping:** Keep DIST-002/003 open. Score remains
+  **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-002-003-license-read-binding-private-2026-10-23.md`;
+  bundle manifest
+  `sha256:7011061d397b47a260e0fd7f1ddf30c5a4f6252971b898e820be1b58c5e21425`.
+
 ## DIST-002 release-tag read binding · 2026-10-23
 
 - **Source mapping:** Private `scripts/verify-release-tag.mjs` now uses the

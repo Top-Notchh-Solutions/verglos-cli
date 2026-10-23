@@ -12130,6 +12130,25 @@ result SHA-256
 bundle manifest
 `sha256:93820e1b4dd44193fdbaaa8a1680fb228222c8f70f015cc70f84659a8ea8537d`.
 
+## 2026-10-23 · DIST-002/003 license inventory and notices read binding
+
+Workspace, virtual-store, nested bundled manifests, and the pnpm lockfile now
+use bounded regular-file reads; license and NOTICE text collection remains
+bounded at 512 KiB. Full supported-architecture inventory reports **254
+lockfile package versions / 250 package entries / 1 bundled component** and
+preserves **7 explicit review blockers**. License inventory, notices,
+package-license, bounded-reader, and bundle contracts passed **15/15**.
+
+`DIST-002/003` remain unchecked; the seven blockers remain open. No legal
+opinion, npm publication, provider, Production, customer, deployment, tag,
+immutable attestation, independent review, or release-sign-off action
+occurred; nothing was deleted or overwritten. Score remains **244 checked / 36
+open / 280 total (87.1%)**.
+
+Evidence: `evidence/dist-002-003-license-read-binding-private-2026-10-23.md`;
+bundle manifest
+`sha256:7011061d397b47a260e0fd7f1ddf30c5a4f6252971b898e820be1b58c5e21425`.
+
 ## 2026-10-23 · DIST-002 release-tag read binding
 
 The private release-tag verifier now reads all six public package manifests

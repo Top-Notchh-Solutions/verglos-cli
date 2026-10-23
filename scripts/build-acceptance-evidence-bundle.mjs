@@ -173,6 +173,7 @@ const paths = [
   "docs/shipping/evidence/dist-001-package-content-read-binding-private-2026-10-23.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-23-coherent.json",
   "docs/shipping/evidence/accept-002-stories-coherent-head-2026-10-23.md",
+  "docs/shipping/evidence/dist-002-003-license-read-binding-private-2026-10-23.md",
 ];
 
 const FORBIDDEN = [

@@ -1,8 +1,9 @@
-import { readFile, readdir } from "node:fs/promises";
+import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createLicenseInventory, parsePnpmLockPackageIds } from "./license-inventory-core.mjs";
 import { LICENSE_SOURCE_OVERRIDES } from "./license-source-overrides.mjs";
+import { readBoundedFile, readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const storeRoot = join(root, "node_modules", ".pnpm");
@@ -26,7 +27,7 @@ async function collectVirtualStoreManifests() {
         : [join(moduleRoot, child.name)];
       for (const packageRoot of packageRoots) {
         try {
-          const manifest = JSON.parse(await readFile(join(packageRoot, "package.json"), "utf8"));
+          const manifest = await readBoundedJsonFile(join(packageRoot, "package.json"), `${packageRoot} package.json`);
           if (typeof manifest.name !== "string" || typeof manifest.version !== "string") continue;
           manifests.push(manifest);
           // An installed dependency can itself ship nested package payloads
@@ -37,7 +38,7 @@ async function collectVirtualStoreManifests() {
             if (!child.isDirectory() || child.name === "node_modules" || child.name.startsWith(".")) continue;
             const nestedManifestPath = join(packageRoot, child.name, "package.json");
             try {
-              const nestedManifest = JSON.parse(await readFile(nestedManifestPath, "utf8"));
+              const nestedManifest = await readBoundedJsonFile(nestedManifestPath, `${nestedManifestPath}`);
               if (typeof nestedManifest.name === "string" && typeof nestedManifest.version === "string") {
                 bundledManifests.push({ manifest: nestedManifest, bundledBy: `${manifest.name}@${manifest.version}` });
               }
@@ -58,13 +59,13 @@ const directDependencies = new Set();
 const workspacePackageDirs = await readdir(workspaceRoot, { withFileTypes: true });
 const workspaceManifests = [join(root, "package.json"), ...workspacePackageDirs.filter((entry) => entry.isDirectory()).map((entry) => join(workspaceRoot, entry.name, "package.json"))];
 for (const manifestPath of workspaceManifests) {
-  const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+  const manifest = await readBoundedJsonFile(manifestPath, `${manifestPath}`);
   for (const field of ["dependencies", "optionalDependencies", "devDependencies"]) {
     for (const name of Object.keys(manifest[field] ?? {})) directDependencies.add(name);
   }
 }
 
-const lockfile = await readFile(join(root, "pnpm-lock.yaml"), "utf8");
+const lockfile = decodeUtf8(await readBoundedFile(join(root, "pnpm-lock.yaml"), "pnpm lockfile"), "pnpm lockfile");
 const lockedPackages = parsePnpmLockPackageIds(lockfile);
 const { manifests, bundledManifests } = await collectVirtualStoreManifests();
 const result = createLicenseInventory({ lockedPackages, manifests, bundledManifests, directDependencies, sourceOverrides: LICENSE_SOURCE_OVERRIDES });
@@ -73,3 +74,11 @@ if (process.argv.includes("--require-clear") && result.reviewBlockers.length > 0
   process.exitCode = 2;
 }
 process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+
+function decodeUtf8(bytes, label) {
+  try {
+    return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  } catch {
+    throw new Error(`${label} must contain valid bounded UTF-8 text`);
+  }
+}
