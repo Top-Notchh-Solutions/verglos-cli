@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Distribution implementation verification · 2026-10-24
+
+- **Source:** CLI `aad2c74395a5c381c955ab9dfab7462295564840`.
+- **Verification:** Build **8/8**; strict license inventory **254** lockfile
+  package versions / **0** review blockers; external records **8/8**; public
+  archives **7/7**; packed manifests **7/7**; clean consumer passed; focused
+  release tests **29/29**; rollback rehearsal passed with five boundaries and
+  two historical records preserved.
+- **Boundary:** Local implementation/artifact verification only. No npm
+  publication, provider/Production write, customer action, independent review,
+  signing-key use, or final release authorization occurred.
+- **Disposition:** `DIST-002/003/006` implementation slice verified, but rows
+  remain open for trusted publication/receipt and release-contract gates. No
+  checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/dist-002-003-006-current-cli-cross-platform-local-2026-10-24.md`.
+- **Bundle:** Additive v17 contains **242** hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:1b80c345a49a548e122f21d398ba0e3c2df8ce91be4d4a69b48a6688b78a0547`.
+
 ## Current acceptance/release contract suite · 2026-10-24
 
 - **Source:** clean CLI `aad2c74395a5c381c955ab9dfab7462295564840`.

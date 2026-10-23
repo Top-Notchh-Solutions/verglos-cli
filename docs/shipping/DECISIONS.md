@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record distribution implementation verification
+
+- **Decision:** Record the current CLI distribution artifact verification as
+  additive implementation evidence for `DIST-002/003/006`.
+- **Evidence:** Build **8/8**, strict license inventory with **254** lockfile
+  package versions and **0** review blockers, external records **8/8**, public
+  archives **7/7**, packed manifests **7/7**, clean consumer passed, focused
+  release tests **29/29**, and rollback rehearsal passed.
+- **Boundary:** No npm publication, trusted registry receipt, provider/
+  Production write, customer action, independent review, signing-key use, or
+  final release authorization occurred.
+- **Disposition:** Do not close the rows or alter checkboxes; implementation
+  is verified and the remaining publication/review/release gates are explicit.
+  Score remains **245/35/280 (87.5%)**.
+- **Evidence file:** `evidence/dist-002-003-006-current-cli-cross-platform-local-2026-10-24.md`.
+- **Bundle:** Additive v17 contains **242** hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:1b80c345a49a548e122f21d398ba0e3c2df8ce91be4d4a69b48a6688b78a0547`.
+
 ## 2026-10-24 · record current acceptance/release contract suite
 
 - **Decision:** Record the current CLI implementation-contract verification.
