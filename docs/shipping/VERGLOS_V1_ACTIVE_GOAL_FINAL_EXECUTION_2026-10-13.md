@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · hosted CLI platform matrix
+
+GitHub Actions Platform matrix run `39993289161` completed successfully at
+merged head `550451c50dd550937be139317a5a5712e98a78e8`. The in-toto release
+binding and all nine Ubuntu/Windows/macOS × Node 20/22/24 cells returned
+`completed / success`; 30 non-expired hosted artifacts were observed.
+
+This is the hosted validation evidence ACCEPT-003 was missing at this stage.
+It does not create npm publication, a tag, a Production CLI release,
+customer acceptance, independent Hunt/AppSec review, or final go/no-go. The
+row remains open for reviewer sign-off and its provider/acceptance conditions;
+the score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/cli-platform-matrix-run-39993289161-2026-10-23.md` and
+the additive bundle
+`docs/shipping/evidence/acceptance-evidence-bundle-cli-platform-matrix-39993289161-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-006 contract-suite verification
+
 ## Latest continuation result · 2026-10-23 · DIST-006 contract-suite verification
 
 The rebuilt exact local checkout `d013796e` completed `pnpm build` with **8/8**
