@@ -1,6 +1,6 @@
 import { constants } from "node:fs";
 import { randomUUID } from "node:crypto";
-import { chmod, lstat, mkdir, open, readFile, rename, unlink } from "node:fs/promises";
+import { chmod, lstat, mkdir, open, rename, unlink } from "node:fs/promises";
 import { dirname } from "node:path";
 import { homedir } from "node:os";
 import {
@@ -53,16 +53,33 @@ function validId(value: string): boolean {
   return ID.test(value);
 }
 
-async function readBoundedFile(path: string, maxBytes: number, message: string): Promise<Buffer> {
+export async function readBoundedPrivateRunnerFile(path: string, maxBytes: number, message: string): Promise<Buffer> {
   const entry = await lstat(path);
   if (!entry.isFile() || entry.size > maxBytes) throw new Error(message);
-  const bytes = await readFile(path);
-  if (bytes.byteLength > maxBytes) throw new Error(message);
-  return bytes;
+  const handle = await open(path, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
+  try {
+    const opened = await handle.stat();
+    if (!opened.isFile() || (entry.ino !== 0 && opened.ino !== 0 && (entry.dev !== opened.dev || entry.ino !== opened.ino))) {
+      throw new Error(`${message} changed during validation`);
+    }
+    if (opened.size > maxBytes) throw new Error(message);
+    const bytes = await handle.readFile();
+    const final = await handle.stat();
+    if (!final.isFile()
+      || (opened.ino !== 0 && final.ino !== 0 && (opened.dev !== final.dev || opened.ino !== final.ino))
+      || final.size !== opened.size
+      || bytes.byteLength !== final.size
+      || bytes.byteLength > maxBytes) {
+      throw new Error(`${message} changed during read`);
+    }
+    return bytes;
+  } finally {
+    await handle.close();
+  }
 }
 
 async function readPublicKey(path: string): Promise<string> {
-  const bytes = await readBoundedFile(path, MAX_KEY_BYTES, "trusted runner key must be a bounded regular file");
+  const bytes = await readBoundedPrivateRunnerFile(path, MAX_KEY_BYTES, "trusted runner key must be a bounded regular file");
   const value = bytes.toString("utf8");
   if (!value.trim()) throw new Error("trusted runner key is empty");
   return value;
@@ -81,7 +98,7 @@ function parseReplay(value: unknown): ReplayState {
 
 async function readReplay(path: string): Promise<ReplayState> {
   try {
-    const bytes = await readBoundedFile(path, MAX_REPLAY_BYTES, "runner replay cache is invalid");
+    const bytes = await readBoundedPrivateRunnerFile(path, MAX_REPLAY_BYTES, "runner replay cache is invalid");
     return parseReplay(JSON.parse(bytes.toString("utf8")));
   } catch (error) {
     if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") return { jobIds: [], nonces: [] };
