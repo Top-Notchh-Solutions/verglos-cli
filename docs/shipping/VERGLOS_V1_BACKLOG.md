@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-003 reusable verifier
+
+Added the checked-in acceptance-bundle verifier and package command. Verifier
+regressions pass **4/4**, builder regressions pass **5/5**, and the regenerated
+packet verifies **180/180** with manifest
+`sha256:4b49a2acde22a097af4bff3acd6785e742a1b1f464133ba6d5c635ac4c43b959` and
+secret scan passed. No checkbox changed: ACCEPT-003 remains open for reviewer,
+hosted, and external acceptance artifacts. Score remains **244 checked / 36
+open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-003-bundle-verifier-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 bundle integrity
 
 The current packet bundle contains **179 listed files**. Read-only verification

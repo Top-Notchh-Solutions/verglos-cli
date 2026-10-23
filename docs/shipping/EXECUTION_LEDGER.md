@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-003 reusable bundle verifier · 2026-10-23
+
+- **Implementation:** Added the checked-in bounded verifier and
+  `acceptance:evidence:verify` command.
+- **Verification:** Verifier tests **4/4**; builder tests **5/5**; current
+  packet **180 files / 0 mismatches / manifest matched / secret scan passed**.
+- **Artifact:** Manifest
+  `sha256:4b49a2acde22a097af4bff3acd6785e742a1b1f464133ba6d5c635ac4c43b959`;
+  bundle file SHA-256
+  `29fc7d974d85d11f685e49901c0798953e4afbcc8ad70852bd004bd8b80e47ab`.
+- **Disposition:** ACCEPT-003 implementation progress only; no row checked.
+  Score remains **244/36/280 (87.1%)** and held acceptance gates remain open.
+- **Evidence:** `evidence/accept-003-bundle-verifier-2026-10-23.md`.
+
 ## ACCEPT-003 packet bundle integrity · 2026-10-23
 
 - **Verification:** Read-only recomputation over **179 files** found **0

@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · implement ACCEPT-003 reusable verifier
+
+- **Decision:** Make bundle integrity verification reproducible through a
+  checked-in bounded command and regression suite.
+- **Result:** Verifier tests **4/4**, builder tests **5/5**, and current packet
+  **180 files / 0 mismatches / manifest matched / secret scan passed**.
+  Manifest
+  `sha256:4b49a2acde22a097af4bff3acd6785e742a1b1f464133ba6d5c635ac4c43b959`.
+- **Disposition:** Implementation progress only; no checkbox or score changed.
+  Score remains **244/36/280 (87.1%)** and external/held acceptance gates
+  remain open.
+- **Evidence:** `evidence/accept-003-bundle-verifier-2026-10-23.md`.
+
 ## 2026-10-23 · verify ACCEPT-003 packet integrity
 
 - **Decision:** Verify the regenerated acceptance packet read-only, preserving

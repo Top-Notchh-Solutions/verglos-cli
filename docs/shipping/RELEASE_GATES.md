@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-003 reusable verifier
+
+The checked-in bounded verifier is implemented. Its tests pass **4/4**, the
+builder tests pass **5/5**, and the current packet verifies **180/180** with
+manifest
+`sha256:4b49a2acde22a097af4bff3acd6785e742a1b1f464133ba6d5c635ac4c43b959`;
+secret scanning passed. This is implementation/integrity evidence only and
+does not check external/reviewer or held release gates. Score remains
+**244/36/280 (87.1%)**. Evidence:
+`evidence/accept-003-bundle-verifier-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 bundle integrity
 
 The current packet bundle contains **179 files**; read-only verification found

@@ -1,5 +1,19 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-003 reusable verifier
+
+Implemented `scripts/verify-acceptance-evidence-bundle.mjs` and the
+`acceptance:evidence:verify` command. Its regression tests pass **4/4**; the
+existing builder tests pass **5/5**. The regenerated current packet contains
+**180 files** and the checked-in verifier reports **0 mismatches**, matching
+manifest `sha256:4b49a2acde22a097af4bff3acd6785e742a1b1f464133ba6d5c635ac4c43b959`,
+with secret scanning passed. Bundle file SHA-256:
+`29fc7d974d85d11f685e49901c0798953e4afbcc8ad70852bd004bd8b80e47ab`.
+This is ACCEPT-003 implementation/integrity progress only; all external and
+held acceptance gates remain open. Score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-003-bundle-verifier-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-003 bundle integrity
 
 The current packet bundle was verified read-only across **179 listed files**:

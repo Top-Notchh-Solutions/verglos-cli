@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-003 reusable verifier
+
+The checked-in acceptance-bundle verifier and package command are implemented;
+verifier regressions pass **4/4** and builder regressions pass **5/5**. The
+current regenerated packet contains **180 files** and verifies with **0
+mismatches**, manifest
+`sha256:4b49a2acde22a097af4bff3acd6785e742a1b1f464133ba6d5c635ac4c43b959`,
+and secret scan passed. Bundle file SHA-256:
+`29fc7d974d85d11f685e49901c0798953e4afbcc8ad70852bd004bd8b80e47ab`.
+Implementation progress only; score remains **244 checked / 36 open / 280
+total (87.1%)**. Evidence:
+`evidence/accept-003-bundle-verifier-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-003 bundle integrity
 
 The current packet bundle contains **179 listed files**; read-only verification

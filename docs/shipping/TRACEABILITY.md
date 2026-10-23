@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 reusable bundle verifier · 2026-10-23
+
+- **Implementation mapping:** `scripts/verify-acceptance-evidence-bundle.mjs`
+  and `acceptance:evidence:verify` now enforce bounded regular-file reads,
+  safe canonical entries, byte/digest binding, manifest binding, and secret
+  scanning.
+- **Verification mapping:** Verifier tests **4/4**, builder tests **5/5**;
+  current packet **180/180** with zero mismatches and a matching manifest
+  `sha256:4b49a2acde22a097af4bff3acd6785e742a1b1f464133ba6d5c635ac4c43b959`.
+- **Acceptance mapping:** Implementation/integrity progress only; held gates
+  remain open. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-003-bundle-verifier-2026-10-23.md`.
+
 ## ACCEPT-003 packet bundle integrity · 2026-10-23
 
 - **Artifact mapping:** Current packet bundle has **179 files**, manifest
