@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## FINAL-WEB source-contract pass · 2026-10-23
+
+- **Implementation mapping:** FINAL-WEB-001/002/003/005/006/007/008 map to
+  the truth registry, homepage flow, canonical billing/allowance projection,
+  machine-readable metadata, proof-origin boundary, route inventory, and
+  public release smoke at Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`.
+- **Verification mapping:** Focused tests **54/54**, typecheck, and diff check
+  passed.
+- **Acceptance mapping:** Acceptance dependencies, hosted/provider execution,
+  human/field evidence, independent review, founder truth-freeze, and final
+  acceptance remain missing; FINAL-WEB-004 is AppSec-dependent. Score remains
+  **244/36/280 (87.1%)**. Acceptance bundle v9 verifies **185 files / 0
+  mismatches** with manifest
+  `sha256:887886a275bff9dfc9c962a745df5adc12541ad42ded55a1dba7ed50328d774d`.
+- **Evidence:** `evidence/final-web-source-contracts-2026-10-23.md`.
+
 ## ACCEPT-014 regression disposition · 2026-10-23
 
 - **Implementation mapping:** Regression binds exact CLI/Web candidates, the

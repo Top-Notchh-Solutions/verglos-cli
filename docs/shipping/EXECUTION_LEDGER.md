@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## FINAL-WEB source-contract pass · 2026-10-23
+
+- **Candidate:** Web `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`, clean worktree.
+- **Implementation:** Public claim registry, Inspect → Decide → Prove →
+  Monitor flow, canonical plan/billing terms, `/llms.txt`/JSON-LD, bounded
+  proof assets, route inventory, and release smoke are present.
+- **Verification:** Focused source-contract suite **54/54**, typecheck, and
+  diff check passed.
+- **Disposition:** FINAL-WEB-001/002/003/005/006/007/008 remain unchecked for
+  acceptance dependencies and external/hosted/human/final gates; FINAL-WEB-004
+  remains AppSec-dependent. Acceptance bundle v9 verifies **185 files / 0
+  mismatches** with manifest
+  `sha256:887886a275bff9dfc9c962a745df5adc12541ad42ded55a1dba7ed50328d774d`.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/final-web-source-contracts-2026-10-23.md`.
+
 ## ACCEPT-014 regression disposition · 2026-10-23
 
 - **Implementation:** Exact CLI/Web candidate binding, frozen-corpus matrix,

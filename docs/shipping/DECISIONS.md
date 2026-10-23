@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile FINAL-WEB source contracts
+
+- **Decision:** Record the current Web public-truth, metadata, proof, and
+  release-smoke implementation as complete code-side; do not convert it into
+  external acceptance or a release decision.
+- **Result:** Exact Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` passed
+  the focused suite **54/54**, typecheck, and diff check.
+- **Disposition:** FINAL-WEB-001/002/003/005/006/007/008 remain open for their
+  declared dependencies and external/hosted/human/final gates; FINAL-WEB-004
+  remains AppSec-dependent. Acceptance bundle v9 verifies **185 files / 0
+  mismatches** with manifest
+  `sha256:887886a275bff9dfc9c962a745df5adc12541ad42ded55a1dba7ed50328d774d`.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/final-web-source-contracts-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile ACCEPT-014 source contract
 
 - **Decision:** Treat final regression as complete code-side; keep the actual

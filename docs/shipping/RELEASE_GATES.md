@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · FINAL-WEB source-contract boundary
+
+The current Web source contract passes **54/54** focused tests plus typecheck
+and diff checks at exact head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`.
+This does not open FINAL-WEB-001/002/003/005/006/007/008: their acceptance
+dependencies, hosted/provider execution, human/field evidence, independent
+review, founder truth-freeze, and final sign-off remain required.
+FINAL-WEB-004 remains AppSec-dependent. Score remains **244/36/280 (87.1%)**.
+Acceptance bundle v9 verifies **185 files / 0 mismatches** with manifest
+`sha256:887886a275bff9dfc9c962a745df5adc12541ad42ded55a1dba7ed50328d774d`.
+Evidence: `evidence/final-web-source-contracts-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-014 regression boundary
 
 The final-regression contract passes **6/6** tests plus syntax and diff checks.
