@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Production public-surface recheck
+
+The current Vercel Production deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL`
+reported `READY`. A bounded read-only request set at
+`2026-10-23T21:23:55Z` matched all thirteen declared public-surface probes:
+the public pages, machine-readable files, synthetic handoff page, CLI-auth
+redirect, receipt page/API negative boundaries, and expected no-store/cache
+boundaries. No login, token, payment, webhook, database, account, customer,
+or release-publication write occurred.
+
+This records current provider/Production evidence for the implementation
+surfaces but does not satisfy authenticated deletion, provider lifecycle,
+customer/recipient, human screen-reader/field-CWV, independent-review, or
+final-release requirements. No checkbox changed; score remains **244 checked /
+36 open / 280 total (87.1%)**, partitioned as **13 AppSec-dependent / 23
+non-AppSec** rows. Evidence:
+`docs/shipping/evidence/vercel-web-production-public-surface-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · Web full serial regression after Production migration hook
 
 Web PR #268 merged head `98b5cf6` passed a fresh `pnpm test:serial` run with

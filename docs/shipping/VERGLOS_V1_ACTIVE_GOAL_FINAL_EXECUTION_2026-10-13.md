@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Production public-surface recheck
+
+The current Vercel Production deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL`
+reported `READY` on the live aliases. A bounded read-only recheck at
+`2026-10-23T21:23:55Z` matched all thirteen declared probes: public pages,
+machine-readable files, the synthetic handoff page, CLI-auth redirect, and
+the bounded receipt/API negative boundary. No login, token, payment, webhook,
+database, account, customer, or release-publication write occurred.
+
+This advances current provider/Production evidence for the relevant Web and
+Studio surfaces. It does not create authenticated deletion, payment/provider
+lifecycle, customer/recipient, human screen-reader/field-CWV,
+independent-review, or final go/no-go evidence. No checkbox changed; score
+remains **244 checked / 36 open / 280 total (87.1%)**, partitioned as **13
+AppSec-dependent / 23 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/vercel-web-production-public-surface-recheck-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Web full regression after Production migration hook
 
 The exact Web PR #268 merged head `98b5cf652623bf4f000ed93366b67a38154579e1`

@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Production public-surface gate
+
+Vercel deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` reported `READY`.
+Thirteen bounded read-only probes matched their expected statuses across the
+declared public pages, machine-readable files, synthetic handoff page,
+CLI-auth redirect, and receipt/API negative boundaries. This opens current
+provider/runtime surface evidence only. Authenticated deletion, provider
+lifecycle, customer/recipient, human/field-CWV, independent-review, and final
+go/no-go gates remain closed. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/vercel-web-production-public-surface-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · Web full regression gate
 
 Web PR #268 merge `98b5cf6` passed the full serial suite at **904/928**, with
