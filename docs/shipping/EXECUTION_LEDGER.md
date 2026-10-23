@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Current acceptance/release contract suite · 2026-10-24
+
+- **Source:** clean CLI `aad2c74395a5c381c955ab9dfab7462295564840`.
+- **Verification:** ten contract test files passed **63/63**, with zero
+  failures, skips, or cancellations. The suite covered freeze, reconciliation,
+  final regression, held-out correction, comprehension, authorized workflow,
+  commercial evidence, corpus triage, backlog partitioning, unsafe paths, and
+  byte/digest binding.
+- **Boundary:** Local implementation-contract evidence only. No hosted,
+  provider/payment, database, customer, reviewer, browser-human, field-CWV,
+  Production write, publication, or Actions run was initiated. No checkbox
+  changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/acceptance-contracts-current-head-2026-10-24.md`.
+- **Bundle:** Additive v16 contains 241 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:8b3e57f1b5510a7183bfbf18e2a847d5b4a0081f08ea41a65af5e0d200363ef1`.
+
 ## Current-head acceptance-story verification · 2026-10-24
 
 - **Sources:** clean CLI `aad2c74395a5c381c955ab9dfab7462295564840` and Web

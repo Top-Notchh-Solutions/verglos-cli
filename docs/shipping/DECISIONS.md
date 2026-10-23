@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current acceptance/release contract suite
+
+- **Decision:** Record the current CLI implementation-contract verification.
+- **Verification:** Ten acceptance/release contract test files passed **63/63**
+  with zero failures, skips, or cancellations.
+- **Boundary:** No hosted/provider/payment, database, customer, reviewer,
+  browser-human/field-CWV, Production write, publication, or Actions run was
+  initiated.
+- **Disposition:** Contract evidence refreshed; no checkbox changed. Score
+  remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/acceptance-contracts-current-head-2026-10-24.md`.
+- **Bundle:** Additive v16 verifies 241 hashed files with zero mismatches and
+  manifest `sha256:8b3e57f1b5510a7183bfbf18e2a847d5b4a0081f08ea41a65af5e0d200363ef1`.
+
 ## 2026-10-24 · record current-head acceptance-story verification
 
 - **Decision:** Record the current local acceptance-story substrate run against

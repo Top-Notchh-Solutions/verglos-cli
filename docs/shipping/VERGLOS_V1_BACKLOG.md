@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current acceptance/release contract suite
+
+The clean current CLI `aad2c74395a5c381c955ab9dfab7462295564840` passed the
+local acceptance/release contract suite **63/63**, with zero failures, skips,
+or cancellations. The suite covers the fail-closed implementation contracts
+for backlog partitioning, freeze, reconciliation, final regression, correction
+loop, comprehension, authorized workflow, commercial evidence, corpus triage,
+unsafe paths, and byte/digest binding. This refreshes implementation evidence
+only; no hosted/provider/customer, independent-review, human/field-CWV,
+account-deletion, AppSec/Hunt, or final-release gate is claimed. No checkbox
+changed. Score remains **245 checked / 35 open / 280 total (87.5%)**, with
+**13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/acceptance-contracts-current-head-2026-10-24.md`.
+The additive bundle v16 verifies **241/241** files with zero mismatches and
+manifest
+`sha256:8b3e57f1b5510a7183bfbf18e2a847d5b4a0081f08ea41a65af5e0d200363ef1`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-current-head-v16.json`.
+
 ## 2026-10-24 · current-head acceptance-story verification
 
 The clean current CLI `aad2c74395a5c381c955ab9dfab7462295564840` and Web
