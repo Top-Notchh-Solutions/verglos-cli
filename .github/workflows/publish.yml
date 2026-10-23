@@ -36,6 +36,16 @@ jobs:
       cancel-in-progress: false
 
     steps:
+      - name: Verify final shipping readiness
+        env:
+          FINAL_RELEASE_READY: ${{ vars.VERGLOS_FINAL_RELEASE_READY }}
+        run: |
+          set -euo pipefail
+          if [[ "${FINAL_RELEASE_READY}" != "true" ]]; then
+            echo "::error::VERGLOS_FINAL_RELEASE_READY must be true after the complete shipping goal is satisfied"
+            exit 1
+          fi
+
       - name: Checkout
         uses: actions/checkout@v5
 
