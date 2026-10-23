@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Production landing browser mapping
+
+- **Implementation mapping:** Web commit `0856d8f` / PR #265 merge `c72c08f`
+  maps delayed INP observer handling to the landing capture harness while
+  retaining fail-closed behavior.
+- **Hosted mapping:** The capture ran against `https://verglos.com` with
+  Chromium/Axe, desktop/mobile viewports, and six required routes; all
+  **12/12** measurements passed performance, accessibility, responsive,
+  metadata, and crawlability contracts.
+- **Acceptance mapping:** This proves automated Chromium/Axe evidence only.
+  It does not prove human screen-reader, supported-browser/field-CWV,
+  customer, independent-review, or final-release acceptance. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/final-web-007-production-browser-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · Production receipt API route mapping
 
 - **Implementation mapping:** Web commit `74239c8` / PR #264 merge

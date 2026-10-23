@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## Web Production landing browser qualification · 2026-10-24
+
+- **Implementation:** Web commit `0856d8f`; PR #265 merged normally as
+  `c72c08f1fc1d198de3ec28ed735c40f9a27f2a46`. The capture retries one real
+  interaction only when the INP observer is delayed and remains fail-closed.
+- **Verification:** Focused landing tests **4/4**, typecheck, and diff checks
+  passed. Live `https://verglos.com` Playwright Chromium/Axe capture covered
+  six paths at desktop/mobile (**12/12**) with no page failures or gaps.
+- **Disposition:** This advances FINAL-WEB-007/008 automated hosted evidence;
+  it is not human screen-reader or field-CWV evidence. No login, payment,
+  database, customer, account, entitlement, webhook, Production write, or
+  AppSec action occurred. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/final-web-007-production-browser-qualification-2026-10-24.md`.
+
 ## Web Production receipt API route fix · 2026-10-24
 
 - **Implementation:** Web commit `74239c8` added the missing public matcher for

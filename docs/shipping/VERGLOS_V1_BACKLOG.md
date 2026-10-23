@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Production landing browser qualification passed
+
+The Web landing capture harness now retries one real pointer/keyboard
+interaction when the Chromium INP observer is delayed, while preserving a
+fail-closed absent-INP result. Web commit `0856d8f` merged normally in PR
+**#265** as `c72c08f1fc1d198de3ec28ed735c40f9a27f2a46`; focused landing tests
+passed **4/4**, with typecheck and diff checks passing. Against live
+`https://verglos.com`, Playwright Chromium/Axe covered six required paths at
+desktop/mobile (**12/12**) with all LCP/INP/CLS/FCP/TTFB, accessibility,
+keyboard, reduced-motion, responsive, metadata, and crawlability checks
+passing. Robots and sitemap returned 200. This advances FINAL-WEB-007/008
+implementation/hosted evidence but does not close their human/field,
+dependency, independent-review, or final-release contracts. Evidence:
+`docs/shipping/evidence/final-web-007-production-browser-qualification-2026-10-24.md`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## 2026-10-24 · Production receipt API route boundary verified
 
 Production public-route audit found the implemented bounded

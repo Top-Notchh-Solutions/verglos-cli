@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Production landing browser qualification passed
+
+The landing-release capture harness now retries one real pointer/keyboard
+interaction when Chromium has not delivered an INP entry after its initial
+settling window, while still failing closed if INP remains absent. Web commit
+`0856d8f` merged normally in PR **#265** as
+`c72c08f1fc1d198de3ec28ed735c40f9a27f2a46`. Focused landing tests **4/4**,
+typecheck, and diff checks passed.
+
+The hardened harness ran against live `https://verglos.com` with Playwright
+Chromium/Axe at desktop and mobile viewports for `/`, `/docs`, `/detectors`,
+`/proof`, `/verify`, and `/checkout`: **12/12** passed. All measured LCP, INP,
+CLS, FCP, TTFB, accessibility, keyboard, reduced-motion, responsive,
+canonical, and crawlability checks passed; robots and sitemap returned 200.
+Evidence: `docs/shipping/evidence/final-web-007-production-browser-qualification-2026-10-24.md`.
+
+This is automated browser/Axe evidence, not human screen-reader or field-CWV
+evidence. It does not close FINAL-WEB-007/008 or any other row without their
+remaining dependency, acceptance, independent-review, and final-release
+artifacts. No login, payment, database, customer, account, entitlement,
+webhook, Production write, or AppSec action occurred. The additive bundle now
+contains the browser evidence; score remains **244 checked / 36 open / 280
+total (87.1%)**, partitioned as **13 AppSec-dependent / 23 non-AppSec** rows.
+
 ## Latest continuation result · 2026-10-24 · Production receipt API route fix shipped
 
 The Production public-route audit found the implemented bounded JSON receipt
