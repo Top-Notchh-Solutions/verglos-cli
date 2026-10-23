@@ -82,6 +82,30 @@ or requalify completed non-AppSec targets merely because that artifact arrives.
 Only a concrete regression or shared integration dependency may justify a
 targeted follow-up change, and that change must be recorded separately.
 
+## Latest continuation result · 2026-10-23 · DIST-002/003 alpha.4 partial provider publication
+
+Normal PR #184 merged the seven-package `2.0.0-alpha.4` candidate at
+`ed318f06b97771f45cc6970f745868fb1aa09404`. Immutable tag `v2.0.0-alpha.4`
+started publish workflow run `39880762320`; the owner-approved release
+deployment was `7267394818`. The workflow passed its release checks and npm
+accepted five packages with provenance bound to the exact merge commit:
+`@verglos/shared`, `@verglos/scanner`, `@verglos/reporter`, `@verglos/mcp`,
+and `@verglos/entitlement`, all at `2.0.0-alpha.4`.
+
+The real `@verglos/hunt@2.0.0-alpha.4` publish then failed with npm `E404`
+(`package not found or you do not have permission to access it`). The workflow
+stopped before the unscoped `verglos` CLI package step. A read-only registry
+recheck and the private verifier accept **5/7** packages; Hunt is absent and
+the CLI was not attempted. The exact bounded observation is recorded in
+`docs/shipping/evidence/dist-002-003-npm-publication-partial-alpha4-2026-10-23.md`
+and its JSON companion.
+
+This is a genuine provider-state observation, not a complete release. Keep
+`DIST-002` and `DIST-003` unchecked until one immutable candidate publishes all
+seven packages with matching provenance. The live score remains **244 checked /
+36 open / 280 total (87.1%)**. No customer acceptance, independent review, or
+final release decision is claimed. Nothing was deleted.
+
 ## Latest continuation result · 2026-10-23 · DIST-002/003 npm publication observation
 
 The private shipping toolchain now exposes

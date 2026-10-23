@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · DIST-002/003 alpha.4 partial provider publication
+
+- **Release event:** PR #184 merged normally at
+  `ed318f06b97771f45cc6970f745868fb1aa09404`; immutable tag
+  `v2.0.0-alpha.4` triggered workflow `39880762320` after owner-approved
+  deployment `7267394818`.
+- **Observed writes:** npm accepted `@verglos/shared`, `@verglos/scanner`,
+  `@verglos/reporter`, `@verglos/mcp`, and `@verglos/entitlement`, each with
+  provenance bound to the exact merge commit. `@verglos/hunt` returned npm
+  `E404` during its real publish step, and the workflow stopped before the
+  `verglos` CLI step.
+- **Verification:** The private read-only verifier accepted **5/7** current
+  packages and recorded the missing Hunt/not-attempted CLI state. Evidence:
+  `evidence/dist-002-003-npm-publication-partial-alpha4-2026-10-23.md` and
+  `evidence/dist-002-003-npm-publication-partial-alpha4-2026-10-23.json`.
+- **Disposition:** Keep `DIST-002`/`DIST-003` open. This is not complete
+  seven-package publication; no customer acceptance, independent review, or
+  final release decision is claimed. Score remains **244/36/280 (87.1%)**.
+  Nothing was deleted.
+
 ## 2026-10-23 · DIST-002/003 npm publication observation
 
 - **Implementation:** Added `scripts/verify-npm-publication.mjs` and the

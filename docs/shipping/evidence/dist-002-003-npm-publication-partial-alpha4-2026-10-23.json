@@ -1,0 +1,92 @@
+{
+  "schema": "verglos.private.npm-publication-observation.v1",
+  "generatedAt": "2026-10-23T01:00:57.092Z",
+  "requestedVersion": "2.0.0-alpha.4",
+  "requestedSourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+  "registry": "https://registry.npmjs.org",
+  "repository": "https://github.com/Top-Notchh-Solutions/verglos-cli",
+  "workflow": ".github/workflows/publish.yml",
+  "workflowRunId": 39880762320,
+  "workflowUrl": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320",
+  "deploymentId": 7267394818,
+  "tag": "v2.0.0-alpha.4",
+  "mergeCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+  "summary": {
+    "packageCount": 7,
+    "acceptedPackageCount": 5,
+    "failureCount": 12,
+    "accepted": false,
+    "providerWritePerformed": true,
+    "customerAcceptance": "not-claimed",
+    "independentReview": "required"
+  },
+  "packages": [
+    {
+      "package": "verglos",
+      "version": "2.0.0-alpha.4",
+      "status": "not-attempted",
+      "reason": "workflow stopped before CLI publication after Hunt failure"
+    },
+    {
+      "package": "@verglos/shared",
+      "version": "2.0.0-alpha.4",
+      "status": "accepted",
+      "tarballIntegrity": "sha512-jtE1/As7qy7ymrV8cMbcHY57+1Ms8nMB4hy+DenicnefY8riW30EGluEf6BI6DhOrKriQE29VKAeCdUduJja8g==",
+      "metadataSha256": "sha256:a9f2526a455dca2cac0e002be6e3e3a8d99b40bb2b2167af8741f397e35af9dd",
+      "attestationSha256": "sha256:0a534fab97eb3b5b2bb421f10d691583aa8942eef81230b4549f3fbc9f642306",
+      "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+      "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1"
+    },
+    {
+      "package": "@verglos/scanner",
+      "version": "2.0.0-alpha.4",
+      "status": "accepted",
+      "tarballIntegrity": "sha512-vO0TTH3KwRoJ1N9DENMMrfeRW75lHzI+5rw+3iodxMSKTJ5XbZ+HIEMVpcq5CJdZgTD7p8g/YB05sJtRTyoBgQ==",
+      "metadataSha256": "sha256:7c1435b10bf8e7cf4bbf518de455337c30bb490cfbe7b1ee02e80a69d8a2521c",
+      "attestationSha256": "sha256:44dcf6bf98a19b37b82a3983a9345de92727a5ab576eb33b8359321103199aa1",
+      "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+      "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1"
+    },
+    {
+      "package": "@verglos/reporter",
+      "version": "2.0.0-alpha.4",
+      "status": "accepted",
+      "tarballIntegrity": "sha512-kMtdss9FAs6dcJ9ODjp9u0MrkngE+VZu4xalM2PCenFf6EELzZQ9+Tb2l4l7gpXPKAl6F+nQaT5BntiJRfxhAA==",
+      "metadataSha256": "sha256:5a081b4357513973efcd4c2c38f502a38bc635dc46defaaeb480ed7d53339ee6",
+      "attestationSha256": "sha256:58bd318f3a7ded8e9b3a47902a0949d06432abe96a025e56fcd653cae948352e",
+      "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+      "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1"
+    },
+    {
+      "package": "@verglos/mcp",
+      "version": "2.0.0-alpha.4",
+      "status": "accepted",
+      "tarballIntegrity": "sha512-EKfTO1ouE1vszAr+sPdOwQkS3tICaX/XPAQ5IUmnEBPGEprUuLupKanN3wndNExnXs2y2NOA2YJg3g2iWcU/BA==",
+      "metadataSha256": "sha256:31a22a550d14e0a86c94305baae7dc70c54b12c5e0e8974171a1e4bc0edacbdc",
+      "attestationSha256": "sha256:a4f022c1857af6f6451d05474bdf36651b092f0bf9991e38decc46d0e9d5e9a2",
+      "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+      "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1"
+    },
+    {
+      "package": "@verglos/entitlement",
+      "version": "2.0.0-alpha.4",
+      "status": "accepted",
+      "tarballIntegrity": "sha512-4XveNdjUCS9XhOASWjPtM0AjQWQA6o4GvsUiuI0vigbccF4EnCwmLn44ZlwDEYMbGJPhmeUCFVNRmndxkYJuWA==",
+      "metadataSha256": "sha256:6d1cd3d62919ef6bf142abc61a006eb70a6cd773e43f4b426d2c2b1971cd4020",
+      "attestationSha256": "sha256:eec41e38d16aa9956cc911302f2225bb52d9e4f002fa8250c95730cb9297544e",
+      "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+      "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1"
+    },
+    {
+      "package": "@verglos/hunt",
+      "version": "2.0.0-alpha.4",
+      "status": "rejected",
+      "reason": "npm publish returned E404: package not found or publish permission is absent",
+      "failureCodes": [
+        "package-not-found",
+        "missing-slsa-provenance"
+      ]
+    }
+  ],
+  "verifierReportSha256": "sha256:1026031597758515ad8861d027805965e8010be5c55dde763f08843197e189ce"
+}

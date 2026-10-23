@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · DIST-002/003 alpha.4 partial provider publication
+
+PR #184 merged normally at `ed318f06b97771f45cc6970f745868fb1aa09404` and the
+immutable `v2.0.0-alpha.4` tag triggered workflow `39880762320`. The owner-
+approved release deployment was `7267394818`. npm accepted five packages with
+exact-source provenance: `@verglos/shared`, `@verglos/scanner`,
+`@verglos/reporter`, `@verglos/mcp`, and `@verglos/entitlement`.
+
+The real `@verglos/hunt` publication failed with npm `E404` (package missing or
+publish permission absent), so the workflow stopped before the `verglos` CLI
+package step. The private read-only verifier accepted **5/7**; `DIST-002` and
+`DIST-003` remain open for complete seven-package publication and provenance.
+The live score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing
+was deleted. Evidence:
+`evidence/dist-002-003-npm-publication-partial-alpha4-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-002/003 npm publication observation
 
 The private shipping toolchain now exposes `acceptance:release:npm-observe`, a
