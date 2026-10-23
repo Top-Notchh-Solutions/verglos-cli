@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-009/010 release byte binding
+
+Release reconciliation and candidate-freeze file runners now bind declared
+evidence/artifact digests to actual bounded regular-file bytes under explicit
+roots, rejecting mismatches and present files marked absent. Focused contracts
+passed **22/22**; adjacent acceptance contracts passed **54/54**; study
+protocol, syntax, and diff checks passed. No checkbox changed. Score remains
+**244 checked / 36 open / 280 total (87.1%)**. The additive bundle contains
+165 hashed files with manifest
+`sha256:04b44f0ba05b08f97283b7b35f70385c8dcaed6029142558a7ae314a49efc692`
+and file SHA-256
+`ce44f2c06b6c2172a42786b5f97b619e91138d8497bdc008b71f13f00ea92c75`.
+Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/accept-009-010-release-byte-binding-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-001/003 public packer read binding
 
 The public packer now uses bounded regular-file reads for reviewed package

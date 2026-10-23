@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## ACCEPT-009/010 release byte binding · 2026-10-23
+
+- **Source mapping:** Private bounded-reader, release-reconciliation, and
+  candidate-freeze file runners.
+- **Contract mapping:** Declared evidence/artifact digests are checked against
+  actual bounded regular-file bytes under explicit roots; absent artifacts are
+  rejected if present; no-follow, identity, size, and exclusive-write
+  protections remain active.
+- **Verification mapping:** Focused contracts **22/22**; adjacent acceptance
+  contracts **54/54**; study-protocol, syntax, and diff checks passed.
+- **Artifact mapping:** 165 hashed bundle files; manifest SHA-256
+  `sha256:04b44f0ba05b08f97283b7b35f70385c8dcaed6029142558a7ae314a49efc692`;
+  bundle file SHA-256
+  `ce44f2c06b6c2172a42786b5f97b619e91138d8497bdc008b71f13f00ea92c75`;
+  secret scan passed.
+- **Acceptance mapping:** ACCEPT-009/010 remain open for actual release
+  evidence, provider/customer/independent-review gates, AppSec/Hunt review,
+  and final sign-off. Score remains **244/36/280 (87.1%)**; nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/accept-009-010-release-byte-binding-2026-10-23.md`.
+
 ## DIST-001/003 public packer read binding · 2026-10-23
 
 - **Source mapping:** Private public-packer, notice-generator, and focused

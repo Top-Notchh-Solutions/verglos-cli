@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-009/010 release byte binding
+
+The release reconciliation and candidate-freeze file runners now verify
+declared evidence/artifact digests against actual bounded regular-file bytes
+under explicit roots. Present artifacts must match their bytes; artifacts
+marked absent cannot exist. The focused freeze/reconciliation/bounded-reader/
+final-regression contracts passed **22/22**; the full adjacent acceptance set
+passed **54/54**; study-protocol, syntax, and diff checks passed.
+
+This advances ACCEPT-009/010 implementation only. It does not claim the actual
+release decision, candidate freeze, provider publication, customer acceptance,
+independent review, AppSec/Hunt review, or final sign-off. No checkbox or
+external state changed, and nothing was deleted or overwritten. The additive
+bundle contains **165 hashed files** with manifest
+`sha256:04b44f0ba05b08f97283b7b35f70385c8dcaed6029142558a7ae314a49efc692`
+and file SHA-256
+`ce44f2c06b6c2172a42786b5f97b619e91138d8497bdc008b71f13f00ea92c75`.
+The live score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/accept-009-010-release-byte-binding-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · DIST-001/003 public packer read binding
 
 The public packer now reads reviewed package manifests and package license

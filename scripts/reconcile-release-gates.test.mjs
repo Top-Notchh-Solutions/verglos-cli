@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import test from "node:test";
 import { join } from "node:path";
@@ -6,6 +7,7 @@ import { tmpdir } from "node:os";
 import { reconcileReleaseGates, reconcileReleaseGatesFile } from "./reconcile-release-gates.mjs";
 
 const digest = (value) => `sha256:${value.repeat(64).slice(0, 64)}`;
+const bytesDigest = (value) => `sha256:${createHash("sha256").update(value).digest("hex")}`;
 
 function run(overrides = {}) {
   return {
@@ -79,6 +81,31 @@ test("reconciliation file refuses to overwrite an existing report", async () => 
   try {
     await assert.rejects(reconcileReleaseGatesFile(inputPath, outputPath), (error) => error?.code === "EEXIST");
     assert.equal(await readFile(outputPath, "utf8"), "existing-reconciliation\n");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("reconciliation file binds evidence claims to bytes under the evidence root", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-reconcile-bindings-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "reconciliation.json");
+  const evidencePath = join(directory, "evidence.md");
+  const contents = "bounded evidence\n";
+  await writeFile(evidencePath, contents, "utf8");
+  const input = run({ rows: [{ id: "FINAL-WEB-007", state: "partial", evidence: [{ path: "evidence.md", sha256: bytesDigest(contents) }] }] });
+  await writeFile(inputPath, `${JSON.stringify(input)}\n`, "utf8");
+  try {
+    const report = await reconcileReleaseGatesFile(inputPath, outputPath, { evidenceRoot: directory });
+    assert.equal(report.summary.rowCount, 1);
+
+    const mismatchInput = join(directory, "mismatch-input.json");
+    const mismatchOutput = join(directory, "mismatch-reconciliation.json");
+    await writeFile(mismatchInput, `${JSON.stringify(run({ rows: [{ id: "FINAL-WEB-007", state: "partial", evidence: [{ path: "evidence.md", sha256: digest("f") }] }] }))}\n`, "utf8");
+    await assert.rejects(
+      reconcileReleaseGatesFile(mismatchInput, mismatchOutput, { evidenceRoot: directory }),
+      /evidence digest does not match bytes/u,
+    );
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

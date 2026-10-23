@@ -16,16 +16,24 @@ export async function readBoundedJsonFile(inputPath, label, maxBytes = MAX_INPUT
 }
 
 export async function readBoundedJsonFileWithDigest(inputPath, label, maxBytes = MAX_INPUT_BYTES) {
-  const bytes = await readBoundedFile(inputPath, label, maxBytes);
+  const result = await readBoundedFileWithDigest(inputPath, label, maxBytes);
   let value;
   try {
-    value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+    value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(result.bytes));
   } catch {
     throw new Error(`${label} must contain valid bounded UTF-8 JSON`);
   }
   return Object.freeze({
     value,
-    bytes: bytes.byteLength,
+    bytes: result.bytes.byteLength,
+    sha256: result.sha256,
+  });
+}
+
+export async function readBoundedFileWithDigest(inputPath, label, maxBytes = MAX_INPUT_BYTES) {
+  const bytes = await readBoundedFile(inputPath, label, maxBytes);
+  return Object.freeze({
+    bytes,
     sha256: `sha256:${createHash("sha256").update(bytes).digest("hex")}`,
   });
 }

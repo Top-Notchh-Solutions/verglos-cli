@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import test from "node:test";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { freezeReleaseCandidate, freezeReleaseCandidateFile } from "./freeze-release-candidate.mjs";
 
 const digest = (value) => `sha256:${value.repeat(64).slice(0, 64)}`;
+const bytesDigest = (value) => `sha256:${createHash("sha256").update(value).digest("hex")}`;
 const gates = { providerLifecycle: "open", customerConsent: "open", independentReview: "open", authenticatedBrowser: "passed", fieldCwv: "open", accountDeletion: "open", finalRelease: "open" };
 const artifactKinds = ["version", "schema", "migration", "manifest", "plan-catalog", "compatibility", "docs", "runbook", "notice", "sbom", "provenance", "rollback"];
 
@@ -80,6 +82,31 @@ test("freeze file refuses to overwrite an existing candidate artifact", async ()
       (error) => error?.code === "EEXIST",
     );
     assert.equal(await readFile(outputPath, "utf8"), "existing-freeze\n");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("freeze file binds present artifact claims to bytes under the artifact root", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "verglos-freeze-bindings-"));
+  const inputPath = join(directory, "input.json");
+  const outputPath = join(directory, "freeze.json");
+  const artifactPath = join(directory, "release", "version.json");
+  const contents = "{\"version\":\"2.0.0-alpha.1\"}\n";
+  await mkdir(join(directory, "release"), { recursive: true });
+  await writeFile(artifactPath, contents, "utf8");
+  await writeFile(inputPath, `${JSON.stringify(run({ artifacts: [{ path: "release/version.json", kind: "version", sha256: bytesDigest(contents), required: true, present: true }] }))}\n`, "utf8");
+  try {
+    const report = await freezeReleaseCandidateFile(inputPath, outputPath, { artifactRoot: directory });
+    assert.equal(report.artifacts[0].sha256, bytesDigest(contents));
+
+    const mismatchInput = join(directory, "mismatch-input.json");
+    const mismatchOutput = join(directory, "mismatch-freeze.json");
+    await writeFile(mismatchInput, `${JSON.stringify(run({ artifacts: [{ path: "release/version.json", kind: "version", sha256: digest("f"), required: true, present: true }] }))}\n`, "utf8");
+    await assert.rejects(
+      freezeReleaseCandidateFile(mismatchInput, mismatchOutput, { artifactRoot: directory }),
+      /artifact digest does not match bytes/u,
+    );
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

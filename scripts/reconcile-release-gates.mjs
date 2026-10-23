@@ -1,5 +1,6 @@
 import { writeFile } from "node:fs/promises";
-import { readBoundedJsonFile } from "./read-bounded-json.mjs";
+import { resolve } from "node:path";
+import { readBoundedFileWithDigest, readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const SCHEMA = "verglos.private.release-gate-reconciliation.v1";
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
@@ -90,11 +91,26 @@ export function reconcileReleaseGates(input, { now = new Date() } = {}) {
   });
 }
 
-export async function reconcileReleaseGatesFile(inputPath, outputPath, options = {}) {
+export async function reconcileReleaseGatesFile(inputPath, outputPath, { evidenceRoot, ...options } = {}) {
   const input = await readBoundedJsonFile(inputPath, "release-gate reconciliation input");
   const report = reconcileReleaseGates(input, options);
+  if (evidenceRoot !== undefined) await verifyEvidenceBytes(input.rows, evidenceRoot);
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;
+}
+
+async function verifyEvidenceBytes(rows, evidenceRoot) {
+  if (typeof evidenceRoot !== "string" || evidenceRoot.length === 0) throw new Error("evidence root is invalid");
+  const root = resolve(evidenceRoot);
+  for (const rawRow of rows) {
+    const row = validateRow(rawRow);
+    for (const evidence of row.evidence) {
+      const absolute = resolve(root, evidence.path);
+      if (absolute !== root && !absolute.startsWith(`${root}/`)) throw new Error(`release evidence path escapes evidence root: ${evidence.path}`);
+      const result = await readBoundedFileWithDigest(absolute, `release evidence ${evidence.path}`);
+      if (result.sha256 !== evidence.sha256) throw new Error(`release evidence digest does not match bytes: ${evidence.path}`);
+    }
+  }
 }
 
 function validateRun(input) {
@@ -160,6 +176,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const inputPath = process.argv[2];
   const outputPath = process.argv[3];
   if (!inputPath || !outputPath) throw new Error("usage: node scripts/reconcile-release-gates.mjs INPUT.json OUTPUT.json");
-  const report = await reconcileReleaseGatesFile(inputPath, outputPath);
+  const report = await reconcileReleaseGatesFile(inputPath, outputPath, { evidenceRoot: process.env.VERGLOS_EVIDENCE_ROOT ?? process.cwd() });
   process.stdout.write(`${JSON.stringify({ schema: report.schema, recommendation: report.decision.recommendation, openGates: report.summary.openGateCount, partialRows: report.summary.partialCount, plannedRows: report.summary.plannedCount })}\n`);
 }

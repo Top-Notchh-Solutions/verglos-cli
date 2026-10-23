@@ -1,5 +1,28 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-009/010 release byte binding · 2026-10-23
+
+- **Source mapping:** Private bounded-reader, release-reconciliation, and
+  candidate-freeze file runners.
+- **Contract mapping:** File runners verify declared evidence/artifact digests
+  against bounded regular-file bytes under explicit roots; present artifacts
+  must match and absent artifacts cannot exist. No-follow, identity, size, and
+  exclusive-write protections remain active.
+- **Verification mapping:** Focused freeze/reconciliation/bounded-reader/
+  final-regression contracts **22/22**; adjacent acceptance contracts
+  **54/54**; study-protocol, syntax, and diff checks passed.
+- **Artifact mapping:** Additive bundle contains 165 hashed files with
+  manifest SHA-256
+  `sha256:04b44f0ba05b08f97283b7b35f70385c8dcaed6029142558a7ae314a49efc692`
+  and bundle file SHA-256
+  `ce44f2c06b6c2172a42786b5f97b619e91138d8497bdc008b71f13f00ea92c75`;
+  secret scan passed.
+- **Acceptance mapping:** Keep ACCEPT-009/010 open for actual release
+  evidence, provider/customer/independent-review gates, AppSec/Hunt review,
+  and final sign-off. No checkbox or external state changed; nothing was
+  deleted or overwritten. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-009-010-release-byte-binding-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-008 commercial validator boundaries
 
 - **Implementation:** Private commit `6af3fbb7` hardens the validator against

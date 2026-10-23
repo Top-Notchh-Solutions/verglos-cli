@@ -1,5 +1,6 @@
-import { writeFile } from "node:fs/promises";
-import { readBoundedJsonFile } from "./read-bounded-json.mjs";
+import { lstat, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { readBoundedFileWithDigest, readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const SCHEMA = "verglos.private.release-candidate-freeze.v1";
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
@@ -77,11 +78,32 @@ export function freezeReleaseCandidate(input) {
   });
 }
 
-export async function freezeReleaseCandidateFile(inputPath, outputPath) {
+export async function freezeReleaseCandidateFile(inputPath, outputPath, { artifactRoot } = {}) {
   const input = await readBoundedJsonFile(inputPath, "release candidate freeze input");
   const report = freezeReleaseCandidate(input);
+  if (artifactRoot !== undefined) await verifyArtifactBytes(report.artifacts, artifactRoot);
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;
+}
+
+async function verifyArtifactBytes(artifacts, artifactRoot) {
+  if (typeof artifactRoot !== "string" || artifactRoot.length === 0) throw new Error("artifact root is invalid");
+  const root = resolve(artifactRoot);
+  for (const artifact of artifacts) {
+    const absolute = resolve(root, artifact.path);
+    if (absolute !== root && !absolute.startsWith(`${root}/`)) throw new Error(`freeze artifact path escapes artifact root: ${artifact.path}`);
+    if (!artifact.present) {
+      try {
+        await lstat(absolute);
+        throw new Error(`freeze artifact is marked absent but exists: ${artifact.path}`);
+      } catch (error) {
+        if (error?.code !== "ENOENT") throw error;
+      }
+      continue;
+    }
+    const result = await readBoundedFileWithDigest(absolute, `freeze artifact ${artifact.path}`);
+    if (result.sha256 !== artifact.sha256) throw new Error(`freeze artifact digest does not match bytes: ${artifact.path}`);
+  }
 }
 
 function validateRun(input) {
@@ -119,6 +141,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const inputPath = process.argv[2];
   const outputPath = process.argv[3];
   if (!inputPath || !outputPath) throw new Error("usage: node scripts/freeze-release-candidate.mjs INPUT.json OUTPUT.json");
-  const report = await freezeReleaseCandidateFile(inputPath, outputPath);
+  const report = await freezeReleaseCandidateFile(inputPath, outputPath, { artifactRoot: process.env.VERGLOS_RELEASE_ARTIFACT_ROOT ?? process.cwd() });
   process.stdout.write(`${JSON.stringify({ schema: report.schema, status: report.freeze.status, openGates: report.summary.openGateCount, missingArtifacts: report.summary.missingArtifactCount, missingArtifactKinds: report.summary.missingArtifactKindCount })}\n`);
 }
