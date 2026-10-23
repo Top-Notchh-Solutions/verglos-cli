@@ -1,5 +1,24 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · merged source queue reconciled
+
+The authoritative GitHub heads are CLI `main` at
+`c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web `main` at
+`0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`. `gh pr list --state open` returns
+`[]` for both repositories; there is no pending merge to retry. Recent normal
+merge commits include CLI PRs #179/#193 and Web PRs #254/#255/#256. No squash,
+branch deletion, tag, publication, provider, Production, customer, or final
+release action occurred.
+
+The next non-AppSec queue entry is `ACCEPT-003`. Its bounded bundle
+implementation is present, and the current additive bundle now contains **175
+hashed files** with manifest
+`sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00`;
+secret scan passed. `ACCEPT-003` remains open for its complete reviewer,
+hosted, and external acceptance artifacts. The score remains **244 checked /
+36 open / 280 total (87.1%)**. Evidence:
+`docs/shipping/evidence/source-queue-audit-after-merged-prs-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · STUDIO-CLI-001 reservation race merged
 
 Web PR #254 merged normally into `main` as merge commit
@@ -719,11 +738,13 @@ still **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted.
 Evidence:
 `docs/shipping/evidence/dist-006-no-follow-pr189-2026-10-23.md`.
 
-## Latest continuation result · 2026-10-23 · current source-queue audit
+## Historical continuation result · 2026-10-23 · superseded source-queue audit
 
-The current authoritative product heads are Web `origin/main` at `16ceddc`
-and CLI `origin/main` at `6ad18792`. Web has no open implementation PRs. The
-only open CLI PR is the package-license-read binding row, which is outside the
+The earlier audit recorded Web `origin/main` at `16ceddc` and CLI `origin/main`
+at `6ad18792`. It is retained as historical evidence. The authoritative
+replacement above records the later merged heads; both current repositories
+have no open implementation PRs. The earlier audit's
+only open CLI PR was the package-license-read binding row, which was outside the
 remaining non-AppSec implementation queue. The QUAL-WEB-005/006 source slices
 and the ACCEPT-006/008 validator substrates are already present in the merged
 heads; their rows remain open only for the observed artifacts named by their

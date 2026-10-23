@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · merged source queue reconciled
+
+CLI `main` is `c0f0db6ab8ab223d0eead310bf827fc11da59bbd` and Web `main` is
+`0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; both repositories have no open
+PRs. The next non-AppSec queue entry is `ACCEPT-003`. Its current additive
+bundle contains 175 hashed files with manifest
+`sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00` and
+passed secret scan. This does not satisfy the reviewer, hosted, or external
+acceptance gates, so no row or release gate is checked. Score remains
+**244/36/280 (87.1%)**. No publication, provider, Production, customer, tag,
+or release action occurred. Nothing was deleted or overwritten. Evidence:
+`evidence/source-queue-audit-after-merged-prs-2026-10-23.md`.
+
 ## 2026-10-23 · STUDIO-CLI-001 reservation race merged
 
 Web PR #254 merged normally as

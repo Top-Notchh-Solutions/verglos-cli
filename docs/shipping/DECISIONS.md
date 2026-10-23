@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile merged source queue
+
+- **Decision:** Treat the GitHub merge queue as empty after normal merges;
+  do not create a duplicate merge or alter history.
+- **Heads:** CLI `main` is
+  `c0f0db6ab8ab223d0eead310bf827fc11da59bbd`; Web `main` is
+  `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9`; both open-PR queries return
+  `[]`.
+- **Next action:** Continue with `ACCEPT-003` evidence/reconciliation. Its
+  implementation substrate is present, but its reviewer/hosted/external
+  acceptance artifacts are not fabricated by this audit.
+- **Evidence:** Current bundle has 175 hashed files, manifest
+  `sha256:85fb43c459de28ac2256f8995fdbbf8bfa500d4d0422c61c01b9283a5c66de00`,
+  and a passed secret scan. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted or overwritten.
+
 ## 2026-10-23 · merge STUDIO-CLI-001 reservation race hardening
 
 - **Decision:** Promote Web PR #254's duplicate projection reservation
