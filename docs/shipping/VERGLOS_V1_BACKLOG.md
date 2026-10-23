@@ -1,5 +1,40 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Production proof route corrected and verified
+
+Production execution found a real hosted defect: `verglos.com/proof` returned
+HTTP **404** because the Clerk public-route matcher omitted `/proof`. Web
+commit `6228bcc` added the public-route entry; PR **#260** merged normally as
+`fb6ff569e4a7bf108d95b5a7680c9f4130bbf8d5`. The owner-managed Vercel
+Production deployment and the post-merge `main` deployment both reported
+**READY**. Read-only Production verification returned HTTP **200** for `/`,
+`/proof`, `/checkout`, `/llms.txt`, `/robots.txt`, and `/sitemap.xml`; `/proof`
+contained `Public proof assets`. Vercel generated **49/49** static pages and
+reported valid Production runtime configuration. Local fix checks passed
+truth-registry **37/37**, public-release smoke **12/12**, typecheck, and diff
+checks. No payment, database, customer, account, entitlement, webhook, or
+final CLI/npm release action occurred. This advances hosted implementation
+evidence for FINAL-WEB-006/007/008 but does not close them because their
+acceptance, human/field, independent-review, dependency, and final-release
+gates remain open. Evidence:
+`docs/shipping/evidence/vercel-web-production-proof-route-fix-2026-10-24.md`.
+The additive private bundle verifies **207/207** files with zero mismatches,
+passed secret scanning, and manifest
+`sha256:3d8d0c2231b7ebb119a6b58f0321ee3e63a24cdb1b93b4901f588f33ad78c6e8`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-proof-route-fix.json`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
+## 2026-10-24 · local acceptance substrates verified
+
+The clean current CLI/Web heads completed the local acceptance-substrate
+verifier: CLI **310/312** passed with 2 designed skips, Web **960/990** passed
+with 30 designed skips, and composed acceptance substrates **83/83** passed.
+This is regression/substrate evidence only and does not substitute for hosted,
+provider, customer, reviewer, browser-human, field-CWV, migration, or
+Production acceptance. Evidence:
+`docs/shipping/evidence/acceptance-stories-verification-2026-10-24-local-current.json`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## 2026-10-24 · owner-controlled human review recorded
 
 At **2026-10-24 01:18:38 IST** (`2026-10-23T19:48:38Z`), Anurag Yadav,
