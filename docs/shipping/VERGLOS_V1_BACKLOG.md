@@ -17,8 +17,8 @@ Evidence: `docs/shipping/evidence/cli-platform-matrix-run-39993289161-2026-10-23
 ## 2026-10-23 · hosted receipt promotion status
 
 The hosted matrix receipt and verified 196-file bundle are also carried by
-private-shipping commit `4cfe082e` on PR #210; PR #211 remains open as the
-separate evidence-only review. Required self-scan still fails at the public
+private-shipping commit `4cfe082e` on PR #210; PR #211 was closed as superseded
+with its branch and commits retained. Required self-scan still fails at the public
 boundary because this public repository retains `docs/shipping/**` in its
 reachable history (9,397 historical path objects observed). Commit `61c83511`
 removes the child-process buffer failure and exposes that existing policy
