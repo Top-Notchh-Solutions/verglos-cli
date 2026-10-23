@@ -24,6 +24,9 @@ jobs:
   publish:
     name: Publish npm packages
     runs-on: ubuntu-latest
+    # Final V1 publication is intentionally stable-only. Prerelease tags are
+    # candidate artifacts and must never reach the public registry.
+    if: startsWith(github.ref, 'refs/tags/v') && !contains(github.ref_name, '-')
     # The repository's `release` environment must require an explicit
     # reviewer before any registry mutation.
     environment:

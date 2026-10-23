@@ -44,6 +44,7 @@ test("publish workflow verifies the same public artifact boundaries as release c
   assert.match(workflow, /id-token:\s*write/u, "publication must use GitHub OIDC for npm provenance");
   assert.match(workflow, /environment:\s*\n\s+name: release/u, "publication must be protected by the release environment");
   assert.match(workflow, /concurrency:\s*\n\s+group: verglos-release-publication/u, "publication must serialize registry mutations");
+  assert.match(workflow, /if:\s*startsWith\(github\.ref, 'refs\/tags\/v'\) && !contains\(github\.ref_name, '-'\)/u, "publication must reject prerelease tags");
   assert.match(workflow, /verify-release-tag\.mjs "[$]GITHUB_REF_NAME"/u);
   assert.match(workflow, /TAG_COMMIT="\$\(git rev-list -n 1 "\$GITHUB_REF"\)"/u, "publication must resolve the exact tag commit");
   assert.match(workflow, /verify-release-tag\.mjs "[$]GITHUB_REF_NAME" "[$]GITHUB_SHA" "[$]TAG_COMMIT"/u, "publication must bind the event SHA to the resolved tag SHA");
