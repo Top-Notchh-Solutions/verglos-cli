@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · STUDIO-CLI-001 Production provider migration completed
+
+Web PR #268 merged normally as `98b5cf6`; one explicitly confirmed Vercel
+Production build ran the reviewed additive migration set and reported
+`migrations applied successfully!`. Deployment
+`dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` is READY. The forged public handoff POST
+now returns bounded JSON 400 `handoff unavailable` with `no-store`; forged
+projection and collection probes return bounded 404/401 JSON. No handoff,
+customer, payment, entitlement, or account record changed. Migration hook 1/1,
+handoff 5/5, public smoke 12/12, truth 37/37, typecheck, and diff pass.
+Provider operation is green; recipient acceptance is still absent. Score
+remains **244/36/280 (87.1%)**. Evidence:
+`evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md`.
+The additive recheck bundle contains **214 files**, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:04ef691741f48d33c75a234530b055d858927edd678d2409140570efa9523ada`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary hardened
 
 Web PR #267 merged normally as `23267349b`; its public acknowledgement route

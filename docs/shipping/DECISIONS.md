@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain STUDIO-CLI-001 after Production migration recheck
+
+- **Decision:** Use the explicit reviewed Vercel build hook to apply the
+  additive handoff schema, then record the safe forged absence response; do
+  not turn it into recipient acceptance.
+- **Provider receipt:** Web PR #268 merged normally as
+  `98b5cf652623bf4f000ed93366b67a38154579e1`; Vercel deployment
+  `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` is READY and the build recorded
+  `migrations applied successfully!`.
+- **Verification:** The forged public POST returns JSON 400 `handoff
+  unavailable` with `no-store`; migration hook 1/1, handoff 5/5, public smoke
+  12/12, truth 37/37, typecheck, and diff pass.
+- **Disposition:** Provider operation is green, but no real handoff or
+  authorized recipient/customer acceptance exists. Keep STUDIO-CLI-001 open;
+  no customer/payment/account/entitlement state changed. Score remains
+  **244/36/280 (87.1%)**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md`.
+  The additive recheck bundle contains **214 files**, verifies with **0
+  mismatches**, passes secret scanning, and matches manifest
+  `sha256:04ef691741f48d33c75a234530b055d858927edd678d2409140570efa9523ada`.
+
 ## 2026-10-24 · retain STUDIO-CLI-001 after Production handoff probe
 
 - **Decision:** Merge the public handoff provider-failure hardening through

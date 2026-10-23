@@ -1,5 +1,34 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 Production provider migration completed
+
+The first Production handoff probe correctly returned a bounded JSON 503
+because the reviewed handoff schema was not yet applied. Web PR #268 merged
+normally as `98b5cf652623bf4f000ed93366b67a38154579e1` and adds a permanently
+guarded migration hook that is inert on normal builds. One explicit Vercel
+Production build used the exact reviewed confirmation; its build output
+recorded `pnpm db:migrate` and `migrations applied successfully!` before the
+application build.
+
+Vercel deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` reported **READY** and
+owns the live aliases. The forged public acknowledgement POST now returns
+HTTP **400** JSON `{"ok":false,"reason":"handoff unavailable"}` with
+`application/json` and `no-store`; forged projection and handoff-collection
+probes return bounded `404/401` JSON responses. No handoff, customer,
+payment, entitlement, account, or acceptance record was created.
+
+Migration-hook contract **1/1**, handoff route contract **5/5**, public-release
+smoke **12/12**, truth-registry **37/37**, typecheck, and diff checks passed.
+The provider boundary is now operational, but the forged absence response is
+not recipient acceptance. `STUDIO-CLI-001` remains unchecked for a real
+authorized recipient/customer acceptance artifact. Score remains **244 checked
+/ 36 open / 280 total (87.1%)**, partitioned as **13 AppSec-dependent / 23
+non-AppSec** rows. Evidence:
+`docs/shipping/evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md`.
+The additive recheck bundle contains **214 files**, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:04ef691741f48d33c75a234530b055d858927edd678d2409140570efa9523ada`.
+
 ## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 Production handoff boundary hardened
 
 Web PR #266 first exposed the public handoff acknowledgement handler in

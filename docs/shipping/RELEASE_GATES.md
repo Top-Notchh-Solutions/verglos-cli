@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · STUDIO-CLI-001 Production provider migration recheck
+
+Web PR #268 merged normally as `98b5cf6`; its explicitly confirmed Vercel
+Production build ran the reviewed additive migrations and reported success.
+Deployment `dpl_37JwVaAw25BoYn4Ase9bn9usm4WL` is READY. The forged public
+acknowledgement now returns bounded JSON HTTP 400 `handoff unavailable` with
+`no-store`; forged projection/collection probes return bounded 404/401 JSON.
+Migration hook **1/1**, handoff **5/5**, public smoke **12/12**, truth **37/37**,
+typecheck, and diff passed. The provider boundary is operational; real
+recipient/customer acceptance, independent review, human/field, and final
+release gates remain closed. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md`.
+The additive recheck bundle contains **214 files**, verifies with **0
+mismatches**, passes secret scanning, and matches manifest
+`sha256:04ef691741f48d33c75a234530b055d858927edd678d2409140570efa9523ada`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production handoff provider boundary
 
 Web PR #267 merged normally as `23267349b`. Its public acknowledgement route
