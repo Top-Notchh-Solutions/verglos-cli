@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · customer-consent scope gate disposition
+
+The current V1 launch contract is limited to owner-authorized public OSS
+exact-commit fixtures analyzed locally under their licenses and terms, with
+redacted reports, no live-target attack, and no endorsement claim. The
+customer/recipient-consent row is closed as **not applicable to this scope**;
+this does not claim real customer acceptance and must be reopened if the launch
+contract adds an external customer or recipient. Score is now **245/35/280
+(87.5%)**, with 13 AppSec-dependent and 22 open non-AppSec rows. Evidence:
+`evidence/customer-acceptance-scope-disposition-2026-10-24.md`.
+
 ## 2026-10-24 · current CLI public-OSS POC input gate
 
 The owner-authorized public-OSS run completed eight exact-commit full clones

@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · customer-consent scope mapping
+
+- **Scope mapping:** The current V1 launch contract is limited to
+  owner-authorized public OSS exact-commit fixtures, analyzed locally under
+  their licenses and terms with redacted reports and no endorsement claim.
+- **Acceptance mapping:** The customer/recipient-consent row is closed as not
+  applicable to that scope; no real customer acceptance is claimed. Reopen it
+  if the launch contract adds an external customer or recipient.
+- **Tracker mapping:** **245 checked / 35 open / 280 total (87.5%)**, with 13
+  AppSec-dependent and 22 open non-AppSec rows.
+- **Evidence:** `evidence/customer-acceptance-scope-disposition-2026-10-24.md`.
+
 ## 2026-10-24 · current CLI public-OSS mapping
 
 - **Implementation mapping:** CLI commit `7d07066f967a2e7899aca6b51f04f306b7071013`
