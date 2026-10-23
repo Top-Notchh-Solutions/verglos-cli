@@ -1,5 +1,26 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Production handoff route boundary verified
+
+Production public-route audit found `/handoff/[handoffId]` returning HTTP **404**
+despite being explicitly designed as a public recipient surface. Web commit
+`4d091d2` added `/handoff(.*)` to the Clerk public matcher and the smoke
+assertion; PR **#263** merged normally as
+`73d4c9a4b1f0594eecd0689d4495269893e2b5c0`. The post-merge Vercel Production
+deployment reported **READY**, owns the live aliases, and generated **49/49**
+static pages. Read-only live verification now renders the handoff page at
+HTTP **200**; no token was submitted, and forged receipt lookup remains HTTP
+404. `/cli-auth` remains 307 and `/proof` remains 200. Local public-release
+smoke passed **12/12**, truth-registry **37/37**, and typecheck/diff checks
+passed. No handoff, payment, database, account, entitlement, webhook,
+customer, final CLI/npm release, or AppSec action occurred. Evidence:
+`docs/shipping/evidence/vercel-web-production-handoff-route-fix-2026-10-24.md`.
+The additive private bundle verifies **210/210** files with zero mismatches,
+passed secret scanning, and manifest
+`sha256:37198414c5ad98eb7ba59b3d19c2907210b7feccc453b999e557e59ecd0cae3a`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-handoff-production-fix.json`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## 2026-10-24 · Production public receipt route boundary verified
 
 Production public-route audit found the declared `/record/verify/[receiptId]`
