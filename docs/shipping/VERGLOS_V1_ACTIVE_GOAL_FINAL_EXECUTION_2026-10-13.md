@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · QUAL-WEB-005 migration preflight and isolated integration
+
+Web PR #258 merged normally as `7941cbfa23f8849daca402e0c3d5d4d8c1eb30e2`,
+from source commit `dace24f75ee598e494bbf2c83ea80834d08d666a`. The Web migration
+preflight now allows **15 seconds** for provider connection establishment in
+both migration paths; the previous 5-second limit was too short for the
+hosted test provider. Against the supplied Neon test database, the migration
+preflight found all **43 ordered migrations** and completed successfully.
+
+The destructive integration contract correctly refused that remote database
+because it is not an isolated local test endpoint. A disposable local
+PostgreSQL container was therefore used for the deletion run; all **43/43**
+focused QUAL-WEB-005 tests passed with **0 failures and 0 skips**. Local
+`pnpm typecheck` and `git diff --check` also passed. No Production database,
+customer data, deployment migration, or release was used or changed. The
+hosted Web PR checks again failed before repository steps with zero executed
+steps, so hosted completion is not claimed.
+
+This advances the QUAL-WEB-005 implementation and test substrate only. The row
+remains unchecked for its declared Production migration/restore/rollback,
+legal-retention, customer-held-record, independent-review, and final
+acceptance conditions. No release version or backlog checkbox changed. Score
+remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · public-pack self-scan contract repair
 
 PR #202 merged normally as `9d7be93cc2855ee371b880df1b0bc8319312bf97`.
