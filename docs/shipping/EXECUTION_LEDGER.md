@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-006 scorer disposition · 2026-10-23
+
+- **Implementation:** Six-question rubric, bounded answer digests,
+  consent-window, participant-identity, artifact/rubric digest, future-date,
+  and secret-material boundaries are complete.
+- **Verification:** Current scorer tests **9/9**, syntax, and diff checks passed.
+- **Disposition:** Participant run, redacted aggregate, and independent scoring
+  review remain open. Next queue: ACCEPT-008. Score remains
+  **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-006-comprehension-boundary-2026-10-23.md`.
+
 ## ACCEPT-005 validator disposition · 2026-10-23
 
 - **Implementation:** Exact repository/commit, consent, scope, expiry,

@@ -5401,6 +5401,14 @@ artifacts. Evidence:
   independent scoring review, and final acceptance. Score remains **244
   checked / 36 open / 280 total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-006-rubric-digest-boundary-2026-10-23.md`.
+**ACCEPT-006 current scorer disposition (2026-10-23; not a checkbox):** The
+current scorer regression suite passes **9/9**, with syntax and diff checks
+passing; the code-side rubric, digest, consent-window, participant-identity,
+and secret-boundary contract is complete. Keep the row unchecked for the
+preregistered consenting participant run, redacted aggregate evidence, and
+independent scoring review. The next implementation-first queue entry is
+`ACCEPT-008`. Evidence:
+`docs/shipping/evidence/accept-006-comprehension-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-007** · Hunt adjudication study · deps: ACCEPT-001/003 · Evaluate at least 100 independently adjudicated findings with preregistered methodology; separate false confirmation, not reproduced, and environment failure. Commit(s): —
 - [ ] **ACCEPT-008** · commercial acceptance/COGS evidence · deps: technical acceptance + founder authorization · Test actual plan agreements/checkout, repeat use, support minutes, hosted cost, recipient value, and explicit allowances; hypotheses remain hypotheses otherwise. Commit(s): private `64c1a477` adds the bounded commercial-evidence validator and `f986f80c` adds its regression coverage. Implementation substrate is complete; the row remains open for actual agreement/checkout/repeat-use/support/cost/recipient evidence and independent/final acceptance. Evidence: `docs/shipping/evidence/accept-008-commercial-validator-2026-10-19.md`.
 - **ACCEPT-008 validator boundary addendum (2026-10-23):** Private `6af3fbb7` rejects future completion, secret-like input, and cross-kind evidence-digest reuse; focused commercial tests pass **7/7**. Actual commercial evidence and independent/final acceptance remain open. Evidence: `docs/shipping/evidence/accept-008-commercial-boundary-2026-10-23.md`.

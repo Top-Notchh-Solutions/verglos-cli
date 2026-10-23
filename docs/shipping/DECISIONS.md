@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## 2026-10-23 · reconcile ACCEPT-006 and advance the queue
+
+- **Decision:** Treat the comprehension scorer as complete code-side; do not
+  invent participant evidence or independent scoring.
+- **Result:** Current scorer tests **9/9**, syntax, and diff checks passed.
+- **Disposition:** ACCEPT-006 remains open for the preregistered participant,
+  redacted aggregate, and independent scoring artifacts. Advance the queue to
+  ACCEPT-008. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-006-comprehension-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · reconcile ACCEPT-005 and advance the queue
 
 - **Decision:** Treat the authorized-workflow validator as complete code-side;

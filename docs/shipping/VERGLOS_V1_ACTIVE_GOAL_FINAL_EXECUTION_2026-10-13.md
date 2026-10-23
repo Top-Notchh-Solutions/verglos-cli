@@ -33,6 +33,22 @@ implementation-first queue entry is `ACCEPT-006`; the score remains **244
 checked / 36 open / 280 total (87.1%)**. Evidence:
 `docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md`.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-006 scorer disposition
+
+The ACCEPT-006 comprehension scorer is implemented and its current regression
+suite passes **9/9**; syntax and diff checks pass. It enforces the exact
+six-question rubric, bounded answer digests, consent windows, unique
+participant identities, artifact/rubric digest binding, future-date rejection,
+and secret-like material rejection. The implementation source audit found no
+missing code-side ACCEPT-006 slice.
+
+ACCEPT-006 remains open for the preregistered consenting participant run,
+redacted aggregate evidence, and independent scoring review. No participant
+identity or answer was fabricated. The next implementation-first queue entry
+is `ACCEPT-008`; the score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`docs/shipping/evidence/accept-006-comprehension-boundary-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · QUAL-WEB-005 isolated database integration
 
 The current Web head `0c2b3065efb32525e42af3b2e8c0cd67a91a00d9` was run against

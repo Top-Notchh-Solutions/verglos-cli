@@ -1,5 +1,13 @@
 # Verglos V1 release gates
 
+## 2026-10-23 · ACCEPT-006 scorer boundary
+
+The comprehension scorer passes **9/9** tests plus syntax and diff checks. This
+does not open ACCEPT-006: a preregistered consenting participant run, redacted
+aggregate evidence, and independent scoring review remain required. Next
+queue: ACCEPT-008. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-006-comprehension-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-005 validator boundary
 
 The code-side authorized-workflow validator passes **7/7** tests plus syntax

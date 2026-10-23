@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## ACCEPT-006 scorer disposition · 2026-10-23
+
+- **Implementation mapping:** The scorer enforces the canonical six-question
+  rubric, bounded digests, consent windows, unique participant identities,
+  artifact/rubric binding, and secret-material rejection.
+- **Verification mapping:** Scorer tests **9/9**, syntax, and diff check passed.
+- **Acceptance mapping:** The preregistered participant run, redacted
+  aggregate, and independent scoring review remain missing; next queue is
+  ACCEPT-008. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-006-comprehension-boundary-2026-10-23.md`.
+
 ## ACCEPT-005 validator disposition · 2026-10-23
 
 - **Implementation mapping:** The validator binds exact repository/commit,

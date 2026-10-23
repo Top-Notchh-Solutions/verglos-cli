@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-006 scorer disposition
+
+The comprehension scorer code-side contract is complete; current tests pass
+**9/9**, with syntax and diff checks passing. ACCEPT-006 remains open for the
+preregistered consenting participant run, redacted aggregate evidence, and
+independent scoring review. No participant identity or answer was fabricated.
+Next queue: **ACCEPT-008**. Score remains **244/36/280 (87.1%)**. Evidence:
+`evidence/accept-006-comprehension-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-005 validator disposition
 
 The authorized-workflow validator code-side contract is complete; its current
