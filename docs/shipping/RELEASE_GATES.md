@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · live Production read-only recheck
+
+The READY Production deployment passed a fresh unauthenticated route audit:
+six public routes returned 200 and the POST-only QR route returned the
+expected 405. This opens current Production surface evidence only; it does
+not open provider lifecycle, customer/recipient, human/field-CWV,
+independent-review, AppSec/Hunt, or final release gates. Score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/vercel-live-production-readonly-recheck-2026-10-24T2247Z.md`.
+The additive bundle verifies **233/233** files with zero mismatches, passes
+secret scanning, and matches manifest
+`sha256:aeecc463080b41bd053dc92330cf91044823e39da89835d03ba2066fba28ea7f`:
+`evidence/acceptance-evidence-bundle-2026-10-24-production-recheck-v6.json`.
+
 ## 2026-10-24 · app-bound Cards payment pending OTP
 
 The current app-bound Cards-only Test Mode run reached **Sending OTP**. The

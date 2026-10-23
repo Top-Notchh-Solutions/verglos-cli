@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · retain gates after current Production recheck
+
+- **Decision:** Record the current READY Production surface as read-only
+  evidence and retain all non-surface gates.
+- **Verification:** Six public routes returned 200 and the POST-only QR route
+  returned the expected GET 405; no write occurred.
+- **Disposition:** No payment, customer, account, database, publication, or
+  release state changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-live-production-readonly-recheck-2026-10-24T2247Z.md`.
+- **Bundle:** Additive v6 contains 233 hashed files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:aeecc463080b41bd053dc92330cf91044823e39da89835d03ba2066fba28ea7f`.
+
 ## 2026-10-24 · retain provider gate at pending OTP boundary
 
 - **Decision:** Record the provider-created pending payment and retain the
