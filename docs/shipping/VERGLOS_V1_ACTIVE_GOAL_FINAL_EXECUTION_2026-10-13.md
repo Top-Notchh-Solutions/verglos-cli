@@ -980,6 +980,21 @@ remain open. No checkbox, provider, Production, publication, customer,
 recipient, or release state changed, and nothing was deleted. The live score
 remains **244 checked / 36 open / 280 total (87.1%)**.
 
+## Latest continuation result · 2026-10-23 · ACCEPT-003 bundle symlink boundary
+
+Private commit `73756396` hardens the acceptance evidence bundle writer to
+read only opened regular files, with no-follow behavior where supported and
+opened-handle identity/size rechecks. A symlinked evidence path now fails
+closed instead of being followed and hashed. The adjacent acceptance set
+passed **47/47**, including the symlink regression; study-protocol, syntax,
+and diff checks passed.
+
+Evidence: `docs/shipping/evidence/accept-003-bundle-symlink-boundary-2026-10-23.md`.
+This is implementation progress only; reviewer sign-off and external/hosted
+acceptance evidence remain open. No checkbox, provider, Production,
+publication, customer, recipient, or release state changed, and nothing was
+deleted. The live score remains **244 checked / 36 open / 280 total (87.1%)**.
+
 ## Latest continuation result · 2026-10-23 · ACCEPT-009 future-date boundary
 
 Private commit `f1b74154` hardens `acceptance:release:reconcile` so a report

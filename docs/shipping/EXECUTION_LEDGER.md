@@ -15292,6 +15292,18 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-014-web-candidate-binding-2026-10-23.md`.
 
+## ACCEPT-003 bundle symlink boundary · 2026-10-23
+
+- **Source:** Private implementation commit `73756396`.
+- **Contract mapping:** Evidence bundle reads now use opened regular-file
+  handles with no-follow, identity, and size checks; symlink paths fail closed.
+- **Verification:** Adjacent acceptance contracts **47/47**, study protocol,
+  syntax, and diff checks passed.
+- **Boundary:** Keep `ACCEPT-003` open for reviewer sign-off and required
+  external/hosted/provider/customer evidence. No external state changed and
+  nothing was deleted. Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/accept-003-bundle-symlink-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source:** Private implementation commit `f1b74154`.

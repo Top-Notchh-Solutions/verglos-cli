@@ -12051,6 +12051,17 @@ nothing was deleted. Score remains **244 checked / 36 open / 280 total
 (87.1%)**. Evidence:
 `evidence/accept-014-web-candidate-binding-2026-10-23.md`.
 
+## 2026-10-23 · ACCEPT-003 bundle symlink boundary
+
+Private commit `73756396` makes the evidence bundle writer reject symlinked
+paths and read content through opened regular-file handles with identity and
+size rechecks. The adjacent acceptance set passed **47/47**, including the
+symlink regression. Keep `ACCEPT-003` open for reviewer sign-off and required
+external/hosted/provider/customer evidence. No external state changed and
+nothing was deleted. Score remains **244 checked / 36 open / 280 total
+(87.1%)**. Evidence:
+`evidence/accept-003-bundle-symlink-boundary-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-009 future-date reconciliation boundary
 
 Private commit `f1b74154` rejects a release reconciliation whose `completedAt`

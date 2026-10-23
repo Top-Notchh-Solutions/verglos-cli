@@ -9421,6 +9421,19 @@ changed. See
   Score remains **244/36/280 (87.1%)**.
 - **Evidence:** `evidence/accept-014-web-candidate-binding-2026-10-23.md`.
 
+## ACCEPT-003 bundle symlink boundary · 2026-10-23
+
+- **Source mapping:** Private implementation commit `73756396`.
+- **Contract mapping:** `acceptance:evidence:bundle` rejects symlinked
+  evidence paths and hashes bytes read from a verified regular-file handle.
+- **Verification mapping:** Adjacent acceptance contracts **47/47** passed;
+  study-protocol, syntax, and diff checks passed.
+- **Acceptance mapping:** This does not close `ACCEPT-003`; reviewer sign-off
+  and external/hosted/provider/customer evidence remain open. No checkbox or
+  external state changed; nothing was deleted. Score remains **244/36/280
+  (87.1%)**.
+- **Evidence:** `evidence/accept-003-bundle-symlink-boundary-2026-10-23.md`.
+
 ## ACCEPT-009 future-date reconciliation boundary · 2026-10-23
 
 - **Source mapping:** Private commit `f1b74154`.
