@@ -15544,3 +15544,23 @@ Evidence: `evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md`
   `sha256:b2447059c18ccbbe88566d7119181d6de8e7fd45f899681b497923697c5c70dc`;
   bundle file SHA-256
   `8537953e40d47242a43bcf9d508d285ce2820eda77824966ed290d8d185e525e`.
+
+## DIST-002 release-tag read binding · 2026-10-23
+
+- **Source mapping:** Private `scripts/verify-release-tag.mjs` now reads all
+  six public package manifests through the bounded JSON reader.
+- **Contract mapping:** Symlinked manifests are rejected; opened-file identity,
+  size, and bytes are rechecked before version comparison.
+- **Verification mapping:** Release-tag, bounded-reader, and release-artifact
+  contracts **8/8**, including the new symlink regression; syntax and diff
+  checks passed.
+- **Acceptance mapping:** Keep DIST-002 unchecked for trusted/protected
+  publication, immutable attestation, independent review, and final
+  acceptance. No tag, registry publication, provider, Production, customer,
+  deployment, or release action occurred. Nothing was deleted or overwritten.
+  Score remains **244/36/280 (87.1%)**.
+- **Evidence:** `evidence/dist-002-release-tag-read-binding-private-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:dba14550e33335c99d5b44936d5df3a0ded53a9ea0835ac6e95c404cd797488d`;
+  bundle file SHA-256
+  `4ae7d2984fe1ec21d01450e1f3cece2511bcb094403e3d78a47befa11382e551`.

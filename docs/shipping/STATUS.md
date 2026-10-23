@@ -12039,6 +12039,21 @@ nothing was deleted. Score remains **239 checked / 41 open / 280 total
 
 Evidence: `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## 2026-10-23 · DIST-002 release-tag read binding
+
+The private release-tag verifier now reads all six public package manifests
+through bounded regular-file handles and rejects symlinked manifests. The
+release-tag, bounded-reader, and release-artifact contracts passed **8/8**,
+including the new symlink regression; syntax and diff checks passed.
+
+This is verifier implementation evidence only. DIST-002 remains unchecked for
+trusted/protected publication, immutable attestation, independent review, and
+final acceptance. No tag, registry publication, provider, Production,
+customer, deployment, or release action occurred; nothing was deleted or
+overwritten. Score remains **244 checked / 36 open / 280 total (87.1%)**.
+
+Evidence: `evidence/dist-002-release-tag-read-binding-private-2026-10-23.md`.
+
 ## 2026-10-23 · ACCEPT-011/012 bounded corpus read binding
 
 The acceptance corpus verifiers now use bounded regular-file handles with

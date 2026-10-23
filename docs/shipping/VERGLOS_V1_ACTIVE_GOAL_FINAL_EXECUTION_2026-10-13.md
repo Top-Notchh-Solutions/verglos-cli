@@ -3118,3 +3118,23 @@ and file SHA-256
 Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
 deleted or overwritten. Evidence:
 `docs/shipping/evidence/accept-011-012-bounded-corpus-read-binding-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-002 release-tag read binding
+
+The private release-tag verifier now reads all six public package manifests
+through the bounded regular-file JSON reader, rejecting symlinked manifests
+and rechecking opened-file identity, size, and bytes. Release-tag, bounded
+reader, and release-artifact contracts passed **8/8**, including the new
+symlink regression; syntax and diff checks passed.
+
+This is acceptance-verifier implementation evidence only. No tag, registry
+publication, provider, Production, customer, deployment, or release action
+occurred. Keep `DIST-002` unchecked for trusted/protected publication,
+immutable attestation, independent review, and final acceptance. The additive
+bundle contains **156** files with manifest
+`sha256:dba14550e33335c99d5b44936d5df3a0ded53a9ea0835ac6e95c404cd797488d`
+and file SHA-256
+`4ae7d2984fe1ec21d01450e1f3cece2511bcb094403e3d78a47befa11382e551`.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-002-release-tag-read-binding-private-2026-10-23.md`.

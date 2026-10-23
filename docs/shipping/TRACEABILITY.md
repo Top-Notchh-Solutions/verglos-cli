@@ -9409,6 +9409,21 @@ changed. See
   sign-off. Score remains **239/41/280 (85.4%)**. No files were deleted.
 - **Evidence:** `evidence/final-web-008-sitemap-guard-pr245-2026-10-22.md`.
 
+## DIST-002 release-tag read binding · 2026-10-23
+
+- **Source mapping:** Private `scripts/verify-release-tag.mjs` now uses the
+  bounded JSON reader for all six public package manifests.
+- **Contract mapping:** Symlinked manifests are rejected and the opened file's
+  identity, size, and bytes are rechecked before package-version comparison.
+- **Verification mapping:** Release-tag, bounded-reader, and release-artifact
+  contracts **8/8**; syntax and diff checks passed.
+- **Acceptance mapping:** Keep DIST-002 open for trusted/protected
+  publication, immutable attestation, independent review, and final
+  acceptance. Score remains **244/36/280 (87.1%)**; nothing was deleted.
+- **Evidence:** `evidence/dist-002-release-tag-read-binding-private-2026-10-23.md`;
+  additive bundle manifest
+  `sha256:dba14550e33335c99d5b44936d5df3a0ded53a9ea0835ac6e95c404cd797488d`.
+
 ## ACCEPT-011/012 bounded corpus read binding · 2026-10-23
 
 - **Source mapping:** Private shipping implementation in

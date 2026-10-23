@@ -1,7 +1,7 @@
-import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { resolve } from "node:path";
+import { readBoundedJsonFile } from "./read-bounded-json.mjs";
 
 const PUBLIC_PACKAGE_DIRS = [
   "packages/shared",
@@ -23,7 +23,7 @@ export async function verifyReleaseTag(root, tag) {
   const version = parseReleaseTag(tag);
   const versions = [];
   for (const directory of PUBLIC_PACKAGE_DIRS) {
-    const packageJson = JSON.parse(await readFile(join(root, directory, "package.json"), "utf8"));
+    const packageJson = await readBoundedJsonFile(join(root, directory, "package.json"), `${directory} package manifest`);
     if (typeof packageJson.version !== "string") throw new Error(`${directory} has no package version`);
     versions.push({ directory, version: packageJson.version });
   }

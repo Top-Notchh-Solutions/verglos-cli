@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -30,6 +30,18 @@ test("release verification requires every public package to match the immutable 
     assert.equal(result.packages.length, 6);
     await writeFile(join(root, "packages", "cli", "package.json"), JSON.stringify({ name: "verglos", version: "2.0.0-alpha.2" }), "utf8");
     await assert.rejects(() => verifyReleaseTag(root, "v2.0.0-alpha.1"), /packages\/cli=2\.0\.0-alpha\.2/u);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("release verification rejects symlinked package manifests", async () => {
+  const root = await fixture();
+  try {
+    const packageJson = join(root, "packages", "cli", "package.json");
+    await rm(packageJson);
+    await symlink(join(root, "packages", "shared", "package.json"), packageJson);
+    await assert.rejects(() => verifyReleaseTag(root, "v2.0.0-alpha.1"), /bounded regular file/u);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
