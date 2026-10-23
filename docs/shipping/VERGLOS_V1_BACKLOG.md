@@ -1,5 +1,43 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-23 · ACCEPT-003 additive current evidence bundle
+
+The protected bundle builder generated an additive **130-file** private
+reproducibility bundle and passed its secret scan. Its SHA-256 is
+`sha256:ecbf08f3788107164e20e654b93fc349a607156793566edbba8de66b32f53dd2`.
+It includes the current exact-head records for QUAL-WEB-005, DIST-006,
+STUDIO-CLI-001, and DIST-002. Provider lifecycle, customer consent,
+independent review, authenticated browser, field CWV, and account deletion
+remain open. No checkbox changed; the score remains **244 checked / 36 open /
+280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-final-local-2026-10-23.md`.
+
+## 2026-10-23 · DIST-002 current publication-contract qualification
+
+The exact CLI head `3d4bca1f` passed the current publication/artifact/tag
+contract suite **17/17**. The workflow remains bound to stable immutable tags,
+protected release environment approval, OIDC provenance, seven exact packages,
+pre-publication artifact verification, and `VERGLOS_FINAL_RELEASE_READY=true`.
+The owner-set `NPM_TOKEN` secret is intentionally not wired because the
+workflow contract rejects long-lived npm tokens. No tag, dispatch, provider,
+registry, or publication action occurred. This advances `DIST-002` code-side
+evidence only; no checkbox changed and the score remains **244 checked / 36
+open / 280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-002-current-publish-contract-2026-10-23.md`.
+
+## 2026-10-23 · STUDIO-CLI-001 current-head contract qualification
+
+Clean CLI head `3d4bca1f` passed its package suite with **291 passed / 2
+explicit skips / 0 failures**. Clean Web head `16ceddc9` passed the focused
+Studio projection, custody, client-workspace, handoff, allowance, retention,
+tenant-leakage, and E2E suite **145/145**, including temporary-table custody
+integration. This confirms current code-side implementation only;
+`STUDIO-CLI-001` remains unchecked for its external customer/recipient
+acceptance artifact and hosted/audit record. No checkbox changed; the live
+score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/studio-cli-001-current-head-contract-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 local rollback/revocation rehearsal
 
 The exact CLI candidate `3d4bca1f` passed the local rollback/revocation

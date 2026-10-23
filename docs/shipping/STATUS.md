@@ -1,5 +1,42 @@
 # Verglos V1 shipping status
 
+## 2026-10-23 · ACCEPT-003 additive current evidence bundle
+
+The protected bundle builder generated an additive **130-file** private
+reproducibility bundle with SHA-256
+`ecbf08f3788107164e20e654b93fc349a607156793566edbba8de66b32f53dd2`; its
+secret scan passed. It includes current exact-head records for QUAL-WEB-005,
+DIST-006, STUDIO-CLI-001, and DIST-002. Provider, customer, independent
+review, browser, field-CWV, and account-deletion gates remain open. Score
+remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`evidence/acceptance-evidence-bundle-final-local-2026-10-23.md`.
+
+## 2026-10-23 · DIST-002 current publication-contract qualification
+
+The exact CLI head `3d4bca1f` passed the publication/artifact/tag contract
+suite **17/17**. Stable immutable tags, protected release approval, OIDC
+provenance, seven-package publication, pre-publication artifact verification,
+and `VERGLOS_FINAL_RELEASE_READY=true` are enforced. `NPM_TOKEN` exists as a
+repository secret but is intentionally not consumed by the workflow. No tag,
+dispatch, provider, registry, or publication action occurred. DIST-002 remains
+open for its protected/final and actual publication artifacts. Score remains
+**244 checked / 36 open / 280 total (87.1%)**. Nothing was deleted or
+overwritten. Evidence:
+`evidence/dist-002-current-publish-contract-2026-10-23.md`.
+
+## 2026-10-23 · STUDIO-CLI-001 current-head contract qualification
+
+Clean CLI head `3d4bca1f` passed **291 tests with 2 explicit skips and 0
+failures**. Clean Web head `16ceddc9` passed the focused Studio projection,
+custody, client-workspace, handoff, allowance, retention, tenant-leakage, and
+E2E suite **145/145**. The custody integration used temporary tables only.
+The implementation is current-head green, but STUDIO-CLI-001 remains open for
+the external customer/recipient acceptance artifact and hosted/audit record.
+Score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`evidence/studio-cli-001-current-head-contract-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 local rollback/revocation rehearsal
 
 The exact CLI candidate `3d4bca1f` passed the local rollback/revocation

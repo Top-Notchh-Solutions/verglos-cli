@@ -1,5 +1,45 @@
 # Verglos V1 traceability
 
+## ACCEPT-003 additive current evidence bundle · 2026-10-23
+
+- **Source mapping:** Protected bundle builder includes the four latest
+  exact-head target records.
+- **Integrity mapping:** 130 hashed files; SHA-256
+  `sha256:ecbf08f3788107164e20e654b93fc349a607156793566edbba8de66b32f53dd2`;
+  secret scan passed.
+- **Gate mapping:** Provider lifecycle, customer consent, independent review,
+  authenticated browser, field CWV, and account deletion remain open.
+- **Acceptance mapping:** ACCEPT-003 remains reproducibility evidence only;
+  score remains **244/36/280 (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-final-local-2026-10-23.md`.
+
+## DIST-002 current publication-contract qualification · 2026-10-23
+
+- **Source mapping:** CLI exact head `3d4bca1f` and the committed publish
+  workflow.
+- **Verification mapping:** Publication/artifact/tag/platform contracts passed
+  **17/17** with zero failures.
+- **Boundary mapping:** Workflow requires protected stable publication with OIDC
+  and explicitly rejects long-lived npm-token wiring; no registry action ran.
+- **Acceptance mapping:** DIST-002 remains open for protected/final approval
+  and actual immutable publication/provenance. Score remains **244/36/280
+  (87.1%)**; nothing was deleted or overwritten.
+- **Evidence:** `evidence/dist-002-current-publish-contract-2026-10-23.md`.
+
+## STUDIO-CLI-001 current-head contract qualification · 2026-10-23
+
+- **Source mapping:** Clean CLI `3d4bca1f` and Web `16ceddc9` heads.
+- **Verification mapping:** CLI 291 passed with 2 explicit Hunt-Docker skips;
+  Web Studio projection/custody/workspace/handoff/allowance/retention suite
+  passed **145/145** with no skips.
+- **Boundary mapping:** Custody integration used temporary local tables and
+  synthetic transaction-scoped records only.
+- **Acceptance mapping:** Repository implementation is current-head green, but
+  STUDIO-CLI-001 remains open for external customer/recipient acceptance and
+  hosted/audit evidence. Score remains **244/36/280 (87.1%)**; nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/studio-cli-001-current-head-contract-2026-10-23.md`.
+
 ## DIST-006 local rollback/revocation rehearsal · 2026-10-23
 
 - **Source mapping:** CLI exact candidate `3d4bca1f` with a matching synthetic

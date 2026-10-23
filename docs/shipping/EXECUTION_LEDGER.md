@@ -1,5 +1,47 @@
 # Verglos V1 Execution Ledger
 
+## 2026-10-23 · ACCEPT-003 additive current evidence bundle
+
+- **Artifact:** Additive private bundle with **130** hashed evidence files.
+- **Integrity:** SHA-256
+  `sha256:ecbf08f3788107164e20e654b93fc349a607156793566edbba8de66b32f53dd2`;
+  secret scan passed.
+- **Coverage:** Includes current exact-head records for QUAL-WEB-005, DIST-006,
+  STUDIO-CLI-001, and DIST-002. Provider, customer, independent-review,
+  browser, field-CWV, and account-deletion gates remain open.
+- **Disposition:** ACCEPT-003 reproducibility only; no external or final-release
+  outcome was claimed. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/acceptance-evidence-bundle-final-local-2026-10-23.md`.
+
+## 2026-10-23 · DIST-002 current publication-contract qualification
+
+- **Source:** CLI exact head `3d4bca1f`.
+- **Verification:** Publication/artifact/tag/platform contract suite passed
+  **17/17** with zero failures.
+- **Contract:** Stable immutable tags, protected release environment, OIDC
+  provenance, seven exact packages, artifact verification before publication,
+  and final-readiness variable are enforced. `NPM_TOKEN` is not consumed.
+- **Disposition:** No tag, dispatch, provider, registry, or publication action
+  occurred. DIST-002 remains open for protected/final approval and actual
+  immutable publication. Score remains **244/36/280 (87.1%)**. Nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/dist-002-current-publish-contract-2026-10-23.md`.
+
+## 2026-10-23 · STUDIO-CLI-001 current-head contract qualification
+
+- **Sources:** CLI `3d4bca1f`; Web `16ceddc9`.
+- **Verification:** CLI **291 passed / 2 explicit skips / 0 failures**; Web
+  focused Studio suite **145/145**, including custody integration.
+- **Boundary:** Custody records were temporary/transaction-scoped synthetic
+  fixtures; no hosted database, customer source, provider payment, Production
+  entitlement, or release action was used.
+- **Disposition:** Code-side contract is current-head green. STUDIO-CLI-001
+  remains open for external customer/recipient acceptance and its hosted/audit
+  artifact. Score remains **244/36/280 (87.1%)**. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/studio-cli-001-current-head-contract-2026-10-23.md`.
+
 ## 2026-10-23 · DIST-006 local rollback/revocation rehearsal
 
 - **Source:** CLI exact head `3d4bca1f`; synthetic manifest digest matched.

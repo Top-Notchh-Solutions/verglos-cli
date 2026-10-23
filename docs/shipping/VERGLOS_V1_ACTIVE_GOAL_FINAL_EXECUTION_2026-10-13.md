@@ -1,5 +1,43 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-23 · ACCEPT-003 additive current evidence bundle
+
+The protected bundle builder generated an additive **130-file** private
+reproducibility bundle with SHA-256
+`sha256:ecbf08f3788107164e20e654b93fc349a607156793566edbba8de66b32f53dd2`;
+its secret scan passed. It includes the current exact-head records for
+QUAL-WEB-005, DIST-006, STUDIO-CLI-001, and DIST-002. Provider lifecycle,
+customer consent, independent review, authenticated browser, field CWV, and
+account deletion remain open. This advances ACCEPT-003 reproducibility only;
+the live score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing
+was deleted or overwritten. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-final-local-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · DIST-002 current publication-contract qualification
+
+The exact CLI head `3d4bca1f` passed the current publication/artifact/tag
+contract suite **17/17**. Stable immutable tags, protected release approval,
+OIDC provenance, seven-package publication, pre-publication artifact
+verification, and `VERGLOS_FINAL_RELEASE_READY=true` are enforced. The
+owner-set `NPM_TOKEN` secret is intentionally not consumed by this workflow.
+No tag, dispatch, provider, registry, or publication action occurred. This is
+code-side `DIST-002` evidence only; protected/final approval and actual
+immutable publication remain open. The live score remains **244 checked / 36
+open / 280 total (87.1%)**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/dist-002-current-publish-contract-2026-10-23.md`.
+
+## Latest continuation result · 2026-10-23 · STUDIO-CLI-001 current-head contract qualification
+
+Clean CLI head `3d4bca1f` passed **291 tests with 2 explicit skips and 0
+failures**. Clean Web head `16ceddc9` passed the focused Studio projection,
+custody, client-workspace, handoff, allowance, retention, tenant-leakage, and
+E2E suite **145/145**, including temporary-table custody integration. This
+confirms code-side implementation only; STUDIO-CLI-001 remains open for its
+external customer/recipient acceptance artifact and hosted/audit record. The
+live score remains **244 checked / 36 open / 280 total (87.1%)**. Nothing was
+deleted or overwritten. Evidence:
+`docs/shipping/evidence/studio-cli-001-current-head-contract-2026-10-23.md`.
+
 ## Latest continuation result · 2026-10-23 · DIST-006 local rollback/revocation rehearsal
 
 The exact CLI candidate `3d4bca1f` passed the local rollback/revocation
