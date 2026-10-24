@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · FINAL-WEB-002 landing qualification contract
+
+The current landing-release qualification contract passed **4/4** with zero
+failures, skips, cancellations, or todos, covering complete desktop/mobile
+measurements for all six required paths and fail-closed malformed/missing
+measurement cases. The Node 22.x engine warning under workstation Node 26.4.0
+is retained. Keep `FINAL-WEB-002` unchecked for its declared dependency and
+final acceptance gates. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-002-current-landing-qualification-contract-2026-10-24.md`.
+Bundle v49 verifies **383** files with **0** mismatches, matching manifest
+`sha256:83550628fa60681ffe02f8d6dbd328c94376a13e1876c687c63e032302662b36`, and
+passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-001 current truth-registry recheck
 
 The current Web truth-registry suite passed **37/37**, public-release contract

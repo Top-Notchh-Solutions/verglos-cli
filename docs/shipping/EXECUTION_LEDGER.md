@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## FINAL-WEB-002 landing qualification contract · 2026-10-24
+
+- **Execution:** Ran `pnpm run test:landing-release` at the current Web source.
+- **Result:** **4/4** passed with zero failures, skips, cancellations, or
+  todos; complete desktop/mobile six-path coverage and fail-closed malformed
+  measurement cases remained green.
+- **Disposition:** Node 22.x warning under workstation Node 26.4.0 retained.
+  No hosted/provider/customer/independent/field/final action occurred;
+  FINAL-WEB-002 remains unchecked and score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-002-current-landing-qualification-contract-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v49.json` verifies 383 files with zero mismatches, matching manifest `sha256:83550628fa60681ffe02f8d6dbd328c94376a13e1876c687c63e032302662b36`, and passed secret scanning.
+
 ## FINAL-WEB-001 current truth-registry recheck · 2026-10-24
 
 - **Execution:** Ran Web truth-registry tests, public-release contract tests,

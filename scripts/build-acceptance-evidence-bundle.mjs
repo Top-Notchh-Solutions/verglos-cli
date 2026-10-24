@@ -386,6 +386,7 @@ const paths = [
   "docs/shipping/evidence/vercel-production-public-surface-recheck-2026-10-24T0717Z.md",
   "docs/shipping/evidence/final-web-007-008-production-browser-capture-2026-10-24.md",
   "docs/shipping/evidence/final-web-001-current-truth-registry-recheck-2026-10-24.md",
+  "docs/shipping/evidence/final-web-002-current-landing-qualification-contract-2026-10-24.md",
   "docs/shipping/evidence/qual-web-006-final-web-007-008-production-browser-capture-2026-10-24.json",
   "docs/shipping/evidence/dist-002-003-current-publish-contract-regression-2026-10-24.md",
   "docs/shipping/evidence/dist-003-current-release-artifact-regression-2026-10-24.md",
