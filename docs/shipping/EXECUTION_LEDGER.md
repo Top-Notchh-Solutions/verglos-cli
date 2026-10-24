@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-003 current bundle v42 verification · 2026-10-24
+
+- **Execution:** Ran the bundle verifier contract suite and verified the
+  current checked-in v42 bundle.
+- **Result:** **4/4** contract tests passed; **376/376** files verified, zero
+  mismatches, manifest matched, and secret scan passed.
+- **Disposition:** Internal reproducibility only. Reviewer, hosted/provider,
+  recipient/customer, independent, browser/field, account-deletion, and final
+  release evidence remain open; no checkbox changed. Score remains **246/34/280**.
+- **Evidence:** `evidence/accept-003-current-bundle-v42-verification-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v43.json` verifies 377 files with zero mismatches, matching manifest `sha256:dd97b8d8fecd6b25e98face9ad3270012cb8b2976d80f2201c0ba9f1f844b058`, and passed secret scanning.
+
 ## QUAL-WEB-005/006 full Web regression · 2026-10-24
 
 - **Execution:** Ran the Web worktree’s complete serial Node test discovery.

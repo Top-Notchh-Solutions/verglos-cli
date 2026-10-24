@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-003 current bundle v42 verification
+
+The bundle verifier contract suite passed **4/4**. Current bundle v42 verified
+**376/376** files with **0** mismatches, matching manifest
+`sha256:56b3719c5d77c8809bb4f48781bcdfef0cfb5fc77073cd549b91737270ff446d`, and
+passed secret scanning. This is internal reproducibility evidence only;
+ACCEPT-003 remains unchecked for reviewer, hosted/provider, recipient/customer,
+independent, browser/field, account-deletion, and final-release evidence. No
+checkbox changed. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-003-current-bundle-v42-verification-2026-10-24.md`.
+Bundle v43 verifies **377** files with **0** mismatches, matching manifest
+`sha256:dd97b8d8fecd6b25e98face9ad3270012cb8b2976d80f2201c0ba9f1f844b058`,
+and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-005/006 full Web regression
 
 The Web worktree’s full serial test discovery completed with **1,195** tests:

@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-003 bundle verification
+
+The bundle verifier contract suite passed **4/4** and current bundle v42
+verified **376/376** files with zero mismatches, matching manifest
+`sha256:56b3719c5d77c8809bb4f48781bcdfef0cfb5fc77073cd549b91737270ff446d`, with
+secret scanning passed. This is internal reproducibility evidence only;
+reviewer, provider/customer, independent, browser/field, account-deletion, and
+final release evidence remain open. No checkbox changed. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-003-current-bundle-v42-verification-2026-10-24.md`.
+Bundle v43 verifies **377** bounded files with **0** mismatches, matching
+manifest `sha256:dd97b8d8fecd6b25e98face9ad3270012cb8b2976d80f2201c0ba9f1f844b058`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · full Web regression
 
 The complete serial Web test discovery produced **1,195** tests: **1,155
