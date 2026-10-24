@@ -5,6 +5,7 @@ import { readBoundedFileWithDigest, readBoundedJsonFile } from "./read-bounded-j
 const INPUT_SCHEMA = "verglos.private.final-regression.v1";
 const OUTPUT_SCHEMA = "verglos.private.final-regression-result.v1";
 const VERIFICATION_SCHEMA = "verglos.private.public-oss-corpus-verification.v1";
+const AUTHORIZATION_SCHEMA = "verglos.web.role-tenant-matrix.v1";
 const COMMIT = /^[a-f0-9]{7,64}$/u;
 const VERSION = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/u;
 const SHA256 = /^sha256:[a-f0-9]{64}$/u;
@@ -57,6 +58,9 @@ export function runFinalRegression(input, { now = new Date() } = {}) {
   const missingRoles = USER_ROLES.filter((role) => !observedRoles.includes(role));
   const missingTenantModes = TENANT_MODES.filter((mode) => !observedTenantModes.includes(mode));
   const missingFixtures = fixtures.map((fixture) => fixture.name).filter((name) => !observedFixtures.includes(name));
+  const expectedScenarioKeys = fixtures.flatMap((fixture) => PLANS.flatMap((plan) => USER_ROLES.flatMap((role) => TENANT_MODES.map((tenantMode) => `${fixture.name}:${plan}:${role}:${tenantMode}`))));
+  const missingScenarioKeys = expectedScenarioKeys.filter((key) => !keys.has(key));
+  const authorizationEvidenceComplete = Boolean(run.authorizationEvidence?.complete && run.authorizationEvidence.webCommit === run.candidate.webCommit);
 
   const deltas = scenarioRuns.map((entry) => compareScenario(entry, run.thresholds.maxDurationIncreasePercent));
   const failedRuns = deltas.filter((entry) => entry.candidate.status !== "passed" || entry.candidate.exitCode !== 0 || entry.candidate.coverage !== "complete");
@@ -66,7 +70,9 @@ export function runFinalRegression(input, { now = new Date() } = {}) {
   const matrixComplete = missingPlans.length === 0
     && missingRoles.length === 0
     && missingTenantModes.length === 0
-    && missingFixtures.length === 0;
+    && missingFixtures.length === 0
+    && missingScenarioKeys.length === 0
+    && authorizationEvidenceComplete;
   const goEligible = matrixComplete
     && failedRuns.length === 0
     && performanceRegressions.length === 0
@@ -100,6 +106,12 @@ export function runFinalRegression(input, { now = new Date() } = {}) {
       fixtureCount: fixtures.length,
       observedFixtureCount: observedFixtures.length,
       missingFixtures,
+      expectedScenarioCount: expectedScenarioKeys.length,
+      missingScenarioKeys,
+      authorizationEvidence: run.authorizationEvidence
+        ? Object.freeze({ schema: run.authorizationEvidence.schema, scope: run.authorizationEvidence.scope, webCommit: run.authorizationEvidence.webCommit, cellCount: run.authorizationEvidence.cellCount, complete: run.authorizationEvidence.complete })
+        : null,
+      authorizationEvidenceComplete,
       complete: matrixComplete,
     }),
     runs: Object.freeze(deltas),
@@ -111,6 +123,7 @@ export function runFinalRegression(input, { now = new Date() } = {}) {
       totalFindingDelta: deltas.reduce((total, entry) => total + entry.findingDelta, 0),
       totalDurationDeltaMs: deltas.reduce((total, entry) => total + entry.durationDeltaMs, 0),
       matrixComplete,
+      authorizationEvidenceComplete,
       openGateCount: openGates.length,
     }),
     gates: Object.freeze({ ...run.gates }),
@@ -127,15 +140,15 @@ export function runFinalRegression(input, { now = new Date() } = {}) {
   });
 }
 
-export async function runFinalRegressionFile(inputPath, outputPath, { corpusRoot, evidenceRoot, requireCorpusReports = false, ...options } = {}) {
+export async function runFinalRegressionFile(inputPath, outputPath, { corpusRoot, evidenceRoot, authorizationRoot, requireCorpusReports = false, ...options } = {}) {
   const input = await readBoundedJsonFile(inputPath, "final regression input");
   const report = runFinalRegression(input, options);
-  await verifyRegressionBytes(input, { corpusRoot, evidenceRoot, requireCorpusReports });
+  await verifyRegressionBytes(input, { corpusRoot, evidenceRoot, authorizationRoot, requireCorpusReports });
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
   return report;
 }
 
-async function verifyRegressionBytes(input, { corpusRoot, evidenceRoot, requireCorpusReports }) {
+async function verifyRegressionBytes(input, { corpusRoot, evidenceRoot, authorizationRoot, requireCorpusReports }) {
   if (corpusRoot !== undefined) {
     if (typeof corpusRoot !== "string" || corpusRoot.length === 0) throw new Error("corpus root is invalid");
     const root = resolve(corpusRoot);
@@ -162,6 +175,15 @@ async function verifyRegressionBytes(input, { corpusRoot, evidenceRoot, requireC
       }
     }
   }
+  if (input.authorizationEvidence) {
+    const rootPath = authorizationRoot ?? evidenceRoot;
+    if (rootPath === undefined) throw new Error("authorization evidence root is required");
+    const root = resolve(rootPath);
+    const absolute = resolve(root, input.authorizationEvidence.path);
+    if (absolute !== root && !absolute.startsWith(`${root}/`)) throw new Error("authorization evidence path escapes root");
+    const result = await readBoundedFileWithDigest(absolute, "authorization evidence");
+    if (result.sha256 !== input.authorizationEvidence.sha256) throw new Error("authorization evidence digest does not match bytes");
+  }
 }
 
 function validateInput(input) {
@@ -172,6 +194,7 @@ function validateInput(input) {
   }
   if (typeof input.candidate.version !== "string" || !VERSION.test(input.candidate.version)) throw new Error("candidate version is invalid");
   if (!input.corpus || typeof input.corpus !== "object") throw new Error("corpus is required");
+  const authorizationEvidence = input.authorizationEvidence === undefined ? undefined : validateAuthorizationEvidence(input.authorizationEvidence, input.candidate.webCommit);
   if (!Array.isArray(input.runs) || input.runs.length === 0 || input.runs.length > MAX_RUNS) throw new Error("regression runs are invalid");
   if (!input.thresholds || typeof input.thresholds !== "object") throw new Error("thresholds are required");
   const maxDurationIncreasePercent = input.thresholds.maxDurationIncreasePercent;
@@ -181,7 +204,30 @@ function validateInput(input) {
   if (!input.gates || typeof input.gates !== "object") throw new Error("regression gates are required");
   for (const name of GATE_NAMES) if (!GATE_STATES.has(input.gates[name])) throw new Error(`regression gate state is invalid: ${name}`);
   if (!DECISIONS.has(input.decision)) throw new Error("regression decision is invalid");
-  return input;
+  return { ...input, authorizationEvidence };
+}
+
+function validateAuthorizationEvidence(input, candidateWebCommit) {
+  if (!input || typeof input !== "object" || input.schema !== AUTHORIZATION_SCHEMA || input.scope !== "product-contract") throw new Error("authorization evidence is invalid");
+  if (input.webCommit !== candidateWebCommit) throw new Error("authorization evidence is not bound to candidate Web commit");
+  if (typeof input.path !== "string" || !SAFE_PATH.test(input.path) || input.path.startsWith(".env")) throw new Error("authorization evidence path is invalid");
+  if (typeof input.sha256 !== "string" || !SHA256.test(input.sha256)) throw new Error("authorization evidence digest is invalid");
+  if (!Array.isArray(input.requiredPlans) || !sameMembers(input.requiredPlans, PLANS)) throw new Error("authorization evidence plans are invalid");
+  if (!Array.isArray(input.requiredRoles) || !sameMembers(input.requiredRoles, USER_ROLES)) throw new Error("authorization evidence roles are invalid");
+  if (!Array.isArray(input.requiredTenantModes) || !sameMembers(input.requiredTenantModes, TENANT_MODES)) throw new Error("authorization evidence tenant modes are invalid");
+  if (input.cellCount !== PLANS.length * USER_ROLES.length * TENANT_MODES.length || input.complete !== true) throw new Error("authorization evidence matrix is incomplete");
+  return Object.freeze({
+    schema: input.schema,
+    scope: input.scope,
+    webCommit: input.webCommit,
+    path: input.path,
+    sha256: input.sha256,
+    requiredPlans: Object.freeze([...input.requiredPlans]),
+    requiredRoles: Object.freeze([...input.requiredRoles]),
+    requiredTenantModes: Object.freeze([...input.requiredTenantModes]),
+    cellCount: input.cellCount,
+    complete: true,
+  });
 }
 
 function validateCorpus(input) {
@@ -289,6 +335,10 @@ function unique(values) {
   return [...new Set(values)].sort();
 }
 
+function sameMembers(actual, expected) {
+  return actual.length === expected.length && expected.every((value) => actual.includes(value)) && new Set(actual).size === actual.length;
+}
+
 function validDate(value, label) {
   const date = value instanceof Date ? value : new Date(value);
   if (!Number.isFinite(date.getTime())) throw new Error(`${label} must be a valid date`);
@@ -302,6 +352,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const report = await runFinalRegressionFile(inputPath, outputPath, {
     corpusRoot: process.env.VERGLOS_REGRESSION_CORPUS_ROOT ?? process.cwd(),
     evidenceRoot: process.env.VERGLOS_REGRESSION_EVIDENCE_ROOT ?? process.cwd(),
+    authorizationRoot: process.env.VERGLOS_REGRESSION_AUTHORIZATION_ROOT ?? process.cwd(),
     requireCorpusReports: true,
   });
   process.stdout.write(`${JSON.stringify({ schema: report.schema, recommendation: report.release.recommendation, goEligible: report.release.goEligible, runCount: report.summary.runCount, openGates: report.summary.openGateCount })}\n`);

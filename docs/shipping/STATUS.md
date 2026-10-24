@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-014 matrix implementation and fail-closed contract
+
+Web PR #282 merged normally at `cb266b83406bbfffbd5ab02189556e60973a63a6`.
+The product-contract emitter produced **50/50** plan × role × tenant-mode
+cells; the targeted role/tenant verification passed **31/31** and typecheck
+passed. The private validator now requires all **400** fixture cross-product
+keys for the eight-fixture corpus and a digest-bound Web receipt.
+
+The current v3 rerun verified the receipt but executed only 12 of 400 keys;
+388 remain missing. It recorded 0 failed runs, 0 finding regressions, and 0
+performance regressions, but correctly remains `no-go`. No checkbox changed;
+score remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.md` and
+`evidence/accept-014-final-regression-matrix-contract-v2-2026-10-24.md`.
+
 ## 2026-10-24 · current merged CLI public-OSS corpus execution
 
 The fresh telemetry-off local run against CLI commit `cd9d572e` (merged PR

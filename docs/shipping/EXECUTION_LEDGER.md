@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-014 matrix implementation and contract correction · 2026-10-24
+
+- **Web implementation:** PR #282 merged normally at
+  `cb266b83406bbfffbd5ab02189556e60973a63a6`; the role/tenant emitter ran all
+  50 product-contract cells (5 plans × 5 roles × 2 tenant modes).
+- **Verification:** Targeted Web authorization/tenant suite **31/31** and
+  `pnpm typecheck` passed. Receipt SHA-256:
+  `sha256:27f43b5d8e5a251dcba79181453eb4a7c627026584276f1b60fe84424409fc1e`.
+- **Private correction:** Final regression now requires the full
+  fixture×plan×role×tenant key set (400 keys for eight fixtures) and binds the
+  Web receipt to the candidate commit.
+- **Current result:** v3 executed 12 keys and reports 388 missing, with no
+  failed runs or finding/performance regressions; recommendation remains
+  `no-go`. ACCEPT-014 remains unchecked.
+- **Boundary:** No hosted database write, customer data, provider transaction,
+  deletion, publication, tag, release, or non-completed Actions run occurred.
+- **Evidence:** `evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.md`,
+  `evidence/accept-014-final-regression-matrix-contract-v2-2026-10-24.md`.
+
 ## Current merged CLI public-OSS corpus execution · 2026-10-24
 
 - **Source:** CLI `cd9d572e28462741103cb21a2274e5892939d5d4`, merged through PR #294 at `c745a2f103e7cf950bcaef1577456dffb94c876b`.

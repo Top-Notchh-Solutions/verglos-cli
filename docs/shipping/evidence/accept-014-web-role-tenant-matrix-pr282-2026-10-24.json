@@ -1,0 +1,479 @@
+{
+  "schema": "verglos.web.role-tenant-matrix.v1",
+  "scope": "product-contract",
+  "requiredPlans": [
+    "free",
+    "pro",
+    "team",
+    "studio",
+    "enterprise"
+  ],
+  "requiredRoles": [
+    "owner",
+    "admin",
+    "approver",
+    "member",
+    "viewer"
+  ],
+  "requiredTenantModes": [
+    "single",
+    "multi"
+  ],
+  "cellCount": 50,
+  "complete": true,
+  "cells": [
+    {
+      "plan": "free",
+      "role": "owner",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "free",
+      "role": "owner",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "free",
+      "role": "admin",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "free",
+      "role": "admin",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "free",
+      "role": "approver",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "free",
+      "role": "approver",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "free",
+      "role": "member",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "free",
+      "role": "member",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "free",
+      "role": "viewer",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "free",
+      "role": "viewer",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 9,
+      "admittedDeclaredCapabilityCount": 9
+    },
+    {
+      "plan": "pro",
+      "role": "owner",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "pro",
+      "role": "owner",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "pro",
+      "role": "admin",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "pro",
+      "role": "admin",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "pro",
+      "role": "approver",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "pro",
+      "role": "approver",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "pro",
+      "role": "member",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "pro",
+      "role": "member",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "pro",
+      "role": "viewer",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "pro",
+      "role": "viewer",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "owner",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "owner",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "admin",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "admin",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "approver",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "approver",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "member",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "member",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "viewer",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "team",
+      "role": "viewer",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 21,
+      "admittedDeclaredCapabilityCount": 21
+    },
+    {
+      "plan": "studio",
+      "role": "owner",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "studio",
+      "role": "owner",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "studio",
+      "role": "admin",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "studio",
+      "role": "admin",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "studio",
+      "role": "approver",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "studio",
+      "role": "approver",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "studio",
+      "role": "member",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "studio",
+      "role": "member",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "studio",
+      "role": "viewer",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "studio",
+      "role": "viewer",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 28,
+      "admittedDeclaredCapabilityCount": 28
+    },
+    {
+      "plan": "enterprise",
+      "role": "owner",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    },
+    {
+      "plan": "enterprise",
+      "role": "owner",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 8,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    },
+    {
+      "plan": "enterprise",
+      "role": "admin",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    },
+    {
+      "plan": "enterprise",
+      "role": "admin",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 7,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    },
+    {
+      "plan": "enterprise",
+      "role": "approver",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    },
+    {
+      "plan": "enterprise",
+      "role": "approver",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 3,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    },
+    {
+      "plan": "enterprise",
+      "role": "member",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    },
+    {
+      "plan": "enterprise",
+      "role": "member",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 2,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    },
+    {
+      "plan": "enterprise",
+      "role": "viewer",
+      "tenantMode": "single",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    },
+    {
+      "plan": "enterprise",
+      "role": "viewer",
+      "tenantMode": "multi",
+      "actionCount": 8,
+      "admittedActionCount": 1,
+      "declaredCapabilityCount": 36,
+      "admittedDeclaredCapabilityCount": 36
+    }
+  ],
+  "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+  "execution": "local-pure-product-contract",
+  "generatedAt": "2026-10-24T04:20:45.090Z"
+}
