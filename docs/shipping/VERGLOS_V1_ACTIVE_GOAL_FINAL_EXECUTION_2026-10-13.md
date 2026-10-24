@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · QUAL-WEB-006 production-build multi-browser qualification
+
+The populated dashboard was re-run against a fresh local PostgreSQL 16
+container using the local production `next start` build. Chromium and Firefox
+each passed the strict dashboard qualifier with **52/52 measurements, zero
+source issues, and zero decision gaps**. All 13 routes reported a 100-row
+dataset on 26 ready states; loading/error announcements were **13/13** each;
+Axe was **0**; and the maximum observed TTFB/FCP/LCP/INP/CLS values were
+Chromium **113.2/140/356/24/0 ms** and Firefox **41/130/366/40/0 ms**.
+
+This advances the automated QUAL-WEB-006 implementation/qualification slice.
+Human screen-reader, field/real-user CWV, independent-review, and final
+acceptance evidence remain open. No checkbox changed; score remains **245
+checked / 35 open / 280 total (87.5%)**, with 13 AppSec-dependent and 22
+non-AppSec rows open. No paid Actions, customer data, Production write,
+payment, publication, deletion, or final npm release occurred. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #280 populated dashboard execution
 
 Web PR #280 merged normally as `395e8252` from implementation `21f9cfb`. The

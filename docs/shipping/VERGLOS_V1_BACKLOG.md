@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser addendum
+
+The strict automated dashboard qualification now passes on a fresh local
+PostgreSQL 16 database and local production `next start` build for Chromium and
+Firefox: **52/52 measurements per browser, zero source issues, zero decision
+gaps**, 100 rows on all 26 ready states, loading/error announcements 13/13,
+Axe 0, and CWV maxima below threshold. This advances QUAL-WEB-006's automated
+implementation/qualification evidence only. Human screen-reader, field/real-
+user CWV, independent review, and final acceptance remain open; no checkbox
+changed. Score remains **245 checked / 35 open / 280 total (87.5%)**, with 13
+AppSec-dependent and 22 non-AppSec rows open. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #280 populated dashboard/transient execution addendum
 
 Web PR #280 merged normally as `395e8252` from `21f9cfb`. The authenticated
