@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · complete Web serial qualification
+
+Web PR [#283](https://github.com/anuragyadav-git/verglos-web/pull/283) merged
+normally at `257e1cc8e0b467d16966433033589111f62f56f0`. Its explicit
+`ACCOUNT_DELETION_TEST_DATABASE_URL` boundary preserves the fresh default while
+allowing the account-deletion integration to use a separately migrated local
+fixture. With fresh general, migrated billing, and migrated account-deletion
+fixtures wired, the full Web serial suite passed **928/928**, with **0
+failures, 0 cancellations, and 0 skips**; typecheck and focused account
+deletion passed as well. This completes the local implementation/test-boundary
+slice for `QUAL-WEB-005/006`, but does not create hosted Production deletion,
+human/field, customer/recipient, provider-publication, independent-review,
+AppSec/Hunt, or final-release evidence. No checkbox changed. Score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-005-006-triple-db-serial-complete-2026-10-24.md`.
+The additive bundle v14 verifies **339** bounded files with **0** mismatches,
+matching manifest
+`sha256:08e046b2e5e342a400fba475ee32028ceb19d0f2715ec6c94b96adf655f30938`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · dual-database Web serial recheck
 
 The current merged Web candidate was exercised with its two required local

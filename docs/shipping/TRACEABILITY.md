@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · complete Web serial qualification
+
+- **Source mapping:** Web tested tree `7307ae5`, merged through PR #283 at
+  `257e1cc8`; trees are content-equivalent.
+- **Verification mapping:** Full serial suite **928/928** passed with 0
+  failures, cancellations, or skips; typecheck and focused account deletion
+  passed.
+- **Acceptance mapping:** Complete local implementation evidence for
+  QUAL-WEB-005/006 only. Hosted deletion, human/field, customer/recipient,
+  provider-publication, independent-review, AppSec/Hunt, and final-release
+  gates remain open; no checkbox changed.
+- **Evidence:** `evidence/qual-web-005-006-triple-db-serial-complete-2026-10-24.md`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-triple-db-v14.json`
+  verifies 339 files with zero mismatches, matching manifest
+  `sha256:08e046b2e5e342a400fba475ee32028ceb19d0f2715ec6c94b96adf655f30938`,
+  and passed secret scanning.
+
 ## 2026-10-24 · dual-database Web serial recheck
 
 - **Source mapping:** Web `705a85e2b7b9d847a85748463aa0d797c60b384f`,

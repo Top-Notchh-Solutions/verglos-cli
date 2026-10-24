@@ -119,6 +119,7 @@ const paths = [
   "docs/shipping/evidence/nonappsec-implementation-sweep-2026-10-24.md",
   "docs/shipping/evidence/qual-web-006-local-isolated-db-serial-recheck-2026-10-24.md",
   "docs/shipping/evidence/qual-web-005-006-dual-db-serial-recheck-2026-10-24.md",
+  "docs/shipping/evidence/qual-web-005-006-triple-db-serial-complete-2026-10-24.md",
   "docs/shipping/evidence/web-full-serial-regression-pr268-2026-10-24.md",
   "docs/shipping/evidence/final-web-007-production-browser-qualification-2026-10-24.md",
   "docs/shipping/evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md",
