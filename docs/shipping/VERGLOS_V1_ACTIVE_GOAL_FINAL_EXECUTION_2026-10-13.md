@@ -1,5 +1,19 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-003 release-artifact regression
+
+The dedicated release checksum, origin, SBOM, SPDX, notice, license,
+clean-consumer, standard-validation, release-note, tag, and strict artifact
+verifier suite passed **43/43** with zero failures, cancellations, skips, or
+todos. No registry/provider publication, tag, protected approval, external
+attestation, or final release sign-off occurred; `DIST-003` remains unchecked.
+Score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-003-current-release-artifact-regression-2026-10-24.md`.
+Bundle v40 verifies **374** bounded files with **0** mismatches, matching
+manifest `sha256:1f10a8e9e9649fea2566432f593bef36d2680fe816ceb08e73ad821f2b53e5da`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · DIST-002/003 publish-contract regression
 
 The no-spend trusted-publishing, package-preflight, license, release-artifact,

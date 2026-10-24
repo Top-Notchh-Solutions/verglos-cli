@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-003 current release-artifact regression
+
+- **Implementation mapping:** Release checksum, origin, SBOM, SPDX, notice,
+  license, clean-consumer, validation, release-note, tag, and artifact tools.
+- **Contract mapping:** **43/43** tests passed with no failures, skips,
+  cancellations, or todos.
+- **Boundary mapping:** Local integrity only; provider publication, external
+  attestation, protected approval, and final release remain open.
+- **Evidence:** `evidence/dist-003-current-release-artifact-regression-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v40.json` verifies 374 files with zero mismatches, matching manifest `sha256:1f10a8e9e9649fea2566432f593bef36d2680fe816ceb08e73ad821f2b53e5da`, and passed secret scanning.
+
 ## 2026-10-24 · DIST-002/003 current publish-contract regression
 
 - **Implementation mapping:** Publish preflight, workflow, license, artifact,

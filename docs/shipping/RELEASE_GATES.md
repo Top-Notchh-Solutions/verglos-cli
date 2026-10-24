@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-003 current release-artifact regression
+
+The dedicated release checksum, origin, SBOM, SPDX, notice, license,
+clean-consumer, validation, release-note, tag, and artifact suite passed
+**43/43**. This does not satisfy trusted provider attestation, final
+license/release clearance, or final acceptance. No checkbox changed; score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/dist-003-current-release-artifact-regression-2026-10-24.md`.
+Bundle v40 verifies **374** files with zero mismatches, matching manifest
+`sha256:1f10a8e9e9649fea2566432f593bef36d2680fe816ceb08e73ad821f2b53e5da`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-002/003 current publish-contract regression
 
 The bounded trusted-publishing, package-preflight, license, artifact, tag,

@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-003 current release-artifact regression
+
+- **Decision:** Record the local release-artifact integrity result without
+  treating fixture/contract validation as external publication evidence.
+- **Result:** **43/43** checksum, SBOM, SPDX, notice, license, clean-consumer,
+  validation, release-note, origin, tag, and strict-verifier tests passed.
+- **Boundary:** No registry/provider publication, tag, protected approval,
+  external attestation, or final release sign-off occurred. DIST-003 remains
+  unchecked; score remains **246/34/280**.
+- **Evidence:** `evidence/dist-003-current-release-artifact-regression-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v40.json` verifies 374 files with zero mismatches, matching manifest `sha256:1f10a8e9e9649fea2566432f593bef36d2680fe816ceb08e73ad821f2b53e5da`, and passed secret scanning.
+
 ## 2026-10-24 · DIST-002/003 current publish-contract regression
 
 - **Decision:** Record the local trusted-publishing and release-artifact
