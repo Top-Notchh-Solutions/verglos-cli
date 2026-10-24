@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · authenticated dashboard capture harness
+
+Web PR #273 merged normally as `8820fbf7`, adding the bounded Playwright
+authenticated dashboard capture command. The isolated synthetic owner fixture
+captured **13/13** authenticated routes at both desktop and mobile (**26
+ready-state measurements**); the contract suite passed **4/4** and typecheck
+passed. The fail-closed qualifier reports **73** gaps because loading/error
+states and large-dataset rows were not fabricated. This advances
+`QUAL-WEB-006` implementation evidence only; human screen-reader,
+supported-browser/field performance, large-dataset, independent review, and
+final acceptance remain open. No checkbox changed. Score remains **245 checked
+/ 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-ready-2026-10-24.md`.
+
 ## 2026-10-24 · current CLI public-OSS verifier recheck
 
 The current CLI `aad2c743` public-OSS corpus was reverified at exact frozen

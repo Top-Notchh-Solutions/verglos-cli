@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · authenticated dashboard capture harness
+
+Web PR #273 merged normally as `8820fbf7`. The local Preview-like authenticated
+capture covered **13/13** dashboard routes at desktop and mobile (**26
+ready-state measurements**); source contracts and the four focused harness
+tests passed. The qualifier intentionally remains failed closed with **73**
+gaps for loading/error/large-dataset and observed page-contract coverage.
+This opens no release gate; human screen-reader, field-CWV, independent
+review, customer, and final release evidence remain open. No checkbox changed;
+score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-local-authenticated-ready-2026-10-24.md`.
+
 ## 2026-10-24 · current CLI public-OSS verifier recheck
 
 The current `aad2c743` public-OSS corpus recheck passed **8/8** exact-commit

@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record authenticated dashboard capture harness
+
+- **Decision:** Merge the bounded Playwright dashboard capture harness and run
+  it against an isolated synthetic owner fixture.
+- **Result:** Web PR #273 merged as `8820fbf7`; **13/13** routes were captured
+  at desktop and mobile (**26 ready-state measurements**), focused contract
+  tests passed **4/4**, and typecheck passed. The qualifier returned **73**
+  gaps because loading/error/large-dataset evidence was absent.
+- **Disposition:** Record implementation/capture progress only. Keep human,
+  field, large-dataset, independent-review, customer, and final-release
+  boundaries open; no checkbox changed. Score remains **245/35/280 (87.5%)**.
+  No Production/customer data or Actions run was used.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-authenticated-ready-2026-10-24.md`.
+
 ## 2026-10-24 · record current CLI public-OSS verifier recheck
 
 - **Decision:** Reverify the exact-commit public corpus against current CLI

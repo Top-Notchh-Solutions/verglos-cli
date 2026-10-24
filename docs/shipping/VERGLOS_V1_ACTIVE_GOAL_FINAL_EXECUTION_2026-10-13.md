@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · authenticated dashboard capture harness
+
+Web PR #273 merged normally as `8820fbf7daa2da83c3030d8215553739e96d5a37`,
+adding the bounded Playwright dashboard capture command. Against an isolated
+local Preview-like server and synthetic `owner-fixture`, it captured all 13
+authenticated dashboard routes at desktop and mobile (**26 ready-state
+measurements**) with zero source-contract issues. The contract suite passed
+**4/4** and typecheck passed. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-ready-2026-10-24.md`.
+
+The qualifier correctly remains failed closed: loading/error states and
+large-dataset rows were not synthesized, and the empty synthetic database
+reported **73** coverage/qualification gaps. This advances QUAL-WEB-006
+implementation and authenticated capture capability only; no checkbox
+changed. Score remains **245 checked / 35 open / 280 total (87.5%)**, with
+**13 AppSec-dependent / 22 non-AppSec** rows open. No Production/customer data,
+Actions run, or artifact deletion was used.
+
 ## Latest continuation result · 2026-10-24 · current CLI public-OSS verifier recheck
 
 The owner-authorized current CLI public-OSS corpus was reverified at

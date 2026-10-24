@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · authenticated dashboard capture harness
+
+Web PR #273 merged normally as `8820fbf7`. The new bounded Playwright harness
+captured all **13** authenticated dashboard routes at desktop and mobile
+(**26 ready-state measurements**) against an isolated synthetic owner fixture;
+its contract suite passed **4/4** and typecheck passed. The qualifier failed
+closed with **73** gaps because loading/error and large-dataset states were not
+invented. This is implementation/capture evidence only; no checkbox changed
+and score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-local-authenticated-ready-2026-10-24.md`.
+
 ## 2026-10-24 · current CLI public-OSS verifier recheck
 
 The owner-authorized current CLI corpus recheck passed **8/8** exact-commit
