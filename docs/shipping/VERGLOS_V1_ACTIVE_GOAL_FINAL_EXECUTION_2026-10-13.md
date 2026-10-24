@@ -1,5 +1,19 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
+
+The current CLI candidate passed **8/8** package builds and the focused
+rollback evidence contracts passed **2/2**. The fail-closed local rehearsal
+covered all five rollback/revocation boundaries and preserved two historical
+records. It did not call npm, a registry, signing/Hunt providers, Vercel, or an
+authenticated rollback/revocation endpoint, so `DIST-006` remains unchecked.
+Score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-006-current-head-rollback-rehearsal-2026-10-24.md`.
+Bundle v28 verifies **361** bounded files with **0** mismatches, matching
+manifest `sha256:d75cedd8af8dbc8eaad3b3fbe9a0437d776243a8576482920302f4af5019e03a`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · DIST-003 current-head artifact and provenance preflight
 
 The dedicated artifact/provenance contract suite passed **39/39** with zero

@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
+
+- **Implementation mapping:** CLI ledger head
+  `8c561e13a6431529d069d27c97a9f261c4353c99`; package build passed **8/8**.
+- **Contract mapping:** Focused rollback evidence contracts passed **2/2**.
+- **Boundary mapping:** The local rehearsal admitted all five required
+  rollback/revocation decisions and preserved two historical records; no npm,
+  registry, signing/Hunt provider, Vercel, or authenticated endpoint was
+  called.
+- **Disposition:** `DIST-006` remains unchecked for real provider/Production
+  rollback/revocation, operational review, and final release acceptance.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/dist-006-current-head-rollback-rehearsal-2026-10-24.md`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v28.json`
+  verifies 361 files with zero mismatches, matching manifest
+  `sha256:d75cedd8af8dbc8eaad3b3fbe9a0437d776243a8576482920302f4af5019e03a`,
+  and passed secret scanning.
+
 ## 2026-10-24 · DIST-003 current-head artifact and provenance preflight
 
 - **Implementation mapping:** CLI candidate

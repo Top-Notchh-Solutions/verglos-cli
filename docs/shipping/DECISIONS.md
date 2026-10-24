@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
+
+- **Decision:** Record the current bounded rollback/revocation decision
+  rehearsal and preserve its historical-record references.
+- **Result:** The current build passed **8/8** package builds; focused rollback
+  evidence contracts passed **2/2**; the rehearsal covered all five required
+  boundaries and preserved two historical records.
+- **Candidate:** CLI ledger head `8c561e13a6431529d069d27c97a9f261c4353c99`;
+  fixture digest `sha256:664f70df2f2a0c063d43c767e602266b1adc1709a498dae7ef71825291b960b7`.
+- **Boundary:** No npm, registry, signing/Hunt provider, Vercel, or
+  authenticated rollback/revocation endpoint was called; no checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/dist-006-current-head-rollback-rehearsal-2026-10-24.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v28.json`
+  verifies 361 files with zero mismatches, matching manifest
+  `sha256:d75cedd8af8dbc8eaad3b3fbe9a0437d776243a8576482920302f4af5019e03a`,
+  and passed secret scanning.
+
 ## 2026-10-24 · DIST-003 current-head artifact and provenance preflight
 
 - **Decision:** Record the current local artifact, checksum, SBOM, release-note,
