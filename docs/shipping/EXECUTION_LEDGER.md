@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## STUDIO-CLI-001 Production handoff boundary smoke · 2026-10-24
+
+- **Execution:** Exercised the deployed public handoff page and acknowledge
+  route with a nonexistent UUID and forged token only.
+- **Result:** Page **200** with private/no-store caching; acknowledge GET
+  **405**; forged POST **400** bounded JSON with `handoff unavailable`,
+  `no-store`, and no database mutation.
+- **Acceptance mapping:** Hosted fail-closed smoke only. Keep STUDIO-CLI-001
+  open for an authorized recipient acknowledgement, independent audit, and
+  final acceptance. Score remains **246/34/280**; no customer data or real
+  handoff was touched.
+- **Evidence:** `evidence/studio-cli-001-production-handoff-boundary-2026-10-24.md`.
+
 ## DIST-002/DIST-003 stable update-channel implementation · 2026-10-24
 
 - **Execution:** Corrected the CLI updater after observing npm's current

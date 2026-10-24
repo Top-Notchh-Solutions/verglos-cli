@@ -1,5 +1,19 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
+
+The deployed handoff boundary was exercised with a nonexistent UUID and forged
+token only: the public handoff page returned **200** with private/no-store
+caching; the acknowledge API rejected GET with **405**; and a forged POST
+returned bounded **400** JSON (`handoff unavailable`) with `no-store` and no
+database mutation. This is real hosted boundary evidence, not recipient
+consent or customer acceptance. `STUDIO-CLI-001` remains unchecked for an
+authorized recipient acknowledgement, independent audit, and final release
+acceptance. No real customer data or handoff was used, and nothing was
+deleted. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-cli-001-production-handoff-boundary-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
 
 The CLI updater had a real production safety defect: npm's mutable `latest`

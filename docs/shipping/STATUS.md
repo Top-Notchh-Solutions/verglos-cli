@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
+
+Production handoff smoke passed the opaque page **200**, method refusal **405**,
+and forged acknowledgement refusal **400** with bounded no-store JSON. No real
+handoff or customer data was touched. STUDIO-CLI-001 remains open for an
+authorized recipient acknowledgement, independent audit, and final acceptance.
+Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/studio-cli-001-production-handoff-boundary-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
 
 The CLI updater is now safe against npm's prerelease `latest` tag: it selects

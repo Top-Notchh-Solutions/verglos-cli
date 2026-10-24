@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
+
+- **Hosted mapping:** `https://verglos.com/handoff/<nonexistent-uuid>` returned
+  200 with private/no-store caching.
+- **Boundary mapping:** The POST-only acknowledge route returned 405 for GET;
+  a forged POST returned bounded 400 JSON with `handoff unavailable`, no-store
+  caching, and no mutation.
+- **Acceptance mapping:** This is deployed fail-closed smoke evidence only;
+  no recipient acknowledgement, customer consent, independent audit, or final
+  release sign-off was inferred. No checkbox changed.
+- **Evidence:** `evidence/studio-cli-001-production-handoff-boundary-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
 
 - **Implementation mapping:** CLI update resolution now reads npm metadata,
