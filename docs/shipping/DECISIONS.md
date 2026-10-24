@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record read-only Production availability
+
+- **Decision:** Record the existing Vercel Production surface as available
+  without initiating a deployment or mutating hosted state.
+- **Result:** Deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc` was `READY`; five
+  public routes returned HTTP 200.
+- **Boundary:** This does not satisfy authenticated browser, human/field-CWV,
+  customer/recipient, provider-publication, independent-review, AppSec/Hunt,
+  or final-release evidence.
+- **Score:** 246/34/280; no checkbox changed.
+- **Evidence:** `evidence/vercel-production-availability-recheck-2026-10-24T0555Z.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-production-availability-v16.json`
+  verifies 343 files with zero mismatches, matching manifest
+  `sha256:f3fc0dc16e229ee34247082bd54cd2077de0cd5a6b273cc6c231eee9c4e8dfd9`,
+  and passed secret scanning.
+
 ## 2026-10-24 · record current-candidate no-go reconciliation
 
 - **Decision:** Reconcile the current merged CLI/Web candidate without

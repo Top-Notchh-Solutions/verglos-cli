@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · read-only Production availability
+
+The existing Vercel Production deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc`
+was `READY` and aliased to `verglos.com`; read-only GET checks returned HTTP
+200 for `/`, `/robots.txt`, `/sitemap.xml`, `/llms.txt`, and `/proof`. No new
+deployment or state-changing provider/payment/customer action was performed.
+This strengthens hosted public-surface evidence only; it does not close a row
+or create authenticated, human/field-CWV, customer, independent-review,
+AppSec/Hunt, or final-release evidence. Score remains **246 checked / 34 open /
+280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/vercel-production-availability-recheck-2026-10-24T0555Z.md`.
+Bundle v16 verifies **343** bounded files with **0** mismatches, matching
+manifest `sha256:f3fc0dc16e229ee34247082bd54cd2077de0cd5a6b273cc6c231eee9c4e8dfd9`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · current-candidate release reconciliation
 
 The fail-closed release reconciliation is now bound to merged CLI

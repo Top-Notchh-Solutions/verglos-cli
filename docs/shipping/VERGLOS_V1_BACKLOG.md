@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · read-only Production availability
+
+The existing Vercel Production deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc`
+was `READY` and aliased to `verglos.com`; read-only GET checks for `/`,
+`/robots.txt`, `/sitemap.xml`, `/llms.txt`, and `/proof` each returned HTTP 200.
+No new deployment or state-changing provider/payment/customer action occurred.
+This is additive hosted public-surface evidence only; no backlog checkbox
+changed. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/vercel-production-availability-recheck-2026-10-24T0555Z.md`.
+Bundle v16 verifies 343 files with zero mismatches, matching manifest
+`sha256:f3fc0dc16e229ee34247082bd54cd2077de0cd5a6b273cc6c231eee9c4e8dfd9`,
+and passed secret scanning.
+
 ## 2026-10-24 · current-candidate release reconciliation
 
 The current merged candidate is CLI `8a69dbc5db815336f9b2103176f988d3fb90ff5d`

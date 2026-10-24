@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Read-only Production availability · 2026-10-24
+
+- **Execution:** Inspected the existing Vercel Production deployment and
+  performed GET-only checks for the five public truth/availability routes.
+- **Result:** Deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc` was `READY`; all
+  five routes returned HTTP 200.
+- **Boundary:** No deployment, migration, provider, payment, customer, or
+  authenticated state changed; no acceptance or release gate was fabricated.
+- **Disposition:** Add hosted public-surface evidence without changing a
+  backlog checkbox; score remains **246/34/280**.
+- **Evidence:** `evidence/vercel-production-availability-recheck-2026-10-24T0555Z.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-production-availability-v16.json`
+  verifies 343 files with zero mismatches, matching manifest
+  `sha256:f3fc0dc16e229ee34247082bd54cd2077de0cd5a6b273cc6c231eee9c4e8dfd9`,
+  and passed secret scanning.
+
 ## Current-candidate release reconciliation · 2026-10-24
 
 - **Candidate:** merged CLI `8a69dbc5db815336f9b2103176f988d3fb90ff5d` and Web
