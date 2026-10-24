@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #290 QUAL-WEB-005 retry-clock hardening and Production receipt
+
+- **Implementation mapping:** Web PR #290 merged normally as
+  `5ff54cd4f4d3258455327d333c9ab9d673fbbd07`; production deletion candidates
+  use a fresh retry clock while injected replay clocks remain deterministic.
+- **Verification mapping:** Account-deletion/cron contracts **11/11**, Web
+  typecheck, and diff checks passed. Vercel deployment
+  `dpl_FP1b4KkeeVep6Ece1TF8rG5BzsCf` reached Ready/Production; `verglos.com`
+  returned **6/6 HTTP 200**, and `www` returned **6/6 HTTP 308** canonical
+  redirects. The deployment hostname returned SSO 302 and was not bypassed.
+- **Boundary mapping:** This is implementation and provider/Production
+  evidence only. It does not perform destructive customer deletion or prove
+  restore/rollback, independent review, customer-held disposition, or final
+  release sign-off; no checkbox changed. Score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-005-retry-clock-pr290-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #289 Ready Production receipt
 
 - **Implementation mapping:** Vercel deployment
