@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · merged dashboard accessibility fix and v3 capture
+
+Web PR #275 merged normally as `b17c846c` from implementation `b344def`. It
+fixed the observed dashboard contrast and billing ARIA defects and hardened
+the WebKit headless focus probe. The authenticated synthetic-fixture rerun
+covered all 13 dashboard routes at desktop/mobile in Chromium, Firefox, and
+WebKit (**78 ready measurements total**); all three browser reports have zero
+ready-state accessibility/performance failures. Typecheck passed and the
+dashboard contract suite passed **4/4**. Large-dataset, loading, and error
+states remain intentionally unprovided, so no checkbox changed; score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-v3-2026-10-24.md`.
+Additive bundle v32 contains **263** hashed files, verifies with **0**
+mismatches, matches manifest
+`sha256:82de78f702f7771eb267473b37f2b547cc8bef4966bbc6582432ae45d2803de7`,
+and passes secret scanning.
+
 ## 2026-10-24 · authenticated dashboard multi-browser capture
 
 Web PR #274 merged normally as `b9f051fd`. Current Chromium, Firefox, and

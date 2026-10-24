@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · merged dashboard accessibility fix and v3 capture
+
+Web PR #275 merged normally as `b17c846c1932636a55eac01895a5226fa9899a3d`,
+with implementation `b344def`. It fixes the observed Monitoring/Alerts/Members
+contrast failures, gives Billing allowance bars valid `progressbar` semantics,
+and hardens the WebKit headless focus probe. The local authenticated synthetic
+fixture captured all 13 dashboard routes at desktop/mobile in Chromium,
+Firefox, and WebKit (**26 measurements per browser / 78 total**); all three
+reports have zero ready-state accessibility/performance failures. Typecheck and
+the dashboard contract suite passed **4/4**. Qualification remains fail-closed
+for large-dataset, loading, and error-state evidence, so no checkbox changed.
+Score remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-v3-2026-10-24.md`.
+Additive bundle v32 contains **263** hashed files, verifies with **0**
+mismatches, matches manifest
+`sha256:82de78f702f7771eb267473b37f2b547cc8bef4966bbc6582432ae45d2803de7`,
+and passes secret scanning.
+
 ## 2026-10-24 · authenticated dashboard multi-browser capture
 
 Web PR #274 merged normally as `b9f051fd`. The retry-enabled harness captured

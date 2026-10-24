@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · merged dashboard accessibility fix and v3 capture
+
+- **Source mapping:** Web PR #275 merged normally as
+  `b17c846c1932636a55eac01895a5226fa9899a3d`; implementation `b344def` fixes
+  the observed contrast/ARIA defects and hardens the WebKit headless focus
+  probe.
+- **Verification mapping:** The authenticated synthetic fixture covered all 13
+  dashboard routes at desktop/mobile in Chromium, Firefox, and WebKit (**78
+  ready measurements total**); all three browser reports have zero ready-state
+  accessibility/performance failures. Typecheck and focused dashboard tests
+  passed **4/4**.
+- **Acceptance mapping:** This advances QUAL-WEB-006 implementation and
+  automated supported-browser evidence only. Large-dataset, loading/error,
+  human/field, independent-review, customer, and final-release evidence remain
+  open. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-v3-2026-10-24.md`.
+- **Bundle mapping:** Additive v32 contains **263** hashed files, verifies with
+  **0** mismatches, matches manifest
+  `sha256:82de78f702f7771eb267473b37f2b547cc8bef4966bbc6582432ae45d2803de7`,
+  and passes secret scanning.
+
 ## 2026-10-24 · authenticated dashboard multi-browser capture
 
 - **Source mapping:** Web PR #274 merged normally as
