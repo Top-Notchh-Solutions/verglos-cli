@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-candidate reconciliation v6
+
+- **Candidate mapping:** CLI `f6facdc5ad312325f00618e3e463dc81569c4341` / Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Reconciliation mapping:** 22 rows; 1 shipped, 21 partial, 0 planned; 6
+  correction items; 1 rollback item; 6 open gates.
+- **Gate mapping:** Provider lifecycle, independent review, authenticated
+  browser, field CWV, account deletion, and final release remain open; the
+  recorded recommendation is `no-go`.
+- **Evidence:** `evidence/acceptance-release-reconciliation-2026-10-24-current-v6.json`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v21.json`
+  verifies 355 files with zero mismatches, matching manifest
+  `sha256:e022b2da062d399108818b6f2bcf121af2686831c467f231a32c94bfbc89f706`,
+  and passed secret scanning.
+
 ## 2026-10-24 · backlog state reconciliation
 
 - **Row-state mapping:** `QUAL-WEB-005` now reflects the reviewed 44/44

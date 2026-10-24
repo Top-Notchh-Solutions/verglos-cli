@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## Current-candidate reconciliation v6 · 2026-10-24
+
+- **Execution:** Rebuilt the release-gate input against current evidence and
+  ran the fail-closed reconciler.
+- **Result:** 22 rows; 1 shipped / 21 partial / 0 planned; 6 corrections; 1
+  rollback; six open gates; recommendation `no-go`.
+- **Candidate:** CLI `f6facdc5` / Web `257e1cc8`.
+- **Disposition:** No gate or checkbox was upgraded; score remains **246/34/280**.
+- **Evidence:** `evidence/acceptance-release-reconciliation-2026-10-24-current-v6.json`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v21.json`
+  verifies 355 files with zero mismatches, matching manifest
+  `sha256:e022b2da062d399108818b6f2bcf121af2686831c467f231a32c94bfbc89f706`,
+  and passed secret scanning.
+
 ## Backlog state reconciliation · 2026-10-24
 
 - **Execution:** Reconciled stale main-row summaries against the current

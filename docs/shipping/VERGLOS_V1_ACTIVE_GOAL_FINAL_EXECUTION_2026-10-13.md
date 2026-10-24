@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-candidate reconciliation v6
+
+The release-gate input was rebuilt against the current Production migration,
+current-head browser receipt, and current corpus/regression evidence. The
+candidate remains CLI `f6facdc5` / Web `257e1cc8`; the reconciler verifies **22
+rows: 1 shipped / 21 partial**, **0 planned**, **6 corrections**, and **1
+rollback**. Open gates remain `providerLifecycle`, `independentReview`,
+`authenticatedBrowser`, `fieldCwv`, `accountDeletion`, and `finalRelease`; the
+recorded recommendation is fail-closed **no-go**. Evidence:
+`docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v6.json`.
+No checkbox changed; score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Bundle v21 verifies **355** bounded files with **0** mismatches, matching
+manifest `sha256:e022b2da062d399108818b6f2bcf121af2686831c467f231a32c94bfbc89f706`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · backlog state reconciliation
 
 The authoritative backlog row summaries were reconciled with current evidence:

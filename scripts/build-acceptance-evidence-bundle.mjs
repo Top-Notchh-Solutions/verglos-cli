@@ -364,6 +364,9 @@ const paths = [
   "docs/shipping/evidence/acceptance-release-reconciliation-input-config-2026-10-24-v5.json",
   "docs/shipping/evidence/acceptance-release-reconciliation-input-2026-10-24-v5.json",
   "docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v5.json",
+  "docs/shipping/evidence/acceptance-release-reconciliation-input-config-2026-10-24-v6.json",
+  "docs/shipping/evidence/acceptance-release-reconciliation-input-2026-10-24-v6.json",
+  "docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v6.json",
   "THIRD_PARTY_NOTICES",
 ];
 

@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-candidate reconciliation v6
+
+- **Decision:** Reconcile the current candidate using the latest bounded
+  Production, browser, corpus, and regression evidence.
+- **Result:** 1 shipped / 21 partial / 0 planned; 6 corrections; 1 rollback;
+  six gates open; recorded recommendation `no-go`.
+- **Candidate:** CLI `f6facdc5` and Web `257e1cc8`.
+- **Boundary:** No gate was inferred as passed and no checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain open.
+- **Evidence:** `evidence/acceptance-release-reconciliation-2026-10-24-current-v6.json`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v21.json`
+  verifies 355 files with zero mismatches, matching manifest
+  `sha256:e022b2da062d399108818b6f2bcf121af2686831c467f231a32c94bfbc89f706`,
+  and passed secret scanning.
+
 ## 2026-10-24 · reconcile stale backlog row summaries
 
 - **Decision:** Align the main row text with already-recorded current evidence.
