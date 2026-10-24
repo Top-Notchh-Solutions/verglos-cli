@@ -19,9 +19,18 @@ type PackageMetadata = Readonly<{
 function parseVersion(value: string): ParsedVersion | null {
   const match = VERSION_PATTERN.exec(value);
   if (!match) return null;
-  const prerelease = match[4]?.split(".").map((part) => /^\d+$/u.test(part) ? Number(part) : part) ?? [];
+  const major = Number(match[1]);
+  const minor = Number(match[2]);
+  const patch = Number(match[3]);
+  if (![major, minor, patch].every((part) => Number.isSafeInteger(part) && part >= 0)) return null;
+  const prereleaseParts = match[4]?.split(".") ?? [];
+  // SemVer numeric identifiers cannot have leading zeroes. Rejecting these
+  // here prevents registry metadata such as 1.2.3-alpha.01 from becoming a
+  // second spelling of a release that npm and other clients order differently.
+  if (prereleaseParts.some((part) => /^\d+$/u.test(part) && part.length > 1 && part.startsWith("0"))) return null;
+  const prerelease = prereleaseParts.map((part) => /^\d+$/u.test(part) ? Number(part) : part);
   if (prerelease.some((part) => typeof part === "number" && (!Number.isSafeInteger(part) || part < 0))) return null;
-  return { major: Number(match[1]), minor: Number(match[2]), patch: Number(match[3]), prerelease };
+  return { major, minor, patch, prerelease };
 }
 
 function comparePrerelease(left: ParsedVersion["prerelease"], right: ParsedVersion["prerelease"]): number {

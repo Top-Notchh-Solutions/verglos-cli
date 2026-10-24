@@ -136,6 +136,8 @@ test("update JSON and quiet process failures have stable exits and bounded outpu
 test("stable update selection ignores npm prereleases and orders semver correctly", () => {
   assert.equal(selectLatestStableVersion({ versions: { "1.8.3": {}, "2.0.0-alpha.1": {}, "1.8.2": {}, "2.0.0-beta.1": {} } }), "1.8.3");
   assert.equal(selectLatestStableVersion({ versions: { "2.0.0-alpha.1": {} } }), null);
+  assert.equal(selectLatestStableVersion({ versions: { "9007199254740992.0.0": {}, "1.8.3": {} } }), "1.8.3");
+  assert.equal(selectLatestStableVersion({ versions: { "1.8.3-alpha.01": {}, "1.8.2": {} } }), "1.8.2");
   assert.equal(compareVersions("2.0.0-alpha.1", "2.0.0-alpha.4") < 0, true);
   assert.equal(compareVersions("2.0.0", "2.0.0-alpha.4") > 0, true);
   assert.equal(isNewerVersion("1.8.3", "2.0.0-alpha.4"), false);
