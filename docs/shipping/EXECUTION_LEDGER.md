@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## FINAL-WEB-006 proof-assets contract · 2026-10-24
+
+- **Execution:** Ran the proof-asset, proof-page, and public-release smoke
+  contract suites at the current Web source.
+- **Result:** **17/17** passed with zero failures, skips, cancellations, or
+  todos; labeled source-free proof and approved-origin boundaries remained
+  green.
+- **Disposition:** Implementation evidence only. No customer/provider,
+  independent/field, deployment, or final-release action occurred;
+  FINAL-WEB-006 remains unchecked and score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-006-current-proof-assets-contract-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v51.json` verifies 385 files with zero mismatches, matching manifest `sha256:da925565e728b8c450cc7c87bd82ebf15f6bd3d88929e00b3c4f32f1086b8a8f`, and passed secret scanning.
+
 ## FINAL-WEB-003 plan/pricing contract · 2026-10-24
 
 - **Execution:** Ran the focused Web entitlement/catalog, resource-admission,

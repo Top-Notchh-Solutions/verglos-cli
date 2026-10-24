@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · FINAL-WEB-006 proof-assets contract
+
+- **Implementation mapping:** Public proof assets, proof page, homepage link,
+  public-origin validator, and release inventory.
+- **Contract mapping:** **17/17** focused tests passed with zero failures,
+  skips, cancellations, or todos.
+- **Boundary mapping:** Public source-free proof does not imply customer,
+  provider, independent/field, deployment, or final-release acceptance.
+- **Evidence:** `evidence/final-web-006-current-proof-assets-contract-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v51.json` verifies 385 files with zero mismatches, matching manifest `sha256:da925565e728b8c450cc7c87bd82ebf15f6bd3d88929e00b3c4f32f1086b8a8f`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-003 plan/pricing contract
 
 - **Implementation mapping:** Web canonical catalog, entitlement/allowance,
