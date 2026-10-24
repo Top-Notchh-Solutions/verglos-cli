@@ -1,5 +1,40 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #296 exact handoff expiry boundary · 2026-10-24
+
+- **Execution:** Web PR #296 merged normally as
+  `a73a479847a6b4667ac33304ccf169b43ed584d7` from `246ec0f`.
+- **Result:** A shared handoff lifecycle helper now treats `now >= expiresAt`
+  as expired across listing and revocation, matching acknowledgement. Focused
+  handoff domain/route/page contracts passed **33/33**; Web typecheck and diff
+  checks passed.
+- **Provider state:** Merged-head Vercel Production deployment
+  `dpl_E7wmp4QBPHx1aiXuSyiYTKhqhUSm` reached **READY / production**; its
+  read-only six-path matrix returned 6/6 expected responses for canonical,
+  www redirect, and protected deployment-host checks.
+- **Acceptance mapping:** This advances STUDIO-CLI-001 implementation only.
+  Authorized recipient acceptance, independent review, and final release
+  evidence remain absent. No checkbox changed; score remains **246/34/280**.
+- **Hosted boundary:** GitHub Actions failed at the blocked budget/runner
+  boundary and was not rerun. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+
+## Web PR #295 monitor registration atomicity · 2026-10-24
+
+- **Execution:** Web PR #295 merged normally as
+  `af53e965e07366fe2d07090b8c1fdf311a60b29e` from `696533e`.
+- **Result:** Monitor registration now performs conflict-safe insert/update and
+  encrypted channel rotation in one transaction. Focused monitor/encryption
+  contracts passed **7/7**; Web typecheck and diff checks passed.
+- **Provider state:** Vercel deployment
+  `dpl_Gpdxuh6ybsJjmyBnYZyNHaiWbERp` reached **READY / production**. The
+  read-only matrix was **6/6 HTTP 200** on `verglos.com`, **6/6 HTTP 308** on
+  `www`, and **6/6 HTTP 302** on the protected deployment hostname.
+- **Acceptance mapping:** Production implementation/provider evidence only; no
+  checkbox changed. Score remains **246/34/280**. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+
 ## Web PR #294 CLI authorization collision boundary · 2026-10-24
 
 - **Execution:** Web PR #294 merged normally as

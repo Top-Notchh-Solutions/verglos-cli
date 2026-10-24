@@ -1,5 +1,34 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #296 exact handoff expiry boundary
+
+Web PR #296 merged normally as
+`a73a479847a6b4667ac33304ccf169b43ed584d7`; handoff listing and revocation
+now resolve exact expiry with `now >= expiresAt`, matching acknowledgement.
+Focused contracts passed **33/33**, typecheck and diff checks passed. The
+merged-head Vercel Production deployment
+`dpl_E7wmp4QBPHx1aiXuSyiYTKhqhUSm` reached **READY / production**; the
+read-only six-path matrix returned 6/6 expected responses for the canonical,
+www redirect, and protected deployment-host checks. Actions failed
+at the blocked budget/runners boundary and were not rerun. This is
+STUDIO-CLI-001 implementation evidence only; recipient acceptance,
+independent review, and final release remain open. No checkbox changed; score
+remains **246/34/280 (87.9%)**. Evidence:
+`evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+
+## 2026-10-24 · Web PR #295 monitor registration atomicity
+
+Web PR #295 merged normally as
+`af53e965e07366fe2d07090b8c1fdf311a60b29e`; monitor registration now uses a
+conflict-safe transaction for registration and encrypted-channel rotation.
+Focused contracts passed **7/7**, typecheck and diff checks passed. Vercel
+deployment `dpl_Gpdxuh6ybsJjmyBnYZyNHaiWbERp` reached Ready/Production; public
+aliases passed **6/6 HTTP 200** and **6/6 expected HTTP 308**, while the
+protected deployment hostname returned **6/6 HTTP 302**. This is
+implementation/provider evidence only; no checkbox changed. Score remains
+**246/34/280 (87.9%)**. Evidence:
+`evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #294 CLI authorization collision boundary
 
 Web PR #294 merged normally as

@@ -1,5 +1,32 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · Web PR #296 exact handoff expiry boundary
+
+- **Decision:** Resolve handoff lifecycle state through one shared helper using
+  the closed expiry boundary `now >= expiresAt`; an issued handoff is expired
+  at the exact deadline and cannot be revoked afterward.
+- **Result:** PR #296 merged normally as
+  `a73a479847a6b4667ac33304ccf169b43ed584d7`; handoff domain/route/page
+  contracts passed **33/33**, typecheck and diff checks passed.
+- **Boundary:** STUDIO-CLI-001 implementation only. The merged-head Vercel
+  Production deployment was still building; recipient acceptance,
+  independent review, and final release remain open. Score remains
+  **246/34/280**.
+- **Evidence:** `evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+
+## 2026-10-24 · Web PR #295 monitor registration atomicity
+
+- **Decision:** Treat monitor registration as one conflict-safe transaction,
+  including encrypted channel credential rotation, so concurrent CLI retries
+  cannot create a false failure or partial credential state.
+- **Result:** PR #295 merged normally as
+  `af53e965e07366fe2d07090b8c1fdf311a60b29e`; focused monitor/encryption
+  contracts passed **7/7**, typecheck and diff checks passed, and the merged
+  Vercel Production deployment reached Ready.
+- **Boundary:** Implementation/provider evidence only; no acceptance checkbox
+  changed. Score remains **246/34/280**.
+- **Evidence:** `evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 strict rollback-input validation
 
 - **Decision:** Require literal boolean approval/history-preservation flags and

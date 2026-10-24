@@ -1,4 +1,8 @@
-# Verglos V1 Active Goal Index — Approved Contract and Point-5 Qualification
+# Verglos V1 Active Goal Index — superseded traceability summary
+
+> **Current execution authority:**
+> `VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md`. This dated index is
+> retained for traceability and must not be used as the active queue.
 
 ## 2026-10-13 feature coverage index
 
@@ -15,7 +19,7 @@ checked / 52 unchecked / 280 total (81.4%)**. The current goal stops after the
 public TypeScript/JavaScript package qualification corpus; npm publication,
 held-out POC/experiments, and the final release decision are next-goal work.
 
-> **Current score:** 228 checked / 52 unchecked / 280 total (81.4%).
+> **Historical score at this checkpoint:** 228 checked / 52 unchecked / 280 total (81.4%).
 >
 > **Current stop boundary:** complete Points 1–5 only, ending with the npm
 > package qualification corpus on public TypeScript/JavaScript repositories.
@@ -23,7 +27,7 @@ held-out POC/experiments, and the final release decision are next-goal work.
 > release decision in this goal.
 
 > **Canonical goal:** use
-> `docs/shipping/VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-07.md`.
+> `docs/shipping/VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md`.
 >
 > The 10/07 file is the complete active goal (2,519 lines) and now contains
 > the 10/12 approved-contract amendment at its top. This file is retained as a
