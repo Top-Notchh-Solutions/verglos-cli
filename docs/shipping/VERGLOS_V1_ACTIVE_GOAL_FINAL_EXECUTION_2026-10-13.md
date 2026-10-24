@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current Production landing multi-browser receipt
+
+The current Web Production deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is
+READY and serves the public aliases from Web commit `21f9cfb`. A read-only
+Playwright/Axe run against `https://verglos.com` covered six declared public
+paths at desktop and mobile in Chromium, Firefox, and WebKit: **36/36
+measurements**, zero Axe violations, zero keyboard failures, zero INP gaps, and
+strict qualification passed for every engine. HTTP checks for the six pages,
+`/llms.txt`, `/robots.txt`, and `/sitemap.xml` returned 200.
+
+This advances current Production automated browser/provider evidence for
+`FINAL-WEB-007` and `FINAL-WEB-008`; it does not create human screen-reader,
+field-CWV, customer/recipient, independent AppSec/Hunt, or final release
+sign-off evidence. No checkbox changed; score remains **245 checked / 35 open /
+280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
+No paid Actions, database write, payment, customer data, publication, deletion,
+or final npm release occurred. Evidence:
+`docs/shipping/evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
+The additive evidence bundle verifies **282** files with zero mismatches and
+manifest `sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-006 production-build multi-browser qualification
 
 The populated dashboard was re-run against a fresh local PostgreSQL 16

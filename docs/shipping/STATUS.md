@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current Production landing multi-browser receipt
+
+Vercel Production deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is READY for
+the merged Web `21f9cfb` source. The read-only public capture covered six
+declared paths at desktop/mobile in Chromium, Firefox, and WebKit: **36/36**
+measurements, zero Axe violations, zero keyboard failures, zero INP gaps, and
+strict qualification passed for every engine. Public HTTP checks for the six
+pages plus `/llms.txt`, `/robots.txt`, and `/sitemap.xml` returned 200.
+
+This advances FINAL-WEB-007/008 automated provider evidence only. Human
+screen-reader, field-CWV, customer/recipient, independent-review,
+AppSec/Hunt, and final-release evidence remain open. Score remains **245
+checked / 35 open / 280 total (87.5%)**, with **13 AppSec-dependent / 22
+non-AppSec** rows open. Evidence:
+`evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
+The additive bundle verifies **282** files with zero mismatches and manifest
+`sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+
 ## 2026-10-24 · QUAL-WEB-006 local production-build qualification
 
 The populated dashboard now has strict automated qualification evidence from a

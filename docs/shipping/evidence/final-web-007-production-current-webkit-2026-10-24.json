@@ -1,0 +1,13 @@
+{
+  "schema": "urn:verglos:landing-release-capture:v2",
+  "capturedAt": "2026-10-24T03:00:15.861Z",
+  "source": "playwright-webkit-axe-local-production-like",
+  "baseUrl": "https://verglos.com",
+  "deployment": "dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu",
+  "measurements": 12,
+  "maxMetrics": { "lcp_ms": 1400, "fcp_ms": 1400, "inp_ms": 32, "ttfb_ms": 296, "cls": 0 },
+  "axeViolations": 0,
+  "keyboardFailures": 0,
+  "inpGaps": 0,
+  "qualification": "passed"
+}

@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Current Production landing multi-browser receipt · 2026-10-24
+
+- **Provider:** Vercel deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu`, READY,
+  serving the public aliases from Web commit `21f9cfb`.
+- **Execution:** Read-only Playwright/Axe capture against `https://verglos.com`
+  for `/`, `/docs`, `/detectors`, `/proof`, `/verify`, and `/checkout`, desktop
+  and mobile, in Chromium, Firefox, and WebKit.
+- **Result:** **36/36** measurements passed strict qualification; Axe 0,
+  keyboard failures 0, INP gaps 0. Six page routes plus `llms.txt`, robots,
+  and sitemap returned HTTP 200.
+- **Disposition:** Provider/automated browser evidence only. Human/field,
+  customer, independent-review, AppSec/Hunt, and final-release gates remain
+  open. No checkbox changed; score remains **245/35/280 (87.5%)**. No paid
+  Actions, database write, payment, publication, deletion, or npm release.
+- **Evidence:** `evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
+- **Bundle:** Additive bundle contains **282** files, verifies with zero
+  mismatches, passes secret scanning, and matches manifest
+  `sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+
 ## QUAL-WEB-006 local production-build multi-browser qualification · 2026-10-24
 
 - **Execution:** Fresh local PostgreSQL 16 container, reviewed migrations,
