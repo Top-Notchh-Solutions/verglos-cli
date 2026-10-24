@@ -4,14 +4,16 @@
 
 The current Web tree `705a85e2` passed the complete serial suite against a
 fresh local PostgreSQL 16 `verglos_test` database: **926/928 passed, 0 failed,
-0 cancelled, and 2 designed skips**, exit `0`. This is additive local
+0 cancelled, and 2 designed database skips**, exit `0`; the separately gated
+`BILLING_TEST_DATABASE_URL` migrated-baseline test was intentionally not part
+of this run. This is additive local
 implementation evidence for `QUAL-WEB-005/006` and related non-AppSec
 surfaces. It does not create human/field, customer/recipient,
 provider-publication, Production deletion, independent-review, AppSec/Hunt, or
 final-release evidence. No checkbox changed. Score remains **246 checked / 34
 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
 Evidence: `docs/shipping/evidence/qual-web-006-local-isolated-db-serial-recheck-2026-10-24.md`.
-Bundle v11 verifies 337 files with zero mismatches and passed secret scanning.
+Bundle v12 verifies 337 files with zero mismatches and passed secret scanning.
 
 ## 2026-10-24 · non-AppSec implementation sweep
 
