@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
+
+- **Implementation mapping:** Dashboard release capture parser and
+  authenticated surface/state qualification contract.
+- **Contract mapping:** **4/4** tests passed with zero failures, skips,
+  cancellations, or todos.
+- **Boundary mapping:** No authenticated Production, human/field, customer,
+  independent/provider, or final-release acceptance was inferred.
+- **Evidence:** `evidence/qual-web-006-current-dashboard-qualification-contract-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v53.json` verifies 387 files with zero mismatches, matching manifest `sha256:6b9aba53c19488890f3d55a14c8d8941306571618ced8f8c9602bdeeabddfc01`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-005 metadata truth contract
 
 - **Implementation mapping:** Web metadata, `/llms.txt`, docs truth, public

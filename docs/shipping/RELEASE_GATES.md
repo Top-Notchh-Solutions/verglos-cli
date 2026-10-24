@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
+
+The current dashboard qualification suite passed **4/4** with zero failures,
+skips, cancellations, or todos, including complete authenticated state
+coverage and fail-closed malformed/partial capture cases. This does not
+satisfy authenticated Production, human/field, customer, independent, or
+final-release evidence. No checkbox changed; score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/qual-web-006-current-dashboard-qualification-contract-2026-10-24.md`.
+Bundle v53 verifies **387** files with zero mismatches, matching manifest
+`sha256:6b9aba53c19488890f3d55a14c8d8941306571618ced8f8c9602bdeeabddfc01`,
+and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-005 metadata truth contract
 
 The focused metadata/public-truth suites passed **37/37** with zero failures,

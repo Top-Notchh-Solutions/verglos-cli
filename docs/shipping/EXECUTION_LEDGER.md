@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-006 dashboard qualification contract · 2026-10-24
+
+- **Execution:** Ran the current Web dashboard-release qualification suite.
+- **Result:** **4/4** passed with zero failures, skips, cancellations, or
+  todos; complete surface/state coverage and fail-closed capture boundaries
+  remained green.
+- **Disposition:** Local qualification evidence only. No authenticated
+  Production, human/field, customer, independent/provider, or final-release
+  action occurred; QUAL-WEB-006 remains unchecked and score remains
+  **246/34/280**.
+- **Evidence:** `evidence/qual-web-006-current-dashboard-qualification-contract-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v53.json` verifies 387 files with zero mismatches, matching manifest `sha256:6b9aba53c19488890f3d55a14c8d8941306571618ced8f8c9602bdeeabddfc01`, and passed secret scanning.
+
 ## FINAL-WEB-005 metadata truth contract · 2026-10-24
 
 - **Execution:** Ran the Web `/llms.txt`, docs truth, public-surface, and
