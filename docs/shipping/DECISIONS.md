@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record ACCEPT-014 clean-corpus matrix correction
+
+- **Decision:** Replace the contaminated v4 matrix as the current
+  evidence-preparation input while retaining v4 for audit history.
+- **Result:** Clean exact-commit report artifacts produce 400/400 scenarios,
+  0 failed runs, 0 finding regressions, 0 performance regressions, and 0 ms
+  aggregate delta. The recommendation remains `no-go` because five declared
+  gates are open.
+- **Disposition:** Keep ACCEPT-014 unchecked. No provider publication,
+  customer, independent, human/field, AppSec/Hunt, or final-release claim is
+  inferred; score remains 245/35/280.
+- **Evidence:** `evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`;
+  bundle manifest `sha256:27af12d1219897a2f40bc7dc4e59342c383495ac5d1a854febd66ab72e78f7d7`.
+
 ## 2026-10-24 · record current-candidate reconciliation v2
 
 - **Decision:** Accept the byte-bound current-candidate reconciliation and

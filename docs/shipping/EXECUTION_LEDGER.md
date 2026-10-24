@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-014 clean-corpus matrix correction · 2026-10-24
+
+- **Execution:** The clean private report root contains 40/40 candidate
+  report files from the verified exact-commit control corpus; the full matrix
+  covers 400/400 fixture×plan×role×tenant keys.
+- **Result:** 0 failed runs, 0 finding regressions, 0 performance regressions,
+  and 0 ms aggregate delta. Authorization evidence is complete; recommendation
+  remains `no-go` for five declared open gates.
+- **Boundary:** This corrects generated-fixture contamination in v4. It does
+  not create provider, customer, independent-review, human/field, AppSec/Hunt,
+  or final-release evidence. ACCEPT-014 remains unchecked; score remains
+  245/35/280.
+- **Evidence:** `evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`;
+  bundle manifest `sha256:27af12d1219897a2f40bc7dc4e59342c383495ac5d1a854febd66ab72e78f7d7`.
+
 ## Current-candidate reconciliation v2 · 2026-10-24
 
 - **Binding:** The new input builder verified evidence bytes and bound the

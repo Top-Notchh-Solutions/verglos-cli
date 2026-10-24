@@ -1,5 +1,30 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-014 clean-corpus matrix correction
+
+The earlier v4 matrix receipt was contaminated by generated fixture files in
+the matrix directories. A clean rerun copied only the already verified
+exact-commit public-OSS control reports into a fresh private matrix root. The
+current candidate now has **400/400** fixture×plan×role×tenant scenarios,
+**0** failed runs, **0** finding regressions, **0** performance regressions,
+and **0 ms** aggregate delta. Authorization evidence remains complete for the
+50-cell Web product-contract matrix.
+
+The result remains correctly `no-go` because `truthRegistry`, `riskReview`,
+`heldOutCorrection`, `providerLifecycle`, and `finalRelease` remain open. This
+corrects the evidence-preparation input; it does not close ACCEPT-014 or infer
+independent review, provider publication, customer acceptance, human/field,
+AppSec/Hunt, or final-release evidence. No checkbox changed; score remains
+**245 checked / 35 open / 280 total (87.5%)**, split **13 AppSec-dependent /
+22 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`;
+the additive bundle verifies **322** files with **0** mismatches, secret scan
+passed, and manifest
+`sha256:27af12d1219897a2f40bc7dc4e59342c383495ac5d1a854febd66ab72e78f7d7`.
+
+No source repository, customer data, Production database, npm registry, tag,
+release, payment, or GitHub Actions run was changed by this rerun.
+
 ## Latest continuation result · 2026-10-24 · current-candidate reconciliation v2
 
 The release ledger is now byte-bound to the actual merged candidates: CLI

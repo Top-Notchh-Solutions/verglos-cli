@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-014 clean-corpus matrix correction
+
+- **Source mapping:** Eight exact-commit public-OSS fixtures, CLI `cd9d572e`,
+  Web `cb266b83`, and the complete 50-cell Web authorization receipt.
+- **Verification mapping:** Clean report artifacts produced 400/400 matrix
+  keys with 0 failed runs, 0 finding regressions, 0 performance regressions,
+  and 0 ms aggregate delta.
+- **Acceptance mapping:** The no-go remains due to five open truth/risk,
+  held-out correction, provider, and final-release gates. No row was closed;
+  score remains 245/35/280.
+- **Evidence:** `evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`;
+  bundle manifest `sha256:27af12d1219897a2f40bc7dc4e59342c383495ac5d1a854febd66ab72e78f7d7`.
+
 ## 2026-10-24 · current-candidate reconciliation v2
 
 - **Source mapping:** Release config and evidence paths bind CLI

@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-014 clean-corpus matrix correction
+
+The v5 rerun used only verified exact-commit control reports in a clean
+private matrix root. It covers **400/400** fixture×plan×role×tenant scenarios
+with **0** failed runs, **0** finding regressions, **0** performance
+regressions, and **0 ms** total delta. The validator remains `no-go` only for
+five open truth/risk/correction/provider/final-release gates. No checkbox
+changed; score remains **245 checked / 35 open / 280 total (87.5%)**, split
+**13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`.
+The additive bundle verifies 322 files with 0 mismatches; manifest
+`sha256:27af12d1219897a2f40bc7dc4e59342c383495ac5d1a854febd66ab72e78f7d7`.
+
 ## 2026-10-24 · current-candidate reconciliation v2
 
 The release input builder now binds the ledger to CLI `cd9d572e` and Web
