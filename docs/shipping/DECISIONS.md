@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-003 streamed source hardening
+
+- **Decision:** Stream file-backed record members from the exact validated
+  source handle and verify identity/size before publication.
+- **Result:** PR #375 merged normally as
+  `28d331faeef1f7cd10a41633a2434045e1cbe9e2`; shared tests, typecheck/build,
+  and CLI build passed.
+- **Boundary:** Local record-ingestion code only. ACCEPT-003 remains open for
+  hosted/provider, independent, recipient/customer, and final-release
+  evidence. Score remains **246/34/280**.
+- **Evidence:** `evidence/accept-003-record-store-stream-source-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-003 record-store read hardening
 
 - **Decision:** Bind content-addressed member reads to an opened regular-file

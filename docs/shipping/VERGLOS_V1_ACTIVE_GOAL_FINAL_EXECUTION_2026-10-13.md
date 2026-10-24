@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-003 streamed source hardening
+
+The file-backed record ingestion path now streams from the exact validated
+source `FileHandle`, uses `O_NOFOLLOW` where available, and verifies source
+identity and size after streaming before publishing the content-addressed
+member. PR **#375** merged normally as
+`28d331faeef1f7cd10a41633a2434045e1cbe9e2`. Shared tests, record-store
+streaming/symlink coverage, shared typecheck/build, and CLI build passed. This
+is real record-ingestion implementation progress supporting ACCEPT-003, but
+does not create provider/hosted acceptance, independent review, customer or
+recipient acceptance, or final release sign-off. Score remains **246 checked /
+34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/accept-003-record-store-stream-source-hardening-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-003 record-store read hardening
 
 The shared content-addressed record store now reads members through a stable

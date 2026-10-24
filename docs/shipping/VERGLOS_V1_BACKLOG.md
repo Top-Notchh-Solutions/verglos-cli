@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-003 streamed source hardening
+
+File-backed record ingestion now streams from the exact validated source
+handle, uses no-follow protection where available, verifies source identity and
+size after streaming, and retains the 50 MB cap, digest, cleanup, and atomic
+publication behavior. PR #375 merged normally as
+`28d331faeef1f7cd10a41633a2434045e1cbe9e2`; shared tests, typecheck/build, and
+CLI build passed. Keep ACCEPT-003 unchecked for provider/hosted evidence,
+independent review, authorized recipient or customer acceptance, and final
+release sign-off. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-003-record-store-stream-source-hardening-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · ACCEPT-003 record-store read hardening
 
 The shared content-addressed record store now uses a stable opened handle for
