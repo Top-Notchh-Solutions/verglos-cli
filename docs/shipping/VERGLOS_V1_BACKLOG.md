@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-006 malformed rollback-reference hardening
+
+The shared rollback decision contract now fails closed on malformed or null
+runtime current/target references, returning bounded invalid-reference reasons
+instead of throwing. CLI PR #368 merged normally as
+`0b789716a3120f9716aa55036932fb1f2f6f6c9e`; shared tests/typecheck/build and
+CLI rollback-plan tests **8/8** passed. Keep DIST-006 unchecked for real
+authenticated provider/Production rollback or revocation, operational review,
+and final release acceptance. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-006-malformed-reference-hardening-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
 
 Using only a nonexistent UUID and forged token, Production returned **200** for
