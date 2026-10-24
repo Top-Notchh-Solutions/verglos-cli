@@ -1,0 +1,54 @@
+{
+  "schema": "verglos.private.release-gate-input-config.v1",
+  "completedAt": "2026-10-24T05:53:34.000Z",
+  "candidate": {
+    "cliCommit": "8a69dbc5db815336f9b2103176f988d3fb90ff5d",
+    "webCommit": "257e1cc8e0b467d16966433033589111f62f56f0",
+    "version": "2.0.0-alpha.4"
+  },
+  "rows": [
+    { "id": "STUDIO-CLI-001", "state": "partial", "evidence": ["docs/shipping/evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md"] },
+    { "id": "DIST-002", "state": "partial", "evidence": ["docs/shipping/evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md"] },
+    { "id": "DIST-003", "state": "partial", "evidence": ["docs/shipping/evidence/dist-002-003-current-alpha4-artifact-recheck-2026-10-24.md"] },
+    { "id": "DIST-006", "state": "partial", "evidence": ["docs/shipping/evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md"] },
+    { "id": "QUAL-WEB-005", "state": "partial", "evidence": ["docs/shipping/evidence/qual-web-005-006-triple-db-serial-complete-2026-10-24.md"] },
+    { "id": "QUAL-WEB-006", "state": "partial", "evidence": ["docs/shipping/evidence/qual-web-005-006-triple-db-serial-complete-2026-10-24.md"] },
+    { "id": "ACCEPT-003", "state": "partial", "evidence": ["docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-triple-db-v14.json"] },
+    { "id": "ACCEPT-005", "state": "shipped", "evidence": ["docs/shipping/evidence/accept-005-public-oss-scope-disposition-2026-10-24.md", "docs/shipping/evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.json"] },
+    { "id": "ACCEPT-006", "state": "partial", "evidence": ["docs/shipping/evidence/accept-006-participant-provenance-2026-10-24.md"] },
+    { "id": "ACCEPT-008", "state": "partial", "evidence": ["docs/shipping/evidence/accept-008-commercial-provenance-2026-10-24.md"] },
+    { "id": "ACCEPT-009", "state": "partial", "evidence": ["docs/shipping/evidence/accept-009-release-reconciler-2026-10-23.md"] },
+    { "id": "ACCEPT-010", "state": "partial", "evidence": ["docs/shipping/evidence/accept-010-candidate-freeze-2026-10-23.md"] },
+    { "id": "FINAL-WEB-001", "state": "partial", "evidence": ["docs/shipping/evidence/final-web-001-security-layer-truth-pr179-2026-10-18.md"] },
+    { "id": "FINAL-WEB-002", "state": "partial", "evidence": ["docs/shipping/evidence/final-web-002-flow-pr178-2026-10-18.md"] },
+    { "id": "FINAL-WEB-003", "state": "partial", "evidence": ["docs/shipping/evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md"] },
+    { "id": "FINAL-WEB-005", "state": "partial", "evidence": ["docs/shipping/evidence/final-web-005-machine-readable-plan-terms-pr250-2026-10-23.md"] },
+    { "id": "FINAL-WEB-006", "state": "partial", "evidence": ["docs/shipping/evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md"] },
+    { "id": "FINAL-WEB-007", "state": "partial", "evidence": ["docs/shipping/evidence/final-web-007-008-production-landing-multibrowser-2026-10-24.md"] },
+    { "id": "FINAL-WEB-008", "state": "partial", "evidence": ["docs/shipping/evidence/final-web-007-008-production-landing-multibrowser-2026-10-24.md"] },
+    { "id": "ACCEPT-011", "state": "partial", "evidence": ["docs/shipping/evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md"] },
+    { "id": "ACCEPT-012", "state": "partial", "evidence": ["docs/shipping/evidence/accept-012-public-oss-triage-2026-10-23.md"] },
+    { "id": "ACCEPT-014", "state": "partial", "evidence": ["docs/shipping/evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md"] }
+  ],
+  "gates": {
+    "providerLifecycle": "open",
+    "customerConsent": "passed",
+    "independentReview": "open",
+    "authenticatedBrowser": "open",
+    "fieldCwv": "open",
+    "accountDeletion": "open",
+    "finalRelease": "open"
+  },
+  "corrections": [
+    { "id": "DIST-002", "action": "complete current trusted npm publication and attestation before release" },
+    { "id": "DIST-003", "action": "bind current candidate release artifacts to trusted publication evidence" },
+    { "id": "QUAL-WEB-005", "action": "complete authorized deletion and restore acceptance" },
+    { "id": "FINAL-WEB-007", "action": "complete human accessibility and field performance evidence" },
+    { "id": "ACCEPT-002", "action": "complete remaining acceptance story evidence" },
+    { "id": "ACCEPT-014", "action": "adjudicate observed finding and performance regressions" }
+  ],
+  "rollback": [
+    { "id": "DIST-006", "action": "perform authenticated provider and registry rollback/revocation rehearsal" }
+  ],
+  "decision": { "result": "no-go", "status": "recorded" }
+}

@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-candidate no-go reconciliation
+
+- **Decision:** Reconcile the current merged CLI/Web candidate without
+  upgrading any partial row or gate.
+- **Candidate:** CLI `8a69dbc5db815336f9b2103176f988d3fb90ff5d`; Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Result:** 1 shipped / 21 partial non-AppSec rows, 6 open gates, 6
+  correction items, and 1 rollback item; recorded recommendation `no-go`.
+- **Boundary:** No publication, deployment, customer/recipient acceptance,
+  independent review, AppSec/Hunt review, final release, or checkbox change.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/acceptance-release-reconciliation-2026-10-24-current-v4.json`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-triple-db-reconciliation-v15.json`
+  verifies 342 files with zero mismatches, matching manifest
+  `sha256:715ed975c83445a1cd2c482136e6e4efd892cbd252868112a166dbc55e029b52`,
+  and passed secret scanning.
+
 ## 2026-10-24 · record complete Web serial qualification
 
 - **Decision:** Accept the triple-database Web run as complete local

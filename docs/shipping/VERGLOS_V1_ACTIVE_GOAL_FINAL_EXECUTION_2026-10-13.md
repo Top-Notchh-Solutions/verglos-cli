@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-candidate release reconciliation
+
+The fail-closed release reconciliation is now bound to merged CLI
+`8a69dbc5db815336f9b2103176f988d3fb90ff5d` and Web
+`257e1cc8e0b467d16966433033589111f62f56f0`. It records **1 shipped / 21
+partial** non-AppSec rows, **6** open gates, **6** correction items, and **1**
+rollback item, so the recorded recommendation is correctly **no-go**. This is
+the current candidate state, not a release or a checkbox change. Score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v4.json`.
+The additive bundle v15 verifies **342** bounded files with **0** mismatches,
+matching manifest
+`sha256:715ed975c83445a1cd2c482136e6e4efd892cbd252868112a166dbc55e029b52`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · complete Web serial qualification
 
 Web PR [#283](https://github.com/anuragyadav-git/verglos-web/pull/283) merged
