@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+## Current CLI public-OSS workflow rerun · 2026-10-24
+
+- **Execution:** The exact `buggy-node` fixture directory was scanned with the
+  merged CLI candidate `cd9d572e`; telemetry and source upload were disabled.
+- **Result:** Exit `0`, complete coverage, 8 files walked, 59 findings, and
+  1559 ms. The JSON and HTML report digests are recorded in the evidence file.
+- **Boundary:** Corrected project-root binding only. No external customer,
+  provider/Production, payment, publication, deletion, independent-review,
+  AppSec/Hunt, or final-release claim was made; score remains 245/35/280.
+- **Evidence:** `evidence/accept-005-current-cli-cd9d572e-public-oss-workflow-2026-10-24.md`.
+
 ## ACCEPT-014 correction merged · 2026-10-24
 
 - **Merge:** CLI PR #306 merged normally at

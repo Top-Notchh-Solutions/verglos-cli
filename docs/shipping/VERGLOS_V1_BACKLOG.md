@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current CLI public-OSS workflow rerun
+
+The owner-authorized `buggy-node` workflow was rerun from the exact fixture
+directory against CLI `cd9d572e`: exit `0`, complete coverage, **8** files,
+**59** findings, and **1559 ms**. This corrects the project-root binding for
+the reproducibility receipt. It does not create external customer/recipient,
+independent-review, AppSec/Hunt, or final-release evidence. Keep ACCEPT-005
+unchecked; score remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/accept-005-current-cli-cd9d572e-public-oss-workflow-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-014 correction merged
 
 CLI PR #306 merged normally at

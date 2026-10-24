@@ -1,5 +1,17 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current CLI public-OSS workflow rerun
+
+The owner-authorized public-OSS workflow was rerun from the exact
+`buggy-node` fixture directory against CLI `cd9d572e28462741103cb21a2274e5892939d5d4`.
+It completed with exit `0`, complete coverage, **8** files walked, **59**
+findings, and **1559 ms** duration. The corrected project-root binding is now
+recorded as evidence; telemetry and source upload were disabled. This remains
+implementation/reproducibility evidence, not external customer acceptance,
+independent review, AppSec/Hunt review, or final release. No checkbox changed;
+score remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/accept-005-current-cli-cd9d572e-public-oss-workflow-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-014 correction merged
 
 The clean-corpus correction was merged normally in CLI PR #306 at
