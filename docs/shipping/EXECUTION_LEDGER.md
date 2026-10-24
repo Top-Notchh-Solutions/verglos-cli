@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-006 dashboard search concurrency hardening · 2026-10-24
+
+- **Execution:** Web PR #287 merged normally as
+  `9b0bf7df46ce09c463c9298da4afdddd7cdeb987`; dashboard search now bounds
+  project-level work to eight order-preserving workers and retains per-project
+  tenant scoping.
+- **Result:** Dashboard boundary suite **5/5**, Web typecheck, and diff checks
+  passed. This prevents unbounded large-tenant database fan-out.
+- **Acceptance mapping:** Production implementation evidence only. Keep
+  QUAL-WEB-006 open for authenticated Production capture, human/field,
+  independent review, customer/recipient acceptance, and final release
+  sign-off. Score remains **246/34/280**. No customer, provider, or Production
+  mutation occurred.
+- **Evidence:** `evidence/qual-web-006-search-concurrency-pr287-2026-10-24.md`.
+
 ## STUDIO-CLI-001 handoff expiry fence · 2026-10-24
 
 - **Execution:** Web PR #286 merged normally as
