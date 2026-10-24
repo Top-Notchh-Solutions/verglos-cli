@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-005 worker scope fence · 2026-10-24
+
+- **Execution:** Web PR #285 merged normally as
+  `e1d7a42dcb48387bae7929ceb627caaeeb90ed0d`. The deletion worker now checks
+  candidate and leased-job requested-kind scope equality before inventory or
+  destructive adapter execution and blocks mismatches with a bounded reason.
+- **Result:** Source commit `623ba06`; focused worker/execution/customer-held
+  tests **11/11**, Web typecheck, and diff checks passed.
+- **Acceptance mapping:** Real production-code hardening only. Keep
+  QUAL-WEB-005 open for authorized Production/customer-held operation,
+  independent review, recovery/rollback acceptance, and final release
+  sign-off. Score remains **246/34/280**. No Production deletion, customer
+  data, provider mutation, or paid Actions state changed.
+- **Evidence:** `evidence/qual-web-005-worker-scope-fence-pr285-2026-10-24.md`.
+
 ## DIST-006 strict rollback-input validation · 2026-10-24
 
 - **Execution:** Hardened the shared rollback decision contract against

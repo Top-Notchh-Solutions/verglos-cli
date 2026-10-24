@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · QUAL-WEB-005 worker scope fence
+
+Web PR **#285** merged normally as `e1d7a42dcb48387bae7929ceb627caaeeb90ed0d`.
+The account-deletion worker now compares the runner candidate's requested
+deletion kinds with the leased database job before reading inventory or
+invoking destructive adapters; a stale or mutated scope fails closed with
+`requested_scope_mismatch`. Focused worker/execution/customer-held tests passed
+**11/11**, Web typecheck passed, and diff checks passed. This is real
+QUAL-WEB-005 production-code hardening, but the row remains open for
+authorized Production/customer-held operation, independent review,
+recovery/rollback acceptance, and final release sign-off. No Production
+deletion, customer data, provider mutation, or paid Actions state changed.
+Score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-005-worker-scope-fence-pr285-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · DIST-006 strict rollback-input validation
 
 The shared rollback/revocation decision boundary now requires literal boolean
