@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current-candidate reconciliation v2
+
+The release input builder now binds the ledger to CLI `cd9d572e` and Web
+`cb266b83` and verifies configured evidence bytes before reconciliation. The
+current report contains 22 partial non-AppSec rows, 6 open gates, 6 correction
+items, and 1 rollback item; recommendation is `no-go`. The freeze verifies
+24/24 artifacts and all 12 required kinds but remains blocked. No checkbox
+changed; score remains **245 checked / 35 open / 280 total (87.5%)**, split
+**13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`evidence/acceptance-release-reconciliation-freeze-2026-10-24-v2.md`.
+The additive bundle verifies 319 files with 0 mismatches; manifest
+`sha256:109185382ea1a35b8adc89356c8da14f382e96e4c72fa202baf7f8859632a5eb`.
+
 ## 2026-10-24 · production inspection bundle verification
 
 The additive private bundle verifies **310** bounded evidence files with **0**
