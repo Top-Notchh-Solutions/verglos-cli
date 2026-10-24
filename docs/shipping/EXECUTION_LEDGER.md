@@ -11,6 +11,21 @@
   or final-release gate was inferred; score remains 245/35/280.
 - **Evidence:** `evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
 
+## ACCEPT-014 full local matrix · 2026-10-24
+
+- **Execution:** 40/40 telemetry-off fixture×plan scans completed with full
+  coverage; the bound regression input expands them to **400/400** fixture ×
+  plan × role × tenant keys.
+- **Result:** 0 missing keys, 0 failed runs, complete 50-cell Web
+  authorization evidence; no-go with 400 finding regressions, 110 performance
+  regressions, and five open gates.
+- **Boundary:** The CLI report is plan-bound and the Web receipt is a local
+  product-contract matrix; this is not hosted browser/provider/customer or
+  final-release evidence. ACCEPT-014 remains unchecked; score remains 245/35/280.
+- **Evidence:** `evidence/accept-014-final-regression-full-matrix-v4-2026-10-24.md`.
+  The additive bundle verifies 313 files with 0 mismatches; manifest
+  `sha256:f39b6660b816fd1a61168f51a4b17ff3cf0ae4781332005c4543b20cbc14afd5`.
+
 ## Read-only Vercel Production inspection · 2026-10-24
 
 - **Provider:** Deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` reports

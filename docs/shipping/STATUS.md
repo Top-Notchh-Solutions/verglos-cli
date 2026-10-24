@@ -10,6 +10,18 @@ No checkbox changed; score remains **245 checked / 35 open / 280 total
 (87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**.
 Evidence: `evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
 
+## 2026-10-24 · ACCEPT-014 full local matrix
+
+The candidate now has **400/400** fixture×plan×role×tenant keys, **0** missing
+keys, and **0** failed runs after 40/40 complete local plan scans. It remains
+`no-go` with 400 finding regressions, 110 performance regressions, and five
+open gates. This is implementation/evidence-preparation progress only; no
+checkbox changed. Score remains **245 checked / 35 open / 280 total (87.5%)**,
+split **13 AppSec-dependent / 22 non-AppSec**.
+Evidence: `evidence/accept-014-final-regression-full-matrix-v4-2026-10-24.md`.
+The additive bundle verifies 313 files with 0 mismatches; manifest
+`sha256:f39b6660b816fd1a61168f51a4b17ff3cf0ae4781332005c4543b20cbc14afd5`.
+
 ## 2026-10-24 · read-only Vercel Production inspection
 
 Vercel inspection confirms deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` is
