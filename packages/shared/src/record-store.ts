@@ -1,6 +1,7 @@
+import { constants } from "node:fs";
 import { createHash, randomUUID } from "node:crypto";
 import { createReadStream } from "node:fs";
-import { lstat, mkdir, rename, writeFile, readFile, open, unlink } from "node:fs/promises";
+import { lstat, mkdir, rename, writeFile, open, unlink } from "node:fs/promises";
 import { join } from "node:path";
 import type { ReleaseRecordManifestDocument } from "./record-manifest.js";
 
@@ -73,11 +74,35 @@ export async function readRecordMember(root: string, memberDigest: string): Prom
   if (!/^sha256:[a-f0-9]{64}$/.test(memberDigest)) throw new Error("record member digest is invalid");
   await assertStoreRoot(root);
   const path = join(root, memberDigest.replace(":", "-"));
-  const entry = await lstat(path);
-  if (!entry.isFile() || entry.size > 50_000_000) throw new Error("record member is not a bounded regular file");
-  const bytes = await readFile(path);
-  if (bytes.byteLength > 50_000_000) throw new Error("record member is not a bounded regular file");
+  const bytes = await readBoundedStoredMember(path);
   if (digest(bytes) !== memberDigest) throw new Error("record member digest mismatch");
   return bytes;
 }
+
+/** Read one member through an opened handle so pathname swaps cannot redirect the read. */
+async function readBoundedStoredMember(path: string): Promise<Uint8Array> {
+  const message = "record member is not a bounded regular file";
+  let handle: Awaited<ReturnType<typeof open>> | undefined;
+  try {
+    const expected = await lstat(path);
+    if (!expected.isFile() || expected.size > 50_000_000) throw new Error(message);
+    handle = await open(path, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
+    const opened = await handle.stat();
+    if (!opened.isFile() || opened.size > 50_000_000 || !sameFile(expected, opened)) throw new Error(message);
+    const bytes = await handle.readFile();
+    const final = await handle.stat();
+    if (!final.isFile() || final.size > 50_000_000 || final.size !== opened.size || !sameFile(opened, final) || bytes.byteLength !== final.size) throw new Error(message);
+    return bytes;
+  } catch (error) {
+    if (error instanceof Error && error.message === message) throw error;
+    throw new Error(message);
+  } finally {
+    await handle?.close().catch(() => undefined);
+  }
+}
+
+function sameFile(left: { readonly dev: number; readonly ino: number }, right: { readonly dev: number; readonly ino: number }): boolean {
+  return left.ino === 0 || right.ino === 0 || (left.dev === right.dev && left.ino === right.ino);
+}
+
 export function describeRecordMember(input: { readonly path: string; readonly kind: ReleaseRecordManifestDocument["members"][number]["kind"]; readonly mediaType: string; readonly bytes: Uint8Array; readonly required: boolean; readonly redaction?: "none" | "applied" | "omitted" }): ReleaseRecordManifestDocument["members"][number] { assertSafePath(input.path); return { path: input.path, kind: input.kind, mediaType: input.mediaType, digest: { algorithm: "sha256", value: digest(input.bytes).slice(7) }, size: input.redaction === "omitted" ? 0 : input.bytes.byteLength, required: input.required, redaction: input.redaction ?? "none" }; }
