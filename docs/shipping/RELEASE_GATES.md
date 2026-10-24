@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-011/012/014 contract regression
+
+The bounded corpus/triage/final-regression/evidence-bundle/study-protocol suite
+passed **22/22**, and implementation syntax checks passed. Existing current-head
+evidence records **8/8** exact-commit fixtures, **13,494** files, **351**
+observations, **0** coverage gaps, and **400/400** regression keys. This does
+not satisfy adjudication, independent/AppSec review, customer/recipient
+acceptance, provider publication, or final release. The rows remain unchecked;
+score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/accept-011-012-014-current-contract-regression-2026-10-24.md`.
+Bundle v36 verifies **369** files with zero mismatches, matching manifest
+`sha256:d888705582bffb29a5c2be1e5d4b774d914ab1e80fba1d95e82182d89c672497`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-010 current freeze regression
 
 The focused release-candidate, SBOM, SPDX, and release-artifact suite passed

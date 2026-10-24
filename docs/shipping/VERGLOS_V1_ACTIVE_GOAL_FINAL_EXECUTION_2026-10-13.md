@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-011/012/014 contract regression
+
+The bounded JSON, public-OSS triage, final-regression, evidence-bundle, and
+study-protocol contract suite passed **22/22**; syntax checks passed for the
+triage, corpus-verifier, and final-regression implementations. Existing
+current-head evidence records the owner-authorized exact-commit corpus result
+of **8/8** fixtures, **13,494** files, **351** observations, **23** rule groups,
+**0** coverage gaps, and **400/400** regression keys. The three rows remain
+unchecked for adjudication, independent/AppSec review, and final acceptance.
+Score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-011-012-014-current-contract-regression-2026-10-24.md`.
+Bundle v36 verifies **369** bounded files with **0** mismatches, matching
+manifest `sha256:d888705582bffb29a5c2be1e5d4b774d914ab1e80fba1d95e82182d89c672497`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-010 current freeze regression
 
 The focused release-candidate, SBOM, SPDX, and release-artifact suite passed

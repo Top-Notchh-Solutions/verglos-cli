@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-011/012/014 current contract regression · 2026-10-24
+
+- **Execution:** Ran bounded JSON, public-OSS triage, final-regression,
+  bundle, and study-protocol contracts with syntax checks.
+- **Result:** **22/22** tests passed; current-head corpus evidence remains
+  **8/8** fixtures, **13,494** files, **351** observations, **23** rule groups,
+  **0** coverage gaps, and **400/400** regression keys.
+- **Disposition:** Synthetic/owner-authorized implementation evidence only.
+  Adjudication, independent/AppSec review, provider publication, customer
+  acceptance, and final release remain open; no checkbox was upgraded. Score
+  remains **246/34/280**.
+- **Evidence:** `evidence/accept-011-012-014-current-contract-regression-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v36.json` verifies 369 files with zero mismatches, matching manifest `sha256:d888705582bffb29a5c2be1e5d4b774d914ab1e80fba1d95e82182d89c672497`, and passed secret scanning.
+
 ## ACCEPT-010 current release-candidate freeze regression · 2026-10-24
 
 - **Execution:** Ran the focused freeze/SBOM/SPDX/release-artifact suite and
