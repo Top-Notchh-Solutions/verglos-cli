@@ -1,0 +1,284 @@
+{
+  "schema": "verglos.private.release-gate-reconciliation.v1",
+  "completedAt": "2026-10-24T05:20:03.000Z",
+  "candidate": {
+    "cliCommit": "cd9d572e28462741103cb21a2274e5892939d5d4",
+    "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+    "version": "2.0.0-alpha.4"
+  },
+  "rows": [
+    {
+      "id": "STUDIO-CLI-001",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md",
+          "sha256": "sha256:e12e12a02e5b02104318a5f9a2deaca3358e9eab9aafc85d7f18b48dff365e3f"
+        }
+      ]
+    },
+    {
+      "id": "DIST-002",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md",
+          "sha256": "sha256:27e3078a885dea8c6a686c8554ab5012deffff6a0b0f7bb39d102bbd3cdbb1ae"
+        }
+      ]
+    },
+    {
+      "id": "DIST-003",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/dist-002-003-current-alpha4-artifact-recheck-2026-10-24.md",
+          "sha256": "sha256:b1ab2ec515412f7293dae9b15a4245bb498ca9c5d8b5debb5c166760383ab0a6"
+        }
+      ]
+    },
+    {
+      "id": "DIST-006",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md",
+          "sha256": "sha256:282254ffe80687d75979208318460ab0b0b1acb17277f637857addd86d34c5ce"
+        }
+      ]
+    },
+    {
+      "id": "QUAL-WEB-005",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/qual-web-005-current-head-fresh-local-deletion-e2e-2026-10-24.md",
+          "sha256": "sha256:4e502817fea05e2b29b37ec63be2be4201d5f5538d6ca54f2914896f1e1b54b4"
+        }
+      ]
+    },
+    {
+      "id": "QUAL-WEB-006",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md",
+          "sha256": "sha256:cbc510a19138995e0af646af23fb67a96b121434c49234a08de4df0df6684d01"
+        }
+      ]
+    },
+    {
+      "id": "ACCEPT-003",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json",
+          "sha256": "sha256:d7faed8db546738d47a385aeae4be10a41da1abdffa43c69247cfc4565f42bd2"
+        },
+        {
+          "path": "docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-accept-014-full-matrix-v1.json",
+          "sha256": "sha256:e83003224ab24c875fc41809b6e250ffa6320fda6995256955fd1b7357cbb9aa"
+        }
+      ]
+    },
+    {
+      "id": "ACCEPT-005",
+      "state": "shipped",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/accept-005-public-oss-scope-disposition-2026-10-24.md",
+          "sha256": "sha256:0601edefac7ec52110e0b81ec163eecb01fc643b736206dd79c8979c3dbc5d80"
+        },
+        {
+          "path": "docs/shipping/evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.json",
+          "sha256": "sha256:dcbb373b91c9dd1332b7df8dd4789c0e304d78ea1a73e8fbe121a4267c94968f"
+        }
+      ]
+    },
+    {
+      "id": "ACCEPT-006",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/accept-006-participant-provenance-2026-10-24.md",
+          "sha256": "sha256:6ad014f7ce0e7a183a50d65e400cde129022124cfe917cfb8ab6341594329193"
+        }
+      ]
+    },
+    {
+      "id": "ACCEPT-008",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/accept-008-commercial-provenance-2026-10-24.md",
+          "sha256": "sha256:4964e6e00266ef0557c867fd615b93728ad084bb55555c5f27f9d9887c657306"
+        }
+      ]
+    },
+    {
+      "id": "ACCEPT-009",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/accept-009-release-reconciler-2026-10-23.md",
+          "sha256": "sha256:f13906d640b749d90a96f0a3bceae5dccc6cf5fea00e9d849daf54c3de193e7e"
+        }
+      ]
+    },
+    {
+      "id": "ACCEPT-010",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/accept-010-candidate-freeze-2026-10-23.md",
+          "sha256": "sha256:ff178172bf435a6cf68215121c24646c358792ece919d23f7521cf2f73b00b43"
+        }
+      ]
+    },
+    {
+      "id": "FINAL-WEB-001",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/final-web-001-security-layer-truth-pr179-2026-10-18.md",
+          "sha256": "sha256:8726510e9b373468a0349e3bb8cc0351b0b1811fd882161ad8231923c72f028c"
+        }
+      ]
+    },
+    {
+      "id": "FINAL-WEB-002",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/final-web-002-flow-pr178-2026-10-18.md",
+          "sha256": "sha256:3d9eba082412e8eef23776b36235d23ce00846a5960893259001d279a78ea1e6"
+        }
+      ]
+    },
+    {
+      "id": "FINAL-WEB-003",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/final-web-003-catalog-allowance-display-pr250-2026-10-23.md",
+          "sha256": "sha256:272bb8309ded1d7d7ad74a892a0131f24a0912ef489cdef3235a5947a7fc8b01"
+        }
+      ]
+    },
+    {
+      "id": "FINAL-WEB-005",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/final-web-005-machine-readable-plan-terms-pr250-2026-10-23.md",
+          "sha256": "sha256:424193709e0e5f35acdf9332bca718727d7c5e48b9d85ac60b0e87c762ec9aae"
+        }
+      ]
+    },
+    {
+      "id": "FINAL-WEB-006",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/final-web-006-proof-origin-boundary-pr250-2026-10-23.md",
+          "sha256": "sha256:411ba16e3d95fd89ab1747cff5483fbc921fb4cc3eeea8393129624fa5d8a0ed"
+        }
+      ]
+    },
+    {
+      "id": "FINAL-WEB-007",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/final-web-007-008-production-landing-multibrowser-2026-10-24.md",
+          "sha256": "sha256:9e1f7af05e88783ef7963fdfdeb94f049fc3a642788dee1ebfe5eb307e7fd5c5"
+        }
+      ]
+    },
+    {
+      "id": "FINAL-WEB-008",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/final-web-007-008-production-landing-multibrowser-2026-10-24.md",
+          "sha256": "sha256:9e1f7af05e88783ef7963fdfdeb94f049fc3a642788dee1ebfe5eb307e7fd5c5"
+        }
+      ]
+    },
+    {
+      "id": "ACCEPT-011",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md",
+          "sha256": "sha256:c5e3809876d66a0ff2661bf473fd46cb5c63aafe4cda97d5f907e32570da2f79"
+        }
+      ]
+    },
+    {
+      "id": "ACCEPT-012",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/accept-012-public-oss-triage-2026-10-23.md",
+          "sha256": "sha256:5ba74724daf3dbe65c2ab949bd148d3bb1357018bc4135d7ef06bae5da5ca114"
+        }
+      ]
+    },
+    {
+      "id": "ACCEPT-014",
+      "state": "partial",
+      "evidence": [
+        {
+          "path": "docs/shipping/evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md",
+          "sha256": "sha256:12436e9ab21bb175016442c2e393d22a328e76c957e5c741a6ebd5a08ce05350"
+        }
+      ]
+    }
+  ],
+  "gates": {
+    "providerLifecycle": "open",
+    "customerConsent": "passed",
+    "independentReview": "open",
+    "authenticatedBrowser": "open",
+    "fieldCwv": "open",
+    "accountDeletion": "open",
+    "finalRelease": "open"
+  },
+  "corrections": [
+    {
+      "id": "DIST-002",
+      "action": "complete current trusted npm publication and attestation before release"
+    },
+    {
+      "id": "DIST-003",
+      "action": "bind current candidate release artifacts to trusted publication evidence"
+    },
+    {
+      "id": "QUAL-WEB-005",
+      "action": "complete authorized deletion and restore acceptance"
+    },
+    {
+      "id": "FINAL-WEB-007",
+      "action": "complete human accessibility and field performance evidence"
+    },
+    {
+      "id": "ACCEPT-002",
+      "action": "complete remaining acceptance story evidence"
+    },
+    {
+      "id": "ACCEPT-014",
+      "action": "adjudicate observed finding and performance regressions"
+    }
+  ],
+  "rollback": [
+    {
+      "id": "DIST-006",
+      "action": "perform authenticated provider and registry rollback/revocation rehearsal"
+    }
+  ],
+  "decision": {
+    "result": "no-go",
+    "status": "recorded"
+  }
+}

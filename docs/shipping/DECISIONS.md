@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · refresh release reconciliation after ACCEPT-005 closure
+
+- **Decision:** Reconcile the current candidate with `ACCEPT-005` shipped for
+  the public-OSS scope and the remaining 21 non-AppSec rows partial.
+- **Result:** 22 rows total, 1 shipped, 21 partial, six open gates, and a
+  recorded `no-go`; the existing 24/24-artifact freeze remains blocked.
+- **Integrity:** The 333-file v7 bundle has zero mismatches and passed secret
+  scan.
+- **Boundary:** This is state reconciliation only. No publication, payment,
+  Production deletion, independent review, AppSec/Hunt review, or final
+  release sign-off occurred. Score remains 246/34/280.
+- **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24-v3.md`.
+
 ## 2026-10-24 · close ACCEPT-005 for public-OSS scope
 
 - **Decision:** Close `ACCEPT-005` under the explicit V1 scope of
