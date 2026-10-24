@@ -5,16 +5,18 @@
 - **Source mapping:** Web `705a85e2b7b9d847a85748463aa0d797c60b384f`,
   content-equivalent to merged `origin/main` `cb266b83`.
 - **Verification mapping:** Fresh local PostgreSQL 16 `verglos_test` run;
-  926/928 passed, 0 failed, 0 cancelled, 2 designed skips, exit 0.
+  926/928 passed, 0 failed, 0 cancelled, 2 designed database skips, exit 0;
+  the separately gated `BILLING_TEST_DATABASE_URL` migrated-baseline test was
+  intentionally not part of this run.
 - **Acceptance mapping:** Local implementation evidence only. It does not
   close human/field, customer/recipient, provider-publication, Production
   deletion, independent-review, AppSec/Hunt, or final-release gates; no
   checkbox changed. Score remains 246/34/280.
 - **Evidence:** `evidence/qual-web-006-local-isolated-db-serial-recheck-2026-10-24.md`.
 - **Integrity mapping:** Bundle
-  `evidence/acceptance-evidence-bundle-2026-10-24-isolated-db-v11.json`
+  `evidence/acceptance-evidence-bundle-2026-10-24-isolated-db-v12.json`
   verifies 337 files with zero mismatches, matching manifest
-  `sha256:e6007fddc90d62da5986f455f9eca0594c90f06b050ed581d20949a46f472878`,
+  `sha256:84c77b9d7bad852210a7aedad32f48a2f7d17853ae5af4a1b65158581470272b`,
   and passed secret scanning.
 
 ## 2026-10-24 · non-AppSec implementation sweep

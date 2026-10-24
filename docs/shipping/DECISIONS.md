@@ -4,7 +4,9 @@
 
 - **Decision:** Accept the fresh local PostgreSQL-backed serial run as additive
   implementation evidence for the Web non-AppSec surfaces.
-- **Result:** 926/928 passed, 0 failed, 0 cancelled, 2 designed skips, exit 0.
+- **Result:** 926/928 passed, 0 failed, 0 cancelled, 2 designed database
+  skips, exit 0; the separately gated `BILLING_TEST_DATABASE_URL`
+  migrated-baseline test was intentionally not part of this run.
 - **Boundary:** The run uses only a loopback disposable test database. It is
   not customer/recipient acceptance, human/field evidence, provider
   publication, Production deletion, independent review, AppSec/Hunt review,
@@ -13,7 +15,7 @@
   under their declared gates.
 - **Evidence:** `evidence/qual-web-006-local-isolated-db-serial-recheck-2026-10-24.md`.
 - **Integrity packet:** Bundle
-  `evidence/acceptance-evidence-bundle-2026-10-24-isolated-db-v11.json`
+  `evidence/acceptance-evidence-bundle-2026-10-24-isolated-db-v12.json`
   verifies 337 files with zero mismatches and passed secret scanning.
 
 ## 2026-10-24 · record non-AppSec implementation sweep

@@ -6,7 +6,9 @@
 - **Execution:** `pnpm test:serial` against fresh local PostgreSQL 16,
   database `verglos_test`, loopback port `55441`.
 - **Result:** **926/928 passed**, **0 failed**, **0 cancelled**, **2 designed
-  skips**, exit `0`.
+  database skips**, exit `0`; the separately gated
+  `BILLING_TEST_DATABASE_URL` migrated-baseline test was intentionally not part
+  of this run.
 - **Boundary:** Local implementation evidence only. No hosted provider,
   Production database, customer data, payment, publication, independent
   review, AppSec/Hunt review, or release-sign-off action occurred.
@@ -14,7 +16,7 @@
   under their declared gates; score remains **246/34/280**.
 - **Evidence:** `evidence/qual-web-006-local-isolated-db-serial-recheck-2026-10-24.md`.
 - **Integrity:** Bundle
-  `evidence/acceptance-evidence-bundle-2026-10-24-isolated-db-v11.json`
+  `evidence/acceptance-evidence-bundle-2026-10-24-isolated-db-v12.json`
   verifies 337 files with zero mismatches and passed secret scanning.
 
 ## Non-AppSec implementation sweep · 2026-10-24

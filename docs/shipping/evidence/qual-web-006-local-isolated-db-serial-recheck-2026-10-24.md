@@ -9,8 +9,9 @@ fresh, isolated local PostgreSQL database:
 - **926 passed**
 - **0 failed**
 - **0 cancelled**
-- **2 designed skips** (the account-deletion cases require the explicit
-  application migration/table fixture and remain intentionally skipped)
+- **2 designed database skips** (the serial harness intentionally leaves the
+  separately gated `BILLING_TEST_DATABASE_URL` migrated-baseline test out of
+  this fresh `TEST_DATABASE_URL` database)
 - **14,035 ms** test duration
 
 The run exited `0` and was executed with `pnpm test:serial` from the Web

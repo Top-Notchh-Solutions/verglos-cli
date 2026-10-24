@@ -5,7 +5,9 @@
 The current Web implementation tree `705a85e2b7b9d847a85748463aa0d797c60b384f`
 passed the complete serial suite against a fresh local PostgreSQL 16
 `verglos_test` database: **926/928 passed, 0 failed, 0 cancelled, and 2
-designed skips**, exit `0`, in 14,035 ms. The database was isolated on loopback
+designed database skips**, exit `0`, in 14,035 ms. The separately gated
+`BILLING_TEST_DATABASE_URL` migrated-baseline test was intentionally not part of
+this fresh `TEST_DATABASE_URL` run. The database was isolated on loopback
 port `55441`; no remote or Production database was used. The tested tree is
 content-equivalent to Web `origin/main` `cb266b83406bbfffbd5ab02189556e60973a63a6`.
 This strengthens implementation evidence for `QUAL-WEB-005/006` and related
@@ -16,9 +18,9 @@ checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
 non-AppSec**. Evidence:
 `docs/shipping/evidence/qual-web-006-local-isolated-db-serial-recheck-2026-10-24.md`.
 
-The additive acceptance bundle v11 records this receipt with **337** bounded
+The additive acceptance bundle v12 records this receipt with **337** bounded
 evidence files, **0** mismatches, matching manifest
-`sha256:e6007fddc90d62da5986f455f9eca0594c90f06b050ed581d20949a46f472878`,
+`sha256:84c77b9d7bad852210a7aedad32f48a2f7d17853ae5af4a1b65158581470272b`,
 and passed secret scanning. No package publication, tag, release, payment,
 customer data, or paid Actions run is authorized by this result.
 
