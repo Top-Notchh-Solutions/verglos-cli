@@ -64,6 +64,7 @@ const RATIO_MIN_LOC_PER_BUCKET = 200;
  * Env override: VERGLOS_PROVENANCE_FILE_CAP=<n>.
  */
 const PROVENANCE_FILE_CAP_DEFAULT = 300;
+const PROVENANCE_FILE_CONCURRENCY = 4;
 
 function getProvenanceFileCap(): number {
   const raw = process.env.VERGLOS_PROVENANCE_FILE_CAP;
@@ -87,6 +88,34 @@ function sampleFiles<T>(items: T[], cap: number): T[] {
     if (item !== undefined) out.push(item);
   }
   return out;
+}
+
+/**
+ * Keep per-file provenance work bounded. Each file can run several Git
+ * subprocess-backed signal sources; an unbounded Promise.all would multiply
+ * that cost by the full sample size and can exhaust process/file-descriptor
+ * limits on large repositories.
+ */
+export async function mapWithConcurrency<T, R>(
+  values: readonly T[],
+  concurrency: number,
+  mapper: (value: T, index: number) => Promise<R>,
+): Promise<R[]> {
+  if (!Number.isSafeInteger(concurrency) || concurrency < 1) {
+    throw new Error("provenance concurrency must be a positive integer");
+  }
+  if (values.length === 0) return [];
+  const results = new Array<R>(values.length);
+  let nextIndex = 0;
+  const worker = async () => {
+    while (true) {
+      const index = nextIndex++;
+      if (index >= values.length) return;
+      results[index] = await mapper(values[index]!, index);
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(concurrency, values.length) }, () => worker()));
+  return results;
 }
 
 async function fileLineCount(
@@ -230,14 +259,14 @@ export async function computeProvenance(
           .join(" · ")
       : null;
 
-  const fileProvenance = await Promise.all(
-    candidates.map((f) =>
-      detectFileProvenance(
-        f.relativePath,
-        projectRoot,
-        priorBoost,
-        priorDetail || null,
-      ),
+  const fileProvenance = await mapWithConcurrency(
+    candidates,
+    PROVENANCE_FILE_CONCURRENCY,
+    (f) => detectFileProvenance(
+      f.relativePath,
+      projectRoot,
+      priorBoost,
+      priorDetail || null,
     ),
   );
 
