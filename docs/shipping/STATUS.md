@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-003 current bundle v53 verification
+
+Bundle verifier **4/4** passed; bundle v53 verified **387/387** files with zero
+mismatches, manifest matched, and secret scan passed. ACCEPT-003 remains
+unchecked for external gates. Score remains **246/34/280 (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-003-current-bundle-v53-verification-2026-10-24.md`.
+Bundle v54 verifies **388** files with zero mismatches, matching manifest
+`sha256:67528344da6f91b21a46e31232fce4fe43f32e332279873d77611f0e6470031d`,
+and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
 
 Dashboard qualification **4/4** passed with zero failures, skips,

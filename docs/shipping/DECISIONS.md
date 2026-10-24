@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-003 current bundle v53 verification
+
+- **Decision:** Record exact current bundle verification without upgrading
+  internal integrity into external acceptance.
+- **Result:** Verifier contracts **4/4**; **387/387** files matched, zero
+  mismatches, manifest matched, secret scan passed.
+- **Boundary:** Provider, independent, browser/field, account-deletion, and
+  final-release gates remain open. ACCEPT-003 remains unchecked; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/accept-003-current-bundle-v53-verification-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v54.json` verifies 388 files with zero mismatches, matching manifest `sha256:67528344da6f91b21a46e31232fce4fe43f32e332279873d77611f0e6470031d`, and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
 
 - **Decision:** Record the current dashboard qualification parser and state

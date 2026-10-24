@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-003 current bundle v53 verification
+
+Bundle verifier contracts passed **4/4** and current bundle v53 verified
+**387/387** files with zero mismatches, matching manifest and secret scanning
+passed. This does not satisfy provider, independent, browser/field,
+account-deletion, or final-release evidence. No checkbox changed; score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-003-current-bundle-v53-verification-2026-10-24.md`.
+Bundle v54 verifies **388** files with zero mismatches, matching manifest
+`sha256:67528344da6f91b21a46e31232fce4fe43f32e332279873d77611f0e6470031d`,
+and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
 
 The current dashboard qualification suite passed **4/4** with zero failures,

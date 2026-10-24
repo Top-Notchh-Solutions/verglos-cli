@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-003 current bundle v53 verification
+
+The bundle verifier contracts passed **4/4**; bundle v53 verified **387/387**
+files with **0** mismatches, matching manifest
+`sha256:6b9aba53c19488890f3d55a14c8d8941306571618ced8f8c9602bdeeabddfc01`, and
+secret scanning passed. This is internal reproducibility only. Keep
+`ACCEPT-003` unchecked for provider, independent, browser/field,
+account-deletion, and final-release gates. Score remains **246 checked / 34 open
+/ 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-003-current-bundle-v53-verification-2026-10-24.md`.
+Bundle v54 verifies **388** files with **0** mismatches, matching manifest
+`sha256:67528344da6f91b21a46e31232fce4fe43f32e332279873d77611f0e6470031d`, and
+passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
 
 The current dashboard-release qualification suite passed **4/4** with zero
