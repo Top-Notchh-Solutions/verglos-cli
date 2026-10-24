@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser evidence
+
+- **Source mapping:** Merged Web PR #280 implementation `21f9cfb` was tested
+  without source changes against a local production build.
+- **Verification mapping:** Fresh local PostgreSQL, 100-row synthetic fixture,
+  Chromium and Firefox, 52 measurements per browser; both strict qualifiers
+  passed with zero gaps, Axe 0, and all CWV maxima below threshold.
+- **Acceptance mapping:** Automated implementation qualification advanced;
+  human/field, independent-review, and final acceptance remain open. Score is
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md`.
+
+
 ## 2026-10-24 · Web PR #280 populated dashboard/transient evidence
 
 - **Source mapping:** Web PR #280 merged normally as `395e8252` from

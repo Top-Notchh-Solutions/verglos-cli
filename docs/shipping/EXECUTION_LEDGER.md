@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-006 local production-build multi-browser qualification · 2026-10-24
+
+- **Execution:** Fresh local PostgreSQL 16 container, reviewed migrations,
+  additive 100-row synthetic fixture, local `next start` production build,
+  authenticated Preview seam, Chromium and Firefox.
+- **Result:** Each browser captured 13 routes × 52 measurements and passed the
+  strict qualifier with zero gaps. Ready rows were 100 on **26/26** states;
+  loading/error announcements were **13/13** each; Axe was **0**; TTFB/FCP/
+  LCP/INP/CLS maxima were Chromium **113.2/140/356/24/0 ms** and Firefox
+  **41/130/366/40/0 ms**.
+- **Disposition:** This completes the automated local qualification slice,
+  not the human/field, independent-review, or final acceptance gates. No
+  checkbox changed; score remains **245/35/280 (87.5%)**, with 13
+  AppSec-dependent and 22 non-AppSec rows open.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md`.
+
+
 ## Web PR #280 populated dashboard/transient capture · 2026-10-24
 
 - **Implementation:** Web PR #280 merged normally as `395e8252` from

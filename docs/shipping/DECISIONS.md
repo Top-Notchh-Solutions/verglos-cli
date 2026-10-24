@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser disposition
+
+- **Decision:** Validate the populated dashboard against a fresh local
+  PostgreSQL database and the production build, preserving strict thresholds.
+- **Result:** Chromium and Firefox each passed `pnpm
+  qualify:dashboard-release` with **52/52 measurements, zero source issues,
+  and zero decision gaps**. All 13 routes reported 100 ready rows, loading and
+  error announcements were **13/13**, Axe was **0**, and observed maxima were
+  TTFB **113.2/41 ms**, FCP **140/130 ms**, LCP **356/366 ms**, INP **24/40
+  ms**, and CLS **0**.
+- **Disposition:** Advance the automated QUAL-WEB-006 implementation and
+  qualification boundary only. Keep the row unchecked for human screen-reader,
+  field/real-user CWV, independent review, and final acceptance. Score remains
+  **245/35/280 (87.5%)** with **13 AppSec-dependent / 22 non-AppSec** rows
+  open. No paid Actions, customer data, Production write, payment,
+  publication, deletion, or final npm release occurred.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md`.
+
+
 ## 2026-10-24 · Web PR #280 populated dashboard/transient disposition
 
 - **Decision:** Merge the observed dashboard hardening normally and preserve a

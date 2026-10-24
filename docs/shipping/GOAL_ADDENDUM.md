@@ -5,6 +5,16 @@
 > `FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md` and
 > `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-11.md` for current execution.
 
+## QUAL-WEB-006 local production-build multi-browser qualification · 2026-10-24
+
+Fresh local PostgreSQL plus the local production `next start` build produced
+strict qualifier passes for Chromium and Firefox: **52/52 measurements per
+browser, zero source issues, zero gaps**, 100 rows on every ready state,
+loading/error announcements 13/13, Axe 0, and all CWV limits green. This is
+automated implementation evidence only; human/field, independent-review, and
+final acceptance remain open. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md`.
+
 ## QUAL-WEB-006 populated dashboard/transient continuation · 2026-10-24
 
 Web PR #280 merged normally as `395e8252` from `21f9cfb`. A real Chromium

@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser evidence
+
+Against a fresh local PostgreSQL 16 database and the production `next start`
+build, Chromium and Firefox each passed the strict dashboard qualifier with
+**52/52 measurements and zero gaps**. All 13 routes had the 100-row dataset,
+loading/error announcements **13/13**, Axe **0**, and CWV maxima below the
+existing thresholds. This opens no release gate: human screen-reader,
+field/real-user CWV, independent-review, and final-acceptance evidence remain
+open. No checkbox changed; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md`.
+
+
 ## 2026-10-24 · Web PR #280 populated dashboard/transient evidence
 
 Web PR #280 merged normally as `395e8252` from `21f9cfb`. A Chromium run

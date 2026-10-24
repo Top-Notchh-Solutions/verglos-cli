@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · QUAL-WEB-006 local production-build qualification
+
+The populated dashboard now has strict automated qualification evidence from a
+fresh local PostgreSQL database and local `next start` production build.
+Chromium and Firefox each passed **52/52** measurements with zero source
+issues/gaps: 100 rows on all 26 ready states, loading/error announcements
+13/13 each, Axe 0, and all CWV maxima below threshold. The owner-controlled
+fixture remained synthetic and additive.
+
+This advances the automated implementation boundary only. Human screen-reader,
+field/real-user CWV, independent review, and final acceptance remain open;
+score remains **245 checked / 35 open / 280 total (87.5%)**, partitioned as 13
+AppSec-dependent and 22 non-AppSec rows. Evidence:
+`evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #280 populated dashboard execution
 
 Web PR #280 merged normally as `395e8252` from `21f9cfb`. Against the
