@@ -30,7 +30,7 @@ Each run used a fresh temporary `postgres:18-alpine` container and was stopped
 after completion. No project or production data was used.
 
 ```text
-TEST_DATABASE_URL=postgres://postgres@127.0.0.1:55440/verglos_test \
+TEST_DATABASE_URL=postgres://127.0.0.1:55440/verglos_test \
   node --import tsx --test \
   src/lib/queue/postgres-provider.integration.test.ts \
   src/lib/queue/worker-crash-recovery.integration.test.ts
@@ -39,14 +39,14 @@ TEST_DATABASE_URL=postgres://postgres@127.0.0.1:55440/verglos_test \
 Result: 7 passed, 0 failed, 0 skipped.
 
 ```text
-TEST_DATABASE_URL=postgres://postgres@127.0.0.1:55442/verglos_test \
+TEST_DATABASE_URL=postgres://127.0.0.1:55442/verglos_test \
   node --import tsx --test src/lib/usage/threshold-outbox.integration.test.ts
 ```
 
 Result: 1 passed, 0 failed, 0 skipped.
 
 ```text
-TEST_DATABASE_URL=postgres://postgres@127.0.0.1:55443/verglos_test \
+TEST_DATABASE_URL=postgres://127.0.0.1:55443/verglos_test \
   node --import tsx --test src/lib/usage/ledger.integration.test.ts
 ```
 

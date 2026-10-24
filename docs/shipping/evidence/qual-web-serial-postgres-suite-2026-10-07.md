@@ -18,7 +18,7 @@ A fresh Docker `postgres:18-alpine` container named
 `verglos_test`. The existing command was run as:
 
 ```text
-TEST_DATABASE_URL=postgres://postgres@127.0.0.1:55444/verglos_test pnpm test:serial
+TEST_DATABASE_URL=postgres://127.0.0.1:55444/verglos_test pnpm test:serial
 ```
 
 Results:
@@ -42,7 +42,7 @@ database because migration `0000` intentionally requires the legacy table. All
 current migrations applied successfully, then this command passed:
 
 ```text
-BILLING_TEST_DATABASE_URL=postgres://postgres@127.0.0.1:55445/verglos_test \
+BILLING_TEST_DATABASE_URL=postgres://127.0.0.1:55445/verglos_test \
   node --import tsx --test src/lib/billing/ledger.integration.test.ts
 ```
 
