@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · Web PR #299 terminal account-deletion lease recovery
+
+- **Decision:** Treat an expired final deletion-worker lease as a terminal
+  dead-letter condition and make the batch reaper observe it explicitly;
+  attempt bounds must not strand a job in `running` forever.
+- **Result:** PR #299 merged normally as
+  `e178e2ec55b19c6ad4bac455ef38a39b079f4368` from `eb7e974`; focused contracts
+  **38/38**, isolated PostgreSQL integration **1/1**, typecheck, and diff
+  checks passed. Vercel Production reached READY with the **18/18** read-only
+  matrix.
+- **Boundary:** QUAL-WEB-005 implementation/provider evidence only. Customer-
+  held operation, independent review, recovery acceptance, and final release
+  remain open. Score remains **246/34/280**; Actions were not rerun.
+- **Evidence:** `evidence/qual-web-005-terminal-lease-recovery-pr299-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #298 active-workspace handoff guard
 
 - **Decision:** Enforce client-workspace lifecycle state at the server handoff

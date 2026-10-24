@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #299 terminal account-deletion lease recovery
+
+- **Implementation mapping:** Web PR #299 merged normally as
+  `e178e2ec55b19c6ad4bac455ef38a39b079f4368` from `eb7e974`; terminal expired
+  account-deletion leases now become bounded dead letters instead of stranded
+  running jobs.
+- **Verification mapping:** Focused contracts passed **38/38**, isolated
+  PostgreSQL integration **1/1**, typecheck, and diff checks passed.
+  Production deployment `dpl_4tcfvRdXWh68ALPY1VaTCqCJPS1e` reached READY and
+  the read-only matrix passed **18/18** expected responses.
+- **Boundary mapping:** QUAL-WEB-005 implementation/provider evidence only;
+  customer-held operation, independent review, recovery acceptance, and final
+  release evidence remain absent. No checkbox changed; score remains
+  **246/34/280**. Actions were not rerun under the blocked budget boundary.
+- **Evidence:** `evidence/qual-web-005-terminal-lease-recovery-pr299-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #298 active-workspace handoff guard
 
 - **Implementation mapping:** Web PR #298 merged normally as

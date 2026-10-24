@@ -1,5 +1,32 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #299 terminal lease recovery
+
+Web PR **#299** merged normally as
+`e178e2ec55b19c6ad4bac455ef38a39b079f4368` from implementation commit
+`eb7e97403eae833c249446c9e5de6f6991dcc963`. The account-deletion batch now
+reaps a `running` job whose final lease expired before the worker could persist
+retry state, records bounded `ACCOUNT_DELETION_LEASE_EXPIRED`, clears stale
+lease ownership, and reports the terminal dead-letter result. This closes a
+real stranded-job production failure mode in `QUAL-WEB-005`.
+
+Focused worker/store/privacy contracts passed **38/38**; the isolated
+PostgreSQL integration passed **1/1**, including batch reaping of an expired
+final lease; Web typecheck and diff checks passed. Vercel Production
+deployment **`dpl_4tcfvRdXWh68ALPY1VaTCqCJPS1e`** reached **READY**. Its
+read-only matrix passed **18/18**: canonical `verglos.com` 6/6 HTTP 200,
+`www` 6/6 HTTP 308, and the exact protected deployment hostname 6/6 HTTP 302.
+Actions failed at the blocked budget/runners boundary and were not rerun.
+
+This advances `QUAL-WEB-005` implementation and provider/Production evidence;
+the row remains unchecked for authorized customer-held operation, independent
+review, recovery/rollback acceptance, and final release evidence. Score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-005-terminal-lease-recovery-pr299-2026-10-24.md`.
+No customer or Production deletion was performed. Nothing was deleted or
+overwritten.
+
 ## Latest continuation result · 2026-10-24 · Web PR #298 active-workspace handoff guard
 
 Web PR **#298** merged normally as

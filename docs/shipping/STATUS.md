@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #299 terminal account-deletion lease recovery
+
+Web PR #299 merged normally as
+`e178e2ec55b19c6ad4bac455ef38a39b079f4368`; account-deletion batch recovery
+now reaps expired final leases as `dead-lettered`, clears stale ownership, and
+records `ACCOUNT_DELETION_LEASE_EXPIRED`. Focused contracts passed **38/38**,
+the isolated PostgreSQL integration passed **1/1**, and typecheck/diff checks
+passed. Vercel Production deployment `dpl_4tcfvRdXWh68ALPY1VaTCqCJPS1e` is
+READY; the read-only matrix passed **18/18**. Actions failed at the blocked
+budget boundary and were not rerun. This advances QUAL-WEB-005 implementation
+and provider evidence only; no checkbox changed. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/qual-web-005-terminal-lease-recovery-pr299-2026-10-24.md`.
+
+No customer or Production deletion was performed. Nothing was deleted or
+overwritten.
+
 ## 2026-10-24 · Web PR #298 active-workspace handoff guard
 
 Web PR #298 merged normally as
