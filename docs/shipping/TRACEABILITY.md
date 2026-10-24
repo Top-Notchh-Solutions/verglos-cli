@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-003 current-head bundle v30 verification
+
+- **Implementation mapping:** Checked-in acceptance bundle v30.
+- **Integrity mapping:** **363/363** bounded files verified; zero mismatches,
+  manifest recomputation matched, secret scan passed, and builder/verifier
+  regression tests passed **9/9**.
+- **Boundary mapping:** Internal reproducibility only; reviewer sign-off,
+  hosted/provider lifecycle, recipient/customer, independent review,
+  browser/field-CWV, account-deletion, and final release remain open.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-003-current-head-bundle-verification-v30-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v31.json` verifies 364 files with zero mismatches, matching manifest `sha256:e98d7cf4a6da099ba4c5cfb90d89a1734ac6c0bbddba17065e2568716a874755`, and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-006 current-head dashboard qualification contracts
 
 - **Implementation mapping:** Web merged source

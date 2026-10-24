@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-003 current-head bundle v30 verification
+
+The current v30 internal acceptance packet verified **363/363** bounded files
+with zero mismatches; manifest recomputation, secret scanning, and the **9/9**
+bundle-builder/verifier regression tests passed. This strengthens internal
+reproducibility only; reviewer, hosted/provider, recipient/customer,
+independent-review, browser/field-CWV, account-deletion, and final-release
+gates remain open, so `ACCEPT-003` remains unchecked. Score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/accept-003-current-head-bundle-verification-v30-2026-10-24.md`.
+Bundle v31 verifies **364** files with zero mismatches, matching manifest
+`sha256:e98d7cf4a6da099ba4c5cfb90d89a1734ac6c0bbddba17065e2568716a874755`,
+and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-006 current-head dashboard qualification contracts
 
 The dashboard qualification contracts passed **4/4** with zero failures,
