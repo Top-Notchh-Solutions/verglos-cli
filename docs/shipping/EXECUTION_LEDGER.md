@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## FINAL-WEB-003 plan/pricing contract · 2026-10-24
+
+- **Execution:** Ran the focused Web entitlement/catalog, resource-admission,
+  commercial-state, checkout/payment-method, and public-truth suites.
+- **Result:** **61/61** passed with zero failures, skips, cancellations, or
+  todos; exact tier terms, allowances, checkout bindings, and drift correction
+  remained green.
+- **Disposition:** Implementation evidence only. No payment, customer,
+  provider, Production, deployment, or final-release action occurred;
+  FINAL-WEB-003 remains unchecked and score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-003-current-plan-pricing-contract-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v50.json` verifies 384 files with zero mismatches, matching manifest `sha256:d79a44bba4f513bd484678fc7364d31bd3f3e39fa52f930ba639d9bad57ac862`, and passed secret scanning.
+
 ## FINAL-WEB-002 landing qualification contract · 2026-10-24
 
 - **Execution:** Ran `pnpm run test:landing-release` at the current Web source.

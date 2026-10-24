@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · FINAL-WEB-003 plan/pricing contract
+
+The focused canonical plan/pricing suite passed **61/61** with zero failures,
+skips, cancellations, or todos. It covers versioned catalog projections,
+inactive paid-plan handling, exact Free/Pro/Team/Enterprise terms, allowance
+ceilings, signed checkout notes, hosted method configuration, QR-only refusal,
+and public claim correction/removal for drift or unverified plans. No payment,
+customer, provider, Production, deployment, or final release action occurred.
+`FINAL-WEB-003` remains unchecked for its declared dependencies and final
+release gates. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-003-current-plan-pricing-contract-2026-10-24.md`.
+Bundle v50 verifies **384** bounded files with **0** mismatches, matching
+manifest `sha256:d79a44bba4f513bd484678fc7364d31bd3f3e39fa52f930ba639d9bad57ac862`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · FINAL-WEB-002 landing qualification contract
 
 The current landing-release qualification contract passed **4/4** with zero

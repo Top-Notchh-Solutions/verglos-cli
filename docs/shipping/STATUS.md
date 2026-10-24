@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · FINAL-WEB-003 plan/pricing contract
+
+Canonical plan/pricing, catalog, allowance, checkout/payment-method,
+commercial-state, and public-claim tests passed **61/61** with zero failures,
+skips, cancellations, or todos. FINAL-WEB-003 remains unchecked; no payment or
+provider/Production action occurred. Score remains **246/34/280 (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/final-web-003-current-plan-pricing-contract-2026-10-24.md`.
+Bundle v50 verifies **384** files with zero mismatches, matching manifest
+`sha256:d79a44bba4f513bd484678fc7364d31bd3f3e39fa52f930ba639d9bad57ac862`,
+and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-002 landing qualification contract
 
 Landing-release qualification **4/4** passed with zero failures, skips,
