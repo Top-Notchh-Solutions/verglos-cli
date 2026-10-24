@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## FINAL-WEB-005 metadata truth contract · 2026-10-24
+
+- **Execution:** Ran the Web `/llms.txt`, docs truth, public-surface, and
+  public claim-registry suites.
+- **Result:** **37/37** passed with zero failures, skips, cancellations, or
+  todos; metadata, allowances, claim correction/removal, and command truth
+  remained green.
+- **Disposition:** Implementation evidence only. No deployment/provider,
+  customer, independent/field, or final-release action occurred;
+  FINAL-WEB-005 remains unchecked and score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-005-current-metadata-truth-contract-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v52.json` verifies 386 files with zero mismatches, matching manifest `sha256:585cb510d194c6535f363ec6d412b1cc95b8a982f020ec371d286ad171d6c246`, and passed secret scanning.
+
 ## FINAL-WEB-006 proof-assets contract · 2026-10-24
 
 - **Execution:** Ran the proof-asset, proof-page, and public-release smoke

@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · FINAL-WEB-005 metadata truth contract
+
+The focused metadata/public-truth suites passed **37/37** with zero failures,
+skips, cancellations, or todos, including `/llms.txt`, canonical metadata,
+exact catalog terms, claim correction/removal, and inactive-plan boundaries.
+This does not satisfy hosted, customer, independent/field, provider, or final
+release acceptance. No checkbox changed; score remains **246/34/280 (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/final-web-005-current-metadata-truth-contract-2026-10-24.md`.
+Bundle v52 verifies **386** files with zero mismatches, matching manifest
+`sha256:585cb510d194c6535f363ec6d412b1cc95b8a982f020ec371d286ad171d6c246`,
+and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-006 proof-assets contract
 
 The focused proof/page/public-release suites passed **17/17** with zero

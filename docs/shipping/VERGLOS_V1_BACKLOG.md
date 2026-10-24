@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · FINAL-WEB-005 metadata truth contract
+
+The focused `/llms.txt`, docs truth, public-surface, and public claim-registry
+suites passed **37/37** with zero failures, skips, cancellations, or todos.
+Factual public copy, canonical metadata, exact catalog allowances, claim
+correction/removal, inactive-plan protections, and bounded attest wording are
+green. Keep `FINAL-WEB-005` unchecked for its dependencies and final release
+gates. Score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-005-current-metadata-truth-contract-2026-10-24.md`.
+Bundle v52 verifies **386** files with **0** mismatches, matching manifest
+`sha256:585cb510d194c6535f363ec6d412b1cc95b8a982f020ec371d286ad171d6c246`, and
+passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-006 proof-assets contract
 
 The focused proof-asset, proof-page, and public-release smoke suites passed

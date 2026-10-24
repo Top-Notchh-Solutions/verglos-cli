@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · FINAL-WEB-005 metadata truth contract
+
+Metadata, `/llms.txt`, docs truth, public-surface, and public claim-registry
+tests passed **37/37** with zero failures, skips, cancellations, or todos.
+FINAL-WEB-005 remains unchecked for its dependencies and final release. Score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/final-web-005-current-metadata-truth-contract-2026-10-24.md`.
+Bundle v52 verifies **386** files with zero mismatches, matching manifest
+`sha256:585cb510d194c6535f363ec6d412b1cc95b8a982f020ec371d286ad171d6c246`,
+and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-006 proof-assets contract
 
 Proof-asset, proof-page, and public-release smoke tests passed **17/17** with
