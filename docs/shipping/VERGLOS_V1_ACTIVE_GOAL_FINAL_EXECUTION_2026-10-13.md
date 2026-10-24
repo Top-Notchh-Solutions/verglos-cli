@@ -9,8 +9,10 @@ Web PR **#297** merged normally as
 request admitted before expiry could revoke after the exact deadline. Focused
 handoff domain, route, and page contracts passed **33/33**, Web typecheck and
 diff checks passed. The merged-head Vercel Production deployment
-`dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was **QUEUED** at capture; no Ready claim is
-made. GitHub Actions were not rerun under the blocked budget/runners boundary.
+`dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` reached **READY / production**. Its
+read-only six-path matrix returned **6/6 HTTP 200** on `verglos.com`, **6/6
+HTTP 308** on `www`, and **6/6 HTTP 302** on the protected deployment
+hostname. GitHub Actions were not rerun under the blocked budget/runners boundary.
 This is real STUDIO-CLI-001 production-code progress; the row remains
 unchecked for recipient acceptance, independent review, and final release
 evidence. Score remains **246 checked / 34 open / 280 total (87.9%)**, split

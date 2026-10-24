@@ -23,12 +23,19 @@ release sign-off.
 
 ## Provider and hosted boundary
 
-The merged-head Vercel deployment was observed as queued at capture:
+The merged-head Vercel deployment reached Ready and passed a read-only public
+surface matrix:
 
 - Deployment: `dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ`.
 - Target: `production`.
 - URL: `verglos-5oe84xrc6-anuragyadav20062002s-projects.vercel.app`.
-- State at capture: `QUEUED`; no Ready claim is made here.
+- State: `READY`.
+- `https://verglos.com`: **6/6 HTTP 200** for `/`, `/proof`, `/checkout`,
+  `/llms.txt`, `/robots.txt`, and `/sitemap.xml`.
+- `https://www.verglos.com`: **6/6 HTTP 308** to the canonical host for the
+  same paths.
+- Exact deployment hostname: **6/6 HTTP 302** to Vercel SSO; no protection
+  bypass was attempted.
 - GitHub Actions checks were not rerun. The account budget/runners remain
   blocked; the code merge is independent of those checks.
 

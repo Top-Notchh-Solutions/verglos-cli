@@ -7,7 +7,9 @@
   now fences the transactional update with `expiresAt > revokedAt`.
 - **Verification mapping:** Handoff domain, route, and page contracts passed
   **33/33**, with Web typecheck and diff checks passing. Vercel Production
-  deployment `dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was queued at capture.
+  deployment `dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` reached **READY**; its
+  read-only six-path matrix returned 6/6 expected responses for canonical,
+  www redirect, and protected deployment-host checks.
 - **Boundary mapping:** STUDIO-CLI-001 implementation evidence only. Recipient
   acceptance, independent review, and final release evidence remain absent;
   no checkbox changed and score remains **246/34/280**.

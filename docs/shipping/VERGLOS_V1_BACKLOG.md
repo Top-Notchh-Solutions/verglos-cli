@@ -8,8 +8,10 @@ revocation now repeats `expiresAt > revokedAt` inside the transactional
 compare-and-set, so an issued receipt cannot be revoked after its exact
 deadline. Focused handoff contracts passed **33/33**, typecheck and diff
 checks passed. The merged-head Vercel Production deployment
-`dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was **QUEUED** at capture; no Ready claim is
-made. This advances `STUDIO-CLI-001` implementation only; recipient
+`dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` reached **READY / production**; its
+read-only six-path matrix returned 6/6 expected responses for canonical, www
+redirect, and protected deployment-host checks. This advances
+`STUDIO-CLI-001` implementation/provider evidence only; recipient
 acceptance, independent review, and final release remain open. Actions were
 not rerun under the blocked budget boundary. No checkbox changed; score
 remains **246 checked / 34 open / 280 total (87.9%)**, split **13
