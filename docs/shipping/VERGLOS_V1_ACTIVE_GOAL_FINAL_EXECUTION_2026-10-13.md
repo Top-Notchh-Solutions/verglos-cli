@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #277 Production receipt
+
+Vercel deployment `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for merged Web
+PR #277 commit `e7a8bbaa403540b37dc5f8ebd3d50a22bfb1e352`, with aliases
+`verglos.com`, `www.verglos.com`, and `verglos-web.vercel.app`. Bounded
+read-only requests to `/`, `/proof`, `/checkout`, `/llms.txt`, `/robots.txt`,
+and `/sitemap.xml` returned HTTP **200**. Production uses `VERCEL_ENV=production`,
+so the new dashboard transient-state seam cannot be activated there.
+
+This records provider/Production runtime evidence only. It does not close
+QUAL-WEB-006's large-dataset, human/field, independent-review, or final
+acceptance requirements. No authenticated dashboard request, database write,
+payment/provider transaction, customer repository, publication, or deletion
+occurred. No checkbox changed; score remains **245 checked / 35 open / 280
+total (87.5%)**. Evidence:
+`docs/shipping/evidence/vercel-production-pr277-transient-capture-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · merged dashboard transient-state capture
 
 Web PR #277 merged normally as
@@ -28,9 +45,9 @@ AppSec-dependent and 22 non-AppSec rows open. Evidence:
 `docs/shipping/evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
 No paid Actions run, Production database write, payment, customer repository,
 publication, or deletion occurred.
-Additive bundle v40 contains **270** hashed evidence files, passes secret
+Additive bundle v41 contains **271** hashed evidence files, passes secret
 scanning, and matches manifest
-`sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+`sha256:cfe253851ca8ae13b4ae9476bd1efc7db32cf352b5a141153913b0e127f5c4f0`.
 
 ## Latest continuation result · 2026-10-24 · Web PR #276 Production receipt
 

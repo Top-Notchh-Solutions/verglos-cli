@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #277 Production receipt
+
+Vercel deployment `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for merged Web
+PR #277; six bounded public read-only routes returned HTTP **200**. The
+Preview-only dashboard state seam is disabled in Production. This opens no
+release gate and does not close QUAL-WEB-006's remaining large-dataset,
+human/field, independent-review, or final-acceptance requirements. No checkbox
+changed; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/vercel-production-pr277-transient-capture-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #277 dashboard transient-state capture
 
 Web PR #277 merged normally as `e7a8bbaa` from `e9f713f7`. The authenticated
@@ -9,9 +19,9 @@ and reduced-motion checks. The 100-row dataset and local CWV requirements
 remain fail-closed; this opens no release gate. No checkbox changed; score
 remains **245/35/280 (87.5%)**. Evidence:
 `evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
-The additive v40 bundle verifies **270** files with **0** mismatches, passes
+The additive v41 bundle verifies **271** files with **0** mismatches, passes
 secret scanning, and matches manifest
-`sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+`sha256:cfe253851ca8ae13b4ae9476bd1efc7db32cf352b5a141153913b0e127f5c4f0`.
 
 ## 2026-10-24 · Web PR #276 Production receipt
 

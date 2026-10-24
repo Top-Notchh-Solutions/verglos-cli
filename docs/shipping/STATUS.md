@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #277 Production receipt
+
+Vercel deployment `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for merged Web
+PR #277 and serves `verglos.com`/`www.verglos.com`; six bounded public routes
+returned HTTP **200**. This is provider/Production runtime evidence only; the
+Preview-only dashboard state seam cannot activate in Production. No checkbox
+changed; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/vercel-production-pr277-transient-capture-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #277 dashboard transient-state capture
 
 Web PR #277 merged normally as `e7a8bbaa` from `e9f713f7`. The Preview-only
@@ -11,8 +20,8 @@ CWV breaches. No checkbox changed; score remains **245/35/280 (87.5%)**.
 Evidence: `evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
 No paid Actions, Production write, payment, customer repository, publication,
 or deletion occurred.
-Additive bundle v40 contains **270** hashed files, passes secret scanning, and
-matches manifest `sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+Additive bundle v41 contains **271** hashed files, passes secret scanning, and
+matches manifest `sha256:cfe253851ca8ae13b4ae9476bd1efc7db32cf352b5a141153913b0e127f5c4f0`.
 
 ## 2026-10-24 · Web PR #276 Production receipt
 

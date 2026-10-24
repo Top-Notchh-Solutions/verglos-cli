@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #277 Production receipt
+
+Vercel deployment `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for merged Web
+PR #277 commit `e7a8bbaa`, with `verglos.com`/`www.verglos.com` aliases. Six
+bounded public read-only routes returned HTTP **200**. The transient dashboard
+seam remains Preview-only and cannot be activated by Production. This advances
+provider/Production runtime evidence only; no checkbox changed and score
+remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/vercel-production-pr277-transient-capture-2026-10-24.md`.
+No authenticated dashboard request, database write, payment, customer
+repository, publication, or deletion occurred.
+
 ## 2026-10-24 · Web PR #277 dashboard transient-state capture
 
 Web PR #277 merged normally as `e7a8bbaa` from implementation `e9f713f7`. The
