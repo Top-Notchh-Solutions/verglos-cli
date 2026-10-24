@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · SCM installation audit atomicity hardening
+
+- **Implementation mapping:** Web PR #288 merged normally as
+  `557d508422374a5b14dfbbe3f3ddeacd2ee5dbcf`; SCM installation and audit
+  writes share one tenant-scoped transaction and one batch insert.
+- **Verification mapping:** Adjacent SCM contracts **18/18**, Web typecheck,
+  and diff checks passed.
+- **Boundary mapping:** This is provider-lifecycle implementation evidence only;
+  it does not create a live provider installation, customer acceptance,
+  independent review, or final release sign-off. No checkbox changed; score
+  remains **246/34/280**.
+- **Evidence:** `evidence/scm-installation-audit-atomicity-pr288-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-003/ACCEPT-003 provenance concurrency hardening
 
 - **Implementation mapping:** CLI PR #385 merged normally as

@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · SCM installation audit atomicity hardening
+
+Web PR **#288** merged normally as
+`557d508422374a5b14dfbbe3f3ddeacd2ee5dbcf`. Organization SCM installation
+creation now persists installation rows and audit records in one tenant-scoped
+transaction, with one batch audit insert; failed audit persistence rolls back
+the installation instead of leaving partial provider state. Adjacent SCM
+contracts passed **18/18**, Web typecheck passed, and diff checks passed. This
+is real production provider-lifecycle hardening, but it did not create a live
+provider installation or close any acceptance checkbox. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/scm-installation-audit-atomicity-pr288-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · DIST-003/ACCEPT-003 provenance concurrency hardening
 
 CLI PR **#385** merged normally as
