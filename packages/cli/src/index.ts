@@ -173,7 +173,7 @@ program
   .name("verglos")
   .description("Local-first security decision layer between code changes and release")
   .version(version, "-v, --version", "Print installed CLI version")
-  .option("--update", "Update Verglos CLI to the latest npm version")
+  .option("--update", "Update Verglos CLI to the latest stable npm version")
   .option(
     "--as-plan <plan>",
     "[founder only] Simulate a plan (free|pro|team|studio|enterprise) for this invocation",
@@ -205,7 +205,7 @@ Command groups:
   });
 program
   .command("update")
-  .description("Update Verglos CLI to the latest npm version")
+  .description("Update Verglos CLI to the latest stable npm version")
   .option("--json", "Emit one machine-readable update result")
   .option("--quiet", "Suppress update output")
   .action(async (opts: { json?: boolean; quiet?: boolean }) => {

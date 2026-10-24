@@ -238,7 +238,7 @@ verglos init                   # interactive project config
 verglos explain                # list every rule
 verglos explain D2-001         # explain one rule
 verglos badge                  # print README badge markdown
-verglos update                 # self-upgrade to the latest npm version
+verglos update                 # self-upgrade to the latest stable npm version
 ```
 
 ---
