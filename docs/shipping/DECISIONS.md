@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · STUDIO-CLI-001 current-head requalification
+
+- **Decision:** Record the current CLI/Web Studio projection, custody, and
+  handoff contract requalification.
+- **Result:** CLI package tests exited **0** with no failures/cancellations and
+  only the two documented Hunt Docker opt-in skips. Web’s focused Studio suite
+  passed **161/161** with **0** failures, skips, or cancellations.
+- **Source:** Web `7307ae5e0cea18e6d0803aa179fafcc2a0ce36f8`, contained in
+  merged Web `257e1cc8e0b467d16966433033589111f62f56f0`; CLI package source
+  history head `f35905d20fc0216299a38467606efa5c648295db`.
+- **Boundary:** Implementation/qualification evidence only. Recipient/customer
+  acceptance and its independent hosted/audit record remain absent; no
+  checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain open.
+- **Evidence:** `evidence/studio-cli-001-current-head-requalification-2026-10-24.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v24.json`
+  verifies 358 files with zero mismatches, matching manifest
+  `sha256:ebe6f72d7bbf06a931a09c468fbae0449847359afe008068401fa37d77059dff`,
+  and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-005 isolated account-deletion integration
 
 - **Decision:** Record the real local isolated lifecycle run as additional
