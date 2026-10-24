@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## Current-head local regression sweep · 2026-10-24
+
+- **Execution:** Ran the current CLI and Web regression suites locally against
+  the candidate commits.
+- **Result:** CLI `pnpm test`: **13/13** Turbo tasks successful. Web
+  `pnpm test:serial`: **904/928** passed, **24 designed skips**, **0 failures**,
+  **0 cancellations**.
+- **Candidate:** CLI `f6facdc5ad312325f00618e3e463dc81569c4341` / Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Disposition:** Implementation/regression evidence recorded; no gate or
+  checkbox was upgraded. Score remains **246/34/280**.
+- **Evidence:** `evidence/nonappsec-current-head-local-regression-2026-10-24.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v22.json`
+  verifies 356 files with zero mismatches, matching manifest
+  `sha256:ab363fe3c0369e2e3575397fb798b1668dc13741e87f50a80387d126d6753994`,
+  and passed secret scanning.
+
 ## Current-candidate reconciliation v6 · 2026-10-24
 
 - **Execution:** Rebuilt the release-gate input against current evidence and

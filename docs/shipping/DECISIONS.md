@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · current-head local regression sweep
+
+- **Decision:** Record the local current-head regression sweep as implementation
+  evidence for the non-AppSec rows.
+- **Result:** CLI `pnpm test` passed with **13/13** Turbo tasks successful;
+  Web `pnpm test:serial` passed with **904/928** tests, **24 designed skips**,
+  **0 failures**, and **0 cancellations**.
+- **Candidate:** CLI `f6facdc5ad312325f00618e3e463dc81569c4341` / Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Boundary:** This is local code/regression evidence only. It does not
+  manufacture provider, customer, independent-review, field-CWV, AppSec/Hunt,
+  account-deletion, or final-release evidence; no checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain open.
+- **Evidence:** `evidence/nonappsec-current-head-local-regression-2026-10-24.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v22.json`
+  verifies 356 files with zero mismatches, matching manifest
+  `sha256:ab363fe3c0369e2e3575397fb798b1668dc13741e87f50a80387d126d6753994`,
+  and passed secret scanning.
+
 ## 2026-10-24 · record current-candidate reconciliation v6
 
 - **Decision:** Reconcile the current candidate using the latest bounded

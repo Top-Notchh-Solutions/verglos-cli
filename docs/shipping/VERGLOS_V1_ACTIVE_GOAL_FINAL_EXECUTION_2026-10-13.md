@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-head local regression sweep
+
+The implementation regression suites passed locally against the current
+candidate: CLI `pnpm test` completed with **13/13** Turbo tasks successful; Web
+`pnpm test:serial` completed with **904/928** tests, **24 designed skips**,
+**0 failures**, and **0 cancellations**. This is code/regression evidence for
+the non-AppSec implementation work. It does not create provider, customer,
+independent-review, field-CWV, AppSec/Hunt, account-deletion, or final-release
+evidence, so no checkbox changed. Score remains **246 checked / 34 open / 280
+total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/nonappsec-current-head-local-regression-2026-10-24.md`.
+Bundle v22 verifies **356** bounded files with **0** mismatches, matching
+manifest `sha256:ab363fe3c0369e2e3575397fb798b1668dc13741e87f50a80387d126d6753994`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · current-candidate reconciliation v6
 
 The release-gate input was rebuilt against the current Production migration,

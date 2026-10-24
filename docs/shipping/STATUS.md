@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current-head local regression sweep
+
+The local current candidate passed the implementation regression suites: CLI
+`pnpm test` completed with **13/13** Turbo tasks successful; Web
+`pnpm test:serial` completed with **904/928** tests, **24 designed skips**,
+**0 failures**, and **0 cancellations**. This records code/regression evidence
+only; it does not close provider, customer, independent-review, field-CWV,
+AppSec/Hunt, account-deletion, or final-release gates. No checkbox changed;
+score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/nonappsec-current-head-local-regression-2026-10-24.md`.
+Bundle v22 verifies **356** files with zero mismatches, matching manifest
+`sha256:ab363fe3c0369e2e3575397fb798b1668dc13741e87f50a80387d126d6753994`,
+and passed secret scanning.
+
 ## 2026-10-24 · current-candidate reconciliation v6
 
 The current release-gate input is bound to CLI `f6facdc5` / Web `257e1cc8` and
