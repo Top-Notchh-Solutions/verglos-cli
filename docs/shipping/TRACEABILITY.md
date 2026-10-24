@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · FINAL-WEB-003 plan/pricing contract
+
+- **Implementation mapping:** Web canonical catalog, entitlement/allowance,
+  commercial-state, checkout/payment-method, and public-claim projection.
+- **Contract mapping:** **61/61** focused tests passed with zero failures,
+  skips, cancellations, or todos.
+- **Boundary mapping:** No payment, customer/provider, Production, deployment,
+  or final-release acceptance was inferred.
+- **Evidence:** `evidence/final-web-003-current-plan-pricing-contract-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v50.json` verifies 384 files with zero mismatches, matching manifest `sha256:d79a44bba4f513bd484678fc7364d31bd3f3e39fa52f930ba639d9bad57ac862`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-002 landing qualification contract
 
 - **Implementation mapping:** Landing Inspect → Decide → Prove → Monitor
