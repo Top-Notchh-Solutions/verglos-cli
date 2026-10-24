@@ -26,7 +26,7 @@ export async function putRecordMemberFromFile(root: string, path: string, source
   if (!source.isFile()) throw new Error("record member source must be a regular file");
   if (source.size > 50_000_000) throw new Error("record member exceeds 50 MB");
   await assertStoreRoot(root, true);
-  const temporary = join(root, `.member.${process.pid}.${Date.now()}.tmp`);
+  const temporary = join(root, `.member.${process.pid}.${randomUUID()}.tmp`);
   const handle = await open(temporary, "wx", 0o600);
   let sourceHandle: Awaited<ReturnType<typeof open>> | undefined;
   const hash = createHash("sha256");
