@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · production browser qualification
+
+The existing Chromium Playwright landing-release capture and qualification ran
+against `https://verglos.com` and passed **12/12** measurements across `/`,
+`/docs`, `/detectors`, `/proof`, `/verify`, and `/checkout` at desktop and
+mobile viewports. Accessibility findings were **0** and required performance,
+keyboard, landmark, responsive, canonical-metadata, and crawlability checks
+passed. This advances hosted browser evidence only; authenticated browser,
+human/field-CWV, independent review, provider/customer acceptance, and final
+release remain open. No checkbox changed. Score remains **246 checked / 34
+open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/final-web-007-008-production-browser-capture-2026-10-24.md`.
+Bundle v38 verifies **372** bounded files with **0** mismatches, matching
+manifest `sha256:d23f39f189925c011a5c3c986dcdaf8dac71bca0da695c88ab491de71a571eb7`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · Vercel Production public-surface recheck
 
 Vercel CLI inspected `verglos.com` as `READY`. Read-only HTTPS checks returned

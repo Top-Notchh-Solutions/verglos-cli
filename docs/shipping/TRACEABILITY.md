@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · FINAL-WEB-007/008 production browser capture
+
+- **Implementation mapping:** Existing landing-release Playwright capture and
+  qualification scripts ran against `https://verglos.com`.
+- **Contract mapping:** **12/12** desktop/mobile measurements passed for six
+  routes, with zero accessibility findings and no required performance,
+  keyboard, landmark, responsive, metadata, or crawlability failures.
+- **Boundary mapping:** Hosted browser evidence only; authenticated browser,
+  human/field-CWV, independent review, provider/customer acceptance, and final
+  release gates remain open. No checkbox changed.
+- **Evidence:** `evidence/final-web-007-008-production-browser-capture-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v38.json` verifies 372 files with zero mismatches, matching manifest `sha256:d23f39f189925c011a5c3c986dcdaf8dac71bca0da695c88ab491de71a571eb7`, and passed secret scanning.
+
 ## 2026-10-24 · Vercel Production public-surface recheck
 
 - **Hosted mapping:** Vercel deployment inspection plus public route response
