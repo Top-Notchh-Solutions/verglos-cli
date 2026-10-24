@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · QUAL-WEB-005 worker scope fence
+
+- **Implementation mapping:** Web PR #285 merged normally as
+  `e1d7a42dcb48387bae7929ceb627caaeeb90ed0d`; the deletion worker compares the
+  runner candidate scope with the leased database job and blocks mismatches
+  before inventory/destructive calls.
+- **Verification mapping:** Source commit `623ba06`; focused
+  worker/execution/customer-held tests **11/11**, Web typecheck, and diff
+  checks passed.
+- **Boundary mapping:** This hardens the production deletion boundary but does
+  not authorize Production/customer-held deletion, independent review,
+  recovery/rollback acceptance, or final release sign-off. No checkbox changed;
+  score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-005-worker-scope-fence-pr285-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 strict rollback-input validation
 
 - **Implementation mapping:** Shared rollback decisions require literal

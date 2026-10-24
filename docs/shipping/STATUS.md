@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · QUAL-WEB-005 worker scope fence
+
+Web PR #285 merged normally as
+`e1d7a42dcb48387bae7929ceb627caaeeb90ed0d`. Account deletion now fails closed
+with `requested_scope_mismatch` when the runner candidate and leased job have
+different requested-kind scopes, before inventory or destructive adapter work.
+Focused tests passed **11/11**; typecheck and diff checks passed. QUAL-WEB-005
+remains open for authorized Production/customer-held operation, independent
+review, recovery/rollback acceptance, and final release sign-off. Score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/qual-web-005-worker-scope-fence-pr285-2026-10-24.md`.
+
+
 ## 2026-10-24 · DIST-006 strict rollback-input validation
 
 Rollback approval/history flags now require literal booleans and malformed

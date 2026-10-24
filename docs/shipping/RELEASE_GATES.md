@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-005 worker scope fence
+
+Web PR #285 merged normally as
+`e1d7a42dcb48387bae7929ceb627caaeeb90ed0d`. The account-deletion worker now
+compares candidate and leased-job requested-kind scopes before inventory or
+destructive adapter execution and blocks a mismatch with
+`requested_scope_mismatch`. Focused tests passed **11/11**, typecheck and diff
+checks passed. This is implementation evidence only; QUAL-WEB-005 remains open
+for authorized Production/customer-held operation, independent review,
+recovery/rollback acceptance, and final release sign-off. No checkbox changed;
+score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/qual-web-005-worker-scope-fence-pr285-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 strict rollback-input validation
 
 Rollback approval and history-preservation flags are now literal-boolean
