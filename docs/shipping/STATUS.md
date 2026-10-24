@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
+
+Web PR #284 merged normally and corrected the public version drift between
+npm's current `latest`/`alpha` prerelease (`2.0.0-alpha.1`) and the latest
+stable scanner (`1.8.3`). Focused tests **10/10**, truth-registry **37/37**,
+public-release smoke **12/12**, typecheck, and build **49/49** passed. Vercel
+Production deployment `dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` is Ready and live
+`/llms.txt` confirms the correction. FINAL-WEB-005/008 remain unchecked for
+their dependencies and final release gates. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/final-web-005-008-npm-truth-production-deployment-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-005 current local isolated recheck
 
 Privacy/account-deletion/customer-held qualification passed **60/60** with

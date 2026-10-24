@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
+
+- **Implementation mapping:** Public truth registry, homepage badges, metadata,
+  JSON-LD, direction docs, and `/llms.txt` now distinguish the latest stable
+  scanner `1.8.3` from npm's public prerelease `2.0.0-alpha.1`.
+- **Contract mapping:** Focused truth/proof/route tests **10/10**, full
+  truth-registry **37/37**, public-release smoke **12/12**, typecheck, and
+  production build **49/49** passed.
+- **Hosted mapping:** Web PR #284 merged normally; Vercel Production
+  deployment `dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` is Ready and the live
+  `/llms.txt` returned the corrected line.
+- **Boundary mapping:** No checkbox changed. FINAL-WEB-005/008 remain open for
+  dependencies, independent/acceptance, and final-release gates; no npm
+  publication, customer data use, deletion, AppSec review, or final go/no-go
+  occurred.
+- **Evidence:** `evidence/final-web-005-008-npm-truth-production-deployment-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-005 current local isolated recheck
 
 - **Implementation mapping:** Privacy page, authenticated account-deletion and

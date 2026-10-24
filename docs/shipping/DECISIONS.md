@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
+
+- **Decision:** Correct the public version claim from “latest public npm
+  release” to explicit stable/prerelease labels after observing npm's current
+  `latest` and `alpha` dist-tags.
+- **Result:** Web PR #284 merged normally as
+  `4b877bf67bdfbe41ddf05d4d95303c01ce79ded2`; focused tests **10/10**, full
+  truth-registry **37/37**, public-release smoke **12/12**, typecheck, and
+  production build **49/49** passed. Vercel Production deployment
+  `dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` is Ready and the live `/llms.txt`
+  contains the corrected wording.
+- **Boundary:** This is real merged code and hosted Production evidence, but
+  FINAL-WEB-005/008 remain unchecked for dependencies, independent/acceptance,
+  and final release gates. No npm publication, customer data use, deletion,
+  AppSec review, or final go/no-go occurred. Score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-005-008-npm-truth-production-deployment-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-005 current local isolated recheck
 
 - **Decision:** Record the stronger current local privacy/deletion qualification

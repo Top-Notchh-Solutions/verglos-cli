@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
+
+Web PR #284 merged normally as `4b877bf67bdfbe41ddf05d4d95303c01ce79ded2`.
+The public surfaces now distinguish the latest stable scanner (`1.8.3`) from
+npm's current public `latest`/`alpha` prerelease (`2.0.0-alpha.1`) after a
+read-only npm observation. Focused truth tests passed **10/10**, the full
+truth-registry suite **37/37**, public-release smoke **12/12**, typecheck, and
+production build **49/49**. Vercel Production deployment
+`dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` is Ready and live `/llms.txt` confirms the
+correction. This advances implementation and hosted truth evidence for
+FINAL-WEB-005/008 but does not check either row: their dependencies,
+independent/acceptance, and final release gates remain open. Score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-005-008-npm-truth-production-deployment-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · QUAL-WEB-005 current local isolated recheck
 
 The privacy/account-deletion/customer-held qualification suite passed **60/60**

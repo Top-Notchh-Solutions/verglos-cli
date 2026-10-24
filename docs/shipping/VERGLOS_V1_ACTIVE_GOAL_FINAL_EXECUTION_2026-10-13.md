@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · FINAL-WEB-005/008 Production truth correction
+
+The Web truth registry had a real public drift: npm currently reports
+`2.0.0-alpha.1` as both `latest` and `alpha`, while the public `/llms.txt` said
+“Latest public npm release is 1.8.3.” Web PR **#284** corrected the distinction
+to **1.8.3 latest stable scanner** and **2.0.0-alpha.1 public qualification
+prerelease** across homepage badges, metadata, JSON-LD, direction docs, and
+`/llms.txt`. Local focused truth tests passed **10/10**, the full truth-registry
+suite passed **37/37**, public-release smoke passed **12/12**, typecheck passed,
+and the production build generated **49/49** pages. PR #284 merged normally as
+`4b877bf67bdfbe41ddf05d4d95303c01ce79ded2`. Vercel Production deployment
+`dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` became `Ready` and is aliased to
+`https://verglos.com`; a read-only live `/llms.txt` check confirmed the new
+wording. This is real code/merge/Production evidence, but FINAL-WEB-005 and
+FINAL-WEB-008 remain unchecked for their declared dependencies, independent or
+acceptance evidence, and final release gates. No npm publication, new package
+version, database migration, customer data use, deletion, AppSec review, or
+final go/no-go occurred. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-005-008-npm-truth-production-deployment-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-005 local isolated recheck
 
 The current privacy/account-deletion/customer-held qualification suite passed
