@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-010 current freeze regression
+
+- **Implementation mapping:** Release-candidate freeze, package metadata, SBOM,
+  SPDX, and strict seven-package artifact verification.
+- **Contract mapping:** Focused tests passed **15/15**; **15** local artifacts
+  verified; the freeze has **24/24** present artifacts across **12/12** kinds.
+- **Boundary mapping:** Six external gates remain open, so the recorded
+  recommendation remains `no-go`; no publication, provider/customer action,
+  independent review, or final sign-off was inferred.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-010-current-freeze-regression-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v35.json` verifies 368 files with zero mismatches, matching manifest `sha256:0c6288ad26aaee9467c3becf12ed35ec0845b8d709c2e33809baaeddc67a5558`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-009 current reconciler regression
 
 - **Implementation mapping:** Reconciliation, candidate-input, freeze, and

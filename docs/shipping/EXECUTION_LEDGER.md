@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-010 current release-candidate freeze regression · 2026-10-24
+
+- **Execution:** Ran the focused freeze/SBOM/SPDX/release-artifact suite and
+  verified the strict local seven-package candidate.
+- **Result:** **15/15** focused tests passed; **15** local artifacts verified
+  (**7** archives and **8** sidecars); inventory reported **250** packages,
+  **1** bundled component, and **0** review blockers.
+- **Freeze:** Current report has **24/24** present digest-bound artifacts and
+  all **12/12** required artifact kinds, with six open gates and `no-go`.
+- **Disposition:** Implementation and artifact-integrity evidence only. No
+  publication, provider/customer action, independent review, final release,
+  or checkbox upgrade occurred. Score remains **246/34/280**.
+- **Evidence:** `evidence/accept-010-current-freeze-regression-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v35.json` verifies 368 files with zero mismatches, matching manifest `sha256:0c6288ad26aaee9467c3becf12ed35ec0845b8d709c2e33809baaeddc67a5558`, and passed secret scanning.
+
 ## ACCEPT-009 current reconciler regression · 2026-10-24
 
 - **Execution:** Ran the reconciliation, candidate-input, freeze, and final
