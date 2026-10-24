@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
+
+The current CLI candidate passed **8/8** package builds and **2/2** focused
+rollback evidence contracts. The local rehearsal covered npm-package,
+engine-manifest, Hunt-feed, signing-identity, and Web-deployment decisions and
+preserved two historical records. This is local implementation evidence only:
+no provider or Production rollback/revocation occurred, so `DIST-006` remains
+unchecked. Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent /
+21 non-AppSec**. Evidence:
+`evidence/dist-006-current-head-rollback-rehearsal-2026-10-24.md`.
+Bundle v28 verifies **361** files with zero mismatches, matching manifest
+`sha256:d75cedd8af8dbc8eaad3b3fbe9a0437d776243a8576482920302f4af5019e03a`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-003 current-head artifact and provenance preflight
 
 The dedicated artifact suite passed **39/39** with zero failures, skips, or

@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## DIST-006 current-head rollback/revocation rehearsal · 2026-10-24
+
+- **Execution:** Built the current CLI candidate and ran the focused rollback
+  evidence contracts plus the five-boundary local rehearsal.
+- **Result:** **8/8** package builds and **2/2** focused tests passed; npm,
+  engine-manifest, Hunt-feed, signing-identity, and Web-deployment decisions
+  were admitted while two historical records remained unchanged.
+- **Candidate:** CLI ledger head `8c561e13a6431529d069d27c97a9f261c4353c99`;
+  fixture digest `sha256:664f70df2f2a0c063d43c767e602266b1adc1709a498dae7ef71825291b960b7`.
+- **Disposition:** Local contract evidence only. No provider or Production
+  rollback/revocation occurred, so no checkbox was upgraded; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/dist-006-current-head-rollback-rehearsal-2026-10-24.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v28.json`
+  verifies 361 files with zero mismatches, matching manifest
+  `sha256:d75cedd8af8dbc8eaad3b3fbe9a0437d776243a8576482920302f4af5019e03a`,
+  and passed secret scanning.
+
 ## DIST-003 current-head artifact and provenance preflight · 2026-10-24
 
 - **Execution:** Ran the current artifact, checksum, SBOM, release-note,

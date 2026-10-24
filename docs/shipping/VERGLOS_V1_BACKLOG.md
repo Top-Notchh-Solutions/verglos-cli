@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
+
+The current CLI ledger head `8c561e13` passed **8/8** package builds and the
+focused rollback evidence contracts passed **2/2**. The bounded local
+rehearsal covered npm-package, engine-manifest, Hunt-feed, signing-identity,
+and Web-deployment decisions and preserved two historical records. It did not
+call npm, a registry, signing/Hunt providers, Vercel, or an authenticated
+rollback/revocation endpoint. Keep `DIST-006` unchecked for the real
+provider/Production operation, operational review, and final release
+acceptance. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-006-current-head-rollback-rehearsal-2026-10-24.md`.
+Bundle v28 verifies **361** files with **0** mismatches, matching manifest
+`sha256:d75cedd8af8dbc8eaad3b3fbe9a0437d776243a8576482920302f4af5019e03a`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-003 current-head artifact and provenance preflight
 
 The dedicated artifact/provenance contract suite passed **39/39** with zero
