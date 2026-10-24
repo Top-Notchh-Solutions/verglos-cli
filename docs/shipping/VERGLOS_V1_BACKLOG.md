@@ -1,5 +1,28 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · production inspection bundle verification
+
+The additive bundle contains **310** bounded evidence files, verifies with
+**0** mismatches, matches manifest
+`sha256:688ea7daf7f02c3cbfa9ad6ab6050e4c5612b439e2b92266434da075187ef33a`,
+and passes secret scanning. This is a reproducibility/provider-state receipt;
+it does not close human, customer/recipient, independent-review, field,
+deletion, AppSec/Hunt, or final-release gates. No checkbox changed; score
+remains **245 checked / 35 open / 280 total (87.5%)**, split **13
+AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
+
+## 2026-10-24 · read-only Vercel Production inspection
+
+Deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` remains `target: production` and
+`readyState: READY`, with the expected public aliases and Next.js build
+configuration. This is provider-state evidence only; keep FINAL-WEB-007/008
+unchecked for human/field, customer/recipient, independent-review,
+AppSec/Hunt, and final-release gates. No checkbox changed; score remains
+**245 checked / 35 open / 280 total (87.5%)**, split **13 AppSec-dependent / 22
+non-AppSec**. Evidence:
+`docs/shipping/evidence/vercel-production-inspection-pr282-2026-10-24.md`.
+
 ## 2026-10-24 · merged Web production smoke
 
 Vercel deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` is READY from merged Web

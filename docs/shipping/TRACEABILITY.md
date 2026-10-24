@@ -1,5 +1,29 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · production inspection bundle verification
+
+- **Source mapping:** Current private evidence set plus the read-only Vercel
+  Production inspection for deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza`.
+- **Verification mapping:** 310 bounded files, 0 byte mismatches, matching
+  manifest `sha256:688ea7daf7f02c3cbfa9ad6ab6050e4c5612b439e2b92266434da075187ef33a`,
+  and secret scan passed.
+- **Acceptance mapping:** Reproducibility/provider-state evidence only. No
+  human/field, customer/recipient, independent-review, deletion, AppSec/Hunt,
+  or final-release gate was closed; score remains 245/35/280.
+- **Evidence:** `evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
+
+## 2026-10-24 · read-only Vercel Production inspection
+
+- **Source mapping:** Provider deployment
+  `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza`.
+- **Verification mapping:** Vercel inspection returned `target: production`,
+  `readyState: READY`, the expected aliases, and the Next.js build command.
+- **Acceptance mapping:** Provider-state evidence only for FINAL-WEB-007/008;
+  no checkbox changed and score remains 245/35/280. Other provider lifecycle,
+  human/field, customer, independent-review, AppSec/Hunt, and final-release
+  gates remain separate.
+- **Evidence:** `evidence/vercel-production-inspection-pr282-2026-10-24.md`.
+
 ## 2026-10-24 · merged Web production smoke
 
 - **Source mapping:** Web PR #282 merged at
