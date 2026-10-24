@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · authenticated dashboard capture harness
+
+- **Source mapping:** Web PR #273 merged normally as
+  `8820fbf7daa2da83c3030d8215553739e96d5a37`; it adds the Playwright
+  authenticated dashboard capture command.
+- **Verification mapping:** Isolated synthetic owner fixture captured all 13
+  dashboard routes at desktop/mobile (**26 ready-state measurements**), with
+  zero source-contract issues; focused harness tests passed **4/4** and
+  typecheck passed. The fail-closed qualifier reports **73** gaps.
+- **Acceptance mapping:** This advances QUAL-WEB-006 implementation/capture
+  capability only. Loading/error, large-dataset, human/field,
+  independent-review, customer, and final-release evidence remain open. No
+  checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-authenticated-ready-2026-10-24.md`.
+
 ## 2026-10-24 · current CLI public-OSS verifier recheck
 
 - **Source mapping:** Current CLI `aad2c74395a5c381c955ab9dfab7462295564840`

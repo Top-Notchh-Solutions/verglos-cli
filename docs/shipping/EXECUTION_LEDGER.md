@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Authenticated dashboard capture harness · 2026-10-24
+
+- **Implementation:** Web PR #273 merged normally as
+  `8820fbf7daa2da83c3030d8215553739e96d5a37`; it adds the bounded Playwright
+  dashboard capture command and package script.
+- **Execution:** Isolated local Preview-like server, synthetic owner fixture,
+  13 dashboard routes, desktop/mobile Chromium capture.
+- **Result:** **26 ready-state measurements**, zero source-contract issues,
+  contract suite **4/4**, and typecheck passed. The fail-closed qualifier
+  returned **73** gaps for absent loading/error/large-dataset coverage and
+  observed page-contract failures.
+- **Disposition:** Advance QUAL-WEB-006 implementation/capture capability
+  only. Human/field, large-dataset, independent-review, and final acceptance
+  remain open; no checkbox changed and score remains **245/35/280 (87.5%)**.
+  No Production/customer data, Actions run, or deletion was used.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-authenticated-ready-2026-10-24.md`.
+
 ## Current CLI public-OSS verifier recheck · 2026-10-24
 
 - **Execution:** Reverified current CLI `aad2c743` against the existing

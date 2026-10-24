@@ -264,6 +264,8 @@ const paths = [
   "docs/shipping/evidence/vercel-production-landing-browser-qualification-2026-10-24-v2.md",
   "docs/shipping/evidence/dist-002-003-006-current-cli-cross-platform-local-2026-10-24.md",
   "docs/shipping/evidence/qual-web-006-dashboard-contract-current-web-2026-10-24.md",
+  "docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-ready-2026-10-24.md",
+  "docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-ready-2026-10-24.json",
   "docs/shipping/evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];
