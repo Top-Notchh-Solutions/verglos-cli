@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-003 current-head bundle v30 verification
+
+- **Decision:** Record the read-only verification of the current internal
+  acceptance evidence packet.
+- **Result:** **363/363** bounded files verified; mismatches **0**; manifest
+  recomputation matched; secret scan passed with **0** flagged paths; bundle
+  builder/verifier regressions passed **9/9**.
+- **Boundary:** This verifies reproducibility only. Reviewer sign-off,
+  hosted/provider lifecycle, recipient/customer, independent-review,
+  authenticated-browser, field-CWV, account-deletion, and final-release gates
+  remain open; no checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-003-current-head-bundle-verification-v30-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v31.json` verifies 364 files with zero mismatches, matching manifest `sha256:e98d7cf4a6da099ba4c5cfb90d89a1734ac6c0bbddba17065e2568716a874755`, and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-006 current-head dashboard qualification contracts
 
 - **Decision:** Record the current dashboard qualification and type-safety

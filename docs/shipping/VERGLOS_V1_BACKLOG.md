@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-003 current-head bundle v30 verification
+
+The checked-in acceptance bundle v30 verified **363/363** bounded evidence
+files with **0** mismatches; manifest recomputation, secret scanning, and the
+bundle-builder/verifier regression suite (**9/9**) passed. This is internal
+reproducibility evidence only. Keep `ACCEPT-003` unchecked for reviewer
+sign-off, hosted/provider lifecycle, recipient/customer acceptance,
+independent review, browser/field-CWV, account-deletion, and final release.
+Score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-003-current-head-bundle-verification-v30-2026-10-24.md`.
+Bundle v31 verifies **364** files with **0** mismatches, matching manifest
+`sha256:e98d7cf4a6da099ba4c5cfb90d89a1734ac6c0bbddba17065e2568716a874755`,
+and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-006 current-head dashboard qualification contracts
 
 The current dashboard qualification contracts passed **4/4** with zero
