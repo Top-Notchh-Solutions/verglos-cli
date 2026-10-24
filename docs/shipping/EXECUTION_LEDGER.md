@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Current-head QUAL-WEB-005 deletion integration · 2026-10-24
+
+- **Execution:** Current Web source `58fe7e3c` (merged implementation on
+  `origin/main` `d8f415b4`) ran against fresh disposable Postgres container
+  `verglos-qual-web-005-current-20261024`, loopback port `55440`.
+- **Database:** Reviewed local empty-database bootstrap plus **43** migrations
+  completed successfully.
+- **Verification:** Account-deletion route and worker integration passed
+  **2/2**, zero failures/skips/cancellations, including route auth/CORS/input
+  boundaries, idempotency, worker completion, scope, lease/fence, legal hold,
+  support deletion, hosted-kind deletion, and terminal receipt behavior.
+- **Disposition:** Advance local implementation evidence for `QUAL-WEB-005`;
+  do not infer Production/customer-held/legal, restore/rollback,
+  independent-review, field, or final-release evidence. No checkbox changed;
+  score remains **245/35/280 (87.5%)**. No Actions run or paid minute was
+  used. Evidence: `evidence/qual-web-005-current-head-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## Hosted production multi-browser qualification · 2026-10-24
 
 - **Deployment:** Vercel `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku`, READY for Web

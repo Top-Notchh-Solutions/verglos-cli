@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current-head QUAL-WEB-005 deletion integration
+
+Fresh isolated local Postgres bootstrap plus **43** migrations succeeded, and
+the current Web account-deletion route/worker integration passed **2/2** with
+zero failures or skips. It covered authenticated route boundaries,
+cross-origin and malformed-input rejection, digest/deletion idempotency,
+worker completion, user scope, leases/fences, legal holds, support deletion,
+hosted-kind deletion, and terminal receipts. Evidence:
+`evidence/qual-web-005-current-head-fresh-local-deletion-e2e-2026-10-24.md`.
+
+This is implementation evidence only; Production/customer-held/legal,
+restore/rollback, independent-review, field, and final-release boundaries stay
+open. No checkbox changed. Score remains **245/35/280 (87.5%)**. No paid
+Actions run was used and no repository or customer data was deleted.
+
 ## 2026-10-24 · hosted production multi-browser qualification
 
 Production deployment `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku` is READY for merged

@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-head QUAL-WEB-005 deletion integration
+
+The current Web implementation was rerun against a fresh isolated local
+PostgreSQL database on loopback port `55440`. The reviewed empty-database
+bootstrap and **43** ordered migrations completed successfully. The bounded
+account-deletion route and worker integration tests passed **2/2**, with zero
+failures, skips, or cancellations. The run covered authenticated route
+boundaries, cross-origin and malformed-input rejection, digest and deletion
+idempotency, worker completion, user scope, lease/fence behavior, legal-hold
+blocking, support deletion idempotency, hosted-kind deletion, and terminal
+receipts. Evidence:
+`docs/shipping/evidence/qual-web-005-current-head-fresh-local-deletion-e2e-2026-10-24.md`.
+
+This advances current-head implementation evidence for `QUAL-WEB-005`; it does
+not claim Production deletion, customer-held/legal disposition, restore or
+rollback acceptance, independent review, field evidence, or final release
+approval. No checkbox changed. Score remains **245 checked / 35 open / 280
+total (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open. No
+GitHub Actions run or paid minute was used, and no repository or customer data
+was deleted.
+
 ## Latest continuation result · 2026-10-24 · hosted production multi-browser qualification
 
 The final Vercel Production deployment `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku`

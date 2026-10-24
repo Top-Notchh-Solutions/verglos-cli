@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-head QUAL-WEB-005 deletion integration
+
+- **Decision:** Rerun the account-deletion route and worker against a fresh
+  explicitly isolated local database at the current Web implementation head.
+- **Result:** The reviewed local bootstrap and **43** migrations completed;
+  the two integration files passed **2/2** with zero failures, skips, or
+  cancellations.
+- **Disposition:** Record implementation evidence only. Keep Production,
+  customer-held/legal, restore/rollback, independent-review, field, and final
+  release boundaries open; no checkbox changed. Score remains
+  **245/35/280 (87.5%)**. No Actions run, paid minute, repository deletion,
+  or customer-data operation was used.
+- **Evidence:** `evidence/qual-web-005-current-head-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## 2026-10-24 · record hosted production multi-browser qualification
 
 - **Decision:** Re-run the browser contract after fixing the hosted landing
