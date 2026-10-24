@@ -1,5 +1,26 @@
 # Verglos V1 Execution Ledger
 
+## DIST-002 current-head release preflight · 2026-10-24
+
+- **Execution:** Ran the current trusted-publishing contract, strict license,
+  seven-archive pack, release-artifact, checksum, and clean-consumer checks
+  locally.
+- **Result:** Contract suite **19/19** passed; inventory reported 254 lockfile
+  package IDs, 250 package entries, 1 bundled component, and 0 review blockers;
+  seven archives and 15 release artifacts verified; all seven archives imported
+  in the clean consumer.
+- **Candidate:** CLI `bcb30a7ed645b21ec150e22929f7bd2960b5c7c3`,
+  `2.0.0-alpha.4`.
+- **Disposition:** No publication/tag/provider action occurred; no checkbox was
+  upgraded. Score remains **246/34/280**. Protected approval, trusted publisher
+  enrollment, actual provenance, and final acceptance remain open.
+- **Evidence:** `evidence/dist-002-current-head-preflight-2026-10-24.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v25.json`
+  verifies 359 files with zero mismatches, matching manifest
+  `sha256:098880ecd5af8a5636a220d2113affb7ae71535083c32ad931f3f91b26b13d82`,
+  and passed secret scanning.
+
 ## STUDIO-CLI-001 current-head requalification · 2026-10-24
 
 - **Execution:** Re-ran the current CLI package suite and focused Web Studio

@@ -1,5 +1,26 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-002 current-head release preflight
+
+- **Implementation mapping:** CLI candidate
+  `bcb30a7ed645b21ec150e22929f7bd2960b5c7c3`, version `2.0.0-alpha.4`.
+- **Contract mapping:** Trusted-publishing suite **19/19** passed; strict
+  inventory found 254 lockfile IDs, 250 package entries, 1 bundled component,
+  and 0 review blockers.
+- **Artifact mapping:** Seven public archives packed; 15 release artifacts
+  verified; clean consumer installed/imported all seven and ran the bounded
+  fixture.
+- **Boundary mapping:** No tag, registry/provider write, protected approval,
+  or token use occurred; publication/provenance/release acceptance remain open.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/dist-002-current-head-preflight-2026-10-24.md`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v25.json`
+  verifies 359 files with zero mismatches, matching manifest
+  `sha256:098880ecd5af8a5636a220d2113affb7ae71535083c32ad931f3f91b26b13d82`,
+  and passed secret scanning.
+
 ## 2026-10-24 · STUDIO-CLI-001 current-head requalification
 
 - **Implementation mapping:** CLI package source history head

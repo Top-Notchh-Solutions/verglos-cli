@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-002 current-head release preflight
+
+The current trusted-publishing contract suite passed **19/19**. Strict license
+inventory reported **254** lockfile package IDs, **250** package entries, **1**
+bundled component, and **0** review blockers. Local packaging verified seven
+public archives and **15** release artifacts; the clean consumer installed and
+imported all seven and executed the bounded fixture. No tag, registry/provider
+write, protected approval, or token use occurred, so no checkbox changed.
+Score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-002-current-head-preflight-2026-10-24.md`.
+Bundle v25 verifies **359** bounded files with **0** mismatches, matching
+manifest `sha256:098880ecd5af8a5636a220d2113affb7ae71535083c32ad931f3f91b26b13d82`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 current-head requalification
 
 The current CLI package suite exited **0** with no failures/cancellations and
