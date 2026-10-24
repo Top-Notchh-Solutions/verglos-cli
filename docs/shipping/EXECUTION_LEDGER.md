@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Source-bound Production smoke · 2026-10-24
+
+- **Execution:** Inspected the current Vercel Production deployment and ran
+  read-only GET checks for the five public truth/availability routes.
+- **Result:** Deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc` was `READY`,
+  aliased to `verglos.com`, and Vercel metadata bound it to Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`; all five routes returned HTTP
+  200.
+- **Boundary:** No deployment, migration, provider, payment, customer, or
+  authenticated state changed; no acceptance or release gate was fabricated.
+- **Disposition:** Add source-bound hosted evidence without changing a
+  backlog checkbox; score remains **246/34/280**.
+- **Evidence:** `evidence/vercel-production-source-bound-smoke-2026-10-24T0624Z.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v19.json`
+  verifies 351 files with zero mismatches, matching manifest
+  `sha256:e41d13f4d945d1ae520d736d332d1e6914b855c81150c7b77a26889ae8374831`,
+  and passed secret scanning.
+
 ## Current-head corpus and final regression · 2026-10-24
 
 - **Execution:** Ran the current merged CLI against eight exact-commit public

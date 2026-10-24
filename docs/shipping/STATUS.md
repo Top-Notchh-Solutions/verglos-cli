@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · source-bound Production smoke
+
+The current Vercel Production deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc`
+is `READY`, aliased to `verglos.com`, and Vercel metadata binds it to merged
+Web `257e1cc8e0b467d16966433033589111f62f56f0`. Read-only GET checks for the
+five public truth/availability routes returned HTTP 200. No hosted state was
+mutated and no checkbox changed. Score remains **246/34/280 (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/vercel-production-source-bound-smoke-2026-10-24T0624Z.md`.
+Bundle v19 verifies **351** files with zero mismatches, matching manifest
+`sha256:e41d13f4d945d1ae520d736d332d1e6914b855c81150c7b77a26889ae8374831`,
+and passed secret scanning.
+
 ## 2026-10-24 · current-head corpus and final regression
 
 The current merged CLI verified **8/8** exact-commit public-OSS fixtures,

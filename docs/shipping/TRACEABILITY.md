@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · source-bound Production smoke
+
+- **Hosted source mapping:** Vercel Production deployment
+  `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc` is `READY`, aliased to `verglos.com`, and
+  binds to Web `257e1cc8e0b467d16966433033589111f62f56f0` on `main`.
+- **Verification mapping:** `/`, `/robots.txt`, `/sitemap.xml`, `/llms.txt`,
+  and `/proof` all returned HTTP 200 with the expected public content types.
+- **Acceptance mapping:** Hosted public availability only. No authenticated,
+  human/field-CWV, customer/recipient, provider-publication,
+  independent-review, AppSec/Hunt, or final-release gate was claimed; no
+  checkbox changed.
+- **Evidence:** `evidence/vercel-production-source-bound-smoke-2026-10-24T0624Z.md`.
+- **Integrity mapping:** Current bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v19.json`
+  verifies 351 files with zero mismatches, matching manifest
+  `sha256:e41d13f4d945d1ae520d736d332d1e6914b855c81150c7b77a26889ae8374831`,
+  and passed secret scanning.
+
 ## 2026-10-24 · current-head corpus and final regression
 
 - **Source mapping:** CLI `f6facdc5db312325f00618e3e463dc81569c4341` and Web
