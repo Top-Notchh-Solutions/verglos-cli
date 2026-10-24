@@ -1,5 +1,13 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · dashboard interaction harness correction
+
+- **Source mapping:** Web PR #281 implementation `204224937228dc0134cb73feb873b893005255c4`, merged at `91d8629cd59f239334629f39ccfebb5953671cc2`.
+- **Verification mapping:** Real visible dashboard control interaction added; dashboard contract tests **4/4**, typecheck, and diff checks passed. WebKit probe exposed no Event Timing entries after a real click.
+- **Acceptance mapping:** QUAL-WEB-006 code-side evidence only; WebKit INP remains unclaimed and no proxy was substituted. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-interaction-harness-pr281-2026-10-24.md`.
+- **Boundary mapping:** No Actions, provider, customer, publication, deletion, or final-release action occurred.
+
 ## 2026-10-24 · current-head npm registry observation
 
 - **Source mapping:** CLI candidate

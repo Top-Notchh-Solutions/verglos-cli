@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · dashboard interaction harness correction
+
+Web PR [#281](https://github.com/anuragyadav-git/verglos-web/pull/281) merged
+normally at `91d8629cd59f239334629f39ccfebb5953671cc2`, from `2042249`. The
+dashboard browser harness now performs a real visible button/role-button
+interaction before reading interaction metrics, with a same-page-anchor
+fallback and the existing keyboard/focus checks retained. Dashboard contract
+tests passed **4/4**, typecheck passed, and diff checks passed. Installed
+headless WebKit exposes no Event Timing entries after a real click; the
+qualification remains fail-closed and no alternate latency metric is claimed
+as INP. No checkbox changed; score remains **245 checked / 35 open / 280 total
+(87.5%)**, with 13 AppSec-dependent and 22 non-AppSec rows open. Evidence:
+`evidence/qual-web-006-dashboard-interaction-harness-pr281-2026-10-24.md`.
+No non-completed Web Actions runs remain.
+
 ## 2026-10-24 · current-head npm registry observation
 
 The read-only publication verifier checked all seven alpha.4 packages against

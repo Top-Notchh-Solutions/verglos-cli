@@ -1,5 +1,14 @@
 # Verglos V1 Execution Ledger
 
+## Dashboard interaction harness correction · 2026-10-24
+
+- **Source:** Web PR #281, implementation `204224937228dc0134cb73feb873b893005255c4`, merged `91d8629cd59f239334629f39ccfebb5953671cc2`.
+- **Change:** Dashboard capture clicks a real visible button/role-button or same-page anchor before reading interaction metrics; keyboard/focus checks remain.
+- **Verification:** `pnpm test:dashboard-release` **4/4**, `pnpm typecheck`, and `git diff --check` passed.
+- **Boundary:** Installed headless WebKit exposes no Event Timing entries after a real click; no proxy metric was called INP. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-interaction-harness-pr281-2026-10-24.md`.
+- **Cost/safety:** No non-completed Web Actions runs remain; no provider, publication, customer, deletion, or release action occurred.
+
 ## Current-head npm registry observation · 2026-10-24
 
 - **Candidate:** CLI `d3ea64df01a8c7cd2879ddf54c97276240b49536`, version

@@ -291,6 +291,7 @@ const paths = [
   "docs/shipping/evidence/qual-web-006-dashboard-populated-transient-v3-2026-10-24.md",
   "docs/shipping/evidence/qual-web-006-dashboard-synthetic-2026-10-24-v3.json",
   "docs/shipping/evidence/qual-web-006-dashboard-local-production-multibrowser-v5-2026-10-24.md",
+  "docs/shipping/evidence/qual-web-006-dashboard-interaction-harness-pr281-2026-10-24.md",
   "docs/shipping/evidence/qual-web-006-dashboard-synthetic-2026-10-24-v5.json",
   "docs/shipping/evidence/qual-web-006-dashboard-synthetic-2026-10-24-v5-firefox.json",
   "docs/shipping/evidence/vercel-production-pr276-deployment-2026-10-24.md",

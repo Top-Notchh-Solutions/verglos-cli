@@ -1,5 +1,13 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record dashboard interaction harness correction
+
+- **Decision:** Make dashboard qualification exercise a real visible control interaction before reading interaction metrics, matching the landing harness, while retaining fail-closed missing-INP behavior.
+- **Result:** Web PR #281 merged normally at `91d8629cd59f239334629f39ccfebb5953671cc2`; dashboard contracts **4/4**, typecheck, and diff checks passed.
+- **Disposition:** Installed headless WebKit exposes no Event Timing entries after a real click. Do not relabel FID or measured proxy latency as INP; keep QUAL-WEB-006 open for supported-browser/human/field evidence and final acceptance. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-interaction-harness-pr281-2026-10-24.md`.
+- **Safety:** No non-completed Web Actions runs remain; no provider, customer, publication, deletion, or final release action occurred.
+
 ## 2026-10-24 · record current-head npm registry boundary
 
 - **Decision:** Treat the fresh read-only npm observation as the authoritative

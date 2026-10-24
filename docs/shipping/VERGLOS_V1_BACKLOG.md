@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · QUAL-WEB-006 dashboard interaction harness correction
+
+Web PR [#281](https://github.com/anuragyadav-git/verglos-web/pull/281) merged
+normally at `91d8629cd59f239334629f39ccfebb5953671cc2`, from implementation
+`204224937228dc0134cb73feb873b893005255c4`. The dashboard capture now clicks a
+real visible button/role-button, with a same-page-anchor fallback, before
+reading interaction metrics; keyboard/focus checks remain. Local dashboard
+contracts passed **4/4**, typecheck and diff checks passed. Installed headless
+WebKit exposes no Event Timing entries after a real click, so no proxy metric
+is claimed as INP. Keep `QUAL-WEB-006` unchecked for human/field, supported
+browser, independent-review, and final acceptance evidence. No checkbox
+changed; score remains **245 checked / 35 open / 280 total (87.5%)**, split
+**13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-interaction-harness-pr281-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002 current-head npm registry observation addendum
 
 The read-only seven-package verifier checked candidate
