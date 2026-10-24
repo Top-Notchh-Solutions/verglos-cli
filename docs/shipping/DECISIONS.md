@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-003 record-store read hardening
+
+- **Decision:** Bind content-addressed member reads to an opened regular-file
+  handle and re-check identity/size around the read.
+- **Result:** PR #373 merged normally as
+  `e68685db110bef82d86c1c4f058c869e233d413f`; shared tests, typecheck, and
+  build passed.
+- **Boundary:** Local record-integrity code only. ACCEPT-003 remains open for
+  hosted/provider, independent, recipient/customer, and final-release
+  evidence. Score remains **246/34/280**.
+- **Evidence:** `evidence/accept-003-record-store-read-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/003 registry SemVer hardening
 
 - **Decision:** Treat npm metadata as untrusted input and reject unsafe

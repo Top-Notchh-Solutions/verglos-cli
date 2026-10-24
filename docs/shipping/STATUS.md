@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-003 record-store read hardening
+
+Record members are now read through stable opened handles with no-follow
+protection where available, identity/size checks, and the existing digest and
+50 MB bounds. PR #373 merged normally; shared tests, typecheck, and build
+passed. ACCEPT-003 remains open for hosted/provider, independent,
+recipient/customer, and final-release acceptance. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-003-record-store-read-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/003 registry SemVer hardening
 
 The CLI updater now rejects unsafe numeric release components and invalid

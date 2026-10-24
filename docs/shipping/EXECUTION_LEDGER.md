@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-003 record-store read hardening · 2026-10-24
+
+- **Execution:** Replaced pathname-only member reads with stable opened-handle
+  reads, no-follow protection where available, and pre/post identity and size
+  checks; merged PR #373 normally.
+- **Result:** Commit `e68685db110bef82d86c1c4f058c869e233d413f`; shared package
+  suite, record-store coverage, typecheck, and build passed.
+- **Acceptance mapping:** This advances local record integrity only. Keep
+  ACCEPT-003 open for hosted/provider evidence, independent review,
+  recipient/customer acceptance, and final release sign-off. Score remains
+  **246/34/280**. No external or paid Actions state changed.
+- **Evidence:** `evidence/accept-003-record-store-read-hardening-2026-10-24.md`.
+
 ## DIST-002/003 registry SemVer hardening · 2026-10-24
 
 - **Execution:** Hardened the CLI updater's npm metadata parser against

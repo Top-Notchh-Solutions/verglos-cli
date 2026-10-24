@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-003 record-store read hardening
+
+The shared content-addressed record store now uses a stable opened handle for
+member reads, rejects symlink/path swaps, checks file identity and size around
+the read, and retains digest verification and the 50 MB bound. PR #373 merged
+normally as `e68685db110bef82d86c1c4f058c869e233d413f`; the shared suite,
+record-store coverage, typecheck, and build passed. Keep ACCEPT-003 unchecked
+for provider/hosted evidence, independent review, authorized recipient or
+customer acceptance, and final release sign-off. Score remains **246 checked /
+34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `docs/shipping/evidence/accept-003-record-store-read-hardening-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · DIST-002/003 registry SemVer hardening
 
 The CLI updater now rejects unsafe numeric release components and SemVer

@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-003 record-store read hardening
+
+- **Implementation mapping:** Content-addressed member reads use stable opened
+  handles, no-follow protection where available, and pre/post identity and size
+  checks; PR #373 merged normally as
+  `e68685db110bef82d86c1c4f058c869e233d413f`.
+- **Verification mapping:** Shared package tests, record-store symlink
+  coverage, typecheck, and build passed.
+- **Boundary mapping:** Local record integrity does not provide hosted/provider,
+  independent, recipient/customer, or final-release acceptance. Score remains
+  **246/34/280**.
+- **Evidence:** `evidence/accept-003-record-store-read-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/003 registry SemVer hardening
 
 - **Implementation mapping:** CLI updater parser rejects unsafe numeric release
