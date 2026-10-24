@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
+
+- **Decision:** Record the current dashboard qualification parser and state
+  boundary without upgrading it to authenticated or human acceptance.
+- **Result:** **4/4** tests passed with zero failures, skips, cancellations, or
+  todos.
+- **Boundary:** Node 22.x warning under workstation Node 26.4.0 retained. No
+  authenticated Production, customer, independent/field, provider, or final
+  release action occurred. QUAL-WEB-006 remains unchecked; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/qual-web-006-current-dashboard-qualification-contract-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v53.json` verifies 387 files with zero mismatches, matching manifest `sha256:6b9aba53c19488890f3d55a14c8d8941306571618ced8f8c9602bdeeabddfc01`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-005 metadata truth contract
 
 - **Decision:** Record the current metadata and machine-readable public-truth

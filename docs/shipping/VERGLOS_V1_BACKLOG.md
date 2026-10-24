@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
+
+The current dashboard-release qualification suite passed **4/4** with zero
+failures, skips, cancellations, or todos, covering complete authenticated
+surface/state coverage, missing-state and large-dataset fail-closed behavior,
+bounded capture reading, and malformed/partial metadata refusal. Node 22.x
+warning under workstation Node 26.4.0 is retained. Keep `QUAL-WEB-006`
+unchecked for authenticated Production, human/field, customer, independent,
+and final-release evidence. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-006-current-dashboard-qualification-contract-2026-10-24.md`.
+Bundle v53 verifies **387** files with **0** mismatches, matching manifest
+`sha256:6b9aba53c19488890f3d55a14c8d8941306571618ced8f8c9602bdeeabddfc01`, and
+passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-005 metadata truth contract
 
 The focused `/llms.txt`, docs truth, public-surface, and public claim-registry

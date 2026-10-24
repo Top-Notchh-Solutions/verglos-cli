@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
+
+Dashboard qualification **4/4** passed with zero failures, skips,
+cancellations, or todos; complete state coverage and fail-closed capture
+handling remain green. Node 22.x warning under workstation Node 26.4.0 is
+retained. QUAL-WEB-006 remains unchecked. Score remains **246/34/280 (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/qual-web-006-current-dashboard-qualification-contract-2026-10-24.md`.
+Bundle v53 verifies **387** files with zero mismatches, matching manifest
+`sha256:6b9aba53c19488890f3d55a14c8d8941306571618ced8f8c9602bdeeabddfc01`,
+and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-005 metadata truth contract
 
 Metadata, `/llms.txt`, docs truth, public-surface, and public claim-registry
