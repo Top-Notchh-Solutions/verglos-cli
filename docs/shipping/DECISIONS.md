@@ -1,5 +1,25 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-002 current-head release preflight
+
+- **Decision:** Record the fresh local trusted-publishing, license, artifact,
+  and clean-consumer preflight without triggering publication.
+- **Result:** Contract suite **19/19** passed; strict license inventory found
+  **254** lockfile package IDs, **250** package entries, **1** bundled component,
+  and **0** review blockers. Seven archives and **15** release artifacts passed
+  local verification; the clean consumer installed all seven packages.
+- **Candidate:** CLI `bcb30a7ed645b21ec150e22929f7bd2960b5c7c3`, version
+  `2.0.0-alpha.4`.
+- **Boundary:** No tag, registry/provider write, workflow dispatch, protected
+  approval, or token use occurred; no checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain open.
+- **Evidence:** `evidence/dist-002-current-head-preflight-2026-10-24.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v25.json`
+  verifies 359 files with zero mismatches, matching manifest
+  `sha256:098880ecd5af8a5636a220d2113affb7ae71535083c32ad931f3f91b26b13d82`,
+  and passed secret scanning.
+
 ## 2026-10-24 · STUDIO-CLI-001 current-head requalification
 
 - **Decision:** Record the current CLI/Web Studio projection, custody, and

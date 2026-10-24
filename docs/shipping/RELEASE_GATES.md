@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-002 current-head release preflight
+
+The current trusted-publishing contract suite passed **19/19**; strict license
+inventory found **0** review blockers. Seven public archives packed cleanly and
+**15** release artifacts verified; the clean consumer installed/imported all
+seven. No tag, registry/provider write, protected approval, or token use
+occurred. This advances code-side/local preflight only; protected approval,
+trusted publisher enrollment, actual provenance, legal/release clearance, and
+final acceptance remain open. No checkbox changed; score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/dist-002-current-head-preflight-2026-10-24.md`.
+Bundle v25 verifies **359** files with zero mismatches, matching manifest
+`sha256:098880ecd5af8a5636a220d2113affb7ae71535083c32ad931f3f91b26b13d82`,
+and passed secret scanning.
+
 ## 2026-10-24 · STUDIO-CLI-001 current-head requalification
 
 The CLI package suite exited **0** with no failures/cancellations and only two

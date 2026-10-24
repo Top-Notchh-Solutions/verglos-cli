@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-002 current-head release preflight
+
+The current trusted-publishing contract suite passed **19/19**. Strict license
+inventory reported **254** lockfile package IDs, **250** package entries, **1**
+bundled component, and **0** review blockers. Seven public archives packed and
+**15** release artifacts verified; the clean consumer installed/imported all
+seven and executed the bounded fixture. No tag, registry/provider write,
+protected approval, or token use occurred, so `DIST-002` remains unchecked for
+trusted publication/provenance, protected approval, legal/release clearance,
+and final acceptance. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-002-current-head-preflight-2026-10-24.md`.
+Bundle v25 verifies **359** bounded files with **0** mismatches, matching
+manifest `sha256:098880ecd5af8a5636a220d2113affb7ae71535083c32ad931f3f91b26b13d82`,
+and passed secret scanning.
+
 ## 2026-10-24 · STUDIO-CLI-001 current-head requalification
 
 The current CLI package suite exited **0** with no failures/cancellations and
@@ -6829,6 +6845,7 @@ Evidence/problem: security tooling must ship through a trustworthy, reproducible
 - **DIST-002 external configuration addendum (2026-10-21; not a checkbox):** Read-only GitHub API observation found the protected `release` environment with required reviewer `anuragyadav-git` and a branch-policy rule. This proves configuration only, not reviewer approval, trusted npm publisher enrollment, legal clearance, or immutable publication. No workflow or registry action was triggered. Keep `DIST-002` unchecked. Evidence: `docs/shipping/evidence/dist-002-current-origin-main-contract-2026-10-21.md`.
 **DIST-002 current merged-head requalification addendum (2026-10-22; not a checkbox):** Exact CLI `db3510356ecd6c6e430d7dcb3b9354e514d777ee` passed the release workflow contract set **19/19** and rollback rehearsal **5/5** with **2** historical records preserved. `license-inventory.mjs --require-clear` correctly exited **2** for seven unresolved dependency review entries. Keep `DIST-002` unchecked for DIST-001, protected/trusted publisher execution, legal/license clearance, actual immutable publication/attestation, and final acceptance. No tag, registry, provider, Production, database, customer, or legal state changed. Score remains **239 checked / 41 open / 280 total (85.4%)**. Evidence: `docs/shipping/evidence/dist-002-current-head-requalification-pr167-2026-10-22.md`.
 **DIST-002 dependency-remediation addendum (2026-10-22; not a checkbox):** A bounded exact-head audit found no safe dependency-only change that clears all seven review blockers while preserving the Node/runtime contract. Fast-uri patch releases retain the bundled benchmark; fetch/cache downgrades leave a BlueOak path or change runtime behavior. Keep the checkbox open for the real legal/license decision, protected/trusted publication, immutable attestation, and final acceptance. Evidence: `docs/shipping/evidence/dist-002-license-remediation-audit-pr167-2026-10-22.md`.
+**DIST-002 current-head release preflight addendum (2026-10-24; not a checkbox):** Candidate `bcb30a7ed645b21ec150e22929f7bd2960b5c7c3` (`2.0.0-alpha.4`) passed the trusted-publishing contract suite **19/19**, strict license inventory with **0** review blockers, seven-archive packing, **15** release-artifact verification, and clean-consumer installation/import. No tag, registry/provider write, protected approval, or token use occurred. Keep the row unchecked for protected approval, trusted publisher enrollment, actual immutable publication/provenance, legal/release clearance, and final acceptance. Evidence: `docs/shipping/evidence/dist-002-current-head-preflight-2026-10-24.md`.
 - [ ] **DIST-003** · release artifact attestations/checksums · deps: DIST-002 · Generate checksums/SBOM/provenance/notes and verify them in a clean consumer job; describe origin, not security certification. Commit(s): `e5e4e72`, `66312a4`, `d269e45`, `4435964`, `2f18041` merged as `8706c97`; CLI PR #70 `67a132c` merged as `3a0959a` adds strict six-archive/shared-version verification to the publish path. Hosted run `37472923540` and self-scan `37472923665` pass. Release-note verification, trusted publication/attestation review, and license-clear release evidence remain open.
 
 **DIST-003 hosted matrix addendum (2026-10-23; not a checkbox):** GitHub
