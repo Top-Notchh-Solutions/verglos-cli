@@ -1,5 +1,14 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-006 current alpha.4 rollback rehearsal
+
+- **Source mapping:** CLI `aad2c743` built all 8 packages.
+- **Verification mapping:** Focused rollback contracts passed 2/2; the
+  rehearsal passed with five bounded decisions and two preserved records.
+- **Acceptance mapping:** Local implementation evidence only; provider action,
+  independent review, and final acceptance remain open. Score **245/35/280**.
+- **Evidence:** `evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md`.
+
 ## 2026-10-24 · current Production landing multi-browser receipt
 
 - **Source mapping:** Web commit `21f9cfb` is the deployed source for Vercel
@@ -15,7 +24,7 @@
 - **Evidence:** `evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
 - **Bundle mapping:** Additive bundle has **282** hashed files, zero
   mismatches, secret scanning passed, manifest
-  `sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+  `sha256:5a4497c28c508a22228fbf431f39197ea2239eb2052c76da727ae8954e6e7f16`.
 
 ## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser evidence
 

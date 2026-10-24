@@ -1,5 +1,16 @@
 # Verglos V1 Execution Ledger
 
+## DIST-006 current alpha.4 rollback rehearsal · 2026-10-24
+
+- **Candidate:** CLI `aad2c743`; build **8/8**; focused rollback contracts
+  **2/2**.
+- **Result:** Local rehearsal exit 0; five bounded decisions and two preserved
+  historical records; fixture manifest matched.
+- **Boundary:** No npm, registry, signing, Hunt-feed, Vercel, authenticated
+  rollback, revocation, publication, or deletion action. DIST-006 remains open
+  for provider action, independent review, and final acceptance.
+- **Evidence:** `evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md`.
+
 ## Current Production landing multi-browser receipt · 2026-10-24
 
 - **Provider:** Vercel deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu`, READY,
@@ -17,7 +28,7 @@
 - **Evidence:** `evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
 - **Bundle:** Additive bundle contains **282** files, verifies with zero
   mismatches, passes secret scanning, and matches manifest
-  `sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+  `sha256:5a4497c28c508a22228fbf431f39197ea2239eb2052c76da727ae8954e6e7f16`.
 
 ## QUAL-WEB-006 local production-build multi-browser qualification · 2026-10-24
 

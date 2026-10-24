@@ -1,5 +1,14 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-006 current alpha.4 rollback rehearsal addendum
+
+CLI `aad2c743` built **8/8** packages and the focused rollback contracts passed
+**2/2**. The local rehearsal covered five bounded decisions and preserved two
+historical records. It did not call npm, a registry, signing/Hunt providers,
+Vercel, or authenticated rollback/revocation endpoints; `DIST-006` remains
+unchecked. Score remains **245 checked / 35 open / 280 total (87.5%)**.
+Evidence: `docs/shipping/evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md`.
+
 ## 2026-10-24 · current Production landing multi-browser addendum
 
 The current Web Production deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` passed

@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-006 current alpha.4 rollback rehearsal
+
+The current CLI `aad2c743` build passed **8/8** and focused rollback contracts
+passed **2/2**. The local fail-closed rehearsal covered five bounded decisions
+and preserved two historical records. This opens no provider gate: no npm,
+registry, signing, Hunt-feed, Vercel, authenticated rollback, or revocation
+action occurred. DIST-006 remains open for provider action, independent review,
+and final acceptance; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md`.
+
 ## 2026-10-24 · current Production landing multi-browser evidence
 
 Vercel Production deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is READY for
@@ -14,7 +24,7 @@ release/go-no-go remain open. No checkbox changed; score remains **245/35/280
 `evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
 The additive bundle verifies **282** files with zero mismatches, passes secret
 scanning, and matches manifest
-`sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+`sha256:5a4497c28c508a22228fbf431f39197ea2239eb2052c76da727ae8954e6e7f16`.
 
 ## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser evidence
 
