@@ -1,5 +1,18 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-008 current commercial validator regression
+
+The commercial-evidence validator suite passed **9/9** with zero failures,
+skips, or cancellations. This is implementation-boundary evidence only; no
+actual agreement, checkout, repeat-use, support, hosted-cost, recipient-value,
+independent-review, or final-acceptance event occurred, so `ACCEPT-008` remains
+unchecked. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-008-current-validator-regression-2026-10-24.md`.
+Bundle v33 verifies **366** bounded files with **0** mismatches, matching
+manifest `sha256:0e11962ce546ebf046d7ad3e2ecff6879ee67759a04516df11be1edd308e8704`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-006 current scorer regression
 
 The six-question comprehension scorer suite passed **11/11** with zero
