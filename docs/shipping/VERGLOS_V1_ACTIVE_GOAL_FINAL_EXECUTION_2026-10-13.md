@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · authenticated dashboard multi-browser capture
+
+Web PR #274 merged normally as `b9f051fd4c36de9e20fcde3b29bbd3104c08925e`,
+adding a bounded real-interaction retry for Firefox/WebKit INP observation.
+The current harness captured the 13 authenticated dashboard routes at desktop
+and mobile in Chromium, Firefox, and WebKit: **78 ready-state measurements**
+total. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-2026-10-24.md`.
+
+Qualification remains fail-closed: Chromium and Firefox each report **73**
+gaps; WebKit reports **85**. Loading/error states and large-dataset rows were
+not synthesized, and observed page-contract failures remain visible. This
+advances automated supported-browser capture for QUAL-WEB-006 only; no
+checkbox changed. Score remains **245 checked / 35 open / 280 total (87.5%)**,
+with **13 AppSec-dependent / 22 non-AppSec** rows open. No Actions run,
+Production/customer data, or artifact deletion was used.
+
 ## Latest continuation result · 2026-10-24 · authenticated dashboard capture harness
 
 Web PR #273 merged normally as `8820fbf7daa2da83c3030d8215553739e96d5a37`,

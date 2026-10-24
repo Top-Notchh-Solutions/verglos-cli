@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · authenticated dashboard multi-browser capture
+
+Web PR #274 merged normally as `b9f051fd`. Current Chromium, Firefox, and
+WebKit local captures covered all 13 authenticated dashboard paths at desktop
+and mobile (**78 ready measurements total**). The fail-closed qualifier found
+73/73/85 gaps respectively; loading/error and large-dataset coverage remain
+missing and observed page failures are retained. No checkbox changed; score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-2026-10-24.md`.
+
 ## 2026-10-24 · authenticated dashboard capture harness
 
 Web PR #273 merged normally as `8820fbf7`. The new bounded Playwright harness

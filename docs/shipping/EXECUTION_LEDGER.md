@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Authenticated dashboard multi-browser capture · 2026-10-24
+
+- **Implementation:** Web PR #274 merged normally as
+  `b9f051fd4c36de9e20fcde3b29bbd3104c08925e`, adding bounded real-interaction
+  retry for missing Firefox/WebKit INP observations.
+- **Execution:** Isolated synthetic owner fixture, 13 authenticated routes,
+  desktop/mobile Chromium, Firefox, and WebKit.
+- **Result:** **26 ready measurements per browser / 78 total**. Qualifier gaps:
+  Chromium **73**, Firefox **73**, WebKit **85**. Loading/error and
+  large-dataset states remain absent; observed page failures remain recorded.
+- **Disposition:** Advance automated supported-browser capture for QUAL-WEB-006
+  only. Human/field, large-dataset, loading/error, independent-review, and
+  final acceptance remain open; no checkbox changed and score remains
+  **245/35/280 (87.5%)**. No Actions run, Production/customer data, or
+  deletion was used.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-2026-10-24.md`.
+
 ## Authenticated dashboard capture harness · 2026-10-24
 
 - **Implementation:** Web PR #273 merged normally as
