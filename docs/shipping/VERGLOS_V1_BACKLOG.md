@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · STUDIO-CLI-001 contract recheck
+
+Focused local Studio projection/workspace/handoff contracts passed **52/52**
+against Web head `705a85e`, with zero failures, skips, or cancellations. This
+is implementation evidence only; keep `STUDIO-CLI-001` open for genuine
+authorized recipient/customer acceptance and its independent artifact. Score
+remains **246 checked / 34 open / 280 total (87.9%)**. Evidence:
+`docs/shipping/evidence/studio-cli-001-local-handoff-projection-contract-recheck-2026-10-24.md`.
+Bundle v9 verifies 335 files with zero mismatches and passed secret scanning.
+
 ## 2026-10-24 · release reconciliation refreshed
 
 The current candidate reconciliation now records **1 shipped** non-AppSec row

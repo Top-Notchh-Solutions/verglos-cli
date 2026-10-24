@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · STUDIO-CLI-001 contract recheck
+
+- **Source mapping:** Web head `705a85e2b7b9d847a85748463aa0d797c60b384f`.
+- **Verification mapping:** Studio projection/workspace/handoff contracts
+  passed 52/52, covering digest/tenant/role/recipient/replay/revocation and
+  route boundaries.
+- **Acceptance mapping:** Implementation evidence only; the authorized
+  recipient/customer acceptance artifact remains missing. No checkbox changed.
+- **Evidence:** `evidence/studio-cli-001-local-handoff-projection-contract-recheck-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-studio-contract-v9.json`
+  verifies 335 files with zero mismatches and passed secret scan.
+
 ## 2026-10-24 · release reconciliation refresh
 
 - **Source mapping:** Current candidate CLI `cd9d572e`, Web `cb266b83`,

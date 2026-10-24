@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## STUDIO-CLI-001 contract recheck · 2026-10-24
+
+- **Execution:** Focused Web projection, workspace, handoff, page, route, and
+  integration contracts ran against head `705a85e`.
+- **Result:** **52/52** passed with zero failures, skips, or cancellations.
+- **Boundary:** Local implementation evidence only; no real recipient/customer
+  acceptance, customer source, payment, entitlement, Production mutation,
+  publication, AppSec/Hunt review, or release sign-off.
+- **Disposition:** Keep `STUDIO-CLI-001` open; score remains 246/34/280.
+- **Evidence:** `evidence/studio-cli-001-local-handoff-projection-contract-recheck-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-studio-contract-v9.json`
+  verifies 335 files with zero mismatches and passed secret scan.
+
 ## Release reconciliation refresh · 2026-10-24
 
 - **Result:** The v3 candidate reconciliation contains 22 non-AppSec rows:
