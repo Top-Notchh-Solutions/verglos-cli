@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-010 current freeze regression
+
+- **Decision:** Record current release-candidate artifact and metadata
+  verification without converting a blocked `no-go` into a release decision.
+- **Result:** Focused release-candidate/SBOM/SPDX/release-artifact tests passed
+  **15/15**; strict verification passed **15 artifacts** (**7** archives and
+  **8** sidecars); inventory reported **250** packages, **1** bundled component,
+  and **0** review blockers.
+- **Freeze:** **24/24** present digest-bound artifacts across all **12/12**
+  required kinds; six external gates remain open and the decision is `no-go`.
+- **Boundary:** No publication, provenance, provider/Production action,
+  customer acceptance, independent review, or final release sign-off occurred.
+  No checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-010-current-freeze-regression-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v35.json` verifies 368 files with zero mismatches, matching manifest `sha256:0c6288ad26aaee9467c3becf12ed35ec0845b8d709c2e33809baaeddc67a5558`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-009 current reconciler regression
 
 - **Decision:** Record the current fail-closed release reconciliation, freeze,

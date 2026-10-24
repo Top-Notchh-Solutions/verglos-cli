@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-010 current freeze regression
+
+The focused release-candidate/SBOM/SPDX/release-artifact suite passed **15/15**;
+strict local verification passed **15** artifacts (**7** archives and **8**
+sidecars). The current freeze binds **24/24** present artifacts across all
+**12/12** required kinds, but keeps a recorded `no-go` while six external
+gates remain open. `ACCEPT-010` remains unchecked. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-010-current-freeze-regression-2026-10-24.md`.
+Bundle v35 verifies **368** files with zero mismatches, matching manifest
+`sha256:0c6288ad26aaee9467c3becf12ed35ec0845b8d709c2e33809baaeddc67a5558`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-009 current reconciler regression
 
 The current reconciliation, candidate-input, freeze, and final-regression
