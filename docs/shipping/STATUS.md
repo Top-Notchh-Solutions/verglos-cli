@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · complete Web serial qualification
+
+The full Web serial suite passed **928/928**, with 0 failures, cancellations,
+or skips, using fresh general plus explicitly migrated billing and
+account-deletion local fixtures. Web typecheck and focused account deletion
+passed. This completes local implementation evidence for QUAL-WEB-005/006 only;
+no checkbox changed. Score remains **246/34/280 (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/qual-web-005-006-triple-db-serial-complete-2026-10-24.md`.
+Additive bundle v14 verifies **339** files with zero mismatches, matching
+manifest `sha256:08e046b2e5e342a400fba475ee32028ceb19d0f2715ec6c94b96adf655f30938`,
+and passed secret scanning.
+
 ## 2026-10-24 · dual-database Web serial recheck
 
 The full serial suite passed **927/928** with zero failures/cancellations and

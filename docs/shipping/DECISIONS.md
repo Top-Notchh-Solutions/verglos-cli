@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record complete Web serial qualification
+
+- **Decision:** Accept the triple-database Web run as complete local
+  implementation evidence for the Web qualification surfaces.
+- **Result:** 928/928 passed, 0 failures/cancellations/skips; typecheck and
+  focused account deletion passed.
+- **Boundary:** The explicit migrated fixture is local and synthetic. This is
+  not hosted Production deletion, human/field, customer/recipient, provider,
+  independent-review, AppSec/Hunt, or final-release evidence.
+- **Score:** 246/34/280; no checkbox changed.
+- **Evidence:** `evidence/qual-web-005-006-triple-db-serial-complete-2026-10-24.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-triple-db-v14.json`
+  verifies 339 files with zero mismatches, matching manifest
+  `sha256:08e046b2e5e342a400fba475ee32028ceb19d0f2715ec6c94b96adf655f30938`,
+  and passed secret scanning.
+
 ## 2026-10-24 · record dual-database Web serial recheck
 
 - **Decision:** Accept the split local database runs as additive implementation

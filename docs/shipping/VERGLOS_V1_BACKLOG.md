@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · complete Web serial qualification
+
+Web PR #283 merged normally at `257e1cc8`, adding the explicit migrated
+account-deletion fixture boundary while retaining the fresh default. The full
+Web serial suite passed **928/928** with 0 failures, cancellations, or skips;
+typecheck and focused account deletion passed. This completes local
+implementation evidence for `QUAL-WEB-005/006`; no checkbox changed. Score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-005-006-triple-db-serial-complete-2026-10-24.md`.
+Bundle v14 verifies 339 files with zero mismatches, matching manifest
+`sha256:08e046b2e5e342a400fba475ee32028ceb19d0f2715ec6c94b96adf655f30938`,
+and passed secret scanning.
+
 ## 2026-10-24 · dual-database Web serial recheck
 
 The full serial suite passed **927/928** with zero failures/cancellations and

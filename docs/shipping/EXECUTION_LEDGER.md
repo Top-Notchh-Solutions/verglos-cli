@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Complete Web serial qualification · 2026-10-24
+
+- **Execution:** Fresh general, migrated billing, and migrated
+  account-deletion local PostgreSQL fixtures were wired explicitly.
+- **Result:** Full serial **928/928 passed**, 0 failed/cancelled/skipped;
+  typecheck and focused account-deletion integration passed.
+- **Merge:** Web PR #283 merged normally at `257e1cc8`.
+- **Boundary:** Local implementation evidence only; no hosted deletion,
+  customer data, provider publication, independent review, AppSec/Hunt review,
+  or release sign-off.
+- **Disposition:** Keep the 21 non-AppSec partial rows and 13 AppSec rows open;
+  score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-005-006-triple-db-serial-complete-2026-10-24.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-triple-db-v14.json`
+  verifies 339 files with zero mismatches, matching manifest
+  `sha256:08e046b2e5e342a400fba475ee32028ceb19d0f2715ec6c94b96adf655f30938`,
+  and passed secret scanning.
+
 ## Dual-database Web serial recheck · 2026-10-24
 
 - **Execution:** Full serial suite used fresh local `TEST_DATABASE_URL` on
