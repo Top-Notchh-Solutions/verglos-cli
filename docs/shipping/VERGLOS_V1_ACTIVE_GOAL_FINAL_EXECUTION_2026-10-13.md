@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · production availability recheck
+
+The already deployed Vercel Production candidate
+`dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` remains `Ready`. A read-only endpoint sweep
+returned HTTP **200** for all nine required public/metadata endpoints: `/`,
+`/docs`, `/detectors`, `/proof`, `/verify`, `/checkout`, `/robots.txt`,
+`/sitemap.xml`, and `/llms.txt`. The local focused acceptance contract set
+passed **31/31**.
+
+This advances automated production availability evidence for FINAL-WEB-007/008
+only. No deploy, database write, payment, npm publication, GitHub Actions run,
+customer data operation, or final release action occurred. Human screen-reader
+and field-CWV evidence, independent review, customer/recipient acceptance, and
+final go/no-go remain distinct gates; no checkbox changed. The authoritative
+score remains **245 checked / 35 open / 280 total (87.5%)**, with **13
+AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/final-web-007-008-production-availability-recheck-2026-10-24.md`.
+The additive bundle verifies **288** files with zero mismatches and secret
+scanning passed; manifest:
+`sha256:6e3d95924fd8c80d720989250bb5fc7d50213c95d86c64f4815bdc9b76d89de1`.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-008 observed Test-Mode commercial evidence
 
 The current Pro monthly catalog was run through the real bounded commercial

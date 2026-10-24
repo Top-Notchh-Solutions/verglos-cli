@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · production availability recheck
+
+Vercel Production deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` remains Ready.
+The nine-path read-only public/metadata sweep returned HTTP 200 throughout,
+and the focused local acceptance contracts passed **31/31**. This opens only
+automated provider availability evidence for FINAL-WEB-007/008. It does not
+open human screen-reader/field-CWV, customer/recipient, independent-review,
+AppSec/Hunt, or final release/go-no-go gates; no checkbox changed. Score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/final-web-007-008-production-availability-recheck-2026-10-24.md`.
+The additive bundle verifies **288** files with zero mismatches and manifest
+`sha256:6e3d95924fd8c80d720989250bb5fc7d50213c95d86c64f4815bdc9b76d89de1`.
+
 ## 2026-10-24 · ACCEPT-008 observed Test-Mode commercial evidence
 
 The bounded commercial report is complete across all seven required evidence

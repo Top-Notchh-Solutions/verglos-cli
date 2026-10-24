@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · production availability recheck
+
+The current Vercel Production deployment
+`dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is still `Ready`. A read-only sweep of the
+nine required public and metadata endpoints returned HTTP 200 for every path.
+The focused local acceptance contract set passed **31/31**. This is automated
+provider availability evidence for FINAL-WEB-007/008 only; no checkbox changed.
+Human/field, independent-review, customer/recipient, AppSec/Hunt, and final
+release evidence remain separate. Score remains **245 checked / 35 open / 280
+total (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open.
+Evidence: `evidence/final-web-007-008-production-availability-recheck-2026-10-24.md`.
+The additive bundle verifies **288** files with zero mismatches and manifest
+`sha256:6e3d95924fd8c80d720989250bb5fc7d50213c95d86c64f4815bdc9b76d89de1`.
+
 ## 2026-10-24 · ACCEPT-008 observed Test-Mode commercial evidence
 
 The current Pro monthly commercial input passed the bounded validator with all
