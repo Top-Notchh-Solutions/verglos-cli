@@ -347,7 +347,7 @@ verglos init -y                # non-interactive
 verglos explain                # list every rule
 verglos explain D5-003         # explain one rule (here: use of eval)
 verglos badge                  # print README badge markdown
-verglos update                 # self-upgrade to the latest npm version
+verglos update                 # self-upgrade to the latest stable npm version
 ```
 
 ---

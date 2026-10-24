@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { test } from "node:test";
-import { updateCli } from "./update.js";
+import { compareVersions, isNewerVersion, selectLatestStableVersion, updateCli } from "./update.js";
 import { runCliFixture } from "./cli-fixture.js";
 
 const cliEntry = join(process.cwd(), "src", "index.ts");
@@ -24,8 +24,10 @@ async function runUpdateProcess(mode: "current" | "newer" | "offline" | "install
     const mode = process.env.VERGLOS_TEST_UPDATE_MODE;
     globalThis.fetch = async () => {
       if (mode === "offline") throw new Error("offline fixture");
-      const version = mode === "current" ? ${JSON.stringify(CURRENT_CLI_VERSION)} : "99.0.0";
-      return new Response(JSON.stringify({ version }), { status: 200, headers: { "content-type": "application/json" } });
+      const versions = mode === "current"
+        ? { ${JSON.stringify(CURRENT_CLI_VERSION)}: {}, "1.8.3": {}, "2.0.0-alpha.1": {} }
+        : { ${JSON.stringify(CURRENT_CLI_VERSION)}: {}, "99.0.0": {}, "2.0.0-alpha.1": {} };
+      return new Response(JSON.stringify({ versions }), { status: 200, headers: { "content-type": "application/json" } });
     };
     childProcess.spawn = (command, spawnArgs, options) => {
       writeFileSync(process.env.VERGLOS_TEST_UPDATE_SPAWN_LOG, JSON.stringify({ command, args: spawnArgs, stdio: options.stdio }));
@@ -78,12 +80,12 @@ test("update fails closed on registry and installer failures with stable error c
   assert.deepEqual(await updateCli("2.0.0", {
     fetchLatestVersion: async () => null,
     installLatest: async () => assert.fail("must not install when latest version is unknown"),
-  }), { status: "error", code: "UPDATE_VERSION_CHECK", message: "could not check npm for the latest Verglos CLI" });
+  }), { status: "error", code: "UPDATE_VERSION_CHECK", message: "could not check npm for the latest stable Verglos CLI" });
 
   assert.deepEqual(await updateCli("2.0.0", {
     fetchLatestVersion: async () => { throw new Error("registry details must not escape"); },
     installLatest: async () => assert.fail("must not install when latest version lookup throws"),
-  }), { status: "error", code: "UPDATE_VERSION_CHECK", message: "could not check npm for the latest Verglos CLI" });
+  }), { status: "error", code: "UPDATE_VERSION_CHECK", message: "could not check npm for the latest stable Verglos CLI" });
 
   assert.deepEqual(await updateCli("2.0.0", {
     fetchLatestVersion: async () => "2.1.0",
@@ -95,14 +97,14 @@ test("update JSON process uses the injected registry and installer without leaki
   const current = await runUpdateProcess("current", ["update", "--json", "--quiet"]);
   assert.equal(current.exitCode, 0);
   assert.equal(current.stderr, "");
-  assert.deepEqual(JSON.parse(current.stdout), { status: "ok", currentVersion: CURRENT_CLI_VERSION, latestVersion: CURRENT_CLI_VERSION, updated: false });
+  assert.deepEqual(JSON.parse(current.stdout), { status: "ok", currentVersion: CURRENT_CLI_VERSION, latestVersion: "1.8.3", updated: false });
   assert.equal(current.spawn, undefined);
 
   const newer = await runUpdateProcess("newer", ["--update", "--json"]);
   assert.equal(newer.exitCode, 0);
   assert.equal(newer.stderr, "");
   assert.deepEqual(JSON.parse(newer.stdout), { status: "ok", currentVersion: CURRENT_CLI_VERSION, latestVersion: "99.0.0", updated: true });
-  assert.deepEqual(newer.spawn, { command: process.platform === "win32" ? "npm.cmd" : "npm", args: ["install", "-g", "verglos@latest"], stdio: "ignore" });
+  assert.deepEqual(newer.spawn, { command: process.platform === "win32" ? "npm.cmd" : "npm", args: ["install", "-g", "verglos@99.0.0"], stdio: "ignore" });
 });
 
 test("historic update alias preserves human output and quiet suppression", async () => {
@@ -122,11 +124,30 @@ test("update JSON and quiet process failures have stable exits and bounded outpu
   const offline = await runUpdateProcess("offline", ["update", "--json"]);
   assert.equal(offline.exitCode, 1);
   assert.equal(offline.stderr, "");
-  assert.deepEqual(JSON.parse(offline.stdout), { status: "error", code: "UPDATE_VERSION_CHECK", message: "could not check npm for the latest Verglos CLI" });
+  assert.deepEqual(JSON.parse(offline.stdout), { status: "error", code: "UPDATE_VERSION_CHECK", message: "could not check npm for the latest stable Verglos CLI" });
   assert.equal(offline.spawn, undefined);
 
   const failedInstall = await runUpdateProcess("install-fail", ["update", "--json", "--quiet"]);
   assert.equal(failedInstall.exitCode, 1);
   assert.equal(failedInstall.stderr, "");
   assert.deepEqual(JSON.parse(failedInstall.stdout), { status: "error", code: "UPDATE_INSTALL_FAILED", message: "Verglos CLI update failed" });
+});
+
+test("stable update selection ignores npm prereleases and orders semver correctly", () => {
+  assert.equal(selectLatestStableVersion({ versions: { "1.8.3": {}, "2.0.0-alpha.1": {}, "1.8.2": {}, "2.0.0-beta.1": {} } }), "1.8.3");
+  assert.equal(selectLatestStableVersion({ versions: { "2.0.0-alpha.1": {} } }), null);
+  assert.equal(compareVersions("2.0.0-alpha.1", "2.0.0-alpha.4") < 0, true);
+  assert.equal(compareVersions("2.0.0", "2.0.0-alpha.4") > 0, true);
+  assert.equal(isNewerVersion("1.8.3", "2.0.0-alpha.4"), false);
+  assert.equal(isNewerVersion("2.0.0", "1.8.3"), true);
+});
+
+test("update installs the exact stable version instead of the mutable latest dist-tag", async () => {
+  const calls: unknown[] = [];
+  const result = await updateCli("1.8.2", {
+    fetchLatestVersion: async () => "1.8.3",
+    installLatest: async (version, quiet) => { calls.push({ version, quiet }); },
+  }, { quiet: true });
+  assert.deepEqual(result, { status: "ok", currentVersion: "1.8.2", latestVersion: "1.8.3", updated: true });
+  assert.deepEqual(calls, [{ version: "1.8.3", quiet: true }]);
 });
