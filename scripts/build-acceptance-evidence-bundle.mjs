@@ -171,6 +171,8 @@ const paths = [
   "docs/shipping/evidence/accept-008-commercial-observed-testmode-2026-10-24.md",
   "docs/shipping/evidence/accept-008-commercial-observed-testmode-input-2026-10-24.json",
   "docs/shipping/evidence/accept-008-commercial-observed-testmode-report-2026-10-24.json",
+  "docs/shipping/evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.md",
+  "docs/shipping/evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.json",
   "docs/shipping/evidence/accept-014-final-regression-contract-2026-10-23.md",
   "docs/shipping/evidence/accept-014-final-regression-execution-2026-10-24.md",
   "docs/shipping/evidence/accept-014-final-regression-input-2026-10-24-v2.json",

@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-005 owner-authorized public-OSS workflow · 2026-10-24
+
+- **Subject:** `https://github.com/UtkarshGupta-CS/buggy-node` at exact commit
+  `b1b9cbc8b86f81a1ecb0b142190d4fa4698518da`, ISC.
+- **Execution:** Current CLI `aad2c74395a5c381c955ab9dfab7462295564840`,
+  telemetry/source upload disabled, scan network denied.
+- **Result:** Exit 0; complete coverage; 7 files walked; 59 findings; 1502 ms;
+  report digest `sha256:b0c16b3501645fa832fc898949000793f3ffd9326ac3aaf2f0de4cae0db7f8a7`.
+- **Validator:** `workflowStatus: accepted`, zero failures,
+  `publicOssBenchmark: authorized`, `customerAcceptance: not-claimed`.
+- **Boundary:** Expiry is recorded; no files were deleted. This does not close
+  ACCEPT-005 or create customer, independent, provider, or final-release
+  evidence. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.md`.
+- **Bundle:** 296 files, zero mismatches, secret scan passed; manifest
+  `sha256:79fb420cb707361aafbd3c7b1071fbd38a3b8184f6de74623577a31fe344931f`.
+
 ## Vercel Production provider receipt · 2026-10-24
 
 - **Provider action:** `vercel promote dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu

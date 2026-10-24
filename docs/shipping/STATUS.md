@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-005 owner-authorized public-OSS workflow
+
+The exact-commit `buggy-node` public-OSS workflow ran locally with current CLI
+`aad2c743`, exit 0, complete coverage, 7 files walked, and 59 findings. The
+authorized-workflow validator returned accepted with zero failures. Its output
+is explicitly `publicOssBenchmark: authorized` and
+`customerAcceptance: not-claimed`; the row remains open for the separate
+external customer-owner/recipient POC, independent review, and final
+acceptance. No checkbox changed; score remains **245 checked / 35 open / 280
+total (87.5%)**. Evidence:
+`evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.md`.
+The additive bundle verifies **296** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:79fb420cb707361aafbd3c7b1071fbd38a3b8184f6de74623577a31fe344931f`.
+
 ## 2026-10-24 · Vercel Production provider receipt
 
 The real `vercel promote` check for deployment

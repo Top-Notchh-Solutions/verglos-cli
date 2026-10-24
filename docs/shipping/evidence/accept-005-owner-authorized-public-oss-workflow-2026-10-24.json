@@ -1,0 +1,77 @@
+{
+  "schema": "verglos.private.authorized-workflow.v1",
+  "consent": {
+    "subjectKind": "owner-authorized-public-oss",
+    "repositoryUrl": "https://github.com/UtkarshGupta-CS/buggy-node",
+    "exactCommit": "b1b9cbc8b86f81a1ecb0b142190d4fa4698518da",
+    "ownerIdentityDigest": "sha256:a97a71e95cd3959964ac023756373e57c926ac08e0ffc4e79f853d76bce1f071",
+    "scopeDigest": "sha256:48806055e8005c4e954fb3a16b3a1f7bef60d5914db5539476e2d473f247b3a2",
+    "permittedPaths": [
+      "."
+    ],
+    "permittedCommands": [
+      "VERGLOS_TELEMETRY=0 node packages/cli/dist/index.js scan --json --quiet --no-telemetry --output <private-output-dir>"
+    ],
+    "networkPolicy": {
+      "mode": "denied",
+      "destinations": []
+    },
+    "findingsMayBeStored": true,
+    "allowedEvidenceFields": [
+      "repositoryUrl",
+      "exactCommit",
+      "license",
+      "filesWalked",
+      "findingCount",
+      "reportDigest",
+      "limitations"
+    ],
+    "approvedAt": "2026-10-24T03:42:00Z",
+    "founderApprovedAt": "2026-10-24T03:42:00Z",
+    "expiresAt": "2026-10-25T04:00:00Z",
+    "revocationChannel": "owner-controlled local Verglos shipping ledger",
+    "licenseId": "ISC",
+    "licenseEvidenceDigest": "sha256:6bb3b6b43b9560a396a2cc760b63cc57cf734ff6a6f8430f31473744426e5cd1"
+  },
+  "execution": {
+    "repositoryUrl": "https://github.com/UtkarshGupta-CS/buggy-node",
+    "exactCommit": "b1b9cbc8b86f81a1ecb0b142190d4fa4698518da",
+    "completedAt": "2026-10-24T03:42:53Z",
+    "cliCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+    "version": "2.0.0-alpha.4",
+    "cloneDigest": "sha256:a8ac7ebbe847d049804e205cc8504a33769306f74d1b289e26258b2dec8030ab",
+    "requestedPaths": [
+      "."
+    ],
+    "commands": [
+      "VERGLOS_TELEMETRY=0 node packages/cli/dist/index.js scan --json --quiet --no-telemetry --output <private-output-dir>"
+    ],
+    "networkDestinations": [],
+    "sourceUpload": "none",
+    "retentionMode": "derived-redacted",
+    "outcome": "passed",
+    "exitCode": 0,
+    "coverage": "complete",
+    "limitations": [],
+    "preflight": {
+      "secretScan": "passed",
+      "personalDataScan": "passed",
+      "scopeCheck": "passed",
+      "redactionCheck": "passed"
+    },
+    "findingCount": 59,
+    "filesWalked": 7,
+    "reportDigest": "sha256:b0c16b3501645fa832fc898949000793f3ffd9326ac3aaf2f0de4cae0db7f8a7",
+    "reportPath": "report/verglos-report.json",
+    "evidenceDigest": "sha256:31c185adbc802d2914fa3e5d71644c4ce504083904285760fd186fffa908114c",
+    "evidencePath": "workflow-execution.md",
+    "ownerSummaryDelivered": true
+  },
+  "deletion": {
+    "disposition": "expired",
+    "status": "confirmed",
+    "recordedAt": "2026-10-24T03:43:10Z",
+    "evidenceDigest": "sha256:522cd15b6d07f9d31fc1f4eb32301acb9a5bd98112d280bf39f28d12a6ca16ce",
+    "evidencePath": "workflow-expiry.md"
+  }
+}

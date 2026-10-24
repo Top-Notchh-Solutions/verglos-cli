@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-005 owner-authorized public-OSS workflow
+
+The owner-authorized public-OSS workflow executed at an exact ISC-licensed
+commit with current CLI `aad2c743`: exit 0, complete coverage, 7 files walked,
+and 59 findings. The validator returned accepted with zero failures. This opens
+only the bounded public-OSS workflow evidence; it does not open customer/
+recipient acceptance, independent review, provider/Production, or final
+release gates. `ACCEPT-005` remains unchecked and no checkbox changed. Score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.md`.
+The additive bundle verifies **296** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:79fb420cb707361aafbd3c7b1071fbd38a3b8184f6de74623577a31fe344931f`.
+
 ## 2026-10-24 · Vercel Production provider receipt
 
 Vercel confirmed that deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is already

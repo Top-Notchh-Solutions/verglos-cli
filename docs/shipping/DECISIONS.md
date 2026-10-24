@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record ACCEPT-005 owner-authorized public-OSS workflow
+
+- **Decision:** Accept the exact-commit owner-authorized public-OSS execution
+  as bounded workflow evidence, without converting it into customer consent.
+- **Result:** Current CLI `aad2c743` completed the ISC-licensed `buggy-node`
+  scan with exit 0, complete coverage, 7 files, 59 findings, and a validated
+  private derived report; validator failure count was 0.
+- **Disposition:** `publicOssBenchmark: authorized`,
+  `customerAcceptance: not-claimed`, and `independentReview: required` remain
+  explicit. Keep ACCEPT-005 open for external customer-owner/recipient POC,
+  independent review, and final acceptance. No checkbox changed; score remains
+  **245/35/280 (87.5%)**. No deletion or paid Actions run occurred.
+- **Evidence:** `evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.md`.
+- **Bundle:** 296 files, zero mismatches, secret scan passed; manifest
+  `sha256:79fb420cb707361aafbd3c7b1071fbd38a3b8184f6de74623577a31fe344931f`.
+
 ## 2026-10-24 · record Vercel Production provider receipt
 
 - **Decision:** Record the actual provider confirmation that the existing
