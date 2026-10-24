@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## Current-head CLI full monorepo regression · 2026-10-24
+
+- **Execution:** CLI `aad2c743` (SBOM/SPDX sidecar fix merged as `8e87c81d`)
+  ran the full local `pnpm test` command with Turbo remote caching disabled.
+- **Verification:** All eight package targets completed **13/13 successful**
+  tasks with **0 failed tasks**. Docker Hunt opt-in skips remain explicit and
+  are not claimed as adversarial evidence.
+- **Disposition:** Advance DIST-002/003/006 and release-contract regression
+  evidence only; keep trusted publication, provider/Production,
+  customer/recipient, independent AppSec/Hunt, and final-release gates open.
+  No checkbox changed; score remains **245/35/280 (87.5%)**. No Actions run,
+  registry write, or artifact deletion was used.
+- **Evidence:** `evidence/cli-current-head-full-test-2026-10-24.md`.
+
 ## Current-head Web serial regression suite · 2026-10-24
 
 - **Execution:** Web source `58fe7e3c` (merged implementation on `origin/main`

@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current-head CLI full monorepo regression
+
+The current CLI `pnpm test` path completed with Turbo **13/13 successful
+tasks** across eight package targets and zero failed tasks. This advances local
+distribution/release implementation evidence only; trusted publication,
+provider/Production, customer/recipient, independent AppSec/Hunt, and final
+release/go-no-go gates remain open. No checkbox changed; score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/cli-current-head-full-test-2026-10-24.md`.
+
 ## 2026-10-24 · current-head Web serial regression suite
 
 The current Web serial pretest/test run completed **904/928**, with **24

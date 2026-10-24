@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current-head CLI full monorepo regression
+
+CLI source `aad2c743` completed the full local `pnpm test` path after the
+version-bound SBOM/SPDX sidecar fix: Turbo reported **13/13 tasks successful**
+across eight package targets and **0 failed tasks**. Explicit Docker Hunt
+integration skips remain visible and are not claimed as adversarial evidence.
+This advances DIST-002/003/006 and release-contract implementation evidence;
+trusted registry publication, provider/Production, customer/recipient,
+independent AppSec/Hunt, and final-release gates remain open. No checkbox
+changed. Score remains **245 checked / 35 open / 280 total (87.5%)**, with
+**13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/cli-current-head-full-test-2026-10-24.md`.
+
 ## 2026-10-24 · current-head Web serial regression suite
 
 The current Web implementation completed `pnpm test:serial` locally with
