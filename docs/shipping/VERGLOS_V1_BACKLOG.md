@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #289 Ready Production receipt
+
+Vercel deployment **`dpl_Baw6JFHyNxrLfaL3viryXxWMcNcG`** reached `READY` with
+target `production`. The six declared public paths returned HTTP **200** on
+`verglos.com` (**6/6**); `www.verglos.com` returned the expected HTTP **308**
+canonical redirect for all six (**6/6**). The exact deployment hostname is
+Vercel-SSO protected (**302**) and was not bypassed. This advances provider/
+Production evidence for the merged SCM delivery implementation, but no
+checkbox changed. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/vercel-production-pr289-scm-lease-concurrency-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #289 SCM delivery lease/concurrency hardening
 
 Web PR **#289** merged normally as
