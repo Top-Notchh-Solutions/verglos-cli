@@ -5,6 +5,25 @@
 > `FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md` and
 > `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-11.md` for current execution.
 
+## QUAL-WEB-006 populated dashboard/transient continuation · 2026-10-24
+
+Web PR #280 merged normally as `395e8252` from `21f9cfb`. A real Chromium
+capture against the owner-controlled synthetic organization
+`qual-web-006-synthetic-20261024` covered all 13 authenticated dashboard routes
+in 52 measurements: ready **26/26** with 100 rows, loading **13/13**, error
+**13/13**, Axe **0**, and keyboard/landmark/reduced-motion/responsive checks
+**52/52**. Typecheck, dashboard contracts **4/4**, serial Web **904/928** with
+24 designed skips and zero failures, and build **49/49** passed.
+
+Vercel Preview `dpl_DrzPfLuw8fzuRLxu6V5kWaZGd7BF` and Production
+`dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` are READY. The strict qualifier remains
+fail-closed for remote Neon CWV latency; human/field, independent-review, and
+final acceptance remain open. No checkbox changed; score remains **245/35/280
+(87.5%)**, with 13 AppSec-dependent and 22 non-AppSec rows open. No paid
+Actions, customer data, Production write, payment, publication, deletion, or
+final npm release occurred. Evidence:
+`evidence/qual-web-006-dashboard-populated-transient-v3-2026-10-24.md`.
+
 ## Web fresh isolated PostgreSQL serial qualification · 2026-10-22
 
 The exact merged Web head `02f5aba95c4172255cc522730c6ffecc1598cbda` passed

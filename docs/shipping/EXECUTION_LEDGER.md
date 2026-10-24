@@ -1,5 +1,31 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #280 populated dashboard/transient capture · 2026-10-24
+
+- **Implementation:** Web PR #280 merged normally as `395e8252` from
+  `21f9cfb`; it fixes populated Findings date normalization, unknown policy
+  lifecycle handling, Alerts semantics/contrast, and mobile record-control
+  sizing.
+- **Execution:** Owner-controlled synthetic organization
+  `qual-web-006-synthetic-20261024`; Chromium; 13 authenticated dashboard
+  routes; 1440×900 and 390×844; 52 measurements.
+- **Result:** Ready **26/26** with a 100-row dataset total on every route;
+  loading **13/13** and error **13/13** announcements; Axe **0**; keyboard,
+  landmarks, reduced-motion, and responsive checks **52/52**. The strict
+  qualifier remains fail-closed for remote Neon TTFB/FCP/LCP breaches.
+- **Verification:** Typecheck, dashboard contracts **4/4**, serial Web
+  **904/928** with 24 designed skips and zero failures, build **49/49**, and
+  diff check passed.
+- **Provider receipt:** Vercel Preview
+  `dpl_DrzPfLuw8fzuRLxu6V5kWaZGd7BF` and Production
+  `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` are READY. No paid Actions run was
+  started or used.
+- **Disposition:** No checkbox changed; score remains **245/35/280
+  (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open. Human/
+  field-CWV, independent-review, and final acceptance remain open.
+- **Evidence:** `evidence/qual-web-006-dashboard-populated-transient-v3-2026-10-24.md`.
+
+
 ## Web PR #279 Production receipt · 2026-10-24
 
 - **Implementation:** Web PR #279 merged normally as
