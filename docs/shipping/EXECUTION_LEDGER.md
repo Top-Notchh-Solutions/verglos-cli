@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-014 correction merged · 2026-10-24
+
+- **Merge:** CLI PR #306 merged normally at
+  `b533877a56b81555ce1a2633b413edbc053311ff`; the v5 matrix and integrity
+  bundle are now on `origin/main`.
+- **Run control:** The three PR-triggered Actions runs were canceled; no active
+  CLI/Web Actions runs remain. No paid run was started.
+- **Disposition:** No checkbox changed. Score remains 245/35/280; the five
+  ACCEPT-014 gates remain open. No npm/tag/release/payment/customer/deletion
+  action occurred.
+- **Evidence:** PR [#306](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/306)
+  and `evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`.
+
 ## ACCEPT-014 clean-corpus matrix correction · 2026-10-24
 
 - **Execution:** The clean private report root contains 40/40 candidate

@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-014 correction merged
+
+CLI PR #306 merged normally at
+`b533877a56b81555ce1a2633b413edbc053311ff`. The v5 clean-corpus matrix and
+322-file integrity bundle are now on `origin/main`; v4 remains retained for
+audit history. The three PR-triggered Actions runs were canceled and no active
+CLI/Web Actions runs remain. No checkbox changed: **245 checked / 35 open /
+280 total (87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**. The five
+ACCEPT-014 gates remain open, so no final release or npm publication occurred.
+
+Evidence: PR [#306](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/306);
+`evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-014 clean-corpus matrix correction
 
 The v5 rerun used only verified exact-commit control reports in a clean

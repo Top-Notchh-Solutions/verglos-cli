@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · merge ACCEPT-014 correction
+
+- **Decision:** Accept CLI PR #306's normal merge at
+  `b533877a56b81555ce1a2633b413edbc053311ff` as the authoritative placement
+  of the corrected v5 matrix and 322-file integrity bundle.
+- **Run-cost boundary:** Cancel the PR-triggered Actions runs; keep the account
+  at zero paid execution. No active CLI/Web Actions runs remain.
+- **Disposition:** Keep all rows unchecked. The five ACCEPT-014 gates remain
+  open; no npm publication, tag, release, payment, customer/deletion action,
+  or final-release sign-off is inferred. Score remains 245/35/280.
+- **Evidence:** PR [#306](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/306)
+  and `evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`.
+
 ## 2026-10-24 · record ACCEPT-014 clean-corpus matrix correction
 
 - **Decision:** Replace the contaminated v4 matrix as the current
