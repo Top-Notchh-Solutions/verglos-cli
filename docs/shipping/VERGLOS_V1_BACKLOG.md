@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-010 workspace-root freeze replay
+
+The current freeze replay resolved its recorded repository-relative artifact
+paths against the workspace root and verified **24/24** artifacts across
+**12/12** required kinds, with zero missing artifacts or kinds. The recorded
+result remains blocked/no-go for the six open external gates: provider
+lifecycle, independent review, authenticated browser, field CWV, account
+deletion, and final release. `ACCEPT-010` remains unchecked; no checkbox
+changed. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-010-current-freeze-workspace-root-replay-2026-10-24.md`.
+Bundle v46 verifies **380** files with **0** mismatches, matching manifest
+`sha256:beccc43eb2d64486dadde1f6718e2ea26aea6aa5cda786c5326cc2a3b167949c`, and
+passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-008 current-head rerun
 
 The current commercial-validator syntax check passed and its suite passed

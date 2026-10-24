@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24T07:38Z · ACCEPT-010 workspace-root freeze replay
+
+The current release-candidate freeze was replayed with the workspace root,
+which correctly resolves the recorded repository-relative worktree and local
+evidence paths. All **24/24** artifacts and **12/12** required kinds were
+present and digest-valid; the result is `blocked`, `no-go`, with **0** missing
+artifacts and **0** missing kinds. The six recorded open gates remain provider
+lifecycle, independent review, authenticated browser, field CWV, account
+deletion, and final release. `ACCEPT-010` remains unchecked; no release,
+provider write, customer access, or sign-off was created. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-010-current-freeze-workspace-root-replay-2026-10-24.md`.
+Bundle v46 verifies **380** bounded files with **0** mismatches, matching
+manifest `sha256:beccc43eb2d64486dadde1f6718e2ea26aea6aa5cda786c5326cc2a3b167949c`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24T07:35Z · ACCEPT-008 current-head rerun
 
 The current commercial-validator syntax check passed and the focused suite

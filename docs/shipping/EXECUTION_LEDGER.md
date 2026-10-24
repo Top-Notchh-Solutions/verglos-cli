@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-010 workspace-root freeze replay · 2026-10-24T07:38Z
+
+- **Execution:** Replayed the existing candidate-freeze input with the
+  workspace as artifact root, matching its recorded `.worktrees/...` and
+  `.local-evidence/...` paths.
+- **Result:** **24/24** artifacts and **12/12** required kinds verified with
+  zero missing artifacts or kinds; freeze status remained `blocked`, decision
+  `no-go`, with six open gates.
+- **Disposition:** Path-root correction only. No provider/Production write,
+  publication, customer access, independent review, or release sign-off
+  occurred; ACCEPT-010 remains unchecked and score remains **246/34/280**.
+- **Evidence:** `evidence/accept-010-current-freeze-workspace-root-replay-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v46.json` verifies 380 files with zero mismatches, matching manifest `sha256:beccc43eb2d64486dadde1f6718e2ea26aea6aa5cda786c5326cc2a3b167949c`, and passed secret scanning.
+
 ## ACCEPT-008 current-head rerun · 2026-10-24T07:35Z
 
 - **Execution:** Ran commercial-validator syntax and the focused test suite at
