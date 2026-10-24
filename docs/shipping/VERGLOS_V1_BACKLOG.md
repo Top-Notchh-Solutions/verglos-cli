@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-002/003 Hunt package identity implementation addendum
+
+PR [#294](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/294) merged
+normally at `c745a2f103e7cf950bcaef1577456dffb94c876b`. The `@verglos/hunt`
+package now carries its public repository, homepage, bugs, author,
+description, and keyword metadata. Focused tests passed **16/16**; pack,
+packed-manifest, and package-content audits passed **7/7**. This advances
+implementation readiness for DIST-002/003 but does not claim npm publication,
+trusted provenance, independent review, AppSec/Hunt review, or final release.
+Keep both rows unchecked. No checkbox changed; score remains **245 checked /
+35 open / 280 total (87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/dist-002-003-hunt-package-public-identity-pr294-2026-10-24.md`.
+The additive bundle verifies **297** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:dc6040a8d6397ea08fe2cbca2f70957cd0f4ea93c0c1b9e7a89954e010feb4a6`.
+
 ## 2026-10-24 · ACCEPT-005 owner-authorized public-OSS workflow addendum
 
 The exact-commit public-OSS workflow ran for `buggy-node` under ISC terms with
