@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-003 current bundle v42 verification
+
+- **Implementation mapping:** Bundle builder/verifier, sorted manifest, bounded
+  regular-file reads, symlink rejection, and secret boundary.
+- **Contract mapping:** **4/4** tests passed; **376/376** current files matched
+  with zero mismatches and secret scan passed.
+- **Boundary mapping:** Internal reproducibility only; external review,
+  provider/customer, browser/field, account deletion, and final release remain
+  open.
+- **Evidence:** `evidence/accept-003-current-bundle-v42-verification-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v43.json` verifies 377 files with zero mismatches, matching manifest `sha256:dd97b8d8fecd6b25e98face9ad3270012cb8b2976d80f2201c0ba9f1f844b058`, and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-005/006 full Web regression
 
 - **Implementation mapping:** Complete serial Web test discovery, including
