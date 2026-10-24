@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #287 Production deployment
+
+Vercel Production deployment **`dpl_9SuaaU6PdPPryYcH5Zn1ANaG2BVx`** completed
+Ready for the merged Web shipping line. Runtime configuration, Next.js build,
+**49/49** static pages, and serverless output creation completed successfully.
+Read-only Node fetch returned HTTP **200** for six declared public paths across
+`verglos.com`, `www.verglos.com`, and the exact deployment hostname: **18/18**.
+Keep QUAL-WEB-006 and the related public Web rows open for their remaining
+authenticated, human/field, independent-review, customer/recipient, and final
+release evidence. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/vercel-production-pr287-dashboard-search-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
 
 Web PR **#287** merged normally as

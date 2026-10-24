@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #287 Production deployment
+
+- **Implementation mapping:** Vercel Production deployment
+  `dpl_9SuaaU6PdPPryYH5Zn1ANaG2BVx` completed Ready for the merged Web line.
+- **Verification mapping:** Runtime configuration and Next build completed;
+  **49/49** static pages were generated and the six-path read-only matrix
+  returned HTTP 200 on `verglos.com`, `www.verglos.com`, and the exact
+  deployment hostname (**18/18**).
+- **Boundary mapping:** This is provider/Production runtime evidence only. It
+  does not provide authenticated dashboard capture, human/field-CWV,
+  independent review, customer/recipient acceptance, or final release
+  sign-off. No checkbox changed; score remains **246/34/280**.
+- **Evidence:** `evidence/vercel-production-pr287-dashboard-search-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
 
 - **Implementation mapping:** Web PR #287 merged normally as

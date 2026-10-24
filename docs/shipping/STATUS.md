@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #287 Production deployment
+
+Vercel Production deployment `dpl_9SuaaU6PdPPryYcH5Zn1ANaG2BVx` is Ready for
+the merged Web shipping line. Build and serverless output completed, and a
+read-only Node matrix returned HTTP **200** for six public paths on both public
+hostnames and the exact deployment hostname (**18/18**). This advances
+provider/Production evidence only; QUAL-WEB-006 and related public Web rows
+remain open for authenticated, human/field, independent-review,
+customer/recipient, and final-release evidence. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/vercel-production-pr287-dashboard-search-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
 
 Web PR #287 merged normally as
