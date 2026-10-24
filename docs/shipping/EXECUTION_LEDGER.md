@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #289 Ready Production receipt · 2026-10-24
+
+- **Execution:** Vercel deployment
+  `dpl_Baw6JFHyNxrLfaL3viryXxWMcNcG` reached `READY` with target `production`
+  for the merged Web PR #289 line.
+- **Result:** `verglos.com` returned HTTP **200** for six public paths
+  (**6/6**); `www.verglos.com` returned expected HTTP **308** canonical
+  redirects for all six (**6/6**). The direct deployment hostname returned
+  Vercel SSO **302** under deployment protection and was not bypassed.
+- **Acceptance mapping:** Provider/Production runtime evidence only. No live
+  provider installation, customer/recipient acceptance, independent/AppSec
+  review, final release sign-off, or checkbox changed. Score remains
+  **246/34/280**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/vercel-production-pr289-scm-lease-concurrency-2026-10-24.md`.
+
 ## Web PR #289 SCM delivery lease/concurrency hardening · 2026-10-24
 
 - **Execution:** Web PR #289 merged normally as

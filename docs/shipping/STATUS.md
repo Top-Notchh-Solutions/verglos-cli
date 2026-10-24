@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #289 Ready Production receipt
+
+Vercel deployment `dpl_Baw6JFHyNxrLfaL3viryXxWMcNcG` is Ready with target
+`production`. The public alias `verglos.com` returned HTTP **200** for all six
+declared routes (**6/6**); `www.verglos.com` returned the expected **308**
+canonical redirect for all six (**6/6**). The exact deployment hostname is
+Vercel-SSO protected (**302**), and no bypass was used. This is provider/
+Production evidence only; no checkbox changed. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/vercel-production-pr289-scm-lease-concurrency-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #289 SCM delivery lease/concurrency hardening
 
 Web PR #289 merged normally as

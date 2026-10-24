@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #289 Ready Production receipt
+
+The post-merge Vercel deployment
+**`dpl_Baw6JFHyNxrLfaL3viryXxWMcNcG`** reached `READY` with target
+`production` for Web PR #289’s merged Web line. Read-only Node fetches returned
+HTTP **200** for all six declared public paths on `https://verglos.com`
+(**6/6**). `www.verglos.com` returned the expected HTTP **308** canonical
+redirect for all six (**6/6**). The exact Vercel deployment hostname is behind
+Vercel SSO and returned **302**, so no protection bypass or false 200 claim was
+made. This is provider/Production evidence for the merged SCM delivery
+hardening, not a live provider installation or acceptance event. No checkbox
+changed; score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Nothing was deleted or overwritten.
+Evidence:
+`docs/shipping/evidence/vercel-production-pr289-scm-lease-concurrency-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #289 SCM delivery lease/concurrency hardening
 
 Web PR **#289** merged normally as
