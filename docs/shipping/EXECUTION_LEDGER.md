@@ -9,7 +9,9 @@
   already-fenced acknowledgement path. Focused contracts passed **33/33**;
   typecheck and diff checks passed.
 - **Provider state:** Merged-head Vercel Production deployment
-  `dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was **QUEUED** at capture; no Ready claim.
+  `dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` reached **READY / production**; its
+  read-only six-path matrix returned 6/6 expected responses for canonical,
+  www redirect, and protected deployment-host checks.
 - **Acceptance mapping:** This advances STUDIO-CLI-001 implementation only.
   Recipient acceptance, independent review, and final release evidence remain
   absent. No checkbox changed; score remains **246/34/280**.

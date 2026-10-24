@@ -7,7 +7,8 @@ Web PR #297 merged normally as
 now rejects an expired row even if the preflight read occurred before expiry.
 Focused handoff contracts passed **33/33**, typecheck and diff checks passed.
 The merged-head Vercel Production deployment
-`dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was **QUEUED** at capture. Actions were not
+`dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` reached **READY / production**; its
+read-only six-path matrix returned 6/6 expected responses. Actions were not
 rerun under the blocked budget boundary. This advances STUDIO-CLI-001
 implementation only; no checkbox changed. Score remains **246/34/280
 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
