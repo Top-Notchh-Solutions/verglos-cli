@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-009 reconciliation v6 replay
+
+- **Implementation mapping:** Release reconciler, candidate freeze, and final
+  regression fail-closed state machine.
+- **Contract mapping:** **22/22** tests passed; replay 1 shipped, 21 partial,
+  0 planned, six corrections, one rollback, six open gates, `no-go`.
+- **Boundary mapping:** Partial rows and open gates were not upgraded from
+  local evidence.
+- **Evidence:** `evidence/accept-009-current-reconciliation-v6-replay-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v55.json` verifies 389 files with zero mismatches, matching manifest `sha256:dc671bb5e4063025681622a45f61c5cd341ad52e7eb4126eb120867c9d0d2d99`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-003 current bundle v53 verification
 
 - **Implementation mapping:** Deterministic evidence bundle builder/verifier,

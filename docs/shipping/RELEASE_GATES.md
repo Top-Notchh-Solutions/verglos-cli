@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-009 reconciliation v6 replay
+
+The reconciler/freeze/final-regression contracts passed **22/22**; current
+replay remains 1 shipped, 21 partial, 0 planned with six open gates and a
+recorded `no-go`. This does not satisfy provider, customer, independent,
+authenticated/field, deletion, or final-release acceptance. No checkbox
+changed; score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/accept-009-current-reconciliation-v6-replay-2026-10-24.md`.
+Bundle v55 verifies **389** files with zero mismatches, matching manifest
+`sha256:dc671bb5e4063025681622a45f61c5cd341ad52e7eb4126eb120867c9d0d2d99`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-003 current bundle v53 verification
 
 Bundle verifier contracts passed **4/4** and current bundle v53 verified

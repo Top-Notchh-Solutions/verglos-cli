@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-009 reconciliation v6 replay
+
+- **Decision:** Preserve the fail-closed reconciliation result; do not upgrade
+  partial rows or open gates from local evidence.
+- **Result:** **22/22** contract tests passed; replay reported 1 shipped, 21
+  partial, 0 planned, 6 corrections, 1 rollback, and 6 open gates.
+- **Boundary:** Recommendation remains `no-go` and acceptance remains open;
+  no provider, customer, independent, authenticated/field, deletion, or final
+  release action occurred. ACCEPT-009 remains unchecked; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/accept-009-current-reconciliation-v6-replay-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v55.json` verifies 389 files with zero mismatches, matching manifest `sha256:dc671bb5e4063025681622a45f61c5cd341ad52e7eb4126eb120867c9d0d2d99`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-003 current bundle v53 verification
 
 - **Decision:** Record exact current bundle verification without upgrading
