@@ -1,5 +1,24 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #277 dashboard transient-state capture
+
+Web PR #277 merged normally as `e7a8bbaa` from implementation `e9f713f7`. The
+dashboard browser harness now observes real Preview-only loading and error DOM
+states through a seam gated by `VERCEL_ENV=preview` plus
+`VERGLOS_DASHBOARD_CAPTURE_STATES=enabled`; Production ignores the header. A
+locally built Next production server captured **52** measurements for the
+synthetic owner tenant: 13 ready desktop, 13 ready mobile, 13 loading desktop,
+and 13 error desktop. Loading and error announcements were **13/13** each;
+Axe findings were **0**, keyboard **52/52**, responsive **52/52**, and
+reduced-motion **52/52**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
+
+The qualifier remains fail-closed because the tenant has no 100-row dataset and
+some local database-backed CWV measurements exceed limits. No checkbox changed;
+score remains **245 checked / 35 open / 280 total (87.5%)**. No paid Actions,
+Production database write, payment, customer repository, publication, or
+deletion occurred.
+
 ## 2026-10-24 · Web PR #276 Production receipt
 
 Vercel deployment `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY for Web PR #276

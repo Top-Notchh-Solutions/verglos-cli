@@ -1,5 +1,37 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · merged dashboard transient-state capture
+
+Web PR #277 merged normally as
+`e7a8bbaa403540b37dc5f8ebd3d50a22bfb1e352` from implementation
+`e9f713f712e37c46b49be66c6ddcbe4aab4eca9f`. The authenticated dashboard
+capture now has an explicit Preview-only state seam, gated by both
+`VERCEL_ENV=preview` and `VERGLOS_DASHBOARD_CAPTURE_STATES=enabled`; Production
+ignores the transient-state header. The browser harness observes the rendered
+loading/error announcements rather than hard-coding them.
+
+Against the owner-controlled synthetic `top-notchh-solutions` tenant and a
+locally built Next production server, the run captured **52** measurements:
+13 ready desktop, 13 ready mobile, 13 loading desktop, and 13 error desktop.
+Loading announcements were **13/13**, error announcements **13/13**, Axe
+findings **0**, keyboard **52/52**, responsive **52/52**, and reduced-motion
+**52/52**. The capture digest is
+`sha256:45556d9d38db40985d5b292dcf037a0e6c6a3d2ce9415435cd65c8f9017e92d3`.
+
+The qualifier remains fail-closed because this synthetic tenant has no
+100-row dataset and local database-backed CWV latency breaches some limits;
+no missing condition was converted into a pass. Production build, typecheck,
+focused dashboard/state tests, and `pnpm test:serial` (**904 passed / 24
+designed database-dependent skips / 0 failures**) passed. No checkbox changed;
+score remains **245 checked / 35 open / 280 total (87.5%)**, with 13
+AppSec-dependent and 22 non-AppSec rows open. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
+No paid Actions run, Production database write, payment, customer repository,
+publication, or deletion occurred.
+Additive bundle v40 contains **270** hashed evidence files, passes secret
+scanning, and matches manifest
+`sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #276 Production receipt
 
 Vercel Production deployment `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY and

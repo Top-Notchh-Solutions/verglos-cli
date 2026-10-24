@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · dashboard transient-state capture
+
+- **Source mapping:** Web PR #277 merged normally as `e7a8bbaa` from
+  `e9f713f7`; the transient-state seam requires enabled Vercel Preview and is
+  ignored by Production.
+- **Verification mapping:** Local built-server capture covered 52 measurements
+  across 13 authenticated routes: loading **13/13**, error **13/13**, Axe **0**,
+  and keyboard/responsive/reduced-motion **52/52**.
+- **Acceptance mapping:** QUAL-WEB-006 remains open for the missing 100-row
+  dataset, local CWV breaches, human/field review, independent review, and
+  final acceptance. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
+- **Bundle mapping:** Additive v40 contains **270** hashed evidence files,
+  passes secret scanning, and matches manifest
+  `sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+
 ## 2026-10-24 · Web PR #276 Production receipt
 
 - **Deployment mapping:** Vercel `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY

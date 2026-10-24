@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #277 dashboard transient-state capture
+
+Web PR #277 merged normally as `e7a8bbaa` from `e9f713f7`. The authenticated
+Preview capture observed loading/error announcements **13/13** each across the
+13 dashboard paths, with **0** Axe findings and **52/52** keyboard, responsive,
+and reduced-motion checks. The 100-row dataset and local CWV requirements
+remain fail-closed; this opens no release gate. No checkbox changed; score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
+The additive v40 bundle verifies **270** files with **0** mismatches, passes
+secret scanning, and matches manifest
+`sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+
 ## 2026-10-24 · Web PR #276 Production receipt
 
 Vercel Production deployment `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY for

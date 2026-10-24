@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #277 dashboard transient-state capture
+
+Web PR #277 merged normally as `e7a8bbaa` from `e9f713f7`. The Preview-only
+dashboard state seam and capture harness recorded **13/13** loading and
+**13/13** error announcements across the authenticated route set, with **0**
+Axe findings and **52/52** keyboard, responsive, and reduced-motion checks.
+The qualifier remains fail-closed for the missing 100-row dataset and local
+CWV breaches. No checkbox changed; score remains **245/35/280 (87.5%)**.
+Evidence: `evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
+No paid Actions, Production write, payment, customer repository, publication,
+or deletion occurred.
+Additive bundle v40 contains **270** hashed files, passes secret scanning, and
+matches manifest `sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+
 ## 2026-10-24 · Web PR #276 Production receipt
 
 Vercel deployment `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY and serves the
