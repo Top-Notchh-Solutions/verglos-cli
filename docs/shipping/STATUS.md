@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-003/ACCEPT-003 provenance concurrency hardening
+
+CLI PR #385 merged normally as
+`90811e92eeb9703a8eceaad109871bb08778a77b`; per-file provenance work is now
+bounded at four workers with deterministic ordering. Focused tests **2/2**,
+full scanner suite, typecheck, and build passed. DIST-003 and ACCEPT-003
+remain open for trusted/provider publication, independent review,
+recipient/customer acceptance, and final-release evidence. Score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/dist-003-provenance-concurrency-pr385-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #287 Production deployment
 
 Vercel Production deployment `dpl_9SuaaU6PdPPryYcH5Zn1ANaG2BVx` is Ready for

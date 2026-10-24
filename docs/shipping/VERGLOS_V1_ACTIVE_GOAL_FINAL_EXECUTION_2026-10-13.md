@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-003/ACCEPT-003 provenance concurrency hardening
+
+CLI PR **#385** merged normally as
+`90811e92eeb9703a8eceaad109871bb08778a77b`. Per-file provenance analysis now
+uses an order-preserving four-worker cap while retaining the existing
+300-file sample bound, preventing large repositories from launching all
+Git-backed signal reads simultaneously. Focused tests passed **2/2**, the full
+scanner package suite passed, scanner typecheck/build passed, and diff checks
+passed. This is real DIST-003/ACCEPT-003 production implementation progress;
+both rows remain open for trusted/provider publication, independent review,
+authorized recipient/customer acceptance, and final release sign-off. No
+checkbox changed; score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-003-provenance-concurrency-pr385-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · Web PR #287 Production deployment
 
 Vercel Production deployment **`dpl_9SuaaU6PdPPryYcH5Zn1ANaG2BVx`** completed

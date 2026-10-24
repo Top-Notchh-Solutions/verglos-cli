@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## DIST-003/ACCEPT-003 provenance concurrency hardening · 2026-10-24
+
+- **Execution:** CLI PR #385 merged normally as
+  `90811e92eeb9703a8eceaad109871bb08778a77b`; per-file provenance work now
+  uses an order-preserving four-worker cap with the existing 300-file sample
+  bound.
+- **Result:** Focused tests **2/2**, full scanner package suite, scanner
+  typecheck, scanner build, and diff checks passed.
+- **Acceptance mapping:** Production implementation evidence only. Keep
+  DIST-003 and ACCEPT-003 open for trusted/provider publication, independent
+  review, authorized recipient/customer acceptance, and final release
+  sign-off. Score remains **246/34/280**. No publication, provider, customer,
+  deletion, or release state changed.
+- **Evidence:** `evidence/dist-003-provenance-concurrency-pr385-2026-10-24.md`.
+
 ## Web PR #287 Production deployment · 2026-10-24
 
 - **Execution:** Vercel Production deployment
