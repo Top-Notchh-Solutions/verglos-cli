@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-head npm registry observation
+
+- **Source mapping:** CLI candidate
+  `d3ea64df01a8c7cd2879ddf54c97276240b49536`, version `2.0.0-alpha.4`.
+- **Verification mapping:** Seven-package read-only verifier returned **0/7**
+  accepted and **17** failures; two packages are absent and five attestations
+  point to `ed318f06b97771f45cc6970f745868fb1aa09404`.
+- **Acceptance mapping:** This confirms the trusted current-candidate
+  publication/provenance gate is still open; no provider write or checkbox
+  change occurred. Score remains **245/35/280 (87.5%)**.
+- **Evidence:**
+  `evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md` and
+  the byte-bound JSON result.
+- **Bundle mapping:** 299 files, zero mismatches, secret scan passed; manifest
+  `sha256:d6ff82f18bdffff797acadceb313547b50588ae128b9f5d5904b084ab0dde393`.
+
 ## 2026-10-24 · DIST-002/003 Hunt package identity implementation
 
 - **Source mapping:** CLI PR #294, merged at

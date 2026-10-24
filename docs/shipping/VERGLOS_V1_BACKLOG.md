@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-002 current-head npm registry observation addendum
+
+The read-only seven-package verifier checked candidate
+`d3ea64df01a8c7cd2879ddf54c97276240b49536` at version `2.0.0-alpha.4` and
+returned **0/7 accepted** with **17** failures. `verglos` and `@verglos/hunt`
+are absent from the registry; the other five alpha.4 attestations bind to
+older commit `ed318f06b97771f45cc6970f745868fb1aa09404`. No provider write,
+token, tag, publication, or Actions run occurred. Keep DIST-002/003 unchecked
+for a trusted current-candidate seven-package publication and attestation. No
+checkbox changed; score remains **245 checked / 35 open / 280 total (87.5%)**,
+split **13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md`.
+The additive bundle verifies **299** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:d6ff82f18bdffff797acadceb313547b50588ae128b9f5d5904b084ab0dde393`.
+
 ## 2026-10-24 · DIST-002/003 Hunt package identity implementation addendum
 
 PR [#294](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/294) merged

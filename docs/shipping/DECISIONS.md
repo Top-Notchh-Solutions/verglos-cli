@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-head npm registry boundary
+
+- **Decision:** Treat the fresh read-only npm observation as the authoritative
+  current provider boundary; do not publish or reuse stale alpha.4 provenance.
+- **Result:** Candidate `d3ea64df01a8c7cd2879ddf54c97276240b49536` produced
+  **0/7 accepted** and **17** failures. `verglos` and `@verglos/hunt` are
+  missing; five existing attestations bind to the older candidate.
+- **Disposition:** Keep DIST-002/003 open. No provider write, token, tag,
+  publication, or Actions run occurred; score remains **245/35/280 (87.5%)**.
+- **Evidence:**
+  `evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md`.
+- **Bundle:** 299 files, zero mismatches, secret scan passed; manifest
+  `sha256:d6ff82f18bdffff797acadceb313547b50588ae128b9f5d5904b084ab0dde393`.
+
 ## 2026-10-24 · record DIST-002/003 Hunt package identity implementation
 
 - **Decision:** Complete the missing public package identity metadata for

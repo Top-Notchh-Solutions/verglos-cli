@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## Current-head npm registry observation · 2026-10-24
+
+- **Candidate:** CLI `d3ea64df01a8c7cd2879ddf54c97276240b49536`, version
+  `2.0.0-alpha.4`, seven packages.
+- **Result:** Read-only verifier exited **2**; **0/7** accepted and **17**
+  failures. `verglos` and `@verglos/hunt` are 404; five existing alpha.4
+  attestations bind to `ed318f06b97771f45cc6970f745868fb1aa09404`.
+- **Boundary:** `providerWritePerformed: false`. No token, registry write,
+  tag, publication, or Actions run occurred. Keep DIST-002/003 unchecked for
+  current-candidate trusted publication/provenance and acceptance.
+- **Evidence:**
+  `evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md` and
+  its byte-bound JSON result.
+- **Bundle:** 299 files, zero mismatches, secret scan passed; manifest
+  `sha256:d6ff82f18bdffff797acadceb313547b50588ae128b9f5d5904b084ab0dde393`.
+
 ## DIST-002/003 Hunt package identity implementation · 2026-10-24
 
 - **Source:** PR #294 merged normally at

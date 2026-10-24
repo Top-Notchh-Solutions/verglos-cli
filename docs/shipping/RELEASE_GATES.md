@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current-head npm registry observation
+
+The read-only seven-package verifier returned **0/7 accepted** and **17
+failures** for alpha.4 at candidate `d3ea64df01a8c7cd2879ddf54c97276240b49536`.
+`verglos` and `@verglos/hunt` are absent; the other five package attestations
+bind to the older commit `ed318f06b97771f45cc6970f745868fb1aa09404`. This
+confirms the trusted publication/provenance gate remains open. No token,
+registry write, tag, publication, or Actions run occurred. No checkbox
+changed; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md`.
+The additive bundle verifies **299** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:d6ff82f18bdffff797acadceb313547b50588ae128b9f5d5904b084ab0dde393`.
+
 ## 2026-10-24 · DIST-002/003 Hunt package identity implementation
 
 PR [#294](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/294) merged
