@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #280 populated dashboard/transient evidence
+
+- **Source mapping:** Web PR #280 merged normally as `395e8252` from
+  `21f9cfb`; populated dashboard date/lifecycle handling, Alerts semantics and
+  contrast, and mobile record-control sizing were corrected.
+- **Verification mapping:** Chromium captured 13 authenticated routes in 52
+  measurements. Ready **26/26** observed 100 rows; loading/error were **13/13**
+  each; Axe was **0**; keyboard, landmarks, reduced-motion, and responsive
+  checks were **52/52**. Typecheck, dashboard contracts **4/4**, serial Web
+  **904/928** with 24 designed skips and zero failures, and build **49/49**
+  passed. Vercel Preview and Production are READY.
+- **Acceptance mapping:** QUAL-WEB-006 remains open because the strict local
+  CWV classifier recorded remote Neon latency breaches and human/field,
+  independent-review, and final acceptance remain unperformed. Score remains
+  **245/35/280 (87.5%)** with **13 AppSec-dependent / 22 non-AppSec** rows
+  open.
+- **Evidence:** `evidence/qual-web-006-dashboard-populated-transient-v3-2026-10-24.md`.
+
+
 ## 2026-10-24 · Web PR #279 bounded dashboard dataset counts
 
 - **Source mapping:** Web PR #279 merged normally as `ab6bb6c0` from

@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #280 populated dashboard execution
+
+Web PR #280 merged normally as `395e8252` from `21f9cfb`. Against the
+owner-controlled synthetic 100-row organization, Chromium captured all 13
+authenticated dashboard routes in 52 measurements: ready **26/26**, loading
+**13/13**, and error **13/13**; Axe was **0** and keyboard/landmark/
+reduced-motion/responsive checks were **52/52**. Typecheck, dashboard
+contracts **4/4**, serial Web **904 passed / 24 designed skips / 0 failures**,
+and build **49/49** passed. Vercel Preview
+`dpl_DrzPfLuw8fzuRLxu6V5kWaZGd7BF` and Production
+`dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` are READY.
+
+This is implementation/provider progress, not a checkbox closure: the strict
+qualifier records remote Neon CWV breaches, and human/field, independent
+review, and final acceptance remain open. Score remains **245 checked / 35
+open / 280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22
+non-AppSec**. No paid Actions, customer data, Production write, payment,
+publication, deletion, or final npm release occurred. Evidence:
+`evidence/qual-web-006-dashboard-populated-transient-v3-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #279 Production receipt
 
 Web PR #279 merged normally as `ab6bb6c0` from `9291d083`. Alerts, SCM,

@@ -1,5 +1,31 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · Web PR #280 populated dashboard/transient disposition
+
+- **Decision:** Merge the observed dashboard hardening normally and preserve a
+  real populated synthetic-fixture capture with the Preview-only transient
+  state seam enabled.
+- **Result:** Web PR #280 merged normally as `395e8252` from implementation
+  `21f9cfb`. Chromium captured 13 authenticated dashboard routes in 52
+  measurements: 26 ready states, 13 loading states, and 13 error states. All
+  ready routes observed the seeded 100-row total; Axe, keyboard, landmark,
+  reduced-motion, and responsive checks were green. Typecheck, dashboard
+  contracts **4/4**, serial Web **904/928** with 24 designed skips and zero
+  failures, and build **49/49** passed.
+- **Provider receipt:** Vercel Preview
+  `dpl_DrzPfLuw8fzuRLxu6V5kWaZGd7BF` and Production
+  `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` are READY; Production serves
+  `verglos.com` aliases.
+- **Disposition:** Advance QUAL-WEB-006 implementation/provider evidence only.
+  Keep the row unchecked because remote test-database latency breaches the
+  strict local CWV classifier and field/human, independent-review, and final
+  acceptance evidence remain open. Score remains **245/35/280 (87.5%)**;
+  **13 AppSec-dependent / 22 non-AppSec** rows remain open. No paid Actions,
+  customer data, Production database write, payment, publication, deletion,
+  or final npm release occurred.
+- **Evidence:** `evidence/qual-web-006-dashboard-populated-transient-v3-2026-10-24.md`.
+
+
 ## 2026-10-24 · Web PR #279 dashboard count disposition
 
 - **Decision:** Merge the tenant/license/project-scoped dataset-count

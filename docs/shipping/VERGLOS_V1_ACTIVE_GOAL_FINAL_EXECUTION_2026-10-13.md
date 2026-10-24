@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #280 populated dashboard execution
+
+Web PR #280 merged normally as `395e8252` from implementation `21f9cfb`. The
+merged Web code hardens populated dashboard date/lifecycle handling, Alerts
+semantics/contrast, and mobile record controls. Against the additive
+owner-controlled synthetic organization `qual-web-006-synthetic-20261024`,
+Chromium captured all 13 authenticated dashboard routes in 52 measurements:
+ready **26/26** with a 100-row total, loading **13/13**, error **13/13**, Axe
+**0**, and keyboard/landmark/reduced-motion/responsive checks **52/52**.
+Typecheck, dashboard contracts **4/4**, serial Web **904 passed / 24 designed
+database-dependent skips / 0 failures / 928 total**, and build **49/49**
+passed.
+
+Vercel Preview `dpl_DrzPfLuw8fzuRLxu6V5kWaZGd7BF` and Production
+`dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` are READY. The strict dashboard qualifier
+still fails closed on remote Neon database-backed CWV latency; this is recorded
+as a real test-environment boundary, not converted into a pass. Human/field,
+independent-review, and final-acceptance evidence remain open. No checkbox
+changed; score remains **245 checked / 35 open / 280 total (87.5%)**, with 13
+AppSec-dependent and 22 non-AppSec rows open. No paid Actions, customer data,
+Production write, payment, publication, deletion, or final npm release
+occurred. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-populated-transient-v3-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #279 Production receipt
 
 Web PR #279 merged normally as `ab6bb6c0cc13c38d20c5296a37b48171f07db8ee`

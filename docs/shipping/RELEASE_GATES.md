@@ -1,5 +1,24 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #280 populated dashboard/transient evidence
+
+Web PR #280 merged normally as `395e8252` from `21f9cfb`. A Chromium run
+against the owner-controlled synthetic organization captured all 13
+authenticated routes in 52 measurements: ready **26/26** with the seeded
+100-row total, loading **13/13**, error **13/13**, Axe **0**, and keyboard,
+landmark, reduced-motion, and responsive checks **52/52**. Vercel Preview
+`dpl_DrzPfLuw8fzuRLxu6V5kWaZGd7BF` and Production
+`dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` are READY.
+
+This opens no release gate. The strict qualifier remains fail-closed for
+remote Neon database-backed CWV breaches; human/field, independent-review,
+and final-acceptance requirements remain open. No checkbox changed; score is
+**245/35/280 (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows
+open. No paid Actions, Production data mutation, payment, customer data,
+publication, deletion, or final npm release occurred. Evidence:
+`evidence/qual-web-006-dashboard-populated-transient-v3-2026-10-24.md`.
+
+
 ## 2026-10-24 · Web PR #279 bounded dashboard dataset counts
 
 Web PR #279 merged normally as `ab6bb6c0` from `9291d083`. Alerts, SCM,
