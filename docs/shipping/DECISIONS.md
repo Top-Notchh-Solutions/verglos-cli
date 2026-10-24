@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · QUAL-WEB-005/006 full Web regression
+
+- **Decision:** Record the complete local Web regression without converting
+  explicit provider/database skips into passes.
+- **Result:** **1,195** tests discovered; **1,155 passed**, **40 skipped**, and
+  zero failed/cancelled/todo.
+- **Boundary:** No Production deletion, customer-held data access, provider
+  action, human/field acceptance, independent review, or final sign-off
+  occurred. QUAL-WEB-005/006 remain unchecked; score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-005-006-full-web-regression-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v42.json` verifies 376 files with zero mismatches, matching manifest `sha256:56b3719c5d77c8809bb4f48781bcdfef0cfb5fc77073cd549b91737270ff446d`, and passed secret scanning.
+
 ## 2026-10-24 · DIST-006 current rollback/revocation rehearsal
 
 - **Decision:** Record the local rollback/revocation decision contract without
