@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · Web PR #297 expiry-fenced handoff revocation
+
+- **Decision:** Repeat the handoff expiry check inside the revoke transaction;
+  preflight state alone is insufficient at the exact deadline.
+- **Result:** PR #297 merged normally as
+  `ed60da0199ef6eba54faf5d387609e56c5b2ae8a` from `4b3b6c7`; focused handoff
+  contracts passed **33/33**, typecheck and diff checks passed.
+- **Boundary:** STUDIO-CLI-001 implementation only. Its Vercel Production
+  deployment was queued at capture; recipient acceptance, independent review,
+  and final release remain open. Score remains **246/34/280**.
+- **Evidence:** `evidence/studio-handoff-revoke-expiry-fence-pr297-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #296 exact handoff expiry boundary
 
 - **Decision:** Resolve handoff lifecycle state through one shared helper using

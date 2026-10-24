@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #297 expiry-fenced handoff revocation
+
+- **Implementation mapping:** Web PR #297 merged normally as
+  `ed60da0199ef6eba54faf5d387609e56c5b2ae8a` from `4b3b6c7`; handoff revoke
+  now fences the transactional update with `expiresAt > revokedAt`.
+- **Verification mapping:** Handoff domain, route, and page contracts passed
+  **33/33**, with Web typecheck and diff checks passing. Vercel Production
+  deployment `dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was queued at capture.
+- **Boundary mapping:** STUDIO-CLI-001 implementation evidence only. Recipient
+  acceptance, independent review, and final release evidence remain absent;
+  no checkbox changed and score remains **246/34/280**.
+- **Evidence:** `evidence/studio-handoff-revoke-expiry-fence-pr297-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #296 exact handoff expiry boundary
 
 - **Implementation mapping:** Web PR #296 merged normally as

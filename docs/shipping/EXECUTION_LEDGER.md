@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #297 expiry-fenced handoff revocation · 2026-10-24
+
+- **Execution:** Web PR #297 merged normally as
+  `ed60da0199ef6eba54faf5d387609e56c5b2ae8a` from `4b3b6c7`.
+- **Result:** Handoff revocation now repeats the expiry boundary inside its
+  transactional compare-and-set (`expiresAt > revokedAt`), matching the
+  already-fenced acknowledgement path. Focused contracts passed **33/33**;
+  typecheck and diff checks passed.
+- **Provider state:** Merged-head Vercel Production deployment
+  `dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was **QUEUED** at capture; no Ready claim.
+- **Acceptance mapping:** This advances STUDIO-CLI-001 implementation only.
+  Recipient acceptance, independent review, and final release evidence remain
+  absent. No checkbox changed; score remains **246/34/280**.
+- **Hosted boundary:** Actions were not rerun under the blocked budget/runners
+  boundary. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/studio-handoff-revoke-expiry-fence-pr297-2026-10-24.md`.
+
 ## Web PR #296 exact handoff expiry boundary · 2026-10-24
 
 - **Execution:** Web PR #296 merged normally as

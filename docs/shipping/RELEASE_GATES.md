@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #297 expiry-fenced handoff revocation
+
+Web PR #297 merged normally as
+`ed60da0199ef6eba54faf5d387609e56c5b2ae8a`; revocation now repeats the exact
+expiry fence in its transactional compare-and-set. Focused contracts passed
+**33/33**, typecheck and diff checks passed. Vercel Production deployment
+`dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was **QUEUED** at capture; no Ready claim is
+made. This is STUDIO-CLI-001 implementation evidence only; recipient
+acceptance, independent review, and final release remain open. No checkbox
+changed; score remains **246/34/280 (87.9%)**. Evidence:
+`evidence/studio-handoff-revoke-expiry-fence-pr297-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #296 exact handoff expiry boundary
 
 Web PR #296 merged normally as

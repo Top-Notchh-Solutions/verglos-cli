@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #297 expiry-fenced handoff revocation
+
+Web PR **#297** merged normally as
+`ed60da0199ef6eba54faf5d387609e56c5b2ae8a` from implementation commit
+`4b3b6c7`. The Studio handoff revoke compare-and-set now requires
+`expiresAt > revokedAt` inside the transaction, closing the race where a
+request admitted before expiry could revoke after the exact deadline. Focused
+handoff domain, route, and page contracts passed **33/33**, Web typecheck and
+diff checks passed. The merged-head Vercel Production deployment
+`dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was **QUEUED** at capture; no Ready claim is
+made. GitHub Actions were not rerun under the blocked budget/runners boundary.
+This is real STUDIO-CLI-001 production-code progress; the row remains
+unchecked for recipient acceptance, independent review, and final release
+evidence. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-handoff-revoke-expiry-fence-pr297-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · Web PR #296 exact handoff expiry boundary
 
 Web PR **#296** merged normally as
