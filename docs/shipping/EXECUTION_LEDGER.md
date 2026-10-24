@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## DIST-003 current release-artifact regression · 2026-10-24
+
+- **Execution:** Ran the dedicated checksum, origin, SBOM, SPDX, notice,
+  license, clean-consumer, validation, release-note, tag, and artifact suites.
+- **Result:** **43/43** passed with zero failures, cancellations, skips, or
+  todos.
+- **Disposition:** Local artifact-integrity evidence only. No registry/provider
+  publication, tag, protected approval, external attestation, or release
+  sign-off occurred; DIST-003 remains unchecked. Score remains **246/34/280**.
+- **Evidence:** `evidence/dist-003-current-release-artifact-regression-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v40.json` verifies 374 files with zero mismatches, matching manifest `sha256:1f10a8e9e9649fea2566432f593bef36d2680fe816ceb08e73ad821f2b53e5da`, and passed secret scanning.
+
 ## DIST-002/003 current publish-contract regression · 2026-10-24
 
 - **Execution:** Ran the bounded publish-preflight, workflow, license,
