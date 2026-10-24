@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #291 monitor deduplication/error boundary hardening · 2026-10-24
+
+- **Execution:** Web PR #291 merged normally as
+  `5bb6c8c34395b0b6a7ac96a8584cee25a5d82404` from
+  `3ce00711c88ee717def2769fa2b033f9b6c0ad7c`. Monitor cron deduplication now
+  recognizes only PostgreSQL SQLSTATE `23505`; real database failures are
+  surfaced, and successful inserts update the per-run dedup set.
+- **Result:** Focused monitor/helper/route contracts **7/7**, Web typecheck,
+  and diff checks passed. Vercel deployment
+  `dpl_CyRkRR9gBmQcQPX6XS3G4sGGx52h` reached `READY` / `production`;
+  `verglos.com` was **6/6 HTTP 200**, `www` was **6/6 HTTP 308**, and the
+  protected deployment hostname was **302** without a bypass.
+- **Hosted boundary:** GitHub-hosted checks failed before repository steps
+  because the Actions budget/runners are blocked; no rerun was started.
+- **Acceptance mapping:** Production monitor implementation and provider/
+  Production runtime evidence only. No human/field, independent/AppSec,
+  customer/recipient, or final-release evidence was created; no checkbox
+  changed. Score remains **246/34/280**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/qual-web-006-monitor-dedup-error-boundary-pr291-2026-10-24.md`.
+
 ## Web PR #290 QUAL-WEB-005 retry-clock hardening and Production receipt · 2026-10-24
 
 - **Execution:** Web PR #290 merged normally as

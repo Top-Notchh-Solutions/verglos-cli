@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #291 monitor deduplication/error boundary hardening
+
+Web PR #291 merged normally as
+`5bb6c8c34395b0b6a7ac96a8584cee25a5d82404`; monitor cron now treats only
+PostgreSQL `23505` as concurrent deduplication, propagates other database
+failures, and suppresses duplicate findings within one OSV response. Focused
+contracts passed **7/7**, typecheck and diff checks passed. Vercel deployment
+`dpl_CyRkRR9gBmQcQPX6XS3G4sGGx52h` is Ready/Production; `verglos.com` was
+**6/6 HTTP 200**, `www` was **6/6 expected 308**, and the protected deployment
+hostname was **302**. Actions checks failed before repository steps under the
+blocked budget; no rerun was started. No checkbox changed; score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/qual-web-006-monitor-dedup-error-boundary-pr291-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #290 QUAL-WEB-005 retry-clock hardening and Production receipt
 
 Web PR #290 merged normally as

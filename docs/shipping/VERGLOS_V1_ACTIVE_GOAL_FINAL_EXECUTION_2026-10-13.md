@@ -1,5 +1,31 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #291 monitor deduplication/error boundary hardening
+
+Web PR **#291** merged normally as
+`5bb6c8c34395b0b6a7ac96a8584cee25a5d82404` from implementation commit
+`3ce00711c88ee717def2769fa2b033f9b6c0ad7c`. The monitor cron now recognizes
+only PostgreSQL unique-constraint SQLSTATE `23505` as concurrent
+deduplication; real database failures propagate to the registration error
+boundary. Successful dispatch inserts update the in-memory dedup set, so
+duplicate findings in one OSV response cannot dispatch repeatedly. Focused
+monitor/helper/route contracts passed **7/7**, Web typecheck passed, and
+`git diff --check` passed.
+
+Vercel deployment **`dpl_CyRkRR9gBmQcQPX6XS3G4sGGx52h`** reached `READY` with
+target `production`. Read-only fetches returned HTTP **200** for six declared
+paths on `verglos.com` (**6/6**) and expected HTTP **308** canonical redirects
+for all six on `www.verglos.com` (**6/6**). The exact deployment hostname
+returned Vercel SSO **302** and was not bypassed. GitHub-hosted checks failed
+before repository steps because the Actions budget/runners are blocked; no
+rerun was started. This is real monitor production-code and provider/Production
+evidence, but no checkbox changed: authenticated capture, human/field,
+independent/AppSec, customer/recipient, and final-release evidence remain
+separate gates. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/qual-web-006-monitor-dedup-error-boundary-pr291-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #290 Ready Production receipt
 
 Web PR **#290** merged normally as

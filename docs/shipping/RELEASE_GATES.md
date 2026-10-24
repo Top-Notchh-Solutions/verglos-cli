@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #291 monitor deduplication/error boundary hardening
+
+Web PR #291 merged normally as
+`5bb6c8c34395b0b6a7ac96a8584cee25a5d82404`; monitor cron now distinguishes
+PostgreSQL unique-key races (`23505`) from real database errors and updates its
+in-memory dedup set after successful dispatch recording. Focused contracts
+passed **7/7**, typecheck and diff checks passed. Vercel deployment
+`dpl_CyRkRR9gBmQcQPX6XS3G4sGGx52h` reached Ready/Production; public aliases
+passed **6/6 HTTP 200** and **6/6 expected HTTP 308**, while the protected
+deployment hostname returned **302**. GitHub Actions checks failed before
+repository steps because the budget/runners are blocked; no rerun occurred.
+This is implementation/provider evidence only; no checkbox changed. Score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/qual-web-006-monitor-dedup-error-boundary-pr291-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #290 QUAL-WEB-005 retry-clock hardening and Production receipt
 
 Web PR #290 merged normally as
