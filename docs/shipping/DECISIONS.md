@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · FINAL-WEB-002 landing qualification contract
+
+- **Decision:** Record the current landing-flow qualification contract without
+  upgrading it to hosted or final acceptance.
+- **Result:** **4/4** passed; all six required paths have complete desktop and
+  mobile contract coverage, and malformed/missing measurement cases fail
+  closed.
+- **Boundary:** Node 22.x warning under workstation Node 26.4.0 is retained.
+  No deployment, provider action, customer/recipient acceptance,
+  independent/field review, or final release sign-off occurred. FINAL-WEB-002
+  remains unchecked; score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-002-current-landing-qualification-contract-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v49.json` verifies 383 files with zero mismatches, matching manifest `sha256:83550628fa60681ffe02f8d6dbd328c94376a13e1876c687c63e032302662b36`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-001 current truth-registry recheck
 
 - **Decision:** Record the current public-truth implementation result without

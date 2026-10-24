@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · FINAL-WEB-002 landing qualification contract
+
+- **Implementation mapping:** Landing Inspect → Decide → Prove → Monitor
+  source contract and qualification parser at the current Web source.
+- **Contract mapping:** **4/4** tests passed with full six-path desktop/mobile
+  coverage and fail-closed malformed/missing measurement cases.
+- **Boundary mapping:** Contract success does not imply hosted, recipient,
+  independent/field, provider, or final-release acceptance.
+- **Evidence:** `evidence/final-web-002-current-landing-qualification-contract-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v49.json` verifies 383 files with zero mismatches, matching manifest `sha256:83550628fa60681ffe02f8d6dbd328c94376a13e1876c687c63e032302662b36`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-001 current truth-registry recheck
 
 - **Implementation mapping:** Web canonical plan/capability truth registry,

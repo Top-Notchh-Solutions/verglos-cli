@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · FINAL-WEB-002 landing qualification contract
+
+Landing-release qualification **4/4** passed with zero failures, skips,
+cancellations, or todos; six required paths have desktop/mobile contract
+coverage and malformed/missing measurements fail closed. Node 22.x warning
+under workstation Node 26.4.0 is retained. FINAL-WEB-002 remains unchecked.
+Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/final-web-002-current-landing-qualification-contract-2026-10-24.md`.
+Bundle v49 verifies **383** files with zero mismatches, matching manifest
+`sha256:83550628fa60681ffe02f8d6dbd328c94376a13e1876c687c63e032302662b36`,
+and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-001 current truth-registry recheck
 
 Web truth-registry **37/37**, public-release contracts **12/12**, and
