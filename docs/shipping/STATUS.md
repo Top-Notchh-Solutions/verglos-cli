@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-002/003 Hunt package identity implementation
+
+PR [#294](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/294) merged
+normally at `c745a2f103e7cf950bcaef1577456dffb94c876b` and adds complete public
+identity metadata to `@verglos/hunt`. Focused tests passed **16/16**; the Hunt
+build/tests passed with documented Docker skips; pack, manifest, and package
+content audits passed **7/7**. This is code/package readiness only: no npm
+publication or trusted provenance is claimed. No checkbox changed; score
+remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`evidence/dist-002-003-hunt-package-public-identity-pr294-2026-10-24.md`.
+The additive bundle verifies **297** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:dc6040a8d6397ea08fe2cbca2f70957cd0f4ea93c0c1b9e7a89954e010feb4a6`.
+
 ## 2026-10-24 · ACCEPT-005 owner-authorized public-OSS workflow
 
 The exact-commit `buggy-node` public-OSS workflow ran locally with current CLI

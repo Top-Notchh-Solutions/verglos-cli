@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record DIST-002/003 Hunt package identity implementation
+
+- **Decision:** Complete the missing public package identity metadata for
+  `@verglos/hunt` before any future registry publication attempt.
+- **Result:** PR #294 merged normally at
+  `c745a2f103e7cf950bcaef1577456dffb94c876b`; focused tests passed **16/16**,
+  and pack, manifest, and package-content audits passed **7/7**.
+- **Disposition:** Record implementation readiness only. Do not treat this as
+  npm publication, trusted provenance, independent review, AppSec/Hunt review,
+  or final sign-off. No checkbox changed; score remains **245/35/280
+  (87.5%)** and no paid Actions run occurred.
+- **Evidence:**
+  `evidence/dist-002-003-hunt-package-public-identity-pr294-2026-10-24.md`.
+- **Bundle:** 297 files, zero mismatches, secret scan passed; manifest
+  `sha256:dc6040a8d6397ea08fe2cbca2f70957cd0f4ea93c0c1b9e7a89954e010feb4a6`.
+
 ## 2026-10-24 · record ACCEPT-005 owner-authorized public-OSS workflow
 
 - **Decision:** Accept the exact-commit owner-authorized public-OSS execution

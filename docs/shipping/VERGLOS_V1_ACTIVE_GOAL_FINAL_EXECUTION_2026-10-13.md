@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-002/003 Hunt package identity implementation
+
+PR [#294](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/294) merged
+normally at `c745a2f103e7cf950bcaef1577456dffb94c876b` and adds the missing
+public identity metadata to `@verglos/hunt` (repository, homepage, bugs,
+author, description, and keywords). Local package-surface/publish-contract
+tests passed **16/16**; the Hunt build and tests passed with documented Docker
+integration skips; the packer, packed-manifest audit, and package-content audit
+passed **7/7**. Hunt archive digest:
+`sha256:a6c6b3b4e3fdfadc9cdedf64ab3f2d3a5a6a3d23dd44d649557a2e0fd7684f12`.
+This advances code/package identity readiness for DIST-002/003 only. It does
+not publish to npm or claim registry/provenance, independent review, AppSec,
+or final release evidence. No checkbox changed; score remains **245 checked /
+35 open / 280 total (87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/dist-002-003-hunt-package-public-identity-pr294-2026-10-24.md`.
+The additive bundle verifies **297** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:dc6040a8d6397ea08fe2cbca2f70957cd0f4ea93c0c1b9e7a89954e010feb4a6`.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-005 owner-authorized public-OSS workflow
 
 One real bounded owner-authorized public-OSS workflow completed against the

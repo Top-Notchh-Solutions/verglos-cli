@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-002/003 Hunt package identity implementation
+
+- **Source mapping:** CLI PR #294, merged at
+  `c745a2f103e7cf950bcaef1577456dffb94c876b`; package `@verglos/hunt`.
+- **Verification mapping:** Public identity metadata is present; focused tests
+  passed **16/16**; pack, packed-manifest, and package-content audits passed
+  **7/7**. Hunt archive digest is
+  `sha256:a6c6b3b4e3fdfadc9cdedf64ab3f2d3a5a6a3d23dd44d649557a2e0fd7684f12`.
+- **Acceptance mapping:** This is code/package readiness only. No npm
+  publication, registry provenance, independent review, AppSec/Hunt review, or
+  final-release evidence is claimed. No checkbox changed; score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:**
+  `evidence/dist-002-003-hunt-package-public-identity-pr294-2026-10-24.md`.
+- **Bundle mapping:** 297 files, zero mismatches, secret scan passed; manifest
+  `sha256:dc6040a8d6397ea08fe2cbca2f70957cd0f4ea93c0c1b9e7a89954e010feb4a6`.
+
 ## 2026-10-24 · ACCEPT-005 owner-authorized public-OSS workflow
 
 - **Source mapping:** `buggy-node` exact commit

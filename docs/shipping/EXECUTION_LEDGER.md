@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## DIST-002/003 Hunt package identity implementation · 2026-10-24
+
+- **Source:** PR #294 merged normally at
+  `c745a2f103e7cf950bcaef1577456dffb94c876b`.
+- **Change:** Added public repository, homepage, bugs, author, description,
+  and keyword metadata to `@verglos/hunt`.
+- **Verification:** Focused tests **16/16**; build/tests passed with explicit
+  Docker integration skips; pack, manifest, and package-content audits **7/7**.
+- **Boundary:** Implementation/package identity only. No npm publish, tag,
+  trusted provenance, independent review, AppSec/Hunt review, or final release
+  was claimed. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:**
+  `evidence/dist-002-003-hunt-package-public-identity-pr294-2026-10-24.md`.
+- **Bundle:** 297 files, zero mismatches, secret scan passed; manifest
+  `sha256:dc6040a8d6397ea08fe2cbca2f70957cd0f4ea93c0c1b9e7a89954e010feb4a6`.
+
 ## ACCEPT-005 owner-authorized public-OSS workflow · 2026-10-24
 
 - **Subject:** `https://github.com/UtkarshGupta-CS/buggy-node` at exact commit
