@@ -933,6 +933,25 @@ secret scan, manifest
 `sha256:900880de803ab12d1e9d9ff6ee200d1e530536a1ddf37d0140496d5669124d6b`:
 `docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-accept-008-provenance.json`.
 
+## 2026-10-24 · ACCEPT-008 observed Test-Mode commercial evidence
+
+The current Pro monthly catalog passed the bounded commercial validator with
+all seven required evidence kinds, **8** distinct digest-bound events, **2**
+repeat-use observations, **30** owner support minutes, an INR **0** hosted-cost
+fact, and explicit allowances. The checkout event is bound to the separately
+recorded Razorpay Test Mode capture/refund receipt; no real money moved. The
+report records mixed provenance and `recipient-value: insufficient-evidence`.
+It correctly reports `evidenceStatus: complete` while keeping
+`acceptanceStatus: open` and `independentReview: required`. Keep ACCEPT-008
+unchecked for independent/final acceptance; no customer, Production-payment,
+publication, or final-release claim is inferred. Score remains **245 checked /
+35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/accept-008-commercial-observed-testmode-2026-10-24.md`.
+The additive bundle verifies **287** files with zero mismatches, passed secret
+scanning, and has manifest
+`sha256:7cd26e438006be50774b926e5a32153550caebe1e79cd5d1896c7014659ba329`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-commercial-observed-testmode-v6.json`.
+
 ## 2026-10-23 · current Web Preview provider receipt
 
 Clean Web `origin/main` commit `42fe33eefd2d2ce23ec89512381af2b767de4e54`
