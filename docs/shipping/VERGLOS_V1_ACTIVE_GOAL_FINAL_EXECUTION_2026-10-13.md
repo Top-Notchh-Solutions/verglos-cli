@@ -1,5 +1,28 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-008 observed Test-Mode commercial evidence
+
+The current Pro monthly catalog was run through the real bounded commercial
+validator with all seven required evidence kinds present. The report records
+**8 distinct digest-bound events**, **2** repeat-use observations, **30** owner
+support minutes, an explicit INR 0 hosted-cost fact, and a Razorpay Test Mode
+checkout event bound to the separately recorded capture/refund receipt. The
+provenance is explicitly mixed: owner-controlled synthetic plus observed
+commercial Test Mode evidence; recipient value remains
+`insufficient-evidence`.
+
+The validator result is `evidenceStatus: complete` but intentionally
+`acceptanceStatus: open` with `independentReview: required`. This is the real
+commercial-evidence slice, not a customer or final-release claim. No real money,
+paid Actions, npm publication, tag, customer data, or deletion occurred. The
+authoritative score remains **245 checked / 35 open / 280 total (87.5%)**, with
+**13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/accept-008-commercial-observed-testmode-2026-10-24.md`.
+The additive bundle now verifies **287** files with zero mismatches, passed
+secret scanning, and manifest
+`sha256:7cd26e438006be50774b926e5a32153550caebe1e79cd5d1896c7014659ba329`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-commercial-observed-testmode-v6.json`.
+
 ## Latest continuation result · 2026-10-24 · DIST-002/003 current alpha.4 artifact recheck
 
 The current CLI `aad2c743` local release flow passed license clearance, **8/8**

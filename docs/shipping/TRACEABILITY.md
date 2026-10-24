@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-008 observed Test-Mode commercial evidence
+
+- **Source mapping:** Commercial input is bound to the current Pro monthly
+  catalog and the separately retained Razorpay Test Mode capture/refund
+  receipt.
+- **Verification mapping:** `validate-commercial-acceptance.mjs` accepted all
+  seven kinds, 8 distinct event digests, 2 repeat-use observations, 30 support
+  minutes, and INR 0 hosted cost.
+- **Acceptance mapping:** Mixed provenance and `recipient-value:
+  insufficient-evidence` remain explicit; acceptance stays open and
+  independent review is required. Score **245/35/280**.
+- **Evidence:** `evidence/accept-008-commercial-observed-testmode-2026-10-24.md`.
+- **Bundle mapping:** 287 files, zero mismatches, secret scan passed;
+  manifest `sha256:7cd26e438006be50774b926e5a32153550caebe1e79cd5d1896c7014659ba329`.
+
 ## 2026-10-24 · DIST-002/003 current alpha.4 artifact recheck
 
 - **Source mapping:** CLI `aad2c743`, package version `2.0.0-alpha.4`.

@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-008 observed Test-Mode commercial evidence
+
+The bounded commercial report is complete across all seven required evidence
+kinds, with 8 distinct events, 2 repeat-use observations, 30 support minutes,
+INR 0 hosted cost, and a Test Mode checkout bound to the capture/refund
+receipt. This advances the commercial evidence gate only: recipient value is
+`insufficient-evidence`, `acceptanceStatus` remains open, and independent
+review is required. No real-money payment, customer acceptance, publication,
+or final go/no-go is inferred. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/accept-008-commercial-observed-testmode-2026-10-24.md`.
+The additive 287-file bundle verifies with zero mismatches and manifest
+`sha256:7cd26e438006be50774b926e5a32153550caebe1e79cd5d1896c7014659ba329`.
+
 ## 2026-10-24 · DIST-002/003 current alpha.4 artifact recheck
 
 Local alpha.4 release artifacts passed license clearance, seven-package pack,

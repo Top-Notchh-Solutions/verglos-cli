@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-008 observed Test-Mode commercial evidence · 2026-10-24
+
+- **Candidate:** catalog `catalog-2026-10-24`, Pro monthly, INR 280943 minor
+  units.
+- **Execution:** Commercial validator accepted all seven evidence kinds with 8
+  distinct event digests, two repeat-use observations, 30 support minutes, INR
+  0 hosted-cost fact, and a Test Mode checkout bound to the capture/refund
+  receipt.
+- **Boundary:** Mixed provenance is retained; recipient value is
+  `insufficient-evidence`; acceptance stays open and independent review is
+  required. No real money, paid Actions, customer data, publication, or
+  deletion occurred.
+- **Evidence:** `evidence/accept-008-commercial-observed-testmode-2026-10-24.md`.
+- **Bundle:** 287 files, zero mismatches, secret scan passed; manifest
+  `sha256:7cd26e438006be50774b926e5a32153550caebe1e79cd5d1896c7014659ba329`.
+
 ## DIST-002/003 current alpha.4 artifact recheck · 2026-10-24
 
 - **Candidate:** CLI `aad2c743`, version `2.0.0-alpha.4`.

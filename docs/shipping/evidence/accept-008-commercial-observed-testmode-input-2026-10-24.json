@@ -1,0 +1,123 @@
+{
+  "schema": "verglos.private.commercial-acceptance.v1",
+  "completedAt": "2026-10-24T03:00:00.000Z",
+  "catalog": {
+    "version": "catalog-2026-10-24",
+    "planId": "pro",
+    "currency": "INR",
+    "monthlyPriceMinor": 280943,
+    "allowances": {
+      "seats": 2,
+      "applications": 5,
+      "recordsPerMonth": 100,
+      "clients": 0,
+      "retentionDays": 90
+    }
+  },
+  "founderApproval": {
+    "approvalDigest": "sha256:364af4d2a9416dda634d4132c30f007ccf7071ae2c6a8e42ee2882ce53346d46",
+    "scopeDigest": "sha256:55e05f5d1d1ce5957278f04c55ad519137059edde2a6089f1621773cc6a12267",
+    "approvedAt": "2026-10-24T01:30:00.000Z",
+    "expiresAt": "2026-10-25T01:30:00.000Z"
+  },
+  "events": [
+    {
+      "kind": "plan-agreement",
+      "evidenceClass": "owner-controlled-synthetic",
+      "subjectDigest": "sha256:a9ebfe00ff8747a966f1b20f142c177bbeac41949f318b82150ddbc7ee5f48bb",
+      "observedAt": "2026-10-24T02:00:00.000Z",
+      "facts": {
+        "planId": "pro",
+        "catalogVersion": "catalog-2026-10-24",
+        "currency": "INR",
+        "amountMinor": 280943
+      },
+      "evidenceDigest": "sha256:1080ffe2c7a96b9aabcb8528f8626bb0a981518965182ebb09bd47de803e0434"
+    },
+    {
+      "kind": "checkout",
+      "evidenceClass": "observed-commercial-evidence",
+      "subjectDigest": "sha256:4007fa1adabe92e167179f41e61baf688870fa364b48881dccc68a6102ecf93f",
+      "observedAt": "2026-10-24T00:04:16.000Z",
+      "facts": {
+        "planId": "pro",
+        "catalogVersion": "catalog-2026-10-24",
+        "currency": "INR",
+        "amountMinor": 280943,
+        "provider": "razorpay-test-mode",
+        "terminalState": "captured-refunded"
+      },
+      "evidenceDigest": "sha256:26519590136437bdb399d23451812bd5c98131c56ebb570e172ae16596e94509"
+    },
+    {
+      "kind": "repeat-use",
+      "evidenceClass": "owner-controlled-synthetic",
+      "subjectDigest": "sha256:09372c2d9b633331cd7eec5e4e7e58d3b71758e90b3444c5691a2f7ab612e08e",
+      "observedAt": "2026-10-24T02:00:00.000Z",
+      "facts": {
+        "useCount": 1,
+        "surface": "local-oss-analysis-run-1"
+      },
+      "evidenceDigest": "sha256:f17eb5587859fd4eca666222e4ac12223d2203a0ceb70ff9e69a34000084f5b8"
+    },
+    {
+      "kind": "repeat-use",
+      "evidenceClass": "owner-controlled-synthetic",
+      "subjectDigest": "sha256:721ba438fff2b4bdab3b310e460596a028f8902d0ca06b01d1a5d440b2081f79",
+      "observedAt": "2026-10-24T02:00:00.000Z",
+      "facts": {
+        "useCount": 1,
+        "surface": "local-oss-analysis-run-2"
+      },
+      "evidenceDigest": "sha256:b2f1d6d73da6c6ec3551541a51f1e2fabf811b95f16dc6ebc4af0dc175114f81"
+    },
+    {
+      "kind": "support-minutes",
+      "evidenceClass": "owner-controlled-synthetic",
+      "subjectDigest": "sha256:e08f8d665c66c5bb41f99a69c43c6ac078c3c05f79416e3004d868489a3abd25",
+      "observedAt": "2026-10-24T02:00:00.000Z",
+      "facts": {
+        "minutes": 30,
+        "surface": "owner-controlled qualification support rehearsal"
+      },
+      "evidenceDigest": "sha256:63b4116dd704a5e49a4eadcd682dabdad10fb16c634224c2e0d0210b4b7a5e7b"
+    },
+    {
+      "kind": "hosted-cost",
+      "evidenceClass": "owner-controlled-synthetic",
+      "subjectDigest": "sha256:98f72b473f30d97e8e046b3a547a3e6e512db9bb0fa6ef780111cd0b979237c2",
+      "observedAt": "2026-10-24T02:00:00.000Z",
+      "facts": {
+        "currency": "INR",
+        "amountMinor": 0,
+        "surface": "no-money local/Test Mode and existing included hosting"
+      },
+      "evidenceDigest": "sha256:c866b577daf99d47c280ab0db1e1b001d0ebac4d5ef161628687db4b4fcee435"
+    },
+    {
+      "kind": "recipient-value",
+      "evidenceClass": "owner-controlled-synthetic",
+      "subjectDigest": "sha256:3ab092d7fd0990f20c204d4234a2d57f7c1d04218a40d2ae7878696c28ff44ac",
+      "observedAt": "2026-10-24T02:00:00.000Z",
+      "facts": {
+        "outcome": "insufficient-evidence",
+        "valueDigest": "sha256:eaa737a3e820c2d609cee0aeb459e2fb08acb93f671593c1442f4e474a00d122"
+      },
+      "evidenceDigest": "sha256:59914bd08eacc801738b8b194da0bb8a4653d4f8e831ba0cd56c327369da3c8d"
+    },
+    {
+      "kind": "allowance",
+      "evidenceClass": "owner-controlled-synthetic",
+      "subjectDigest": "sha256:d700924345f90b002a022cfda1b502ca31a7d1021f34ff198f726fe4547ea4ff",
+      "observedAt": "2026-10-24T02:00:00.000Z",
+      "facts": {
+        "seats": 2,
+        "applications": 5,
+        "recordsPerMonth": 100,
+        "clients": 0,
+        "retentionDays": 90
+      },
+      "evidenceDigest": "sha256:5aa7bea591eea80061d4342d79a8dea376075aa60aab3b89c738c9f100ac6adc"
+    }
+  ]
+}

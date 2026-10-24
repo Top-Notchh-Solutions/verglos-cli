@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-008 observed Test-Mode commercial evidence
+
+The current Pro monthly commercial input passed the bounded validator with all
+seven evidence kinds, eight distinct event digests, two repeat-use
+observations, 30 support minutes, INR 0 hosted cost, and a Test Mode checkout
+bound to the captured/refunded provider receipt. Provenance is mixed and the
+recipient outcome is `insufficient-evidence`. The report is complete evidence
+but keeps `acceptanceStatus: open` and `independentReview: required`; ACCEPT-008
+remains open. No real money, paid Actions, customer data, publication, or
+deletion occurred. Score remains **245 checked / 35 open / 280 total (87.5%)**.
+Evidence: `evidence/accept-008-commercial-observed-testmode-2026-10-24.md`.
+The additive bundle verifies **287** files with zero mismatches and manifest
+`sha256:7cd26e438006be50774b926e5a32153550caebe1e79cd5d1896c7014659ba329`.
+
 ## 2026-10-24 · DIST-002/003 current alpha.4 artifact recheck
 
 Local alpha.4 release artifacts passed license clearance, seven-package

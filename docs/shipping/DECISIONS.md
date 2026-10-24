@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record observed Test-Mode commercial evidence
+
+- **Decision:** Accept the bounded commercial evidence as complete evidence,
+  while keeping commercial acceptance fail-closed.
+- **Result:** Seven required kinds present; 8 distinct digest-bound events, 2
+  repeat-use observations, 30 support minutes, INR 0 hosted cost, and one
+  Razorpay Test Mode checkout bound to the recorded capture/refund receipt.
+- **Disposition:** Mixed provenance is explicit; recipient value is
+  `insufficient-evidence`; `acceptanceStatus` stays open and independent review
+  remains required. No real money, customer, publication, or final-release
+  state is claimed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-008-commercial-observed-testmode-2026-10-24.md`.
+
 ## 2026-10-24 · record current alpha.4 DIST-002/003 artifact recheck
 
 - **Decision:** Re-run the local release artifact flow at current alpha.4

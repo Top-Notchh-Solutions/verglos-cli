@@ -1,0 +1,71 @@
+{
+  "schema": "verglos.private.commercial-acceptance-report.v1",
+  "completedAt": "2026-10-24T03:00:00.000Z",
+  "catalog": {
+    "version": "catalog-2026-10-24",
+    "planId": "pro",
+    "currency": "INR",
+    "monthlyPriceMinor": 280943,
+    "allowances": {
+      "seats": 2,
+      "applications": 5,
+      "recordsPerMonth": 100,
+      "clients": 0,
+      "retentionDays": 90
+    }
+  },
+  "evidence": {
+    "evidenceClass": "mixed-commercial-sources",
+    "evidenceClasses": [
+      "owner-controlled-synthetic",
+      "observed-commercial-evidence"
+    ],
+    "kinds": [
+      {
+        "kind": "plan-agreement",
+        "count": 1
+      },
+      {
+        "kind": "checkout",
+        "count": 1
+      },
+      {
+        "kind": "repeat-use",
+        "count": 2
+      },
+      {
+        "kind": "support-minutes",
+        "count": 1
+      },
+      {
+        "kind": "hosted-cost",
+        "count": 1
+      },
+      {
+        "kind": "recipient-value",
+        "count": 1
+      },
+      {
+        "kind": "allowance",
+        "count": 1
+      }
+    ],
+    "distinctEvidenceDigests": 8,
+    "repeatUseCount": 2,
+    "supportMinutes": 30,
+    "hostedCostMinor": 0,
+    "hostedCostCurrency": "INR",
+    "recipientOutcome": "insufficient-evidence"
+  },
+  "approval": {
+    "approvalDigest": "sha256:364af4d2a9416dda634d4132c30f007ccf7071ae2c6a8e42ee2882ce53346d46",
+    "scopeDigest": "sha256:55e05f5d1d1ce5957278f04c55ad519137059edde2a6089f1621773cc6a12267",
+    "expiresAt": "2026-10-25T01:30:00.000Z"
+  },
+  "gate": {
+    "evidenceStatus": "complete",
+    "evidenceClass": "mixed-commercial-sources",
+    "acceptanceStatus": "open",
+    "independentReview": "required"
+  }
+}
