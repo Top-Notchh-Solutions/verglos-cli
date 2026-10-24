@@ -1,5 +1,27 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-014 bounded final-regression execution
+
+The implemented final-regression runner now has a real local execution receipt:
+**12** CLI scans across **8/8** exact public OSS fixtures and all **5/5** plan
+simulations. The run recorded **0** finding regressions, **0** performance
+regressions, and an aggregate duration delta of **-10,238 ms**. The result is a
+fail-closed **no-go**: all five final-regression gates remain open, and the
+runner explicitly reports missing `admin`, `approver`, `member`, and `viewer`
+role scenarios plus the `multi` tenant mode. No role/tenant measurement was
+reused as false coverage. No checkbox changed; score remains **245 checked / 35
+open / 280 total (87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/accept-014-final-regression-execution-2026-10-24.md`,
+`docs/shipping/evidence/accept-014-final-regression-input-2026-10-24-v2.json`,
+and `docs/shipping/evidence/accept-014-final-regression-result-2026-10-24-v2.json`.
+
+This closes the missing local execution-receipt portion of ACCEPT-014's
+implementation work, but ACCEPT-014 remains open for the missing role/tenant
+scenarios, dependent correction/provider gates, independent review, and final
+decision. No paid Actions run, customer data, provider transaction, npm
+publication, tag, final release, database mutation, or deletion occurred.
+
 ## Latest continuation result · 2026-10-24 · current Web candidate local verification
 
 Web commit `21f9cfbd559d2b06c328d985ef4615430643c0ed` was verified from a clean

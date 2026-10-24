@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-014 bounded final-regression execution
+
+- **Source mapping:** CLI `aad2c74395a5c381c955ab9dfab7462295564840` and Web
+  `21f9cfbd559d2b06c328d985ef4615430643c0ed` at `2.0.0-alpha.4`.
+- **Verification mapping:** 12 actual scans; 8/8 fixtures; 5/5 plans; zero
+  finding/performance regressions; aggregate duration delta `-10,238 ms`.
+- **Acceptance mapping:** Runner reports no-go, with missing non-owner roles,
+  multi-tenant mode, and five open gates. No checkbox changed; score remains
+  245/35/280.
+- **Evidence:** `evidence/accept-014-final-regression-execution-2026-10-24.md`,
+  the byte-bound v2 input/result JSON files, and
+  `scripts/build-final-regression-input.mjs`.
+
 ## 2026-10-24 · current Web candidate local verification
 
 - **Source mapping:** Clean Web worktree at commit

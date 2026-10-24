@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record ACCEPT-014 bounded final-regression execution
+
+- **Decision:** Accept the 12-scan local execution as real implementation and
+  reproducibility evidence; keep the release recommendation fail-closed.
+- **Result:** Eight exact fixtures and five plan simulations ran; finding and
+  performance regression counts were zero, with aggregate duration delta
+  `-10,238 ms`.
+- **Disposition:** `no-go` is correct because all five gates are open and
+  admin/approver/member/viewer plus multi-tenant scenarios are not exercised.
+  No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-014-final-regression-execution-2026-10-24.md`.
+
 ## 2026-10-24 · record current Web candidate local verification
 
 - **Decision:** Accept the current clean-worktree code/build receipt as
