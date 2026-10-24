@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record Production landing multi-browser receipt
+
+- **Decision:** Accept the read-only Production browser captures as current
+  automated hosted evidence for the public landing and checkout surfaces.
+- **Result:** Chromium, Firefox, and WebKit each passed 12/12 measurements;
+  total 36/36, zero Axe findings, zero keyboard/responsive/metadata/crawl
+  failures, and 12/12 observed INP measurements per engine.
+- **Disposition:** Keep FINAL-WEB-007/008 open for human screen-reader,
+  field-CWV, customer/recipient, independent-review, AppSec/Hunt, and final
+  release evidence. No checkbox changed; score remains 245/35/280.
+- **Evidence:** `evidence/final-web-007-008-production-landing-multibrowser-2026-10-24.md`.
+
 ## 2026-10-24 · record current CLI public-OSS workflow rerun
 
 - **Decision:** Accept the corrected fixture-root binding for the current

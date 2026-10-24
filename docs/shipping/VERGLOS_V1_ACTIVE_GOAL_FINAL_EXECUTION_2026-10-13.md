@@ -1,5 +1,18 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Production landing multi-browser receipt
+
+The current `https://verglos.com` Production alias passed the release browser
+harness in Chromium, Firefox, and WebKit: **36/36** route×viewport
+measurements across `/`, `/docs`, `/detectors`, `/proof`, `/verify`, and
+`/checkout`. Each engine reported zero Axe findings, zero keyboard/responsive/
+metadata/crawlability failures, and 12/12 observed INP measurements. This is
+automated hosted evidence only; it does not create human screen-reader,
+field-CWV, customer, independent-review, AppSec/Hunt, or final-release proof.
+No checkbox changed; score remains **245 checked / 35 open / 280 total
+(87.5%)**. Evidence:
+`docs/shipping/evidence/final-web-007-008-production-landing-multibrowser-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · current CLI public-OSS workflow rerun
 
 The owner-authorized public-OSS workflow was rerun from the exact

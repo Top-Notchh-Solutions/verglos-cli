@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Production landing multi-browser receipt
+
+- **Source mapping:** Public Production alias `https://verglos.com`, serving
+  the previously inspected merged Web candidate.
+- **Verification mapping:** Chromium, Firefox, and WebKit each completed 12
+  route×viewport measurements; 36/36 total passed with zero Axe, keyboard,
+  responsive, metadata, or crawlability failures and 12/12 INP observations.
+- **Acceptance mapping:** This advances automated provider/browser evidence for
+  FINAL-WEB-007/008 only. Human/field, customer, independent-review,
+  AppSec/Hunt, and final-release gates remain open; no checkbox changed.
+- **Evidence:** `evidence/final-web-007-008-production-landing-multibrowser-2026-10-24.md`.
+
 ## 2026-10-24 · current CLI public-OSS workflow rerun
 
 - **Source mapping:** Exact `buggy-node` commit
