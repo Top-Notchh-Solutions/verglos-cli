@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-006 current protocol recheck
+
+Comprehension scorer **11/11** passed; protocol state remains participant and
+Hunt open. No participant or independent acceptance was recorded. ACCEPT-006
+remains unchecked. Score remains **246/34/280 (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-006-current-protocol-recheck-2026-10-24.md`.
+Bundle v56 verifies **390** files with zero mismatches, matching manifest
+`sha256:df37f1fa17f784436ea3846fec6db0913a5e13a4ea7074cf8fb49a1338d110a3`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-009 reconciliation v6 replay
 
 Current reconciler contracts passed **22/22**; replay remains **1 shipped / 21

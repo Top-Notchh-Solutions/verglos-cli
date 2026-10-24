@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-006 current protocol recheck · 2026-10-24
+
+- **Execution:** Ran scorer/protocol syntax checks, the comprehension scorer
+  suite, and study-protocol validator.
+- **Result:** **11/11** scorer tests passed; state remained
+  `participantRun: open` and `huntAdjudication: open`.
+- **Disposition:** No participant, answer data, independent review, or final
+  acceptance occurred; ACCEPT-006 remains unchecked and score remains
+  **246/34/280**.
+- **Evidence:** `evidence/accept-006-current-protocol-recheck-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v56.json` verifies 390 files with zero mismatches, matching manifest `sha256:df37f1fa17f784436ea3846fec6db0913a5e13a4ea7074cf8fb49a1338d110a3`, and passed secret scanning.
+
 ## ACCEPT-009 reconciliation v6 replay · 2026-10-24
 
 - **Execution:** Ran reconciler, freeze, and final-regression syntax checks,
