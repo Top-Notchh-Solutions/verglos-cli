@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current Web candidate local verification
+
+- **Decision:** Accept the current clean-worktree code/build receipt as
+  implementation evidence without treating it as hosted or final acceptance.
+- **Result:** Web `21f9cfbd559d2b06c328d985ef4615430643c0ed`; typecheck passed;
+  suite **904/928** with 24 designed database skips and 0 failures; build
+  **49/49** routes.
+- **Disposition:** No checkbox changed. Hosted, field/human,
+  customer/recipient, independent-review, provider-lifecycle, AppSec/Hunt, and
+  final-release evidence remain distinct. Score remains **245/35/280
+  (87.5%)**.
+- **Evidence:** `evidence/final-web-current-head-local-verification-2026-10-24.md`.
+- **Bundle:** 289 files, zero mismatches, secret scan passed; manifest
+  `sha256:8d00fc1e4303c58fbf504492b639c3c6bc05c57d5e4caa614699e2847c34c6ab`.
+
 ## 2026-10-24 · record production availability recheck
 
 - **Decision:** Record the current Production deployment and public endpoint

@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## Current Web candidate local verification · 2026-10-24
+
+- **Candidate:** Web `21f9cfbd559d2b06c328d985ef4615430643c0ed` from a clean
+  worktree.
+- **Verification:** Typecheck passed; Web suite **904 passed / 24 designed
+  database-dependent skips / 0 failures / 928 total**; production build
+  generated **49/49** routes.
+- **Boundary:** Code/build evidence only. No database migration or write was
+  requested; no checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/final-web-current-head-local-verification-2026-10-24.md`.
+- **Bundle:** 289 files, zero mismatches, secret scan passed; manifest
+  `sha256:8d00fc1e4303c58fbf504492b639c3c6bc05c57d5e4caa614699e2847c34c6ab`.
+
 ## Production availability recheck · 2026-10-24
 
 - **Provider:** Vercel Production deployment

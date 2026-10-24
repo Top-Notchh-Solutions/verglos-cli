@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current Web candidate local verification
+
+- **Source mapping:** Clean Web worktree at commit
+  `21f9cfbd559d2b06c328d985ef4615430643c0ed`.
+- **Verification mapping:** Typecheck passed; full Web suite passed 904/928
+  with 24 designed database skips and 0 failures; build generated 49/49
+  routes.
+- **Acceptance mapping:** Code/build evidence only; no row checkbox changed
+  and score remains 245/35/280. Hosted, field, customer, independent-review,
+  provider, AppSec/Hunt, and final-release evidence remain separate.
+- **Evidence:** `evidence/final-web-current-head-local-verification-2026-10-24.md`.
+- **Bundle mapping:** 289 files, zero mismatches, secret scan passed; manifest
+  `sha256:8d00fc1e4303c58fbf504492b639c3c6bc05c57d5e4caa614699e2847c34c6ab`.
+
 ## 2026-10-24 · production availability recheck
 
 - **Source mapping:** Vercel Production deployment
