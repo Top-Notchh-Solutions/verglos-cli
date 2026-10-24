@@ -115,6 +115,7 @@ const paths = [
   "docs/shipping/evidence/vercel-web-production-receipt-api-route-fix-2026-10-24.md",
   "docs/shipping/evidence/studio-cli-001-production-handoff-ack-boundary-pr267-2026-10-24.md",
   "docs/shipping/evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md",
+  "docs/shipping/evidence/studio-cli-001-local-handoff-projection-contract-recheck-2026-10-24.md",
   "docs/shipping/evidence/web-full-serial-regression-pr268-2026-10-24.md",
   "docs/shipping/evidence/final-web-007-production-browser-qualification-2026-10-24.md",
   "docs/shipping/evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md",

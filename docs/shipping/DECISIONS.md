@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record STUDIO-CLI-001 contract recheck
+
+- **Decision:** Accept the 52/52 focused Web Studio contract run as additive
+  implementation evidence.
+- **Boundary:** It does not represent recipient/customer acceptance. Keep the
+  row unchecked until the genuine authorized acceptance artifact exists.
+- **Score:** 246/34/280; no provider, payment, customer, publication,
+  AppSec/Hunt, or final-release action occurred.
+- **Evidence:** `evidence/studio-cli-001-local-handoff-projection-contract-recheck-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-studio-contract-v9.json`
+  verifies 335 files with zero mismatches and passed secret scan.
+
 ## 2026-10-24 · refresh release reconciliation after ACCEPT-005 closure
 
 - **Decision:** Reconcile the current candidate with `ACCEPT-005` shipped for

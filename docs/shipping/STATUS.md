@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · STUDIO-CLI-001 contract recheck
+
+Focused local Studio projection/workspace/handoff contracts passed **52/52**
+against Web head `705a85e`, with zero failures, skips, or cancellations. This
+advances implementation evidence only; authorized recipient/customer
+acceptance remains open. Score remains **246/34/280 (87.9%)**. Evidence:
+`evidence/studio-cli-001-local-handoff-projection-contract-recheck-2026-10-24.md`.
+Bundle v9 verifies 335 files with zero mismatches and passed secret scanning.
+
 ## 2026-10-24 · release reconciliation refreshed
 
 The v3 release reconciliation now records **1 shipped** row (`ACCEPT-005`) and

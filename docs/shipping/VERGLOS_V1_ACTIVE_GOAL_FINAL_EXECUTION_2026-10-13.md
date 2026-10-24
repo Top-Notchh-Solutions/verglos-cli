@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 contract recheck
+
+The current Web head `705a85e2b7b9d847a85748463aa0d797c60b384f` passed the
+focused Studio projection/workspace/handoff contract suite **52/52**, with
+zero failures, skips, or cancellations. It covers safe projection and digest
+binding, tenant/role boundaries, workspace allowance/lifecycle, handoff
+issuance/expiry/token/recipient/replay/revocation rules, public acknowledgement
+boundaries, and route contracts. This is local implementation evidence only;
+the row remains open for genuine authorized recipient/customer acceptance and
+its independent artifact. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-cli-001-local-handoff-projection-contract-recheck-2026-10-24.md`.
+The additive bundle v9 verifies **335 files**, zero mismatches, matching
+manifest `sha256:2edd4e144d32de5e29da84f507690e7e9b618730eba4bb90b2931132b55016fb`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · release reconciliation refreshed
 
 The current release reconciliation now reflects the merged backlog: **22**
