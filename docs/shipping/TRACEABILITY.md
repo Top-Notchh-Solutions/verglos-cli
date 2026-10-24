@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #293 organization write SQLSTATE hardening
+
+- **Implementation mapping:** Web PR #293 merged normally as
+  `a4a048293501dedc3652aeb82bc4fc40e2e95694` from `ba2bbac`; organization,
+  project, workspace, handoff, SCM, policy, evaluation, and exception writes
+  classify duplicate conflicts only from PostgreSQL SQLSTATE `23505`.
+- **Verification mapping:** Ten-route contract **1/1**, helper/policy
+  regressions **20/20**, Web typecheck, and diff checks passed. Vercel
+  deployment `dpl_F16xyZxrYkf8AiSLcwAxbSjG8ZyS` reached Ready/Production; six
+  public paths were **200** on `verglos.com` and **308** canonical redirects
+  on `www`, while the protected deployment hostname returned **302**.
+- **Boundary mapping:** GitHub Actions checks failed before repository steps
+  because the account budget/runners are blocked; no rerun was started. This
+  is implementation/provider evidence only and does not provide human/field,
+  independent/AppSec, customer/recipient, or final release evidence. No
+  checkbox changed; score remains **246/34/280**.
+- **Evidence:** `evidence/organization-unique-conflict-sqlstate-pr293-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #292 policy-exception SQLSTATE hardening
 
 - **Implementation mapping:** Web PR #292 merged normally as
