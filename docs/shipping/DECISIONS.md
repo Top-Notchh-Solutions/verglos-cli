@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current CLI public-OSS workflow rerun
+
+- **Decision:** Accept the corrected fixture-root binding for the current
+  owner-authorized public-OSS execution as reproducibility evidence.
+- **Result:** CLI `cd9d572e` scanned the exact `buggy-node` commit with exit 0,
+  complete coverage, 8 files walked, 59 findings, and 1559 ms.
+- **Disposition:** Keep ACCEPT-005 open. This does not upgrade public-OSS
+  analysis into customer/recipient acceptance or independent/final review.
+  Score remains 245/35/280; no provider, payment, publication, deletion, or
+  final release action occurred.
+- **Evidence:** `evidence/accept-005-current-cli-cd9d572e-public-oss-workflow-2026-10-24.md`.
+
 ## 2026-10-24 · merge ACCEPT-014 correction
 
 - **Decision:** Accept CLI PR #306's normal merge at

@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current CLI public-OSS workflow rerun
+
+- **Source mapping:** Exact `buggy-node` commit
+  `b1b9cbc8b86f81a1ecb0b142190d4fa4698518da` and CLI candidate
+  `cd9d572e28462741103cb21a2274e5892939d5d4`.
+- **Verification mapping:** The scan ran from the fixture directory with exit
+  0, complete coverage, 8 files, 59 findings, and 1559 ms; report digests are
+  byte-bound in the evidence receipt.
+- **Acceptance mapping:** Owner-authorized public-OSS reproducibility only;
+  no customer/recipient, independent-review, AppSec/Hunt, or final-release
+  gate was closed. `ACCEPT-005` remains unchecked; score is 245/35/280.
+- **Evidence:** `evidence/accept-005-current-cli-cd9d572e-public-oss-workflow-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-014 correction merged
 
 - **Source mapping:** CLI PR #306 merged at
