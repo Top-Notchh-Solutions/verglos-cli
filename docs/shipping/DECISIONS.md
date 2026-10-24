@@ -1,5 +1,26 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-head corpus and final regression
+
+- **Decision:** Accept the current-head exact-commit corpus and complete
+  fixture×plan×role×tenant matrix as additive implementation evidence.
+- **Result:** 8/8 fixtures, 13,494 files, 351 observations, 0 coverage gaps;
+  400/400 matrix keys, 0 failed runs, 0 finding regressions, and 0 performance
+  regressions; current reconciliation recommends `no-go`.
+- **Candidate:** CLI `f6facdc5db312325f00618e3e463dc81569c4341`; Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Boundary:** Local owner-authorized public-OSS/synthetic product-contract
+  evidence only. No customer, provider publication, independent review,
+  human/field-CWV, AppSec/Hunt, final release, or checkbox change.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain open.
+- **Evidence:** `evidence/accept-011-012-014-current-head-f6fac-2026-10-24.md`;
+  `evidence/acceptance-release-reconciliation-2026-10-24-current-v5.json`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v18.json`
+  verifies 350 files with zero mismatches, matching manifest
+  `sha256:c5ca9b2845d35f09589db543549b6c63d37b82afdc50064aefc2cb720e2fced5`,
+  and passed secret scanning.
+
 ## 2026-10-24 · record read-only Production availability
 
 - **Decision:** Record the existing Vercel Production surface as available

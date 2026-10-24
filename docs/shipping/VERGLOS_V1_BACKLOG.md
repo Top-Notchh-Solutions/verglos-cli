@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current-head corpus and final regression
+
+The current merged CLI `f6facdc5` verified 8/8 exact-commit public-OSS
+fixtures, walking 13,494 files and producing 351 observations across 23 rule
+groups with 0 coverage gaps. Forty plan-bound scans produced a complete
+**400/400** fixture×plan×role×tenant matrix with 0 failed runs, finding
+regressions, or performance regressions; the current Web authorization matrix
+is 50/50 at `257e1cc8`. The current reconciliation records **1 shipped / 21
+partial** non-AppSec rows and recommends **no-go** with 6 open gates. Keep
+ACCEPT-011/012/014 unchecked; no checkbox changed. Score remains **246 checked
+/ 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/accept-011-012-014-current-head-f6fac-2026-10-24.md` and
+`docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v5.json`.
+Bundle v18 verifies 350 files with zero mismatches, matching manifest
+`sha256:c5ca9b2845d35f09589db543549b6c63d37b82afdc50064aefc2cb720e2fced5`,
+and passed secret scanning.
+
 ## 2026-10-24 · read-only Production availability
 
 The existing Vercel Production deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc`

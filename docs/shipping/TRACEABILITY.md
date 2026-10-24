@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-head corpus and final regression
+
+- **Source mapping:** CLI `f6facdc5db312325f00618e3e463dc81569c4341` and Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`, both merged heads.
+- **Verification mapping:** 8/8 exact-commit fixtures, 13,494 files, 351
+  observations, 0 coverage gaps; final regression 400/400 keys, 0 failed
+  runs, 0 finding regressions, and 0 performance regressions.
+- **Acceptance mapping:** Current local synthetic/public-OSS implementation and
+  product-contract evidence only. Triage, provider lifecycle, independent
+  review, human/field, AppSec/Hunt, and final-release gates remain open; no
+  checkbox changed.
+- **Evidence:** `evidence/accept-011-012-014-current-head-f6fac-2026-10-24.md`
+  and `evidence/acceptance-release-reconciliation-2026-10-24-current-v5.json`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v18.json`
+  verifies 350 files with zero mismatches, matching manifest
+  `sha256:c5ca9b2845d35f09589db543549b6c63d37b82afdc50064aefc2cb720e2fced5`,
+  and passed secret scanning.
+
 ## 2026-10-24 · read-only Production availability
 
 - **Hosted mapping:** Existing Vercel Production deployment
