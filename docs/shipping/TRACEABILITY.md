@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-002/003 current publish-contract regression
+
+- **Implementation mapping:** Publish preflight, workflow, license, artifact,
+  tag, checksum, release metadata, and mocked provenance contracts.
+- **Contract mapping:** **44/44** tests passed with no failures, skips,
+  cancellations, or todos.
+- **Boundary mapping:** The suite did not write to npm or any provider and did
+  not create protected approval, external attestation, or release sign-off.
+  DIST-002/003 remain unchecked.
+- **Evidence:** `evidence/dist-002-003-current-publish-contract-regression-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v39.json` verifies 373 files with zero mismatches, matching manifest `sha256:39916f73fa7739a3cf8ea6578df59bee973e4ef7a5c21570c870ea2b6d7d8fe6`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-007/008 production browser capture
 
 - **Implementation mapping:** Existing landing-release Playwright capture and

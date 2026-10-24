@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## DIST-002/003 current publish-contract regression · 2026-10-24
+
+- **Execution:** Ran the bounded publish-preflight, workflow, license,
+  release-artifact, tag-binding, release-note/origin, checksum, and mocked
+  provenance suites.
+- **Result:** **44/44** passed with zero failures, cancellations, skips, or
+  todos.
+- **Disposition:** Local implementation evidence only. No registry/provider
+  write, tag, protected approval, token use, external attestation, or release
+  sign-off occurred; DIST-002 and DIST-003 remain unchecked. Score remains
+  **246/34/280**.
+- **Evidence:** `evidence/dist-002-003-current-publish-contract-regression-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v39.json` verifies 373 files with zero mismatches, matching manifest `sha256:39916f73fa7739a3cf8ea6578df59bee973e4ef7a5c21570c870ea2b6d7d8fe6`, and passed secret scanning.
+
 ## FINAL-WEB-007/008 production browser capture · 2026-10-24T07:20Z
 
 - **Execution:** Ran the existing Chromium Playwright landing-release capture

@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-002/003 current publish-contract regression
+
+The no-spend trusted-publishing, package-preflight, license, release-artifact,
+tag-binding, and mocked-provenance suite passed **44/44** with zero failures,
+cancellations, skips, or todos. This strengthens the local DIST-002/DIST-003
+implementation boundary only. No npm registry write, tag, protected approval,
+token use, provider attestation, or release sign-off occurred; both rows remain
+unchecked. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-002-003-current-publish-contract-regression-2026-10-24.md`.
+Bundle v39 verifies **373** files with **0** mismatches, matching manifest
+`sha256:39916f73fa7739a3cf8ea6578df59bee973e4ef7a5c21570c870ea2b6d7d8fe6`,
+and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-007/008 production browser capture
 
 The existing Chromium landing-release capture and qualification ran against
