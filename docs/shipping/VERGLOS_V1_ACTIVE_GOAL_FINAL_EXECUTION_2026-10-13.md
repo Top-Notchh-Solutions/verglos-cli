@@ -1,5 +1,19 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-009 reconciliation v6 replay
+
+The reconciliation, freeze, and final-regression syntax checks passed; the
+focused contract suite passed **22/22**. Current replay reported **1 shipped /
+21 partial / 0 planned**, six corrections, one rollback, and six open gates.
+The recorded recommendation remains `no-go`, `goEligible=false`, and
+`acceptanceStatus=open`. `ACCEPT-009` remains unchecked; score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-009-current-reconciliation-v6-replay-2026-10-24.md`.
+Bundle v55 verifies **389** bounded files with **0** mismatches, matching
+manifest `sha256:dc671bb5e4063025681622a45f61c5cd341ad52e7eb4126eb120867c9d0d2d99`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-003 current bundle v53 verification
 
 The bundle verifier contracts passed **4/4**; bundle v53 verified **387/387**

@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-009 reconciliation v6 replay · 2026-10-24
+
+- **Execution:** Ran reconciler, freeze, and final-regression syntax checks,
+  the **22/22** focused suite, and current v6 reconciliation replay.
+- **Result:** 1 shipped, 21 partial, 0 planned; 6 corrections, 1 rollback, 6
+  open gates; recommendation `no-go`, `goEligible=false`.
+- **Disposition:** Fail-closed release-state evidence only. No provider,
+  customer, independent/authenticated/field, deletion, or final release action
+  occurred; ACCEPT-009 remains unchecked and score remains **246/34/280**.
+- **Evidence:** `evidence/accept-009-current-reconciliation-v6-replay-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v55.json` verifies 389 files with zero mismatches, matching manifest `sha256:dc671bb5e4063025681622a45f61c5cd341ad52e7eb4126eb120867c9d0d2d99`, and passed secret scanning.
+
 ## ACCEPT-003 current bundle v53 verification · 2026-10-24
 
 - **Execution:** Ran the bundle verifier contract suite and verified current
