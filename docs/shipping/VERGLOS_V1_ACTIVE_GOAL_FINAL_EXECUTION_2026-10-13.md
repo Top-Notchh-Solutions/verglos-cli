@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-014 matrix contract and Web implementation
+
+Web PR [#282](https://github.com/anuragyadav-git/verglos-web/pull/282) merged
+normally at `cb266b83406bbfffbd5ab02189556e60973a63a6`. The new Web
+product-contract emitter executes **50/50** plan × role × tenant-mode cells
+(5 plans × 5 roles × single/multi tenant modes); targeted authorization/tenant
+verification passed **31/31** and Web typecheck passed. The private final
+regression validator now requires all **400** fixture × plan × role × tenant
+keys for the eight-fixture corpus plus the digest-bound Web receipt.
+
+The current v3 rerun verified the Web receipt, had **12** executed runs and
+**388** missing full-matrix keys, with 0 failed runs, 0 finding regressions,
+and 0 performance regressions. It remains a truthful fail-closed `no-go`; no
+checkbox changed. Score remains **245 checked / 35 open / 280 total (87.5%)**,
+split **13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.md`,
+`docs/shipping/evidence/accept-014-final-regression-matrix-contract-v2-2026-10-24.md`.
+
+No customer data, database mutation, deletion, provider transaction, npm
+publication, tag, release, or non-completed Actions run occurred.
+
 ## Latest continuation result · 2026-10-24 · current merged CLI public-OSS corpus execution
 
 The fresh telemetry-off execution against CLI commit `cd9d572e28462741103cb21a2274e5892939d5d4` (merged PR #294 at `c745a2f1`) scanned **8/8** exact full-clone public JS/TS fixtures. It walked **13,494** files, produced **351** bounded observations across **23** rule groups, covered `small`, `multi-user`, `multi-tenant-team`, and `enterprise-like` architecture shapes, and recorded **0** coverage gaps. Verification and triage are byte-bound in the private evidence root; no source or report was uploaded.

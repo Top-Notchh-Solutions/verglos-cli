@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-014 matrix implementation and contract correction
+
+- **Source mapping:** Web PR #282 merged at
+  `cb266b83406bbfffbd5ab02189556e60973a63a6`; private regression contract
+  changed in the current shipping branch.
+- **Verification mapping:** 50 product-contract cells executed; targeted Web
+  role/tenant checks **31/31** and typecheck passed. Receipt digest
+  `sha256:27f43b5d8e5a251dcba79181453eb4a7c627026584276f1b60fe84424409fc1e`.
+- **Acceptance mapping:** The v3 regression output requires 400 fixture
+  cross-product keys, verified the Web receipt, and reports 388 missing keys;
+  no-go remains. ACCEPT-014 is unchecked; score remains 245/35/280.
+- **Evidence:** `evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.md`,
+  `evidence/accept-014-final-regression-matrix-contract-v2-2026-10-24.md`.
+
 ## 2026-10-24 · current merged CLI public-OSS corpus execution
 
 - **Source mapping:** CLI `cd9d572e28462741103cb21a2274e5892939d5d4`, merged by PR #294 at `c745a2f103e7cf950bcaef1577456dffb94c876b`.

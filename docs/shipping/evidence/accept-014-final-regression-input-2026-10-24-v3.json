@@ -1,0 +1,608 @@
+{
+  "schema": "verglos.private.final-regression.v1",
+  "candidate": {
+    "cliCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+    "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+    "version": "2.0.0-alpha.4"
+  },
+  "corpus": {
+    "verificationSchema": "verglos.private.public-oss-corpus-verification.v1",
+    "manifestSha256": "sha256:9fee9eb8f5bdba47317c9a992bccc476490d57a3bb8fe842eec390e8b4c009a2",
+    "fixtureCount": 8,
+    "fixtures": [
+      {
+        "name": "buggy-node",
+        "exactCommit": "b1b9cbc8b86f81a1ecb0b142190d4fa4698518da",
+        "reportSha256": "sha256:5df17aefe380a206e4a4e0d326103a74391c9cc915927e002bb04d1631ba240b",
+        "reportPath": "buggy-node/verglos-report.json",
+        "architectureShapes": [
+          "small"
+        ]
+      },
+      {
+        "name": "juice-shop",
+        "exactCommit": "1618a611b173b4bf114028e6e02549950606e29d",
+        "reportSha256": "sha256:4acf0a807563df1da3cd9e8001ccd5673007b36b3c2f5efe8cd21759d7ac7eee",
+        "reportPath": "juice-shop/verglos-report.json",
+        "architectureShapes": [
+          "multi-user"
+        ]
+      },
+      {
+        "name": "nodegoat",
+        "exactCommit": "c5cb68a7084e4ae7dcc60e6a98768720a81841e8",
+        "reportSha256": "sha256:93eaeed494dcebd33a61475dd281ad48e6b24e24c4c9c819c720a6178a2a6e67",
+        "reportPath": "nodegoat/verglos-report.json",
+        "architectureShapes": [
+          "multi-user"
+        ]
+      },
+      {
+        "name": "dvna",
+        "exactCommit": "9ba473add536f66ac9007966acb2a775dd31277a",
+        "reportSha256": "sha256:0b715e3bf4e0d252e4befcc439c7f8d3d9354e2bc237658d6a31cb43caa25751",
+        "reportPath": "dvna/verglos-report.json",
+        "architectureShapes": [
+          "small"
+        ]
+      },
+      {
+        "name": "nodejs-goof",
+        "exactCommit": "add14ba59e98240d9e00a235dd7d42cd61ae9912",
+        "reportSha256": "sha256:a6f79aa9b6bf062cc68e883bda312de7b9bddabea41fa51c122423a98e423c98",
+        "reportPath": "nodejs-goof/verglos-report.json",
+        "architectureShapes": [
+          "multi-user"
+        ]
+      },
+      {
+        "name": "damm-vulnerable-node",
+        "exactCommit": "1946570b36bf8e6dcac48142f072f40ee9cee160",
+        "reportSha256": "sha256:2ae8120d65a551b3c22c4d58c15d6f638e9112bfd8eb13d185716b47dc206b77",
+        "reportPath": "damm-vulnerable-node/verglos-report.json",
+        "architectureShapes": [
+          "small"
+        ]
+      },
+      {
+        "name": "payload",
+        "exactCommit": "57f39097aa17d0ee4db728e393a47409ee24e586",
+        "reportSha256": "sha256:bbbf1780da294f9fa7a84d199636c2fadc34b608c334bafdc15a0ad0f2f79689",
+        "reportPath": "payload-corrected/verglos-report.json",
+        "architectureShapes": [
+          "multi-tenant-team"
+        ]
+      },
+      {
+        "name": "vendure",
+        "exactCommit": "b6653518cd342f803469a394eff6beb0f7a13a12",
+        "reportSha256": "sha256:23294037a72cc34f287a7a7086bbf4173daae20e46226bc6b5b619b5744c5fc2",
+        "reportPath": "vendure-corrected/verglos-report.json",
+        "architectureShapes": [
+          "multi-tenant-team",
+          "enterprise-like"
+        ]
+      }
+    ]
+  },
+  "thresholds": {
+    "maxDurationIncreasePercent": 25
+  },
+  "gates": {
+    "truthRegistry": "open",
+    "riskReview": "open",
+    "heldOutCorrection": "open",
+    "providerLifecycle": "open",
+    "finalRelease": "open"
+  },
+  "decision": "no-go",
+  "runs": [
+    {
+      "fixture": "buggy-node",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "free",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 5019,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 1602,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "buggy-node/free/verglos-report.json",
+          "sha256": "sha256:7c499cc8fed7277607054273ea731fd5c13c4a346d6bcf08c838958e3d4572fb"
+        }
+      ]
+    },
+    {
+      "fixture": "buggy-node",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "pro",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 5019,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 1642,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "buggy-node/pro/verglos-report.json",
+          "sha256": "sha256:609219ccae06f0d18174279ecb23029487290a52edf7ea8e94b064e764fbb8cd"
+        }
+      ]
+    },
+    {
+      "fixture": "buggy-node",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "team",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 5019,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 1426,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "buggy-node/team/verglos-report.json",
+          "sha256": "sha256:f2ef8001cd1d74052f49ce676cab5bb3d90ad4a84b8fbe27436e462ffe167f13"
+        }
+      ]
+    },
+    {
+      "fixture": "buggy-node",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "studio",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 5019,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 1319,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "buggy-node/studio/verglos-report.json",
+          "sha256": "sha256:ee16a5b7e46481eab49f6bb30aa1df9038ab9f59a765f11090b846fdd75359bc"
+        }
+      ]
+    },
+    {
+      "fixture": "buggy-node",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "enterprise",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 5019,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8,
+        "findingCount": 59,
+        "durationMs": 1446,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "buggy-node/enterprise/verglos-report.json",
+          "sha256": "sha256:99e396a2e541d6ca5d618fb146132fbcd64909f07ab0f3827f563d8f200a43b1"
+        }
+      ]
+    },
+    {
+      "fixture": "juice-shop",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "free",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 906,
+        "findingCount": 54,
+        "durationMs": 55262,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 906,
+        "findingCount": 54,
+        "durationMs": 57496,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "juice-shop/free/verglos-report.json",
+          "sha256": "sha256:88fd24cf98e344fe22c0d5b18c0cb8ee4cb47f9caf1a09395e768f1cbc5d775c"
+        }
+      ]
+    },
+    {
+      "fixture": "nodegoat",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "free",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 67,
+        "findingCount": 31,
+        "durationMs": 9234,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 67,
+        "findingCount": 31,
+        "durationMs": 5545,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "nodegoat/free/verglos-report.json",
+          "sha256": "sha256:2d72fcaf31bc44eb3febd3075e7fd4976202fdcd872d7f4933724632b4c599e6"
+        }
+      ]
+    },
+    {
+      "fixture": "dvna",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "free",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 35,
+        "findingCount": 17,
+        "durationMs": 940,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 35,
+        "findingCount": 17,
+        "durationMs": 480,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "dvna/free/verglos-report.json",
+          "sha256": "sha256:71a78af5358003242e24175281fc367fbbc4881bf36d8c454ef0dce870a4884c"
+        }
+      ]
+    },
+    {
+      "fixture": "nodejs-goof",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "free",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 25,
+        "findingCount": 29,
+        "durationMs": 7605,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 25,
+        "findingCount": 29,
+        "durationMs": 2234,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "nodejs-goof/free/verglos-report.json",
+          "sha256": "sha256:f6a0210cb5d97115d380321c345e5257e08f32e25488a0745ad3096d51a4e470"
+        }
+      ]
+    },
+    {
+      "fixture": "damm-vulnerable-node",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "free",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 38,
+        "findingCount": 17,
+        "durationMs": 441,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 38,
+        "findingCount": 17,
+        "durationMs": 476,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "damm-vulnerable-node/free/verglos-report.json",
+          "sha256": "sha256:e369221da074dec865301fb9c34f3dcee5be18cdfef9dce7e188e2a5c0c38b39"
+        }
+      ]
+    },
+    {
+      "fixture": "payload",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "free",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8585,
+        "findingCount": 79,
+        "durationMs": 79160,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 8585,
+        "findingCount": 79,
+        "durationMs": 89676,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "payload/free/verglos-report.json",
+          "sha256": "sha256:0a628e9c4f62ce15ec5037f9b30e8c718f87995bacc71d65d347a05fcc969cc4"
+        }
+      ]
+    },
+    {
+      "fixture": "vendure",
+      "sourceCommit": "aad2c74395a5c381c955ab9dfab7462295564840",
+      "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+      "scenario": {
+        "plan": "free",
+        "userRole": "owner",
+        "tenantMode": "single"
+      },
+      "baseline": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 3830,
+        "findingCount": 65,
+        "durationMs": 48858,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "candidate": {
+        "status": "passed",
+        "exitCode": 0,
+        "coverage": "complete",
+        "filesWalked": 3830,
+        "findingCount": 65,
+        "durationMs": 53015,
+        "limitations": [
+          "CLI plan simulation executed; user-role and tenant-mode behavior was not exercised by this CLI-only run.",
+          "Hosted Web/provider lifecycle was not invoked by this local corpus run."
+        ]
+      },
+      "evidence": [
+        {
+          "path": "vendure/free/verglos-report.json",
+          "sha256": "sha256:2a9a0cf12ea0bf319eb7db77ced6fdefbdc69aedcd8b492453a9606c7295152f"
+        }
+      ]
+    }
+  ],
+  "authorizationEvidence": {
+    "schema": "verglos.web.role-tenant-matrix.v1",
+    "scope": "product-contract",
+    "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+    "path": "docs/shipping/evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.json",
+    "sha256": "sha256:27f43b5d8e5a251dcba79181453eb4a7c627026584276f1b60fe84424409fc1e",
+    "requiredPlans": [
+      "free",
+      "pro",
+      "team",
+      "studio",
+      "enterprise"
+    ],
+    "requiredRoles": [
+      "owner",
+      "admin",
+      "approver",
+      "member",
+      "viewer"
+    ],
+    "requiredTenantModes": [
+      "single",
+      "multi"
+    ],
+    "cellCount": 50,
+    "complete": true
+  }
+}

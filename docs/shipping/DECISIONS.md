@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record ACCEPT-014 matrix implementation and contract correction
+
+- **Decision:** Accept the Web product-contract matrix as implementation
+  evidence and strengthen final regression to require the complete fixture
+  cross-product.
+- **Result:** PR #282 merged normally at `cb266b83406bbfffbd5ab02189556e60973a63a6`;
+  50/50 Web matrix cells ran, targeted verification passed 31/31, and the
+  current v3 regression verified the receipt with 388 of 400 full keys still
+  absent.
+- **Disposition:** Keep ACCEPT-014 open. The validator correctly reports
+  `no-go`; no scenario was fabricated from owner-only output, and no checkbox
+  changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.md`
+  and `evidence/accept-014-final-regression-matrix-contract-v2-2026-10-24.md`.
+
 ## 2026-10-24 · record current merged CLI public-OSS corpus execution
 
 - **Decision:** Accept the fresh exact-commit corpus run as reproducibility evidence for the planned public-OSS POC path.

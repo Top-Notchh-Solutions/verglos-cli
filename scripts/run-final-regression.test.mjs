@@ -15,14 +15,24 @@ function measurement(overrides = {}) {
   return { status: "passed", exitCode: 0, coverage: "complete", filesWalked: 100, findingCount: 4, durationMs: 100, limitations: [], ...overrides };
 }
 
+function authorizationEvidence(overrides = {}) {
+  return {
+    schema: "verglos.web.role-tenant-matrix.v1",
+    scope: "product-contract",
+    webCommit: WEB,
+    path: "auth.json",
+    sha256: SHA,
+    requiredPlans: ["free", "pro", "team", "studio", "enterprise"],
+    requiredRoles: ["owner", "admin", "approver", "member", "viewer"],
+    requiredTenantModes: ["single", "multi"],
+    cellCount: 50,
+    complete: true,
+    ...overrides,
+  };
+}
+
 function input(overrides = {}) {
-  const scenarios = [
-    ["fixture-a", "free", "owner", "single"],
-    ["fixture-a", "pro", "admin", "single"],
-    ["fixture-a", "team", "member", "multi"],
-    ["fixture-b", "studio", "approver", "multi"],
-    ["fixture-b", "enterprise", "viewer", "multi"],
-  ];
+  const scenarios = ["fixture-a", "fixture-b"].flatMap((fixture) => ["free", "pro", "team", "studio", "enterprise"].flatMap((plan) => ["owner", "admin", "approver", "member", "viewer"].flatMap((userRole) => ["single", "multi"].map((tenantMode) => [fixture, plan, userRole, tenantMode]))));
   return {
     schema: "verglos.private.final-regression.v1",
     candidate: { cliCommit: CLI, webCommit: WEB, version: "2.0.0-alpha.1" },
@@ -38,6 +48,7 @@ function input(overrides = {}) {
     thresholds: { maxDurationIncreasePercent: 25 },
     gates: { truthRegistry: "open", riskReview: "open", heldOutCorrection: "open", providerLifecycle: "open", finalRelease: "open" },
     decision: "no-go",
+    authorizationEvidence: authorizationEvidence(),
     runs: scenarios.map(([fixture, plan, userRole, tenantMode]) => ({
       fixture,
       sourceCommit: CLI,
@@ -53,11 +64,13 @@ function input(overrides = {}) {
 
 test("final regression reports complete matrix and fails closed on open gates", () => {
   const report = runFinalRegression(input(), { now: "2026-10-23T12:00:00.000Z" });
-  assert.equal(report.summary.runCount, 5);
+  assert.equal(report.summary.runCount, 100);
   assert.equal(report.matrix.complete, true);
   assert.deepEqual(report.matrix.missingPlans, []);
   assert.deepEqual(report.matrix.missingUserRoles, []);
   assert.deepEqual(report.matrix.missingTenantModes, []);
+  assert.deepEqual(report.matrix.missingScenarioKeys, []);
+  assert.equal(report.matrix.authorizationEvidenceComplete, true);
   assert.equal(report.release.recommendation, "no-go");
   assert.equal(report.release.goEligible, false);
   assert.equal(report.summary.openGateCount, 5);
@@ -100,8 +113,7 @@ test("final regression records performance and finding deltas without hiding the
 test("final regression rejects unsafe or incomplete inputs", () => {
   const incomplete = runFinalRegression(input({ runs: input().runs.slice(0, 4) }));
   assert.equal(incomplete.matrix.complete, false);
-  assert.deepEqual(incomplete.matrix.missingPlans, ["enterprise"]);
-  assert.deepEqual(incomplete.matrix.missingUserRoles, ["viewer"]);
+  assert.ok(incomplete.matrix.missingScenarioKeys.length > 0);
   assert.throws(() => runFinalRegression(input({ runs: input().runs.map((run, index) => index === 0 ? { ...run, sourceCommit: "f".repeat(40) } : run) })), /not bound/u);
   assert.throws(() => runFinalRegression(input({ runs: input().runs.map((run, index) => index === 0 ? { ...run, webCommit: "f".repeat(40) } : run) })), /not bound to candidate Web commit/u);
   assert.throws(() => runFinalRegression(input({ runs: input().runs.map((run, index) => index === 0 ? { ...run, evidence: [{ path: "../secret.json", sha256: SHA }] } : run) })), /evidence path/u);
@@ -114,8 +126,10 @@ test("final regression file binds corpus reports and evidence to actual bytes", 
   await mkdir(corpusRoot, { recursive: true });
   const reportContents = "verified corpus report\n";
   const evidenceContents = "scenario evidence\n";
+  const authorizationContents = "authorization matrix\n";
   await writeFile(join(corpusRoot, "report.json"), reportContents, "utf8");
   await writeFile(join(directory, "evidence.md"), evidenceContents, "utf8");
+  await writeFile(join(directory, "auth.json"), authorizationContents, "utf8");
   const source = input({
     corpus: {
       ...input().corpus,
@@ -129,6 +143,7 @@ test("final regression file binds corpus reports and evidence to actual bytes", 
       ...entry,
       evidence: [{ path: "evidence.md", sha256: bytesDigest(evidenceContents) }],
     })),
+    authorizationEvidence: authorizationEvidence({ sha256: bytesDigest(authorizationContents) }),
   });
   const inputPath = join(directory, "input.json");
   const outputPath = join(directory, "output.json");
@@ -141,14 +156,14 @@ test("final regression file binds corpus reports and evidence to actual bytes", 
       runFinalRegressionFile(missingReportInput, missingReportOutput, { corpusRoot, evidenceRoot: directory, requireCorpusReports: true }),
       /corpus report path is required/u,
     );
-    const report = await runFinalRegressionFile(inputPath, outputPath, { corpusRoot, evidenceRoot: directory, requireCorpusReports: true });
+    const report = await runFinalRegressionFile(inputPath, outputPath, { corpusRoot, evidenceRoot: directory, authorizationRoot: directory, requireCorpusReports: true });
     assert.equal(report.matrix.complete, true);
 
     const mismatchPath = join(directory, "mismatch.json");
     const mismatchOutput = join(directory, "mismatch-output.json");
     await writeFile(mismatchPath, `${JSON.stringify({ ...source, runs: source.runs.map((entry) => ({ ...entry, evidence: [{ path: "evidence.md", sha256: SHA }] })) })}\n`, "utf8");
     await assert.rejects(
-      runFinalRegressionFile(mismatchPath, mismatchOutput, { corpusRoot, evidenceRoot: directory, requireCorpusReports: true }),
+      runFinalRegressionFile(mismatchPath, mismatchOutput, { corpusRoot, evidenceRoot: directory, authorizationRoot: directory, requireCorpusReports: true }),
       /regression evidence digest does not match bytes/u,
     );
   } finally {
