@@ -117,6 +117,7 @@ const paths = [
   "docs/shipping/evidence/studio-cli-001-production-migration-and-handoff-recheck-2026-10-24.md",
   "docs/shipping/evidence/web-full-serial-regression-pr268-2026-10-24.md",
   "docs/shipping/evidence/final-web-007-production-browser-qualification-2026-10-24.md",
+  "docs/shipping/evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md",
   "docs/shipping/evidence/gate-artifact-inventory-2026-10-23.md",
   "docs/shipping/evidence/dist-001-pack-manifest-read-binding-pr174-2026-10-23.md",
   "docs/shipping/evidence/dist-001-package-audit-read-binding-pr172-2026-10-23.md",

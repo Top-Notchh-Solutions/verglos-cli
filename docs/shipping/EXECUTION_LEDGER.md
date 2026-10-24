@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Merged multi-browser checkout qualification fix · 2026-10-24
+
+- **Merge:** Web PR #270 merged normally as
+  `2358edee90de78c06d6128a6d312165f911f7b6a`.
+- **Implementation:** Checkout cadence tabs use explicit ARIA tab focus
+  semantics; the landing capture harness accepts an explicit Chromium,
+  Firefox, or WebKit browser.
+- **Verification:** Warmed local captures passed **36/36** measurements across
+  six required routes, desktop/mobile, and three engines. Accessibility,
+  keyboard, responsive, metadata, crawlability, and reduced-motion checks had
+  zero failures; typecheck and landing tests passed **4/4**.
+- **Boundary:** This is local implementation evidence. Vercel's automatic
+  deployment was queued/building at record time; no paid Actions run, human
+  screen-reader review, field-CWV observation, independent review, AppSec/Hunt
+  review, or final-release sign-off was used.
+- **Disposition:** Advance browser implementation evidence only; no checkbox
+  changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md`.
+
 ## Local signed refund integration · 2026-10-24
 
 - **Environment:** Fresh isolated Docker database `verglos_webhook_20261024`;

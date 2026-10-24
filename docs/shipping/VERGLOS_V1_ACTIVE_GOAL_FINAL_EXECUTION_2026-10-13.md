@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · merged multi-browser checkout qualification fix
+
+Web PR #270 merged normally as `2358edee90de78c06d6128a6d312165f911f7b6a`.
+The implementation fixes checkout cadence-tab keyboard focus semantics with
+selected `tabIndex=0` and unselected `tabIndex=-1`, and makes the landing
+qualification harness explicitly runnable with Chromium, Firefox, or WebKit.
+Typecheck and the landing contract suite passed (`4/4`). Warmed local captures
+passed in all three engines across six required public paths at desktop and
+mobile: **36/36 measurements**, zero accessibility findings, zero keyboard
+failures, and zero responsive/metadata/crawlability/reduced-motion failures.
+Evidence: `docs/shipping/evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md`.
+
+This is a completed implementation slice, not a hosted Production receipt or
+human/field review. Vercel's automatic deployment for merged Web commit
+`2358edee` was still queued/building when recorded; no release publication or
+paid GitHub Actions run was used. Keep the relevant rows open for their
+remaining hosted, human, field, independent-review, AppSec, and final-release
+conditions. Score remains **245 checked / 35 open / 280 total (87.5%)**, with
+**13 AppSec-dependent / 22 non-AppSec** rows open.
+
 ## Latest continuation result · 2026-10-24 · local signed refund integration
 
 The Web source `9005d5ed5182b1d29159c0bb65c8ac696928baed` was exercised

@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · merged multi-browser checkout qualification fix
+
+Web PR #270 merged normally as `2358edee`. Checkout cadence tabs now have
+explicit selected/unselected keyboard focus semantics, and the landing
+qualification harness supports Chromium, Firefox, and WebKit. Warmed local
+captures passed **36/36** measurements across six required routes at
+desktop/mobile in all three engines; typecheck and landing tests passed
+**4/4**. Evidence:
+`evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md`.
+
+This is implementation evidence only; the automatic Vercel deployment was
+still queued/building at record time, and no human/field/independent-review,
+AppSec, or final-release gate is inferred. No checkbox changed. Score remains
+**245/35/280 (87.5%)**.
+
 ## 2026-10-24 · local signed refund integration
 
 The fresh isolated Docker Web database received the reviewed baseline plus 43

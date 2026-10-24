@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · merged multi-browser qualification mapping
+
+- **Source mapping:** Web patch `13b7989785eeff89684919a01c5706907dea1a84`,
+  merged normally in PR #270 as
+  `2358edee90de78c06d6128a6d312165f911f7b6a`.
+- **Implementation mapping:** Checkout cadence tabs now expose selected
+  `tabIndex=0` and unselected `tabIndex=-1`; capture supports Chromium,
+  Firefox, and WebKit selection.
+- **Verification mapping:** Warmed local captures passed **36/36** required
+  route/viewport/engine measurements with zero accessibility, keyboard,
+  responsive, metadata, crawlability, or reduced-motion failures. Typecheck and
+  landing tests passed **4/4**.
+- **Acceptance mapping:** Local implementation evidence only. Vercel's merged
+  deployment was queued/building at record time; hosted, human/field-CWV,
+  independent-review, AppSec/Hunt, customer, and final-release gates remain
+  separate. Score remains **245/35/280 (87.5%)**; no checkbox changed.
+- **Evidence:** `evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · local signed refund integration mapping
 
 - **Source mapping:** Web `9005d5ed5182b1d29159c0bb65c8ac696928baed`, local
