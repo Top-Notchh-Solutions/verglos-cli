@@ -64,10 +64,15 @@ export type ReleaseRollbackDecision =
 const SAFE_TEXT = /^[^\u0000-\u001f\u007f]{1,512}$/u;
 const IMMUTABLE_REF = /^(?:sha256:[a-f0-9]{64}|https:\/\/[^\s#?]+|v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)$/u;
 
-function validReference(value: ReleaseReference): boolean {
-  return RELEASE_ROLLBACK_KINDS.includes(value.kind)
-    && SAFE_TEXT.test(value.identity)
-    && IMMUTABLE_REF.test(value.immutableRef);
+function validReference(value: unknown): value is ReleaseReference {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const reference = value as Record<string, unknown>;
+  return typeof reference.kind === "string"
+    && RELEASE_ROLLBACK_KINDS.includes(reference.kind as ReleaseRollbackKind)
+    && typeof reference.identity === "string"
+    && SAFE_TEXT.test(reference.identity)
+    && typeof reference.immutableRef === "string"
+    && IMMUTABLE_REF.test(reference.immutableRef);
 }
 
 /**
@@ -78,10 +83,11 @@ function validReference(value: ReleaseReference): boolean {
  * impossible to represent at the shared boundary.
  */
 export function decideReleaseRollback(input: ReleaseRollbackRequest): ReleaseRollbackDecision {
+  if (!input || typeof input !== "object") return { allowed: false, reason: "current-reference-invalid" };
   if (!input.approved) return { allowed: false, reason: "approval-required" };
-  if (!RELEASE_ROLLBACK_KINDS.includes(input.current.kind) || input.current.kind !== input.target.kind) return { allowed: false, reason: "kind-invalid" };
   if (!validReference(input.current)) return { allowed: false, reason: "current-reference-invalid" };
   if (!validReference(input.target)) return { allowed: false, reason: "target-reference-invalid" };
+  if (input.current.kind !== input.target.kind) return { allowed: false, reason: "kind-invalid" };
   if (input.current.identity === input.target.identity && input.current.immutableRef === input.target.immutableRef) return { allowed: false, reason: "same-reference" };
   if (!input.preserveHistoricalRecords) return { allowed: false, reason: "history-invalidation-requested" };
   if (!SAFE_TEXT.test(input.reason.trim())) return { allowed: false, reason: "target-reference-invalid" };
@@ -97,4 +103,3 @@ export function decideReleaseRollback(input: ReleaseRollbackRequest): ReleaseRol
   if (input.replacementIdentity !== undefined) return { allowed: false, reason: "revocation-not-applicable" };
   return { allowed: true, action: "rollback", kind: input.current.kind, current: input.current, target: input.target, preserveHistoricalRecords: true, reason: input.reason.trim() };
 }
-
