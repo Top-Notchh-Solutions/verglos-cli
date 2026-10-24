@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-006 current rollback/revocation rehearsal
+
+The rollback contract suite passed **3/3** and the direct rehearsal passed with
+five boundaries and two preserved historical records. This does not satisfy a
+real provider/Production rollback or revocation, operational review, or final
+release acceptance. No checkbox changed; score remains **246/34/280 (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/dist-006-current-rollback-rehearsal-regression-2026-10-24.md`.
+Bundle v41 verifies **375** files with zero mismatches, matching manifest
+`sha256:7d31074f79c6fbd98754792920b53e842c14ff2e7ef627c35143e6828622bd3f`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-003 current release-artifact regression
 
 The dedicated release checksum, origin, SBOM, SPDX, notice, license,

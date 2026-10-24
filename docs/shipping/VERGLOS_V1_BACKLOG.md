@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-006 current rollback/revocation rehearsal
+
+The current rollback contract suite passed **3/3** and the direct rehearsal
+returned `status: passed`, with all five rollback/revocation boundaries,
+matching fixture digest, and two preserved historical records. No npm,
+registry, signing-provider, Hunt-provider, Vercel, or authenticated rollback
+call occurred. `DIST-006` remains unchecked. Score remains **246 checked / 34
+open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `docs/shipping/evidence/dist-006-current-rollback-rehearsal-regression-2026-10-24.md`.
+Bundle v41 verifies **375** files with **0** mismatches, matching manifest
+`sha256:7d31074f79c6fbd98754792920b53e842c14ff2e7ef627c35143e6828622bd3f`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-003 current release-artifact regression
 
 The dedicated release checksum, origin, SBOM, SPDX, notice, license,

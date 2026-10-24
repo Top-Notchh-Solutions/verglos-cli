@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-006 current rollback/revocation rehearsal
+
+- **Implementation mapping:** Rollback evidence generator, bounded fixture
+  digest binding, and platform-matrix contract.
+- **Contract mapping:** **3/3** tests passed; direct rehearsal produced five
+  operations and preserved two historical records.
+- **Boundary mapping:** Local rehearsal only; provider/Production rollback,
+  revocation, operational review, and final acceptance remain open.
+- **Evidence:** `evidence/dist-006-current-rollback-rehearsal-regression-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v41.json` verifies 375 files with zero mismatches, matching manifest `sha256:7d31074f79c6fbd98754792920b53e842c14ff2e7ef627c35143e6828622bd3f`, and passed secret scanning.
+
 ## 2026-10-24 · DIST-003 current release-artifact regression
 
 - **Implementation mapping:** Release checksum, origin, SBOM, SPDX, notice,
