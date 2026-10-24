@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web contract recheck
+
+The current merged Web head `705a85e` passed the local account-deletion
+boundary **1/1**, truth registry **37/37**, public-release smoke **12/12**,
+and landing qualification contract **4/4**, with zero failures. The local
+runtime was Node `v26.4.0` although the repository requests Node 22; the
+warning is recorded. This advances implementation evidence only; no hosted
+deletion, human/field, customer/commercial, independent-review, provider
+publication, AppSec/Hunt, or final-release gate is closed. No checkbox changed;
+score remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`evidence/web-contract-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · Production landing multi-browser receipt
 
 The current public Production alias passed Chromium, Firefox, and WebKit

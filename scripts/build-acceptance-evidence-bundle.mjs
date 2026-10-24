@@ -140,6 +140,7 @@ const paths = [
   "docs/shipping/evidence/final-web-007-008-production-landing-multibrowser-2026-10-24-chromium.json",
   "docs/shipping/evidence/final-web-007-008-production-landing-multibrowser-2026-10-24-firefox.json",
   "docs/shipping/evidence/final-web-007-008-production-landing-multibrowser-2026-10-24-webkit.json",
+  "docs/shipping/evidence/web-contract-recheck-2026-10-24.md",
   "docs/shipping/evidence/final-web-source-contracts-2026-10-23.md",
   "docs/shipping/evidence/cli-workspace-full-test-2026-10-23.md",
   "docs/shipping/evidence/qual-web-006-dashboard-capture-command-pr257-2026-10-23.md",

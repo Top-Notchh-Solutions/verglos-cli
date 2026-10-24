@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web contract recheck
+
+- **Source mapping:** Current merged Web head `705a85e` in the Web worktree.
+- **Verification mapping:** Account-deletion worker **1/1**, truth registry
+  **37/37**, public-release smoke **12/12**, and landing qualification **4/4**
+  passed locally with zero failures.
+- **Acceptance mapping:** This strengthens local implementation evidence for
+  QUAL-WEB-005/006 and FINAL-WEB-001/005/007/008 only. Node 26 was used where
+  the repository requests Node 22; hosted, human/field, customer, independent,
+  provider-publication, AppSec/Hunt, and final-release gates remain open.
+- **Evidence:** `evidence/web-contract-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · Production landing multi-browser receipt
 
 - **Source mapping:** Public Production alias `https://verglos.com`, serving

@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web contract recheck
+
+Current merged Web head `705a85e` passed the local account-deletion boundary
+**1/1**, truth registry **37/37**, public-release smoke **12/12**, and landing
+qualification contract **4/4**, with zero failures. The workstation used Node
+26.4.0 while the repository requests Node 22; that warning is recorded. This
+is additive implementation evidence only. Keep QUAL-WEB-005/006 and
+FINAL-WEB-001/005/007/008 open for their hosted, human/field,
+customer/commercial, independent-review, provider-publication, AppSec/Hunt,
+and final-release requirements. Score remains **245 checked / 35 open / 280
+total (87.5%)**. Evidence:
+`docs/shipping/evidence/web-contract-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · Production landing multi-browser receipt
 
 The current `https://verglos.com` Production alias passed Chromium, Firefox,
