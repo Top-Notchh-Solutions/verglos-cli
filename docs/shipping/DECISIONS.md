@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · FINAL-WEB-006 proof-assets contract
+
+- **Decision:** Record the current proof implementation and origin-boundary
+  result without treating source-free proof fixtures as customer acceptance.
+- **Result:** **17/17** focused proof/page/public-release tests passed with zero
+  failures, skips, cancellations, or todos.
+- **Boundary:** No customer, provider, independent/field, deployment, or final
+  release action occurred. FINAL-WEB-006 remains unchecked; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/final-web-006-current-proof-assets-contract-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v51.json` verifies 385 files with zero mismatches, matching manifest `sha256:da925565e728b8c450cc7c87bd82ebf15f6bd3d88929e00b3c4f32f1086b8a8f`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-003 plan/pricing contract
 
 - **Decision:** Record the current canonical plan/pricing implementation result

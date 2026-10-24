@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · FINAL-WEB-006 proof-assets contract
+
+Proof-asset, proof-page, and public-release smoke tests passed **17/17** with
+zero failures, skips, cancellations, or todos. FINAL-WEB-006 remains
+unchecked for its acceptance dependencies and final release. Score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/final-web-006-current-proof-assets-contract-2026-10-24.md`.
+Bundle v51 verifies **385** files with zero mismatches, matching manifest
+`sha256:da925565e728b8c450cc7c87bd82ebf15f6bd3d88929e00b3c4f32f1086b8a8f`,
+and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-003 plan/pricing contract
 
 Canonical plan/pricing, catalog, allowance, checkout/payment-method,

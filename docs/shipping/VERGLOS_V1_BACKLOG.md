@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · FINAL-WEB-006 proof-assets contract
+
+The focused proof-asset, proof-page, and public-release smoke suites passed
+**17/17** with zero failures, skips, cancellations, or todos, covering bounded
+labeled proof rendering, homepage linkage, dated/source-free assets, approved
+public origins, and route/sitemap/robots boundaries. Keep `FINAL-WEB-006`
+unchecked for its acceptance dependencies, independent/field evidence, and
+final release. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-006-current-proof-assets-contract-2026-10-24.md`.
+Bundle v51 verifies **385** files with **0** mismatches, matching manifest
+`sha256:da925565e728b8c450cc7c87bd82ebf15f6bd3d88929e00b3c4f32f1086b8a8f`, and
+passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-003 plan/pricing contract
 
 The focused canonical plan/pricing suite passed **61/61** with zero failures,
