@@ -1,5 +1,13 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · backlog state reconciliation
+
+The main row summaries now match current evidence: `QUAL-WEB-005` records the
+reviewed **44/44** Production migration ledger and six support tables;
+`ACCEPT-011/012/014` record the current 13,494-file / 351-observation corpus
+and **400/400** no-regression matrix. No checkbox changed. Score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+
 ## 2026-10-24 · current-head Production Chromium qualification
 
 The live Vercel deployment bound to Web `257e1cc8e0b467d16966433033589111f62f56f0`

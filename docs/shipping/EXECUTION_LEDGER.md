@@ -1,5 +1,15 @@
 # Verglos V1 Execution Ledger
 
+## Backlog state reconciliation · 2026-10-24
+
+- **Execution:** Reconciled stale main-row summaries against the current
+  Production migration and corpus/regression evidence.
+- **Result:** `QUAL-WEB-005` reflects 44/44 migrations and six support tables;
+  `ACCEPT-011/012/014` reflect 13,494 files, 351 observations, and 400/400
+  no-regression matrix coverage.
+- **Disposition:** Documentation correction only; no checkbox changed. Score
+  remains **246/34/280**.
+
 ## Current-head Production Chromium qualification · 2026-10-24
 
 - **Execution:** Ran the existing Playwright Chromium/Axe harness against the

@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · backlog state reconciliation
+
+- **Row-state mapping:** `QUAL-WEB-005` now reflects the reviewed 44/44
+  Production migration ledger and six deletion-support tables;
+  `ACCEPT-011/012/014` now reflect the current 13,494-file / 351-observation
+  corpus and 400/400 final matrix.
+- **Disposition mapping:** These are stale-summary corrections only. No
+  checkbox changed; the remaining provider, human/field, independent-review,
+  correction, account-deletion, and final-release gates remain explicit.
+
 ## 2026-10-24 · current-head Production Chromium qualification
 
 - **Source mapping:** Vercel Production deployment is bound to Web
