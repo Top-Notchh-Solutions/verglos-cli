@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Test Mode capture/refund provider mapping
+
+- **Source mapping:** Existing owner-controlled Razorpay Test Mode payment
+  `pay_TrXOmx4SSAS4iQ` bound to order `order_TrXOfcG0B3WYN0`; refund
+  `rfnd_TrXb712V0DFjQm` was created against that exact payment.
+- **Verification mapping:** Provider read-back returned capture, full refund,
+  payment `refunded`, `refund_status: full`, refund `processed`, and exact
+  amount binding at **280,943 paise / INR**.
+- **Acceptance mapping:** This is no-money Test Mode lifecycle evidence. It is
+  not Production payment, external webhook, customer/recipient acceptance,
+  independent review, or final release sign-off. Score remains
+  **245/35/280 (87.5%)**; no checkbox changed.
+- **Evidence:**
+  `evidence/razorpay-testmode-capture-refund-lifecycle-2026-10-24.md` and
+  bundle v22 manifest
+  `sha256:c6a68f2f5d7bf40c96ff7df978aea97b2aab4f4e85f02f768f23ca065484eee1`.
+
 ## 2026-10-24 · PR #264 Test Mode provider/local integration mapping
 
 - **Source mapping:** Private shipping PR #264 merged normally into CLI
