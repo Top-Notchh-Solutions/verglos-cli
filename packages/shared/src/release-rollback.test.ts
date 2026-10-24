@@ -48,3 +48,11 @@ test("tenant/source-like control text is bounded and never becomes an execution 
   if (result.allowed) assert.equal(result.reason, "bounded reason");
   assert.deepEqual(decideReleaseRollback({ current: ref("web-deployment", "production", "a"), target: ref("web-deployment", "previous", "b"), approved: true, reason: "\u0000", preserveHistoricalRecords: true }), { allowed: false, reason: "target-reference-invalid" });
 });
+
+test("rollback decision fails closed for malformed runtime references instead of throwing", () => {
+  const malformedCurrent = { current: null, target: ref("npm-package", "target", "b"), approved: true, reason: "runtime input", preserveHistoricalRecords: true } as never;
+  assert.deepEqual(decideReleaseRollback(malformedCurrent), { allowed: false, reason: "current-reference-invalid" });
+
+  const malformedTarget = { current: ref("npm-package", "current", "a"), target: "not-a-reference", approved: true, reason: "runtime input", preserveHistoricalRecords: true } as never;
+  assert.deepEqual(decideReleaseRollback(malformedTarget), { allowed: false, reason: "target-reference-invalid" });
+});
