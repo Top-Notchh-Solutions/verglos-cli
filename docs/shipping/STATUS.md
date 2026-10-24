@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
+
+The current Web privacy/deletion suite passed **25/25** against the disposable
+local `verglos_test` database, with zero failures, skips, or cancellations.
+Post-run checks found zero residual fixture user, deletion request/job/receipt,
+or held-digest rows. This remains local implementation evidence: no Production
+or customer-held deletion occurred, so `QUAL-WEB-005` remains unchecked. Score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/qual-web-005-current-head-privacy-deletion-full-suite-2026-10-24.md`.
+Bundle v29 verifies **362** files with zero mismatches, matching manifest
+`sha256:8ebe74fe06cf3925a93dbb55ecd3e2b55aadaec7ca18010ed46259d4c6756738`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
 
 The current CLI candidate passed **8/8** package builds and **2/2** focused

@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-005 current-head privacy/deletion full suite · 2026-10-24
+
+- **Execution:** Ran the privacy page, route contract/integration, customer-
+  held digest, inventory, holds, store, worker, and job-integration tests
+  against the disposable local `verglos_test` fixture.
+- **Result:** **25/25** passed with zero failures, skips, or cancellations;
+  post-run fixture counts were zero for the named user and deletion/digest
+  records.
+- **Source:** Web merged `257e1cc8e0b467d16966433033589111f62f56f0`, tested
+  head `7307ae5e0cea18e6d0803aa179fafcc2a0ce36f8`.
+- **Disposition:** Local implementation evidence only. No Production or
+  customer-held deletion occurred; no checkbox was upgraded. Score remains
+  **246/34/280**.
+- **Evidence:** `evidence/qual-web-005-current-head-privacy-deletion-full-suite-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v29.json` verifies 362 files with zero mismatches, matching manifest `sha256:8ebe74fe06cf3925a93dbb55ecd3e2b55aadaec7ca18010ed46259d4c6756738`, and passed secret scanning.
+
 ## DIST-006 current-head rollback/revocation rehearsal · 2026-10-24
 
 - **Execution:** Built the current CLI candidate and ran the focused rollback

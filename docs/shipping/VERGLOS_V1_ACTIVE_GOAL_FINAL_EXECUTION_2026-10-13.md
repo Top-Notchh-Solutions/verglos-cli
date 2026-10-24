@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
+
+The isolated Web privacy/deletion suite passed **25/25** with zero failures,
+skips, or cancellations. It covered the authenticated request/digest surface,
+idempotency, inventory, holds, worker lease/retry behavior, failure rollback,
+completion receipt, and cleanup; the disposable fixture ended with zero named
+fixture user, deletion request/job/receipt, or held-digest rows. This remains
+local implementation evidence only: no Production or customer-held deletion
+occurred, so `QUAL-WEB-005` remains unchecked. Score remains **246 checked /
+34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/qual-web-005-current-head-privacy-deletion-full-suite-2026-10-24.md`.
+Bundle v29 verifies **362** bounded files with **0** mismatches, matching
+manifest `sha256:8ebe74fe06cf3925a93dbb55ecd3e2b55aadaec7ca18010ed46259d4c6756738`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
 
 The current CLI candidate passed **8/8** package builds and the focused
