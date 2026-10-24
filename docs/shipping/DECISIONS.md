@@ -12,6 +12,21 @@
   are; no checkbox changed and score remains **245/35/280 (87.5%)**.
 - **Evidence:** `evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
 
+## 2026-10-24 · record ACCEPT-014 full local matrix
+
+- **Decision:** Accept the complete local fixture×plan×role×tenant matrix as
+  implementation/evidence-preparation progress.
+- **Result:** 40/40 local plan scans completed; 400/400 matrix keys are
+  present, 0 runs failed, and 50/50 Web product-contract cells are bound.
+  The result remains no-go with 400 finding regressions, 110 performance
+  regressions, and five open gates.
+- **Disposition:** Keep ACCEPT-014 open for correction, independent review,
+  provider lifecycle, and final release decision; no checkbox changed and
+  score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-014-final-regression-full-matrix-v4-2026-10-24.md`.
+  The additive bundle verifies 313 files with 0 mismatches; manifest
+  `sha256:f39b6660b816fd1a61168f51a4b17ff3cf0ae4781332005c4543b20cbc14afd5`.
+
 ## 2026-10-24 · record read-only Vercel Production inspection
 
 - **Decision:** Accept the provider inspection as current Production-state

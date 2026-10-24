@@ -12,6 +12,21 @@
   or final-release gate was closed; score remains 245/35/280.
 - **Evidence:** `evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
 
+## 2026-10-24 · ACCEPT-014 full local matrix
+
+- **Source mapping:** CLI `cd9d572e28462741103cb21a2274e5892939d5d4`, Web
+  `cb266b83406bbfffbd5ab02189556e60973a63a6`, and eight exact-commit fixtures.
+- **Verification mapping:** 40/40 complete plan scans expanded to 400/400
+  fixture×plan×role×tenant keys; 0 missing and 0 failed, with complete 50-cell
+  Web product-contract evidence.
+- **Acceptance mapping:** Result is no-go with 400 finding regressions, 110
+  performance regressions, and five open gates. This does not infer hosted
+  provider, customer, independent, field, AppSec/Hunt, or final-release proof;
+  ACCEPT-014 remains unchecked and score remains 245/35/280.
+- **Evidence:** `evidence/accept-014-final-regression-full-matrix-v4-2026-10-24.md`.
+  The additive bundle verifies 313 files with 0 mismatches; manifest
+  `sha256:f39b6660b816fd1a61168f51a4b17ff3cf0ae4781332005c4543b20cbc14afd5`.
+
 ## 2026-10-24 · read-only Vercel Production inspection
 
 - **Source mapping:** Provider deployment

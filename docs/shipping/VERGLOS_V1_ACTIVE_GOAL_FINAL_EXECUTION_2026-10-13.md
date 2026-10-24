@@ -12,6 +12,23 @@ score remains **245 checked / 35 open / 280 total (87.5%)**, split **13
 AppSec-dependent / 22 non-AppSec**. Evidence:
 `docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
 
+## Latest continuation result · 2026-10-24 · ACCEPT-014 full local matrix
+
+The current CLI candidate ran **40/40** fixture×plan scans with complete
+coverage, then the fail-closed regression receipt expanded them across all
+roles and tenant modes: **400/400** expected keys, **0** missing keys, **0**
+failed runs, and complete 50-cell Web authorization evidence. The result is
+still `no-go` with **400 finding regressions**, **110 performance regressions**,
+and five open gates. This closes the matrix implementation/evidence-preparation
+slice only; ACCEPT-014 remains unchecked for correction, independent review,
+provider lifecycle, and final release decision. No checkbox changed; score
+remains **245 checked / 35 open / 280 total (87.5%)**, split **13
+AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-014-final-regression-full-matrix-v4-2026-10-24.md`.
+The accompanying additive bundle verifies **313** files with **0** mismatches,
+secret scanning passed, and manifest
+`sha256:f39b6660b816fd1a61168f51a4b17ff3cf0ae4781332005c4543b20cbc14afd5`.
+
 ## Latest continuation result · 2026-10-24 · read-only Vercel Production inspection
 
 The current merged Web deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` was
