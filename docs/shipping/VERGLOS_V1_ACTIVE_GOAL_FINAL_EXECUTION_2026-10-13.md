@@ -1,5 +1,30 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #292 policy-exception SQLSTATE hardening
+
+Web PR **#292** merged normally as
+`a7d817a1a868eaec6cdf1d7cea3469307266c5c8` from implementation commit
+`434e4e3ad03513981ef559a8e2031917bafb56d5`. Exception creation and approval
+decision routes now classify duplicate writes only from PostgreSQL SQLSTATE
+`23505`; unrelated database failures no longer become false `409` conflicts
+because their text happens to contain “unique” or “duplicate”. Focused
+policy/constraint/route contracts passed **21/21**, Web typecheck passed, and
+`git diff --check` passed.
+
+Vercel deployment **`dpl_2dxNo38ynNqvCWM9DW1eqH6z9NdM`** reached `READY` with
+target `production`. Read-only fetches returned HTTP **200** for six declared
+paths on `verglos.com` (**6/6**) and expected HTTP **308** canonical redirects
+for all six on `www.verglos.com` (**6/6**). The exact deployment hostname
+returned Vercel SSO **302** and was not bypassed. GitHub-hosted checks failed
+before repository steps because the Actions budget/runners are blocked; no
+rerun was started. This is real policy/approval production-code and
+provider/Production evidence, but no checkbox changed: human/field,
+independent/AppSec, customer/recipient, and final-release evidence remain
+separate gates. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Nothing was deleted or
+overwritten. Evidence:
+`docs/shipping/evidence/policy-exception-sqlstate-hardening-pr292-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #291 monitor deduplication/error boundary hardening
 
 Web PR **#291** merged normally as

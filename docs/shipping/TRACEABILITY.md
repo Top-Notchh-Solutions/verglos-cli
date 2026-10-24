@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #292 policy-exception SQLSTATE hardening
+
+- **Implementation mapping:** Web PR #292 merged normally as
+  `a7d817a1a868eaec6cdf1d7cea3469307266c5c8` from `434e4e3`; exception
+  creation and approval decision routes now classify duplicate writes only
+  from PostgreSQL SQLSTATE `23505`.
+- **Verification mapping:** Focused policy/constraint/route contracts **21/21**,
+  Web typecheck, and diff checks passed. Vercel deployment
+  `dpl_2dxNo38ynNqvCWM9DW1eqH6z9NdM` reached Ready/Production; six public
+  paths were **200** on `verglos.com` and **308** canonical redirects on
+  `www`, while the protected deployment hostname returned **302**.
+- **Boundary mapping:** GitHub Actions checks failed before repository steps
+  because the account budget/runners are blocked; no rerun was started. This
+  is implementation/provider evidence only and does not provide human/field,
+  independent/AppSec, customer/recipient, or final release evidence. No
+  checkbox changed; score remains **246/34/280**.
+- **Evidence:** `evidence/policy-exception-sqlstate-hardening-pr292-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #291 monitor deduplication/error boundary hardening
 
 - **Implementation mapping:** Web PR #291 merged normally as
