@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #300 nullable Studio handoff digest
+
+Web PR #300 merged normally as
+`069d4a2c4937c0e72eddbe22c0aa657d683bbc14` from `dadfd515`. The client
+handoff-history parser now preserves issued receipts whose acknowledgement
+digest is absent or explicitly null, while actual acknowledgement digests
+remain bounded SHA-256 values. Focused contracts passed **35/35**, typecheck
+and diff checks passed. Vercel Production deployment
+`dpl_GszPddwswnPS7sD8mcgCMkLJqzYJ` reached READY with an **18/18** read-only
+matrix. This advances `STUDIO-CLI-001` implementation/provider evidence only;
+recipient acknowledgement, customer acceptance, independent review, and final
+release remain open. No Actions rerun was started. No checkbox changed; score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-
+dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-handoff-null-digest-pr300-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · Web PR #299 terminal account-deletion lease recovery
 
 Web PR #299 merged normally as

@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #300 nullable handoff digest
+
+Web PR **#300** merged normally as
+`069d4a2c4937c0e72eddbe22c0aa657d683bbc14` from implementation commit
+`dadfd5150b7ca1183f02c778bc7c113c90bb492b`. The Studio handoff-history parser
+now accepts an explicit `null` acknowledgement digest for an issued,
+not-yet-acknowledged receipt while retaining bounded SHA-256 validation for an
+actual acknowledgement. Focused handoff/dashboard contracts passed **35/35**,
+Web typecheck and diff checks passed.
+
+Vercel Production deployment **`dpl_GszPddwswnPS7sD8mcgCMkLJqzYJ`** reached
+**READY**. Its read-only matrix passed **18/18**: canonical `verglos.com` 6/6
+HTTP 200, `www` 6/6 HTTP 308, and the exact protected deployment hostname 6/6
+HTTP 302. No GitHub Actions rerun was started.
+
+This advances `STUDIO-CLI-001` implementation and provider/Production
+evidence; the row remains unchecked for authorized recipient acknowledgement,
+customer acceptance, independent review, and final release evidence. Score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-
+dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-handoff-null-digest-pr300-2026-10-24.md`.
+No customer or Production database data was changed. Nothing was deleted or
+overwritten.
+
 ## Latest continuation result · 2026-10-24 · Web PR #299 terminal lease recovery
 
 Web PR **#299** merged normally as
