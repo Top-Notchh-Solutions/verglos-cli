@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record isolated Web database serial recheck
+
+- **Decision:** Accept the fresh local PostgreSQL-backed serial run as additive
+  implementation evidence for the Web non-AppSec surfaces.
+- **Result:** 926/928 passed, 0 failed, 0 cancelled, 2 designed skips, exit 0.
+- **Boundary:** The run uses only a loopback disposable test database. It is
+  not customer/recipient acceptance, human/field evidence, provider
+  publication, Production deletion, independent review, AppSec/Hunt review,
+  or final release sign-off.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain open
+  under their declared gates.
+- **Evidence:** `evidence/qual-web-006-local-isolated-db-serial-recheck-2026-10-24.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-isolated-db-v11.json`
+  verifies 337 files with zero mismatches and passed secret scanning.
+
 ## 2026-10-24 · record non-AppSec implementation sweep
 
 - **Decision:** Accept the local CLI/Web sweep as additive implementation
