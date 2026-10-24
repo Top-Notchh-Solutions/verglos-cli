@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Hosted production multi-browser qualification · 2026-10-24
+
+- **Deployment:** Vercel `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku`, READY for Web
+  merge `d8f415b486b57ab6fa3885d734a4904e11ac435a`, aliases include
+  `https://verglos.com`.
+- **Verification:** Read-only hosted capture passed **36/36** measurements
+  across Chromium, Firefox, and WebKit for six required routes at
+  desktop/mobile. Axe/accessibility, keyboard, INP, performance, responsive,
+  metadata, crawlability, and reduced-motion checks all passed.
+- **Defect fix:** The prior hosted run identified the landing byline at 4.22:1
+  contrast; PR #271 raised it above the WCAG AA threshold. The final packet has
+  zero Axe findings.
+- **Boundary:** No payment, database write, customer data, Actions run,
+  independent review, field-CWV observation, AppSec/Hunt review, or final
+  release sign-off occurred.
+- **Disposition:** Hosted automated browser evidence advanced; no checkbox
+  changed. Score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/final-web-007-production-multi-browser-qualification-2026-10-24.md`.
+
 ## Merged multi-browser checkout qualification fix · 2026-10-24
 
 - **Merge:** Web PR #270 merged normally as

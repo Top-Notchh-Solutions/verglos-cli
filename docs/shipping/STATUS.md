@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · hosted production multi-browser qualification
+
+Production deployment `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku` is READY for merged
+Web commit `d8f415b4` and serves `verglos.com`. The final read-only browser
+packet passed **36/36** measurements across Chromium, Firefox, and WebKit,
+desktop/mobile, six required public routes; Axe, keyboard, INP, performance,
+responsive, metadata, crawlability, and reduced-motion checks were all green.
+The earlier hosted contrast defect was fixed in PR #271. Evidence:
+`evidence/final-web-007-production-multi-browser-qualification-2026-10-24.md`.
+
+This is hosted automated evidence, not human screen-reader, field-CWV,
+independent-review, AppSec/Hunt, customer, or final-release evidence. No
+checkbox changed. Score remains **245/35/280 (87.5%)**.
+
 ## 2026-10-24 · merged multi-browser checkout qualification fix
 
 Web PR #270 merged normally as `2358edee`. Checkout cadence tabs now have

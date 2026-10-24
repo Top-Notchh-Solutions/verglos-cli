@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · hosted production multi-browser qualification
+
+Vercel Production deployment `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku` is READY for
+Web `d8f415b4` and serves `verglos.com`. The final read-only qualification
+passed **36/36** hosted measurements across Chromium, Firefox, and WebKit at
+desktop/mobile for all six required public paths. Axe/accessibility, keyboard,
+INP, performance, responsive, metadata, crawlability, and reduced-motion all
+passed. The earlier 4.22:1 hosted byline contrast defect was fixed in PR #271.
+This opens hosted automated browser evidence only; it does not open human
+screen-reader, field-CWV, independent-review, AppSec/Hunt, customer, or final
+release gates. No checkbox changed; score remains **245/35/280 (87.5%)**.
+Evidence: `evidence/final-web-007-production-multi-browser-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · merged multi-browser checkout qualification fix
 
 Web PR #270 merged normally as `2358edee`. The checkout cadence-tab keyboard

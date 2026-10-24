@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · hosted production multi-browser mapping
+
+- **Deployment mapping:** Vercel `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku`, READY
+  for Web merge `d8f415b486b57ab6fa3885d734a4904e11ac435a`, aliases include
+  `https://verglos.com`.
+- **Verification mapping:** Hosted read-only capture passed **36/36**
+  measurements across Chromium, Firefox, and WebKit, six required routes,
+  desktop/mobile. All Axe/accessibility, keyboard, INP, performance,
+  responsive, metadata, crawlability, and reduced-motion checks passed.
+- **Defect mapping:** The earlier hosted byline contrast ratio was 4.22:1;
+  PR #271 raised the source opacity and the final packet reports zero findings.
+- **Acceptance mapping:** Hosted automated browser evidence only; no human
+  screen-reader, field-CWV, independent-review, AppSec/Hunt, customer, or
+  final-release sign-off is inferred. Score remains **245/35/280 (87.5%)**;
+  no checkbox changed.
+- **Evidence:** `evidence/final-web-007-production-multi-browser-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · merged multi-browser qualification mapping
 
 - **Source mapping:** Web patch `13b7989785eeff89684919a01c5706907dea1a84`,

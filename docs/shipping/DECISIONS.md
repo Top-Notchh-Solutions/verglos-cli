@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record hosted production multi-browser qualification
+
+- **Decision:** Re-run the browser contract after fixing the hosted landing
+  byline contrast defect and hardening fail-closed INP observation retries.
+- **Deployment:** Vercel `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku` is READY for Web
+  merge `d8f415b486b57ab6fa3885d734a4904e11ac435a`.
+- **Result:** Chromium, Firefox, and WebKit all passed **12/12** hosted
+  measurements for six required routes at desktop/mobile, with zero Axe,
+  keyboard, INP, performance, responsive, metadata, crawlability, or
+  reduced-motion failures.
+- **Disposition:** Record hosted automated evidence only; keep human/field,
+  independent-review, AppSec/Hunt, customer, and final-release gates open. No
+  checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/final-web-007-production-multi-browser-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · record merged multi-browser checkout qualification fix
 
 - **Decision:** Fix the WebKit keyboard failure in product code and extend the
