@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
+
+- **Decision:** Record deployed handoff-boundary behavior using only a
+  nonexistent UUID and forged token.
+- **Result:** Public handoff page returned 200 with private/no-store caching;
+  acknowledge GET returned 405; forged POST returned bounded 400 JSON with
+  `handoff unavailable`, `no-store`, and no mutation.
+- **Boundary:** This is hosted fail-closed smoke evidence only. It does not
+  create recipient consent, customer acknowledgement, independent audit, or
+  final release acceptance. Keep STUDIO-CLI-001 unchecked; score remains
+  **246/34/280**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/studio-cli-001-production-handoff-boundary-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
 
 - **Decision:** Keep the CLI updater on the stable release channel even when

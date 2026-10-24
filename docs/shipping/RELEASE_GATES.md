@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
+
+The deployed handoff page returned **200** with private/no-store caching for a
+nonexistent UUID. The POST-only acknowledge route returned **405** for GET and
+bounded **400** JSON with `no-store` for a forged token; no real handoff or
+customer data was used. This does not satisfy STUDIO-CLI-001's authorized
+recipient acknowledgement, independent audit, or final release gates. No
+checkbox changed; score remains **246/34/280 (87.9%)**, split **13 AppSec-
+dependent / 21 non-AppSec**. Evidence:
+`evidence/studio-cli-001-production-handoff-boundary-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
 
 The CLI updater now ignores npm prereleases, selects the highest stable SemVer,

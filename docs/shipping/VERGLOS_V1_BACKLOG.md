@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
+
+Using only a nonexistent UUID and forged token, Production returned **200** for
+the opaque handoff page, **405** for an invalid GET against the POST-only
+acknowledge endpoint, and bounded **400** JSON for the forged POST with
+`Cache-Control: no-store`. No real handoff or customer data was touched. This
+advances hosted fail-closed evidence but does not check `STUDIO-CLI-001`:
+authorized recipient acknowledgement, independent audit, and final release
+acceptance remain open. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-cli-001-production-handoff-boundary-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
 
 The CLI updater now reads npm package metadata, ignores prereleases, selects
