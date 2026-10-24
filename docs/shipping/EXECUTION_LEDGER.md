@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-005/006 full Web regression · 2026-10-24
+
+- **Execution:** Ran the Web worktree’s complete serial Node test discovery.
+- **Result:** **1,195** tests discovered; **1,155 passed**, **40 explicitly
+  skipped**, and **0 failed/cancelled/todo** in 18.6 seconds.
+- **Disposition:** Local regression only; database/provider-dependent skips
+  remain explicit. No Production deletion, customer data, provider action,
+  human/field acceptance, or final sign-off occurred. QUAL-WEB-005/006 remain
+  unchecked; score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-005-006-full-web-regression-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v42.json` verifies 376 files with zero mismatches, matching manifest `sha256:56b3719c5d77c8809bb4f48781bcdfef0cfb5fc77073cd549b91737270ff446d`, and passed secret scanning.
+
 ## DIST-006 current rollback/revocation rehearsal · 2026-10-24
 
 - **Execution:** Ran the rollback evidence and platform-matrix contracts plus

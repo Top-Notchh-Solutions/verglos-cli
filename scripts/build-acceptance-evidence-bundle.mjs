@@ -387,6 +387,7 @@ const paths = [
   "docs/shipping/evidence/dist-002-003-current-publish-contract-regression-2026-10-24.md",
   "docs/shipping/evidence/dist-003-current-release-artifact-regression-2026-10-24.md",
   "docs/shipping/evidence/dist-006-current-rollback-rehearsal-regression-2026-10-24.md",
+  "docs/shipping/evidence/qual-web-005-006-full-web-regression-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];
 

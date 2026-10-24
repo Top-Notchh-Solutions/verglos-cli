@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · full Web regression
+
+The complete serial Web test discovery produced **1,195** tests: **1,155
+passed**, **40 explicitly skipped**, and **0 failed/cancelled/todo**. It covers
+privacy/deletion, customer-held digest, dashboard, public-release, and the
+broader Web contracts; local/provider-dependent skips remain explicit. No
+Production deletion, customer data access, provider action, human/field
+acceptance, independent review, or final release sign-off occurred.
+QUAL-WEB-005/006 remain unchecked. Score remains **246 checked / 34 open / 280
+total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-005-006-full-web-regression-2026-10-24.md`.
+Bundle v42 verifies **376** bounded files with **0** mismatches, matching
+manifest `sha256:56b3719c5d77c8809bb4f48781bcdfef0cfb5fc77073cd549b91737270ff446d`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · DIST-006 rollback rehearsal
 
 The current rollback contract suite passed **3/3** and the direct local
