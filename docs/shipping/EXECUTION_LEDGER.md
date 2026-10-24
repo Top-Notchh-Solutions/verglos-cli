@@ -10,6 +10,13 @@
 - **Evidence:** `evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`.
 - **Bundle:** 301 files, zero mismatches, secret scan passed; manifest `sha256:c5491c6f6f2bbd90eea9c39fa2d12ea8b444f48c836fbbc1885f03280426d99d`.
 
+## ACCEPT-014 Web role/tenant substrate execution · 2026-10-24
+
+- **Source:** Web `204224937228dc0134cb73feb873b893005255c4`, merged through PR #281 at `91d8629cd59f239334629f39ccfebb5953671cc2`.
+- **Verification:** Targeted RBAC, capability, tenant predicate, cross-tenant denial, and protected-route suite passed **43/43** with **0 failures**.
+- **Boundary:** Local Web substrate only; no per-fixture final regression, hosted/provider state, database write, customer data, or release decision. ACCEPT-014 remains open; no checkbox changed.
+- **Evidence:** `evidence/accept-014-web-role-tenant-substrate-pr281-2026-10-24.md`.
+
 ## Dashboard interaction harness correction · 2026-10-24
 
 - **Source:** Web PR #281, implementation `204224937228dc0134cb73feb873b893005255c4`, merged `91d8629cd59f239334629f39ccfebb5953671cc2`.

@@ -7,6 +7,13 @@
 - **Disposition:** Keep ACCEPT-011/012 open. Observations are unadjudicated; this run does not create customer/recipient, provider/Production, independent-review, AppSec/Hunt, human/field, or final-release evidence. No checkbox changed; score remains **245/35/280 (87.5%)**.
 - **Evidence:** `evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`.
 
+## 2026-10-24 · record ACCEPT-014 Web role/tenant substrate
+
+- **Decision:** Accept the current Web role/tenant suite as implementation evidence without treating it as the final per-fixture regression matrix.
+- **Result:** 43/43 targeted checks passed across all five roles, capability composition, tenant predicates, cross-tenant denial, and protected-route boundaries.
+- **Disposition:** Keep ACCEPT-014 open for the actual byte-bound plan/user/tenant corpus matrix, correction/provider gates, independent review, and final decision. No checkbox changed; score remains 245/35/280.
+- **Evidence:** `evidence/accept-014-web-role-tenant-substrate-pr281-2026-10-24.md`.
+
 ## 2026-10-24 · record dashboard interaction harness correction
 
 - **Decision:** Make dashboard qualification exercise a real visible control interaction before reading interaction metrics, matching the landing harness, while retaining fail-closed missing-INP behavior.

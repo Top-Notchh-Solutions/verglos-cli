@@ -8,6 +8,13 @@
 - **Evidence:** `evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`.
 - **Bundle mapping:** 301 files, zero mismatches, secret scan passed; manifest `sha256:c5491c6f6f2bbd90eea9c39fa2d12ea8b444f48c836fbbc1885f03280426d99d`.
 
+## 2026-10-24 · ACCEPT-014 Web role/tenant substrate execution
+
+- **Source mapping:** Web `204224937228dc0134cb73feb873b893005255c4`, merged PR #281 at `91d8629cd59f239334629f39ccfebb5953671cc2`.
+- **Verification mapping:** Targeted role/capability/tenant suite passed 43/43; summary digest `sha256:6900f657ac77dc3d558fad009e979176bd6f9cbf4ec5948e64b9203eaa9e42fb`.
+- **Acceptance mapping:** Web substrate evidence only; no per-fixture matrix or final decision. ACCEPT-014 remains unchecked; score remains 245/35/280.
+- **Evidence:** `evidence/accept-014-web-role-tenant-substrate-pr281-2026-10-24.md`.
+
 ## 2026-10-24 · dashboard interaction harness correction
 
 - **Source mapping:** Web PR #281 implementation `204224937228dc0134cb73feb873b893005255c4`, merged at `91d8629cd59f239334629f39ccfebb5953671cc2`.

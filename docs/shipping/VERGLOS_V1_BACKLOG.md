@@ -17,6 +17,19 @@ The additive bundle verifies **301** files with zero mismatches and secret
 scanning passed; manifest
 `sha256:c5491c6f6f2bbd90eea9c39fa2d12ea8b444f48c836fbbc1885f03280426d99d`.
 
+## 2026-10-24 · ACCEPT-014 Web role/tenant substrate addendum
+
+The current Web implementation at `204224937228dc0134cb73feb873b893005255c4`
+(merged PR #281) passed the targeted role/tenant substrate suite **43/43**
+with **0 failures**, covering all five required roles, plan/capability
+composition, single-tenant predicates, cross-tenant denial, and protected
+organization-route boundaries. Keep `ACCEPT-014` unchecked: this is Web
+implementation evidence, not the required per-fixture plan/user/tenant matrix;
+correction/provider, independent-review, and final-decision gates remain open.
+No checkbox changed; score remains **245 checked / 35 open / 280 total
+(87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-014-web-role-tenant-substrate-pr281-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard interaction harness correction
 
 Web PR [#281](https://github.com/anuragyadav-git/verglos-web/pull/281) merged
