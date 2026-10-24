@@ -1,5 +1,35 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Active execution mode · row-closure audit (2026-10-24)
+
+The primary objective of the next execution pass is to close the actual row
+contracts, not to accumulate more implementation-hardening notes. For every
+currently open non-AppSec row, work from the row's complete acceptance
+contract and dependencies:
+
+1. Inspect the row, its dependency chain, and the strongest existing evidence.
+2. Check the row only when every row-specific acceptance condition is actually
+   satisfied by current evidence. Code, tests, or a deployment alone are not
+   sufficient when the row requires provider, recipient, human, commercial,
+   release, or other external evidence.
+3. When a required artifact is missing but the action is authorized and
+   executable, perform the real provider/Production or controlled fixture
+   action and retain its exact receipt. Do not manufacture customer,
+   recipient, reviewer, legal, payment, publication, or release evidence.
+4. When the row is blocked by an external or AppSec-held dependency, record
+   the exact blocker and move to the next dependency-ready non-AppSec row.
+   A direct or transitive AppSec dependency is not silently relabelled as
+   complete.
+5. Update only the existing relevant ledger/backlog entry required to make
+   the closure auditable. Do not add duplicate evidence bundles, status prose,
+   or unrelated Markdown.
+
+The pass ends when every satisfiable non-AppSec row is checked and every
+remaining open row is explicitly held by an identified AppSec or genuine
+external dependency. The score must be recomputed from the checked boxes after
+each real closure; implementation progress without a satisfied row contract
+must not be reported as a closed row.
+
 ## Latest continuation result · 2026-10-24 · Web PR #300 nullable handoff digest
 
 Web PR **#300** merged normally as
