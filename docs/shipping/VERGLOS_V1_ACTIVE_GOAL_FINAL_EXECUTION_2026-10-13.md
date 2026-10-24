@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · release reconciliation refreshed
+
+The current release reconciliation now reflects the merged backlog: **22**
+non-AppSec rows total, **1 shipped** (`ACCEPT-005`) and **21 partial**. The
+recorded decision remains `no-go`; six gates remain open: provider lifecycle,
+independent review, authenticated-browser acceptance, field-CWV,
+account-deletion acceptance, and final release. The exact v3 input/result are
+bound to the current candidate and the retained freeze inventory remains
+24/24 artifacts with all 12 required kinds present. The additive integrity
+bundle verifies **333 files**, zero mismatches, matching manifest
+`sha256:dfe950489e85cc94545424b4b0896fce0d8ab950099d39f9598e9755787a8c7a`,
+and passed secret scan. Backlog score remains **246 checked / 34 open / 280
+total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/acceptance-release-reconciliation-freeze-2026-10-24-v3.md`.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-005 closed for public-OSS scope
 
 `ACCEPT-005` is now closed for the current V1 scope: owner-authorized analysis

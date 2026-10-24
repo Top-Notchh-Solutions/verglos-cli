@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · release reconciliation refreshed
+
+The current candidate reconciliation now records **1 shipped** non-AppSec row
+(`ACCEPT-005`) and **21 partial** rows across the 22-row non-AppSec set. It
+remains a recorded `no-go` with six open gates; the 24/24-artifact freeze
+remains blocked. Integrity bundle v7 verifies 333 files with zero mismatches and
+passed secret scan. Backlog score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/acceptance-release-reconciliation-freeze-2026-10-24-v3.md`.
+
 ## 2026-10-24 · ACCEPT-005 public-OSS scope disposition
 
 `ACCEPT-005` is closed for the current V1 scope of owner-authorized analysis of

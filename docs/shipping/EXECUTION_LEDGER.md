@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## Release reconciliation refresh · 2026-10-24
+
+- **Result:** The v3 candidate reconciliation contains 22 non-AppSec rows:
+  1 shipped (`ACCEPT-005`), 21 partial, and 0 planned; recommendation remains
+  `no-go` with six open gates.
+- **Freeze:** Existing candidate freeze inventory remains 24/24 artifacts and
+  all 12 required artifact kinds are present; the candidate remains blocked.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-release-reconciliation-v7.json`
+  verifies 333 files with zero mismatches and passed secret scan.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec open.
+- **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24-v3.md`.
+
 ## ACCEPT-005 public-OSS scope disposition · 2026-10-24
 
 - **Disposition:** Closed `ACCEPT-005` for the current owner-authorized
