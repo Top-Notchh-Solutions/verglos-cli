@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## Merged Web production smoke · 2026-10-24
+
+- **Provider:** Vercel deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` reached
+  `READY` and serves `verglos.com` from merged Web commit
+  `cb266b83406bbfffbd5ab02189556e60973a63a6`.
+- **Receipt:** Read-only Node fetch returned HTTP 200 for all nine public and
+  metadata routes; exact content types and byte counts are recorded in the
+  JSON receipt.
+- **Boundary:** Provider availability only. No database write, payment,
+  deletion, npm publication, tag, release, customer, human/field, or
+  independent-review claim was inferred. Score remains 245/35/280.
+- **Evidence:** `evidence/vercel-production-smoke-pr282-2026-10-24.md`.
+
 ## ACCEPT-014 matrix implementation and contract correction · 2026-10-24
 
 - **Web implementation:** PR #282 merged normally at

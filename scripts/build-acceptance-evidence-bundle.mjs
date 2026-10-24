@@ -182,6 +182,8 @@ const paths = [
   "docs/shipping/evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.json",
   "docs/shipping/evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.md",
   "docs/shipping/evidence/accept-014-final-regression-matrix-contract-v2-2026-10-24.md",
+  "docs/shipping/evidence/vercel-production-smoke-pr282-2026-10-24.json",
+  "docs/shipping/evidence/vercel-production-smoke-pr282-2026-10-24.md",
   "scripts/build-final-regression-input.mjs",
   "docs/shipping/evidence/accept-014-web-candidate-binding-2026-10-23.md",
   "docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md",

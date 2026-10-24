@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · merged Web production smoke
+
+Vercel deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` is READY from merged Web
+commit `cb266b83406bbfffbd5ab02189556e60973a63a6`. A read-only sweep returned
+HTTP **200** for all nine required public/metadata routes. Keep FINAL-WEB-007
+and FINAL-WEB-008 unchecked for human/field, customer, independent-review,
+AppSec/Hunt, and final-release gates. No checkbox changed; score remains
+**245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/vercel-production-smoke-pr282-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-014 matrix implementation and contract correction
 
 Web PR #282 merged normally at `cb266b83406bbfffbd5ab02189556e60973a63a6`.

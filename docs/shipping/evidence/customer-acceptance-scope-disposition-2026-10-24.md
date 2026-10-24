@@ -10,7 +10,7 @@ and no endorsement or external-customer result is claimed.
 
 The owner authorization for this exact path is recorded in
 `evidence/owner-authorization-2026-10-23.md`. The latest execution is recorded
-in `evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md`.
+in `evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`.
 
 ## Disposition
 

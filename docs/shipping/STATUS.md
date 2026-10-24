@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · merged Web production smoke
+
+Vercel deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` is READY and serves the
+public aliases from Web PR #282's merged commit. A read-only sweep returned
+HTTP 200 for all nine public/metadata routes. This advances FINAL-WEB-007/008
+provider evidence only; no checkbox changed and score remains **245 checked /
+35 open / 280 total (87.5%)**. Evidence:
+`evidence/vercel-production-smoke-pr282-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-014 matrix implementation and fail-closed contract
 
 Web PR #282 merged normally at `cb266b83406bbfffbd5ab02189556e60973a63a6`.
