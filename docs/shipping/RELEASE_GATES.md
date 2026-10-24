@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Production deployment receipt and public browser qualification
+
+Vercel deployment `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY for Web PR #275
+and serves `verglos.com`/`www.verglos.com`. The real read-only production
+qualification passed **36/36** measurements across six public paths at
+desktop/mobile in Chromium, Firefox, and WebKit; Axe, keyboard, performance,
+responsive, metadata, and crawlability checks all passed. This advances hosted
+FINAL-WEB-007/008 evidence only; human/field, customer, independent-review,
+AppSec/Hunt, and final release gates remain open. No checkbox changed; score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/final-web-007-production-pr275-multi-browser-2026-10-24.md`.
+The additive v33 bundle verifies **267** files with **0** mismatches, matches
+manifest `sha256:5578c852aa2475a0f77dab08860caa042a89d4c01e5113b86b68d4d120c1b0d8`,
+and passes secret scanning.
+
 ## 2026-10-24 · merged dashboard accessibility fix and v3 capture
 
 Web PR #275 merged normally as `b17c846c` from implementation `b344def`.
