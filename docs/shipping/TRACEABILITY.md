@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-006 malformed rollback-reference hardening
+
+- **Implementation mapping:** Shared rollback decisions validate unknown
+  runtime reference shapes before accessing fields and return bounded failure
+  reasons for malformed current or target references.
+- **Contract mapping:** Shared package tests/typecheck/build passed; CLI
+  rollback-plan tests passed **8/8**. PR #368 merged normally as
+  `0b789716a3120f9716aa55036932fb1f2f6f6c9e`.
+- **Boundary mapping:** This is code-side fail-closed evidence only; no
+  provider rollback/revocation, operational review, or final acceptance was
+  inferred. No checkbox changed and no provider state was mutated.
+- **Evidence:** `evidence/dist-006-malformed-reference-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
 
 - **Hosted mapping:** `https://verglos.com/handoff/<nonexistent-uuid>` returned

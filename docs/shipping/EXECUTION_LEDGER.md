@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## DIST-006 malformed rollback-reference hardening · 2026-10-24
+
+- **Execution:** Hardened the shared rollback decision boundary against null,
+  primitive, array, and malformed reference values supplied at runtime.
+- **Result:** Invalid references now produce explicit bounded denial reasons;
+  shared package tests/typecheck/build passed and CLI rollback-plan tests
+  passed **8/8**. PR #368 merged normally as
+  `0b789716a3120f9716aa55036932fb1f2f6f6c9e`.
+- **Acceptance mapping:** Code-side fail-closed evidence only. DIST-006 remains
+  open for authenticated provider/Production rollback or revocation,
+  operational review, and final acceptance. Score remains **246/34/280**; no
+  provider mutation or deletion occurred.
+- **Evidence:** `evidence/dist-006-malformed-reference-hardening-2026-10-24.md`.
+
 ## STUDIO-CLI-001 Production handoff boundary smoke · 2026-10-24
 
 - **Execution:** Exercised the deployed public handoff page and acknowledge

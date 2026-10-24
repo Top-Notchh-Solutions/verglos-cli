@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-006 malformed rollback-reference hardening
+
+- **Decision:** Treat rollback references as untrusted runtime input and fail
+  closed with a bounded decision rather than allowing malformed shapes to
+  throw.
+- **Result:** Shared tests, typecheck, and build passed; CLI rollback-plan
+  tests passed **8/8**. PR #368 merged normally as
+  `0b789716a3120f9716aa55036932fb1f2f6f6c9e`.
+- **Boundary:** This is code-side rollback safety only. No provider/Production
+  rollback or revocation, operational review, or final release acceptance
+  occurred. Keep DIST-006 unchecked; score remains **246/34/280**. No files
+  were deleted.
+- **Evidence:** `evidence/dist-006-malformed-reference-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
 
 - **Decision:** Record deployed handoff-boundary behavior using only a

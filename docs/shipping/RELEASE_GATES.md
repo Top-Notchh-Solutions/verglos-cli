@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-006 malformed rollback-reference hardening
+
+The shared rollback decision contract now validates runtime reference shapes
+and returns bounded invalid-reference decisions instead of throwing. Shared
+tests/typecheck/build passed and CLI rollback-plan tests passed **8/8**; PR
+#368 merged normally as `0b789716a3120f9716aa55036932fb1f2f6f6c9e`. This does
+not satisfy authenticated provider/Production rollback or revocation,
+operational review, or final release acceptance. No checkbox changed; score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/dist-006-malformed-reference-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
 
 The deployed handoff page returned **200** with private/no-store caching for a

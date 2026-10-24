@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-006 malformed rollback-reference hardening
+
+Rollback runtime input is now shape-validated and fails closed with bounded
+invalid-reference results instead of throwing. Shared tests/typecheck/build
+passed; CLI rollback-plan tests **8/8** passed; PR #368 merged normally as
+`0b789716a3120f9716aa55036932fb1f2f6f6c9e`. DIST-006 remains open for actual
+provider/Production rollback or revocation, operational review, and final
+acceptance. Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent /
+21 non-AppSec**. Evidence:
+`evidence/dist-006-malformed-reference-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
 
 Production handoff smoke passed the opaque page **200**, method refusal **405**,

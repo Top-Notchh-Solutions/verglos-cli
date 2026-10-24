@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-006 malformed rollback-reference hardening
+
+The shared rollback decision contract now validates untrusted runtime reference
+shapes before field access. Malformed or null current/target references return
+bounded `current-reference-invalid` or `target-reference-invalid` decisions
+instead of throwing. CLI PR **#368** merged normally as
+`0b789716a3120f9716aa55036932fb1f2f6f6c9e`; shared tests, typecheck, build,
+and CLI rollback-plan tests **8/8** passed. This advances DIST-006's real
+code-side fail-closed behavior, but does not create provider/Production
+rollback, operational review, or final release evidence. No provider mutation,
+publication, paid Actions run, or deletion occurred. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-006-malformed-reference-hardening-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 Production handoff boundary smoke
 
 The deployed handoff boundary was exercised with a nonexistent UUID and forged
