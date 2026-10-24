@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · STUDIO-CLI-001 handoff expiry fence
+
+Web PR #286 merged normally as
+`ce973942c94d889a5eaa0610618a96ce4d38c509`; the handoff acknowledgement write
+now re-checks expiry in-transaction and rejects exact-time expiry. Handoff
+contracts passed **30/30**; Web typecheck and diff checks passed. STUDIO-CLI-001
+remains open for authorized recipient acknowledgement, independent
+audit/review, and final release sign-off. Score remains **246/34/280 (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/studio-cli-001-handoff-expiry-fence-pr286-2026-10-24.md`.
+
+
 ## 2026-10-24 · ACCEPT-003 streamed temporary-name hardening
 
 CLI PR #380 merged normally as

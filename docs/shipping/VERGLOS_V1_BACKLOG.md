@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · STUDIO-CLI-001 handoff expiry fence
+
+Web PR **#286** merged normally as
+`ce973942c94d889a5eaa0610618a96ce4d38c509`. The public handoff acknowledgement
+write now re-checks expiry in its compare-and-set transaction and rejects exact-
+time expiry; the handoff domain/route suite passed **30/30**, with Web
+typecheck and diff checks green. Keep STUDIO-CLI-001 unchecked for authorized
+recipient acknowledgement, independent audit/review, and final release
+sign-off. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-cli-001-handoff-expiry-fence-pr286-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · ACCEPT-003 streamed temporary-name hardening
 
 CLI PR **#380** merged normally as

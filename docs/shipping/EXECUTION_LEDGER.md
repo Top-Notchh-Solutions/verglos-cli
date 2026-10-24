@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## STUDIO-CLI-001 handoff expiry fence · 2026-10-24
+
+- **Execution:** Web PR #286 merged normally as
+  `ce973942c94d889a5eaa0610618a96ce4d38c509`; the public handoff
+  acknowledgement transaction now fences the write with `expiresAt >
+  acknowledgedAt` and rejects exact-time expiry.
+- **Result:** Source commit `fc89c93`; handoff domain/route contracts **30/30**,
+  Web typecheck, and diff checks passed.
+- **Acceptance mapping:** Real STUDIO-CLI-001 production-code hardening only.
+  Keep the row open for authorized recipient acknowledgement, independent
+  audit/review, and final release sign-off. Score remains **246/34/280**. No
+  real recipient/customer/provider/Production handoff occurred.
+- **Evidence:** `evidence/studio-cli-001-handoff-expiry-fence-pr286-2026-10-24.md`.
+
 ## ACCEPT-003 streamed temporary-name hardening · 2026-10-24
 
 - **Execution:** CLI PR #380 merged normally as
