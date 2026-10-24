@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 handoff expiry fence
+
+Web PR **#286** merged normally as
+`ce973942c94d889a5eaa0610618a96ce4d38c509`. The public handoff acknowledgement
+compare-and-set now requires `expiresAt > acknowledgedAt` inside the write
+transaction, closing the read-before-expiry/write-after-expiry race; exact-time
+expiry is rejected. Handoff domain and route contracts passed **30/30**, Web
+typecheck passed, and diff checks passed. This is real STUDIO-CLI-001
+production-code hardening, but the row remains open for authorized recipient
+acknowledgement, independent audit/review, and final release sign-off. No real
+recipient, customer, provider, or Production handoff was used. Score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-cli-001-handoff-expiry-fence-pr286-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-003 streamed temporary-name hardening
 
 CLI PR **#380** merged normally as

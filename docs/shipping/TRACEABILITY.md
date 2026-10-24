@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · STUDIO-CLI-001 handoff expiry fence
+
+- **Implementation mapping:** Web PR #286 merged normally as
+  `ce973942c94d889a5eaa0610618a96ce4d38c509`; acknowledgement writes require
+  the row to remain unexpired at the transaction boundary.
+- **Verification mapping:** Source commit `fc89c93`; handoff domain/route
+  contracts **30/30**, Web typecheck, and diff checks passed.
+- **Boundary mapping:** This closes a production race in the acknowledgement
+  implementation but does not provide an authorized recipient acknowledgement,
+  independent audit/review, or final release sign-off. No checkbox changed;
+  score remains **246/34/280**.
+- **Evidence:** `evidence/studio-cli-001-handoff-expiry-fence-pr286-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-003 streamed temporary-name hardening
 
 - **Implementation mapping:** CLI PR #380 merged normally as
