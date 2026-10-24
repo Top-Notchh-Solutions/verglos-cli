@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-003 streamed temporary-name hardening
+
+CLI PR **#380** merged normally as
+`e1360b444c5c51268d9b99a26ce5d82730bf0d20`. File-backed record ingestion now
+uses a process-plus-UUID temporary name instead of a process/time-only name,
+removing same-process same-millisecond temporary-file collisions. Focused
+record-store tests passed **7/7**, including concurrent file-backed streaming;
+the shared package suite, shared typecheck/build, and CLI typecheck/build
+passed. This is real ACCEPT-003 production-code hardening, but the row remains
+open for hosted/provider evidence, independent review, authorized
+recipient/customer acceptance, and final release sign-off. No registry,
+provider, Production/customer, or deletion state changed. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-003-stream-temp-uuid-pr380-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-005 worker scope fence
 
 Web PR **#285** merged normally as `e1d7a42dcb48387bae7929ceb627caaeeb90ed0d`.

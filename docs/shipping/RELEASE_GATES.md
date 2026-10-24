@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-003 streamed temporary-name hardening
+
+CLI PR #380 merged normally as
+`e1360b444c5c51268d9b99a26ce5d82730bf0d20`. File-backed record ingestion now
+uses a process-plus-UUID temporary name; focused record-store tests passed
+**7/7**, including concurrent streaming, and shared/CLI typecheck/build passed.
+This is implementation evidence only; ACCEPT-003 remains open for
+hosted/provider evidence, independent review, authorized recipient/customer
+acceptance, and final release sign-off. No checkbox changed; score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/accept-003-stream-temp-uuid-pr380-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-005 worker scope fence
 
 Web PR #285 merged normally as

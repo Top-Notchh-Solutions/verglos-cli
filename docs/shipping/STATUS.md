@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-003 streamed temporary-name hardening
+
+CLI PR #380 merged normally as
+`e1360b444c5c51268d9b99a26ce5d82730bf0d20`; file-backed record ingestion now
+uses UUID-based temporary names, and focused record-store tests passed **7/7**
+with shared/CLI typecheck/build green. ACCEPT-003 remains open for
+hosted/provider, independent, recipient/customer, and final-release evidence.
+Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/accept-003-stream-temp-uuid-pr380-2026-10-24.md`.
+
+
 ## 2026-10-24 · QUAL-WEB-005 worker scope fence
 
 Web PR #285 merged normally as

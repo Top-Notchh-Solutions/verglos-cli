@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-003 streamed temporary-name hardening · 2026-10-24
+
+- **Execution:** CLI PR #380 merged normally as
+  `e1360b444c5c51268d9b99a26ce5d82730bf0d20`. File-backed record ingestion now
+  uses a UUID-based temporary name, eliminating same-process same-millisecond
+  temporary-file collisions.
+- **Result:** Source commit `8e27dab1`; record-store tests **7/7**, shared
+  package suite, shared typecheck/build, and CLI typecheck/build passed.
+- **Acceptance mapping:** Real ACCEPT-003 implementation hardening only. Keep
+  ACCEPT-003 open for hosted/provider evidence, independent review,
+  recipient/customer acceptance, and final release sign-off. Score remains
+  **246/34/280**. No registry/provider/Production/customer state changed.
+- **Evidence:** `evidence/accept-003-stream-temp-uuid-pr380-2026-10-24.md`.
+
 ## QUAL-WEB-005 worker scope fence · 2026-10-24
 
 - **Execution:** Web PR #285 merged normally as

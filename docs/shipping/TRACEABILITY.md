@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-003 streamed temporary-name hardening
+
+- **Implementation mapping:** CLI PR #380 merged normally as
+  `e1360b444c5c51268d9b99a26ce5d82730bf0d20`; file-backed record ingestion now
+  uses process-plus-UUID temporary names to avoid concurrent stream collisions.
+- **Verification mapping:** Source commit `8e27dab1`; record-store tests
+  **7/7**, shared package suite, shared typecheck/build, and CLI typecheck/build
+  passed.
+- **Boundary mapping:** This hardens local record ingestion but does not
+  provide hosted/provider evidence, independent review, authorized
+  recipient/customer acceptance, or final release sign-off. No checkbox
+  changed; score remains **246/34/280**.
+- **Evidence:** `evidence/accept-003-stream-temp-uuid-pr380-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-005 worker scope fence
 
 - **Implementation mapping:** Web PR #285 merged normally as
