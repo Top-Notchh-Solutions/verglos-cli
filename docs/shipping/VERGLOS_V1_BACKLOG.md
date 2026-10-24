@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #279 bounded dashboard dataset counts
+
+Web PR #279 merged normally as `ab6bb6c0cc13c38d20c5296a37b48171f07db8ee`
+from `9291d083`. Alerts, SCM, Members, and Billing now expose exact
+tenant/license-scoped dataset totals beside their bounded dashboard slices.
+Local typecheck, dashboard contracts **4/4**, serial Web **904/24/0**, and
+Production build **49/49** passed. Vercel deployment
+`dpl_4jTk3gJtYBAG2rtx8EcqP1UKEUBA` is READY on `production`; twelve read-only
+public-host/route checks returned HTTP **200**. This advances QUAL-WEB-006
+implementation/provider evidence only. No checkbox changed; score remains
+**245 checked / 35 open / 280 total (87.5%)**, partitioned as **13
+AppSec-dependent / 22 non-AppSec** rows. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-dataset-counts-pr279-2026-10-24.md`.
+Additive bundle v43 contains **273** hashed evidence files, passes secret
+scanning, and matches manifest
+`sha256:ce6ffdb9adb52a651a488ea44a2335772ef2870f84537c905d1d9f1ff80cc206`.
+
 ## 2026-10-24 · Web PR #278 bounded dashboard dataset totals
 
 Web PR #278 merged normally as `11b4f5c717c4b127655b53a15f029c693fb1fdcd`

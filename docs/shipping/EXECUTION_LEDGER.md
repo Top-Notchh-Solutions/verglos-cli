@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #279 Production receipt · 2026-10-24
+
+- **Implementation:** Web PR #279 merged normally as
+  `ab6bb6c0cc13c38d20c5296a37b48171f07db8ee` from `9291d083`; Alerts, SCM,
+  Members, and Billing expose exact server-side counts beside bounded slices.
+- **Verification:** Typecheck passed; dashboard contracts passed **4/4**;
+  serial Web passed **904/928** with **24 designed skips** and zero failures;
+  Production build generated **49/49** routes.
+- **Provider receipt:** Vercel deployment
+  `dpl_4jTk3gJtYBAG2rtx8EcqP1UKEUBA` is READY for `production`; both public
+  hostnames and six read-only routes returned HTTP **200**.
+- **Disposition:** Advance QUAL-WEB-006 implementation/provider evidence only.
+  Keep 100-row, loading/error, human/field, independent-review, and final
+  acceptance gates open. No checkbox changed; score remains **245/35/280
+  (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open. No
+  database write, payment, customer data, publication, deletion, or final npm
+  release occurred; blocked GitHub Actions were not used as evidence.
+- **Evidence:** `evidence/qual-web-006-dashboard-dataset-counts-pr279-2026-10-24.md`.
+- **Bundle:** Additive v43 contains **273** hashed evidence files, verifies
+  with **0** mismatches, passes secret scanning, and matches manifest
+  `sha256:ce6ffdb9adb52a651a488ea44a2335772ef2870f84537c905d1d9f1ff80cc206`.
+
 ## Web PR #278 Production receipt · 2026-10-24
 
 - **Implementation:** Web PR #278 merged normally as

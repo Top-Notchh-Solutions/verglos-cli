@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · Web PR #279 dashboard count disposition
+
+- **Decision:** Merge the tenant/license/project-scoped dataset-count
+  implementation normally and record Vercel Production readiness for the
+  merged Web commit.
+- **Disposition:** Advance QUAL-WEB-006 implementation/provider evidence only;
+  retain its 100-row, loading/error, human/field, independent-review, and
+  final acceptance gates. No checkbox changed; score remains **245/35/280
+  (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-dataset-counts-pr279-2026-10-24.md`;
+  additive bundle v43 manifest
+  `sha256:ce6ffdb9adb52a651a488ea44a2335772ef2870f84537c905d1d9f1ff80cc206`.
+
 ## 2026-10-24 · record Web PR #278 bounded dataset totals
 
 - **Decision:** Make server-side totals explicit wherever the authenticated

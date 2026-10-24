@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #279 bounded dashboard dataset counts
+
+- **Source mapping:** Web PR #279 merged normally as `ab6bb6c0` from
+  `9291d083`; Alerts, SCM, Members, and Billing use exact server-side counts
+  beside bounded slices while retaining tenant/license/project boundaries.
+- **Verification mapping:** Typecheck, dashboard contracts **4/4**, serial Web
+  **904 passed / 24 designed skips / 0 failures**, and Production build
+  **49/49** passed. Vercel deployment `dpl_4jTk3gJtYBAG2rtx8EcqP1UKEUBA` is
+  READY for `production`; public read-only smoke returned HTTP **200**.
+- **Acceptance mapping:** This advances QUAL-WEB-006 implementation/provider
+  evidence only. The 100-row, loading/error, human/field,
+  independent-review, and final acceptance requirements remain open. No
+  checkbox changed; score remains **245/35/280 (87.5%)** with **13
+  AppSec-dependent / 22 non-AppSec** rows open.
+- **Evidence:** `evidence/qual-web-006-dashboard-dataset-counts-pr279-2026-10-24.md`.
+- **Bundle mapping:** Additive v43 contains **273** hashed evidence files,
+  passes secret scanning, verifies with **0** mismatches, and matches manifest
+  `sha256:ce6ffdb9adb52a651a488ea44a2335772ef2870f84537c905d1d9f1ff80cc206`.
+
 ## 2026-10-24 · Web PR #278 bounded dashboard dataset totals
 
 - **Source mapping:** Web PR #278 merged normally as
