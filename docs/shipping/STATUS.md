@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #300 nullable Studio handoff digest
+
+Web PR #300 merged normally as
+`069d4a2c4937c0e72eddbe22c0aa657d683bbc14`; the client handoff-history parser
+now preserves issued receipts with a null acknowledgement digest while keeping
+actual digest validation bounded. Focused contracts passed **35/35**, typecheck
+and diff checks passed. Vercel Production deployment
+`dpl_GszPddwswnPS7sD8mcgCMkLJqzYJ` is READY; the read-only matrix passed
+**18/18**. No Actions rerun was started. This advances STUDIO-CLI-001
+implementation/provider evidence only; no checkbox changed. Score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/studio-handoff-null-digest-pr300-2026-10-24.md`.
+
+No customer or Production database data was changed. Nothing was deleted or
+overwritten.
+
 ## 2026-10-24 · Web PR #299 terminal account-deletion lease recovery
 
 Web PR #299 merged normally as

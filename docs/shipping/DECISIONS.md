@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · Web PR #300 nullable Studio handoff digest
+
+- **Decision:** Treat the unacknowledged handoff state as valid client data;
+  an absent or explicit null acknowledgement digest must not erase an issued
+  receipt from history.
+- **Result:** PR #300 merged normally as
+  `069d4a2c4937c0e72eddbe22c0aa657d683bbc14` from `dadfd515`; focused
+  handoff/dashboard contracts **35/35**, typecheck, and diff checks passed.
+  Vercel Production reached READY with the **18/18** read-only matrix.
+- **Boundary:** STUDIO-CLI-001 implementation/provider evidence only.
+  Recipient acknowledgement, customer acceptance, independent review, and
+  final release remain open. Score remains **246/34/280**; no Actions rerun
+  was started.
+- **Evidence:** `evidence/studio-handoff-null-digest-pr300-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #299 terminal account-deletion lease recovery
 
 - **Decision:** Treat an expired final deletion-worker lease as a terminal
