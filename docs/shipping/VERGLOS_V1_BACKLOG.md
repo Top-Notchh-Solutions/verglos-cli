@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Vercel Production provider receipt addendum
+
+Vercel confirmed that deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is already
+the current Production deployment: the real `vercel promote` command returned
+the provider's 409 idempotency response. Inspection reported `target:
+production`, `readyState: READY`, and all production aliases. A fresh
+read-only sweep returned HTTP 200 for all nine public/metadata endpoints.
+Keep `FINAL-WEB-007` and `FINAL-WEB-008` unchecked for human/field-CWV,
+recipient/customer, independent-review, and final-release evidence. No
+checkbox changed; score remains **245 checked / 35 open / 280 total (87.5%)**,
+split **13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-007-008-production-promotion-receipt-2026-10-24.md`.
+The additive bundle verifies **294** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:662d481dfbb3a7e6fa9acce52dea1c938b3937871a2806a5fff9a9bf8a1cfb84`.
+
 ## 2026-10-24 · ACCEPT-014 bounded final-regression execution addendum
 
 The implemented final-regression runner executed **12** real local CLI scans

@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Vercel Production provider receipt · 2026-10-24
+
+- **Provider action:** `vercel promote dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu
+  --yes --timeout 3m`.
+- **Result:** Vercel returned 409 because the deployment is already the current
+  Production deployment. Inspection reported `target: production` and
+  `readyState: READY`; all five production aliases were present.
+- **Verification:** A fresh read-only Node sweep returned HTTP 200 for all nine
+  public/metadata endpoints; exact content types and byte counts are in the
+  evidence receipt.
+- **Boundary:** Provider production state and availability only. No new
+  deployment, alias mutation, database write, payment, publication, Actions
+  run, customer-data operation, or final release occurred. No checkbox
+  changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:**
+  `evidence/final-web-007-008-production-promotion-receipt-2026-10-24.md`.
+- **Bundle:** 294 files, zero mismatches, secret scan passed; manifest
+  `sha256:662d481dfbb3a7e6fa9acce52dea1c938b3937871a2806a5fff9a9bf8a1cfb84`.
+
 ## ACCEPT-014 bounded final-regression execution · 2026-10-24
 
 - **Candidate:** CLI `aad2c74395a5c381c955ab9dfab7462295564840`, Web

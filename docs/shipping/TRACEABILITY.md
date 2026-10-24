@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Vercel Production provider receipt
+
+- **Source mapping:** Vercel deployment
+  `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu`, targeted as `production` and inspected
+  in `READY` state.
+- **Verification mapping:** The provider returned the exact 409 idempotency
+  response for `vercel promote`, and a read-only Node fetch sweep returned
+  HTTP 200 for all nine public/metadata endpoints.
+- **Acceptance mapping:** This advances provider-production-state evidence for
+  FINAL-WEB-007/008 only. It does not satisfy human/field, recipient/customer,
+  independent-review, AppSec/Hunt, or final-release requirements. Score is
+  **245/35/280 (87.5%)** and no checkbox changed.
+- **Evidence:**
+  `evidence/final-web-007-008-production-promotion-receipt-2026-10-24.md`.
+- **Bundle mapping:** 294 files, zero mismatches, secret scan passed; manifest
+  `sha256:662d481dfbb3a7e6fa9acce52dea1c938b3937871a2806a5fff9a9bf8a1cfb84`.
+
 ## 2026-10-24 · ACCEPT-014 bounded final-regression execution
 
 - **Source mapping:** CLI `aad2c74395a5c381c955ab9dfab7462295564840` and Web

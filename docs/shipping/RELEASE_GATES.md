@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Vercel Production provider receipt
+
+Vercel confirmed that deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is already
+the current Production deployment (`vercel promote` returned 409), with
+`target: production` and `readyState: READY`. A read-only sweep returned 200
+for all nine required public/metadata endpoints. This advances only the
+automated provider-production-state evidence for FINAL-WEB-007/008. Human
+screen-reader/field-CWV, recipient/customer acceptance, independent review,
+and final release/go-no-go remain open; no checkbox changed. Score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/final-web-007-008-production-promotion-receipt-2026-10-24.md`.
+The additive bundle verifies **294** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:662d481dfbb3a7e6fa9acce52dea1c938b3937871a2806a5fff9a9bf8a1cfb84`.
+
 ## 2026-10-24 · ACCEPT-014 bounded final-regression execution
 
 The local final-regression run executed 12 real CLI scans across 8/8 frozen

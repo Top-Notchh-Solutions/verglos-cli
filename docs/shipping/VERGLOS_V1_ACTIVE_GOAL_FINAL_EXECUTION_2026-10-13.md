@@ -1,5 +1,28 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Vercel Production provider receipt
+
+The provider action was executed against the existing Vercel deployment
+`dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu`. Vercel returned HTTP **409** with the exact
+disposition that this deployment is already the current Production deployment.
+Inspection reported `target: production`, `readyState: READY`, and all five
+production aliases. A fresh read-only sweep returned HTTP **200** for all nine
+public and metadata endpoints, with the observed content types and byte sizes
+retained in the receipt.
+
+This is real provider-production-state evidence for FINAL-WEB-007/008, not a
+claim that a new deployment or public CLI release occurred. No alias, build,
+database, payment, npm, tag, or release state was mutated. Human
+screen-reader/field-CWV evidence, recipient/customer acceptance, independent
+review, and final go/no-go remain separate requirements; no checkbox changed.
+Score remains **245 checked / 35 open / 280 total (87.5%)**, split **13
+AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-007-008-production-promotion-receipt-2026-10-24.md`.
+The additive acceptance bundle verifies **294** files with zero mismatches,
+secret scanning passed, and manifest
+`sha256:662d481dfbb3a7e6fa9acce52dea1c938b3937871a2806a5fff9a9bf8a1cfb84`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-promotion-receipt-v1.json`.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-014 bounded final-regression execution
 
 The implemented final-regression runner now has a real local execution receipt:

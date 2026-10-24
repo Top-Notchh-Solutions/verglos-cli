@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record Vercel Production provider receipt
+
+- **Decision:** Record the actual provider confirmation that the existing
+  deployment is already current Production, without treating an idempotent
+  promotion check as a new release.
+- **Result:** Vercel returned 409 for `vercel promote`; inspection reported
+  `target: production`, `readyState: READY`, and the production aliases. Nine
+  public/metadata endpoints returned HTTP 200 in a read-only sweep.
+- **Disposition:** Advance automated provider-production-state evidence for
+  FINAL-WEB-007/008 only. Human/field, recipient/customer, independent-review,
+  AppSec/Hunt, and final release gates remain open. No checkbox changed; score
+  remains **245/35/280 (87.5%)**. No paid Actions run or public release occurred.
+- **Evidence:**
+  `evidence/final-web-007-008-production-promotion-receipt-2026-10-24.md`.
+- **Bundle:** 294 files, zero mismatches, secret scan passed; manifest
+  `sha256:662d481dfbb3a7e6fa9acce52dea1c938b3937871a2806a5fff9a9bf8a1cfb84`.
+
 ## 2026-10-24 · record ACCEPT-014 bounded final-regression execution
 
 - **Decision:** Accept the 12-scan local execution as real implementation and
