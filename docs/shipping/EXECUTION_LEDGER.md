@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## Web contract recheck · 2026-10-24
+
+- **Execution:** Local Web contracts ran against merged head `705a85e` with
+  `pnpm test:account-deletion-cron`, `pnpm test:truth-registry`,
+  `pnpm test:public-release-smoke`, and `pnpm test:landing-release`.
+- **Result:** 1/1, 37/37, 12/12, and 4/4 passed respectively; zero failures.
+- **Runtime boundary:** Node `v26.4.0` was used; the repository requests Node
+  22 and pnpm emitted the engine warning. No hosted/provider/database/payment,
+  customer, deletion, publication, or Actions state changed.
+- **Disposition:** Local implementation evidence only; no checkbox changed and
+  score remains 245/35/280.
+- **Evidence:** `evidence/web-contract-recheck-2026-10-24.md`.
+
 ## Production landing multi-browser receipt · 2026-10-24
 
 - **Execution:** Read-only browser qualification ran against `https://verglos.com`

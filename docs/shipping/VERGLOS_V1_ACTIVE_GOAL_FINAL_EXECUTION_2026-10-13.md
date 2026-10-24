@@ -1,5 +1,19 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web contract recheck
+
+The current merged Web head `705a85e` passed the local account-deletion
+worker boundary **1/1**, truth-registry contracts **37/37**, public-release
+smoke **12/12**, and landing-qualification contracts **4/4**, with zero test
+failures. The workstation used Node `v26.4.0` while the repository requests
+Node 22; that engine warning is retained in the evidence. This is local
+implementation evidence only. It does not create Production deletion,
+human/field, customer/commercial, independent-review, provider-publication,
+AppSec/Hunt, or final-release evidence. No checkbox changed; score remains
+**245 checked / 35 open / 280 total (87.5%)**, split **13 AppSec-dependent /
+22 non-AppSec**. Evidence:
+`docs/shipping/evidence/web-contract-recheck-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Production landing multi-browser receipt
 
 The current `https://verglos.com` Production alias passed the release browser

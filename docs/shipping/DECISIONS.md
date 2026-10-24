@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record Web contract recheck
+
+- **Decision:** Accept the local Web contract run as additive implementation
+  evidence for the current merged head `705a85e`.
+- **Result:** Account-deletion boundary 1/1, truth registry 37/37,
+  public-release smoke 12/12, and landing qualification 4/4 passed with zero
+  failures. Node 26.4.0 was used and the repository's Node 22 engine warning
+  was retained.
+- **Disposition:** Keep all affected rows open. This is not Production
+  deletion, human/field, customer/commercial, independent-review,
+  provider-publication, AppSec/Hunt, or final-release evidence. Score remains
+  245/35/280; no checkbox changed.
+- **Evidence:** `evidence/web-contract-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · record Production landing multi-browser receipt
 
 - **Decision:** Accept the read-only Production browser captures as current
