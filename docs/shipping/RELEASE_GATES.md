@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · local signed refund integration
+
+The Web signed-handler integration passed **4/4** on a fresh isolated database
+after 43 migrations, including capture entitlement, replay, partial/full/stale
+refund handling, failed-order/invoice paths, and subscription expiry. This
+advances application-side provider evidence only; it does not open the
+Production provider, customer, independent-review, field, AppSec/Hunt, or
+final-release gates. No checkbox changed; score remains **245/35/280
+(87.5%)**. Evidence:
+`evidence/razorpay-webhook-refund-local-integration-2026-10-24.md`.
+
 ## 2026-10-24 · Test Mode capture/refund lifecycle
 
 The synthetic Test Mode provider payment completed capture then full refund:

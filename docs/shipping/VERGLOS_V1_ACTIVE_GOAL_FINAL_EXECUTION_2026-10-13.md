@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · local signed refund integration
+
+The Web source `9005d5ed5182b1d29159c0bb65c8ac696928baed` was exercised
+against a fresh isolated Docker PostgreSQL database. The reviewed local
+baseline and **43** ordered migrations applied successfully, and the real
+database-backed Razorpay webhook integration passed **4/4** with zero failures
+or skips. It covered capture entitlement, duplicate replay, partial/full/stale
+refund watermarks, failed-order handling, invoice binding, and subscription
+expiry. Evidence:
+`docs/shipping/evidence/razorpay-webhook-refund-local-integration-2026-10-24.md`.
+
+This is application-side signed-handler evidence paired with the separate
+provider Test Mode capture/refund receipt; it is not an external webhook
+delivery, Production database action, customer acceptance, independent review,
+or final release decision. The additive bundle v23 verifies **247/247** files
+with zero mismatches, passes secret scanning, and matches manifest
+`sha256:89505715f868fd5955533652a14441da665d57a045682cd1b2dfa61053f093fc`.
+No checkbox changed; score remains **245 checked / 35 open / 280 total
+(87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
+
 ## Latest continuation result · 2026-10-24 · Test Mode capture/refund lifecycle
 
 The existing synthetic Razorpay Test Mode capture was completed through a

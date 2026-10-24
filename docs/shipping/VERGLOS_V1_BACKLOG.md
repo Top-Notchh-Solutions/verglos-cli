@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · local signed refund integration
+
+The Web current head passed the real database-backed signed Razorpay webhook
+integration **4/4** against a fresh isolated Docker database after the reviewed
+baseline and 43 migrations. Capture entitlement, duplicate replay,
+partial/full/stale refunds, failed orders, invoice binding, and subscription
+expiry all passed. This is application-side evidence only; no external webhook,
+Production database, customer, independent-review, or final-release state is
+inferred. Bundle v23 verifies **247/247** files with zero mismatches and a
+passed secret scan. No checkbox changed; score remains **245 checked / 35 open /
+280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/razorpay-webhook-refund-local-integration-2026-10-24.md`.
+
 ## 2026-10-24 · Test Mode capture/refund lifecycle
 
 The existing synthetic Razorpay Test Mode capture completed a full provider

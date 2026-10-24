@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## Local signed refund integration · 2026-10-24
+
+- **Environment:** Fresh isolated Docker database `verglos_webhook_20261024`;
+  reviewed baseline plus 43 migrations applied. The pre-existing partial test
+  database was left untouched.
+- **Verification:** Database-backed Razorpay webhook integration passed **4/4**
+  with zero failures/skips, covering capture/replay, refund watermarks,
+  failed-order/invoice paths, and subscription expiry.
+- **Disposition:** Application-side provider integration advanced; no external
+  webhook, Production database, customer data, or checkbox change. Score
+  remains **245/35/280 (87.5%)**. Evidence:
+  `evidence/razorpay-webhook-refund-local-integration-2026-10-24.md`.
+
 ## Test Mode capture/refund lifecycle · 2026-10-24
 
 - **Provider action:** Existing synthetic Razorpay Test Mode payment was
