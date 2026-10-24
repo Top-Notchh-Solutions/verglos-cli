@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current alpha.4 DIST-002/003 artifact recheck
+
+- **Decision:** Re-run the local release artifact flow at current alpha.4
+  without publication or trusted-provider action.
+- **Result:** License clearance, external-license records **8/8**, seven
+  archives, clean consumer, **15 artifacts**, checksums, and upgrade/rollback
+  all passed.
+- **Disposition:** Local artifact evidence only. Keep DIST-002/003 open for
+  protected publication/attestation, independent review, and final acceptance.
+  Score remains **245/35/280 (87.5%)**; no npm/tag/provider/release state
+  changed.
+- **Evidence:** `evidence/dist-002-003-current-alpha4-artifact-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · record current alpha.4 DIST-006 rollback rehearsal
 
 - **Decision:** Re-run the bounded rollback decision contract at current CLI

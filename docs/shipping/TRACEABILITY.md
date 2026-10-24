@@ -1,5 +1,15 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-002/003 current alpha.4 artifact recheck
+
+- **Source mapping:** CLI `aad2c743`, package version `2.0.0-alpha.4`.
+- **Verification mapping:** Seven archives, eight external-license records,
+  clean consumer, 15-artifact origin/checksum verification, and upgrade/
+  rollback passed locally.
+- **Acceptance mapping:** Trusted publication/attestation, provider action,
+  independent review, and final release remain open. Score **245/35/280**.
+- **Evidence:** `evidence/dist-002-003-current-alpha4-artifact-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 current alpha.4 rollback rehearsal
 
 - **Source mapping:** CLI `aad2c743` built all 8 packages.
@@ -24,7 +34,7 @@
 - **Evidence:** `evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
 - **Bundle mapping:** Additive bundle has **282** hashed files, zero
   mismatches, secret scanning passed, manifest
-  `sha256:5a4497c28c508a22228fbf431f39197ea2239eb2052c76da727ae8954e6e7f16`.
+  `sha256:4e09e3c95bdf640d22164493b40c48260a5dba6c3e281acb4bb3648240051f80`.
 
 ## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser evidence
 

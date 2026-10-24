@@ -1,5 +1,15 @@
 # Verglos V1 Execution Ledger
 
+## DIST-002/003 current alpha.4 artifact recheck · 2026-10-24
+
+- **Candidate:** CLI `aad2c743`, version `2.0.0-alpha.4`.
+- **Result:** License clearance, external-license records 8/8, seven-package
+  pack/manifest, clean consumer, 15-artifact origin/checksum verification, and
+  upgrade/rollback all passed.
+- **Boundary:** No npm publication, tag, trusted publication, provider
+  attestation, or final release. DIST-002/003 remain open for those gates.
+- **Evidence:** `evidence/dist-002-003-current-alpha4-artifact-recheck-2026-10-24.md`.
+
 ## DIST-006 current alpha.4 rollback rehearsal · 2026-10-24
 
 - **Candidate:** CLI `aad2c743`; build **8/8**; focused rollback contracts
@@ -28,7 +38,7 @@
 - **Evidence:** `evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
 - **Bundle:** Additive bundle contains **282** files, verifies with zero
   mismatches, passes secret scanning, and matches manifest
-  `sha256:5a4497c28c508a22228fbf431f39197ea2239eb2052c76da727ae8954e6e7f16`.
+  `sha256:4e09e3c95bdf640d22164493b40c48260a5dba6c3e281acb4bb3648240051f80`.
 
 ## QUAL-WEB-006 local production-build multi-browser qualification · 2026-10-24
 

@@ -1,5 +1,15 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-002/003 current alpha.4 artifact recheck addendum
+
+The current local alpha.4 release flow passed license clearance, seven-package
+packing/manifest audit, clean-consumer verification, 15-artifact release
+origin/checksum verification, and upgrade/rollback. No npm publication, tag,
+trusted provider action, or final release occurred; DIST-002/003 remain
+unchecked for their protected publication/attestation and final acceptance.
+Score remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/dist-002-003-current-alpha4-artifact-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 current alpha.4 rollback rehearsal addendum
 
 CLI `aad2c743` built **8/8** packages and the focused rollback contracts passed
