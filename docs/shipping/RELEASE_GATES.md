@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-006 current scorer regression
+
+The comprehension scorer suite passed **11/11** with zero failures, skips, or
+cancellations, and the study-protocol validator passed with participant and
+Hunt runs still open. This is implementation-boundary evidence only; no
+participant run, answer data, independent scoring review, or final acceptance
+was inferred. `ACCEPT-006` remains unchecked. No checkbox changed; score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/accept-006-current-scorer-regression-2026-10-24.md`.
+Bundle v32 verifies **365** files with zero mismatches, matching manifest
+`sha256:3d5d2250dc2090df15ccf1602b0fb18d4168723105756c400f64e933462c6d82`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-003 current-head bundle v30 verification
 
 The checked-in v30 acceptance packet verified **363/363** bounded evidence

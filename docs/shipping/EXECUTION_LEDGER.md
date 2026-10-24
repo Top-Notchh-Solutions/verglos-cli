@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-006 current scorer regression · 2026-10-24
+
+- **Execution:** Ran the six-question scorer regression suite and frozen
+  comprehension/Hunt study-protocol validator.
+- **Result:** **11/11** scorer tests passed with zero failures, skips, or
+  cancellations; protocol validation passed and retained open participant and
+  Hunt states.
+- **Disposition:** Implementation-boundary evidence only. No participant run,
+  answer data, independent scoring review, or final acceptance occurred; no
+  checkbox was upgraded. Score remains **246/34/280**.
+- **Evidence:** `evidence/accept-006-current-scorer-regression-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v32.json` verifies 365 files with zero mismatches, matching manifest `sha256:3d5d2250dc2090df15ccf1602b0fb18d4168723105756c400f64e933462c6d82`, and passed secret scanning.
+
 ## ACCEPT-003 current-head bundle v30 verification · 2026-10-24
 
 - **Execution:** Verified the checked-in v30 acceptance bundle and ran the

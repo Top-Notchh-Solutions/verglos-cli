@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-006 current scorer regression
+
+- **Decision:** Record the current six-question comprehension scorer and
+  protocol-boundary regression.
+- **Result:** Scorer tests passed **11/11** with zero failures, skips, or
+  cancellations; study-protocol validation passed with participant and Hunt
+  runs correctly remaining open.
+- **Boundary:** No participant run, answer collection, independent scoring
+  review, or final acceptance was generated; no checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-006-current-scorer-regression-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v32.json` verifies 365 files with zero mismatches, matching manifest `sha256:3d5d2250dc2090df15ccf1602b0fb18d4168723105756c400f64e933462c6d82`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-003 current-head bundle v30 verification
 
 - **Decision:** Record the read-only verification of the current internal

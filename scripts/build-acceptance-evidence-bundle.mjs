@@ -376,6 +376,7 @@ const paths = [
   "docs/shipping/evidence/qual-web-005-current-head-privacy-deletion-full-suite-2026-10-24.md",
   "docs/shipping/evidence/qual-web-006-current-head-dashboard-contracts-2026-10-24.md",
   "docs/shipping/evidence/accept-003-current-head-bundle-verification-v30-2026-10-24.md",
+  "docs/shipping/evidence/accept-006-current-scorer-regression-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];
 

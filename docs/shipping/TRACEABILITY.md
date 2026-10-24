@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-006 current scorer regression
+
+- **Implementation mapping:** Six-question comprehension scorer and frozen
+  study protocols.
+- **Contract mapping:** Scorer regression tests passed **11/11**; protocol
+  validation passed with `participantRun: open` and `huntAdjudication: open`.
+- **Boundary mapping:** No participant run, answer data, independent scoring
+  review, or final acceptance was inferred.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-006-current-scorer-regression-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v32.json` verifies 365 files with zero mismatches, matching manifest `sha256:3d5d2250dc2090df15ccf1602b0fb18d4168723105756c400f64e933462c6d82`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-003 current-head bundle v30 verification
 
 - **Implementation mapping:** Checked-in acceptance bundle v30.
