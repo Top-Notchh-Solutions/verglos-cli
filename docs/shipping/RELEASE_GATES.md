@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-006 current protocol recheck
+
+The scorer suite passed **11/11** and the protocol validator retained
+`participantRun: open` and `huntAdjudication: open`. This does not satisfy
+participant, independent, or final acceptance evidence. No checkbox changed;
+score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/accept-006-current-protocol-recheck-2026-10-24.md`.
+Bundle v56 verifies **390** files with zero mismatches, matching manifest
+`sha256:df37f1fa17f784436ea3846fec6db0913a5e13a4ea7074cf8fb49a1338d110a3`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-009 reconciliation v6 replay
 
 The reconciler/freeze/final-regression contracts passed **22/22**; current

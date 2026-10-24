@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-006 current protocol recheck
+
+- **Implementation mapping:** Comprehension scorer, rubric digest, provenance,
+  consent-window, and study-protocol validator.
+- **Contract mapping:** Syntax passed; **11/11** scorer tests passed; protocol
+  state remained participant/Hunt open.
+- **Boundary mapping:** No participant, answer data, independent review, or
+  final acceptance was inferred.
+- **Evidence:** `evidence/accept-006-current-protocol-recheck-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v56.json` verifies 390 files with zero mismatches, matching manifest `sha256:df37f1fa17f784436ea3846fec6db0913a5e13a4ea7074cf8fb49a1338d110a3`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-009 reconciliation v6 replay
 
 - **Implementation mapping:** Release reconciler, candidate freeze, and final

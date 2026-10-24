@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-006 current protocol recheck
+
+- **Decision:** Record current scorer/protocol integrity without upgrading the
+  participant gate.
+- **Result:** Syntax passed; scorer suite **11/11** passed; protocol state
+  remained participant and Hunt open.
+- **Boundary:** No participant, answer data, independent review, or final
+  acceptance occurred. ACCEPT-006 remains unchecked; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/accept-006-current-protocol-recheck-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v56.json` verifies 390 files with zero mismatches, matching manifest `sha256:df37f1fa17f784436ea3846fec6db0913a5e13a4ea7074cf8fb49a1338d110a3`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-009 reconciliation v6 replay
 
 - **Decision:** Preserve the fail-closed reconciliation result; do not upgrade
