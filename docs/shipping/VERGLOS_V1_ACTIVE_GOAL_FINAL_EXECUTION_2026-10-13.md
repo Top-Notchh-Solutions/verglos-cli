@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 current-head requalification
+
+The current CLI package suite exited **0** with no failures/cancellations and
+only the two documented Hunt Docker opt-in skips. The focused Web Studio
+projection/custody/handoff suite passed **161/161** with **0** failures, skips,
+or cancellations. This advances implementation and qualification evidence for
+the next unchecked target; recipient/customer acceptance and its independent
+hosted/audit record remain absent, so no checkbox changed. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-cli-001-current-head-requalification-2026-10-24.md`.
+Bundle v24 verifies **358** bounded files with **0** mismatches, matching
+manifest `sha256:ebe6f72d7bbf06a931a09c468fbae0449847359afe008068401fa37d77059dff`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-005 isolated account-deletion integration
 
 The authenticated deletion route and worker integration tests passed **2/2**
