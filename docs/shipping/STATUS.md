@@ -1,5 +1,21 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Vercel Production provider receipt
+
+The real `vercel promote` check for deployment
+`dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` returned the provider's exact idempotency
+response: the deployment is already the current Production deployment (409).
+Inspection reported `target: production` and `readyState: READY`; a fresh
+read-only sweep returned HTTP 200 for all nine required public/metadata
+endpoints. This advances provider-production-state evidence for FINAL-WEB-007/
+008 only. No new deployment or public release was made, and no checkbox
+changed. Score remains **245 checked / 35 open / 280 total (87.5%)**, with 13
+AppSec-dependent and 22 non-AppSec rows open. Evidence:
+`evidence/final-web-007-008-production-promotion-receipt-2026-10-24.md`.
+The additive bundle verifies **294** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:662d481dfbb3a7e6fa9acce52dea1c938b3937871a2806a5fff9a9bf8a1cfb84`.
+
 ## 2026-10-24 · ACCEPT-014 bounded final-regression execution
 
 The real local execution covered **8/8** exact fixtures and all **5/5** plan
