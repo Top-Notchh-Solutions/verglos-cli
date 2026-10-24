@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-011/012 current merged CLI public-OSS corpus execution addendum
+
+CLI commit `cd9d572e` (merged PR #294 at `c745a2f1`) completed a fresh
+telemetry-off local run across **8/8** exact full-clone public JS/TS fixtures.
+The run walked **13,494** files and produced **351** bounded observations
+across **23** rule groups, with all four required architecture shapes and **0**
+coverage gaps. Keep `ACCEPT-011` and `ACCEPT-012` unchecked: this is
+reproducibility evidence only, observations remain unadjudicated, and no
+customer/recipient, provider/Production, independent-review, AppSec/Hunt, or
+final-release evidence is inferred. No checkbox changed; score remains **245
+checked / 35 open / 280 total (87.5%)**, split **13 AppSec-dependent / 22
+non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`.
+The additive bundle verifies **301** files with zero mismatches and secret
+scanning passed; manifest
+`sha256:c5491c6f6f2bbd90eea9c39fa2d12ea8b444f48c836fbbc1885f03280426d99d`.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard interaction harness correction
 
 Web PR [#281](https://github.com/anuragyadav-git/verglos-web/pull/281) merged

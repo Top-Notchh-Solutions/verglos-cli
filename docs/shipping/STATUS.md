@@ -1,5 +1,23 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current merged CLI public-OSS corpus execution
+
+The fresh telemetry-off local run against CLI commit `cd9d572e` (merged PR
+#294 at `c745a2f1`) scanned **8/8** exact full-clone public JS/TS fixtures,
+walked **13,494** files, and reproduced **351** bounded observations across
+**23** rule groups with **0** coverage gaps. All four required architecture
+shapes are present. This advances ACCEPT-011/012 reproducibility inputs only;
+observations remain unadjudicated and no customer, provider, independent-review,
+AppSec/Hunt, or final-release claim is made. No checkbox changed; score remains
+**245 checked / 35 open / 280 total (87.5%)**, split **13 AppSec-dependent / 22
+non-AppSec**. Evidence:
+`evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`.
+The additive bundle verifies **301** files with zero mismatches and secret
+scanning passed; manifest:
+`sha256:c5491c6f6f2bbd90eea9c39fa2d12ea8b444f48c836fbbc1885f03280426d99d`.
+
+## 2026-10-24 · dashboard interaction harness correction
+
 ## 2026-10-24 · dashboard interaction harness correction
 
 Web PR [#281](https://github.com/anuragyadav-git/verglos-web/pull/281) merged

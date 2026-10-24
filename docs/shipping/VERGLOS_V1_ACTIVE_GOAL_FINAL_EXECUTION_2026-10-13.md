@@ -1,5 +1,11 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current merged CLI public-OSS corpus execution
+
+The fresh telemetry-off execution against CLI commit `cd9d572e28462741103cb21a2274e5892939d5d4` (merged PR #294 at `c745a2f1`) scanned **8/8** exact full-clone public JS/TS fixtures. It walked **13,494** files, produced **351** bounded observations across **23** rule groups, covered `small`, `multi-user`, `multi-tenant-team`, and `enterprise-like` architecture shapes, and recorded **0** coverage gaps. Verification and triage are byte-bound in the private evidence root; no source or report was uploaded.
+
+This advances the implementation/reproducibility inputs for `ACCEPT-011` and `ACCEPT-012`, but does not close either row: observations remain unadjudicated and customer/recipient, provider/Production, human/field, independent-review, AppSec/Hunt, and final-release boundaries remain distinct. No checkbox changed; score remains **245 checked / 35 open / 280 total (87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**. Evidence: `docs/shipping/evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`. The additive bundle verifies **301** files with zero mismatches and secret scanning passed; manifest `sha256:c5491c6f6f2bbd90eea9c39fa2d12ea8b444f48c836fbbc1885f03280426d99d`.
+
 ## Latest continuation result · 2026-10-24 · dashboard interaction harness correction
 
 Web PR [#281](https://github.com/anuragyadav-git/verglos-web/pull/281) merged

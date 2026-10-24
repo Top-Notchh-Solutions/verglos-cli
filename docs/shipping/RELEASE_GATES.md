@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current merged CLI public-OSS corpus execution
+
+CLI commit `cd9d572e` (merged PR #294) produced a fresh local execution receipt
+for all **8/8** exact public fixtures: **13,494** files walked, **351** bounded
+observations, **23** rule groups, all four architecture shapes, and **0**
+coverage gaps. This advances the local ACCEPT-011/012 evidence substrate only.
+Adjudication, customer/recipient, provider/Production, human/field,
+independent-review, AppSec/Hunt, and final-release gates remain open. No
+checkbox changed; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`.
+The additive bundle verifies **301** files with zero mismatches and secret
+scanning passed; manifest
+`sha256:c5491c6f6f2bbd90eea9c39fa2d12ea8b444f48c836fbbc1885f03280426d99d`.
+
 ## 2026-10-24 · dashboard interaction harness correction
 
 Web PR #281 merged normally at `91d8629cd59f239334629f39ccfebb5953671cc2`.

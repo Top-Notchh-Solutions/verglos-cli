@@ -1,5 +1,12 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current merged CLI public-OSS corpus execution
+
+- **Decision:** Accept the fresh exact-commit corpus run as reproducibility evidence for the planned public-OSS POC path.
+- **Result:** CLI `cd9d572e` scanned 8/8 full fixtures, walked 13,494 files, produced 351 bounded observations across 23 rule groups, covered all four architecture shapes, and had zero coverage gaps.
+- **Disposition:** Keep ACCEPT-011/012 open. Observations are unadjudicated; this run does not create customer/recipient, provider/Production, independent-review, AppSec/Hunt, human/field, or final-release evidence. No checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`.
+
 ## 2026-10-24 · record dashboard interaction harness correction
 
 - **Decision:** Make dashboard qualification exercise a real visible control interaction before reading interaction metrics, matching the landing harness, while retaining fail-closed missing-INP behavior.
