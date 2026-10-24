@@ -14,6 +14,17 @@ The additive bundle verifies **301** files with zero mismatches and secret
 scanning passed; manifest
 `sha256:c5491c6f6f2bbd90eea9c39fa2d12ea8b444f48c836fbbc1885f03280426d99d`.
 
+## 2026-10-24 · ACCEPT-014 Web role/tenant substrate execution
+
+The current Web role/tenant substrate suite passed **43/43** with **0
+failures**, covering all five required roles, plan/capability composition,
+single-tenant predicates, cross-tenant denial, and protected-route boundaries.
+This advances implementation evidence only. It does not satisfy the
+per-fixture final regression matrix, provider/correction, independent-review,
+or final-decision gates. No checkbox changed; score remains **245/35/280
+(87.5%)**. Evidence:
+`evidence/accept-014-web-role-tenant-substrate-pr281-2026-10-24.md`.
+
 ## 2026-10-24 · dashboard interaction harness correction
 
 Web PR #281 merged normally at `91d8629cd59f239334629f39ccfebb5953671cc2`.
