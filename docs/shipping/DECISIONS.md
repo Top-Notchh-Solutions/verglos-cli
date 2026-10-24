@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-head Production Chromium qualification
+
+- **Decision:** Accept the current live deployment's automated Chromium/Axe
+  result as additive hosted implementation evidence.
+- **Result:** Six public paths at desktop/mobile passed **12/12**; zero Axe,
+  keyboard, responsive, reduced-motion, and decision-gap failures; max
+  LCP/FCP 892 ms, INP 48 ms, TTFB 354 ms, CLS 0.
+- **Boundary:** No human screen-reader or field-CWV, customer/recipient,
+  provider-publication, independent-review, AppSec/Hunt, or final-release
+  evidence was created.
+- **Score:** 246/34/280; no checkbox changed.
+- **Evidence:** `evidence/final-web-007-008-production-current-head-chromium-2026-10-24.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v20.json`
+  verifies 352 files with zero mismatches, matching manifest
+  `sha256:9341c7297bfaafc3dedbc3ee421e60b482370fae7857b5b42cb704c4d40bc0e1`,
+  and passed secret scanning.
+
 ## 2026-10-24 · record source-bound Production smoke
 
 - **Decision:** Record the current Vercel Production surface with its exact

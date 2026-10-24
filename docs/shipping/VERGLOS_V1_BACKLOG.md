@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current-head Production Chromium qualification
+
+The live Vercel deployment bound to Web `257e1cc8e0b467d16966433033589111f62f56f0`
+passed the existing Playwright Chromium/Axe qualification for six public paths
+at desktop/mobile (**12/12**). Axe, keyboard, responsive, reduced-motion, and
+decision-gap checks were zero; max LCP/FCP was 892 ms, INP 48 ms, TTFB 354 ms,
+and CLS 0. This advances automated hosted implementation evidence for
+FINAL-WEB-007/008 only; no checkbox changed. Score remains **246 checked / 34
+open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `docs/shipping/evidence/final-web-007-008-production-current-head-chromium-2026-10-24.md`.
+Bundle v20 verifies **352** bounded files with **0** mismatches, matching
+manifest `sha256:9341c7297bfaafc3dedbc3ee421e60b482370fae7857b5b42cb704c4d40bc0e1`,
+and passed secret scanning.
+
 ## 2026-10-24 · source-bound Production smoke
 
 The current Vercel Production deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc`
