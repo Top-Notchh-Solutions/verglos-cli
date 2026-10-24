@@ -1,5 +1,15 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · backlog state reconciliation
+
+The authoritative backlog row summaries were reconciled with current evidence:
+`QUAL-WEB-005` now records the reviewed **44/44** Production migration ledger
+and six support tables, while `ACCEPT-011/012/014` now record the current
+13,494-file / 351-observation corpus and **400/400** no-regression matrix. These
+are documentation corrections, not checkbox changes. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. The remaining gates stay explicit and fail closed.
+
 ## Latest continuation result · 2026-10-24 · current-head Production Chromium qualification
 
 The live Vercel Production deployment bound to Web `257e1cc8e0b467d16966433033589111f62f56f0`

@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · reconcile stale backlog row summaries
+
+- **Decision:** Align the main row text with already-recorded current evidence.
+- **Result:** `QUAL-WEB-005` now records 44/44 Production migrations and six
+  support tables; `ACCEPT-011/012/014` now record the current 13,494-file /
+  351-observation corpus and 400/400 matrix.
+- **Boundary:** Documentation correction only; no new gate was inferred and no
+  checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain open.
+
 ## 2026-10-24 · record current-head Production Chromium qualification
 
 - **Decision:** Accept the current live deployment's automated Chromium/Axe
