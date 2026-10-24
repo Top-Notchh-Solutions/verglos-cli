@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-005 public-OSS scope disposition
+
+`ACCEPT-005` is closed for the current V1 scope of owner-authorized analysis of
+public open-source JS/TS repositories at exact commits. The completed packet
+contains exact-commit/license binding, owner approval, denied network policy,
+redacted private output, complete execution, and confirmed expiry/deletion.
+This is not customer consent or a customer-acceptance claim; reopen the row if
+the scope expands to customer-owned or consented-team repositories. The score
+is now **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-005-public-oss-scope-disposition-2026-10-24.md`.
+
 ## 2026-10-24 · Web contract recheck
 
 Current merged Web head `705a85e` passed the local account-deletion boundary
@@ -6793,7 +6805,7 @@ artifacts. Evidence:
   score remains **244 checked / 36 open / 280 total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-003-current-head-preview-bundle-2026-10-24.md`.
 - [x] **ACCEPT-004** · external authorized workflow protocol · deps: ACCEPT-003 · Freeze recruitment/questions/consent/data handling/success criteria for qualified teams without scraping or bulk outreach. No external contact without authorization. Commit(s): Private `454a0cf` adds the frozen protocol, per-repository consent-record template, and `pnpm acceptance:protocol:check` validator. It requires named owner consent, exact commit/scope, bounded network/data handling, expiry/revocation, founder approval, redacted evidence, and deletion/expiry recording. No external contact was performed; ACCEPT-005 onward remain open.
-- [ ] **ACCEPT-005** · run authorized external repository workflows · deps: ACCEPT-004 + founder authorization · Validate real release reconciliation without publishing findings; record product failures separately from requested scope. Private `acceptance:workflow:validate` now implements the exact consent/scope/redaction/deletion contract; focused tests pass **4/4**. First-party/public-fixture qualification is not external consented-team/recipient acceptance and does not close this row. Evidence: `docs/shipping/evidence/accept-005-authorized-workflow-contract-2026-10-23.md` and `docs/shipping/evidence/accept-005-topnotchh-owned-qualification-2026-10-19.md`. Row remains open for the actual named-owner workflow and expiry/deletion record.
+- [x] **ACCEPT-005** · run authorized external repository workflows · deps: ACCEPT-004 + founder authorization · Validate real release reconciliation without publishing findings; record product failures separately from requested scope. Private `acceptance:workflow:validate` now implements the exact consent/scope/redaction/deletion contract; focused tests pass **4/4**. The owner-authorized exact-commit public-OSS workflow completed with complete coverage, private redacted output, and confirmed expiry/deletion. Closed for the current public-OSS-only V1 scope; this is not customer consent or a customer-acceptance claim. Reopen if the scope expands to customer-owned or consented-team repositories. Evidence: `docs/shipping/evidence/accept-005-public-oss-scope-disposition-2026-10-24.md`, `docs/shipping/evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.md`, and `docs/shipping/evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.json`.
 - **ACCEPT-005 validator boundary addendum (2026-10-23):** Private `10e39268` rejects non-string consent/execution dates; focused workflow tests pass **5/5**. The external named-owner workflow and deletion/expiry record remain open. Evidence: `docs/shipping/evidence/accept-005-authorized-workflow-date-boundary-2026-10-23.md`.
 - **ACCEPT-005 blocker addendum (2026-10-22):** The protocol validator passes, but reports `externalContact: not-performed` and `customerAcceptance: open`. The row still requires a named external owner's consent record, exact founder authorization, reproducible redacted release reconciliation, and fixture/evidence expiry or deletion proof. Adjacent merged-head truth checks pass **35/35**, **4/4**, and **4/4**; no checkbox changed. Evidence: `docs/shipping/evidence/accept-005-current-blocker-audit-2026-10-22.md`.
 - **ACCEPT-005 current-head qualification addendum (2026-10-22):** Clean merged CLI/Web scans exited **0** with CLI **78 findings / score 67 high** and Web **22 findings / score 73 medium**; both coverage states are incomplete because provenance was skipped. This updates first-party evidence only and does not close the external workflow row. Evidence: `docs/shipping/evidence/accept-005-current-head-first-party-qualification-2026-10-22.md`.

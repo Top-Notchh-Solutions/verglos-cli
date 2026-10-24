@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-005 public-OSS scope disposition · 2026-10-24
+
+- **Disposition:** Closed `ACCEPT-005` for the current owner-authorized
+  public-OSS exact-commit scope. Customer-owned/consented-team repositories are
+  outside this V1 contract.
+- **Evidence:** Exact license/commit binding, owner approval, denied network,
+  complete execution, redacted private report, and confirmed expiry/deletion.
+- **Boundary:** This is not customer consent or customer acceptance. Reopen if
+  the product scope expands. No provider publication, payment, deletion of
+  customer data, independent review, AppSec/Hunt review, or final release.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec open.
+- **Evidence:** `evidence/accept-005-public-oss-scope-disposition-2026-10-24.md`.
+- **Integrity packet:** `evidence/acceptance-evidence-bundle-2026-10-24-accept005-scope-v6.json`
+  verifies 329 files with 0 mismatches, a matching manifest, and passed secret
+  scan; customer-consent is passed only for the declared public-OSS scope.
+
 ## Web contract recheck · 2026-10-24
 
 - **Execution:** Local Web contracts ran against merged head `705a85e` with
