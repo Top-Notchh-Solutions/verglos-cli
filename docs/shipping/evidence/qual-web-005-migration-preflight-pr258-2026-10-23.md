@@ -26,7 +26,7 @@ acceptance.
 - The destructive integration contract refused the remote endpoint because it
   was not an isolated local test database.
 - Local disposable PostgreSQL endpoint:
-  `postgres://postgres@127.0.0.1:55437/verglos_test`.
+  `postgres://127.0.0.1:55437/verglos_test`.
 - Local `pnpm db:migrate` against the isolated endpoint: **passed**.
 - Focused suite, serially:
 

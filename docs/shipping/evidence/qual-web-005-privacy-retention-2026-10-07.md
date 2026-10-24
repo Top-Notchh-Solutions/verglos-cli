@@ -24,7 +24,7 @@ No project or production data was used.
 Command:
 
 ```text
-TEST_DATABASE_URL=postgres://postgres@127.0.0.1:55438/verglos_test node --import tsx --test src/lib/qual/qual-web-suites.test.ts src/lib/organizations/studio-retention-export.test.ts src/lib/organizations/dashboard-record-view.test.ts src/lib/organizations/dashboard-records-repository.integration.test.ts
+TEST_DATABASE_URL=postgres://127.0.0.1:55438/verglos_test node --import tsx --test src/lib/qual/qual-web-suites.test.ts src/lib/organizations/studio-retention-export.test.ts src/lib/organizations/dashboard-record-view.test.ts src/lib/organizations/dashboard-records-repository.integration.test.ts
 ```
 
 Result: 46 tests passed, 0 failed, 0 skipped.

@@ -38,7 +38,7 @@ stopped after the run. No project or production data was used.
 Focused integration command:
 
 ```text
-TEST_DATABASE_URL=postgres://postgres:localtest@127.0.0.1:55432/verglos_test pnpm exec node --import tsx --test src/lib/organizations/dashboard-monitoring-repository.integration.test.ts
+TEST_DATABASE_URL=postgres://127.0.0.1:55432/verglos_test pnpm exec node --import tsx --test src/lib/organizations/dashboard-monitoring-repository.integration.test.ts
 ```
 
 Result: **1 test passed, 0 failed, 0 skipped**.
