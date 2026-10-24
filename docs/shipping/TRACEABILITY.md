@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #298 active-workspace handoff guard
+
+- **Implementation mapping:** Web PR #298 merged normally as
+  `5661a1f9331f569f033ec6148b959039ec825409` from `f6e89aa`; handoff issuance
+  now rejects inactive client workspaces at the server boundary.
+- **Verification mapping:** Handoff domain, route, and page contracts passed
+  **33/33**, with Web typecheck and diff checks passing. Vercel Production
+  deployment `dpl_AbTcNMvBXnWEqBMcVVSQtjqJawSG` was queued at capture.
+- **Boundary mapping:** STUDIO-CLI-001 implementation evidence only. Recipient
+  acceptance, independent review, and final release evidence remain absent;
+  no checkbox changed and score remains **246/34/280**.
+- **Evidence:** `evidence/studio-handoff-active-workspace-pr298-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #297 expiry-fenced handoff revocation
 
 - **Implementation mapping:** Web PR #297 merged normally as

@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #298 active-workspace handoff guard · 2026-10-24
+
+- **Execution:** Web PR #298 merged normally as
+  `5661a1f9331f569f033ec6148b959039ec825409` from `f6e89aa`.
+- **Result:** Handoff issuance now rejects suspended and archived client
+  workspaces server-side with bounded `409` JSON. Focused contracts passed
+  **33/33**; typecheck and diff checks passed.
+- **Provider state:** Merged-head Vercel Production deployment
+  `dpl_AbTcNMvBXnWEqBMcVVSQtjqJawSG` was **QUEUED** at capture; no Ready claim.
+- **Acceptance mapping:** This advances STUDIO-CLI-001 implementation only.
+  Recipient acceptance, independent review, and final release evidence remain
+  absent. No checkbox changed; score remains **246/34/280**.
+- **Hosted boundary:** Actions failed at the blocked budget/runners boundary
+  and were not rerun. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/studio-handoff-active-workspace-pr298-2026-10-24.md`.
+
 ## Web PR #297 expiry-fenced handoff revocation · 2026-10-24
 
 - **Execution:** Web PR #297 merged normally as

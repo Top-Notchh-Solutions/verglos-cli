@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · Web PR #298 active-workspace handoff guard
+
+- **Decision:** Enforce client-workspace lifecycle state at the server handoff
+  issuance boundary; a UI-only guard is insufficient.
+- **Result:** PR #298 merged normally as
+  `5661a1f9331f569f033ec6148b959039ec825409` from `f6e89aa`; focused handoff
+  contracts passed **33/33**, typecheck and diff checks passed.
+- **Boundary:** STUDIO-CLI-001 implementation only. Its Vercel Production
+  deployment was queued at capture; recipient acceptance, independent review,
+  and final release remain open. Score remains **246/34/280**.
+- **Evidence:** `evidence/studio-handoff-active-workspace-pr298-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #297 expiry-fenced handoff revocation
 
 - **Decision:** Repeat the handoff expiry check inside the revoke transaction;

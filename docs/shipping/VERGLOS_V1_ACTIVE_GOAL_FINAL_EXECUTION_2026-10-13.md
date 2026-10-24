@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #298 active-workspace handoff guard
+
+Web PR **#298** merged normally as
+`5661a1f9331f569f033ec6148b959039ec825409` from implementation commit
+`f6e89aa`. Handoff issuance now refuses suspended or archived client
+workspaces with bounded `409` JSON, matching the dashboard lifecycle guard.
+Focused handoff domain, route, and page contracts passed **33/33**, Web
+typecheck and diff checks passed. The merged-head Vercel Production deployment
+`dpl_AbTcNMvBXnWEqBMcVVSQtjqJawSG` was **QUEUED** at capture; no Ready claim is
+made. Actions failed at the blocked budget/runners boundary and were not
+rerun. This is real STUDIO-CLI-001 production-code progress; the row remains
+unchecked for recipient acceptance, independent review, and final release
+evidence. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-handoff-active-workspace-pr298-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · Web PR #297 expiry-fenced handoff revocation
 
 Web PR **#297** merged normally as
