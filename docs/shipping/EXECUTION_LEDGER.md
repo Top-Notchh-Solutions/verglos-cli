@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Production deployment receipt and public browser qualification · 2026-10-24
+
+- **Deployment:** Vercel `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY for the
+  merged Web PR #275 implementation and aliases `verglos.com` and
+  `www.verglos.com`.
+- **Verification:** Real read-only production capture passed **36/36**
+  measurements across six public paths, desktop/mobile, Chromium, Firefox, and
+  WebKit. Axe, keyboard, performance, responsive, metadata, and crawlability
+  checks were all green.
+- **Disposition:** Advance FINAL-WEB-007/008 hosted production evidence only;
+  keep human/field, customer, independent-review, AppSec/Hunt, and final
+  release gates open. No checkbox changed; score remains **245/35/280 (87.5%)**.
+  No payment, customer repository, or customer data was used.
+- **Evidence:** `evidence/final-web-007-production-pr275-multi-browser-2026-10-24.md`.
+- **Bundle:** Additive v33 contains **267** hashed files, verifies with **0**
+  mismatches, matches manifest
+  `sha256:5578c852aa2475a0f77dab08860caa042a89d4c01e5113b86b68d4d120c1b0d8`,
+  and passes secret scanning.
+
 ## Merged dashboard accessibility fix and v3 capture · 2026-10-24
 
 - **Implementation:** Web PR #275 merged normally as

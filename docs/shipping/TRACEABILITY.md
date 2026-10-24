@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Production deployment receipt and public browser qualification
+
+- **Deployment mapping:** Vercel `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY
+  for Web PR #275 and serves `verglos.com`/`www.verglos.com`.
+- **Verification mapping:** Real read-only capture passed **36/36** across six
+  public paths, desktop/mobile, and Chromium/Firefox/WebKit, with zero Axe,
+  keyboard, performance, responsive, metadata, or crawlability failures.
+- **Acceptance mapping:** This advances hosted FINAL-WEB-007/008 evidence only;
+  human/field, customer, independent-review, AppSec/Hunt, and final-release
+  evidence remain open. No checkbox changed; score remains **245/35/280
+  (87.5%)**.
+- **Evidence:** `evidence/final-web-007-production-pr275-multi-browser-2026-10-24.md`.
+- **Bundle mapping:** Additive v33 contains **267** hashed files, verifies with
+  **0** mismatches, matches manifest
+  `sha256:5578c852aa2475a0f77dab08860caa042a89d4c01e5113b86b68d4d120c1b0d8`,
+  and passes secret scanning.
+
 ## 2026-10-24 · merged dashboard accessibility fix and v3 capture
 
 - **Source mapping:** Web PR #275 merged normally as

@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Production deployment receipt and public browser qualification
+
+Vercel deployment `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY for Web PR #275,
+with `https://verglos.com` and `https://www.verglos.com` aliases. The real
+read-only production capture passed **36/36** measurements: six public paths,
+desktop/mobile, Chromium/Firefox/WebKit; zero Axe, keyboard, performance,
+responsive, metadata, or crawlability failures. Evidence:
+`docs/shipping/evidence/final-web-007-production-pr275-multi-browser-2026-10-24.md`.
+
+This advances FINAL-WEB-007/008 hosted production evidence only. Human
+screen-reader/field-CWV review, customer acceptance, independent AppSec/Hunt
+review, and final release/go-no-go sign-off remain open; no checkbox changed.
+Score remains **245 checked / 35 open / 280 total (87.5%)**, with **13
+AppSec-dependent / 22 non-AppSec** rows open. No payment, customer repository,
+or customer data was used.
+Additive bundle v33 contains **267** hashed evidence files, verifies with **0**
+mismatches, matches manifest
+`sha256:5578c852aa2475a0f77dab08860caa042a89d4c01e5113b86b68d4d120c1b0d8`,
+and passes secret scanning.
+
 ## Latest continuation result · 2026-10-24 · merged dashboard accessibility fix and v3 capture
 
 Web PR #275 merged normally as

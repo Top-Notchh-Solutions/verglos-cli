@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record Production deployment receipt and public browser qualification
+
+- **Decision:** Inspect the Vercel Production deployment created from merged
+  Web PR #275 and run the bounded public browser qualification.
+- **Result:** Deployment `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY with
+  `verglos.com` aliases; Chromium, Firefox, and WebKit passed **36/36** public
+  desktop/mobile measurements with zero Axe, keyboard, performance,
+  responsive, metadata, or crawlability failures.
+- **Disposition:** Record hosted production evidence only. Keep human/field,
+  customer, independent-review, AppSec/Hunt, and final-release boundaries open;
+  no checkbox changed. Score remains **245/35/280 (87.5%)**. No payment,
+  customer repository, or customer data was used.
+- **Evidence:** `evidence/final-web-007-production-pr275-multi-browser-2026-10-24.md`.
+- **Bundle:** Additive v33 contains **267** hashed files, verifies with **0**
+  mismatches, matches manifest
+  `sha256:5578c852aa2475a0f77dab08860caa042a89d4c01e5113b86b68d4d120c1b0d8`,
+  and passes secret scanning.
+
 ## 2026-10-24 · record merged dashboard accessibility fix and v3 capture
 
 - **Decision:** Fix the four locally observed dashboard qualification defects,
