@@ -309,6 +309,8 @@ const paths = [
   "docs/shipping/evidence/dist-002-003-current-alpha4-artifact-recheck-2026-10-24.md",
   "docs/shipping/evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md",
   "docs/shipping/evidence/dist-002-003-hunt-package-public-identity-pr294-2026-10-24.md",
+  "docs/shipping/evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md",
+  "docs/shipping/evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.json",
   "THIRD_PARTY_NOTICES",
 ];
 

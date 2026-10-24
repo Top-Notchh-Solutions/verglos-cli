@@ -1,0 +1,339 @@
+{
+  "schema": "verglos.private.npm-publication-observation.v1",
+  "generatedAt": "2026-10-24T03:55:54.731Z",
+  "registry": "https://registry.npmjs.org",
+  "repository": "https://github.com/Top-Notchh-Solutions/verglos-cli",
+  "workflow": ".github/workflows/publish.yml",
+  "requestedVersion": "2.0.0-alpha.4",
+  "requestedSourceCommit": "d3ea64df01a8c7cd2879ddf54c97276240b49536",
+  "requestedPackages": [
+    "verglos",
+    "@verglos/shared",
+    "@verglos/scanner",
+    "@verglos/reporter",
+    "@verglos/mcp",
+    "@verglos/entitlement",
+    "@verglos/hunt"
+  ],
+  "packages": [
+    {
+      "package": "verglos",
+      "version": "2.0.0-alpha.4",
+      "packageMetadataSha256": "sha256:2e27a5b2404e4d67ba9488274d81783b87c1d1ac44aeaec9c2dcfcf8ade2e5cc",
+      "attestationSha256": null,
+      "tarball": {
+        "url": null,
+        "integrity": null,
+        "shasum": null
+      },
+      "provenance": null,
+      "status": "rejected",
+      "failures": [
+        {
+          "code": "package-not-found",
+          "detail": "registry HTTP 404"
+        },
+        {
+          "code": "attestation-not-found",
+          "detail": "registry HTTP 404"
+        },
+        {
+          "code": "package-identity-mismatch",
+          "detail": "registry package identity does not match the requested name/version"
+        },
+        {
+          "code": "missing-tarball-integrity",
+          "detail": "registry metadata has no usable sha512 integrity"
+        },
+        {
+          "code": "missing-attestation-response",
+          "detail": "npm did not return an attestation collection"
+        },
+        {
+          "code": "missing-slsa-provenance",
+          "detail": "no SLSA provenance attestation was returned"
+        }
+      ]
+    },
+    {
+      "package": "@verglos/shared",
+      "version": "2.0.0-alpha.4",
+      "packageMetadataSha256": "sha256:a9f2526a455dca2cac0e002be6e3e3a8d99b40bb2b2167af8741f397e35af9dd",
+      "attestationSha256": "sha256:0a534fab97eb3b5b2bb421f10d691583aa8942eef81230b4549f3fbc9f642306",
+      "tarball": {
+        "url": "https://registry.npmjs.org/@verglos/shared/-/shared-2.0.0-alpha.4.tgz",
+        "integrity": "sha512-jtE1/As7qy7ymrV8cMbcHY57+1Ms8nMB4hy+DenicnefY8riW30EGluEf6BI6DhOrKriQE29VKAeCdUduJja8g==",
+        "shasum": "266dac3e2e692d3425d6bba349899e6465eb714c"
+      },
+      "provenance": {
+        "subjectName": "pkg:npm/%40verglos/shared@2.0.0-alpha.4",
+        "subjectSha512": "8ed135fc0b3bab2ef29ab57c70c6dc1d8e7bfb532cf27301e21cbe0de9e272779f63cae25b7d041a5b847fa048e8384eacaae2404dbd54a01e09d51db898daf2",
+        "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+        "workflowRepository": "https://github.com/Top-Notchh-Solutions/verglos-cli",
+        "workflowPath": ".github/workflows/publish.yml",
+        "workflowRef": "refs/tags/v2.0.0-alpha.4",
+        "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+        "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1",
+        "builderId": "https://github.com/actions/runner/github-hosted"
+      },
+      "status": "rejected",
+      "failures": [
+        {
+          "code": "attestation-source-mismatch",
+          "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+        }
+      ]
+    },
+    {
+      "package": "@verglos/scanner",
+      "version": "2.0.0-alpha.4",
+      "packageMetadataSha256": "sha256:7c1435b10bf8e7cf4bbf518de455337c30bb490cfbe7b1ee02e80a69d8a2521c",
+      "attestationSha256": "sha256:44dcf6bf98a19b37b82a3983a9345de92727a5ab576eb33b8359321103199aa1",
+      "tarball": {
+        "url": "https://registry.npmjs.org/@verglos/scanner/-/scanner-2.0.0-alpha.4.tgz",
+        "integrity": "sha512-vO0TTH3KwRoJ1N9DENMMrfeRW75lHzI+5rw+3iodxMSKTJ5XbZ+HIEMVpcq5CJdZgTD7p8g/YB05sJtRTyoBgQ==",
+        "shasum": "fed6d6b2cc655a9de7cd4d91890cd6fae124b92d"
+      },
+      "provenance": {
+        "subjectName": "pkg:npm/%40verglos/scanner@2.0.0-alpha.4",
+        "subjectSha512": "bced134c7dcac11a09d4df4310d30cadf7915bbe651f323ee6bc3ede2a1dc4c48a4c9e576d9f87204315a5cab90897598130fba7c83f601d39b09b514f2a0181",
+        "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+        "workflowRepository": "https://github.com/Top-Notchh-Solutions/verglos-cli",
+        "workflowPath": ".github/workflows/publish.yml",
+        "workflowRef": "refs/tags/v2.0.0-alpha.4",
+        "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+        "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1",
+        "builderId": "https://github.com/actions/runner/github-hosted"
+      },
+      "status": "rejected",
+      "failures": [
+        {
+          "code": "attestation-source-mismatch",
+          "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+        }
+      ]
+    },
+    {
+      "package": "@verglos/reporter",
+      "version": "2.0.0-alpha.4",
+      "packageMetadataSha256": "sha256:5a081b4357513973efcd4c2c38f502a38bc635dc46defaaeb480ed7d53339ee6",
+      "attestationSha256": "sha256:58bd318f3a7ded8e9b3a47902a0949d06432abe96a025e56fcd653cae948352e",
+      "tarball": {
+        "url": "https://registry.npmjs.org/@verglos/reporter/-/reporter-2.0.0-alpha.4.tgz",
+        "integrity": "sha512-kMtdss9FAs6dcJ9ODjp9u0MrkngE+VZu4xalM2PCenFf6EELzZQ9+Tb2l4l7gpXPKAl6F+nQaT5BntiJRfxhAA==",
+        "shasum": "9bf1bc1b25c20022e912c4aab2a0a96bb19168cf"
+      },
+      "provenance": {
+        "subjectName": "pkg:npm/%40verglos/reporter@2.0.0-alpha.4",
+        "subjectSha512": "90cb5db2cf4502ce9d709f4e0e3a7dbb432b927804f9566ee316a53363c27a715fe8410bcd943df936f697897b8295cf28097a17e9d0693e419ed88945fc6100",
+        "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+        "workflowRepository": "https://github.com/Top-Notchh-Solutions/verglos-cli",
+        "workflowPath": ".github/workflows/publish.yml",
+        "workflowRef": "refs/tags/v2.0.0-alpha.4",
+        "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+        "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1",
+        "builderId": "https://github.com/actions/runner/github-hosted"
+      },
+      "status": "rejected",
+      "failures": [
+        {
+          "code": "attestation-source-mismatch",
+          "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+        }
+      ]
+    },
+    {
+      "package": "@verglos/mcp",
+      "version": "2.0.0-alpha.4",
+      "packageMetadataSha256": "sha256:31a22a550d14e0a86c94305baae7dc70c54b12c5e0e8974171a1e4bc0edacbdc",
+      "attestationSha256": "sha256:a4f022c1857af6f6451d05474bdf36651b092f0bf9991e38decc46d0e9d5e9a2",
+      "tarball": {
+        "url": "https://registry.npmjs.org/@verglos/mcp/-/mcp-2.0.0-alpha.4.tgz",
+        "integrity": "sha512-EKfTO1ouE1vszAr+sPdOwQkS3tICaX/XPAQ5IUmnEBPGEprUuLupKanN3wndNExnXs2y2NOA2YJg3g2iWcU/BA==",
+        "shasum": "98a44ec788ec1945f0302fd673e29c8faab7edfc"
+      },
+      "provenance": {
+        "subjectName": "pkg:npm/%40verglos/mcp@2.0.0-alpha.4",
+        "subjectSha512": "10a7d33b5a2e135beccc0afeb0f74ec10912ded202697fd73c04392149a71013c6129ad4b8bba929a9cddf09dd344c675ecdb2d8d380d98260de0da259c53f04",
+        "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+        "workflowRepository": "https://github.com/Top-Notchh-Solutions/verglos-cli",
+        "workflowPath": ".github/workflows/publish.yml",
+        "workflowRef": "refs/tags/v2.0.0-alpha.4",
+        "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+        "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1",
+        "builderId": "https://github.com/actions/runner/github-hosted"
+      },
+      "status": "rejected",
+      "failures": [
+        {
+          "code": "attestation-source-mismatch",
+          "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+        }
+      ]
+    },
+    {
+      "package": "@verglos/entitlement",
+      "version": "2.0.0-alpha.4",
+      "packageMetadataSha256": "sha256:6d1cd3d62919ef6bf142abc61a006eb70a6cd773e43f4b426d2c2b1971cd4020",
+      "attestationSha256": "sha256:eec41e38d16aa9956cc911302f2225bb52d9e4f002fa8250c95730cb9297544e",
+      "tarball": {
+        "url": "https://registry.npmjs.org/@verglos/entitlement/-/entitlement-2.0.0-alpha.4.tgz",
+        "integrity": "sha512-4XveNdjUCS9XhOASWjPtM0AjQWQA6o4GvsUiuI0vigbccF4EnCwmLn44ZlwDEYMbGJPhmeUCFVNRmndxkYJuWA==",
+        "shasum": "0342da95d4e3d67012254d7213feea593e23aa49"
+      },
+      "provenance": {
+        "subjectName": "pkg:npm/%40verglos/entitlement@2.0.0-alpha.4",
+        "subjectSha512": "e17bde35d8d4092f5784e0125a33ed334023416400ea8e06bec522b88d2f8a06dc705e049c2c262e7e38665c0311831b1893e199e5021553519a777191826e58",
+        "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+        "workflowRepository": "https://github.com/Top-Notchh-Solutions/verglos-cli",
+        "workflowPath": ".github/workflows/publish.yml",
+        "workflowRef": "refs/tags/v2.0.0-alpha.4",
+        "sourceCommit": "ed318f06b97771f45cc6970f745868fb1aa09404",
+        "invocationId": "https://github.com/Top-Notchh-Solutions/verglos-cli/actions/runs/39880762320/attempts/1",
+        "builderId": "https://github.com/actions/runner/github-hosted"
+      },
+      "status": "rejected",
+      "failures": [
+        {
+          "code": "attestation-source-mismatch",
+          "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+        }
+      ]
+    },
+    {
+      "package": "@verglos/hunt",
+      "version": "2.0.0-alpha.4",
+      "packageMetadataSha256": "sha256:57aefd8046010e86f09187427e21bad3376b25a2f9a46ce20452ac7d5448298d",
+      "attestationSha256": null,
+      "tarball": {
+        "url": null,
+        "integrity": null,
+        "shasum": null
+      },
+      "provenance": null,
+      "status": "rejected",
+      "failures": [
+        {
+          "code": "package-not-found",
+          "detail": "registry HTTP 404"
+        },
+        {
+          "code": "attestation-not-found",
+          "detail": "registry HTTP 404"
+        },
+        {
+          "code": "package-identity-mismatch",
+          "detail": "registry package identity does not match the requested name/version"
+        },
+        {
+          "code": "missing-tarball-integrity",
+          "detail": "registry metadata has no usable sha512 integrity"
+        },
+        {
+          "code": "missing-attestation-response",
+          "detail": "npm did not return an attestation collection"
+        },
+        {
+          "code": "missing-slsa-provenance",
+          "detail": "no SLSA provenance attestation was returned"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "packageCount": 7,
+    "acceptedPackageCount": 0,
+    "failureCount": 17,
+    "accepted": false,
+    "providerWritePerformed": false,
+    "customerAcceptance": "not-claimed",
+    "independentReview": "required"
+  },
+  "failures": [
+    {
+      "package": "verglos",
+      "code": "package-not-found",
+      "detail": "registry HTTP 404"
+    },
+    {
+      "package": "verglos",
+      "code": "attestation-not-found",
+      "detail": "registry HTTP 404"
+    },
+    {
+      "package": "verglos",
+      "code": "package-identity-mismatch",
+      "detail": "registry package identity does not match the requested name/version"
+    },
+    {
+      "package": "verglos",
+      "code": "missing-tarball-integrity",
+      "detail": "registry metadata has no usable sha512 integrity"
+    },
+    {
+      "package": "verglos",
+      "code": "missing-attestation-response",
+      "detail": "npm did not return an attestation collection"
+    },
+    {
+      "package": "verglos",
+      "code": "missing-slsa-provenance",
+      "detail": "no SLSA provenance attestation was returned"
+    },
+    {
+      "package": "@verglos/shared",
+      "code": "attestation-source-mismatch",
+      "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+    },
+    {
+      "package": "@verglos/scanner",
+      "code": "attestation-source-mismatch",
+      "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+    },
+    {
+      "package": "@verglos/reporter",
+      "code": "attestation-source-mismatch",
+      "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+    },
+    {
+      "package": "@verglos/mcp",
+      "code": "attestation-source-mismatch",
+      "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+    },
+    {
+      "package": "@verglos/entitlement",
+      "code": "attestation-source-mismatch",
+      "detail": "expected d3ea64df01a8c7cd2879ddf54c97276240b49536, got ed318f06b97771f45cc6970f745868fb1aa09404"
+    },
+    {
+      "package": "@verglos/hunt",
+      "code": "package-not-found",
+      "detail": "registry HTTP 404"
+    },
+    {
+      "package": "@verglos/hunt",
+      "code": "attestation-not-found",
+      "detail": "registry HTTP 404"
+    },
+    {
+      "package": "@verglos/hunt",
+      "code": "package-identity-mismatch",
+      "detail": "registry package identity does not match the requested name/version"
+    },
+    {
+      "package": "@verglos/hunt",
+      "code": "missing-tarball-integrity",
+      "detail": "registry metadata has no usable sha512 integrity"
+    },
+    {
+      "package": "@verglos/hunt",
+      "code": "missing-attestation-response",
+      "detail": "npm did not return an attestation collection"
+    },
+    {
+      "package": "@verglos/hunt",
+      "code": "missing-slsa-provenance",
+      "detail": "no SLSA provenance attestation was returned"
+    }
+  ]
+}

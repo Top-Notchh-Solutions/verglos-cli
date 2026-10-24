@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current-head npm registry observation
+
+The read-only publication verifier checked all seven alpha.4 packages against
+candidate `d3ea64df01a8c7cd2879ddf54c97276240b49536`: **0/7 accepted**, **17**
+failures. `verglos` and `@verglos/hunt` are HTTP 404; the other five packages'
+provenance is bound to older commit `ed318f06b97771f45cc6970f745868fb1aa09404`.
+No provider write, token, tag, publication, or Actions run occurred. No
+checkbox changed; score remains **245 checked / 35 open / 280 total (87.5%)**.
+Evidence: `evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md`.
+The additive bundle verifies **299** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:d6ff82f18bdffff797acadceb313547b50588ae128b9f5d5904b084ab0dde393`.
+
 ## 2026-10-24 · DIST-002/003 Hunt package identity implementation
 
 PR [#294](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/294) merged
