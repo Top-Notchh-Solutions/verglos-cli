@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · FINAL-WEB-008 current Production route matrix
+
+The Ready Production deployment passed a fresh read-only route matrix: **7/7**
+public routes returned 200; the POST-only QR route returned 405 for GET; and
+an empty unauthenticated POST returned 403 without a payment payload. This
+does not satisfy FINAL-WEB-008 dependencies, independent/acceptance, or final
+release gates. No checkbox changed; score remains **246 checked / 34 open / 280
+total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/final-web-008-current-production-route-matrix-2026-10-24.md`.
+
 ## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
 
 Web PR #284 merged normally as `4b877bf67bdfbe41ddf05d4d95303c01ce79ded2`.

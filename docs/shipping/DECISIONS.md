@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · FINAL-WEB-008 current Production route matrix
+
+- **Decision:** Record the current read-only Production route behavior without
+  upgrading it into final acceptance.
+- **Result:** **7/7** public routes returned 200; the QR route returned 405 for
+  GET and 403 for an empty unauthenticated POST, with no payment payload.
+- **Boundary:** No payment, customer data, database write, npm publication,
+  deletion, AppSec review, or final go/no-go occurred. FINAL-WEB-008 remains
+  unchecked; score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-008-current-production-route-matrix-2026-10-24.md`.
+
 ## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
 
 - **Decision:** Correct the public version claim from “latest public npm

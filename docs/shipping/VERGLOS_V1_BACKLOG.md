@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · FINAL-WEB-008 current Production route matrix
+
+The Ready Production deployment `dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` passed a
+fresh read-only matrix: **7/7** public routes returned HTTP 200; the POST-only
+QR route returned 405 for GET and 403 for an empty unauthenticated POST without
+creating a payment payload. This advances current hosted smoke evidence for
+FINAL-WEB-008 but does not check the row; dependencies, independent/acceptance,
+and final release gates remain open. Score remains **246 checked / 34 open / 280
+total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-008-current-production-route-matrix-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
 
 Web PR #284 merged normally as `4b877bf67bdfbe41ddf05d4d95303c01ce79ded2`.

@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · FINAL-WEB-008 current Production route matrix
+
+- **Hosted mapping:** Ready Production deployment
+  `dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` returned 200 for all seven public routes.
+- **Boundary mapping:** The POST-only QR route returned 405 for GET and 403 for
+  an empty unauthenticated POST; no payment payload or state mutation occurred.
+- **Acceptance mapping:** This is current read-only hosted smoke evidence;
+  FINAL-WEB-008 remains open for its dependencies, independent/acceptance, and
+  final release gates. No checkbox changed.
+- **Evidence:** `evidence/final-web-008-current-production-route-matrix-2026-10-24.md`.
+
 ## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
 
 - **Implementation mapping:** Public truth registry, homepage badges, metadata,
