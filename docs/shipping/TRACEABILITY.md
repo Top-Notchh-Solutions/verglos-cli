@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · dual-database Web serial recheck
+
+- **Source mapping:** Web `705a85e2b7b9d847a85748463aa0d797c60b384f`,
+  content-equivalent to merged `origin/main` `cb266b83`.
+- **Verification mapping:** Full serial 927/928 passed with 0 failures and 1
+  intentional fresh-database migration-table skip; billing migrated-baseline
+  1/1 and account-deletion migrated-baseline 1/1 passed.
+- **Acceptance mapping:** Local implementation evidence only. Hosted deletion,
+  human/field, customer/recipient, provider-publication, independent-review,
+  AppSec/Hunt, and final-release gates remain open; no checkbox changed.
+- **Evidence:** `evidence/qual-web-005-006-dual-db-serial-recheck-2026-10-24.md`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-dual-db-v13.json`
+  verifies 338 files with zero mismatches, matching manifest
+  `sha256:379175db5187df74b326af5d834ee40e4cb486611b7147d80fc7f96daf438608`,
+  and passed secret scanning.
+
 ## 2026-10-24 · isolated Web database serial recheck
 
 - **Source mapping:** Web `705a85e2b7b9d847a85748463aa0d797c60b384f`,

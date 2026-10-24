@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · dual-database Web serial recheck
+
+The full serial suite passed **927/928** with zero failures/cancellations and
+one intentional fresh-database migration-table skip. Billing migrated-baseline
+integration passed **1/1**, and account-deletion migrated-baseline integration
+passed **1/1** against a separate local migrated fixture. This is additive
+implementation evidence for `QUAL-WEB-005/006`; no checkbox changed. Score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-005-006-dual-db-serial-recheck-2026-10-24.md`.
+Bundle v13 verifies 338 files with zero mismatches and passed secret scanning.
+
 ## 2026-10-24 · isolated Web database serial recheck
 
 The current Web tree `705a85e2` passed the complete serial suite against a
