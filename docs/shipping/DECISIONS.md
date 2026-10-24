@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · FINAL-WEB-007/008 production browser capture
+
+- **Decision:** Record the bounded Chromium browser qualification against the
+  current hosted production surface.
+- **Result:** **12/12** route/viewport measurements passed across six routes;
+  accessibility findings were **0**, with all required performance, keyboard,
+  landmark, responsive, metadata, and crawlability checks passing.
+- **Boundary:** This is hosted browser evidence only. No authenticated
+  account, customer, provider, payment, database, deployment, independent
+  review, human/field-CWV, or final release action occurred. No checkbox
+  changed; score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-007-008-production-browser-capture-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v38.json` verifies 372 files with zero mismatches, matching manifest `sha256:d23f39f189925c011a5c3c986dcdaf8dac71bca0da695c88ab491de71a571eb7`, and passed secret scanning.
+
 ## 2026-10-24 · Vercel Production public-surface recheck
 
 - **Decision:** Record the current read-only hosted production surface.

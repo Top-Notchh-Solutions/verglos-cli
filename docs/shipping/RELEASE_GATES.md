@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · FINAL-WEB-007/008 production browser capture
+
+The existing Chromium Playwright capture and qualification passed **12/12**
+measurements for six public routes at desktop and mobile viewports, with zero
+accessibility findings and no performance, keyboard, responsive, metadata, or
+crawlability failures. This does not satisfy authenticated browser,
+human/field-CWV, independent review, provider/customer acceptance, or final
+release. No checkbox changed; score remains **246/34/280 (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/final-web-007-008-production-browser-capture-2026-10-24.md`.
+Bundle v38 verifies **372** files with zero mismatches, matching manifest
+`sha256:d23f39f189925c011a5c3c986dcdaf8dac71bca0da695c88ab491de71a571eb7`,
+and passed secret scanning.
+
 ## 2026-10-24 · Vercel Production public-surface recheck
 
 Vercel reported the production deployment `READY`. Read-only checks returned

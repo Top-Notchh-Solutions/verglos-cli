@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · FINAL-WEB-007/008 production browser capture
+
+The existing Chromium Playwright landing-release qualification passed **12/12**
+measurements across six public routes and desktop/mobile viewports. It recorded
+zero accessibility findings and passed required performance, keyboard,
+landmark, responsive, metadata, and crawlability checks. This is hosted
+browser evidence only; authenticated browser, human/field-CWV, independent
+review, provider/customer acceptance, and final release remain open. Score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/final-web-007-008-production-browser-capture-2026-10-24.md`.
+Bundle v38 verifies **372** files with zero mismatches, matching manifest
+`sha256:d23f39f189925c011a5c3c986dcdaf8dac71bca0da695c88ab491de71a571eb7`,
+and passed secret scanning.
+
 ## 2026-10-24 · Vercel Production public-surface recheck
 
 The Vercel deployment is `READY`; read-only checks returned 200 for the six

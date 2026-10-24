@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## FINAL-WEB-007/008 production browser capture · 2026-10-24T07:20Z
+
+- **Execution:** Ran the existing Chromium Playwright landing-release capture
+  and qualification against `https://verglos.com`.
+- **Result:** **12/12** route/viewport measurements passed across six public
+  routes and desktop/mobile viewports; accessibility findings were **0** and
+  all required performance, keyboard, landmark, responsive, metadata, and
+  crawlability checks passed.
+- **Disposition:** Hosted browser evidence only. Authenticated browser,
+  human/field-CWV, independent review, provider/customer acceptance, and final
+  release remain open; no checkbox changed. Score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-007-008-production-browser-capture-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v38.json` verifies 372 files with zero mismatches, matching manifest `sha256:d23f39f189925c011a5c3c986dcdaf8dac71bca0da695c88ab491de71a571eb7`, and passed secret scanning.
+
 ## Vercel Production public-surface recheck · 2026-10-24T07:17Z
 
 - **Execution:** Inspected the Vercel deployment and ran bounded read-only
