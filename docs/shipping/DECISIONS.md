@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-head Web serial regression suite
+
+- **Decision:** Run the complete local Web serial pretest/test path after the
+  focused current-head deletion integration.
+- **Result:** The suite completed in **10.574 seconds** with **904 passed / 24
+  designed database-dependent skips / 0 failures / 0 cancellations / 928
+  total**. The Node 22.x package warning under local Node `v26.4.0` did not
+  affect completion.
+- **Disposition:** Refresh regression evidence only. Keep skipped database,
+  Production/customer, human/field, independent-review, AppSec/Hunt, and final
+  release boundaries open; no checkbox changed. Score remains
+  **245/35/280 (87.5%)**. No Actions run or paid minute was used.
+- **Evidence:** `evidence/qual-web-current-head-serial-suite-2026-10-24.md`.
+
 ## 2026-10-24 · record current-head QUAL-WEB-005 deletion integration
 
 - **Decision:** Rerun the account-deletion route and worker against a fresh

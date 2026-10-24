@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-head Web serial regression suite
+
+The current Web implementation completed `pnpm test:serial` locally in
+**10.574 seconds**: **904 passed / 24 designed database-dependent skips / 0
+failures / 0 cancellations / 928 total**. The serial runner executed the
+configured pretest and test suites with one worker. The package reported its
+expected Node 22.x engine warning under the local Node `v26.4.0` runtime, but
+the suite completed successfully. Evidence:
+`docs/shipping/evidence/qual-web-current-head-serial-suite-2026-10-24.md`.
+
+This refreshes current-head Web regression evidence; it does not substitute
+for the skipped database-backed run or authenticated Production/customer,
+human/field, independent-review, AppSec/Hunt, or final-release evidence. No
+checkbox changed. Score remains **245 checked / 35 open / 280 total (87.5%)**,
+with **13 AppSec-dependent / 22 non-AppSec** rows open. No GitHub Actions run
+or paid minute was used, and nothing was deleted.
+
 ## Latest continuation result · 2026-10-24 · current-head QUAL-WEB-005 deletion integration
 
 The current Web implementation was rerun against a fresh isolated local

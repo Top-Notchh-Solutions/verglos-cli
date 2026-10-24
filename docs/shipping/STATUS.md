@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current-head Web serial regression suite
+
+The current Web `pnpm test:serial` run completed **904/928** with **24
+designed database-dependent skips**, zero failures, and zero cancellations in
+10.574 seconds. This is local regression evidence only; skipped database,
+Production/customer, human/field, independent-review, AppSec/Hunt, and final
+release boundaries remain open. No checkbox changed. Score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-current-head-serial-suite-2026-10-24.md`.
+
 ## 2026-10-24 · current-head QUAL-WEB-005 deletion integration
 
 Fresh isolated local Postgres bootstrap plus **43** migrations succeeded, and

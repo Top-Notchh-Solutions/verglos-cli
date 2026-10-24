@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## Current-head Web serial regression suite · 2026-10-24
+
+- **Execution:** Web source `58fe7e3c` (merged implementation on `origin/main`
+  `d8f415b4`) ran `pnpm test:serial` locally with the repository's serial
+  runner.
+- **Result:** **904 passed / 24 designed database-dependent skips / 0 failures
+  / 0 cancellations / 928 total** in **10.574 seconds**. The local runtime was
+  Node `v26.4.0`; the package's expected Node 22.x engine warning was emitted.
+- **Disposition:** Refresh local regression evidence only; do not infer the
+  skipped database-backed run, Production/customer, human/field,
+  independent-review, AppSec/Hunt, or final-release gates. No checkbox changed;
+  score remains **245/35/280 (87.5%)**. No Actions run or paid minute was used.
+- **Evidence:** `evidence/qual-web-current-head-serial-suite-2026-10-24.md`.
+
 ## Current-head QUAL-WEB-005 deletion integration · 2026-10-24
 
 - **Execution:** Current Web source `58fe7e3c` (merged implementation on

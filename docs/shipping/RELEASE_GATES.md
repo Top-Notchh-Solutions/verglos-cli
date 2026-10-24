@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current-head Web serial regression suite
+
+The current Web serial pretest/test run completed **904/928**, with **24
+designed database-dependent skips**, zero failures, and zero cancellations in
+10.574 seconds. This refreshes local regression evidence only; it does not
+open skipped database, Production/customer, human/field, independent-review,
+AppSec/Hunt, or final release/go-no-go gates. No checkbox changed; score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-current-head-serial-suite-2026-10-24.md`.
+
 ## 2026-10-24 · current-head QUAL-WEB-005 deletion integration
 
 Current Web account-deletion route and worker integration passed **2/2** on a
