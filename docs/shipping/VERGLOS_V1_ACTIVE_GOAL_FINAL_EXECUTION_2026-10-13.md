@@ -1,5 +1,17 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-006 current alpha.4 rollback rehearsal
+
+CLI `aad2c743` built **8/8** packages; focused rollback contracts passed
+**2/2**. The bounded rehearsal exited 0, matched the fixed fixture manifest,
+covered five rollback/revocation decisions, and preserved two historical
+records. This advances the local DIST-006 implementation contract only. No
+npm, registry, signing provider, Hunt feed, Vercel, authenticated rollback, or
+revocation action occurred; the row remains open for the real provider action,
+independent review, and final release acceptance. Score remains **245 checked /
+35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · current Production landing multi-browser receipt
 
 The current Web Production deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is
@@ -19,7 +31,7 @@ No paid Actions, database write, payment, customer data, publication, deletion,
 or final npm release occurred. Evidence:
 `docs/shipping/evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
 The additive evidence bundle verifies **282** files with zero mismatches and
-manifest `sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+manifest `sha256:5a4497c28c508a22228fbf431f39197ea2239eb2052c76da727ae8954e6e7f16`.
 
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-006 production-build multi-browser qualification
 

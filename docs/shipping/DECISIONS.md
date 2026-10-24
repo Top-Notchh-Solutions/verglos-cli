@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current alpha.4 DIST-006 rollback rehearsal
+
+- **Decision:** Re-run the bounded rollback decision contract at current CLI
+  alpha.4 without contacting any provider or registry.
+- **Result:** CLI `aad2c743` build **8/8**, focused rollback contracts **2/2**,
+  rehearsal exit 0, five decisions, and two historical records preserved.
+- **Disposition:** Implementation evidence only. Keep DIST-006 open for an
+  authenticated provider operation, independent review, and final acceptance.
+  Score remains **245/35/280 (87.5%)**; no publication, credential, customer,
+  Vercel, or deletion state changed.
+- **Evidence:** `evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser disposition
 
 - **Decision:** Validate the populated dashboard against a fresh local

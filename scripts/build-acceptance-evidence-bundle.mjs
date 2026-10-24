@@ -293,6 +293,7 @@ const paths = [
   "docs/shipping/evidence/final-web-007-production-current-firefox-2026-10-24.json",
   "docs/shipping/evidence/final-web-007-production-current-webkit-2026-10-24.json",
   "docs/shipping/evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md",
+  "docs/shipping/evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md",
   "docs/shipping/evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];

@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-006 current alpha.4 rollback rehearsal
+
+CLI `aad2c743` passed the 8-package build and focused rollback contracts 2/2.
+The local fail-closed rehearsal exited 0, covered npm/engine/Hunt/signing/Web
+decisions, and preserved two historical records. Provider/registry/signing/
+Hunt/Vercel rollback was not called; DIST-006 remains open. Score remains
+**245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`evidence/dist-006-current-alpha4-rollback-rehearsal-2026-10-24.md`.
+
 ## 2026-10-24 · current Production landing multi-browser receipt
 
 Vercel Production deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is READY for
@@ -16,7 +25,7 @@ checked / 35 open / 280 total (87.5%)**, with **13 AppSec-dependent / 22
 non-AppSec** rows open. Evidence:
 `evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
 The additive bundle verifies **282** files with zero mismatches and manifest
-`sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+`sha256:5a4497c28c508a22228fbf431f39197ea2239eb2052c76da727ae8954e6e7f16`.
 
 ## 2026-10-24 · QUAL-WEB-006 local production-build qualification
 
