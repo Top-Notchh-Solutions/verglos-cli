@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
+
+- **Implementation mapping:** Web PR #287 merged normally as
+  `9b0bf7df46ce09c463c9298da4afdddd7cdeb987`; dashboard search uses an
+  order-preserving eight-worker cap and preserves per-project tenant scope.
+- **Verification mapping:** Dashboard boundary tests **5/5**, Web typecheck,
+  and diff checks passed.
+- **Boundary mapping:** This is production-code hardening only. It does not
+  provide authenticated Production capture, human/field evidence, independent
+  review, customer/recipient acceptance, or final release sign-off. No
+  checkbox changed; score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-006-search-concurrency-pr287-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 handoff expiry fence
 
 - **Implementation mapping:** Web PR #286 merged normally as

@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
+
+Web PR #287 merged normally as
+`9b0bf7df46ce09c463c9298da4afdddd7cdeb987`; dashboard search now bounds
+project fan-out at eight workers while preserving per-project tenant scoping.
+Dashboard boundary tests passed **5/5**, Web typecheck and diff checks passed.
+QUAL-WEB-006 remains open for authenticated Production capture, human/field,
+independent review, customer/recipient, and final-release evidence. Score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/qual-web-006-search-concurrency-pr287-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 handoff expiry fence
 
 Web PR #286 merged normally as

@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
+
+Web PR #287 merged normally as
+`9b0bf7df46ce09c463c9298da4afdddd7cdeb987`; dashboard search now uses an
+order-preserving eight-worker cap with per-project tenant scoping. Dashboard
+boundary tests **5/5**, Web typecheck, and diff checks passed. This is
+implementation evidence only; no checkbox changed. QUAL-WEB-006 remains open
+for authenticated Production capture, human/field evidence, independent
+review, customer/recipient acceptance, and final release sign-off. Score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/qual-web-006-search-concurrency-pr287-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 handoff expiry fence
 
 Web PR #286 merged normally as

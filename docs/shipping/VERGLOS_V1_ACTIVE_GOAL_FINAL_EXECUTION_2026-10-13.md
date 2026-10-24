@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
+
+Web PR **#287** merged normally as
+`9b0bf7df46ce09c463c9298da4afdddd7cdeb987`. Organization dashboard search now
+uses an order-preserving worker pool capped at **8** project searches instead
+of unbounded project fan-out, while retaining per-project tenant scoping. This
+prevents large organizations from turning one request into hundreds of
+simultaneous database operations. Dashboard boundary tests passed **5/5**,
+Web typecheck passed, and diff checks passed. This is real QUAL-WEB-006
+production-code hardening, but the row remains open for authenticated
+Production capture, human/field evidence, independent review,
+customer/recipient acceptance, and final release sign-off. No checkbox changed;
+score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-006-search-concurrency-pr287-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 handoff expiry fence
 
 Web PR **#286** merged normally as

@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
+
+Web PR **#287** merged normally as
+`9b0bf7df46ce09c463c9298da4afdddd7cdeb987`. Organization dashboard search now
+limits project fan-out to **8** order-preserving workers while retaining
+per-project tenant scoping, preventing large tenants from creating hundreds
+of simultaneous database operations. Dashboard boundary tests passed **5/5**,
+Web typecheck passed, and diff checks passed. Keep QUAL-WEB-006 unchecked for
+authenticated Production capture, human/field evidence, independent review,
+customer/recipient acceptance, and final release sign-off. Score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-006-search-concurrency-pr287-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · STUDIO-CLI-001 handoff expiry fence
 
 Web PR **#286** merged normally as
