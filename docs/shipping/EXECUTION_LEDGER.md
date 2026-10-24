@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #278 Production receipt · 2026-10-24
+
+- **Implementation:** Web PR #278 merged normally as
+  `11b4f5c717c4b127655b53a15f029c693fb1fdcd` from `0da1d132`. The shared
+  `DatasetSummary` contract adds real tenant-scoped totals to bounded Home,
+  Audit, Policy, and Client dashboard views.
+- **Verification:** Typecheck passed; focused dashboard contracts passed
+  **14/14**; serial Web passed **904/928** with **24 designed skips** and zero
+  failures; Production build generated **49/49** routes.
+- **Provider receipt:** Vercel Production is READY for the merged commit at
+  `verglos-bzjg1c6p6-anuragyadav20062002s-projects.vercel.app`; bounded public
+  read-only checks returned HTTP **200**.
+- **Disposition:** Advance QUAL-WEB-006 implementation/provider evidence only.
+  Keep the 100-row route capture, human/field, independent-review, and final
+  acceptance gates open. No checkbox changed; score remains **245/35/280
+  (87.5%)**. No database write, payment, customer data, publication,
+  deletion, or final npm release occurred.
+- **Evidence:** `evidence/qual-web-006-dashboard-dataset-totals-pr278-2026-10-24.md`.
+- **Bundle:** Additive v42 contains **272** hashed evidence files, passes
+  secret scanning, and matches manifest
+  `sha256:62eb71084ee51e2caaeb6185acf77bfc33661a23cf5463a8a3469946b32d351e`.
+
 ## Web PR #277 Production receipt · 2026-10-24
 
 - **Deployment:** Vercel `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for merged

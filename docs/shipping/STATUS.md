@@ -1,5 +1,20 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #278 Production receipt
+
+Web PR #278 merged normally as `11b4f5c7` from `0da1d132`. Authenticated
+bounded dashboard views now expose server-counted totals and visible bounded
+slice text. Typecheck, focused dashboard contracts **14/14**, serial Web
+**904 passed / 24 designed skips / 0 failures**, and build **49/49** passed.
+The merged Vercel Production deployment is READY and the bounded public
+read-only smoke returned HTTP **200**. This is implementation/provider
+evidence only; no checkbox changed and the score remains **245/35/280
+(87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-dataset-totals-pr278-2026-10-24.md`.
+Additive bundle v42 contains **272** hashed evidence files, passes secret
+scanning, and matches manifest
+`sha256:62eb71084ee51e2caaeb6185acf77bfc33661a23cf5463a8a3469946b32d351e`.
+
 ## 2026-10-24 · Web PR #277 Production receipt
 
 Vercel deployment `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for merged Web

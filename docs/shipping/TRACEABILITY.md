@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #278 bounded dashboard dataset totals
+
+- **Source mapping:** Web PR #278 merged normally as
+  `11b4f5c717c4b127655b53a15f029c693fb1fdcd` from `0da1d132`; the shared
+  `DatasetSummary` uses tenant-scoped server counts and keeps bounded slices
+  visible to both the operator and browser harness.
+- **Verification mapping:** Typecheck, focused dashboard qualification/boundary
+  contracts **14/14**, serial Web **904 passed / 24 designed skips / 0
+  failures**, and Production build **49/49** passed. Vercel Production is
+  READY and bounded public read-only checks returned HTTP **200**.
+- **Acceptance mapping:** This advances QUAL-WEB-006 implementation and
+  provider evidence only. The complete 100-row capture, human/field,
+  independent-review, and final acceptance requirements remain open. No
+  checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-dataset-totals-pr278-2026-10-24.md`.
+- **Bundle mapping:** Additive v42 contains **272** hashed evidence files,
+  passes secret scanning, and matches manifest
+  `sha256:62eb71084ee51e2caaeb6185acf77bfc33661a23cf5463a8a3469946b32d351e`.
+
 ## 2026-10-24 · Web PR #277 Production receipt
 
 - **Deployment mapping:** Vercel `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for

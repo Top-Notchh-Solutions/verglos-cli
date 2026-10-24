@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #278 Production receipt
+
+Web PR #278 merged normally as `11b4f5c717c4b127655b53a15f029c693fb1fdcd`
+from implementation `0da1d132ab79349c264b96f8118aabf6c04880f1`. Authenticated
+bounded dashboard views now expose real server-counted dataset totals through
+the shared `DatasetSummary` contract and visibly report bounded slices. Local
+typecheck, focused dashboard qualification/boundary contracts **14/14**, the
+serial suite (**904 passed / 24 designed database-dependent skips / 0
+failures / 928 total**), and the Production build (**49/49** routes) passed.
+
+Vercel target `production` is READY at
+`verglos-bzjg1c6p6-anuragyadav20062002s-projects.vercel.app` for the merged
+commit, and bounded read-only requests to the public aliases/routes returned
+HTTP **200**. This is provider/Production runtime evidence only. It does not
+close QUAL-WEB-006's complete 100-row capture, human/field, independent
+review, or final acceptance requirements. No authenticated dashboard request,
+database write, payment/provider transaction, customer repository, customer
+data, publication, deletion, or final npm release occurred. No checkbox
+changed; score remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-dataset-totals-pr278-2026-10-24.md`.
+Additive bundle v42 contains **272** hashed evidence files, passes secret
+scanning, and matches manifest
+`sha256:62eb71084ee51e2caaeb6185acf77bfc33661a23cf5463a8a3469946b32d351e`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #277 Production receipt
 
 Vercel deployment `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for merged Web

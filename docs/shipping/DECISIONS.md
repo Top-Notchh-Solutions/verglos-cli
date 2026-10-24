@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record Web PR #278 bounded dataset totals
+
+- **Decision:** Make server-side totals explicit wherever the authenticated
+  dashboard intentionally renders a bounded slice, so qualification and human
+  operators cannot mistake a short page for an empty tenant.
+- **Result:** Web PR #278 merged normally as `11b4f5c7` from `0da1d132`; local
+  typecheck, focused dashboard contracts **14/14**, serial Web **904/928** with
+  24 designed skips, and build **49/49** passed. The merged Vercel Production
+  deployment is READY and public read-only checks returned HTTP **200**.
+- **Disposition:** Advance QUAL-WEB-006 implementation/provider evidence only.
+  Keep the complete 100-row, human/field, independent-review, and final
+  acceptance boundaries open; no checkbox changed and score remains
+  **245/35/280 (87.5%)**. No production database write, payment, customer
+  data, publication, deletion, or final npm release occurred.
+- **Evidence:** `evidence/qual-web-006-dashboard-dataset-totals-pr278-2026-10-24.md`.
+- **Bundle:** Additive v42 contains **272** hashed evidence files, passes
+  secret scanning, and matches manifest
+  `sha256:62eb71084ee51e2caaeb6185acf77bfc33661a23cf5463a8a3469946b32d351e`.
+
 ## 2026-10-24 · record Web PR #277 Production receipt
 
 - **Decision:** Inspect the provider Production deployment created by merged

@@ -1,5 +1,26 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #278 bounded dashboard dataset totals
+
+Web PR #278 merged normally as `11b4f5c717c4b127655b53a15f029c693fb1fdcd`
+from `0da1d132ab79349c264b96f8118aabf6c04880f1`. The authenticated dashboard
+now exposes real tenant-scoped `count(*)` totals for bounded Home applications,
+Audit export, Policy versions, and Client workspaces, with visible `N shown · M
+total` text; the existing paginated views retain their real server-reported
+totals. Typecheck, focused dashboard contracts **14/14**, serial Web
+**904/24/0**, and Production build **49/49** passed. Vercel Production is READY
+for the merged commit and seven bounded public read-only URL checks returned
+HTTP **200**. This advances QUAL-WEB-006 implementation/provider evidence only;
+the 100-row route capture, human/field, independent-review, and final
+acceptance boundaries remain open. No checkbox changed; score remains
+**245 checked / 35 open / 280 total (87.5%)**. No paid Actions evidence,
+Production database write, payment, customer data, publication, deletion, or
+final npm release occurred. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-dataset-totals-pr278-2026-10-24.md`.
+Additive bundle v42 contains **272** hashed evidence files, passes secret
+scanning, and matches manifest
+`sha256:62eb71084ee51e2caaeb6185acf77bfc33661a23cf5463a8a3469946b32d351e`.
+
 ## 2026-10-24 · Web PR #277 Production receipt
 
 Vercel deployment `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for merged Web
