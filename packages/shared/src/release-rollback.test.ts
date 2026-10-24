@@ -55,4 +55,13 @@ test("rollback decision fails closed for malformed runtime references instead of
 
   const malformedTarget = { current: ref("npm-package", "current", "a"), target: "not-a-reference", approved: true, reason: "runtime input", preserveHistoricalRecords: true } as never;
   assert.deepEqual(decideReleaseRollback(malformedTarget), { allowed: false, reason: "target-reference-invalid" });
+
+  const malformedReason = { current: ref("npm-package", "current", "a"), target: ref("npm-package", "target", "b"), approved: true, reason: null, preserveHistoricalRecords: true } as never;
+  assert.deepEqual(decideReleaseRollback(malformedReason), { allowed: false, reason: "target-reference-invalid" });
+
+  const truthyFlags = { current: ref("npm-package", "current", "a"), target: ref("npm-package", "target", "b"), approved: "yes", reason: "runtime input", preserveHistoricalRecords: "yes" } as never;
+  assert.deepEqual(decideReleaseRollback(truthyFlags), { allowed: false, reason: "approval-required" });
+
+  const truthyHistoryFlag = { current: ref("npm-package", "current", "a"), target: ref("npm-package", "target", "b"), approved: true, reason: "runtime input", preserveHistoricalRecords: "yes" } as never;
+  assert.deepEqual(decideReleaseRollback(truthyHistoryFlag), { allowed: false, reason: "history-invalidation-requested" });
 });
