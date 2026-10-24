@@ -1,5 +1,18 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24T07:34Z · ACCEPT-006 current-head rerun
+
+The current scorer syntax check passed, the comprehension suite passed **11/11**,
+and the study-protocol validator retained `participantRun: open` and
+`huntAdjudication: open`. No participant was recruited or run and no answer
+data, independent review, or final acceptance was fabricated; ACCEPT-006
+remains unchecked. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-006-current-head-rerun-2026-10-24T0734Z.md`.
+Bundle v44 verifies **378** bounded files with **0** mismatches, matching
+manifest `sha256:37635bfbc8a98c42478aed4f626d26f0e2c5e05184139b0a117338ec3ff1c156`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-003 bundle verification
 
 The bundle verifier contract suite passed **4/4** and current bundle v42
