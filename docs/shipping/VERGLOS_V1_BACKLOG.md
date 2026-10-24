@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
+
+The CLI updater now reads npm package metadata, ignores prereleases, selects
+the highest stable SemVer, and installs the exact selected version instead of
+the mutable `latest` tag. This fixes the observed production risk where npm's
+`latest` currently points to `2.0.0-alpha.1` while the newest stable version
+is `1.8.3`. CLI PR #365 merged normally as
+`d657889d39c3a3090d5f8411a81d7b1adc6d9f2f`; updater tests passed **8/8**,
+typecheck/build passed, and the full package suite exited successfully. Keep
+DIST-002 and DIST-003 unchecked for trusted publication, immutable attestation,
+provider action, independent review, and final release acceptance. Score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-
+dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-002-003-stable-update-channel-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · FINAL-WEB-008 current Production route matrix
 
 The Ready Production deployment `dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` passed a

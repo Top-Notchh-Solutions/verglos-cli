@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## DIST-002/DIST-003 stable update-channel implementation · 2026-10-24
+
+- **Execution:** Corrected the CLI updater after observing npm's current
+  prerelease `latest` tag. It now reads package metadata, selects the highest
+  stable SemVer, handles prerelease ordering, and installs the exact version.
+- **Result:** Registry-backed selection returned `1.8.3`; updater tests **8/8**
+  passed; typecheck, build, and the full CLI package suite passed. CLI PR #365
+  merged normally as `d657889d39c3a3090d5f8411a81d7b1adc6d9f2f`.
+- **Acceptance mapping:** This advances implementation and distribution
+  safety only. DIST-002/DIST-003 remain open for trusted publication,
+  immutable attestation, provider action, independent review, and final
+  acceptance. Score remains **246/34/280**. No package publication or deletion
+  occurred; queued paid Actions runs were cancelled.
+- **Evidence:** `evidence/dist-002-003-stable-update-channel-2026-10-24.md`.
+
 ## FINAL-WEB-008 current Production route matrix · 2026-10-24
 
 - **Execution:** Ran a read-only matrix against the current Ready Production
