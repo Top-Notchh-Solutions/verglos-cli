@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-head Web serial regression mapping
+
+- **Source mapping:** Web implementation `58fe7e3c` with merged equivalent on
+  `origin/main` `d8f415b4`; local Node `v26.4.0`/pnpm `10.34.5`.
+- **Verification mapping:** `pnpm test:serial` completed **904/928** with 24
+  designed database-dependent skips, zero failures, and zero cancellations in
+  10.574 seconds.
+- **Acceptance mapping:** Local regression evidence only. The skipped database
+  cases and Production/customer, human/field, independent-review, AppSec/Hunt,
+  and final-release evidence remain separate. No checkbox changed; score
+  remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-current-head-serial-suite-2026-10-24.md`.
+
 ## 2026-10-24 · current-head QUAL-WEB-005 deletion mapping
 
 - **Source mapping:** Web implementation `58fe7e3c` with merged equivalent on

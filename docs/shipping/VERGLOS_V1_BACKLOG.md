@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current-head Web serial regression suite
+
+The current Web implementation completed `pnpm test:serial` locally with
+**904/928 passed**, **24 designed database-dependent skips**, and **0
+failures/cancellations** in **10.574 seconds**. This refreshes broad local
+regression evidence; the skipped isolated-database cases and the hosted,
+human/field, independent-review, AppSec/Hunt, customer, and final-release
+boundaries remain separate. No checkbox changed. Score remains **245 checked /
+35 open / 280 total (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec**
+rows open. Evidence:
+`docs/shipping/evidence/qual-web-current-head-serial-suite-2026-10-24.md`.
+
 ## 2026-10-24 · current-head QUAL-WEB-005 deletion integration
 
 The current Web implementation passed the bounded account-deletion route and
