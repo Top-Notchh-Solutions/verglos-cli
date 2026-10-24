@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## DIST-003 current-source release-artifact preflight · 2026-10-24
+
+- **Execution:** Fast-forwarded to exact `origin/main`, built all workspace
+  packages, packed the public set into a disposable directory, generated the
+  release sidecars, ran the clean consumer, and verified the strict release
+  artifact contract.
+- **Result:** Build **8/8**, release contracts **57/57**, **7/7** archives,
+  **8/8** sidecars, clean consumer `2.0.0-alpha.4`, and strict **15/15**
+  checksum/origin/archive-notice verification passed.
+- **Acceptance mapping:** This advances exact-source artifact integrity only.
+  Keep DIST-003 open for trusted publication, immutable attestation, final
+  release clearance, independent review, and final acceptance. Score remains
+  **246/34/280**. No registry/provider/tag/customer action occurred.
+- **Evidence:** `evidence/dist-003-current-source-artifact-preflight-2026-10-24.md`.
+
 ## DIST-006 malformed rollback-reference hardening · 2026-10-24
 
 - **Execution:** Hardened the shared rollback decision boundary against null,

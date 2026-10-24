@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-003 current-source release-artifact preflight
+
+Exact `origin/main` source built **8/8** packages; release/artifact contracts
+passed **57/57**; the real packer produced **7/7** archives and **8/8**
+sidecars; clean consumer executed `2.0.0-alpha.4`; and strict verification
+passed **15/15** artifacts with matching notices. This does not satisfy trusted
+publication, immutable attestation, final release clearance, independent
+review, or final acceptance. No checkbox changed; score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/dist-003-current-source-artifact-preflight-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 malformed rollback-reference hardening
 
 The shared rollback decision contract now validates runtime reference shapes

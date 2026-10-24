@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-003 current-source release-artifact preflight
+
+Current exact-source preflight passed build **8/8**, release contracts **57/57**,
+archive/sidecar generation **7/7 + 8/8**, clean consumer on `2.0.0-alpha.4`,
+and strict **15/15** artifact verification. DIST-003 remains open for trusted
+publication, immutable attestation, final release clearance, independent
+review, and final acceptance. Score remains **246/34/280 (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/dist-003-current-source-artifact-preflight-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 malformed rollback-reference hardening
 
 Rollback runtime input is now shape-validated and fails closed with bounded

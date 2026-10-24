@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-003 current-source release-artifact preflight
+
+- **Source mapping:** Exact `origin/main` source was
+  `6a2f03ec76855d7ecea089e6dc312d3d9ed9391e`; all seven public manifests were
+  `2.0.0-alpha.4`.
+- **Artifact mapping:** Build **8/8**, release contracts **57/57**, **7/7**
+  archives, **8/8** sidecars, clean-consumer execution, and strict **15/15**
+  artifact verification passed. SBOM/SPDX metadata bind the current version.
+- **Boundary mapping:** Local exact-source artifact integrity does not imply
+  trusted publication, immutable attestation, independent review, or final
+  acceptance. No checkbox changed and no provider state was mutated.
+- **Evidence:** `evidence/dist-003-current-source-artifact-preflight-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 malformed rollback-reference hardening
 
 - **Implementation mapping:** Shared rollback decisions validate unknown

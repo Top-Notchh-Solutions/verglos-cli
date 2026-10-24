@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-003 current-source release-artifact preflight
+
+- **Decision:** Record the exact current-source release preflight after syncing
+  the shipping worktree to `origin/main`.
+- **Result:** Build **8/8**, release contracts **57/57**, **7/7** archives,
+  **8/8** sidecars, clean consumer on `2.0.0-alpha.4`, and strict artifact
+  verification **15/15** passed. SBOM metadata and SPDX namespace bind the
+  package-manifest version.
+- **Boundary:** Local exact-source artifact integrity only. DIST-003 remains
+  unchecked for trusted publication, immutable external attestation, final
+  release clearance, independent review, and final acceptance. No provider,
+  registry, tag, customer, paid Actions, or deletion action occurred. Score
+  remains **246/34/280**.
+- **Evidence:** `evidence/dist-003-current-source-artifact-preflight-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 malformed rollback-reference hardening
 
 - **Decision:** Treat rollback references as untrusted runtime input and fail
