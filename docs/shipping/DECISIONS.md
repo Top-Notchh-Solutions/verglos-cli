@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · STUDIO-CLI-001 bounded current recheck
+
+- **Decision:** Record the current projection/custody implementation recheck
+  without converting synthetic or owner-controlled tests into recipient
+  acceptance.
+- **Result:** CLI exited 0 with only two documented Hunt Docker opt-in skips;
+  the focused Web Studio contract set passed **106/106**.
+- **Boundary:** Authorized recipient/customer acceptance and independent
+  hosted/audit evidence remain open. STUDIO-CLI-001 remains unchecked; score
+  remains **246/34/280**.
+- **Evidence:** `evidence/studio-cli-001-bounded-current-recheck-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v47.json` verifies 381 files with zero mismatches, matching manifest `sha256:aa4f8a83ec9fb54c8fe71220a15c7611171f04b41a68dea035a386c49bb15ebe`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-010 workspace-root freeze replay
 
 - **Decision:** Correct the replay root for the existing candidate-freeze

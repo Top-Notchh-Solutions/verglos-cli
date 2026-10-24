@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 bounded current recheck
+
+The current CLI package suite exited **0** with no failures or cancellations;
+only the two explicitly opt-in Hunt Docker cases were skipped. The focused Web
+Studio projection, custody, handoff, leakage, allowance, retention, and E2E
+contracts passed **106/106** with zero failures, skips, cancellations, or todos.
+`STUDIO-CLI-001` remains unchecked only for its declared authorized
+recipient/customer acceptance and independent hosted/audit record. Score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-cli-001-bounded-current-recheck-2026-10-24.md`.
+Bundle v47 verifies **381** bounded files with **0** mismatches, matching
+manifest `sha256:aa4f8a83ec9fb54c8fe71220a15c7611171f04b41a68dea035a386c49bb15ebe`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24T07:38Z · ACCEPT-010 workspace-root freeze replay
 
 The current release-candidate freeze was replayed with the workspace root,

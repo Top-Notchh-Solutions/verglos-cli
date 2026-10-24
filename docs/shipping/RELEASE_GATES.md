@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · STUDIO-CLI-001 bounded current recheck
+
+The current CLI package suite exited 0 with only two documented Hunt Docker
+opt-in skips; the focused Web Studio contract set passed **106/106** with zero
+failures, skips, cancellations, or todos. This does not satisfy authorized
+recipient/customer acceptance or independent hosted/audit evidence. No
+checkbox changed; score remains **246/34/280 (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/studio-cli-001-bounded-current-recheck-2026-10-24.md`.
+Bundle v47 verifies **381** files with zero mismatches, matching manifest
+`sha256:aa4f8a83ec9fb54c8fe71220a15c7611171f04b41a68dea035a386c49bb15ebe`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-010 workspace-root freeze replay
 
 The existing candidate-freeze input now replays against the correct workspace

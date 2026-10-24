@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · STUDIO-CLI-001 bounded current recheck
+
+- **Implementation mapping:** Current CLI projection/upload and Web Studio
+  custody/handoff implementation at the recorded current sources.
+- **Contract mapping:** CLI exited 0 with two documented Hunt Docker opt-in
+  skips; focused Web Studio contracts passed **106/106** with zero failures,
+  skips, cancellations, or todos.
+- **Boundary mapping:** Recipient/customer acceptance and independent
+  hosted/audit evidence remain open; no external state was inferred.
+- **Evidence:** `evidence/studio-cli-001-bounded-current-recheck-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v47.json` verifies 381 files with zero mismatches, matching manifest `sha256:aa4f8a83ec9fb54c8fe71220a15c7611171f04b41a68dea035a386c49bb15ebe`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-010 workspace-root freeze replay
 
 - **Implementation mapping:** Candidate-freeze verifier replayed with the
