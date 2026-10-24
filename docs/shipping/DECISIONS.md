@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · FINAL-WEB-001 current truth-registry recheck
+
+- **Decision:** Record the current public-truth implementation result without
+  treating local contract success as release acceptance.
+- **Result:** Truth registry **37/37**, public-release contracts **12/12**, and
+  executable smoke **32/32** claims publishable with 18 routes, 2 proof assets,
+  8 sitemap URLs, 6 robots rules, and zero issues.
+- **Boundary:** The Node 22.x engine warning under workstation Node 26.4.0 is
+  retained. No deployment, provider action, independent/field review, or final
+  release sign-off occurred. FINAL-WEB-001 remains unchecked; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/final-web-001-current-truth-registry-recheck-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v48.json` verifies 382 files with zero mismatches, matching manifest `sha256:92b2f79e73b978080884f76c1fa6c756aef13a180b42decb05d9e85936e9b054`, and passed secret scanning.
+
 ## 2026-10-24 · STUDIO-CLI-001 bounded current recheck
 
 - **Decision:** Record the current projection/custody implementation recheck

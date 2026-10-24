@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · FINAL-WEB-001 current truth-registry recheck
+
+- **Implementation mapping:** Web canonical plan/capability truth registry,
+  public claim projection, `/llms.txt`, structured data, route inventory, and
+  public-release smoke at the recorded current source.
+- **Contract mapping:** Truth registry **37/37**, public-release contracts
+  **12/12**, executable smoke **32/32** publishable claims, 18 routes, 2 proof
+  assets, 8 sitemap URLs, 6 robots rules, zero issues.
+- **Boundary mapping:** Local public-truth contracts do not imply deployment,
+  provider action, independent/field acceptance, or final release.
+- **Evidence:** `evidence/final-web-001-current-truth-registry-recheck-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v48.json` verifies 382 files with zero mismatches, matching manifest `sha256:92b2f79e73b978080884f76c1fa6c756aef13a180b42decb05d9e85936e9b054`, and passed secret scanning.
+
 ## 2026-10-24 · STUDIO-CLI-001 bounded current recheck
 
 - **Implementation mapping:** Current CLI projection/upload and Web Studio
