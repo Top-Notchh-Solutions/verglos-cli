@@ -351,6 +351,9 @@ const paths = [
   "docs/shipping/evidence/dist-002-003-hunt-package-public-identity-pr294-2026-10-24.md",
   "docs/shipping/evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.md",
   "docs/shipping/evidence/dist-002-npm-alpha4-current-head-observation-2026-10-24.json",
+  "docs/shipping/evidence/acceptance-release-reconciliation-input-config-2026-10-24-v4.json",
+  "docs/shipping/evidence/acceptance-release-reconciliation-input-2026-10-24-v4.json",
+  "docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v4.json",
   "THIRD_PARTY_NOTICES",
 ];
 

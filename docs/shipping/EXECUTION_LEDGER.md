@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Current-candidate release reconciliation · 2026-10-24
+
+- **Candidate:** merged CLI `8a69dbc5db815336f9b2103176f988d3fb90ff5d` and Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Execution:** Rebuilt the byte-bound release input and ran the fail-closed
+  reconciliation against the current candidate.
+- **Result:** 1 shipped / 21 partial non-AppSec rows, 6 open gates, 6
+  correction items, and 1 rollback item; recorded recommendation `no-go`.
+- **Boundary:** No publication, deployment, customer data, independent review,
+  AppSec/Hunt review, final release, or checkbox change.
+- **Evidence:** `evidence/acceptance-release-reconciliation-2026-10-24-current-v4.json`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-triple-db-reconciliation-v15.json`
+  verifies 342 files with zero mismatches, matching manifest
+  `sha256:715ed975c83445a1cd2c482136e6e4efd892cbd252868112a166dbc55e029b52`,
+  and passed secret scanning.
+
 ## Complete Web serial qualification · 2026-10-24
 
 - **Execution:** Fresh general, migrated billing, and migrated

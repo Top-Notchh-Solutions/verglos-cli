@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current-candidate release reconciliation
+
+The fail-closed reconciliation is bound to merged CLI
+`8a69dbc5db815336f9b2103176f988d3fb90ff5d` and Web
+`257e1cc8e0b467d16966433033589111f62f56f0`. It records 1 shipped and 21
+partial non-AppSec rows, 6 open gates, 6 correction items, and 1 rollback item;
+the recorded recommendation is **no-go**. No release or checkbox changed.
+Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/acceptance-release-reconciliation-2026-10-24-current-v4.json`.
+Additive bundle v15 verifies **342** files with zero mismatches, matching
+manifest `sha256:715ed975c83445a1cd2c482136e6e4efd892cbd252868112a166dbc55e029b52`,
+and passed secret scanning.
+
 ## 2026-10-24 · complete Web serial qualification
 
 The full Web serial suite passed **928/928**, with 0 failures, cancellations,

@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current-candidate release reconciliation
+
+The current merged candidate is CLI `8a69dbc5db815336f9b2103176f988d3fb90ff5d`
+plus Web `257e1cc8e0b467d16966433033589111f62f56f0`. The fail-closed
+reconciliation records **1 shipped / 21 partial** non-AppSec rows, 6 open gates,
+6 correction items, and 1 rollback item, with recorded recommendation **no-go**.
+No release or backlog checkbox changed. Score remains **246 checked / 34 open /
+280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v4.json`.
+Bundle v15 verifies 342 files with zero mismatches, matching manifest
+`sha256:715ed975c83445a1cd2c482136e6e4efd892cbd252868112a166dbc55e029b52`,
+and passed secret scanning.
+
 ## 2026-10-24 · complete Web serial qualification
 
 Web PR #283 merged normally at `257e1cc8`, adding the explicit migrated

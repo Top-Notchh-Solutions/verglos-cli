@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-candidate release reconciliation
+
+- **Candidate mapping:** CLI `8a69dbc5db815336f9b2103176f988d3fb90ff5d` and Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`, both merged heads.
+- **Reconciliation mapping:** 1 shipped / 21 partial non-AppSec rows, 6 open
+  gates, 6 correction items, and 1 rollback item; recorded recommendation
+  `no-go`.
+- **Acceptance mapping:** This is current release-state evidence only. It does
+  not publish, deploy, create customer consent, independent review, field
+  evidence, AppSec/Hunt evidence, or final release sign-off; no checkbox
+  changed.
+- **Evidence:** `evidence/acceptance-release-reconciliation-2026-10-24-current-v4.json`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-triple-db-reconciliation-v15.json`
+  verifies 342 files with zero mismatches, matching manifest
+  `sha256:715ed975c83445a1cd2c482136e6e4efd892cbd252868112a166dbc55e029b52`,
+  and passed secret scanning.
+
 ## 2026-10-24 · complete Web serial qualification
 
 - **Source mapping:** Web tested tree `7307ae5`, merged through PR #283 at
