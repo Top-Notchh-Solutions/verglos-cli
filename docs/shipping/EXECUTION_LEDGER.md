@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #288 Production deployment · 2026-10-24
+
+- **Execution:** Vercel Production deployment
+  `dpl_2KSkgFHCFyDTpF5NNdJMkbPf66R1` reached Ready for Web `main` at
+  `557d508`; the migration hook was not requested.
+- **Result:** Read-only Node fetch returned HTTP 200 for six public paths on
+  the exact deployment hostname, `verglos.com`, and `www.verglos.com` (**18/18**).
+- **Acceptance mapping:** Provider/Production runtime evidence only. No live
+  provider installation, customer data, database write, payment, deletion, or
+  acceptance checkbox changed. Score remains **246/34/280**.
+- **Evidence:** `evidence/vercel-production-pr288-scm-atomicity-2026-10-24.md`.
+
 ## SCM installation audit atomicity hardening · 2026-10-24
 
 - **Execution:** Web PR #288 merged normally as
