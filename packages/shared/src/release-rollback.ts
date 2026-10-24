@@ -84,13 +84,13 @@ function validReference(value: unknown): value is ReleaseReference {
  */
 export function decideReleaseRollback(input: ReleaseRollbackRequest): ReleaseRollbackDecision {
   if (!input || typeof input !== "object") return { allowed: false, reason: "current-reference-invalid" };
-  if (!input.approved) return { allowed: false, reason: "approval-required" };
+  if (input.approved !== true) return { allowed: false, reason: "approval-required" };
   if (!validReference(input.current)) return { allowed: false, reason: "current-reference-invalid" };
   if (!validReference(input.target)) return { allowed: false, reason: "target-reference-invalid" };
   if (input.current.kind !== input.target.kind) return { allowed: false, reason: "kind-invalid" };
   if (input.current.identity === input.target.identity && input.current.immutableRef === input.target.immutableRef) return { allowed: false, reason: "same-reference" };
-  if (!input.preserveHistoricalRecords) return { allowed: false, reason: "history-invalidation-requested" };
-  if (!SAFE_TEXT.test(input.reason.trim())) return { allowed: false, reason: "target-reference-invalid" };
+  if (input.preserveHistoricalRecords !== true) return { allowed: false, reason: "history-invalidation-requested" };
+  if (typeof input.reason !== "string" || !SAFE_TEXT.test(input.reason.trim())) return { allowed: false, reason: "target-reference-invalid" };
 
   if (input.current.kind === "signing-identity") {
     if (!input.replacementIdentity || input.replacementIdentity.kind !== "signing-identity" || !validReference(input.replacementIdentity)) {
