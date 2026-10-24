@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
+
+- **Implementation mapping:** CLI update resolution now reads npm metadata,
+  filters prereleases, orders SemVer correctly, and installs the exact stable
+  version rather than a mutable dist-tag.
+- **Production mapping:** The current registry returned stable `1.8.3` while
+  the public `latest` tag pointed to `2.0.0-alpha.1`; this was the defect the
+  implementation prevents.
+- **Contract mapping:** Updater tests **8/8**, typecheck, build, and the full
+  package suite passed. CLI PR #365 merged normally as
+  `d657889d39c3a3090d5f8411a81d7b1adc6d9f2f`.
+- **Boundary mapping:** This is implementation/release-preparation evidence;
+  no checkbox changed. Trusted publication, attestation, provider action,
+  independent review, and final acceptance remain open. No package was
+  published and no files were deleted.
+- **Evidence:** `evidence/dist-002-003-stable-update-channel-2026-10-24.md`.
+
 ## 2026-10-24 · FINAL-WEB-008 current Production route matrix
 
 - **Hosted mapping:** Ready Production deployment

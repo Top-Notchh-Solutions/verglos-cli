@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
+
+- **Decision:** Keep the CLI updater on the stable release channel even when
+  npm's mutable `latest` dist-tag points to a prerelease.
+- **Result:** The updater selects the highest stable version from package
+  metadata and installs that exact version. The observed registry result is
+  `1.8.3`; the public `latest` tag is `2.0.0-alpha.1`. CLI PR #365 merged
+  normally as `d657889d39c3a3090d5f8411a81d7b1adc6d9f2f`; focused tests **8/8**,
+  typecheck, build, and the full package suite passed.
+- **Boundary:** This is implementation/release-preparation evidence, not
+  trusted publication, immutable attestation, provider action, independent
+  review, or final acceptance. DIST-002/DIST-003 remain unchecked; score
+  remains **246/34/280**. No package was published and no files were deleted.
+- **Evidence:** `evidence/dist-002-003-stable-update-channel-2026-10-24.md`.
+
 ## 2026-10-24 · FINAL-WEB-008 current Production route matrix
 
 - **Decision:** Record the current read-only Production route behavior without

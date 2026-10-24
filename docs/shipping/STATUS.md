@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
+
+The CLI updater is now safe against npm's prerelease `latest` tag: it selects
+the newest stable version from metadata and installs that exact version. The
+registry-backed result is `1.8.3`; updater tests **8/8**, typecheck, build,
+and the full package suite passed. CLI PR #365 merged normally as
+`d657889d39c3a3090d5f8411a81d7b1adc6d9f2f`. DIST-002/DIST-003 remain open for
+trusted publication, attestation, provider action, independent review, and
+final acceptance. Score remains **246/34/280 (87.9%)**, split **13 AppSec-
+dependent / 21 non-AppSec**. Evidence:
+`evidence/dist-002-003-stable-update-channel-2026-10-24.md`.
+
 ## 2026-10-24 · FINAL-WEB-008 current Production route matrix
 
 Current Production smoke passed **7/7** public GET routes with HTTP 200; the

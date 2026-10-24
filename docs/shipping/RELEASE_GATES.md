@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
+
+The CLI updater now ignores npm prereleases, selects the highest stable SemVer,
+and installs the exact selected package version instead of `verglos@latest`.
+The live registry result is stable `1.8.3` versus public prerelease
+`2.0.0-alpha.1`. CLI PR #365 merged normally as
+`d657889d39c3a3090d5f8411a81d7b1adc6d9f2f`; focused tests passed **8/8**,
+typecheck/build passed, and the full package suite exited successfully. This
+does not satisfy trusted publication, immutable attestation, provider action,
+independent review, or final release acceptance. No checkbox changed; score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/dist-002-003-stable-update-channel-2026-10-24.md`.
+
 ## 2026-10-24 · FINAL-WEB-008 current Production route matrix
 
 The Ready Production deployment passed a fresh read-only route matrix: **7/7**

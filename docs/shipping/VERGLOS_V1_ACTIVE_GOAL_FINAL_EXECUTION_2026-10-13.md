@@ -1,5 +1,24 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-002/DIST-003 stable update-channel implementation
+
+The CLI updater had a real production safety defect: npm's mutable `latest`
+dist-tag currently points to `2.0.0-alpha.1`, while the newest stable package
+is `1.8.3`. The updater now reads package metadata, selects the highest stable
+SemVer while ignoring prereleases, compares stable/prerelease versions
+correctly, and installs the exact selected version rather than
+`verglos@latest`. CLI PR **#365** merged normally as
+`d657889d39c3a3090d5f8411a81d7b1adc6d9f2f`. Focused updater tests passed
+**8/8**, typecheck and build passed, the full package suite exited
+successfully, and a direct registry-backed check returned `1.8.3`. This is
+real distribution/release-preparation implementation evidence, but DIST-002
+and DIST-003 remain unchecked for trusted publication, immutable attestation,
+provider publication action, independent review, and final release acceptance.
+No package was published, no paid Actions run was allowed to continue, and no
+files were deleted. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-002-003-stable-update-channel-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · FINAL-WEB-008 current Production route matrix
 
 The Ready Production deployment `dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM`, aliased to
