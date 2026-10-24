@@ -1,6 +1,5 @@
 import { constants } from "node:fs";
 import { createHash, randomUUID } from "node:crypto";
-import { createReadStream } from "node:fs";
 import { lstat, mkdir, rename, writeFile, open, unlink } from "node:fs/promises";
 import { join } from "node:path";
 import type { ReleaseRecordManifestDocument } from "./record-manifest.js";
@@ -29,15 +28,32 @@ export async function putRecordMemberFromFile(root: string, path: string, source
   await assertStoreRoot(root, true);
   const temporary = join(root, `.member.${process.pid}.${Date.now()}.tmp`);
   const handle = await open(temporary, "wx", 0o600);
+  let sourceHandle: Awaited<ReturnType<typeof open>> | undefined;
   const hash = createHash("sha256");
   let size = 0;
   try {
-    for await (const chunk of createReadStream(sourcePath)) {
-      const bytes = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
-      size += bytes.byteLength;
+    try {
+      sourceHandle = await open(sourcePath, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
+    } catch {
+      throw new Error("record member source must be a regular file");
+    }
+    const openedSource = await sourceHandle.stat();
+    if (!openedSource.isFile() || openedSource.size > 50_000_000 || !sameFile(source, openedSource)) {
+      throw new Error("record member source must be a regular file");
+    }
+    const chunk = Buffer.allocUnsafe(64 * 1024);
+    while (true) {
+      const { bytesRead } = await sourceHandle.read(chunk, 0, chunk.byteLength, null);
+      if (bytesRead === 0) break;
+      const bytes = chunk.subarray(0, bytesRead);
+      size += bytesRead;
       if (size > 50_000_000) throw new Error("record member exceeds 50 MB");
       hash.update(bytes);
       await handle.write(bytes);
+    }
+    const finalSource = await sourceHandle.stat();
+    if (!finalSource.isFile() || finalSource.size !== openedSource.size || size !== finalSource.size || !sameFile(openedSource, finalSource)) {
+      throw new Error("record member source changed during read");
     }
     await handle.close();
     const digest = `sha256:${hash.digest("hex")}`;
@@ -47,6 +63,8 @@ export async function putRecordMemberFromFile(root: string, path: string, source
     await handle.close().catch(() => undefined);
     await unlink(temporary).catch(() => undefined);
     throw error;
+  } finally {
+    await sourceHandle?.close().catch(() => undefined);
   }
 }
 
