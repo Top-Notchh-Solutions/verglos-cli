@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-009 current reconciler regression
+
+- **Decision:** Record the current fail-closed release reconciliation, freeze,
+  and final-regression contract suite.
+- **Result:** **24/24** tests passed with zero failures, skips, or cancellations;
+  both reconciliation implementation scripts passed syntax checks.
+- **Boundary:** The contracts preserve `no-go` while required gates or
+  correction/rollback evidence remain open. No hosted/provider/customer run,
+  independent review, final release decision, or checkbox change.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-009-current-reconciler-regression-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v34.json` verifies 367 files with zero mismatches, matching manifest `sha256:5e687a359e0c74dd8c1b935860c5f93ba7cc98981aefd95359846cf8d5f65e72`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-008 current commercial validator regression
 
 - **Decision:** Record the current commercial-evidence validator and

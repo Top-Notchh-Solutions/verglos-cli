@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-009 current reconciler regression
+
+The current reconciliation, candidate-input, freeze, and final-regression
+contract suite passed **24/24** with zero failures, skips, or cancellations;
+both implementation scripts passed syntax checks. This advances fail-closed
+release-state implementation only; actual hosted/provider/customer acceptance,
+independent review, and final release remain open, so `ACCEPT-009` remains
+unchecked. Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent /
+21 non-AppSec**. Evidence:
+`evidence/accept-009-current-reconciler-regression-2026-10-24.md`.
+Bundle v34 verifies **367** files with zero mismatches, matching manifest
+`sha256:5e687a359e0c74dd8c1b935860c5f93ba7cc98981aefd95359846cf8d5f65e72`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-008 current commercial validator regression
 
 The commercial-evidence validator suite passed **9/9** with zero failures,

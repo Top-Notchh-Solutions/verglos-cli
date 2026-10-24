@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-009 current reconciler regression
+
+- **Implementation mapping:** Reconciliation, candidate-input, freeze, and
+  final-regression contracts.
+- **Contract mapping:** **24/24** tests passed with zero failures, skips, or
+  cancellations; both implementation scripts passed syntax checks.
+- **Boundary mapping:** Fail-closed `no-go` behavior remains active while
+  required gates, correction/rollback work, and acceptance evidence are open.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-009-current-reconciler-regression-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v34.json` verifies 367 files with zero mismatches, matching manifest `sha256:5e687a359e0c74dd8c1b935860c5f93ba7cc98981aefd95359846cf8d5f65e72`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-008 current commercial validator regression
 
 - **Implementation mapping:** Commercial-evidence validator and provenance

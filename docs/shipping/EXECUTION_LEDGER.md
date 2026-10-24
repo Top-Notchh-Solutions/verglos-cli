@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-009 current reconciler regression · 2026-10-24
+
+- **Execution:** Ran the reconciliation, candidate-input, freeze, and final
+  regression contract suites and checked both implementation scripts.
+- **Result:** **24/24** tests passed with zero failures, skips, or
+  cancellations; syntax checks exited **0**.
+- **Disposition:** Fail-closed release-state evidence only. No actual
+  hosted/provider/customer acceptance or final release decision occurred; no
+  checkbox was upgraded. Score remains **246/34/280**.
+- **Evidence:** `evidence/accept-009-current-reconciler-regression-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v34.json` verifies 367 files with zero mismatches, matching manifest `sha256:5e687a359e0c74dd8c1b935860c5f93ba7cc98981aefd95359846cf8d5f65e72`, and passed secret scanning.
+
 ## ACCEPT-008 current commercial validator regression · 2026-10-24
 
 - **Execution:** Ran the commercial-evidence validator regression suite and
