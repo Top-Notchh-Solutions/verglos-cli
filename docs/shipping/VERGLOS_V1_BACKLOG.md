@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-008 current-head rerun
+
+The current commercial-validator syntax check passed and its suite passed
+**9/9** with zero failures, skips, cancellations, or todos. It exercises all
+seven evidence kinds, exact catalog/allowance binding, provenance classes,
+approval windows, digest tamper rejection, missing evidence, non-overwrite, and
+secret boundaries. It retains `acceptanceStatus: open`; no actual commercial
+event or independent/final acceptance was created. ACCEPT-008 remains
+unchecked. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-008-current-head-rerun-2026-10-24T0735Z.md`.
+Bundle v45 verifies **379** files with **0** mismatches, matching manifest
+`sha256:d29bbe45a676fa471eea9545b07f76c162abcc91df50fd5331b253de7919689b`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-006 current-head rerun
 
 The current scorer syntax check passed, the comprehension suite passed **11/11**

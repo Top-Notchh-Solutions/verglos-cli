@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-008 current-head rerun
+
+- **Implementation mapping:** Current commercial evidence validator at CLI
+  commit `493823c6`.
+- **Contract mapping:** Syntax passed; **9/9** tests passed across seven kinds,
+  catalog binding, provenance, approval, tamper, and secret boundaries.
+- **Boundary mapping:** `acceptanceStatus` remains open; no commercial or
+  independent acceptance was inferred.
+- **Evidence:** `evidence/accept-008-current-head-rerun-2026-10-24T0735Z.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v45.json` verifies 379 files with zero mismatches, matching manifest `sha256:d29bbe45a676fa471eea9545b07f76c162abcc91df50fd5331b253de7919689b`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-006 current-head rerun
 
 - **Implementation mapping:** Current comprehension scorer and study-protocol

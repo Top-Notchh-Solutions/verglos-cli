@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-008 current-head rerun
+
+The commercial-validator syntax check passed and the suite passed **9/9**;
+`acceptanceStatus` remains `open`. No actual commercial event or independent
+acceptance was created. ACCEPT-008 remains unchecked. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-008-current-head-rerun-2026-10-24T0735Z.md`.
+Bundle v45 verifies **379** files with zero mismatches, matching manifest
+`sha256:d29bbe45a676fa471eea9545b07f76c162abcc91df50fd5331b253de7919689b`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-006 current-head rerun
 
 The scorer syntax check passed, the comprehension suite passed **11/11**, and

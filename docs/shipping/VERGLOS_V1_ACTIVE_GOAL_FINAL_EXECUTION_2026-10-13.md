@@ -1,5 +1,19 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24T07:35Z · ACCEPT-008 current-head rerun
+
+The current commercial-validator syntax check passed and the focused suite
+passed **9/9** with zero failures/skips/cancellations/todos. All seven evidence
+kinds, exact catalog/allowance binding, provenance, approval windows, tamper
+rejection, and secret boundaries remain covered; `acceptanceStatus: open`.
+No actual commercial event, independent review, or final acceptance was
+created. ACCEPT-008 remains unchecked. Score remains **246 checked / 34 open /
+280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-008-current-head-rerun-2026-10-24T0735Z.md`.
+Bundle v45 verifies **379** bounded files with **0** mismatches, matching
+manifest `sha256:d29bbe45a676fa471eea9545b07f76c162abcc91df50fd5331b253de7919689b`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24T07:34Z · ACCEPT-006 current-head rerun
 
 The current scorer syntax check passed, the comprehension suite passed **11/11**,
