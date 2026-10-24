@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #293 organization write SQLSTATE hardening · 2026-10-24
+
+- **Execution:** Web PR #293 merged normally as
+  `a4a048293501dedc3652aeb82bc4fc40e2e95694` from `ba2bbac`; ten
+  organization write routes now classify duplicate writes only from PostgreSQL
+  SQLSTATE `23505`.
+- **Result:** The ten-route contract **1/1**, helper/policy regressions
+  **20/20**, Web typecheck, and diff checks passed. Vercel deployment
+  `dpl_F16xyZxrYkf8AiSLcwAxbSjG8ZyS` reached `READY` / `production`;
+  `verglos.com` was **6/6 HTTP 200**, `www` was **6/6 HTTP 308**, and the
+  protected deployment hostname was **302** without a bypass.
+- **Hosted boundary:** GitHub-hosted checks failed before repository steps
+  because the Actions budget/runners are blocked; no rerun was started.
+- **Acceptance mapping:** Production organization-write implementation and
+  provider/Production runtime evidence only. No human/field, independent/
+  AppSec, customer/recipient, or final-release evidence was created; no
+  checkbox changed. Score remains **246/34/280**. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/organization-unique-conflict-sqlstate-pr293-2026-10-24.md`.
+
 ## Web PR #292 policy-exception SQLSTATE hardening · 2026-10-24
 
 - **Execution:** Web PR #292 merged normally as
