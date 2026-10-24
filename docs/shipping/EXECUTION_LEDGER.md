@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## Production inspection bundle verification · 2026-10-24
+
+- **Receipt:** The additive private bundle contains 310 bounded evidence files,
+  verifies with 0 mismatches, matches manifest
+  `sha256:688ea7daf7f02c3cbfa9ad6ab6050e4c5612b439e2b92266434da075187ef33a`,
+  and passes secret scanning.
+- **Boundary:** Evidence integrity and provider-state observation only. No
+  human/field, customer/recipient, independent-review, deletion, AppSec/Hunt,
+  or final-release gate was inferred; score remains 245/35/280.
+- **Evidence:** `evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
+
+## Read-only Vercel Production inspection · 2026-10-24
+
+- **Provider:** Deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` reports
+  `target: production` and `readyState: READY`, with the expected aliases and
+  Next.js build configuration.
+- **Boundary:** Provider-state observation only. No provider mutation,
+  database, payment, webhook, customer, deletion, npm, tag, release, or
+  Actions operation occurred. FINAL-WEB-007/008 remain open for their other
+  gates; score remains 245/35/280.
+- **Evidence:** `evidence/vercel-production-inspection-pr282-2026-10-24.md`.
+
 ## Merged Web production smoke · 2026-10-24
 
 - **Provider:** Vercel deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` reached

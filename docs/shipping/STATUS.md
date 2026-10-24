@@ -1,5 +1,25 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · production inspection bundle verification
+
+The additive private bundle verifies **310** bounded evidence files with **0**
+mismatches, matching manifest
+`sha256:688ea7daf7f02c3cbfa9ad6ab6050e4c5612b439e2b92266434da075187ef33a`;
+secret scanning passed. This records evidence integrity and provider state only.
+No checkbox changed; score remains **245 checked / 35 open / 280 total
+(87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**.
+Evidence: `evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
+
+## 2026-10-24 · read-only Vercel Production inspection
+
+Vercel inspection confirms deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` is
+still `target: production` and `READY`, with the expected aliases and Next.js
+build configuration. This adds provider-state evidence only; no checkbox
+changed and score remains **245 checked / 35 open / 280 total (87.5%)**, split
+**13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`evidence/vercel-production-inspection-pr282-2026-10-24.md`.
+
+
 ## 2026-10-24 · merged Web production smoke
 
 Vercel deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` is READY and serves the

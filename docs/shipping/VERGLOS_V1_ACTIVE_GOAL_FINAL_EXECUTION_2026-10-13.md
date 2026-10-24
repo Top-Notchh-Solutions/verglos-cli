@@ -1,5 +1,34 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · production inspection bundle
+
+The additive acceptance bundle now contains **310** bounded evidence files;
+verification found **0** byte mismatches, the manifest matches
+`sha256:688ea7daf7f02c3cbfa9ad6ab6050e4c5612b439e2b92266434da075187ef33a`,
+and secret scanning passed. It records the read-only Vercel Production
+inspection without converting provider state into customer, independent,
+field, deletion, AppSec/Hunt, or final-release evidence. No checkbox changed;
+score remains **245 checked / 35 open / 280 total (87.5%)**, split **13
+AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
+
+## Latest continuation result · 2026-10-24 · read-only Vercel Production inspection
+
+The current merged Web deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` was
+inspected through the Vercel provider API. It is still `target: production`,
+`readyState: READY`, serves the five returned production aliases, and reports
+the expected Next.js build (`pnpm config:check && pnpm build`). This confirms
+provider state; the separate nine-route HTTP sweep remains the response-level
+receipt.
+
+No deployment, alias, environment, database, payment, webhook, customer,
+deletion, npm, tag, release, or GitHub Actions operation was performed. This
+advances provider evidence for `FINAL-WEB-007/008` only. Human/field,
+recipient/customer, independent-review, AppSec/Hunt, and final-release gates
+remain open; no checkbox changed. Score remains **245 checked / 35 open / 280
+total (87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/vercel-production-inspection-pr282-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · merged Web production smoke
 
 After Web PR #282 merged, Vercel production deployment

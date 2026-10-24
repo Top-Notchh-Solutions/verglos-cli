@@ -1,5 +1,30 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record production inspection bundle verification
+
+- **Decision:** Accept the additive evidence bundle as the current private
+  reproducibility and provider-state integrity receipt.
+- **Result:** 310 files verified, 0 mismatches, manifest
+  `sha256:688ea7daf7f02c3cbfa9ad6ab6050e4c5612b439e2b92266434da075187ef33a`,
+  secret scan passed.
+- **Disposition:** Keep all remaining human/field, customer/recipient,
+  independent-review, deletion, AppSec/Hunt, and final-release gates as they
+  are; no checkbox changed and score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/acceptance-evidence-bundle-2026-10-24-production-inspection-v1.json`.
+
+## 2026-10-24 · record read-only Vercel Production inspection
+
+- **Decision:** Accept the provider inspection as current Production-state
+  evidence for the merged Web candidate.
+- **Result:** Deployment `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` is
+  `target: production`, `READY`, and exposes the expected aliases/build
+  configuration.
+- **Disposition:** Advance FINAL-WEB-007/008 provider evidence only. Keep
+  human/field, customer/recipient, independent-review, AppSec/Hunt, and final
+  release gates open; no checkbox changed and score remains **245/35/280
+  (87.5%)**.
+- **Evidence:** `evidence/vercel-production-inspection-pr282-2026-10-24.md`.
+
 ## 2026-10-24 · record merged Web production smoke
 
 - **Decision:** Accept the current READY Vercel deployment and nine-route
