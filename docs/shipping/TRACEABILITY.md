@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · QUAL-WEB-005 current local isolated recheck
+
+- **Implementation mapping:** Privacy page, authenticated account-deletion and
+  customer-held routes, versioned inventory, holds, worker, and digest proof.
+- **Contract mapping:** Focused local suite **60/60** passed with zero
+  failures, skips, cancellations, or todos; deletion-specific tables were
+  empty after the run.
+- **Boundary mapping:** The isolated fixture retained one pre-existing user
+  row; no Production, customer-held, external-customer, independent-review,
+  or final-release evidence was inferred. No checkbox changed.
+- **Integrity mapping:** Bundle v58 verifies **392** files with zero
+  mismatches, matching manifest
+  `sha256:2bfdc664c8185449e9906fdbc65343d4ddfece39f74cf624851936ae076c2a71`,
+  and passed secret scanning.
+- **Evidence:** `evidence/qual-web-005-current-local-isolated-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/DIST-003 current license validation
 
 - **Implementation mapping:** Current bounded license inventory and external

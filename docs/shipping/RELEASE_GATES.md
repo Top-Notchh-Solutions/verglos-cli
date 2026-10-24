@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-005 current local isolated recheck
+
+The focused privacy/account-deletion/customer-held suite passed **60/60** with
+zero failures, skips, cancellations, or todos against disposable local
+PostgreSQL. Deletion-specific tables were empty after the run; one
+pre-existing fixture user row remained. This does not satisfy Production,
+customer-held, independent-review, or final-release acceptance. No checkbox
+changed; score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Bundle v58 verifies **392** files with zero mismatches, matching
+manifest `sha256:2bfdc664c8185449e9906fdbc65343d4ddfece39f74cf624851936ae076c2a71`,
+and passed secret scanning. Evidence:
+`evidence/qual-web-005-current-local-isolated-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/DIST-003 current license validation
 
 Current license tests passed **6/6**, external license records validated **8**,

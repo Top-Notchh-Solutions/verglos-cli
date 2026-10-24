@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · QUAL-WEB-005 current local isolated recheck
+
+- **Decision:** Record the stronger current local privacy/deletion qualification
+  result without upgrading the external acceptance gate.
+- **Result:** Focused suite **60/60** passed with zero failures, skips,
+  cancellations, or todos. Deletion-specific tables were empty after the run;
+  one pre-existing fixture user row remained.
+- **Boundary:** No Production, customer-held, external-customer, independent,
+  or final-release operation occurred. Keep `QUAL-WEB-005` unchecked; no data
+  outside the disposable fixture was deleted or overwritten.
+- **Integrity:** Bundle v58 contains **392** files, zero mismatches, manifest
+  `sha256:2bfdc664c8185449e9906fdbc65343d4ddfece39f74cf624851936ae076c2a71`,
+  and passed secret scanning. Score remains **246/34/280 (87.9%)**.
+- **Evidence:** `evidence/qual-web-005-current-local-isolated-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-002/DIST-003 current license validation
 
 - **Decision:** Record the current license and external-record validators as
