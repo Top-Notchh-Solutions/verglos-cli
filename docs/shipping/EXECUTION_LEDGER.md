@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## Vercel Production public-surface recheck · 2026-10-24T07:17Z
+
+- **Execution:** Inspected the Vercel deployment and ran bounded read-only
+  HTTPS checks against six public routes plus the POST-only QR route.
+- **Result:** Deployment `READY`; six routes returned 200 and QR creation GET
+  returned 405. Body digests and byte counts are retained in the evidence.
+- **Disposition:** Hosted availability evidence only; no state-changing
+  provider, payment, database, customer, deployment, or release action. Score
+  remains **246/34/280** and no checkbox was upgraded.
+- **Evidence:** `evidence/vercel-production-public-surface-recheck-2026-10-24T0717Z.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v37.json` verifies 370 files with zero mismatches, matching manifest `sha256:cacc79df6aa1f53e285548e2ef0bc0bc578eeea3e4ee76466fec9b23bc4eb9f7`, and passed secret scanning.
+
 ## ACCEPT-011/012/014 current contract regression · 2026-10-24
 
 - **Execution:** Ran bounded JSON, public-OSS triage, final-regression,

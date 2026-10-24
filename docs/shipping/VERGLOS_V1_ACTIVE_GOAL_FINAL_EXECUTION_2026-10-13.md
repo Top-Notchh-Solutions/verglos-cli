@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Vercel Production public-surface recheck
+
+Vercel CLI inspected `verglos.com` as `READY`. Read-only HTTPS checks returned
+200 for `/`, `/proof`, `/checkout`, `/llms.txt`, `/robots.txt`, and
+`/sitemap.xml`; the POST-only `/api/razorpay/create-qr` route correctly returned
+GET 405. No deployment, environment, database, payment, customer, or provider
+write occurred. This strengthens hosted evidence for the final Web and
+provider-bound rows but does not create human/field-CWV, authenticated,
+independent-review, payment-lifecycle, or final-release evidence. Score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/vercel-production-public-surface-recheck-2026-10-24T0717Z.md`.
+Bundle v37 verifies **370** bounded files with **0** mismatches, matching
+manifest `sha256:cacc79df6aa1f53e285548e2ef0bc0bc578eeea3e4ee76466fec9b23bc4eb9f7`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-011/012/014 contract regression
 
 The bounded JSON, public-OSS triage, final-regression, evidence-bundle, and

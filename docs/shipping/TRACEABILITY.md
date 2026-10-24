@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Vercel Production public-surface recheck
+
+- **Hosted mapping:** Vercel deployment inspection plus public route response
+  and byte-digest checks.
+- **Contract mapping:** Six public routes returned 200; the POST-only QR
+  creation route rejected GET with 405.
+- **Boundary mapping:** This is read-only availability evidence. Authenticated
+  browser, human/field-CWV, provider payment, independent review, and final
+  release gates remain open.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/vercel-production-public-surface-recheck-2026-10-24T0717Z.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v37.json` verifies 370 files with zero mismatches, matching manifest `sha256:cacc79df6aa1f53e285548e2ef0bc0bc578eeea3e4ee76466fec9b23bc4eb9f7`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-011/012/014 contract regression
 
 - **Implementation mapping:** Bounded corpus verification, public-OSS triage,
