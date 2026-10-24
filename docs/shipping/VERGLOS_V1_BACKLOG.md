@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current-candidate reconciliation v6
+
+The current release-gate input is bound to CLI `f6facdc5` / Web `257e1cc8` and
+records **1 shipped / 21 partial / 0 planned** rows, 6 correction items, and 1
+rollback item. Provider lifecycle, independent review, authenticated browser,
+field CWV, account deletion, and final release remain open; the recorded
+recommendation is fail-closed **no-go**. No checkbox changed. Score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v6.json`.
+Bundle v21 verifies **355** bounded files with **0** mismatches, matching
+manifest `sha256:e022b2da062d399108818b6f2bcf121af2686831c467f231a32c94bfbc89f706`,
+and passed secret scanning.
+
 ## 2026-10-24 · backlog state reconciliation
 
 The main row summaries now match current evidence: `QUAL-WEB-005` records the
