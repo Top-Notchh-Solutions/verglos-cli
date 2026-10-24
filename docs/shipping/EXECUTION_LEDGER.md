@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #277 Production receipt · 2026-10-24
+
+- **Deployment:** Vercel `dpl_2aACCsbfmDGYQQP9LsaxJUmeN8qV` is READY for merged
+  Web PR #277 commit `e7a8bbaa` and aliases `verglos.com`, `www.verglos.com`,
+  and `verglos-web.vercel.app`.
+- **Verification:** Six public read-only routes returned HTTP **200**. The
+  Preview-only dashboard state seam is disabled by Production environment
+  boundary.
+- **Disposition:** Record provider/Production runtime evidence only; no
+  checkbox changed and score remains **245/35/280 (87.5%)**. No authenticated
+  dashboard request, database write, payment, customer repository, publication,
+  or deletion occurred.
+- **Evidence:** `evidence/vercel-production-pr277-transient-capture-2026-10-24.md`.
+
 ## Dashboard transient-state capture · 2026-10-24
 
 - **Implementation:** Web PR #277 merged normally as `e7a8bbaa` from
@@ -16,9 +30,9 @@
   Actions, Production write, payment, customer repository, publication, or
   deletion occurred.
 - **Evidence:** `evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
-- **Bundle:** Additive v40 contains **270** hashed evidence files, passes secret
+- **Bundle:** Additive v41 contains **271** hashed evidence files, passes secret
   scanning, and matches manifest
-  `sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+  `sha256:cfe253851ca8ae13b4ae9476bd1efc7db32cf352b5a141153913b0e127f5c4f0`.
 
 ## Web PR #276 Production receipt · 2026-10-24
 
