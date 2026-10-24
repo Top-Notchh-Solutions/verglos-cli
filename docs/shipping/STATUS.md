@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · QUAL-WEB-006 current-head dashboard qualification contracts
+
+The dashboard qualification contracts passed **4/4** with zero failures,
+skips, or cancellations, and Web typecheck exited **0**. This advances local
+dashboard implementation evidence only; authenticated browser capture, human
+screen-reader/field-CWV evidence, independent review, and final acceptance
+remain open, so `QUAL-WEB-006` remains unchecked. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/qual-web-006-current-head-dashboard-contracts-2026-10-24.md`.
+Bundle v30 verifies **363** files with zero mismatches, matching manifest
+`sha256:83f1cfc4fbac06ad959419bf3ed2e08ad4d85a717eafed528ce394671b42bea6`,
+and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
 
 The current Web privacy/deletion suite passed **25/25** against the disposable

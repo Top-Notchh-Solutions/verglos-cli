@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-006 current-head dashboard qualification contracts
+
+The dashboard qualification contracts passed **4/4** with zero failures,
+skips, or cancellations, and Web typecheck exited **0**. The contracts cover
+complete authenticated-surface declaration, ready/loading/error/large-dataset
+coverage, fail-closed missing-state handling, malformed metadata, and bounded
+capture-file boundaries. This is source-level evidence only; authenticated
+browser capture, human screen-reader/field-CWV evidence, independent review,
+and final acceptance remain open. No checkbox changed; score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/qual-web-006-current-head-dashboard-contracts-2026-10-24.md`.
+Bundle v30 verifies **363** files with zero mismatches, matching manifest
+`sha256:83f1cfc4fbac06ad959419bf3ed2e08ad4d85a717eafed528ce394671b42bea6`,
+and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
 
 The isolated privacy/deletion suite passed **25/25** with zero failures,

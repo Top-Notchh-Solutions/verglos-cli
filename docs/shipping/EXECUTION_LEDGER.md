@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-006 current-head dashboard qualification contracts · 2026-10-24
+
+- **Execution:** Ran the dashboard qualification contract suite and Web
+  typecheck against the current merged source.
+- **Result:** **4/4** dashboard contracts passed with zero failures, skips, or
+  cancellations; typecheck exited **0**.
+- **Source:** Web merged `257e1cc8e0b467d16966433033589111f62f56f0`, tested
+  head `7307ae5e0cea18e6d0803aa179fafcc2a0ce36f8`.
+- **Disposition:** Source-level evidence only. No authenticated browser,
+  human/field-CWV, independent-review, or final-acceptance gate was created;
+  no checkbox was upgraded. Score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-006-current-head-dashboard-contracts-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v30.json` verifies 363 files with zero mismatches, matching manifest `sha256:83f1cfc4fbac06ad959419bf3ed2e08ad4d85a717eafed528ce394671b42bea6`, and passed secret scanning.
+
 ## QUAL-WEB-005 current-head privacy/deletion full suite · 2026-10-24
 
 - **Execution:** Ran the privacy page, route contract/integration, customer-
