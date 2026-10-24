@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## DIST-002/DIST-003 current license validation · 2026-10-24
+
+- **Execution:** Ran the current license-inventory contract suite, external
+  license-record validator, and inventory check from the exact CLI worktree.
+- **Result:** License tests **6/6** passed; **8** external records validated;
+  **254** lockfile package IDs, **250** package entries, and **0** unresolved
+  review blockers.
+- **Acceptance mapping:** This advances only the code-side/release-preparation
+  substrate. Keep DIST-002/DIST-003 open for trusted/protected publication,
+  immutable attestation, provider/Production action, independent review, and
+  final release acceptance. No external write or deletion occurred.
+- **Integrity:** Bundle v57 verifies **391** files with zero mismatches,
+  manifest `sha256:387dedb6a694c869f34997049b81a22f825fdf744b87710223a48ec7135899de`,
+  and passed secret scanning.
+- **Evidence:** `evidence/dist-002-003-current-license-validation-2026-10-24.md`.
+
 ## ACCEPT-006 current protocol recheck · 2026-10-24
 
 - **Execution:** Ran scorer/protocol syntax checks, the comprehension scorer

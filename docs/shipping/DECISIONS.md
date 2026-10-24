@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-002/DIST-003 current license validation
+
+- **Decision:** Record the current license and external-record validators as
+  additive release-preparation evidence.
+- **Result:** License tests **6/6** passed; **8** external license records
+  validated; inventory reported **254** lockfile package IDs, **250** package
+  entries, and **0** unresolved review blockers.
+- **Boundary:** Do not upgrade either checkbox. No trusted publication,
+  immutable attestation, provider/Production action, independent review, or
+  final release acceptance occurred. Nothing was deleted.
+- **Integrity:** Bundle v57 contains **391** files, has zero mismatches,
+  manifest `sha256:387dedb6a694c869f34997049b81a22f825fdf744b87710223a48ec7135899de`,
+  and passed secret scanning. Score remains **246/34/280 (87.9%)**.
+- **Evidence:** `evidence/dist-002-003-current-license-validation-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-006 current protocol recheck
 
 - **Decision:** Record current scorer/protocol integrity without upgrading the

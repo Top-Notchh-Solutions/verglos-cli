@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-002/DIST-003 current license validation
+
+- **Implementation mapping:** Current bounded license inventory and external
+  license-record validation.
+- **Contract mapping:** License tests **6/6** passed; **8** external records
+  validated; inventory contained **254** lockfile package IDs and **250**
+  package entries with **0** unresolved review blockers.
+- **Boundary mapping:** Local license evidence does not imply trusted
+  publication, immutable attestation, provider/Production execution,
+  independent review, or final release acceptance. No checkbox changed.
+- **Integrity mapping:** Bundle v57 verifies **391** files with zero
+  mismatches, matching manifest
+  `sha256:387dedb6a694c869f34997049b81a22f825fdf744b87710223a48ec7135899de`,
+  and passed secret scanning.
+- **Evidence:** `evidence/dist-002-003-current-license-validation-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-006 current protocol recheck
 
 - **Implementation mapping:** Comprehension scorer, rubric digest, provenance,
