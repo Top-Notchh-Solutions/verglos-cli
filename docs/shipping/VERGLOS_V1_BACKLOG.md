@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · source-bound Production smoke
+
+The current Vercel Production deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc`
+is `READY`, aliased to `verglos.com`, and Vercel metadata binds it to merged
+Web `257e1cc8e0b467d16966433033589111f62f56f0`. Read-only GET checks for `/`,
+`/robots.txt`, `/sitemap.xml`, `/llms.txt`, and `/proof` all returned HTTP 200.
+This strengthens hosted source/availability evidence for FINAL-WEB-007/008 and
+related non-AppSec rows, but does not close a row or create human/field-CWV,
+customer/recipient, provider-publication, independent-review, AppSec/Hunt, or
+final-release evidence. No checkbox changed. Score remains **246 checked / 34
+open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `docs/shipping/evidence/vercel-production-source-bound-smoke-2026-10-24T0624Z.md`.
+Bundle v19 verifies **351** bounded files with **0** mismatches, matching
+manifest `sha256:e41d13f4d945d1ae520d736d332d1e6914b855c81150c7b77a26889ae8374831`,
+and passed secret scanning.
+
 ## 2026-10-24 · current-head corpus and final regression
 
 The current merged CLI `f6facdc5` verified 8/8 exact-commit public-OSS

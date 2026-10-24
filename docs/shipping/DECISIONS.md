@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record source-bound Production smoke
+
+- **Decision:** Record the current Vercel Production surface with its exact
+  merged Web source binding, using read-only checks only.
+- **Result:** Deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc` is `READY`; the
+  five public routes returned HTTP 200 and metadata binds the deployment to
+  Web `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Boundary:** No deployment, migration, payment, customer, provider,
+  authenticated state, acceptance, or release state changed.
+- **Score:** 246/34/280; no checkbox changed.
+- **Evidence:** `evidence/vercel-production-source-bound-smoke-2026-10-24T0624Z.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v19.json`
+  verifies 351 files with zero mismatches, matching manifest
+  `sha256:e41d13f4d945d1ae520d736d332d1e6914b855c81150c7b77a26889ae8374831`,
+  and passed secret scanning.
+
 ## 2026-10-24 · record current-head corpus and final regression
 
 - **Decision:** Accept the current-head exact-commit corpus and complete
