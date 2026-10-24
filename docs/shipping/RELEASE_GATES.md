@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-006 current-head rerun
+
+The current scorer syntax check and comprehension suite passed **11/11**; the
+protocol validator retained `participantRun: open` and `huntAdjudication:
+open`. This does not satisfy participant, independent scoring, or final
+acceptance evidence. No checkbox changed; score remains **246/34/280 (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-006-current-head-rerun-2026-10-24T0734Z.md`.
+Bundle v44 verifies **378** files with zero mismatches, matching manifest
+`sha256:37635bfbc8a98c42478aed4f626d26f0e2c5e05184139b0a117338ec3ff1c156`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-003 current bundle v42 verification
 
 The bundle verifier contract suite passed **4/4** and current bundle v42

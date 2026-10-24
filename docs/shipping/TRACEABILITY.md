@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-006 current-head rerun
+
+- **Implementation mapping:** Current comprehension scorer and study-protocol
+  validator at CLI commit `58ff1984`.
+- **Contract mapping:** Syntax passed; **11/11** scorer tests passed; protocol
+  state remained participant and Hunt open.
+- **Boundary mapping:** No participant or independent acceptance state was
+  inferred.
+- **Evidence:** `evidence/accept-006-current-head-rerun-2026-10-24T0734Z.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v44.json` verifies 378 files with zero mismatches, matching manifest `sha256:37635bfbc8a98c42478aed4f626d26f0e2c5e05184139b0a117338ec3ff1c156`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-003 current bundle v42 verification
 
 - **Implementation mapping:** Bundle builder/verifier, sorted manifest, bounded

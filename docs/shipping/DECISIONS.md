@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-006 current-head rerun
+
+- **Decision:** Record the current scorer/protocol result without upgrading the
+  participant gate.
+- **Result:** Syntax passed; scorer suite **11/11** passed; protocol state
+  remained `participantRun: open` and `huntAdjudication: open`.
+- **Boundary:** No participant, answer data, independent scoring review, or
+  final acceptance occurred. ACCEPT-006 remains unchecked; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/accept-006-current-head-rerun-2026-10-24T0734Z.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v44.json` verifies 378 files with zero mismatches, matching manifest `sha256:37635bfbc8a98c42478aed4f626d26f0e2c5e05184139b0a117338ec3ff1c156`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-003 current bundle v42 verification
 
 - **Decision:** Record the current bundle’s exact verification without treating
