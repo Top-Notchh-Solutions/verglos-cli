@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-003 record-store read hardening
+
+The shared content-addressed record store now reads members through a stable
+opened regular-file handle, uses `O_NOFOLLOW` where available, and verifies
+file identity and size before and after the read while preserving the 50 MB
+bound and digest check. PR **#373** merged normally as
+`e68685db110bef82d86c1c4f058c869e233d413f`. The shared package suite,
+record-store symlink coverage, typecheck, and build passed. This is real
+record-integrity implementation progress supporting ACCEPT-003, but it does
+not create provider/hosted acceptance, independent review, customer or
+recipient acceptance, or final release sign-off. No paid Actions run or
+external state change occurred. Score remains **246 checked / 34 open / 280
+total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-003-record-store-read-hardening-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · DIST-002/003 registry SemVer hardening
 
 The CLI stable update channel now rejects unsafe npm version metadata: numeric
