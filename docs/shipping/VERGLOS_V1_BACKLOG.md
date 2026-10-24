@@ -7023,6 +7023,15 @@ implementation-first queue entry is `ACCEPT-014`. Evidence:
   36 open / 280 total (87.1%)**. Evidence:
   `docs/shipping/evidence/accept-013-correction-time-boundary-2026-10-23.md`.
 - [ ] **ACCEPT-014** · final regression corpus and go/no-go evidence · deps: ACCEPT-013, GITHUB-WEB-004, PLAN-WEB-015 · Re-run the frozen corpus across plan/user/tenant scenarios, compare report and performance deltas, reconcile truth/risk/gates, and issue a dated release recommendation. Commit(s): private `e20c5ca9`, `1391acf4`, `5478f8a3`, `8d96304b` implement and harden the exact-candidate-bound final regression contract. Focused contract tests pass **4/4**. Evidence: `docs/shipping/evidence/accept-014-final-regression-contract-2026-10-23.md`. Row remains open for the actual frozen-corpus scenario run, dependent correction/provider gates, and final decision.
+**ACCEPT-014 clean-corpus matrix addendum (2026-10-24; not a checkbox):**
+The v5 rerun used clean private copies of the verified exact-commit control
+reports, removing generated-fixture contamination from v4. It verifies
+**400/400** fixture×plan×role×tenant keys, **0** failed runs, **0** finding
+regressions, **0** performance regressions, and **0 ms** aggregate delta. The
+validator remains `no-go` for the five open truth/risk/correction/provider/
+final-release gates. Keep the row unchecked for those gates and final
+acceptance. Evidence:
+`docs/shipping/evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`.
 **ACCEPT-014 matrix implementation addendum (2026-10-24; not a checkbox):** Web PR #282 merged normally at `cb266b83406bbfffbd5ab02189556e60973a63a6` and emits a digest-bound **50-cell** product-contract plan/role/tenant matrix; targeted verification passed **31/31** and typecheck passed. Private regression now requires **400** fixture cross-product keys and the v3 run reports **388 missing** after verifying the Web receipt. Keep the row unchecked for actual full corpus scenario execution, correction/provider gates, independent review, and final decision. Evidence: `docs/shipping/evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.md`, `docs/shipping/evidence/accept-014-final-regression-matrix-contract-v2-2026-10-24.md`.
 - **ACCEPT-014 Web-candidate binding addendum (2026-10-23):** Private
   `1391acf4` requires every regression scenario to carry the exact candidate
