@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Vercel Production public-surface recheck
+
+The Vercel deployment is `READY`; read-only checks returned 200 for the six
+public routes and 405 for GET against the POST-only QR creation route. No
+state-changing provider, payment, database, customer, or deployment action
+occurred. Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent /
+21 non-AppSec**. Evidence:
+`evidence/vercel-production-public-surface-recheck-2026-10-24T0717Z.md`.
+Bundle v37 verifies **370** files with zero mismatches, matching manifest
+`sha256:cacc79df6aa1f53e285548e2ef0bc0bc578eeea3e4ee76466fec9b23bc4eb9f7`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-011/012/014 contract regression
 
 The current bounded corpus, triage, final-regression, bundle, and study

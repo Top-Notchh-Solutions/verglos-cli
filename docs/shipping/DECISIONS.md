@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · Vercel Production public-surface recheck
+
+- **Decision:** Record the current read-only hosted production surface.
+- **Result:** Vercel reported `READY`; six public routes returned 200 and the
+  GET against the POST-only QR creation route returned 405.
+- **Boundary:** No deployment or environment write, database/payment/customer
+  operation, provider lifecycle completion, human/field review, independent
+  review, or release sign-off occurred. No checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/vercel-production-public-surface-recheck-2026-10-24T0717Z.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v37.json` verifies 370 files with zero mismatches, matching manifest `sha256:cacc79df6aa1f53e285548e2ef0bc0bc578eeea3e4ee76466fec9b23bc4eb9f7`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-011/012/014 current contract regression
 
 - **Decision:** Record the current bounded corpus, triage, and final-regression

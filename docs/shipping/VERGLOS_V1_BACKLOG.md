@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Vercel Production public-surface recheck
+
+Vercel reported the Production deployment `READY`. Read-only checks returned
+200 for `/`, `/proof`, `/checkout`, `/llms.txt`, `/robots.txt`, and
+`/sitemap.xml`; GET against the POST-only `/api/razorpay/create-qr` route
+returned 405. This strengthens hosted availability and public-boundary
+evidence only. No deployment, environment, database, payment, customer, or
+provider write occurred; no checkbox changed. Score remains **246 checked / 34
+open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/vercel-production-public-surface-recheck-2026-10-24T0717Z.md`.
+Bundle v37 verifies **370** files with **0** mismatches, matching manifest
+`sha256:cacc79df6aa1f53e285548e2ef0bc0bc578eeea3e4ee76466fec9b23bc4eb9f7`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-011/012/014 current contract regression
 
 The bounded corpus, public-OSS triage, final-regression, evidence-bundle, and
