@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · dashboard interaction harness correction
+
+Web PR [#281](https://github.com/anuragyadav-git/verglos-web/pull/281) merged
+normally at `91d8629cd59f239334629f39ccfebb5953671cc2`, from implementation
+`204224937228dc0134cb73feb873b893005255c4`. The authenticated dashboard
+capture now performs a real visible button/role-button interaction before
+reading interaction metrics, with a same-page-anchor fallback and the existing
+keyboard/focus probe preserved. Local dashboard contracts passed **4/4**,
+typecheck and diff checks passed. A direct installed-WebKit probe confirmed
+that this runtime exposes no Event Timing entries even after a real click, so
+no FID/proxy value was relabeled as INP; WebKit remains unclaimed for that
+metric. No checkbox changed; score remains **245 checked / 35 open / 280 total
+(87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-interaction-harness-pr281-2026-10-24.md`.
+No non-completed Web Actions runs remain; no paid run, provider write,
+publication, customer action, deletion, or final release occurred.
+
 ## Latest continuation result · 2026-10-24 · current-head npm registry observation
 
 The read-only `scripts/verify-npm-publication.mjs` check ran against the

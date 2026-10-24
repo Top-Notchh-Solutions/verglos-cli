@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · dashboard interaction harness correction
+
+Web PR #281 merged normally at `91d8629cd59f239334629f39ccfebb5953671cc2`.
+The dashboard capture now executes a real visible control interaction before
+reading metrics; local dashboard contracts passed **4/4**, typecheck and diff
+checks passed. Installed headless WebKit still exposes no Event Timing entries,
+so no alternate metric is claimed as INP. This advances QUAL-WEB-006 code-side
+evidence only. Human screen-reader/field-CWV, independent review,
+customer/recipient, provider-lifecycle, AppSec/Hunt, and final release gates
+remain open. No checkbox changed; score remains **245/35/280 (87.5%)**. No
+non-completed Web Actions runs remain. Evidence:
+`evidence/qual-web-006-dashboard-interaction-harness-pr281-2026-10-24.md`.
+
 ## 2026-10-24 · current-head npm registry observation
 
 The read-only seven-package verifier returned **0/7 accepted** and **17
