@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-head CLI full monorepo regression
+
+The current CLI head `aad2c74395a5c381c955ab9dfab7462295564840`, including the
+version-bound SBOM/SPDX sidecar fix merged in PR #241 as `8e87c81d`, completed
+the full local `pnpm test` path. Turbo ran all eight package targets with
+**13/13 tasks successful and 0 failed tasks**. The repository's explicit
+Docker Hunt integration skips remain clearly reported and are not claimed as
+adversarial security evidence. Evidence:
+`docs/shipping/evidence/cli-current-head-full-test-2026-10-24.md`.
+
+This refreshes CLI implementation/regression evidence for DIST-002/003/006
+and the release contracts. It does not open trusted registry publication,
+provider/Production, customer/recipient, independent AppSec/Hunt, or final
+release gates. No checkbox changed. Score remains **245 checked / 35 open / 280
+total (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open. No
+GitHub Actions run, registry write, or local artifact deletion was used.
+
 ## Latest continuation result · 2026-10-24 · current-head Web serial regression suite
 
 The current Web implementation completed `pnpm test:serial` locally in

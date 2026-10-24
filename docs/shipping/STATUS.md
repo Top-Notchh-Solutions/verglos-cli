@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current-head CLI full monorepo regression
+
+CLI `pnpm test` completed with Turbo **13/13 tasks successful** and zero failed
+tasks across eight packages. This refreshes the distribution/release
+implementation evidence only; trusted registry publication,
+provider/Production, customer/recipient, independent AppSec/Hunt, and final
+release boundaries remain open. No checkbox changed. Score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/cli-current-head-full-test-2026-10-24.md`.
+
 ## 2026-10-24 · current-head Web serial regression suite
 
 The current Web `pnpm test:serial` run completed **904/928** with **24

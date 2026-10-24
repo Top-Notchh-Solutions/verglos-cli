@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-head CLI full monorepo regression
+
+- **Decision:** Rerun the complete CLI package test path after the current
+  version-bound release-sidecar fix.
+- **Result:** Turbo completed all eight package targets with **13/13 successful
+  tasks** and zero failed tasks; Docker Hunt opt-in skips remain explicit.
+- **Disposition:** Record local implementation evidence only. Keep trusted
+  registry publication, provider/Production, customer/recipient, independent
+  AppSec/Hunt, and final-release boundaries open; no checkbox changed. Score
+  remains **245/35/280 (87.5%)**. No Actions run, registry write, or artifact
+  deletion was used.
+- **Evidence:** `evidence/cli-current-head-full-test-2026-10-24.md`.
+
 ## 2026-10-24 · record current-head Web serial regression suite
 
 - **Decision:** Run the complete local Web serial pretest/test path after the

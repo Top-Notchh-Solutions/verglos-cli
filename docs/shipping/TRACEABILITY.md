@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-head CLI regression mapping
+
+- **Source mapping:** CLI `aad2c743` with the version-bound SBOM/SPDX sidecar
+  fix merged as `8e87c81d`; package test scope covers all eight monorepo
+  targets.
+- **Verification mapping:** Local `pnpm test` completed **13/13 successful
+  tasks**, zero failed tasks; Docker Hunt opt-in skips remain explicit.
+- **Acceptance mapping:** Implementation/regression evidence only. Trusted
+  registry publication, provider/Production, customer/recipient, independent
+  AppSec/Hunt, and final-release evidence remain separate. No checkbox changed;
+  score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/cli-current-head-full-test-2026-10-24.md`.
+
 ## 2026-10-24 · current-head Web serial regression mapping
 
 - **Source mapping:** Web implementation `58fe7e3c` with merged equivalent on
