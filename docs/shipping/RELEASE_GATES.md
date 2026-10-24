@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current-head QUAL-WEB-005 deletion integration
+
+Current Web account-deletion route and worker integration passed **2/2** on a
+fresh isolated loopback database after the reviewed bootstrap and **43**
+migrations. This advances the local implementation gate for `QUAL-WEB-005`.
+It does not open Production deletion, customer-held/legal disposition,
+restore/rollback acceptance, independent review, field evidence, or final
+release/go-no-go. No checkbox changed; score remains **245/35/280 (87.5%)**.
+Evidence: `evidence/qual-web-005-current-head-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## 2026-10-24 · hosted production multi-browser qualification
 
 Vercel Production deployment `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku` is READY for

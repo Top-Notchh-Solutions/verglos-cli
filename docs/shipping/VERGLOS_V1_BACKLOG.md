@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current-head QUAL-WEB-005 deletion integration
+
+The current Web implementation passed the bounded account-deletion route and
+worker integration run **2/2** against a fresh isolated loopback PostgreSQL
+database after the reviewed bootstrap and **43** migrations. The run verified
+authenticated route boundaries, cross-origin and malformed-input rejection,
+digest/deletion idempotency, worker completion, user scope, lease/fence
+behavior, legal-hold blocking, support deletion idempotency, hosted-kind
+deletion, and terminal receipts. Evidence:
+`docs/shipping/evidence/qual-web-005-current-head-fresh-local-deletion-e2e-2026-10-24.md`.
+
+This advances implementation evidence only. Production deletion,
+customer-held/legal disposition, restore/rollback acceptance, independent
+review, field evidence, and final release approval remain open; no checkbox
+changed. Score remains **245 checked / 35 open / 280 total (87.5%)**, with
+**13 AppSec-dependent / 22 non-AppSec** rows open. No Actions run or paid
+minute was used.
+
 ## 2026-10-24 · hosted production multi-browser qualification
 
 Vercel Production deployment `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku` is READY for

@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-head QUAL-WEB-005 deletion mapping
+
+- **Source mapping:** Web implementation `58fe7e3c` with merged equivalent on
+  `origin/main` `d8f415b4`; fresh disposable Postgres container
+  `verglos-qual-web-005-current-20261024`, loopback port `55440`.
+- **Database mapping:** Reviewed local bootstrap plus **43** migrations
+  applied successfully to `verglos_test`.
+- **Verification mapping:** Account-deletion route and worker integration
+  passed **2/2**, zero failures/skips/cancellations, covering auth/CORS/input
+  boundaries, idempotency, worker completion, scope, lease/fence, legal-hold,
+  support deletion, hosted-kind deletion, and terminal receipts.
+- **Acceptance mapping:** Local implementation evidence only. Production,
+  customer-held/legal, restore/rollback, independent-review, field, and final
+  release evidence remain separate. No checkbox changed; score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-005-current-head-fresh-local-deletion-e2e-2026-10-24.md`.
+
 ## 2026-10-24 · hosted production multi-browser mapping
 
 - **Deployment mapping:** Vercel `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku`, READY
