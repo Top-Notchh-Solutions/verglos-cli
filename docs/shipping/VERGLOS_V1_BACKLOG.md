@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · production availability recheck addendum
+
+The current Vercel Production deployment
+`dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` remains `Ready`. A read-only sweep returned
+HTTP 200 for all nine public/metadata endpoints, and the focused local
+acceptance contract set passed **31/31**. This advances automated provider
+availability evidence for FINAL-WEB-007/008 only; human/field,
+independent-review, customer/recipient, AppSec/Hunt, and final-release gates
+remain open. No checkbox changed. Score remains **245 checked / 35 open / 280
+total (87.5%)**, split into **13 AppSec-dependent / 22 non-AppSec** rows.
+Evidence:
+`docs/shipping/evidence/final-web-007-008-production-availability-recheck-2026-10-24.md`.
+The additive bundle verifies **288** files with zero mismatches and manifest
+`sha256:6e3d95924fd8c80d720989250bb5fc7d50213c95d86c64f4815bdc9b76d89de1`.
+
 ## 2026-10-24 · DIST-002/003 current alpha.4 artifact recheck addendum
 
 The current local alpha.4 release flow passed license clearance, seven-package

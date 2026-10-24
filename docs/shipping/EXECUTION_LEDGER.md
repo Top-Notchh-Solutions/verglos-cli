@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## Production availability recheck · 2026-10-24
+
+- **Provider:** Vercel Production deployment
+  `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu`, target `production`, status `Ready`.
+- **Execution:** Read-only Node fetch sweep for nine public/metadata endpoints.
+- **Result:** All nine returned HTTP 200; focused local acceptance contracts
+  passed **31/31**.
+- **Boundary:** Automated provider availability only. No deploy, database
+  write, payment, publication, Actions run, customer-data operation, human
+  field evidence, independent review, or final release decision occurred. No
+  checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/final-web-007-008-production-availability-recheck-2026-10-24.md`.
+- **Bundle:** 288 files, zero mismatches, secret scan passed; manifest
+  `sha256:6e3d95924fd8c80d720989250bb5fc7d50213c95d86c64f4815bdc9b76d89de1`.
+
 ## ACCEPT-008 observed Test-Mode commercial evidence · 2026-10-24
 
 - **Candidate:** catalog `catalog-2026-10-24`, Pro monthly, INR 280943 minor

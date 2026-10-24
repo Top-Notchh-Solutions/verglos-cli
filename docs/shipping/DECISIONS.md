@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record production availability recheck
+
+- **Decision:** Record the current Production deployment and public endpoint
+  availability without treating availability as final acceptance.
+- **Result:** Vercel deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is Ready;
+  nine required public/metadata endpoints returned HTTP 200; local focused
+  acceptance contracts passed **31/31**.
+- **Disposition:** Advance automated FINAL-WEB-007/008 provider evidence only.
+  Human/field, independent-review, customer/recipient, AppSec/Hunt, and final
+  release gates remain open. No checkbox changed; score is **245/35/280
+  (87.5%)**. No Actions run, database write, payment, publication, or final
+  npm release occurred.
+- **Evidence:** `evidence/final-web-007-008-production-availability-recheck-2026-10-24.md`.
+- **Bundle:** 288 files, zero mismatches, secret scan passed; manifest
+  `sha256:6e3d95924fd8c80d720989250bb5fc7d50213c95d86c64f4815bdc9b76d89de1`.
+
 ## 2026-10-24 · record observed Test-Mode commercial evidence
 
 - **Decision:** Accept the bounded commercial evidence as complete evidence,

@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · production availability recheck
+
+- **Source mapping:** Vercel Production deployment
+  `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` serving the current Web candidate.
+- **Verification mapping:** Read-only Node fetch returned HTTP 200 for all nine
+  public/metadata endpoints; focused local acceptance contracts passed 31/31.
+- **Acceptance mapping:** Automated provider availability only for
+  FINAL-WEB-007/008. Human/field, independent-review, customer/recipient,
+  AppSec/Hunt, and final release evidence remain open; score is 245/35/280.
+- **Evidence:** `evidence/final-web-007-008-production-availability-recheck-2026-10-24.md`.
+- **Bundle mapping:** 288 files, zero mismatches, secret scan passed; manifest
+  `sha256:6e3d95924fd8c80d720989250bb5fc7d50213c95d86c64f4815bdc9b76d89de1`.
+
 ## 2026-10-24 · ACCEPT-008 observed Test-Mode commercial evidence
 
 - **Source mapping:** Commercial input is bound to the current Pro monthly
