@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-003 current-head artifact and provenance preflight
+
+The dedicated artifact suite passed **39/39**. Seven public archives and **15**
+strict release artifacts verified, including checksums, SBOMs, notices, release
+notes, origin metadata, and clean-consumer output. Local origin metadata is not
+trusted external provider attestation; no publication, tag, or provider write
+occurred. The row remains unchecked for trusted publication/attestation,
+release clearance, and final acceptance. No checkbox changed; score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/dist-003-current-head-artifact-preflight-2026-10-24.md`.
+Bundle v26 verifies **360** files with zero mismatches, matching manifest
+`sha256:cce9c337b72cd381509b161053d638e751595f3ebf5e6d8052fae5faf0dd5205`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-002 current-head release preflight
 
 The current trusted-publishing contract suite passed **19/19**; strict license
