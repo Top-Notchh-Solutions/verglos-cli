@@ -1,5 +1,19 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-003 current-head artifact and provenance preflight
+
+The dedicated artifact suite passed **39/39** with zero failures, skips, or
+cancellations. Seven public archives and **15** strict release artifacts
+verified; the clean consumer installed/imported all seven packages. Local
+origin metadata is not trusted external provider attestation, and no
+publication, tag, or provider action occurred, so `DIST-003` remains
+unchecked. Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent /
+21 non-AppSec**. Evidence:
+`evidence/dist-003-current-head-artifact-preflight-2026-10-24.md`.
+Bundle v26 verifies **360** files with zero mismatches, matching manifest
+`sha256:cce9c337b72cd381509b161053d638e751595f3ebf5e6d8052fae5faf0dd5205`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-002 current-head release preflight
 
 The current trusted-publishing contract suite passed **19/19**. Strict license

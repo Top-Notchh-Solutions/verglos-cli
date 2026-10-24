@@ -1,5 +1,25 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-003 current-head artifact and provenance preflight
+
+- **Implementation mapping:** CLI candidate
+  `bcb30a7ed645b21ec150e22929f7bd2960b5c7c3`, version `2.0.0-alpha.4`.
+- **Contract mapping:** Artifact/provenance suite **39/39** passed with zero
+  failures/skips/cancellations.
+- **Artifact mapping:** Seven public archives and 15 strict release artifacts
+  verified; checksums, SBOMs, notices, release notes, origin metadata, and
+  clean-consumer output were generated and checked.
+- **Boundary mapping:** Local origin metadata is not trusted external provider
+  attestation; no publication, tag, provider write, or checkbox change.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/dist-003-current-head-artifact-preflight-2026-10-24.md`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v26.json`
+  verifies 360 files with zero mismatches, matching manifest
+  `sha256:cce9c337b72cd381509b161053d638e751595f3ebf5e6d8052fae5faf0dd5205`,
+  and passed secret scanning.
+
 ## 2026-10-24 · DIST-002 current-head release preflight
 
 - **Implementation mapping:** CLI candidate

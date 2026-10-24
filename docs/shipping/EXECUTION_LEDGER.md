@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## DIST-003 current-head artifact and provenance preflight · 2026-10-24
+
+- **Execution:** Ran the current artifact, checksum, SBOM, release-note,
+  origin-binding, external-license, clean-consumer, and release-tag contracts.
+- **Result:** **39/39** passed; seven archives and 15 strict release artifacts
+  verified; the clean consumer installed/imported all seven packages.
+- **Candidate:** CLI `bcb30a7ed645b21ec150e22929f7bd2960b5c7c3`,
+  `2.0.0-alpha.4`; checksum manifest digest
+  `sha256:c524585a6fd3f6959fd1ad1df362e9b93df3322dfc7d76363b7e499e0a07a96f`.
+- **Disposition:** No publication/provider attestation/tag occurred; local
+  origin metadata is not trusted external provenance. No checkbox upgraded;
+  score remains **246/34/280**.
+- **Evidence:** `evidence/dist-003-current-head-artifact-preflight-2026-10-24.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v26.json`
+  verifies 360 files with zero mismatches, matching manifest
+  `sha256:cce9c337b72cd381509b161053d638e751595f3ebf5e6d8052fae5faf0dd5205`,
+  and passed secret scanning.
+
 ## DIST-002 current-head release preflight · 2026-10-24
 
 - **Execution:** Ran the current trusted-publishing contract, strict license,

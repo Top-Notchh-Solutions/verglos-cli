@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-003 current-head artifact and provenance preflight
+
+- **Decision:** Record the current local artifact, checksum, SBOM, release-note,
+  origin-binding, and clean-consumer qualification.
+- **Result:** Dedicated suite **39/39** passed with zero failures, skips, or
+  cancellations; seven archives and 15 strict release artifacts verified.
+- **Candidate:** CLI `bcb30a7ed645b21ec150e22929f7bd2960b5c7c3`, version
+  `2.0.0-alpha.4`; local checksum manifest digest
+  `sha256:c524585a6fd3f6959fd1ad1df362e9b93df3322dfc7d76363b7e499e0a07a96f`.
+- **Boundary:** Local origin metadata is not trusted external provider
+  attestation. No publication, tag, provider write, or checkbox change.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain open.
+- **Evidence:** `evidence/dist-003-current-head-artifact-preflight-2026-10-24.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v26.json`
+  verifies 360 files with zero mismatches, matching manifest
+  `sha256:cce9c337b72cd381509b161053d638e751595f3ebf5e6d8052fae5faf0dd5205`,
+  and passed secret scanning.
+
 ## 2026-10-24 · DIST-002 current-head release preflight
 
 - **Decision:** Record the fresh local trusted-publishing, license, artifact,
