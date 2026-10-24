@@ -1,5 +1,17 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-002/003 current alpha.4 artifact recheck
+
+The current CLI `aad2c743` local release flow passed license clearance, **8/8**
+external-license records, seven-package public packing, clean-consumer
+verification, **15-artifact** release-origin/checksum verification, and the
+`1.8.3 -> 2.0.0-alpha.4 -> 1.8.3` upgrade/rollback transition. This advances
+local DIST-002/003 artifact evidence only; no npm publication, tag, trusted
+provider action, or final release occurred. Both rows remain open for their
+protected publication/attestation, independent review, and final acceptance
+contracts. Score remains **245 checked / 35 open / 280 total (87.5%)**.
+Evidence: `docs/shipping/evidence/dist-002-003-current-alpha4-artifact-recheck-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · DIST-006 current alpha.4 rollback rehearsal
 
 CLI `aad2c743` built **8/8** packages; focused rollback contracts passed
@@ -31,7 +43,7 @@ No paid Actions, database write, payment, customer data, publication, deletion,
 or final npm release occurred. Evidence:
 `docs/shipping/evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
 The additive evidence bundle verifies **282** files with zero mismatches and
-manifest `sha256:5a4497c28c508a22228fbf431f39197ea2239eb2052c76da727ae8954e6e7f16`.
+manifest `sha256:4e09e3c95bdf640d22164493b40c48260a5dba6c3e281acb4bb3648240051f80`.
 
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-006 production-build multi-browser qualification
 

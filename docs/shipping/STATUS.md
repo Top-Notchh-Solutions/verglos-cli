@@ -1,5 +1,14 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-002/003 current alpha.4 artifact recheck
+
+Local alpha.4 release artifacts passed license clearance, seven-package
+packing, clean-consumer verification, 15-artifact origin/checksum validation,
+and upgrade/rollback. No npm publication, tag, trusted provider action, or
+final release occurred; DIST-002/003 remain open. Score remains **245 checked /
+35 open / 280 total (87.5%)**. Evidence:
+`evidence/dist-002-003-current-alpha4-artifact-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-006 current alpha.4 rollback rehearsal
 
 CLI `aad2c743` passed the 8-package build and focused rollback contracts 2/2.
@@ -25,7 +34,7 @@ checked / 35 open / 280 total (87.5%)**, with **13 AppSec-dependent / 22
 non-AppSec** rows open. Evidence:
 `evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
 The additive bundle verifies **282** files with zero mismatches and manifest
-`sha256:5a4497c28c508a22228fbf431f39197ea2239eb2052c76da727ae8954e6e7f16`.
+`sha256:4e09e3c95bdf640d22164493b40c48260a5dba6c3e281acb4bb3648240051f80`.
 
 ## 2026-10-24 · QUAL-WEB-006 local production-build qualification
 
