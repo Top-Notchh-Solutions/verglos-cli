@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record dashboard transient-state capture
+
+- **Decision:** Add a Preview-only, authenticated state seam so QUAL-WEB-006
+  captures rendered loading/error announcements instead of hard-coding them.
+- **Result:** Web PR #277 merged normally as `e7a8bbaa` from `e9f713f7`; the
+  local built-server capture observed loading **13/13** and error **13/13**.
+- **Disposition:** Keep QUAL-WEB-006 fail-closed for the missing 100-row
+  dataset and local CWV breaches; no checkbox changed and score remains
+  **245/35/280 (87.5%)**. No paid Actions, Production write, payment,
+  customer repository, publication, or deletion occurred.
+- **Evidence:** `evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
+- **Bundle:** Additive v40 contains **270** hashed evidence files, passes secret
+  scanning, and matches manifest
+  `sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+
 ## 2026-10-24 · record Web PR #276 Production receipt
 
 - **Decision:** Inspect the Production deployment created from merged Web PR

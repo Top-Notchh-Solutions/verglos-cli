@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## Dashboard transient-state capture · 2026-10-24
+
+- **Implementation:** Web PR #277 merged normally as `e7a8bbaa` from
+  `e9f713f7`; the state seam is gated to enabled Vercel Preview and cannot be
+  activated by Production requests.
+- **Execution:** Locally built Next production server, authenticated synthetic
+  `top-notchh-solutions` tenant, Chromium; 52 measurements across ready,
+  loading, and error states.
+- **Result:** Loading announcements **13/13**, error announcements **13/13**,
+  Axe **0**, keyboard/responsive/reduced-motion **52/52**. No 100-row dataset
+  was present and local CWV limits remained fail-closed.
+- **Disposition:** Advance QUAL-WEB-006 implementation/capture capability only;
+  no checkbox changed and score remains **245/35/280 (87.5%)**. No paid
+  Actions, Production write, payment, customer repository, publication, or
+  deletion occurred.
+- **Evidence:** `evidence/qual-web-006-dashboard-transient-state-capture-pr277-2026-10-24.md`.
+- **Bundle:** Additive v40 contains **270** hashed evidence files, passes secret
+  scanning, and matches manifest
+  `sha256:7c9adcb03301383762047a4103207b293d8781efcda6fda204d7964e7b5260eb`.
+
 ## Web PR #276 Production receipt · 2026-10-24
 
 - **Deployment:** Vercel `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY for the
