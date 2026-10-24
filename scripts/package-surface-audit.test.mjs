@@ -57,6 +57,19 @@ test("public package set requires exactly the seven reviewed package identities"
   assert.ok(auditPublicPackageSet([{ name: "verglos" }]).some((failure) => failure.includes("exactly one @verglos/shared")));
 });
 
+test("the Hunt package carries a bound public repository identity", async () => {
+  const hunt = JSON.parse(await readFile(new URL("../packages/hunt/package.json", import.meta.url), "utf8"));
+  assert.deepEqual(hunt.repository, {
+    type: "git",
+    url: "git+https://github.com/Top-Notchh-Solutions/verglos-cli.git",
+    directory: "packages/hunt",
+  });
+  assert.equal(hunt.homepage, "https://verglos.com");
+  assert.deepEqual(hunt.bugs, { url: "https://github.com/Top-Notchh-Solutions/verglos-cli/issues" });
+  assert.equal(hunt.author, "Top Notchh Team");
+  assert.ok(Array.isArray(hunt.keywords) && hunt.keywords.includes("hunt"));
+});
+
 test("package file allowlists reject traversal, glob, control-character, and duplicate declarations", () => {
   for (const value of ["dist/../private", "dist/*.js", "dist//index.js", "./dist", "dist/\u0000.js"]) {
     assert.equal(isSafePackageFileDeclaration(value), false, value);
