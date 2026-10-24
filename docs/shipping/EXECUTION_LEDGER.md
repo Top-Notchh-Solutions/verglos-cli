@@ -1,5 +1,25 @@
 # Verglos V1 Execution Ledger
 
+## Current-head corpus and final regression · 2026-10-24
+
+- **Execution:** Ran the current merged CLI against eight exact-commit public
+  OSS fixtures, then ran 40 explicit plan simulations and bound the result to
+  the current Web 50-cell role/tenant matrix.
+- **Result:** 8/8 fixtures, 13,494 files, 351 observations, 0 coverage gaps;
+  400/400 final matrix keys, 0 failed runs, 0 finding regressions, and 0
+  performance regressions.
+- **Candidate:** CLI `f6facdc5db312325f00618e3e463dc81569c4341`; Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Disposition:** Reconciliation records 1 shipped / 21 partial non-AppSec
+  rows and recommends `no-go`; no checkbox changed. Score remains **246/34/280**.
+- **Evidence:** `evidence/accept-011-012-014-current-head-f6fac-2026-10-24.md`;
+  `evidence/acceptance-release-reconciliation-2026-10-24-current-v5.json`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v18.json`
+  verifies 350 files with zero mismatches, matching manifest
+  `sha256:c5ca9b2845d35f09589db543549b6c63d37b82afdc50064aefc2cb720e2fced5`,
+  and passed secret scanning.
+
 ## Read-only Production availability · 2026-10-24
 
 - **Execution:** Inspected the existing Vercel Production deployment and

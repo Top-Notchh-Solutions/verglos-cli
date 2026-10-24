@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-head corpus and 400-cell regression
+
+The current merged CLI `f6facdc5ad312325f00618e3e463dc81569c4341` was run
+against eight exact-commit public-OSS fixtures with telemetry disabled. The
+run verified **8/8** fixtures, walked **13,494** files, produced **351**
+observations across **23** rule groups, and found **0** coverage gaps. Forty
+plan-bound scans then supplied the complete final matrix: **400/400**
+fixture×plan×role×tenant keys, **0** failed runs, **0** finding regressions,
+and **0** performance regressions. The current Web role/tenant matrix is
+**50/50** and bound to merged Web `257e1cc8`.
+
+The current-candidate reconciliation is bound to CLI `f6facdc5` and Web
+`257e1cc8`; it records **1 shipped / 21 partial** non-AppSec rows, **6** open
+gates, **6** correction items, and **1** rollback item, so the recorded
+recommendation remains **no-go**. No checkbox changed. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-011-012-014-current-head-f6fac-2026-10-24.md` and
+`docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v5.json`.
+Bundle v18 verifies **350** bounded files with **0** mismatches, matching
+manifest
+`sha256:c5ca9b2845d35f09589db543549b6c63d37b82afdc50064aefc2cb720e2fced5`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · read-only Production availability
 
 The existing Vercel Production deployment `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc`

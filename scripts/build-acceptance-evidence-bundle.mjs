@@ -196,6 +196,10 @@ const paths = [
   "docs/shipping/evidence/accept-014-final-regression-full-matrix-v4-2026-10-24.md",
   "docs/shipping/evidence/accept-014-final-regression-input-2026-10-24-v5.json",
   "docs/shipping/evidence/accept-014-final-regression-result-2026-10-24-v5.json",
+  "docs/shipping/evidence/accept-011-012-014-current-head-f6fac-2026-10-24.md",
+  "docs/shipping/evidence/accept-014-web-role-tenant-matrix-current-2026-10-24.json",
+  "docs/shipping/evidence/accept-014-final-regression-input-2026-10-24-f6fac-v1.json",
+  "docs/shipping/evidence/accept-014-final-regression-result-2026-10-24-f6fac-v1.json",
   "docs/shipping/evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md",
   "docs/shipping/evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.json",
   "docs/shipping/evidence/accept-014-web-role-tenant-matrix-pr282-2026-10-24.md",
@@ -355,6 +359,9 @@ const paths = [
   "docs/shipping/evidence/acceptance-release-reconciliation-input-config-2026-10-24-v4.json",
   "docs/shipping/evidence/acceptance-release-reconciliation-input-2026-10-24-v4.json",
   "docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v4.json",
+  "docs/shipping/evidence/acceptance-release-reconciliation-input-config-2026-10-24-v5.json",
+  "docs/shipping/evidence/acceptance-release-reconciliation-input-2026-10-24-v5.json",
+  "docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v5.json",
   "THIRD_PARTY_NOTICES",
 ];
 
