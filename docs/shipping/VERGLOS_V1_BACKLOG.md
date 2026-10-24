@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · SCM installation audit atomicity hardening
+
+Web PR **#288** merged normally as
+`557d508422374a5b14dfbbe3f3ddeacd2ee5dbcf`. SCM installation creation now
+persists installation and audit rows in one tenant-scoped transaction with a
+single batch audit insert. Adjacent SCM contracts passed **18/18**, Web
+typecheck passed, and diff checks passed. This is production provider-lifecycle
+implementation evidence only; no live provider installation or acceptance
+checkbox changed. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/scm-installation-audit-atomicity-pr288-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · DIST-003/ACCEPT-003 provenance concurrency hardening
 
 CLI PR **#385** merged normally as

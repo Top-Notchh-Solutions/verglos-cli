@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## SCM installation audit atomicity hardening · 2026-10-24
+
+- **Execution:** Web PR #288 merged normally as
+  `557d508422374a5b14dfbbe3f3ddeacd2ee5dbcf`; SCM installation and audit
+  persistence now share one tenant-scoped transaction and one batch audit
+  insert.
+- **Result:** Adjacent SCM contracts **18/18**, Web typecheck, and diff checks
+  passed.
+- **Acceptance mapping:** Production provider-lifecycle hardening only. No live
+  provider installation, customer data, migration, payment, deletion, or
+  acceptance checkbox changed. Score remains **246/34/280**.
+- **Evidence:** `evidence/scm-installation-audit-atomicity-pr288-2026-10-24.md`.
+
 ## DIST-003/ACCEPT-003 provenance concurrency hardening · 2026-10-24
 
 - **Execution:** CLI PR #385 merged normally as
