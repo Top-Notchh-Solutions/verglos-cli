@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## DIST-006 current rollback/revocation rehearsal · 2026-10-24
+
+- **Execution:** Ran the rollback evidence and platform-matrix contracts plus
+  the direct local rollback rehearsal.
+- **Result:** **3/3** tests passed; rehearsal status `passed`, five operations
+  emitted, fixture digest matched, and two historical records preserved.
+- **Disposition:** Local rehearsal only. No provider/Production rollback,
+  revocation, or authenticated endpoint was called; DIST-006 remains
+  unchecked. Score remains **246/34/280**.
+- **Evidence:** `evidence/dist-006-current-rollback-rehearsal-regression-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v41.json` verifies 375 files with zero mismatches, matching manifest `sha256:7d31074f79c6fbd98754792920b53e842c14ff2e7ef627c35143e6828622bd3f`, and passed secret scanning.
+
 ## DIST-003 current release-artifact regression · 2026-10-24
 
 - **Execution:** Ran the dedicated checksum, origin, SBOM, SPDX, notice,
