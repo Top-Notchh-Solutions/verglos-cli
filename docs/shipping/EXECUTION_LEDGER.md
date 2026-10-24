@@ -1,5 +1,15 @@
 # Verglos V1 Execution Ledger
 
+## Current merged CLI public-OSS corpus execution · 2026-10-24
+
+- **Source:** CLI `cd9d572e28462741103cb21a2274e5892939d5d4`, merged through PR #294 at `c745a2f103e7cf950bcaef1577456dffb94c876b`.
+- **Execution:** `VERGLOS_TELEMETRY=0 node packages/cli/dist/index.js scan --json --quiet --no-telemetry --output <private-output-dir>` across eight exact, full, non-shallow public fixtures.
+- **Result:** 8/8 verified; 13,494 files; 351 bounded observations; 23 rule groups; all four architecture shapes; zero coverage gaps.
+- **Integrity:** verification `sha256:9707d32446f764368e3b0e1c89bf20c2a76335df75508da824a57b2eb5fd62b4`; triage `sha256:fbec9153b582d0ed98311119b4ad0a9eb91622601a0dca7b1fe358e5e0354104`.
+- **Boundary:** Local owner-authorized public-OSS reproducibility evidence only. Findings remain unadjudicated; no customer, provider, independent-review, AppSec/Hunt, or final-release evidence was inferred. No checkbox changed; score remains 245/35/280.
+- **Evidence:** `evidence/accept-011-012-current-cli-cd9d572e-public-corpus-2026-10-24.md`.
+- **Bundle:** 301 files, zero mismatches, secret scan passed; manifest `sha256:c5491c6f6f2bbd90eea9c39fa2d12ea8b444f48c836fbbc1885f03280426d99d`.
+
 ## Dashboard interaction harness correction · 2026-10-24
 
 - **Source:** Web PR #281, implementation `204224937228dc0134cb73feb873b893005255c4`, merged `91d8629cd59f239334629f39ccfebb5953671cc2`.
