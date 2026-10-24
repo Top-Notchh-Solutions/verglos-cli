@@ -1,5 +1,24 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #289 SCM delivery lease/concurrency hardening · 2026-10-24
+
+- **Execution:** Web PR #289 merged normally as
+  `f7719d505e5b855d10514dbc4eabfa5289e8d950`; the SCM cron worker now uses a
+  bounded four-lane provider-delivery pool with a hard concurrency ceiling of
+  eight, and the Production route claims a 240-second lease within the
+  five-minute function ceiling.
+- **Result:** Focused SCM/provider/runner/worker/route contracts **31/31**,
+  Web typecheck, and diff checks passed.
+- **Hosted boundary:** Actions runs were canceled before repository steps due
+  the blocked $0 budget. Vercel deployment
+  `dpl_Baw6JFHyNxrLfaL3viryXxWMcNcG` was still queued; no Ready Production
+  result is claimed.
+- **Acceptance mapping:** Real provider-delivery implementation evidence only;
+  no provider installation, customer/recipient acceptance, independent or
+  AppSec/Hunt review, final release sign-off, or checkbox changed. Score
+  remains **246/34/280**. Nothing was deleted or overwritten.
+- **Evidence:** `evidence/scm-delivery-lease-concurrency-pr289-2026-10-24.md`.
+
 ## Web PR #288 Production deployment · 2026-10-24
 
 - **Execution:** Vercel Production deployment
