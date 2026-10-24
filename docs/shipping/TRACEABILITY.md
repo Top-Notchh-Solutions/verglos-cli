@@ -1,5 +1,20 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · QUAL-WEB-006 current-head dashboard qualification contracts
+
+- **Implementation mapping:** Web merged source
+  `257e1cc8e0b467d16966433033589111f62f56f0`; tested head
+  `7307ae5e0cea18e6d0803aa179fafcc2a0ce36f8`.
+- **Qualification mapping:** Dashboard qualification contracts passed **4/4**
+  with zero failures/skips/cancellations; typecheck exited **0**.
+- **Boundary mapping:** No authenticated browser capture, human
+  screen-reader/field-CWV run, independent review, customer/recipient
+  acceptance, or final release sign-off was inferred.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/qual-web-006-current-head-dashboard-contracts-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v30.json` verifies 363 files with zero mismatches, matching manifest `sha256:83f1cfc4fbac06ad959419bf3ed2e08ad4d85a717eafed528ce394671b42bea6`, and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
 
 - **Implementation mapping:** Web merged source

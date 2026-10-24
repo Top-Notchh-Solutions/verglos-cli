@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · QUAL-WEB-006 current-head dashboard qualification contracts
+
+The current dashboard qualification contracts passed **4/4** with zero
+failures, skips, or cancellations, and Web typecheck exited **0**. This
+advances the source-level dashboard implementation only; keep `QUAL-WEB-006`
+unchecked for authenticated browser capture, human screen-reader and
+supported-browser/field-CWV evidence, independent review, customer/recipient
+acceptance, and final release. Score remains **246 checked / 34 open / 280
+total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-006-current-head-dashboard-contracts-2026-10-24.md`.
+Bundle v30 verifies **363** files with **0** mismatches, matching manifest
+`sha256:83f1cfc4fbac06ad959419bf3ed2e08ad4d85a717eafed528ce394671b42bea6`,
+and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
 
 The current Web privacy/deletion focused suite passed **25/25** with zero
