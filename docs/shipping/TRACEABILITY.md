@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · non-AppSec implementation sweep
+
+- **Source mapping:** CLI `e0ef3bf1`; Web `705a85e2`.
+- **Verification mapping:** CLI 13/13 package tasks; Web 904/928 serial tests,
+  24 designed database skips, zero failures/cancellations; Studio 52/52
+  focused contracts.
+- **Acceptance mapping:** This is implementation evidence only. It does not
+  satisfy human/field, customer, independent-review, provider-publication,
+  Production deletion, AppSec/Hunt, or final-release gates.
+- **Evidence:** `evidence/nonappsec-implementation-sweep-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 contract recheck
 
 - **Source mapping:** Web head `705a85e2b7b9d847a85748463aa0d797c60b384f`.

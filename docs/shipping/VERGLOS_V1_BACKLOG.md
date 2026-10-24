@@ -1,5 +1,16 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · non-AppSec implementation sweep
+
+The local implementation sweep passed **13/13** CLI Turbo package tasks and
+**904/928** Web serial tests, with **24 designed database skips**, zero
+failures, and zero cancellations. It adds implementation evidence only; keep
+the 21 non-AppSec rows partial until their declared customer/provider,
+human/field, independent-review, deletion, and final-release gates are
+genuinely satisfied. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/nonappsec-implementation-sweep-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 contract recheck
 
 Focused local Studio projection/workspace/handoff contracts passed **52/52**

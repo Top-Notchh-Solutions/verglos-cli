@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · non-AppSec implementation sweep
+
+The current local implementation sweep passed **13/13** CLI Turbo package test
+tasks and **904/928** Web serial tests, with **24 designed database skips** and
+zero failures or cancellations. The focused Studio contract receipt remains
+**52/52**. This rechecks implementation substrates across the non-AppSec
+candidate rows without inventing human, customer, provider-publication,
+Production deletion, independent-review, field-CWV, AppSec/Hunt, or final
+release evidence. No file, database, customer repository, package
+publication, tag, or release was deleted or mutated. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**; `ACCEPT-005` remains the only shipped non-AppSec row under its
+explicit public-OSS-only scope. Evidence:
+`docs/shipping/evidence/nonappsec-implementation-sweep-2026-10-24.md`.
+The additive bundle v10 records the sweep and verifies with zero mismatches and
+passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · STUDIO-CLI-001 contract recheck
 
 The current Web head `705a85e2b7b9d847a85748463aa0d797c60b384f` passed the
