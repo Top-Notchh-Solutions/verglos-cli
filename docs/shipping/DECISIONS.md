@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-006 strict rollback-input validation
+
+- **Decision:** Require literal boolean approval/history-preservation flags and
+  reject malformed reasons at the shared rollback boundary.
+- **Result:** PR #377 merged normally as
+  `b9e411e66a40e52c6856665de6af55248f86464d`; shared rollback tests **7/7**,
+  CLI rollback-plan tests **8/8**, typecheck/build passed.
+- **Boundary:** Local decision contract only. DIST-006 remains open for
+  authenticated provider rollback/revocation, operational review, and final
+  acceptance. Score remains **246/34/280**.
+- **Evidence:** `evidence/dist-006-strict-rollback-input-validation-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-003 streamed source hardening
 
 - **Decision:** Stream file-backed record members from the exact validated

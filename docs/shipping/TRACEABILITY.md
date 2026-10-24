@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-006 strict rollback-input validation
+
+- **Implementation mapping:** Shared rollback decisions require literal
+  boolean approval/history flags and reject malformed reasons; PR #377 merged
+  normally as `b9e411e66a40e52c6856665de6af55248f86464d`.
+- **Verification mapping:** Shared rollback tests **7/7**, CLI rollback-plan
+  tests **8/8**, shared typecheck/build, and CLI build passed.
+- **Boundary mapping:** Local decision validation does not provide authenticated
+  provider rollback/revocation, operational review, or final acceptance. Score
+  remains **246/34/280**.
+- **Evidence:** `evidence/dist-006-strict-rollback-input-validation-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-003 streamed source hardening
 
 - **Implementation mapping:** File-backed members stream from the validated

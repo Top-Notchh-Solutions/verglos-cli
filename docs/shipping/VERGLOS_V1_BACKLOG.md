@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-006 strict rollback-input validation
+
+The shared rollback boundary now requires literal boolean approval and
+historical-record-preservation flags and rejects malformed reasons without
+throwing. PR #377 merged normally as
+`b9e411e66a40e52c6856665de6af55248f86464d`; shared rollback tests passed **7/7**,
+CLI rollback-plan tests **8/8**, shared typecheck/build passed, and CLI build
+passed. Keep DIST-006 unchecked for authenticated provider rollback/revocation,
+operational review, and final acceptance. Score remains **246 checked / 34 open
+/ 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-006-strict-rollback-input-validation-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · ACCEPT-003 streamed source hardening
 
 File-backed record ingestion now streams from the exact validated source

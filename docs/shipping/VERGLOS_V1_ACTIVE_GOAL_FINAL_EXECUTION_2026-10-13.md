@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-006 strict rollback-input validation
+
+The shared rollback/revocation decision boundary now requires literal boolean
+approval and historical-record-preservation flags and rejects null/non-string
+reasons without throwing. PR **#377** merged normally as
+`b9e411e66a40e52c6856665de6af55248f86464d`. Shared rollback tests passed
+**7/7**, CLI rollback-plan tests **8/8**, shared typecheck/build passed, and
+CLI build passed. This is real DIST-006 implementation progress, but the row
+remains open for authenticated provider/registry/engine/feed/signing/Vercel
+rollback or revocation, operational review, and final acceptance. No external
+rollback or paid Actions state changed. Score remains **246 checked / 34 open /
+280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-006-strict-rollback-input-validation-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-003 streamed source hardening
 
 The file-backed record ingestion path now streams from the exact validated
