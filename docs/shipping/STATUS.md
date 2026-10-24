@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · DIST-002/003 registry SemVer hardening
+
+The CLI updater now rejects unsafe numeric release components and invalid
+leading-zero numeric prerelease identifiers from npm metadata. PR #371 merged
+normally as `0ed84805226cff8fe129596db2c3f3011885f7f7`; updater tests **8/8**,
+typecheck, and build passed. This is production release-channel code progress,
+not trusted publication or final acceptance. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/dist-002-003-registry-semver-hardening-2026-10-24.md`.
+
+## 2026-10-24 · DIST-003 current-source release-artifact preflight
+
 ## 2026-10-24 · DIST-003 current-source release-artifact preflight
 
 Current exact-source preflight passed build **8/8**, release contracts **57/57**,

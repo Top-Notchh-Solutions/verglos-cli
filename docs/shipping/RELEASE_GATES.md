@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-002/003 registry SemVer hardening
+
+The CLI updater rejects unsafe numeric release components and invalid
+leading-zero numeric prerelease identifiers before selecting a stable npm
+version. PR #371 merged normally as
+`0ed84805226cff8fe129596db2c3f3011885f7f7`; updater tests **8/8**, typecheck,
+and build passed. This gate remains implementation-only: no checkbox changed;
+score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Trusted publication, immutable attestation, provider action,
+independent review, and final acceptance remain open. Evidence:
+`evidence/dist-002-003-registry-semver-hardening-2026-10-24.md`.
+
+## 2026-10-24 · DIST-003 current-source release-artifact preflight
+
 ## 2026-10-24 · DIST-003 current-source release-artifact preflight
 
 Exact `origin/main` source built **8/8** packages; release/artifact contracts

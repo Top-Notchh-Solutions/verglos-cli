@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-002/003 registry SemVer hardening
+
+- **Decision:** Treat npm metadata as untrusted input and reject unsafe
+  numeric release components and numeric prerelease identifiers with leading
+  zeroes before stable-version selection.
+- **Result:** PR #371 merged normally as
+  `0ed84805226cff8fe129596db2c3f3011885f7f7`; updater tests **8/8**, CLI
+  typecheck, and build passed.
+- **Boundary:** Release-channel code only. No registry/provider write,
+  publication, protected approval, paid Actions run, independent review, or
+  final acceptance occurred. Score remains **246/34/280**.
+- **Evidence:** `evidence/dist-002-003-registry-semver-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-003 current-source release-artifact preflight
 
 - **Decision:** Record the exact current-source release preflight after syncing

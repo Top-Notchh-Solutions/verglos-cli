@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-002/003 registry SemVer hardening
+
+The CLI stable update channel now rejects unsafe npm version metadata: numeric
+release components must be safe integers and numeric prerelease identifiers may
+not contain leading zeroes. This prevents malformed registry keys from being
+selected or ordered as releases. PR **#371** merged normally as
+`0ed84805226cff8fe129596db2c3f3011885f7f7`; focused updater tests passed
+**8/8**, and CLI typecheck/build passed. This is real production
+release-channel implementation evidence, but DIST-002/003 remain unchecked
+for trusted publication, immutable attestation, protected/provider action,
+independent review, and final release acceptance. No paid Actions run was
+allowed to continue, and no package or provider state changed. Score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent /
+21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-002-003-registry-semver-hardening-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · DIST-003 current-source release-artifact preflight
 
 After fast-forwarding to exact `origin/main` source
