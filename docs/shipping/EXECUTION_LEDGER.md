@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-005 current local isolated recheck · 2026-10-24
+
+- **Execution:** Ran the focused privacy page, account-deletion route,
+  inventory, hold, worker, customer-held digest, and qualification contracts
+  with both test database variables bound to disposable local PostgreSQL.
+- **Result:** **60/60** tests passed with zero failures, skips, cancellations,
+  or todos. Deletion-specific tables were empty after the run; one pre-existing
+  fixture user row remained.
+- **Acceptance mapping:** This advances only local implementation and
+  qualification. Keep QUAL-WEB-005 open for Production/customer-held
+  operation, independent review, and final release acceptance. No data outside
+  the disposable fixture was deleted or overwritten.
+- **Integrity:** Bundle v58 verifies **392** files with zero mismatches,
+  manifest `sha256:2bfdc664c8185449e9906fdbc65343d4ddfece39f74cf624851936ae076c2a71`,
+  and passed secret scanning.
+- **Evidence:** `evidence/qual-web-005-current-local-isolated-recheck-2026-10-24.md`.
+
 ## DIST-002/DIST-003 current license validation · 2026-10-24
 
 - **Execution:** Ran the current license-inventory contract suite, external

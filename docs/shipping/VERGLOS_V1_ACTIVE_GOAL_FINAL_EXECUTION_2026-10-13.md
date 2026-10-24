@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · QUAL-WEB-005 local isolated recheck
+
+The current privacy/account-deletion/customer-held qualification suite passed
+**60/60** with zero failures, skips, cancellations, or todos against the
+disposable local PostgreSQL fixture. The deletion-specific tables were empty
+after the run; the fixture retained one pre-existing user row. This is local
+implementation/qualification evidence only. `QUAL-WEB-005` remains unchecked
+for Production/customer-held operation, independent review, and final release
+acceptance. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-005-current-local-isolated-recheck-2026-10-24.md`.
+Bundle v58 verifies **392** bounded files with **0** mismatches, manifest
+`sha256:2bfdc664c8185449e9906fdbc65343d4ddfece39f74cf624851936ae076c2a71`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · DIST-002/DIST-003 license validation
 
 The current license inventory test suite passed **6/6**; external license
