@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-006 strict rollback-input validation
+
+Rollback approval and history-preservation flags are now literal-boolean
+validated, and malformed reasons fail closed without throwing. PR #377 merged
+normally; shared rollback tests **7/7**, CLI rollback-plan tests **8/8**,
+typecheck/build, and CLI build passed. This is implementation evidence only:
+DIST-006 remains open for authenticated provider rollback/revocation,
+operational review, and final acceptance. Score remains **246/34/280 (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/dist-006-strict-rollback-input-validation-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-003 streamed source hardening
 
 File-backed record ingestion now streams from the validated source handle,

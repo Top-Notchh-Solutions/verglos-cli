@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## DIST-006 strict rollback-input validation · 2026-10-24
+
+- **Execution:** Hardened the shared rollback decision contract against
+  malformed reasons and truthy non-boolean approval/history flags; merged PR
+  #377 normally.
+- **Result:** Commit `b9e411e66a40e52c6856665de6af55248f86464d`; shared rollback
+  tests **7/7**, CLI rollback-plan tests **8/8**, shared typecheck/build, and
+  CLI build passed.
+- **Acceptance mapping:** This advances the local decision boundary only. Keep
+  DIST-006 open for authenticated provider rollback/revocation, operational
+  review, and final acceptance. Score remains **246/34/280**. No external or
+  paid Actions state changed.
+- **Evidence:** `evidence/dist-006-strict-rollback-input-validation-2026-10-24.md`.
+
 ## ACCEPT-003 streamed source hardening · 2026-10-24
 
 - **Execution:** Replaced pathname-based source streaming with a bounded loop
