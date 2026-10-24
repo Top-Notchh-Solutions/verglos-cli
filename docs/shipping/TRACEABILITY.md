@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-head local regression sweep
+
+- **Implementation mapping:** CLI candidate
+  `f6facdc5ad312325f00618e3e463dc81569c4341` passed `pnpm test` with **13/13**
+  Turbo tasks; Web candidate `257e1cc8e0b467d16966433033589111f62f56f0`
+  passed `pnpm test:serial` with **904/928** tests, **24 designed skips**,
+  **0 failures**, and **0 cancellations**.
+- **Boundary mapping:** The sweep supports implementation/regression status
+  only. It does not satisfy provider, customer, independent-review, field-CWV,
+  AppSec/Hunt, account-deletion, or final-release gates; no checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/nonappsec-current-head-local-regression-2026-10-24.md`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v22.json`
+  verifies 356 files with zero mismatches, matching manifest
+  `sha256:ab363fe3c0369e2e3575397fb798b1668dc13741e87f50a80387d126d6753994`,
+  and passed secret scanning.
+
 ## 2026-10-24 · current-candidate reconciliation v6
 
 - **Candidate mapping:** CLI `f6facdc5ad312325f00618e3e463dc81569c4341` / Web
