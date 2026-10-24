@@ -1,5 +1,21 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · QUAL-WEB-005 isolated account-deletion integration
+
+The authenticated deletion route and worker integration tests passed **2/2**
+against the isolated local `verglos_test` PostgreSQL fixture, with **0**
+failures, skips, or cancellations. Fixture cleanup checks returned zero
+residual test user/request rows. This advances QUAL-WEB-005 implementation and
+qualification evidence only; it does not create Production deletion,
+legal/customer-held-record, restore/rollback, independent-review, or final
+acceptance evidence, so no checkbox changed. Score remains **246 checked / 34
+open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/qual-web-005-account-deletion-isolated-integration-2026-10-24.md`.
+Bundle v23 verifies **357** bounded files with **0** mismatches, matching
+manifest `sha256:047fe598a503d29f161eb9a4497292357912b599f2d9957c01b5eb8b41740d0d`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · current-head local regression sweep
 
 The implementation regression suites passed locally against the current

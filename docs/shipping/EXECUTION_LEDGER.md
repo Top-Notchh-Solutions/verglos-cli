@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## QUAL-WEB-005 isolated account-deletion integration · 2026-10-24
+
+- **Execution:** Ran the authenticated deletion route and worker integration
+  tests against the isolated local `verglos_test` PostgreSQL fixture.
+- **Result:** **2/2** passed; **0** failures, skips, or cancellations. The
+  fixture cleanup query returned zero residual test user/request rows.
+- **Source:** Web `7307ae5e0cea18e6d0803aa179fafcc2a0ce36f8`, contained in
+  merged Web `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Disposition:** This advances QUAL-WEB-005 implementation/qualification
+  evidence only. No checkbox was upgraded; score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-005-account-deletion-isolated-integration-2026-10-24.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v23.json`
+  verifies 357 files with zero mismatches, matching manifest
+  `sha256:047fe598a503d29f161eb9a4497292357912b599f2d9957c01b5eb8b41740d0d`,
+  and passed secret scanning.
+
 ## Current-head local regression sweep · 2026-10-24
 
 - **Execution:** Ran the current CLI and Web regression suites locally against

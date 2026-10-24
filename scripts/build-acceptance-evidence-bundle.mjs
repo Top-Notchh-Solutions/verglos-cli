@@ -368,6 +368,7 @@ const paths = [
   "docs/shipping/evidence/acceptance-release-reconciliation-input-2026-10-24-v6.json",
   "docs/shipping/evidence/acceptance-release-reconciliation-2026-10-24-current-v6.json",
   "docs/shipping/evidence/nonappsec-current-head-local-regression-2026-10-24.md",
+  "docs/shipping/evidence/qual-web-005-account-deletion-isolated-integration-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];
 

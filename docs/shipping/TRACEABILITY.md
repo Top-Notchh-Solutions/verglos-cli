@@ -1,5 +1,24 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · QUAL-WEB-005 isolated account-deletion integration
+
+- **Implementation mapping:** Web `7307ae5e0cea18e6d0803aa179fafcc2a0ce36f8`,
+  contained in merged Web `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Qualification mapping:** Authenticated deletion route and worker tests
+  passed **2/2** against isolated local `verglos_test`; cleanup returned zero
+  residual test user/request rows.
+- **Boundary mapping:** No Production deletion, legal/customer-held-record
+  decision, restore/rollback acceptance, independent review, or final-release
+  evidence was inferred; no checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/qual-web-005-account-deletion-isolated-integration-2026-10-24.md`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v23.json`
+  verifies 357 files with zero mismatches, matching manifest
+  `sha256:047fe598a503d29f161eb9a4497292357912b599f2d9957c01b5eb8b41740d0d`,
+  and passed secret scanning.
+
 ## 2026-10-24 · current-head local regression sweep
 
 - **Implementation mapping:** CLI candidate

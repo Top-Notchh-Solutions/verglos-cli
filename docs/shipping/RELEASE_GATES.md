@@ -1,5 +1,20 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-005 isolated account-deletion integration
+
+The authenticated deletion route and worker integration tests passed **2/2**
+against the isolated local `verglos_test` fixture, with **0** failures, skips,
+or cancellations; cleanup checks returned zero residual test user/request
+rows. This advances local implementation/qualification evidence only. It does
+not satisfy destructive account-deletion acceptance, legal/customer-held-record
+disposition, restore/rollback acceptance, independent review, or final release.
+No checkbox changed; score remains **246/34/280 (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/qual-web-005-account-deletion-isolated-integration-2026-10-24.md`.
+Bundle v23 verifies **357** files with zero mismatches, matching manifest
+`sha256:047fe598a503d29f161eb9a4497292357912b599f2d9957c01b5eb8b41740d0d`,
+and passed secret scanning.
+
 ## 2026-10-24 · current merged CLI public-OSS corpus execution
 
 CLI commit `cd9d572e` (merged PR #294) produced a fresh local execution receipt
