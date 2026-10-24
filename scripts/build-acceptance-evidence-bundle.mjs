@@ -278,6 +278,7 @@ const paths = [
   "docs/shipping/evidence/vercel-production-pr277-transient-capture-2026-10-24.md",
   "docs/shipping/evidence/qual-web-006-dashboard-pagination-total-pr276-2026-10-24.md",
   "docs/shipping/evidence/qual-web-006-dashboard-dataset-totals-pr278-2026-10-24.md",
+  "docs/shipping/evidence/qual-web-006-dashboard-dataset-counts-pr279-2026-10-24.md",
   "docs/shipping/evidence/vercel-production-pr276-deployment-2026-10-24.md",
   "docs/shipping/evidence/final-web-007-production-pr275-chromium-2026-10-24.json",
   "docs/shipping/evidence/final-web-007-production-pr275-firefox-2026-10-24.json",

@@ -1,5 +1,32 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #279 Production receipt
+
+Web PR #279 merged normally as `ab6bb6c0cc13c38d20c5296a37b48171f07db8ee`
+from `9291d0834a37d18b56e1d1df135dfb2d86f8e13a`. Authenticated Alerts, SCM,
+Members, and Billing dashboards now expose exact server-side dataset counts
+beside bounded rendered slices, preserving tenant/license/project boundaries
+and never selecting secrets or provider payloads.
+
+Local typecheck, dashboard contracts **4/4**, serial Web (**904 passed / 24
+designed database-dependent skips / 0 failures / 928 total**), and Production
+build (**49/49** routes) passed. Vercel deployment
+`dpl_4jTk3gJtYBAG2rtx8EcqP1UKEUBA` is READY for target `production`; read-only
+checks on both public hostnames and six declared routes returned HTTP **200**.
+No database write, payment, customer repository/data, publication, deletion, or
+final npm release occurred. GitHub Actions checks were not used as evidence
+because the account budget is blocked.
+
+This advances QUAL-WEB-006 implementation/provider evidence only. The complete
+100-row capture, loading/error qualification, human/field, independent-review,
+and final acceptance requirements remain open. No checkbox changed; score
+remains **245 checked / 35 open / 280 total (87.5%)**, partitioned as **13
+AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-dataset-counts-pr279-2026-10-24.md`.
+Additive bundle v43 contains **273** hashed evidence files, verifies with **0**
+mismatches, passes secret scanning, and matches manifest
+`sha256:ce6ffdb9adb52a651a488ea44a2335772ef2870f84537c905d1d9f1ff80cc206`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #278 Production receipt
 
 Web PR #278 merged normally as `11b4f5c717c4b127655b53a15f029c693fb1fdcd`

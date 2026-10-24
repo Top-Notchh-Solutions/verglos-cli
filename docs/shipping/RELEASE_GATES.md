@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #279 bounded dashboard dataset counts
+
+Web PR #279 merged normally as `ab6bb6c0` from `9291d083`. Alerts, SCM,
+Members, and Billing now expose exact server-side totals beside bounded slices.
+Typecheck, dashboard contracts **4/4**, serial Web **904/928** with 24 designed
+skips and zero failures, and build **49/49** passed. Vercel deployment
+`dpl_4jTk3gJtYBAG2rtx8EcqP1UKEUBA` is READY on `production`; six routes on each
+public hostname returned HTTP **200** after redirects. This opens no gate and
+does not close QUAL-WEB-006: 100-row, loading/error, human/field,
+independent-review, and final-acceptance evidence remain open. No checkbox
+changed; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-dataset-counts-pr279-2026-10-24.md`.
+Additive v43 verifies **273** files with **0** mismatches, passes secret
+scanning, and matches manifest
+`sha256:ce6ffdb9adb52a651a488ea44a2335772ef2870f84537c905d1d9f1ff80cc206`.
+
 ## 2026-10-24 · Web PR #278 bounded dashboard dataset totals
 
 Web PR #278 merged normally as `11b4f5c7` from `0da1d132`. The authenticated

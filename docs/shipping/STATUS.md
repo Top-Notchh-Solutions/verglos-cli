@@ -1,5 +1,22 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #279 Production receipt
+
+Web PR #279 merged normally as `ab6bb6c0` from `9291d083`. Alerts, SCM,
+Members, and Billing dashboard slices now expose exact server-side dataset
+counts with tenant/license/project-safe queries. Typecheck, dashboard
+contracts **4/4**, serial Web **904 passed / 24 designed skips / 0 failures**,
+and build **49/49** passed. Vercel deployment
+`dpl_4jTk3gJtYBAG2rtx8EcqP1UKEUBA` is READY for `production`; both public
+hostnames and six read-only routes returned HTTP **200**. This is
+implementation/provider evidence only; no checkbox changed and the score
+remains **245/35/280 (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec**
+rows open. Evidence:
+`evidence/qual-web-006-dashboard-dataset-counts-pr279-2026-10-24.md`.
+Additive bundle v43 contains **273** hashed files, verifies with **0**
+mismatches, passes secret scanning, and matches manifest
+`sha256:ce6ffdb9adb52a651a488ea44a2335772ef2870f84537c905d1d9f1ff80cc206`.
+
 ## 2026-10-24 · Web PR #278 Production receipt
 
 Web PR #278 merged normally as `11b4f5c7` from `0da1d132`. Authenticated
