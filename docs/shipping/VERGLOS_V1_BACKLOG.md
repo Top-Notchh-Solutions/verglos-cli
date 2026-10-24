@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #297 expiry-fenced handoff revocation
+
+Web PR #297 merged normally as
+`ed60da0199ef6eba54faf5d387609e56c5b2ae8a` from `4b3b6c7`. Handoff
+revocation now repeats `expiresAt > revokedAt` inside the transactional
+compare-and-set, so an issued receipt cannot be revoked after its exact
+deadline. Focused handoff contracts passed **33/33**, typecheck and diff
+checks passed. The merged-head Vercel Production deployment
+`dpl_4KErnPb4XCnzpGKCapjQwKHEEpAQ` was **QUEUED** at capture; no Ready claim is
+made. This advances `STUDIO-CLI-001` implementation only; recipient
+acceptance, independent review, and final release remain open. Actions were
+not rerun under the blocked budget boundary. No checkbox changed; score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-handoff-revoke-expiry-fence-pr297-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · Web PR #296 exact handoff expiry boundary
 
 Web PR #296 merged normally as
