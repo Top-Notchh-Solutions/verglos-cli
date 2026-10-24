@@ -9,11 +9,15 @@ independent review, authenticated-browser acceptance, field-CWV,
 account-deletion acceptance, and final release. The exact v3 input/result are
 bound to the current candidate and the retained freeze inventory remains
 24/24 artifacts with all 12 required kinds present. The additive integrity
-bundle verifies **333 files**, zero mismatches, matching manifest
-`sha256:dfe950489e85cc94545424b4b0896fce0d8ab950099d39f9598e9755787a8c7a`,
+bundle v8 verifies **334 files**, zero mismatches, matching manifest
+`sha256:4363ecaebda8e0fd9b99c2b982a89b171f44520595514f63712bb3931b8bbcb1`,
 and passed secret scan. Backlog score remains **246 checked / 34 open / 280
 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
 `docs/shipping/evidence/acceptance-release-reconciliation-freeze-2026-10-24-v3.md`.
+The refreshed freeze output is
+`docs/shipping/evidence/acceptance-candidate-freeze-2026-10-24-current-v3.json`
+(`sha256:5e4f4a33a1b64f391ce13439d7c10bbc504036f26806cde5c02f067350acfbb1`),
+with 24/24 artifacts present and six open gates.
 
 ## Latest continuation result · 2026-10-24 · ACCEPT-005 closed for public-OSS scope
 

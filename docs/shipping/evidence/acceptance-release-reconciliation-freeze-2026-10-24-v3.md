@@ -25,9 +25,14 @@ Artifacts:
 
 ## Freeze boundary
 
-The existing exact-candidate freeze inventory remains **24/24 artifacts**, all
+The refreshed exact-candidate freeze inventory remains **24/24 artifacts**, all
 12 required artifact kinds present, with zero missing artifacts. Its decision
 remains `no-go` and status `blocked` because the six gates above remain open.
+The refreshed output is:
+
+- Current output: `acceptance-candidate-freeze-2026-10-24-current-v3.json`
+  SHA-256 `sha256:5e4f4a33a1b64f391ce13439d7c10bbc504036f26806cde5c02f067350acfbb1`
+
 The prior freeze input/output are retained for audit history:
 
 - Input SHA-256 `sha256:0e4cbe440ebd85561f2a71370809ece374cca50dca35650a4088dd1f8cbdda8b`

@@ -238,6 +238,7 @@ const paths = [
   "docs/shipping/evidence/acceptance-candidate-freeze-2026-10-24-current.json",
   "docs/shipping/evidence/acceptance-candidate-freeze-input-2026-10-24-v2.json",
   "docs/shipping/evidence/acceptance-candidate-freeze-2026-10-24-current-v2.json",
+  "docs/shipping/evidence/acceptance-candidate-freeze-2026-10-24-current-v3.json",
   "docs/shipping/evidence/acceptance-release-reconciliation-freeze-2026-10-24.md",
   "docs/shipping/evidence/acceptance-release-reconciliation-freeze-2026-10-24-v2.md",
   "docs/shipping/evidence/acceptance-release-reconciliation-freeze-2026-10-24-v3.md",

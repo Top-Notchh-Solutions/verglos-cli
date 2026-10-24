@@ -6,12 +6,14 @@
   version `2.0.0-alpha.4`, and the merged backlog disposition.
 - **Verification mapping:** Reconciliation v3 records 1 shipped row and 21
   partial rows; six gates remain open and the recommendation is `no-go`.
-- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-release-reconciliation-v7.json`
-  verifies 333 files with zero mismatches and passed secret scan.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-release-reconciliation-v8.json`
+  verifies 334 files with zero mismatches and passed secret scan.
 - **Acceptance mapping:** This reconciles state; it does not create provider,
   human/field, independent-review, account-deletion, AppSec/Hunt, or final
   release evidence.
 - **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24-v3.md`.
+- **Freeze mapping:** `evidence/acceptance-candidate-freeze-2026-10-24-current-v3.json`
+  verifies 24/24 present artifacts and zero missing required kinds.
 
 ## 2026-10-24 · ACCEPT-005 public-OSS scope disposition
 
