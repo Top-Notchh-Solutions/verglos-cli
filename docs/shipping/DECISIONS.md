@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-010 workspace-root freeze replay
+
+- **Decision:** Correct the replay root for the existing candidate-freeze
+  input; retain the historical inputs and do not alter release state.
+- **Result:** **24/24** artifacts and **12/12** required kinds were present and
+  digest-valid; missing artifacts and kinds were both zero. The freeze remains
+  `blocked`/`no-go` with six recorded open gates.
+- **Boundary:** No provider or Production write, publication, customer access,
+  independent review, or final release sign-off occurred. ACCEPT-010 remains
+  unchecked; score remains **246/34/280**.
+- **Evidence:** `evidence/accept-010-current-freeze-workspace-root-replay-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v46.json` verifies 380 files with zero mismatches, matching manifest `sha256:beccc43eb2d64486dadde1f6718e2ea26aea6aa5cda786c5326cc2a3b167949c`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-008 current-head rerun
 
 - **Decision:** Record the commercial validator’s current fail-closed result

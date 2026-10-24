@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-010 workspace-root freeze replay
+
+The existing candidate-freeze input now replays against the correct workspace
+artifact root: **24/24** artifacts and **12/12** required kinds are present and
+digest-valid. The freeze remains `blocked`/`no-go` because provider lifecycle,
+independent review, authenticated browser, field CWV, account deletion, and
+final release remain open. No checkbox changed; score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-010-current-freeze-workspace-root-replay-2026-10-24.md`.
+Bundle v46 verifies **380** files with zero mismatches, matching manifest
+`sha256:beccc43eb2d64486dadde1f6718e2ea26aea6aa5cda786c5326cc2a3b167949c`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-008 current-head rerun
 
 The commercial-validator syntax check and suite passed **9/9**, retaining

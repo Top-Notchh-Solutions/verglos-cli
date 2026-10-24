@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-010 workspace-root freeze replay
+
+- **Implementation mapping:** Candidate-freeze verifier replayed with the
+  workspace root, matching the input’s repository-relative artifact paths.
+- **Contract mapping:** **24/24** artifacts and **12/12** required kinds were
+  present and digest-valid; no missing artifact or kind was reported.
+- **Boundary mapping:** The freeze remains blocked/no-go for provider lifecycle,
+  independent review, authenticated browser, field CWV, account deletion, and
+  final release. No release state was upgraded.
+- **Evidence:** `evidence/accept-010-current-freeze-workspace-root-replay-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v46.json` verifies 380 files with zero mismatches, matching manifest `sha256:beccc43eb2d64486dadde1f6718e2ea26aea6aa5cda786c5326cc2a3b167949c`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-008 current-head rerun
 
 - **Implementation mapping:** Current commercial evidence validator at CLI

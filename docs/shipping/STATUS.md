@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-010 workspace-root freeze replay
+
+The candidate-freeze replay verified **24/24** artifacts and **12/12** required
+kinds with zero missing artifacts or kinds. It remains blocked/no-go for the
+six recorded open gates; ACCEPT-010 remains unchecked. Score remains **246/34/
+280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-010-current-freeze-workspace-root-replay-2026-10-24.md`.
+Bundle v46 verifies **380** files with zero mismatches, matching manifest
+`sha256:beccc43eb2d64486dadde1f6718e2ea26aea6aa5cda786c5326cc2a3b167949c`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-008 current-head rerun
 
 The commercial-validator syntax check passed and the suite passed **9/9**;
