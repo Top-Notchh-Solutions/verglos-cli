@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-005 closed for public-OSS scope
+
+`ACCEPT-005` is closed for the current owner-authorized public-OSS exact-commit
+scope. The packet has exact license/commit binding, denied network, redacted
+private output, complete execution, and confirmed expiry/deletion. It makes no
+customer-acceptance claim and must reopen if the scope expands to customer-owned
+repositories. Score is now **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/accept-005-public-oss-scope-disposition-2026-10-24.md`.
+Current bundle: `evidence/acceptance-evidence-bundle-2026-10-24-accept005-scope-v6.json`
+(329 files, 0 mismatches, secret scan passed, customer-consent gate passed for
+the declared public-OSS scope).
+
 ## 2026-10-24 · Web contract recheck
 
 The current merged Web head `705a85e` passed the local account-deletion

@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-005 public-OSS scope disposition
+
+- **Source mapping:** Owner-authorized public OSS repository at an exact
+  commit, with recorded license and terms evidence.
+- **Verification mapping:** Complete bounded workflow execution passed with
+  denied network, redaction/scope preflight passes, private report digests, and
+  confirmed expiry/deletion.
+- **Acceptance mapping:** `ACCEPT-005` is closed only for the current
+  public-OSS-only V1 scope. This does not claim external customer consent or
+  customer acceptance; reopen on scope expansion. Score is 246/34/280.
+- **Evidence:** `evidence/accept-005-public-oss-scope-disposition-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-accept005-scope-v6.json`
+  verifies 329 files with zero mismatches and passed secret scan.
+
 ## 2026-10-24 · Web contract recheck
 
 - **Source mapping:** Current merged Web head `705a85e` in the Web worktree.

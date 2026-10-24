@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · close ACCEPT-005 for public-OSS scope
+
+- **Decision:** Close `ACCEPT-005` under the explicit V1 scope of
+  owner-authorized public OSS exact-commit analysis.
+- **Basis:** The workflow packet records license/commit binding, owner
+  authorization, denied network, complete execution, redacted private output,
+  and confirmed expiry/deletion.
+- **Boundary:** This is a scope disposition, not customer consent or customer
+  acceptance. Reopen if customer-owned or consented-team repositories enter
+  the product scope. No provider publication, payment, independent review,
+  AppSec/Hunt review, or final release was performed.
+- **Score:** 246 checked / 34 open / 280 total (87.9%); 13 AppSec-dependent /
+  21 non-AppSec open.
+- **Evidence:** `evidence/accept-005-public-oss-scope-disposition-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-accept005-scope-v6.json`
+  verifies 329 files with zero mismatches; customer-consent is passed only for
+  the declared public-OSS scope.
+
 ## 2026-10-24 · record Web contract recheck
 
 - **Decision:** Accept the local Web contract run as additive implementation

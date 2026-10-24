@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-005 closed for public-OSS scope
+
+`ACCEPT-005` is now closed for the current V1 scope: owner-authorized analysis
+of public open-source JS/TS repositories at exact commits, subject to license
+and terms, with private redacted reports and no customer-acceptance claim. The
+retained packet proves exact-commit/license binding, owner approval, denied
+network policy, complete execution, preflight scope/redaction checks, private
+output, and confirmed expiry/deletion. This is a scope disposition, not
+synthetic customer consent; the row must reopen if the scope expands to
+customer-owned or consented-team repositories. Score is now **246 checked /
+34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/accept-005-public-oss-scope-disposition-2026-10-24.md`.
+Current integrity bundle `docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-accept005-scope-v6.json`
+verifies 329 files with 0 mismatches, a matching manifest
+`sha256:db4c010cc17714d8414b75efda84bcdc06e74ece3ac409d163736047117de385`,
+and a passed secret scan; its customer-consent gate is passed for this scope.
+
 ## Latest continuation result · 2026-10-24 · Web contract recheck
 
 The current merged Web head `705a85e` passed the local account-deletion
