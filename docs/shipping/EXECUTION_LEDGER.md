@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## STUDIO-CLI-001 bounded current recheck · 2026-10-24
+
+- **Execution:** Ran the current CLI package suite and focused Web Studio
+  projection, custody, handoff, leakage, allowance, retention, and E2E tests.
+- **Result:** CLI exited 0 with two documented Hunt Docker opt-in skips; Web
+  passed **106/106** with zero failures, skips, cancellations, or todos.
+- **Disposition:** Implementation remains green, but recipient/customer
+  acceptance and the independent hosted/audit record are absent;
+  STUDIO-CLI-001 remains unchecked and score remains **246/34/280**.
+- **Evidence:** `evidence/studio-cli-001-bounded-current-recheck-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v47.json` verifies 381 files with zero mismatches, matching manifest `sha256:aa4f8a83ec9fb54c8fe71220a15c7611171f04b41a68dea035a386c49bb15ebe`, and passed secret scanning.
+
 ## ACCEPT-010 workspace-root freeze replay · 2026-10-24T07:38Z
 
 - **Execution:** Replayed the existing candidate-freeze input with the
