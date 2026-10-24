@@ -1,6 +1,7 @@
 {
   "name": "@verglos/hunt",
   "version": "2.0.0-alpha.4",
+  "description": "Bounded, approval-bound Hunt execution handoff and evidence helpers for Verglos.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -28,6 +29,24 @@
   "engines": {
     "node": ">=20"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Top-Notchh-Solutions/verglos-cli.git",
+    "directory": "packages/hunt"
+  },
+  "homepage": "https://verglos.com",
+  "bugs": {
+    "url": "https://github.com/Top-Notchh-Solutions/verglos-cli/issues"
+  },
+  "author": "Top Notchh Team",
+  "keywords": [
+    "security",
+    "hunt",
+    "sandbox",
+    "evidence",
+    "approval",
+    "typescript"
+  ],
   "publishConfig": {
     "access": "public"
   },
