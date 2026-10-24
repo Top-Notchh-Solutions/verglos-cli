@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-014 correction merged
+
+- **Source mapping:** CLI PR #306 merged at
+  `b533877a56b81555ce1a2633b413edbc053311ff`; the clean v5 matrix artifacts
+  are authoritative on `origin/main` and v4 remains historical evidence.
+- **Verification mapping:** The 322-file bundle remains byte-integrity verified
+  with 0 mismatches; all PR-triggered Actions runs were canceled and none are
+  active in CLI or Web.
+- **Acceptance mapping:** No row was closed; score remains 245/35/280 because
+  the five ACCEPT-014 gates remain open. No release boundary was crossed.
+- **Evidence:** PR [#306](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/306)
+  and `evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-014 clean-corpus matrix correction
 
 - **Source mapping:** Eight exact-commit public-OSS fixtures, CLI `cd9d572e`,

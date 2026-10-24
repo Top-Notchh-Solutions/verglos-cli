@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-014 correction merged
+
+CLI PR #306 merged normally at
+`b533877a56b81555ce1a2633b413edbc053311ff`. The clean v5 matrix and its
+322-file integrity bundle are now on `origin/main`; v4 remains retained for
+audit history. The three PR-triggered Actions runs were canceled and no active
+CLI/Web Actions runs remain. No checkbox changed: **245 checked / 35 open /
+280 total (87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**. Keep the
+remaining rows open because ACCEPT-014's five truth/risk/correction/provider/
+final-release gates remain unresolved. No npm publication, tag, release,
+payment, customer data, deletion, or final release occurred.
+
+Evidence: PR [#306](https://github.com/Top-Notchh-Solutions/verglos-cli/pull/306);
+`docs/shipping/evidence/accept-014-final-regression-full-matrix-v5-2026-10-24.md`.
+
 ## 2026-10-24 · production inspection bundle verification
 
 The additive bundle contains **310** bounded evidence files, verifies with
