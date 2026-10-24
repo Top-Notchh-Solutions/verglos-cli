@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current Web candidate local verification addendum
+
+Web commit `21f9cfbd559d2b06c328d985ef4615430643c0ed` passed typecheck, the
+full local suite (**904 passed / 24 designed database-dependent skips / 0
+failures / 928 total**), and the production build (**49/49** routes). This
+advances code/build evidence for QUAL-WEB-005/006 and FINAL-WEB surfaces only;
+no checkbox changed. Score remains **245 checked / 35 open / 280 total
+(87.5%)**, split into **13 AppSec-dependent / 22 non-AppSec** rows.
+Evidence: `docs/shipping/evidence/final-web-current-head-local-verification-2026-10-24.md`.
+The additive bundle verifies **289** files with zero mismatches and manifest
+`sha256:8d00fc1e4303c58fbf504492b639c3c6bc05c57d5e4caa614699e2847c34c6ab`.
+
 ## 2026-10-24 · production availability recheck addendum
 
 The current Vercel Production deployment

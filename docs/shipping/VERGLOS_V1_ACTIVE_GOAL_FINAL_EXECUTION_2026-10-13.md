@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current Web candidate local verification
+
+Web commit `21f9cfbd559d2b06c328d985ef4615430643c0ed` was verified from a clean
+worktree. `pnpm typecheck` passed; the full Web suite passed **904/928** with
+**24 designed database-dependent skips and 0 failures**; and `pnpm build`
+generated **49/49** routes. The production-build configuration check did not
+request a migration or database write.
+
+This strengthens current code/build evidence for QUAL-WEB-005/006 and the
+FINAL-WEB surfaces. It does not close a row or fabricate hosted, human,
+field-CWV, customer, independent-review, AppSec/Hunt, provider-lifecycle, or
+final-release evidence. Score remains **245 checked / 35 open / 280 total
+(87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-current-head-local-verification-2026-10-24.md`.
+The additive bundle now verifies **289** files with zero mismatches and secret
+scanning passed; manifest:
+`sha256:8d00fc1e4303c58fbf504492b639c3c6bc05c57d5e4caa614699e2847c34c6ab`.
+
 ## Latest continuation result · 2026-10-24 · production availability recheck
 
 The already deployed Vercel Production candidate
