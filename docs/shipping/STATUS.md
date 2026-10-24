@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · current CLI public-OSS verifier recheck
+
+The owner-authorized current CLI corpus recheck passed **8/8** exact-commit
+full clones, **13,494** files walked, all four architecture shapes, and **0**
+coverage gaps. Bounded triage recorded **351** observations across **23** rule
+groups; adjudication is still open and no customer acceptance is claimed. The
+private twelve-fixture corpus verifier also passed from the private shipping
+ledger. This is reproducibility evidence only. No checkbox changed; score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/accept-011-012-current-cli-aad2c743-verifier-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · current-head CLI full monorepo regression
 
 CLI `pnpm test` completed with Turbo **13/13 tasks successful** and zero failed

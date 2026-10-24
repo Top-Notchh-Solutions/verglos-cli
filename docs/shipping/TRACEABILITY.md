@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current CLI public-OSS verifier recheck
+
+- **Source mapping:** Current CLI `aad2c74395a5c381c955ab9dfab7462295564840`
+  with the existing eight exact-commit public JS/TS fixtures.
+- **Verification mapping:** **8/8** full clones, **13,494** files walked, all
+  four architecture shapes, **0** coverage gaps, and **351** bounded
+  observations across **23** rule groups. The private twelve-fixture corpus
+  verifier passed from the private shipping ledger as well.
+- **Acceptance mapping:** This is implementation/reproducibility evidence for
+  `ACCEPT-011/012`; observations are unadjudicated, customer acceptance is
+  not claimed, and independent review remains required. No checkbox changed;
+  score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-011-012-current-cli-aad2c743-verifier-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · current-head CLI regression mapping
 
 - **Source mapping:** CLI `aad2c743` with the version-bound SBOM/SPDX sidecar

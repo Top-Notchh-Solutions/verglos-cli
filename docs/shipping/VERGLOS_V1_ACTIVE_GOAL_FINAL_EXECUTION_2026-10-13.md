@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current CLI public-OSS verifier recheck
+
+The owner-authorized current CLI public-OSS corpus was reverified at
+`aad2c74395a5c381c955ab9dfab7462295564840`: **8/8** exact-commit full clones,
+**13,494** files walked, all four required architecture shapes, **0** coverage
+gaps, and bounded triage of **351** observations across **23** rule groups.
+The private twelve-fixture corpus verifier also passed when run from the
+private shipping ledger, including full-clone, coverage, artifact-integrity,
+and internal-fixture checks. Evidence:
+`docs/shipping/evidence/accept-011-012-current-cli-aad2c743-verifier-recheck-2026-10-24.md`.
+
+This advances reproducibility inputs for `ACCEPT-011/012`; observations remain
+unadjudicated, customer acceptance is not claimed, and independent review is
+still required. No checkbox changed. Score remains **245 checked / 35 open /
+280 total (87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open.
+No Actions run, provider write, release publication, or artifact deletion was
+used.
+
 ## Latest continuation result · 2026-10-24 · current-head CLI full monorepo regression
 
 The current CLI head `aad2c74395a5c381c955ab9dfab7462295564840`, including the

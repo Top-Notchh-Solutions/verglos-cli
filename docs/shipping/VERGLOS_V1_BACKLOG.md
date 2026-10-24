@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current CLI public-OSS verifier recheck
+
+The current CLI `aad2c743` public-OSS corpus was reverified at exact frozen
+commits: **8/8** full clones, **13,494** files walked, all four required
+architecture shapes, **0** coverage gaps, and **351** bounded observations
+across **23** rule groups. The private twelve-fixture corpus verifier also
+passed from the private shipping ledger, including internal-fixture integrity.
+This advances `ACCEPT-011/012` reproducibility evidence only; adjudication,
+independent review, customer/recipient, provider/Production, and final-release
+boundaries remain open. No checkbox changed. Score remains **245 checked / 35
+open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/accept-011-012-current-cli-aad2c743-verifier-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · current-head CLI full monorepo regression
 
 CLI source `aad2c743` completed the full local `pnpm test` path after the

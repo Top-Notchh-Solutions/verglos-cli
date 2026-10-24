@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## Current CLI public-OSS verifier recheck · 2026-10-24
+
+- **Execution:** Reverified current CLI `aad2c743` against the existing
+  exact-commit public corpus with telemetry and source upload disabled.
+- **Verification:** **8/8** full clones, **13,494** files walked, all four
+  architecture shapes, **0** coverage gaps, and **351** bounded observations
+  across **23** rule groups. The private twelve-fixture verifier also passed
+  from the private shipping ledger.
+- **Disposition:** Reproducibility progress for `ACCEPT-011/012` only.
+  Observations remain unadjudicated; customer acceptance and independent
+  review remain open. No checkbox changed; score remains **245/35/280
+  (87.5%)**. No Actions run, provider write, publication, or deletion was
+  used.
+- **Evidence:** `evidence/accept-011-012-current-cli-aad2c743-verifier-recheck-2026-10-24.md`.
+
 ## Current-head CLI full monorepo regression · 2026-10-24
 
 - **Execution:** CLI `aad2c743` (SBOM/SPDX sidecar fix merged as `8e87c81d`)

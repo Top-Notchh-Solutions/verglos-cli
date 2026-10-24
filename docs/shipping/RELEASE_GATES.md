@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current CLI public-OSS verifier recheck
+
+The current `aad2c743` public-OSS corpus recheck passed **8/8** exact-commit
+full clones, **13,494** files walked, all four architecture shapes, and **0**
+coverage gaps. Bounded triage completed with **351** observations and **23**
+rule groups. This opens no release gate: observations remain unadjudicated,
+independent review is required, and provider/Production, recipient, and final
+release evidence remain open. No checkbox changed; score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/accept-011-012-current-cli-aad2c743-verifier-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · current-head CLI full monorepo regression
 
 The current CLI `pnpm test` path completed with Turbo **13/13 successful

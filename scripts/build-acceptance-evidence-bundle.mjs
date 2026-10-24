@@ -248,6 +248,7 @@ const paths = [
   "docs/shipping/evidence/vercel-web-production-public-surface-recheck-2026-10-24.md",
   "docs/shipping/evidence/accept-011-012-current-cli-7d07066-public-corpus-2026-10-24.md",
   "docs/shipping/evidence/accept-011-012-current-cli-aad2c743-public-corpus-2026-10-24.md",
+  "docs/shipping/evidence/accept-011-012-current-cli-aad2c743-verifier-recheck-2026-10-24.md",
   "docs/shipping/evidence/customer-acceptance-scope-disposition-2026-10-24.md",
   "docs/shipping/evidence/qual-web-005-fresh-local-deletion-e2e-2026-10-24.md",
   "docs/shipping/evidence/qual-web-005-current-head-fresh-local-deletion-e2e-2026-10-24.md",
