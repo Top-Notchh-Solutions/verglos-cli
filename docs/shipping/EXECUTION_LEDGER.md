@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## DIST-002/003 registry SemVer hardening · 2026-10-24
+
+- **Execution:** Hardened the CLI updater's npm metadata parser against
+  unsafe numeric release components and invalid numeric prerelease spellings;
+  added regression coverage and merged PR #371 normally.
+- **Result:** Commit `0ed84805226cff8fe129596db2c3f3011885f7f7`; updater tests
+  **8/8**, CLI typecheck, and build passed.
+- **Acceptance mapping:** This advances release-channel implementation only.
+  Keep DIST-002/003 open for trusted publication, immutable attestation,
+  protected/provider action, independent review, and final acceptance. Score
+  remains **246/34/280**. No paid Actions run, registry write, or provider
+  action occurred.
+- **Evidence:** `evidence/dist-002-003-registry-semver-hardening-2026-10-24.md`.
+
 ## DIST-003 current-source release-artifact preflight · 2026-10-24
 
 - **Execution:** Fast-forwarded to exact `origin/main`, built all workspace

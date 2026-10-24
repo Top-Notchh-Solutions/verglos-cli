@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-002/003 registry SemVer hardening
+
+- **Implementation mapping:** CLI updater parser rejects unsafe numeric release
+  components and numeric prerelease identifiers with leading zeroes; PR #371
+  merged normally as `0ed84805226cff8fe129596db2c3f3011885f7f7`.
+- **Verification mapping:** Focused updater tests **8/8**, CLI typecheck, and
+  build passed. No hosted Actions run was allowed to continue.
+- **Boundary mapping:** This is release-channel implementation evidence only;
+  trusted publication, immutable attestation, provider action, independent
+  review, and final acceptance remain open. Score remains **246/34/280**.
+- **Evidence:** `evidence/dist-002-003-registry-semver-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · DIST-003 current-source release-artifact preflight
 
 - **Source mapping:** Exact `origin/main` source was
