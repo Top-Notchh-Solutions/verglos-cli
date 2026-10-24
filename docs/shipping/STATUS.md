@@ -6,9 +6,11 @@ The v3 release reconciliation now records **1 shipped** row (`ACCEPT-005`) and
 **21 partial** rows across the 22-row non-AppSec candidate set. It remains a
 truthful `no-go` with six open gates. The retained freeze inventory remains
 24/24 artifacts with all required kinds present. Current bundle:
-`evidence/acceptance-evidence-bundle-2026-10-24-release-reconciliation-v7.json`
-(333 files, zero mismatches, secret scan passed). Score remains **246/34/280
+`evidence/acceptance-evidence-bundle-2026-10-24-release-reconciliation-v8.json`
+(334 files, zero mismatches, secret scan passed). Score remains **246/34/280
 (87.9%)**.
+The refreshed freeze output has 24/24 artifacts present and remains blocked by
+six gates: `evidence/acceptance-candidate-freeze-2026-10-24-current-v3.json`.
 
 ## 2026-10-24 · ACCEPT-005 closed for public-OSS scope
 

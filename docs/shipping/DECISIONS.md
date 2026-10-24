@@ -6,12 +6,14 @@
   the public-OSS scope and the remaining 21 non-AppSec rows partial.
 - **Result:** 22 rows total, 1 shipped, 21 partial, six open gates, and a
   recorded `no-go`; the existing 24/24-artifact freeze remains blocked.
-- **Integrity:** The 333-file v7 bundle has zero mismatches and passed secret
+- **Integrity:** The 334-file v8 bundle has zero mismatches and passed secret
   scan.
 - **Boundary:** This is state reconciliation only. No publication, payment,
   Production deletion, independent review, AppSec/Hunt review, or final
   release sign-off occurred. Score remains 246/34/280.
 - **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24-v3.md`.
+- **Freeze receipt:** `evidence/acceptance-candidate-freeze-2026-10-24-current-v3.json`
+  remains blocked only by the six open gates; no artifact category is missing.
 
 ## 2026-10-24 · close ACCEPT-005 for public-OSS scope
 

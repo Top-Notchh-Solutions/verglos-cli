@@ -7,10 +7,13 @@
   `no-go` with six open gates.
 - **Freeze:** Existing candidate freeze inventory remains 24/24 artifacts and
   all 12 required artifact kinds are present; the candidate remains blocked.
-- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-release-reconciliation-v7.json`
-  verifies 333 files with zero mismatches and passed secret scan.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-release-reconciliation-v8.json`
+  verifies 334 files with zero mismatches and passed secret scan.
 - **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec open.
 - **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24-v3.md`.
+- **Freeze receipt:** `evidence/acceptance-candidate-freeze-2026-10-24-current-v3.json`
+  confirms 24/24 artifacts and zero missing required kinds; status remains
+  blocked with six open gates.
 
 ## ACCEPT-005 public-OSS scope disposition · 2026-10-24
 
