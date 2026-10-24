@@ -1,5 +1,22 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
+
+The current Web privacy/deletion focused suite passed **25/25** with zero
+failures, skips, or cancellations against disposable local PostgreSQL
+`verglos_test`. It covered the authenticated request and customer-held digest
+surfaces, idempotency, inventory, holds, worker lease/retry behavior, failure
+rollback, completion receipt, and cleanup; post-run checks found zero residual
+named fixture user, deletion request/job/receipt, or held-digest rows. Keep
+`QUAL-WEB-005` unchecked: no Production or customer-held deletion was issued,
+and legal disposition, restore/rollback acceptance, independent review, and
+final release remain open. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/qual-web-005-current-head-privacy-deletion-full-suite-2026-10-24.md`.
+Bundle v29 verifies **362** files with **0** mismatches, matching manifest
+`sha256:8ebe74fe06cf3925a93dbb55ecd3e2b55aadaec7ca18010ed46259d4c6756738`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
 
 The current CLI ledger head `8c561e13` passed **8/8** package builds and the

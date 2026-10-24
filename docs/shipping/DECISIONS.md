@@ -1,5 +1,22 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
+
+- **Decision:** Record the complete local privacy/deletion contract and
+  isolated database-backed worker run.
+- **Result:** Focused suite **25/25** passed with zero failures, skips, or
+  cancellations; post-run fixture checks found zero residual test user,
+  deletion request/job/receipt, or held-digest rows.
+- **Source:** Web `257e1cc8e0b467d16966433033589111f62f56f0` on `origin/main`;
+  tested head `7307ae5e0cea18e6d0803aa179fafcc2a0ce36f8` is contained in it.
+- **Boundary:** Disposable local `verglos_test` only. No Production or
+  customer-held deletion, legal disposition, restore/rollback acceptance,
+  independent review, or checkbox change.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/qual-web-005-current-head-privacy-deletion-full-suite-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v29.json` verifies 362 files with zero mismatches, matching manifest `sha256:8ebe74fe06cf3925a93dbb55ecd3e2b55aadaec7ca18010ed46259d4c6756738`, and passed secret scanning.
+
 ## 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
 
 - **Decision:** Record the current bounded rollback/revocation decision

@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
+
+- **Implementation mapping:** Web merged source
+  `257e1cc8e0b467d16966433033589111f62f56f0`; tested head
+  `7307ae5e0cea18e6d0803aa179fafcc2a0ce36f8`.
+- **Qualification mapping:** Privacy/deletion focused suite **25/25** passed
+  with zero failures, skips, or cancellations against isolated local
+  `verglos_test`; post-run named fixture counts were all zero.
+- **Boundary mapping:** No Production or customer-held deletion was issued;
+  legal disposition, restore/rollback acceptance, independent review, and
+  final release remain separate gates.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/qual-web-005-current-head-privacy-deletion-full-suite-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v29.json` verifies 362 files with zero mismatches, matching manifest `sha256:8ebe74fe06cf3925a93dbb55ecd3e2b55aadaec7ca18010ed46259d4c6756738`, and passed secret scanning.
+
 ## 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
 
 - **Implementation mapping:** CLI ledger head

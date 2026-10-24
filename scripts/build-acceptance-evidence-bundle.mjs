@@ -373,6 +373,7 @@ const paths = [
   "docs/shipping/evidence/dist-002-current-head-preflight-2026-10-24.md",
   "docs/shipping/evidence/dist-003-current-head-artifact-preflight-2026-10-24.md",
   "docs/shipping/evidence/dist-006-current-head-rollback-rehearsal-2026-10-24.md",
+  "docs/shipping/evidence/qual-web-005-current-head-privacy-deletion-full-suite-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];
 

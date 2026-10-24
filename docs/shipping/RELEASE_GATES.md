@@ -1,5 +1,22 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · QUAL-WEB-005 current-head privacy/deletion full suite
+
+The isolated privacy/deletion suite passed **25/25** with zero failures,
+skips, or cancellations. It covered the authenticated request and digest
+surfaces, idempotency, inventory, holds, worker leases/retries, failure
+rollback, completion receipt, and cleanup. The disposable fixture ended with
+zero named test user, request/job/receipt, or held-digest rows. This advances
+local implementation evidence only; no Production or customer-held deletion
+was performed. `QUAL-WEB-005` remains unchecked for destructive acceptance,
+legal/customer-held disposition, restore/rollback acceptance, independent
+review, and final release. No checkbox changed; score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/qual-web-005-current-head-privacy-deletion-full-suite-2026-10-24.md`.
+Bundle v29 verifies **362** files with zero mismatches, matching manifest
+`sha256:8ebe74fe06cf3925a93dbb55ecd3e2b55aadaec7ca18010ed46259d4c6756738`,
+and passed secret scanning.
+
 ## 2026-10-24 · DIST-006 current-head rollback/revocation rehearsal
 
 The current build passed **8/8** package builds and the focused rollback
