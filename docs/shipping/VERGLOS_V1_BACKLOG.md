@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · hosted production multi-browser qualification
+
+Vercel Production deployment `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku` is READY for
+Web merge `d8f415b486b57ab6fa3885d734a4904e11ac435a` and serves
+`https://verglos.com`. The final read-only hosted qualification passed
+**36/36** measurements across Chromium, Firefox, and WebKit for six required
+paths at desktop/mobile. Axe/accessibility, keyboard, INP, performance,
+responsive, metadata, crawlability, and reduced-motion checks all passed. The
+earlier real byline contrast defect was fixed in PR #271. Evidence:
+`docs/shipping/evidence/final-web-007-production-multi-browser-qualification-2026-10-24.md`.
+
+This advances hosted automated browser evidence only; human screen-reader,
+field-CWV, independent-review, AppSec/Hunt, customer, and final-release gates
+remain distinct. No checkbox changed. Score remains **245 checked / 35 open /
+280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
+
 ## 2026-10-24 · merged multi-browser checkout qualification fix
 
 Web PR #270 merged normally as `2358edee90de78c06d6128a6d312165f911f7b6a`.

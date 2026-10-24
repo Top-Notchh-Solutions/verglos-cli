@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · hosted production multi-browser qualification
+
+The final Vercel Production deployment `dpl_6avUvwLEQVdaPRuwwSxxjrJccxku`
+is READY for Web merge `d8f415b486b57ab6fa3885d734a4904e11ac435a` and serves
+`https://verglos.com`. The final read-only hosted capture passed **36/36**
+measurements: Chromium, Firefox, and WebKit across six required public paths at
+desktop/mobile. All Axe/accessibility, keyboard, INP, performance, responsive,
+metadata, crawlability, and reduced-motion checks passed. Evidence:
+`docs/shipping/evidence/final-web-007-production-multi-browser-qualification-2026-10-24.md`.
+
+The hosted run also verified the contrast fix found during the prior attempt:
+the landing byline's 4.22:1 contrast defect was corrected in PR #271, and the
+final production packet has zero Axe findings. This is completed hosted
+automated browser evidence, not human screen-reader, field-CWV, independent
+review, AppSec/Hunt, customer, or final release/go-no-go evidence. No checkbox
+changed. Score remains **245 checked / 35 open / 280 total (87.5%)**, with
+**13 AppSec-dependent / 22 non-AppSec** rows open.
+
 ## Latest continuation result · 2026-10-24 · merged multi-browser checkout qualification fix
 
 Web PR #270 merged normally as `2358edee90de78c06d6128a6d312165f911f7b6a`.
