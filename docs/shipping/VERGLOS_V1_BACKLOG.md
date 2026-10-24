@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #292 policy-exception SQLSTATE hardening
+
+Web PR #292 merged normally as
+`a7d817a1a868eaec6cdf1d7cea3469307266c5c8` from `434e4e3`. Exception
+creation and approval decision routes now distinguish PostgreSQL duplicate
+writes (`23505`) from unrelated database failures instead of matching error
+message text. Focused contracts passed **21/21**, Web typecheck and diff
+checks passed. Vercel deployment `dpl_2dxNo38ynNqvCWM9DW1eqH6z9NdM` reached
+Ready/Production; `verglos.com` passed **6/6 HTTP 200**, `www` passed **6/6
+expected HTTP 308**, and the protected deployment hostname returned **302**.
+This advances policy/approval implementation and provider/Production evidence
+only; human/field, independent/AppSec, customer/recipient, and final-release
+gates remain separate. GitHub Actions checks failed before repository steps
+under the blocked budget and were not rerun. No checkbox changed; score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-
+dependent / 21 non-AppSec**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/policy-exception-sqlstate-hardening-pr292-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #291 monitor deduplication/error boundary hardening
 
 Web PR #291 merged normally as
