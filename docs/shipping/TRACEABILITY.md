@@ -1,5 +1,37 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #276 Production receipt
+
+- **Deployment mapping:** Vercel `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY
+  for Web PR #276 and serves `verglos.com`/`www.verglos.com`.
+- **Verification mapping:** Six read-only public routes returned HTTP **200**.
+- **Acceptance mapping:** This advances live runtime evidence only; QUAL-WEB-006
+  large-dataset/loading/error, human/field, independent-review, customer, and
+  final-release evidence remain open. No checkbox changed; score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-production-pr276-deployment-2026-10-24.md`.
+- **Bundle mapping:** Additive v37 contains **269** hashed evidence files,
+  verifies with **0** mismatches, matches manifest
+  `sha256:daaafce7e0864da87076d5acb379b5f185faff8ce0abf506ee3e76a399571d98`,
+  and passes secret scanning.
+
+## 2026-10-24 · paginated dashboard dataset binding
+
+- **Source mapping:** Web PR #276 merged normally as `2424659a` from
+  implementation `05e7855b`; pagination exposes the existing server-reported
+  total through a bounded data attribute.
+- **Verification mapping:** Web typecheck passed and the dashboard
+  qualification contract passed **4/4**.
+- **Acceptance mapping:** This advances QUAL-WEB-006 implementation/capture
+  capability only. Large-dataset/loading/error, human/field,
+  independent-review, customer, and final-release evidence remain open. No
+  checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-pagination-total-pr276-2026-10-24.md`.
+- **Bundle mapping:** Additive v36 contains **268** hashed evidence files,
+  verifies with **0** mismatches, matches manifest
+  `sha256:d37096d15c5f2b4ed5b43931a12114606ae46eda369b0aebc046feb9a6e1193a`,
+  and passes secret scanning.
+
 ## 2026-10-24 · Production deployment receipt and public browser qualification
 
 - **Deployment mapping:** Vercel `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY

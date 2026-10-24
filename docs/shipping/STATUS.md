@@ -1,5 +1,30 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #276 Production receipt
+
+Vercel deployment `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY and serves the
+merged Web PR #276 through `verglos.com`/`www.verglos.com`. Six read-only public
+routes returned HTTP **200**. This is runtime evidence only; no checkbox
+changed and score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/vercel-production-pr276-deployment-2026-10-24.md`.
+Additive bundle v37 contains **269** hashed evidence files, verifies with **0**
+mismatches, matches manifest
+`sha256:daaafce7e0864da87076d5acb379b5f185faff8ce0abf506ee3e76a399571d98`,
+and passes secret scanning.
+
+## 2026-10-24 · paginated dashboard dataset binding
+
+Web PR #276 merged normally as `2424659a` from `05e7855b`. Dashboard capture
+now observes the real server-reported pagination total in addition to mounted
+rows, enabling honest large-dataset qualification on paginated views. Typecheck
+and the dashboard contract passed **4/4**. This is implementation progress for
+QUAL-WEB-006 only; no checkbox changed and score remains **245/35/280 (87.5%)**.
+ Evidence: `evidence/qual-web-006-dashboard-pagination-total-pr276-2026-10-24.md`.
+Additive bundle v36 contains **268** hashed evidence files, verifies with **0**
+mismatches, matches manifest
+`sha256:d37096d15c5f2b4ed5b43931a12114606ae46eda369b0aebc046feb9a6e1193a`,
+and passes secret scanning.
+
 ## 2026-10-24 · Production deployment receipt and public browser qualification
 
 Vercel deployment `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY for Web PR #275

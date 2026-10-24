@@ -1,5 +1,39 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #276 Production receipt · 2026-10-24
+
+- **Deployment:** Vercel `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY for the
+  merged Web PR #276 and aliases `verglos.com`/`www.verglos.com`.
+- **Verification:** Six read-only public routes (`/`, `/proof`, `/checkout`,
+  `/llms.txt`, `/robots.txt`, `/sitemap.xml`) returned HTTP **200**.
+- **Disposition:** Record live runtime evidence only; no checkbox changed and
+  score remains **245/35/280 (87.5%)**. QUAL-WEB-006's large-dataset/loading/error,
+  human/field, independent-review, customer, and final-release evidence remain
+  open. No payment, database/customer mutation, publication, or deletion.
+- **Evidence:** `evidence/vercel-production-pr276-deployment-2026-10-24.md`.
+- **Bundle:** Additive v37 contains **269** hashed evidence files, verifies with
+  **0** mismatches, matches manifest
+  `sha256:daaafce7e0864da87076d5acb379b5f185faff8ce0abf506ee3e76a399571d98`,
+  and passes secret scanning.
+
+## Paginated dashboard dataset binding · 2026-10-24
+
+- **Implementation:** Web PR #276 merged normally as `2424659a` from
+  `05e7855b`; pagination exposes the existing server-reported total through a
+  bounded data attribute and capture reads it alongside mounted rows.
+- **Verification:** Web typecheck passed and the dashboard qualification
+  contract passed **4/4**.
+- **Disposition:** QUAL-WEB-006 implementation/capture capability advanced;
+  large-dataset/loading/error, human/field, independent-review, customer, and
+  final-release evidence remain open. No checkbox changed; score remains
+  **245/35/280 (87.5%)**. No paid Actions, database/customer data mutation,
+  publication, or deletion occurred.
+- **Evidence:** `evidence/qual-web-006-dashboard-pagination-total-pr276-2026-10-24.md`.
+- **Bundle:** Additive v36 contains **268** hashed evidence files, verifies with
+  **0** mismatches, matches manifest
+  `sha256:d37096d15c5f2b4ed5b43931a12114606ae46eda369b0aebc046feb9a6e1193a`,
+  and passes secret scanning.
+
 ## Production deployment receipt and public browser qualification · 2026-10-24
 
 - **Deployment:** Vercel `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY for the
