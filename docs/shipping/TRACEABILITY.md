@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · DIST-003/ACCEPT-003 provenance concurrency hardening
+
+- **Implementation mapping:** CLI PR #385 merged normally as
+  `90811e92eeb9703a8eceaad109871bb08778a77b`; per-file provenance analysis
+  uses a four-worker order-preserving pool and retains the 300-file bound.
+- **Verification mapping:** Focused tests **2/2**, full scanner suite, scanner
+  typecheck/build, and diff checks passed.
+- **Boundary mapping:** This is production implementation evidence only. It
+  does not provide trusted/provider publication, independent review,
+  recipient/customer acceptance, or final release sign-off. No checkbox
+  changed; score remains **246/34/280**.
+- **Evidence:** `evidence/dist-003-provenance-concurrency-pr385-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #287 Production deployment
 
 - **Implementation mapping:** Vercel Production deployment

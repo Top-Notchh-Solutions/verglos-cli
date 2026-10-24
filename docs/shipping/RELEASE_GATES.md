@@ -1,5 +1,17 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-003/ACCEPT-003 provenance concurrency hardening
+
+CLI PR #385 merged normally as
+`90811e92eeb9703a8eceaad109871bb08778a77b`; provenance analysis now has a
+four-worker cap and preserves deterministic ordering. Focused tests **2/2**,
+the full scanner suite, scanner typecheck/build, and diff checks passed. This
+is implementation evidence only; no checkbox changed. DIST-003 and ACCEPT-003
+remain open for trusted/provider publication, independent review,
+recipient/customer acceptance, and final release sign-off. Score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/dist-003-provenance-concurrency-pr385-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #287 Production deployment
 
 Vercel Production deployment **`dpl_9SuaaU6PdPPryYcH5Zn1ANaG2BVx`** completed
