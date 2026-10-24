@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #289 SCM delivery lease/concurrency hardening
+
+Web PR #289 merged normally as
+`f7719d505e5b855d10514dbc4eabfa5289e8d950`. The SCM cron worker now bounds
+provider delivery to four concurrent lanes with a hard ceiling of eight, and
+the Production route uses a 240-second lease. Focused contracts passed
+**31/31**, Web typecheck passed, and diff checks passed. The post-merge Vercel
+deployment was still queued, so no Ready Production receipt is claimed.
+Actions were canceled before repository steps under the blocked $0 budget. No
+checkbox changed; score remains **246/34/280 (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/scm-delivery-lease-concurrency-pr289-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #288 Production deployment
 
 Vercel Production deployment `dpl_2KSkgFHCFyDTpF5NNdJMkbPf66R1` is Ready for

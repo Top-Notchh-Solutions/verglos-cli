@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #289 SCM delivery lease/concurrency hardening
+
+Web PR **#289** merged normally as
+`f7719d505e5b855d10514dbc4eabfa5289e8d950`. The authenticated SCM cron worker
+now processes claimed provider deliveries through a bounded four-lane worker
+pool with a hard ceiling of eight, and the Production route uses a
+240-second lease within its 300-second function limit. Focused SCM/provider/
+runner/worker/route contracts passed **31/31**, Web typecheck passed, and diff
+checks passed. This is actual provider-delivery production-code progress; no
+checkbox changed. Score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**.
+
+The post-merge Vercel Production deployment
+`dpl_Baw6JFHyNxrLfaL3viryXxWMcNcG` was still `QUEUED` at capture, so no Ready
+Production receipt is claimed. Actions runs were canceled before repository
+steps to honor the blocked $0 Actions budget. No provider installation,
+customer/recipient acceptance, independent review, AppSec/Hunt review, or
+final-release sign-off occurred. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/scm-delivery-lease-concurrency-pr289-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #288 Production deployment
 
 Vercel Production deployment **`dpl_2KSkgFHCFyDTpF5NNdJMkbPf66R1`** cloned Web

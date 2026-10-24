@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #289 SCM delivery lease/concurrency hardening
+
+Web PR #289 merged normally as
+`f7719d505e5b855d10514dbc4eabfa5289e8d950`. SCM provider delivery now uses a
+bounded four-lane worker pool with a hard ceiling of eight, and the Production
+cron route uses a 240-second lease inside the five-minute function limit.
+Focused SCM/provider/runner/worker/route contracts passed **31/31**; typecheck
+and diff checks passed. Actions were canceled before repository steps because
+the $0 budget is blocked; Vercel deployment
+`dpl_Baw6JFHyNxrLfaL3viryXxWMcNcG` remained queued at capture. This is
+implementation evidence only; no gate or checkbox changed. Score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/scm-delivery-lease-concurrency-pr289-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #288 Production deployment
 
 Vercel deployment **`dpl_2KSkgFHCFyDTpF5NNdJMkbPf66R1`** reached Ready for Web
