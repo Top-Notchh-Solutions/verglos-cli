@@ -380,6 +380,7 @@ const paths = [
   "docs/shipping/evidence/accept-008-current-validator-regression-2026-10-24.md",
   "docs/shipping/evidence/accept-009-current-reconciler-regression-2026-10-24.md",
   "docs/shipping/evidence/accept-010-current-freeze-regression-2026-10-24.md",
+  "docs/shipping/evidence/accept-011-012-014-current-contract-regression-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];
 

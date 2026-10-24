@@ -1,5 +1,23 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-011/012/014 current contract regression
+
+- **Decision:** Record the current bounded corpus, triage, and final-regression
+  contract result without treating owner-authorized synthetic analysis as
+  independent or customer acceptance.
+- **Result:** **22/22** contract tests passed; triage, corpus-verifier, and
+  final-regression syntax checks passed; participant and Hunt adjudication stay
+  open.
+- **Current corpus reference:** Existing exact-commit evidence records **8/8**
+  fixtures, **13,494** files, **351** observations, **23** rule groups,
+  **0** coverage gaps, and **400/400** regression keys.
+- **Boundary:** No customer consent, adjudication, independent/AppSec review,
+  provider publication, or final release sign-off occurred. No checkbox change.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-011-012-014-current-contract-regression-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v36.json` verifies 369 files with zero mismatches, matching manifest `sha256:d888705582bffb29a5c2be1e5d4b774d914ab1e80fba1d95e82182d89c672497`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-010 current freeze regression
 
 - **Decision:** Record current release-candidate artifact and metadata

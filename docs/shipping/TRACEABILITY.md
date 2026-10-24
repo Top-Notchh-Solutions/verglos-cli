@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-011/012/014 contract regression
+
+- **Implementation mapping:** Bounded corpus verification, public-OSS triage,
+  final regression, evidence bundles, and study-protocol validation.
+- **Contract mapping:** **22/22** tests passed; syntax checks passed; current
+  exact-commit evidence records **8/8** fixtures, **13,494** files, **351**
+  observations, **23** rule groups, **0** gaps, and **400/400** keys.
+- **Boundary mapping:** Adjudication and independent/AppSec/customer/provider/
+  final-release gates remain open; no acceptance state was inferred.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-011-012-014-current-contract-regression-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v36.json` verifies 369 files with zero mismatches, matching manifest `sha256:d888705582bffb29a5c2be1e5d4b774d914ab1e80fba1d95e82182d89c672497`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-010 current freeze regression
 
 - **Implementation mapping:** Release-candidate freeze, package metadata, SBOM,
