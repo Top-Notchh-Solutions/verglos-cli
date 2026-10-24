@@ -1,5 +1,16 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · local signed refund integration
+
+The fresh isolated Docker Web database received the reviewed baseline plus 43
+migrations, and `pnpm test:payment-webhook-integration` passed **4/4** with no
+failures or skips. The run covered capture, replay, refund watermarking,
+failed-order/invoice paths, and subscription expiry. No remote database,
+Production, customer data, or Actions was used. No checkbox changed; score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/razorpay-webhook-refund-local-integration-2026-10-24.md`.
+Bundle v23 verifies **247/247** files with zero mismatches.
+
 ## 2026-10-24 · Test Mode capture/refund lifecycle
 
 The existing synthetic Razorpay Test Mode payment was read back as captured,

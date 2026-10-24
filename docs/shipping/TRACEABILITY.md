@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · local signed refund integration mapping
+
+- **Source mapping:** Web `9005d5ed5182b1d29159c0bb65c8ac696928baed`, local
+  Docker database `verglos_webhook_20261024`, reviewed baseline plus 43
+  migrations.
+- **Verification mapping:** `pnpm test:payment-webhook-integration` passed
+  **4/4**, covering capture/replay, partial/full/stale refunds, failed-order and
+  invoice binding, and subscription expiry.
+- **Acceptance mapping:** Application-side signed-handler evidence only; no
+  external provider webhook, Production database action, customer/recipient
+  acceptance, independent review, or final release sign-off. Score remains
+  **245/35/280 (87.5%)**; no checkbox changed.
+- **Evidence:**
+  `evidence/razorpay-webhook-refund-local-integration-2026-10-24.md` and bundle
+  v23 manifest
+  `sha256:89505715f868fd5955533652a14441da665d57a045682cd1b2dfa61053f093fc`.
+
 ## 2026-10-24 · Test Mode capture/refund provider mapping
 
 - **Source mapping:** Existing owner-controlled Razorpay Test Mode payment

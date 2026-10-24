@@ -102,6 +102,7 @@ const paths = [
   "docs/shipping/evidence/owner-controlled-human-review-2026-10-24.md",
   "docs/shipping/evidence/razorpay-testmode-captured-upi-local-entitlement-2026-10-24.md",
   "docs/shipping/evidence/razorpay-testmode-capture-refund-lifecycle-2026-10-24.md",
+  "docs/shipping/evidence/razorpay-webhook-refund-local-integration-2026-10-24.md",
   "docs/shipping/evidence/razorpay-testmode-qr-attempt-2026-10-24.md",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-24-local-current.json",
   "docs/shipping/evidence/acceptance-stories-verification-2026-10-24-current-head.json",

@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record local signed refund integration
+
+- **Decision:** Validate the real Web database-backed refund handler against a
+  fresh explicitly approved local database after the migration guard refused a
+  partial existing database.
+- **Result:** Baseline plus 43 migrations applied; the integration suite passed
+  **4/4** across capture/replay, refund watermarks, failed-order/invoice, and
+  subscription-expiry paths.
+- **Disposition:** Advance application-side evidence only. Keep external
+  webhook/Production, customer, independent-review, field, AppSec/Hunt, and
+  final-release gates open; no checkbox changed. Score remains
+  **245/35/280 (87.5%)**.
+
 ## 2026-10-24 · record Test Mode capture/refund lifecycle
 
 - **Decision:** Complete the existing synthetic provider rehearsal with a full
