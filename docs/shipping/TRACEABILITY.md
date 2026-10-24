@@ -1,5 +1,17 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-003 streamed source hardening
+
+- **Implementation mapping:** File-backed members stream from the validated
+  source handle and are checked for identity/size before publication; PR #375
+  merged normally as `28d331faeef1f7cd10a41633a2434045e1cbe9e2`.
+- **Verification mapping:** Shared tests, record-store streaming/symlink
+  coverage, shared typecheck/build, and CLI build passed.
+- **Boundary mapping:** Local ingestion integrity does not provide
+  hosted/provider, independent, recipient/customer, or final-release
+  acceptance. Score remains **246/34/280**.
+- **Evidence:** `evidence/accept-003-record-store-stream-source-hardening-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-003 record-store read hardening
 
 - **Implementation mapping:** Content-addressed member reads use stable opened

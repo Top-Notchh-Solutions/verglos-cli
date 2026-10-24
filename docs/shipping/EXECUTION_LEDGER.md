@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-003 streamed source hardening · 2026-10-24
+
+- **Execution:** Replaced pathname-based source streaming with a bounded loop
+  over the validated source `FileHandle`, then checked source identity and size
+  before atomic publication; merged PR #375 normally.
+- **Result:** Commit `28d331faeef1f7cd10a41633a2434045e1cbe9e2`; shared tests,
+  typecheck/build, and CLI build passed.
+- **Acceptance mapping:** This advances local record ingestion only. Keep
+  ACCEPT-003 open for hosted/provider evidence, independent review,
+  recipient/customer acceptance, and final release sign-off. Score remains
+  **246/34/280**. No external or paid Actions state changed.
+- **Evidence:** `evidence/accept-003-record-store-stream-source-hardening-2026-10-24.md`.
+
 ## ACCEPT-003 record-store read hardening · 2026-10-24
 
 - **Execution:** Replaced pathname-only member reads with stable opened-handle
