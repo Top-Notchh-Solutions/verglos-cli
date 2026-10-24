@@ -1,5 +1,18 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-003 current-source release-artifact preflight
+
+Exact `origin/main` source `6a2f03ec76855d7ecea089e6dc312d3d9ed9391e` passed
+workspace build **8/8**, release/artifact contracts **57/57**, generated **7/7**
+public archives and **8/8** sidecars, completed the `2.0.0-alpha.4`
+clean-consumer run, and passed strict **15/15** checksum/origin/archive-notice
+verification. Keep DIST-003 unchecked for trusted publication, immutable
+attestation, final release clearance, independent review, and final acceptance.
+Score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-003-current-source-artifact-preflight-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · DIST-006 malformed rollback-reference hardening
 
 The shared rollback decision contract now fails closed on malformed or null

@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-003 current-source release-artifact preflight
+
+After fast-forwarding to exact `origin/main` source
+`6a2f03ec76855d7ecea089e6dc312d3d9ed9391e`, the complete release preflight
+passed: workspace build **8/8**, release/artifact contracts **57/57**, **7/7**
+public archives, **8/8** sidecars, clean-consumer execution of
+`2.0.0-alpha.4`, and strict **15/15** checksum/origin/archive-notice
+verification. CycloneDX and SPDX metadata both bind `2.0.0-alpha.4`; the
+clean consumer installed all libraries, created no external engine cache, and
+executed the bounded signed A1 fixture. This is real exact-source artifact
+implementation evidence, but DIST-003 remains unchecked for trusted provider
+publication, immutable external attestation, final release clearance,
+independent review, and final acceptance. No publication, tag, provider
+action, paid Actions run, or deletion occurred. Score remains **246 checked /
+34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/dist-003-current-source-artifact-preflight-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · DIST-006 malformed rollback-reference hardening
 
 The shared rollback decision contract now validates untrusted runtime reference
