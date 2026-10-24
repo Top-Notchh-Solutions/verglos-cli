@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #287 Production deployment
+
+Vercel Production deployment **`dpl_9SuaaU6PdPPryYcH5Zn1ANaG2BVx`** completed
+Ready; the build generated **49/49** static pages and serverless outputs. A
+read-only matrix returned HTTP **200** for six public paths on both public
+hostnames and the exact deployment hostname (**18/18**). This is
+provider/Production implementation evidence only; no checkbox changed.
+QUAL-WEB-006 and related public Web rows remain open for authenticated,
+human/field, independent-review, customer/recipient, and final-release
+evidence. Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent /
+21 non-AppSec**. Evidence:
+`evidence/vercel-production-pr287-dashboard-search-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
 
 Web PR #287 merged normally as

@@ -1,5 +1,21 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #287 Production deployment · 2026-10-24
+
+- **Execution:** Vercel Production deployment
+  `dpl_9SuaaU6PdPPryYcH5Zn1ANaG2BVx` completed Ready for the merged Web
+  shipping line.
+- **Result:** Runtime configuration and Next build passed; **49/49** static
+  pages and serverless outputs were created. Read-only Node fetch returned
+  HTTP 200 for six public paths on `verglos.com`, `www.verglos.com`, and the
+  exact deployment hostname (**18/18**).
+- **Acceptance mapping:** Provider/Production runtime evidence only. Keep
+  QUAL-WEB-006 and related public Web rows open for authenticated capture,
+  human/field, independent review, customer/recipient acceptance, and final
+  release sign-off. Score remains **246/34/280**. No database migration,
+  customer data, payment, deletion, or publication operation occurred.
+- **Evidence:** `evidence/vercel-production-pr287-dashboard-search-2026-10-24.md`.
+
 ## QUAL-WEB-006 dashboard search concurrency hardening · 2026-10-24
 
 - **Execution:** Web PR #287 merged normally as

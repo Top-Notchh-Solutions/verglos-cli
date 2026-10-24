@@ -1,5 +1,23 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #287 Production deployment
+
+Vercel Production deployment **`dpl_9SuaaU6PdPPryYcH5Zn1ANaG2BVx`** completed
+Ready for the merged Web shipping line. The provider build validated runtime
+configuration, skipped the migration hook, compiled Next.js, generated **49/49**
+static pages, created serverless outputs, and completed deployment. Read-only
+Node fetch checks returned HTTP **200** for `/`, `/proof`, `/checkout`,
+`/llms.txt`, `/robots.txt`, and `/sitemap.xml` on `verglos.com`,
+`www.verglos.com`, and the exact Production deployment hostname: **18/18**.
+This advances provider/Production evidence for QUAL-WEB-006 and the public Web
+rows; it does not create authenticated dashboard capture, human/field-CWV,
+independent review, customer/recipient acceptance, or final release evidence.
+No checkbox changed; score remains **246 checked / 34 open / 280 total (87.9%)**,
+split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/vercel-production-pr287-dashboard-search-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · QUAL-WEB-006 dashboard search concurrency hardening
 
 Web PR **#287** merged normally as
