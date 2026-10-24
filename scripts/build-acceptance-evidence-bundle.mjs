@@ -312,6 +312,7 @@ const paths = [
   "docs/shipping/evidence/vercel-live-production-readonly-recheck-2026-10-24T2201Z.md",
   "docs/shipping/evidence/vercel-production-availability-recheck-2026-10-24T0555Z.md",
   "docs/shipping/evidence/vercel-production-source-bound-smoke-2026-10-24T0624Z.md",
+  "docs/shipping/evidence/final-web-007-008-production-current-head-chromium-2026-10-24.md",
   "docs/shipping/evidence/vercel-production-migration-and-smoke-2026-10-24.md",
   "docs/shipping/evidence/vercel-order-attempted-processing-fix-2026-10-24.md",
   "docs/shipping/evidence/vercel-order-attempted-processing-production-ready-2026-10-24.md",

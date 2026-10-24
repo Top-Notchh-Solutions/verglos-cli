@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-head Production Chromium qualification
+
+- **Source mapping:** Vercel Production deployment is bound to Web
+  `257e1cc8e0b467d16966433033589111f62f56f0`.
+- **Verification mapping:** Six required public paths × desktop/mobile passed
+  **12/12** with zero Axe, keyboard, responsive, reduced-motion, or
+  qualification decision-gap failures; max LCP/FCP 892 ms, INP 48 ms, TTFB
+  354 ms, CLS 0.
+- **Acceptance mapping:** Automated hosted evidence only. Human/field-CWV,
+  customer/recipient, provider-publication, independent-review, AppSec/Hunt,
+  and final-release gates remain distinct; no checkbox changed.
+- **Evidence:** `evidence/final-web-007-008-production-current-head-chromium-2026-10-24.md`.
+- **Integrity mapping:** Current bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v20.json`
+  verifies 352 files with zero mismatches, matching manifest
+  `sha256:9341c7297bfaafc3dedbc3ee421e60b482370fae7857b5b42cb704c4d40bc0e1`,
+  and passed secret scanning.
+
 ## 2026-10-24 · source-bound Production smoke
 
 - **Hosted source mapping:** Vercel Production deployment
