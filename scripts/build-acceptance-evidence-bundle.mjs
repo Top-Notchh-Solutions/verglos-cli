@@ -389,6 +389,7 @@ const paths = [
   "docs/shipping/evidence/final-web-002-current-landing-qualification-contract-2026-10-24.md",
   "docs/shipping/evidence/final-web-003-current-plan-pricing-contract-2026-10-24.md",
   "docs/shipping/evidence/final-web-006-current-proof-assets-contract-2026-10-24.md",
+  "docs/shipping/evidence/final-web-005-current-metadata-truth-contract-2026-10-24.md",
   "docs/shipping/evidence/qual-web-006-final-web-007-008-production-browser-capture-2026-10-24.json",
   "docs/shipping/evidence/dist-002-003-current-publish-contract-regression-2026-10-24.md",
   "docs/shipping/evidence/dist-003-current-release-artifact-regression-2026-10-24.md",

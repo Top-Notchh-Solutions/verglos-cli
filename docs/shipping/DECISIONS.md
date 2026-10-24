@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · FINAL-WEB-005 metadata truth contract
+
+- **Decision:** Record the current metadata and machine-readable public-truth
+  contract without inferring hosted or final acceptance.
+- **Result:** **37/37** focused tests passed with zero failures, skips,
+  cancellations, or todos.
+- **Boundary:** No deployment, provider, customer, independent/field, or final
+  release action occurred. FINAL-WEB-005 remains unchecked; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/final-web-005-current-metadata-truth-contract-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v52.json` verifies 386 files with zero mismatches, matching manifest `sha256:585cb510d194c6535f363ec6d412b1cc95b8a982f020ec371d286ad171d6c246`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-006 proof-assets contract
 
 - **Decision:** Record the current proof implementation and origin-boundary
