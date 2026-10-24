@@ -1,5 +1,19 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
+
+Web PR #284 merged normally as `4b877bf67bdfbe41ddf05d4d95303c01ce79ded2`.
+The public surfaces now identify `1.8.3` as the latest stable scanner and
+`2.0.0-alpha.1` as npm's current public qualification prerelease. Focused truth
+tests passed **10/10**, the full truth-registry suite **37/37**, public-release
+smoke **12/12**, typecheck, and build **49/49**. Vercel Production deployment
+`dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` is Ready and the live `/llms.txt` was
+verified. This does not satisfy FINAL-WEB-005/008 dependencies,
+independent/acceptance, or final-release gates. No checkbox changed; score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-
+dependent / 21 non-AppSec**. Evidence:
+`evidence/final-web-005-008-npm-truth-production-deployment-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-005 current local isolated recheck
 
 The focused privacy/account-deletion/customer-held suite passed **60/60** with

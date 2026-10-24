@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## FINAL-WEB-005/008 npm truth correction and Production receipt · 2026-10-24
+
+- **Execution:** Observed npm's current dist-tags, corrected the Web public
+  truth registry and all rendered version surfaces, merged Web PR #284
+  normally, and verified the Vercel Preview and Production deployments.
+- **Result:** Focused tests **10/10**, truth-registry **37/37**, public-release
+  smoke **12/12**, typecheck, and build **49/49** passed. Production deployment
+  `dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM` is Ready and live `/llms.txt` confirms the
+  stable/prerelease distinction.
+- **Disposition:** Real code and hosted receipt recorded; FINAL-WEB-005/008
+  remain open for declared dependencies, independent/acceptance, and final
+  release gates. No npm publication, customer data use, deletion, AppSec
+  review, or final go/no-go occurred. Score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-005-008-npm-truth-production-deployment-2026-10-24.md`.
+
 ## QUAL-WEB-005 current local isolated recheck · 2026-10-24
 
 - **Execution:** Ran the focused privacy page, account-deletion route,
