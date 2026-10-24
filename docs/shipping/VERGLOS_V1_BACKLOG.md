@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · current Production landing multi-browser addendum
+
+The current Web Production deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` passed
+read-only landing qualification across Chromium, Firefox, and WebKit (**36/36**
+measurements, zero Axe/keyboard/INP gaps, strict qualification passed). This
+is provider and automated browser evidence for `FINAL-WEB-007`/`FINAL-WEB-008`,
+not human, field-CWV, customer, independent-review, AppSec/Hunt, or final
+release acceptance. No checkbox changed. The authoritative score remains
+**245 checked / 35 open / 280 total (87.5%)**, partitioned as **13
+AppSec-dependent / 22 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
+
 ## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser addendum
 
 The strict automated dashboard qualification now passes on a fresh local

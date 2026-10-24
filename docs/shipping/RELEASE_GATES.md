@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · current Production landing multi-browser evidence
+
+Vercel Production deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is READY for
+Web `21f9cfb`. The read-only public capture passed strict qualification across
+Chromium, Firefox, and WebKit for six required paths at desktop and mobile:
+**36/36** measurements, Axe 0, keyboard failures 0, and INP gaps 0. The six
+pages plus `/llms.txt`, `/robots.txt`, and `/sitemap.xml` returned HTTP 200.
+This opens automated provider/browser evidence only; human screen-reader,
+field-CWV, customer/recipient, independent review, AppSec/Hunt, and final
+release/go-no-go remain open. No checkbox changed; score remains **245/35/280
+(87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
+The additive bundle verifies **282** files with zero mismatches, passes secret
+scanning, and matches manifest
+`sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+
 ## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser evidence
 
 Against a fresh local PostgreSQL 16 database and the production `next start`

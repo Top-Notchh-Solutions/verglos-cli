@@ -1,5 +1,22 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current Production landing multi-browser receipt
+
+- **Source mapping:** Web commit `21f9cfb` is the deployed source for Vercel
+  Production `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu`.
+- **Verification mapping:** Read-only Playwright/Axe coverage across six
+  public paths, two viewports, and three engines produced **36/36** strict
+  passes with zero Axe, keyboard, and INP gaps; public route/metadata
+  endpoints returned 200.
+- **Acceptance mapping:** This advances FINAL-WEB-007/008 provider and
+  automated browser evidence only. Human/field, customer, independent-review,
+  AppSec/Hunt, and final release requirements remain open; score is
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/final-web-007-008-production-current-multibrowser-2026-10-24.md`.
+- **Bundle mapping:** Additive bundle has **282** hashed files, zero
+  mismatches, secret scanning passed, manifest
+  `sha256:ac7962c792ae6a469dd0b9a503049d958ff60cf05785458b5d282814b868965d`.
+
 ## 2026-10-24 · QUAL-WEB-006 local production-build multi-browser evidence
 
 - **Source mapping:** Merged Web PR #280 implementation `21f9cfb` was tested
