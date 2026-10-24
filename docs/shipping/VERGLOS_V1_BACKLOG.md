@@ -1,5 +1,21 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-005 owner-authorized public-OSS workflow addendum
+
+The exact-commit public-OSS workflow ran for `buggy-node` under ISC terms with
+current CLI `aad2c743`: exit **0**, complete coverage, **7** files walked, and
+**59** findings. The validator returned `accepted` with zero failures,
+`publicOssBenchmark: authorized`, and `customerAcceptance: not-claimed`.
+Keep `ACCEPT-005` unchecked for the separate external customer-owner/recipient
+POC, independent review, and final acceptance. The authorization expiry is
+recorded; no files were deleted. No checkbox changed; score remains **245
+checked / 35 open / 280 total (87.5%)**, split **13 AppSec-dependent / 22
+non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.md`.
+The additive bundle verifies **296** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:79fb420cb707361aafbd3c7b1071fbd38a3b8184f6de74623577a31fe344931f`.
+
 ## 2026-10-24 · Vercel Production provider receipt addendum
 
 Vercel confirmed that deployment `dpl_Aw8Coq1UJV2XPKDpN8s8RemXhgmu` is already

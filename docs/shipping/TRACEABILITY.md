@@ -1,5 +1,21 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-005 owner-authorized public-OSS workflow
+
+- **Source mapping:** `buggy-node` exact commit
+  `b1b9cbc8b86f81a1ecb0b142190d4fa4698518da`, ISC, scanned by CLI
+  `aad2c74395a5c381c955ab9dfab7462295564840`.
+- **Verification mapping:** Exit 0; complete coverage; 7 files; 59 findings;
+  private report digest `sha256:b0c16b3501645fa832fc898949000793f3ffd9326ac3aaf2f0de4cae0db7f8a7`;
+  validator accepted with zero failures.
+- **Acceptance mapping:** `publicOssBenchmark: authorized` and
+  `customerAcceptance: not-claimed`; external customer/recipient,
+  independent-review, provider, and final-release requirements remain open.
+  Score is **245/35/280 (87.5%)**; no checkbox changed.
+- **Evidence:** `evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.md`.
+- **Bundle mapping:** 296 files, zero mismatches, secret scan passed; manifest
+  `sha256:79fb420cb707361aafbd3c7b1071fbd38a3b8184f6de74623577a31fe344931f`.
+
 ## 2026-10-24 · Vercel Production provider receipt
 
 - **Source mapping:** Vercel deployment

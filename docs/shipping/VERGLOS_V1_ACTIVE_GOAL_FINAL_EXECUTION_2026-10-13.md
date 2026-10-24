@@ -1,5 +1,28 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · ACCEPT-005 owner-authorized public-OSS workflow
+
+One real bounded owner-authorized public-OSS workflow completed against the
+exact `buggy-node` commit under ISC terms. Current CLI `aad2c743` ran with
+telemetry/source upload disabled and denied scan networking; the scan returned
+exit **0**, complete coverage, **7** files walked, **59** findings, and a
+byte-bound private report. The authorized-workflow validator returned
+`accepted` with zero failures.
+
+This is explicitly `publicOssBenchmark: authorized` and
+`customerAcceptance: not-claimed`; it is not a customer/recipient POC,
+independent review, provider/Production event, or final sign-off. The
+authorization expiry record is confirmed and no files were deleted. Keep
+`ACCEPT-005` unchecked for its separate external customer-owner/recipient POC,
+independent review, and final acceptance. No checkbox changed; score remains
+**245 checked / 35 open / 280 total (87.5%)**, split **13 AppSec-dependent / 22
+non-AppSec**. Evidence:
+`docs/shipping/evidence/accept-005-owner-authorized-public-oss-workflow-2026-10-24.md`.
+The additive bundle verifies **296** files with zero mismatches, secret
+scanning passed, and manifest
+`sha256:79fb420cb707361aafbd3c7b1071fbd38a3b8184f6de74623577a31fe344931f`:
+`docs/shipping/evidence/acceptance-evidence-bundle-2026-10-24-accept-005-owner-public-oss-workflow-v1.json`.
+
 ## Latest continuation result · 2026-10-24 · Vercel Production provider receipt
 
 The provider action was executed against the existing Vercel deployment
