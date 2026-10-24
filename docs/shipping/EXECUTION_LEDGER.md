@@ -1,5 +1,23 @@
 # Verglos V1 Execution Ledger
 
+## Web PR #290 QUAL-WEB-005 retry-clock hardening and Production receipt · 2026-10-24
+
+- **Execution:** Web PR #290 merged normally as
+  `5ff54cd4f4d3258455327d333c9ab9d673fbbd07`; deletion-batch selection keeps a
+  stable replay clock while each production candidate receives a fresh retry
+  clock.
+- **Result:** Account-deletion/cron contracts **11/11**, Web typecheck, and
+  diff checks passed. Vercel deployment
+  `dpl_FP1b4KkeeVep6Ece1TF8rG5BzsCf` reached `READY` / `production`; public
+  alias checks were `verglos.com` **6/6 HTTP 200** and `www` **6/6 HTTP 308**.
+  The deployment hostname was SSO-protected with **302** and was not bypassed.
+- **Acceptance mapping:** Real QUAL-WEB-005 implementation and provider/
+  Production evidence only. No destructive deletion, restore/rollback
+  acceptance, independent review, customer-held disposition, final release
+  sign-off, or checkbox changed. Score remains **246/34/280**. Nothing was
+  deleted or overwritten.
+- **Evidence:** `evidence/qual-web-005-retry-clock-pr290-2026-10-24.md`.
+
 ## Web PR #289 Ready Production receipt · 2026-10-24
 
 - **Execution:** Vercel deployment

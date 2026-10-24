@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #290 QUAL-WEB-005 retry-clock hardening and Production receipt
+
+Web PR #290 merged normally as
+`5ff54cd4f4d3258455327d333c9ab9d673fbbd07`. Account-deletion/cron contracts
+passed **11/11**, typecheck and diff checks passed, and each production
+candidate now gets a fresh retry clock after a bounded batch selection. Vercel
+deployment `dpl_FP1b4KkeeVep6Ece1TF8rG5BzsCf` is Ready/Production;
+`verglos.com` returned **6/6 HTTP 200**, `www` returned **6/6 expected 308**,
+and the protected deployment hostname returned **302**. No bypass or
+destructive deletion occurred. No checkbox changed; score remains
+**246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/qual-web-005-retry-clock-pr290-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #289 Ready Production receipt
 
 Vercel deployment `dpl_Baw6JFHyNxrLfaL3viryXxWMcNcG` is Ready with target

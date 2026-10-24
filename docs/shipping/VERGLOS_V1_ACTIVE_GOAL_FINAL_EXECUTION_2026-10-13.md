@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #290 Ready Production receipt
+
+Web PR **#290** merged normally as
+`5ff54cd4f4d3258455327d333c9ab9d673fbbd07`. The account-deletion batch now
+uses a fresh production clock for each candidate's retry schedule while
+preserving its deterministic selection clock for replay/tests, preventing
+late failures in long batches from receiving already-expired retry times.
+Account-deletion and authenticated cron contracts passed **11/11**, Web
+typecheck passed, and diff checks passed.
+
+Vercel deployment **`dpl_FP1b4KkeeVep6Ece1TF8rG5BzsCf`** reached `READY` with
+target `production`. Read-only fetches returned HTTP **200** for six declared
+paths on `verglos.com` (**6/6**) and expected HTTP **308** canonical redirects
+on `www.verglos.com` (**6/6**). The exact deployment hostname returned Vercel
+SSO **302** and was not bypassed. This advances QUAL-WEB-005 implementation
+and provider/Production evidence; no destructive customer deletion, restore/
+rollback acceptance, or checkbox changed. Score remains **246 checked / 34
+open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/qual-web-005-retry-clock-pr290-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · Web PR #289 Ready Production receipt
 
 The post-merge Vercel deployment
