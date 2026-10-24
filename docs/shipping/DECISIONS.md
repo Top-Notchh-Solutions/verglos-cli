@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-008 current commercial validator regression
+
+- **Decision:** Record the current commercial-evidence validator and
+  provenance-boundary regression.
+- **Result:** Validator tests passed **9/9** with zero failures, skips, or
+  cancellations; all commercial evidence kinds and fail-closed boundaries
+  were exercised.
+- **Boundary:** No actual agreement, checkout, repeat-use, support, hosted
+  cost, recipient-value, independent-review, or final-acceptance event was
+  generated; no checkbox changed.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-008-current-validator-regression-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v33.json` verifies 366 files with zero mismatches, matching manifest `sha256:0e11962ce546ebf046d7ad3e2ecff6879ee67759a04516df11be1edd308e8704`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-006 current scorer regression
 
 - **Decision:** Record the current six-question comprehension scorer and

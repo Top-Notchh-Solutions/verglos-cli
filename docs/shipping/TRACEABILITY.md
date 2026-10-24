@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-008 current commercial validator regression
+
+- **Implementation mapping:** Commercial-evidence validator and provenance
+  contract.
+- **Contract mapping:** Validator regression tests passed **9/9** with zero
+  failures, skips, or cancellations.
+- **Boundary mapping:** No actual commercial/customer event, provider/payment
+  action, independent review, or final acceptance was inferred.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain
+  open.
+- **Evidence:** `evidence/accept-008-current-validator-regression-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v33.json` verifies 366 files with zero mismatches, matching manifest `sha256:0e11962ce546ebf046d7ad3e2ecff6879ee67759a04516df11be1edd308e8704`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-006 current scorer regression
 
 - **Implementation mapping:** Six-question comprehension scorer and frozen

@@ -1,5 +1,19 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-008 current commercial validator regression · 2026-10-24
+
+- **Execution:** Ran the commercial-evidence validator regression suite and
+  the frozen study-protocol validator.
+- **Result:** **9/9** validator tests passed with zero failures, skips, or
+  cancellations; provenance, allowance, approval-window, digest, tamper, and
+  secret boundaries all remained fail-closed.
+- **Disposition:** Implementation-boundary evidence only. No actual
+  commercial/customer event, provider/payment action, independent review, or
+  final acceptance occurred; no checkbox was upgraded. Score remains
+  **246/34/280**.
+- **Evidence:** `evidence/accept-008-current-validator-regression-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v33.json` verifies 366 files with zero mismatches, matching manifest `sha256:0e11962ce546ebf046d7ad3e2ecff6879ee67759a04516df11be1edd308e8704`, and passed secret scanning.
+
 ## ACCEPT-006 current scorer regression · 2026-10-24
 
 - **Execution:** Ran the six-question scorer regression suite and frozen

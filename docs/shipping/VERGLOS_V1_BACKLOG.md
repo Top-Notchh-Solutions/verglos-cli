@@ -1,5 +1,19 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-008 current commercial validator regression
+
+The current commercial-evidence validator suite passed **9/9** with zero
+failures, skips, or cancellations. It exercises the provenance, allowance,
+approval-window, digest-binding, tamper, overwrite, future-time, and
+secret-boundary contracts. Keep `ACCEPT-008` unchecked: no actual agreement,
+checkout, repeat-use, support, hosted-cost, recipient-value, independent
+review, or final acceptance event exists. Score remains **246 checked / 34 open
+/ 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `docs/shipping/evidence/accept-008-current-validator-regression-2026-10-24.md`.
+Bundle v33 verifies **366** files with **0** mismatches, matching manifest
+`sha256:0e11962ce546ebf046d7ad3e2ecff6879ee67759a04516df11be1edd308e8704`,
+and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-006 current scorer regression
 
 The current six-question comprehension scorer suite passed **11/11** with
