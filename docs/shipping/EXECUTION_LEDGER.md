@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Dual-database Web serial recheck · 2026-10-24
+
+- **Execution:** Full serial suite used fresh local `TEST_DATABASE_URL` on
+  loopback `55441`; billing and account-deletion focused runs used the
+  separately migrated local fixture on `55440`.
+- **Result:** Full serial **927/928 passed**, 0 failed/cancelled, 1 intentional
+  migration-table skip; billing **1/1** and account-deletion **1/1** passed.
+- **Boundary:** Local synthetic implementation evidence only; no hosted
+  deletion, customer data, provider publication, independent review,
+  AppSec/Hunt review, or release sign-off.
+- **Disposition:** Keep the 21 non-AppSec partial rows and 13 AppSec rows open;
+  score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-005-006-dual-db-serial-recheck-2026-10-24.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-dual-db-v13.json`
+  verifies 338 files with zero mismatches and passed secret scanning.
+
 ## Isolated Web database serial recheck · 2026-10-24
 
 - **Source:** Web `705a85e2b7b9d847a85748463aa0d797c60b384f`.

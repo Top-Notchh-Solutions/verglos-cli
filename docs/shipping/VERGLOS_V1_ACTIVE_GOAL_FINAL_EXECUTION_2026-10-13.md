@@ -1,5 +1,26 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · dual-database Web serial recheck
+
+The current merged Web candidate was exercised with its two required local
+database boundaries. The full serial suite passed **927/928**, with **0
+failures**, **0 cancellations**, and **1 intentional fixture-boundary skip**;
+the separately gated migrated-baseline billing integration passed **1/1**, and
+the migrated-baseline account-deletion integration passed **1/1**. The skip is
+the fresh general database's explicit missing-migration-table guard; the same
+account-deletion test passes against the migrated local fixture. No remote or
+Production database was used. This strengthens implementation evidence for
+`QUAL-WEB-005/006` without claiming hosted deletion, human/field,
+customer/recipient, provider-publication, independent-review, AppSec/Hunt, or
+final-release evidence. No checkbox changed. Score remains **246 checked / 34
+open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/qual-web-005-006-dual-db-serial-recheck-2026-10-24.md`.
+The additive bundle v13 verifies **338** bounded files with **0** mismatches,
+matching manifest
+`sha256:379175db5187df74b326af5d834ee40e4cb486611b7147d80fc7f96daf438608`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · isolated Web database serial recheck
 
 The current Web implementation tree `705a85e2b7b9d847a85748463aa0d797c60b384f`

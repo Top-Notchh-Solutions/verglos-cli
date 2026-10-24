@@ -1,5 +1,21 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record dual-database Web serial recheck
+
+- **Decision:** Accept the split local database runs as additive implementation
+  evidence for the Web qualification surfaces.
+- **Result:** Full serial 927/928 passed with 0 failures and 1 intentional
+  fresh-database skip; billing and account-deletion migrated-baseline checks
+  passed 1/1 each.
+- **Boundary:** These are local synthetic fixtures only. They do not create
+  hosted Production deletion, human/field, customer/recipient, provider,
+  independent-review, AppSec/Hunt, or final-release evidence.
+- **Score:** 246/34/280; no checkbox changed.
+- **Evidence:** `evidence/qual-web-005-006-dual-db-serial-recheck-2026-10-24.md`.
+- **Integrity packet:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-dual-db-v13.json`
+  verifies 338 files with zero mismatches and passed secret scanning.
+
 ## 2026-10-24 · record isolated Web database serial recheck
 
 - **Decision:** Accept the fresh local PostgreSQL-backed serial run as additive
