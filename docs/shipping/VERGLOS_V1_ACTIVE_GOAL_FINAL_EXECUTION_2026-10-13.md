@@ -1,5 +1,44 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #296 exact handoff expiry boundary
+
+Web PR **#296** merged normally as
+`a73a479847a6b4667ac33304ccf169b43ed584d7` from implementation commit
+`246ec0f1c6afb79121df981c28d8134fa0e7681c`. A shared handoff lifecycle helper
+now treats `now >= expiresAt` as expired; the list and revoke routes use the
+same exact boundary as acknowledgement. Focused handoff domain, route, and
+page contracts passed **33/33**, Web typecheck passed, and `git diff --check`
+passed. The merged-head Vercel Production deployment
+`dpl_E7wmp4QBPHx1aiXuSyiYTKhqhUSm` reached **READY / production** after the
+build completed. The same read-only six-path matrix returned **6/6 HTTP 200**
+on `verglos.com`, **6/6 HTTP 308** on `www.verglos.com`, and **6/6 HTTP 302**
+on the protected deployment hostname. GitHub Actions failed at the blocked budget /
+runner boundary and was not rerun. This is real STUDIO-CLI-001 production-code
+progress; the row remains unchecked for authorized recipient acceptance,
+independent review, and final release evidence. Score remains **246 checked /
+34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence:
+`docs/shipping/evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
+## Latest continuation result · 2026-10-24 · Web PR #295 monitor registration atomicity
+
+Web PR **#295** merged normally as
+`af53e965e07366fe2d07090b8c1fdf311a60b29e` from implementation commit
+`696533e4ad76a04b76d4f8b214e2aa720efdcb49`. Monitor registration now uses a
+conflict-safe insert/update and rotates encrypted channel credentials in one
+transaction, removing the read-then-insert race and partial-rotation window.
+Focused monitor/encryption contracts passed **7/7**, Web typecheck passed, and
+`git diff --check` passed. Vercel deployment
+`dpl_Gpdxuh6ybsJjmyBnYZyNHaiWbERp` reached **READY / production**; the
+read-only matrix returned **6/6 HTTP 200** on `verglos.com`, **6/6 HTTP 308**
+on `www`, and **6/6 HTTP 302** on the protected deployment hostname. This is
+production implementation/provider evidence only; no acceptance checkbox
+changed. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · Web PR #294 CLI authorization collision boundary
 
 Web PR **#294** merged normally as
@@ -5481,8 +5520,8 @@ all eligible non-AppSec items are genuinely implemented, qualified, evidenced,
 and checked. Hunt/AppSec-dependent items remain explicitly held until the
 independent review is complete.
 
-The current recorded baseline is **239 checked / 41 open / 280 total
-(85.4%)**. Recompute this from the live checklist after every accepted batch;
+The current recorded baseline is **246 checked / 34 open / 280 total
+(87.9%)**. Recompute this from the live checklist after every accepted batch;
 never copy an old score forward.
 
 **Current implementation batch (2026-10-22):** `QUAL-WEB-006` received
@@ -6118,7 +6157,7 @@ The explicit hold roots are:
 For this implementation-first closeout, the owner-directed **13-entry
 partition at the top of this file is the routing list**: it names the held
 rows and the independent-review gate that must remain at the boundary. The
-remaining **23-entry partition is the implementation queue**. This routing
+remaining **21-entry partition is the implementation queue**. This routing
 clarification does not waive any row's own external acceptance contract or
 turn an implementation defect into an AppSec dependency.
 

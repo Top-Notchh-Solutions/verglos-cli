@@ -1,9 +1,11 @@
 # Goal addendum — 2026-10-07
 
-> **Current contract:** The dated 2026-10-11 product-contract and active-goal
-> entries supersede the historical checkpoint notes in this file. Use
-> `FINAL_V1_PRODUCT_CONTRACT_2026-10-11.md` and
-> `VERGLOS_V1_ACTIVE_GOAL_REVISED-2026-10-11.md` for current execution.
+> **Current contract:** The dated product-contract and active-goal entries
+> supersede the historical checkpoint notes in this file. Use
+> `FINAL_V1_PRODUCT_CONTRACT_APPROVAL_DRAFT_2026-10-12.md` for the approved
+> product contract and
+> `VERGLOS_V1_ACTIVE_GOAL_FINAL_EXECUTION_2026-10-13.md` for current shipping
+> execution. The older revised-goal files are retained for traceability only.
 
 ## QUAL-WEB-006 local production-build multi-browser qualification · 2026-10-24
 

@@ -1,5 +1,38 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #296 exact handoff expiry boundary
+
+Web PR #296 merged normally as
+`a73a479847a6b4667ac33304ccf169b43ed584d7` from `246ec0f`. Handoff listing,
+revocation, and acknowledgement now share the exact `now >= expiresAt`
+boundary; focused contracts passed **33/33**, typecheck and diff checks
+passed. The merged-head Vercel Production deployment
+`dpl_E7wmp4QBPHx1aiXuSyiYTKhqhUSm` reached **READY / production**; the
+read-only six-path matrix returned 6/6 expected responses for the canonical,
+www redirect, and protected deployment-host checks. This advances
+`STUDIO-CLI-001` implementation only; its
+authorized recipient acceptance, independent review, and final release gates
+remain open. GitHub Actions failed at the blocked budget boundary and was not
+rerun. No checkbox changed; score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
+## 2026-10-24 · Web PR #295 monitor registration atomicity
+
+Web PR #295 merged normally as
+`af53e965e07366fe2d07090b8c1fdf311a60b29e` from `696533e`. Monitor
+registration and encrypted channel rotation now use a conflict-safe
+transaction; focused contracts passed **7/7**, typecheck and diff checks
+passed. Vercel deployment `dpl_Gpdxuh6ybsJjmyBnYZyNHaiWbERp` reached
+Ready/Production; `verglos.com` passed **6/6 HTTP 200**, `www` passed **6/6
+expected HTTP 308**, and the protected deployment hostname returned **6/6 HTTP
+302**. This is implementation/provider evidence only; no checkbox changed and
+the score remains **246 checked / 34 open / 280 total (87.9%)**, split **13
+AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · Web PR #294 CLI authorization collision boundary
 
 Web PR #294 merged normally as

@@ -1,5 +1,38 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #296 exact handoff expiry boundary
+
+- **Implementation mapping:** Web PR #296 merged normally as
+  `a73a479847a6b4667ac33304ccf169b43ed584d7` from `246ec0f`; one shared
+  handoff lifecycle helper now makes list and revoke state agree with the
+  acknowledgement `now >= expiresAt` boundary.
+- **Verification mapping:** Handoff domain, route, and page contracts passed
+  **33/33**, with Web typecheck and diff checks passing. The merged-head
+  Vercel Production deployment `dpl_E7wmp4QBPHx1aiXuSyiYTKhqhUSm` reached
+  **READY** and its read-only six-path matrix returned 6/6 expected responses
+  for canonical, www redirect, and protected deployment-host checks.
+- **Boundary mapping:** This is STUDIO-CLI-001 implementation evidence only.
+  Recipient acceptance, independent review, and final release evidence remain
+  absent. Actions failed at the blocked budget boundary and were not rerun; no
+  checkbox changed and score remains **246/34/280**.
+- **Evidence:** `evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+
+## 2026-10-24 · Web PR #295 monitor registration atomicity
+
+- **Implementation mapping:** Web PR #295 merged normally as
+  `af53e965e07366fe2d07090b8c1fdf311a60b29e` from `696533e`; monitor
+  registration insert/update and encrypted channel rotation now share one
+  conflict-safe transaction.
+- **Verification mapping:** Monitor/encryption contracts passed **7/7**;
+  typecheck and diff checks passed. Vercel deployment
+  `dpl_Gpdxuh6ybsJjmyBnYZyNHaiWbERp` reached Ready/Production; canonical
+  routes were **6/6 HTTP 200**, `www` **6/6 HTTP 308**, and the protected
+  deployment hostname **6/6 HTTP 302**.
+- **Boundary mapping:** Implementation/provider evidence only; no acceptance
+  checkbox changed. Score remains **246/34/280**. Nothing was deleted or
+  overwritten.
+- **Evidence:** `evidence/studio-handoff-and-monitor-atomicity-pr295-296-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #294 CLI authorization collision boundary
 
 - **Implementation mapping:** Web PR #294 merged normally as
