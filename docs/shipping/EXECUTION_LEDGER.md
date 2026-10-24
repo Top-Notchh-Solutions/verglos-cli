@@ -1,5 +1,27 @@
 # Verglos V1 Execution Ledger
 
+## Merged dashboard accessibility fix and v3 capture · 2026-10-24
+
+- **Implementation:** Web PR #275 merged normally as
+  `b17c846c1932636a55eac01895a5226fa9899a3d` from implementation `b344def`.
+  It fixes the observed contrast failures, gives Billing allowance bars valid
+  `progressbar` semantics, and hardens the WebKit headless focus probe.
+- **Execution:** Local authenticated synthetic owner fixture; 13 dashboard
+  routes; desktop/mobile Chromium, Firefox, and WebKit.
+- **Result:** **26 ready measurements per browser / 78 total** and zero
+  ready-state accessibility/performance failures in all three browser reports.
+  `pnpm typecheck` passed and `pnpm test:dashboard-release` passed **4/4**.
+- **Disposition:** Advance QUAL-WEB-006 implementation and automated
+  supported-browser evidence only. Large-dataset, loading/error, human/field,
+  independent-review, customer, and final-release evidence remain open; no
+  checkbox changed. Score remains **245/35/280 (87.5%)**. No paid Actions,
+  Production/customer operation, publication, or deletion was used.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-v3-2026-10-24.md`.
+- **Bundle:** Additive v32 contains **263** hashed files, verifies with **0**
+  mismatches, matches manifest
+  `sha256:82de78f702f7771eb267473b37f2b547cc8bef4966bbc6582432ae45d2803de7`,
+  and passes secret scanning.
+
 ## Authenticated dashboard multi-browser capture · 2026-10-24
 
 - **Implementation:** Web PR #274 merged normally as

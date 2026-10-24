@@ -270,6 +270,10 @@ const paths = [
   "docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-firefox-ready-2026-10-24.json",
   "docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-webkit-ready-2026-10-24.json",
   "docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-2026-10-24.md",
+  "docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-chromium-ready-v3-2026-10-24.json",
+  "docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-firefox-ready-v3-2026-10-24.json",
+  "docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-webkit-ready-v3-2026-10-24.json",
+  "docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-v3-2026-10-24.md",
   "docs/shipping/evidence/dist-002-npm-alpha4-publication-observation-2026-10-24.md",
   "THIRD_PARTY_NOTICES",
 ];

@@ -1,5 +1,24 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record merged dashboard accessibility fix and v3 capture
+
+- **Decision:** Fix the four locally observed dashboard qualification defects,
+  merge the implementation, and rerun the authenticated browser capture.
+- **Result:** Web PR #275 merged as `b17c846c` from `b344def`. Chromium,
+  Firefox, and WebKit each captured 13 routes at desktop/mobile (**78 ready
+  measurements total**) with zero ready-state accessibility/performance
+  failures; typecheck and the dashboard contract suite passed **4/4**.
+- **Disposition:** Record implementation and automated browser progress only.
+  Keep large-dataset, loading/error, human/field, independent-review,
+  customer, and final-release boundaries open; no checkbox changed. Score
+  remains **245/35/280 (87.5%)**. No paid Actions, Production/customer
+  operation, publication, or deletion was used.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-v3-2026-10-24.md`.
+- **Bundle:** Additive v32 contains **263** hashed files, verifies with **0**
+  mismatches, matches manifest
+  `sha256:82de78f702f7771eb267473b37f2b547cc8bef4966bbc6582432ae45d2803de7`,
+  and passes secret scanning.
+
 ## 2026-10-24 · record authenticated dashboard multi-browser capture
 
 - **Decision:** Re-run the authenticated dashboard capture with Chromium,

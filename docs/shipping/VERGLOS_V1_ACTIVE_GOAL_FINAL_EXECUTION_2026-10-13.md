@@ -1,5 +1,28 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · merged dashboard accessibility fix and v3 capture
+
+Web PR #275 merged normally as
+`b17c846c1932636a55eac01895a5226fa9899a3d` (implementation `b344def`). It
+fixes the three observed dashboard contrast failures in Monitoring, Alerts, and
+Members; exposes Billing allowance bars as valid `progressbar` semantics; and
+hardens the dashboard browser probe for WebKit's headless focus behavior.
+
+The local authenticated synthetic-fixture rerun captured all 13 dashboard
+routes at desktop/mobile in Chromium, Firefox, and WebKit: **26 measurements per
+browser / 78 total**. The three browser qualification reports now have **zero
+ready-state accessibility or performance failures**. `pnpm typecheck` passed and
+`pnpm test:dashboard-release` passed **4/4**. Qualification remains fail-closed
+for the intentionally absent large-dataset, loading, and error-state evidence;
+no checkbox changed. Score remains **245 checked / 35 open / 280 total (87.5%)**,
+with **13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-v3-2026-10-24.md`.
+No paid Actions run, Production/customer operation, publication, or deletion
+was used. Additive bundle v32 contains **263** hashed evidence files, verifies
+with **0** mismatches, matches manifest
+`sha256:82de78f702f7771eb267473b37f2b547cc8bef4966bbc6582432ae45d2803de7`,
+and passes secret scanning.
+
 ## Latest continuation result · 2026-10-24 · authenticated dashboard multi-browser capture
 
 Web PR #274 merged normally as `b9f051fd4c36de9e20fcde3b29bbd3104c08925e`,

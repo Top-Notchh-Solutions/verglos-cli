@@ -1,5 +1,21 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · merged dashboard accessibility fix and v3 capture
+
+Web PR #275 merged normally as `b17c846c` from implementation `b344def`.
+Monitoring, Alerts, and Members now pass the observed contrast checks; Billing
+allowance bars expose valid progressbar semantics; and the WebKit headless
+focus probe is bounded. Chromium, Firefox, and WebKit each captured all 13
+authenticated dashboard routes at desktop/mobile (**78 ready measurements**),
+with zero ready-state accessibility/performance failures. This opens no release
+gate: large-dataset, loading/error, human/field, independent-review, customer,
+and final-release evidence remain open. No checkbox changed; score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-v3-2026-10-24.md`.
+The additive v32 bundle verifies **263** files with **0** mismatches, matches
+manifest `sha256:82de78f702f7771eb267473b37f2b547cc8bef4966bbc6582432ae45d2803de7`,
+and passes secret scanning.
+
 ## 2026-10-24 · authenticated dashboard multi-browser capture
 
 Web PR #274 merged normally as `b9f051fd`. Chromium, Firefox, and WebKit each
