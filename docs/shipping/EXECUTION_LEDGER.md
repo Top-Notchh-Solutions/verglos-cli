@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## FINAL-WEB-008 current Production route matrix · 2026-10-24
+
+- **Execution:** Ran a read-only matrix against the current Ready Production
+  deployment and checked the public routes plus the POST-only QR boundary.
+- **Result:** **7/7** public routes returned 200; QR GET returned 405 and an
+  empty unauthenticated POST returned 403 without a payment payload.
+- **Disposition:** Current hosted smoke only. FINAL-WEB-008 remains open for
+  dependencies, independent/acceptance, and final release gates. No payment,
+  customer data, database write, publication, deletion, AppSec review, or
+  final go/no-go occurred. Score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-008-current-production-route-matrix-2026-10-24.md`.
+
 ## FINAL-WEB-005/008 npm truth correction and Production receipt · 2026-10-24
 
 - **Execution:** Observed npm's current dist-tags, corrected the Web public

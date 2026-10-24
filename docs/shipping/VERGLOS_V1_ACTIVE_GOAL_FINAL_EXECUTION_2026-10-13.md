@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · FINAL-WEB-008 current Production route matrix
+
+The Ready Production deployment `dpl_G97rLhokYPQ93y6RHqj2f8kQZyrM`, aliased to
+`https://verglos.com`, passed a fresh read-only route matrix: **7/7** public
+routes returned HTTP 200; the POST-only QR endpoint returned the expected 405
+for GET; and an empty unauthenticated POST was refused with 403 without a
+payment payload. The corrected `/llms.txt` version wording remains live.
+This is current hosted smoke evidence, not final acceptance: FINAL-WEB-008
+remains unchecked for its dependencies, independent/acceptance evidence, and
+final release gates. No payment, customer data, database write, npm
+publication, deletion, AppSec review, or final go/no-go occurred. Score
+remains **246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-
+dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/final-web-008-current-production-route-matrix-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · FINAL-WEB-005/008 Production truth correction
 
 The Web truth registry had a real public drift: npm currently reports

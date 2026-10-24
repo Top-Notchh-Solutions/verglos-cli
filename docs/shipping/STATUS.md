@@ -1,5 +1,13 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · FINAL-WEB-008 current Production route matrix
+
+Current Production smoke passed **7/7** public GET routes with HTTP 200; the
+QR boundary returned expected 405/403 responses without a payment payload.
+FINAL-WEB-008 remains unchecked for dependencies and final release gates. Score
+remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**.
+Evidence: `evidence/final-web-008-current-production-route-matrix-2026-10-24.md`.
+
 ## 2026-10-24 · FINAL-WEB-005/008 npm truth correction and Production receipt
 
 Web PR #284 merged normally and corrected the public version drift between
