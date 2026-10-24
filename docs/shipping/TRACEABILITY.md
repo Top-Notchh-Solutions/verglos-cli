@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · merged Web production smoke
+
+- **Source mapping:** Web PR #282 merged at
+  `cb266b83406bbfffbd5ab02189556e60973a63a6`; Vercel deployment
+  `dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` is READY.
+- **Verification mapping:** Nine public/metadata endpoints returned HTTP 200
+  in a read-only Node fetch sweep.
+- **Acceptance mapping:** Provider availability evidence advances
+  FINAL-WEB-007/008 only; human/field, customer, independent-review,
+  AppSec/Hunt, and final-release gates remain separate. No checkbox changed;
+  score remains 245/35/280.
+- **Evidence:** `evidence/vercel-production-smoke-pr282-2026-10-24.md`.
+
 ## 2026-10-24 · ACCEPT-014 matrix implementation and contract correction
 
 - **Source mapping:** Web PR #282 merged at

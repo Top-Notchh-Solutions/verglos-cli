@@ -1,5 +1,16 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · merged Web production smoke
+
+After Web PR #282 merged, Vercel production deployment
+`dpl_7xFLAALkYPWAiDj8foH1qdq2Caza` reached `READY` and serves the public
+aliases. A read-only sweep returned HTTP **200** for all nine required public
+and metadata routes. This advances provider/Production evidence for
+FINAL-WEB-007/008; it does not close human/field, independent-review,
+customer, AppSec/Hunt, or final-release gates. No checkbox changed; score
+remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/vercel-production-smoke-pr282-2026-10-24.md`.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-014 matrix contract and Web implementation
 
 Web PR [#282](https://github.com/anuragyadav-git/verglos-web/pull/282) merged

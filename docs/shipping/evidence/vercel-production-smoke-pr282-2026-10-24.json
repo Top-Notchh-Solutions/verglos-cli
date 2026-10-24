@@ -1,0 +1,72 @@
+{
+  "schema": "verglos.private.production-smoke.v1",
+  "deployment": "dpl_7xFLAALkYPWAiDj8foH1qdq2Caza",
+  "alias": "https://verglos.com",
+  "webCommit": "cb266b83406bbfffbd5ab02189556e60973a63a6",
+  "capturedAt": "2026-10-24T04:24:27.919Z",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 215245,
+      "location": null
+    },
+    {
+      "path": "/docs",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 68839,
+      "location": null
+    },
+    {
+      "path": "/detectors",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 37545,
+      "location": null
+    },
+    {
+      "path": "/proof",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 24892,
+      "location": null
+    },
+    {
+      "path": "/verify",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 15806,
+      "location": null
+    },
+    {
+      "path": "/checkout",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 13784,
+      "location": null
+    },
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "contentType": "text/plain",
+      "bytes": 180,
+      "location": null
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "contentType": "application/xml",
+      "bytes": 1345,
+      "location": null
+    },
+    {
+      "path": "/llms.txt",
+      "status": 200,
+      "contentType": "text/markdown; charset=utf-8",
+      "bytes": 4380,
+      "location": null
+    }
+  ]
+}

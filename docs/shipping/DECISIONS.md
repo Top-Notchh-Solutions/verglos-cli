@@ -1,5 +1,15 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record merged Web production smoke
+
+- **Decision:** Accept the current READY Vercel deployment and nine-route
+  HTTP-200 sweep as provider availability evidence.
+- **Disposition:** Advance FINAL-WEB-007/008 only. Keep the rows open for
+  human/field evidence, customer/recipient acceptance, independent review,
+  AppSec/Hunt review, and final release sign-off. No checkbox changed; score
+  remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/vercel-production-smoke-pr282-2026-10-24.md`.
+
 ## 2026-10-24 · record ACCEPT-014 matrix implementation and contract correction
 
 - **Decision:** Accept the Web product-contract matrix as implementation
