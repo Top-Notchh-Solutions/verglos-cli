@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current CLI public-OSS verifier recheck
+
+- **Decision:** Reverify the exact-commit public corpus against current CLI
+  `aad2c743` and retain a fresh bounded triage receipt.
+- **Result:** **8/8** full clones, **13,494** files walked, all four required
+  architecture shapes, **0** coverage gaps, and **351** observations across
+  **23** rule groups. The private twelve-fixture verifier also passed from the
+  private shipping ledger.
+- **Disposition:** Record implementation/reproducibility progress only.
+  Keep adjudication, independent review, customer/recipient, provider/
+  Production, and final-release boundaries open; no checkbox changed. Score
+  remains **245/35/280 (87.5%)**. No Actions run or provider write was used.
+- **Evidence:** `evidence/accept-011-012-current-cli-aad2c743-verifier-recheck-2026-10-24.md`.
+
 ## 2026-10-24 · record current-head CLI full monorepo regression
 
 - **Decision:** Rerun the complete CLI package test path after the current
