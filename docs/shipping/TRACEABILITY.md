@@ -1,5 +1,23 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · read-only Production availability
+
+- **Hosted mapping:** Existing Vercel Production deployment
+  `dpl_L3iuaiDqh6oNwoKeW5Cx6mRd73Hc` was `READY` and aliased to
+  `verglos.com`.
+- **Verification mapping:** Read-only GET checks for `/`, `/robots.txt`,
+  `/sitemap.xml`, `/llms.txt`, and `/proof` returned HTTP 200.
+- **Acceptance mapping:** Public availability only. No authenticated,
+  human/field-CWV, customer/recipient, provider-publication,
+  independent-review, AppSec/Hunt, or final-release gate was claimed; no
+  checkbox changed.
+- **Evidence:** `evidence/vercel-production-availability-recheck-2026-10-24T0555Z.md`.
+- **Integrity mapping:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-production-availability-v16.json`
+  verifies 343 files with zero mismatches, matching manifest
+  `sha256:f3fc0dc16e229ee34247082bd54cd2077de0cd5a6b273cc6c231eee9c4e8dfd9`,
+  and passed secret scanning.
+
 ## 2026-10-24 · current-candidate release reconciliation
 
 - **Candidate mapping:** CLI `8a69dbc5db815336f9b2103176f988d3fb90ff5d` and Web
