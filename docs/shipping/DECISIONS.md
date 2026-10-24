@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record non-AppSec implementation sweep
+
+- **Decision:** Accept the local CLI/Web sweep as additive implementation
+  evidence across the candidate non-AppSec surfaces.
+- **Result:** CLI 13/13 package tasks and Web 904/928 tests passed; 24 Web
+  database-dependent cases are designed skips, not failures.
+- **Boundary:** Do not relabel this as customer, human/field, provider
+  publication, Production deletion, independent-review, AppSec/Hunt, or final
+  release evidence.
+- **Score:** 246/34/280; 13 AppSec-dependent and 21 non-AppSec rows remain open
+  under their declared gates.
+- **Evidence:** `evidence/nonappsec-implementation-sweep-2026-10-24.md`.
+
 ## 2026-10-24 · record STUDIO-CLI-001 contract recheck
 
 - **Decision:** Accept the 52/52 focused Web Studio contract run as additive

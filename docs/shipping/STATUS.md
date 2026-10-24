@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · non-AppSec implementation sweep
+
+The workstation recheck passed **13/13** CLI Turbo package tasks and **904/928**
+Web serial tests, with **24 designed database skips**, zero failures, and zero
+cancellations. This is implementation evidence only; no customer, human/field,
+publication, deletion, AppSec/Hunt, or final-release gate was fabricated or
+closed. Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/nonappsec-implementation-sweep-2026-10-24.md`.
+
 ## 2026-10-24 · STUDIO-CLI-001 contract recheck
 
 Focused local Studio projection/workspace/handoff contracts passed **52/52**

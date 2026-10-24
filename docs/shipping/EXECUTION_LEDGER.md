@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## Non-AppSec implementation sweep · 2026-10-24
+
+- **CLI:** 13/13 Turbo package test tasks successful, exit 0.
+- **Web:** 904/928 serial tests passed, 24 designed database skips, zero
+  failures/cancellations.
+- **Boundary:** Workstation implementation evidence only; no external
+  acceptance, provider publication, Production deletion, payment, npm/tag,
+  independent review, AppSec/Hunt review, or final release action.
+- **Disposition:** Keep the 21 non-AppSec partial rows and 13 AppSec rows open
+  under their declared gates; score remains 246/34/280.
+- **Evidence:** `evidence/nonappsec-implementation-sweep-2026-10-24.md`.
+
 ## STUDIO-CLI-001 contract recheck · 2026-10-24
 
 - **Execution:** Focused Web projection, workspace, handoff, page, route, and
