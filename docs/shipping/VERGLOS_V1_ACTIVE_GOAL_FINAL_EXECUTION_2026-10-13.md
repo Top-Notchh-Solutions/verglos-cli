@@ -1,5 +1,43 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #276 Production receipt
+
+Vercel Production deployment `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY and
+serves `verglos.com`/`www.verglos.com` for Web PR #276 merge commit
+`2424659a7752a4a9a924be97c313a0e1e4d2e640`. Read-only requests to `/`,
+`/proof`, `/checkout`, `/llms.txt`, `/robots.txt`, and `/sitemap.xml` returned
+HTTP **200**. This records live runtime evidence for the merged implementation;
+it does not close QUAL-WEB-006's large-dataset/loading/error, human/field,
+independent-review, customer, or final-release evidence. No checkbox changed.
+Score remains **245 checked / 35 open / 280 total (87.5%)**, with **13
+AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/vercel-production-pr276-deployment-2026-10-24.md`.
+Additive bundle v37 contains **269** hashed evidence files, verifies with **0**
+mismatches, matches manifest
+`sha256:daaafce7e0864da87076d5acb379b5f185faff8ce0abf506ee3e76a399571d98`,
+and passes secret scanning.
+
+## Latest continuation result · 2026-10-24 · paginated dashboard dataset binding
+
+Web PR #276 merged normally as `2424659a7752a4a9a924be97c313a0e1e4d2e640`
+from implementation `05e7855b97c984e35714833bcb35fa1b1346b54b`. The dashboard
+qualification harness now reads the real server-reported pagination total from
+the rendered pagination control in addition to mounted rows. This makes a
+bounded large-dataset observation possible on paginated routes without
+manufacturing 100 DOM rows. Web typecheck and the dashboard qualification
+contract passed **4/4**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-pagination-total-pr276-2026-10-24.md`.
+
+The change advances QUAL-WEB-006 implementation/capture capability only. It
+does not claim large-dataset, loading/error, human/field, independent-review,
+customer, or final-release evidence; no checkbox changed. Score remains
+**245 checked / 35 open / 280 total (87.5%)**, with **13 AppSec-dependent / 22
+non-AppSec** rows open. No paid Actions run, Production data mutation,
+customer data, publication, or deletion occurred. Additive bundle v36 contains
+**268** hashed evidence files, verifies with **0** mismatches, matches manifest
+`sha256:d37096d15c5f2b4ed5b43931a12114606ae46eda369b0aebc046feb9a6e1193a`,
+and passes secret scanning.
+
 ## Latest continuation result · 2026-10-24 · Production deployment receipt and public browser qualification
 
 Vercel deployment `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY for Web PR #275,

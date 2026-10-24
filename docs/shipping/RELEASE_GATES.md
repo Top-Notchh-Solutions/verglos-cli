@@ -1,5 +1,32 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Web PR #276 Production receipt
+
+Vercel Production deployment `dpl_D1DK6VzpsWb5suMxuLrnusSPLEs4` is READY for
+the merged Web PR #276; six read-only public routes returned HTTP **200**.
+This records runtime evidence only and opens no release gate. QUAL-WEB-006's
+large-dataset/loading/error, human/field, independent-review, customer, and
+final-release evidence remain open. No checkbox changed; score remains
+**245/35/280 (87.5%)**. Evidence:
+`evidence/vercel-production-pr276-deployment-2026-10-24.md`.
+The additive v37 bundle verifies **269** files with **0** mismatches, matches
+manifest `sha256:daaafce7e0864da87076d5acb379b5f185faff8ce0abf506ee3e76a399571d98`,
+and passes secret scanning.
+
+## 2026-10-24 · paginated dashboard dataset binding
+
+Web PR #276 merged normally as `2424659a` from `05e7855b`. The capture harness
+now reads the real server-reported pagination total alongside mounted rows,
+providing an honest bounded input for large-dataset qualification on paginated
+dashboard views. Typecheck and the dashboard contract passed **4/4**. This
+opens no release gate and does not close QUAL-WEB-006; loading/error,
+human/field, independent-review, customer, and final-release evidence remain
+open. No checkbox changed; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-pagination-total-pr276-2026-10-24.md`.
+The additive v36 bundle verifies **268** files with **0** mismatches, matches
+manifest `sha256:d37096d15c5f2b4ed5b43931a12114606ae46eda369b0aebc046feb9a6e1193a`,
+and passes secret scanning.
+
 ## 2026-10-24 · Production deployment receipt and public browser qualification
 
 Vercel deployment `dpl_9QR8VMPTedtaSvfNPYxgXaUKwgwG` is READY for Web PR #275
