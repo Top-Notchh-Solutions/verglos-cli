@@ -1,5 +1,16 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · ACCEPT-003 current bundle v53 verification
+
+- **Implementation mapping:** Deterministic evidence bundle builder/verifier,
+  bounded file reads, manifest binding, and secret scan.
+- **Contract mapping:** Verifier tests **4/4**; bundle **387/387** matched with
+  zero mismatches and manifest equality.
+- **Boundary mapping:** Internal reproducibility does not imply provider,
+  independent, browser/field, account-deletion, or final release acceptance.
+- **Evidence:** `evidence/accept-003-current-bundle-v53-verification-2026-10-24.md`.
+- **Integrity mapping:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v54.json` verifies 388 files with zero mismatches, matching manifest `sha256:67528344da6f91b21a46e31232fce4fe43f32e332279873d77611f0e6470031d`, and passed secret scanning.
+
 ## 2026-10-24 · QUAL-WEB-006 dashboard qualification contract
 
 - **Implementation mapping:** Dashboard release capture parser and
