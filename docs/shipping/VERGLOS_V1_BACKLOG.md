@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Test Mode capture/refund lifecycle
+
+The existing synthetic Razorpay Test Mode capture completed a full provider
+capture/refund lifecycle. The bound payment was read back as `captured`, the
+full refund returned HTTP 200, and the provider then reported refund
+`processed` and payment `refunded` with `refund_status: full` and the exact
+amount refunded. This is no-money Test Mode evidence only; it is not a
+Production payment, external webhook, customer acceptance, independent
+review, or final release decision. Bundle v22 verifies **246/246** files with
+**0 mismatches**, passes secret scanning, and matches manifest
+`sha256:c6a68f2f5d7bf40c96ff7df978aea97b2aab4f4e85f02f768f23ca065484eee1`.
+No checkbox changed; score remains **245 checked / 35 open / 280 total
+(87.5%)**, with **13 AppSec-dependent / 22 non-AppSec** rows open. Evidence:
+`docs/shipping/evidence/razorpay-testmode-capture-refund-lifecycle-2026-10-24.md`.
+
 ## 2026-10-24 · PR #264 reconciliation and next non-AppSec queue item
 
 CLI PR #264 merged normally as

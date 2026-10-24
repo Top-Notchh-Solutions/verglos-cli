@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Test Mode capture/refund lifecycle
+
+The existing synthetic Razorpay Test Mode payment was read back as captured,
+refunded in full through the provider Test Mode endpoint, and then verified as
+`payment=refunded`, `refund_status=full`, and refund `processed` for 280,943
+paise. This advances provider-lifecycle evidence without using real money,
+Production payment, customer data, or Actions. No checkbox changed; score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/razorpay-testmode-capture-refund-lifecycle-2026-10-24.md`.
+Bundle v22 verifies **246/246** files with zero mismatches and a passed secret
+scan.
+
 ## 2026-10-24 · PR #264 tracker reconciliation and queue routing
 
 Private shipping PR #264 merged normally as

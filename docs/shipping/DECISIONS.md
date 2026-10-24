@@ -1,5 +1,16 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record Test Mode capture/refund lifecycle
+
+- **Decision:** Complete the existing synthetic provider rehearsal with a full
+  Test Mode refund, without touching Production or spending real money.
+- **Result:** Razorpay returned the exact full refund as `processed`; the
+  payment read-back is `refunded` with `refund_status: full` and the exact
+  280,943-paise amount.
+- **Disposition:** Advance provider-lifecycle evidence only. Keep Production,
+  customer, independent-review, field, AppSec/Hunt, and final-release gates
+  open; no checkbox changed. Score remains **245/35/280 (87.5%)**.
+
 ## 2026-10-24 · reconcile PR #264 and route next non-AppSec target
 
 - **Decision:** Reconcile the captured Test Mode packet against the normal

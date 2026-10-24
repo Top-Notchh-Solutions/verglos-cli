@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · Test Mode capture/refund lifecycle
+
+The synthetic Test Mode provider payment completed capture then full refund:
+the provider returned refund `processed` and payment `refunded` with
+`refund_status: full` for the exact 280,943-paise amount. This advances the
+provider rehearsal only. It does not open the Production provider, customer,
+independent-review, field, AppSec/Hunt, or final-release gates. No checkbox
+changed; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/razorpay-testmode-capture-refund-lifecycle-2026-10-24.md`.
+
 ## 2026-10-24 · PR #264 merge and next non-AppSec routing
 
 CLI PR #264 merged normally as

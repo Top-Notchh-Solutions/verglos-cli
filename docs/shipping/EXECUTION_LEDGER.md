@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## Test Mode capture/refund lifecycle · 2026-10-24
+
+- **Provider action:** Existing synthetic Razorpay Test Mode payment was
+  verified as captured; its full 280,943-paise refund returned HTTP 200 and
+  provider state `processed`.
+- **Final read-back:** Payment is `refunded` with `refund_status: full` and
+  `amount_refunded: 280943`; refund/payment binding is exact.
+- **Boundary:** No real money, Production payment, customer data, external
+  webhook delivery, Actions run, or stable release was used.
+- **Disposition:** Provider Test Mode lifecycle evidence advanced; row
+  checkboxes remain unchanged. Score remains **245/35/280 (87.5%)**. Evidence:
+  `evidence/razorpay-testmode-capture-refund-lifecycle-2026-10-24.md`.
+
 ## PR #264 reconciliation and next-row routing · 2026-10-24
 
 - **Merge:** CLI PR #264 merged normally as

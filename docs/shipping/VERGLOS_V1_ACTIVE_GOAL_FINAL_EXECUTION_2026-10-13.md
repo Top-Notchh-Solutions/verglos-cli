@@ -1,5 +1,25 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Test Mode capture/refund lifecycle
+
+The existing synthetic Razorpay Test Mode capture was completed through a
+full provider capture/refund lifecycle. Read-only preflight returned the bound
+order `paid` and payment `captured` for **280,943 paise / INR**. A full refund
+request returned HTTP 200 with refund `rfnd_TrXb712V0DFjQm`; the immediate
+provider read-back returned `processed`, and the final payment read-back
+returned `refunded`, `refund_status: full`, and `amount_refunded: 280943`.
+Evidence:
+`docs/shipping/evidence/razorpay-testmode-capture-refund-lifecycle-2026-10-24.md`.
+
+This is genuine no-money Test Mode provider evidence, not a Production
+payment, external webhook delivery, customer acceptance, independent review,
+or final release decision. The additive bundle v22 verifies **246/246** files
+with **0 mismatches**, passes secret scanning, and matches manifest
+`sha256:c6a68f2f5d7bf40c96ff7df978aea97b2aab4f4e85f02f768f23ca065484eee1`.
+The provider lifecycle gate remains open for its declared Production/release
+boundary; no checkbox changed. Score remains **245 checked / 35 open / 280
+total (87.5%)**, partitioned as **13 AppSec-dependent / 22 non-AppSec**.
+
 ## Latest continuation result · 2026-10-24 · PR #264 tracker reconciliation and next-row selection
 
 The captured Test Mode entitlement packet was merged normally in CLI PR #264
