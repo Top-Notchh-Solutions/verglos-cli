@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · ACCEPT-014 bounded final-regression execution addendum
+
+The implemented final-regression runner executed **12** real local CLI scans
+across **8/8** exact frozen public OSS fixtures and **5/5** plan simulations.
+Finding regressions: **0**. Performance regressions: **0**; aggregate duration
+delta: **-10,238 ms**. The fail-closed result is `no-go` with all five gates
+open. Missing `admin`, `approver`, `member`, `viewer`, and `multi` tenant
+scenarios are explicitly reported; owner/single results were not reused as
+false matrix coverage. Keep `ACCEPT-014` unchecked for the remaining scenario
+matrix, dependent correction/provider gates, independent review, and final
+decision. No customer data, payment, publication, npm release, tag, Actions
+run, database mutation, or deletion occurred. Score remains **245 checked / 35
+open / 280 total (87.5%)**, split **13 AppSec-dependent / 22 non-AppSec**.
+Evidence: `docs/shipping/evidence/accept-014-final-regression-execution-2026-10-24.md`.
+
 ## 2026-10-24 · current Web candidate local verification addendum
 
 Web commit `21f9cfbd559d2b06c328d985ef4615430643c0ed` passed typecheck, the

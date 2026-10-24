@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-014 bounded final-regression execution · 2026-10-24
+
+- **Candidate:** CLI `aad2c74395a5c381c955ab9dfab7462295564840`, Web
+  `21f9cfbd559d2b06c328d985ef4615430643c0ed`, version `2.0.0-alpha.4`.
+- **Execution:** 12 actual local CLI scans across 8/8 exact fixtures and all
+  five plan simulations.
+- **Result:** 0 finding regressions, 0 performance regressions, aggregate
+  duration delta `-10,238 ms`; the runner returned `no-go`.
+- **Boundary:** Missing admin/approver/member/viewer and multi-tenant
+  scenarios are explicit. All five final-regression gates remain open. No
+  checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/accept-014-final-regression-execution-2026-10-24.md`.
+
 ## Current Web candidate local verification · 2026-10-24
 
 - **Candidate:** Web `21f9cfbd559d2b06c328d985ef4615430643c0ed` from a clean

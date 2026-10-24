@@ -1,5 +1,15 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · ACCEPT-014 bounded final-regression execution
+
+The local final-regression run executed 12 real CLI scans across 8/8 frozen
+fixtures and 5/5 plan simulations. Finding and performance regression counts
+were both zero. The runner returned `no-go` with all five final-regression
+gates open and explicitly missing four non-owner roles plus `multi` tenant
+coverage. This advances the execution gate only; no final-release gate opened
+and no checkbox changed. Score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/accept-014-final-regression-execution-2026-10-24.md`.
+
 ## 2026-10-24 · current Web candidate local verification
 
 Web commit `21f9cfbd559d2b06c328d985ef4615430643c0ed` passed typecheck, the

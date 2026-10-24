@@ -1,5 +1,17 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · ACCEPT-014 bounded final-regression execution
+
+The real local execution covered **8/8** exact fixtures and all **5/5** plan
+simulations in **12** CLI scans. It recorded zero finding regressions and zero
+performance regressions; aggregate duration delta was **-10,238 ms**. The
+fail-closed result is `no-go` with all five final-regression gates open. Missing
+role scenarios (`admin`, `approver`, `member`, `viewer`) and `multi` tenant mode
+are explicit; they were not fabricated from the owner/single runs. No checkbox
+changed. Score remains **245 checked / 35 open / 280 total (87.5%)**, with 13
+AppSec-dependent and 22 non-AppSec rows open. Evidence:
+`evidence/accept-014-final-regression-execution-2026-10-24.md`.
+
 ## 2026-10-24 · current Web candidate local verification
 
 Web commit `21f9cfbd559d2b06c328d985ef4615430643c0ed` passed typecheck, the
