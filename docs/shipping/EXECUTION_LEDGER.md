@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## ACCEPT-008 current-head rerun · 2026-10-24T07:35Z
+
+- **Execution:** Ran commercial-validator syntax and the focused test suite at
+  CLI commit `493823c6`.
+- **Result:** **9/9** passed; all seven evidence kinds and fail-closed
+  boundaries remained covered.
+- **Disposition:** Implementation evidence only; no actual commercial event,
+  independent review, or final acceptance occurred. ACCEPT-008 remains
+  unchecked; score remains **246/34/280**.
+- **Evidence:** `evidence/accept-008-current-head-rerun-2026-10-24T0735Z.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v45.json` verifies 379 files with zero mismatches, matching manifest `sha256:d29bbe45a676fa471eea9545b07f76c162abcc91df50fd5331b253de7919689b`, and passed secret scanning.
+
 ## ACCEPT-006 current-head rerun · 2026-10-24T07:34Z
 
 - **Execution:** Ran scorer syntax, the 11-test comprehension suite, and the

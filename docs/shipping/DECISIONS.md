@@ -1,5 +1,17 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · ACCEPT-008 current-head rerun
+
+- **Decision:** Record the commercial validator’s current fail-closed result
+  without converting synthetic contracts into commercial acceptance.
+- **Result:** Syntax passed; **9/9** tests passed across the seven evidence
+  kinds and tamper/provenance/approval boundaries.
+- **Boundary:** No actual agreement, checkout, repeat-use, support, cost,
+  recipient event, independent review, or final acceptance occurred. ACCEPT-008
+  remains unchecked; score remains **246/34/280**.
+- **Evidence:** `evidence/accept-008-current-head-rerun-2026-10-24T0735Z.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v45.json` verifies 379 files with zero mismatches, matching manifest `sha256:d29bbe45a676fa471eea9545b07f76c162abcc91df50fd5331b253de7919689b`, and passed secret scanning.
+
 ## 2026-10-24 · ACCEPT-006 current-head rerun
 
 - **Decision:** Record the current scorer/protocol result without upgrading the
