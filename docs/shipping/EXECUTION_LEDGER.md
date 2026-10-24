@@ -1,5 +1,22 @@
 # Verglos V1 Execution Ledger
 
+## Isolated Web database serial recheck · 2026-10-24
+
+- **Source:** Web `705a85e2b7b9d847a85748463aa0d797c60b384f`.
+- **Execution:** `pnpm test:serial` against fresh local PostgreSQL 16,
+  database `verglos_test`, loopback port `55441`.
+- **Result:** **926/928 passed**, **0 failed**, **0 cancelled**, **2 designed
+  skips**, exit `0`.
+- **Boundary:** Local implementation evidence only. No hosted provider,
+  Production database, customer data, payment, publication, independent
+  review, AppSec/Hunt review, or release-sign-off action occurred.
+- **Disposition:** Keep the 21 non-AppSec partial rows and 13 AppSec rows open
+  under their declared gates; score remains **246/34/280**.
+- **Evidence:** `evidence/qual-web-006-local-isolated-db-serial-recheck-2026-10-24.md`.
+- **Integrity:** Bundle
+  `evidence/acceptance-evidence-bundle-2026-10-24-isolated-db-v11.json`
+  verifies 337 files with zero mismatches and passed secret scanning.
+
 ## Non-AppSec implementation sweep · 2026-10-24
 
 - **CLI:** 13/13 Turbo package test tasks successful, exit 0.

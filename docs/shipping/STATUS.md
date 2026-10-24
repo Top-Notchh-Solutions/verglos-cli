@@ -1,5 +1,18 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · isolated Web database serial recheck
+
+The current Web tree `705a85e2` passed the full serial suite against a fresh
+local PostgreSQL 16 `verglos_test` database: **926/928 passed, 0 failures, 0
+cancellations, and 2 designed skips**, exit 0. This is stronger local
+implementation evidence for QUAL-WEB-005/006; it does not substitute for
+human/field, customer, provider-publication, Production deletion,
+independent-review, AppSec/Hunt, or final-release evidence. No checkbox changed.
+Score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/qual-web-006-local-isolated-db-serial-recheck-2026-10-24.md`.
+Bundle v11 verifies 337 files with zero mismatches and passed secret scanning.
+
 ## 2026-10-24 · non-AppSec implementation sweep
 
 The workstation recheck passed **13/13** CLI Turbo package tasks and **904/928**
