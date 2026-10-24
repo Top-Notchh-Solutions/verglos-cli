@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #288 Production deployment
+
+Vercel Production deployment **`dpl_2KSkgFHCFyDTpF5NNdJMkbPf66R1`** reached
+Ready for Web `main` at `557d508`; the migration hook was not requested. Six
+public paths returned HTTP **200** on the exact deployment hostname and both
+public aliases (**18/18**). This is provider/Production evidence only; no live
+provider installation or acceptance checkbox changed. Score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/vercel-production-pr288-scm-atomicity-2026-10-24.md`.
+Nothing was deleted or overwritten.
+
 ## 2026-10-24 · SCM installation audit atomicity hardening
 
 Web PR **#288** merged normally as

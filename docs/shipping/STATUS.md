@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Web PR #288 Production deployment
+
+Vercel Production deployment `dpl_2KSkgFHCFyDTpF5NNdJMkbPf66R1` is Ready for
+Web `main` at `557d508`. The six-path read-only matrix returned HTTP **200** on
+the deployment hostname and both public aliases (**18/18**); no migration was
+requested. This advances provider/Production evidence only; no live provider
+installation or acceptance checkbox changed. Score remains **246/34/280
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/vercel-production-pr288-scm-atomicity-2026-10-24.md`.
+
 ## 2026-10-24 · SCM installation audit atomicity hardening
 
 Web PR #288 merged normally as

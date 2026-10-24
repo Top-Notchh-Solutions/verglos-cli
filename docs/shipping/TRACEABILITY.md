@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · Web PR #288 Production deployment
+
+- **Implementation mapping:** Vercel Production deployment
+  `dpl_2KSkgFHCFyDTpF5NNdJMkbPf66R1` reached Ready for Web `main` at `557d508`.
+- **Verification mapping:** Runtime configuration/build completed and the
+  six-path read-only matrix returned HTTP 200 on the deployment hostname,
+  `verglos.com`, and `www.verglos.com` (**18/18**); no migration was requested.
+- **Boundary mapping:** This is provider/Production runtime evidence only. It
+  does not create a live provider installation, customer consent, independent
+  review, or final release sign-off. No checkbox changed; score remains
+  **246/34/280**.
+- **Evidence:** `evidence/vercel-production-pr288-scm-atomicity-2026-10-24.md`.
+
 ## 2026-10-24 · SCM installation audit atomicity hardening
 
 - **Implementation mapping:** Web PR #288 merged normally as

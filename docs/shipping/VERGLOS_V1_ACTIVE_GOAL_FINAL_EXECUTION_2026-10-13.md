@@ -1,5 +1,22 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · Web PR #288 Production deployment
+
+Vercel Production deployment **`dpl_2KSkgFHCFyDTpF5NNdJMkbPf66R1`** cloned Web
+`main` at `557d508`, completed the Next.js build and serverless output
+creation, and reached Ready. Runtime configuration was valid and the
+Production migration hook was not requested. Read-only Node fetch checks
+returned HTTP **200** for six public paths on the exact deployment hostname,
+`verglos.com`, and `www.verglos.com`: **18/18**. This records provider/
+Production runtime evidence for the merged implementation; no provider
+installation, database write, customer data, human/field, independent-review,
+or final-release action occurred. No checkbox changed; score remains **246
+checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`docs/shipping/evidence/vercel-production-pr288-scm-atomicity-2026-10-24.md`.
+
+Nothing was deleted or overwritten.
+
 ## Latest continuation result · 2026-10-24 · SCM installation audit atomicity hardening
 
 Web PR **#288** merged normally as
