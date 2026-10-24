@@ -1,5 +1,15 @@
 # Verglos V1 shipping status
 
+## 2026-10-24 · Production landing multi-browser receipt
+
+The current public Production alias passed Chromium, Firefox, and WebKit
+qualification across six required paths at desktop/mobile: **36/36** total
+measurements, zero Axe findings, zero keyboard/responsive/metadata/crawl
+failures, and 12/12 observed INP measurements per browser. This advances
+automated hosted evidence for FINAL-WEB-007/008 only. No checkbox changed;
+score remains **245 checked / 35 open / 280 total (87.5%)**. Evidence:
+`evidence/final-web-007-008-production-landing-multibrowser-2026-10-24.md`.
+
 ## 2026-10-24 · current CLI public-OSS workflow rerun
 
 The owner-authorized `buggy-node` workflow was rerun from the pinned fixture

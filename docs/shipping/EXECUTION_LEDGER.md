@@ -1,5 +1,17 @@
 # Verglos V1 Execution Ledger
 
+## Production landing multi-browser receipt · 2026-10-24
+
+- **Execution:** Read-only browser qualification ran against `https://verglos.com`
+  in Chromium, Firefox, and WebKit across six public routes at desktop/mobile.
+- **Result:** 36/36 measurements passed; each engine had zero Axe findings,
+  keyboard/responsive/metadata/crawl failures, and 12/12 observed INP values.
+- **Boundary:** Automated hosted evidence only. No database, payment, customer,
+  deletion, provider mutation, independent-review, AppSec/Hunt, or release
+  action occurred; score remains 245/35/280.
+- **Evidence:** `evidence/final-web-007-008-production-landing-multibrowser-2026-10-24.md`;
+  three byte-bound JSON captures are listed there.
+
 ## Current CLI public-OSS workflow rerun · 2026-10-24
 
 - **Execution:** The exact `buggy-node` fixture directory was scanned with the
