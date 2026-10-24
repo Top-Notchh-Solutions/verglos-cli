@@ -1,5 +1,18 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · current-candidate reconciliation v2
+
+- **Source mapping:** Release config and evidence paths bind CLI
+  `cd9d572e28462741103cb21a2274e5892939d5d4`, Web
+  `cb266b83406bbfffbd5ab02189556e60973a63a6`, and version `2.0.0-alpha.4`.
+- **Verification mapping:** The input builder bound evidence digests; 22 rows
+  are partial, 6 gates are open, and correction/rollback work remains. Freeze
+  verification found 24/24 artifacts and all 12 required kinds.
+- **Acceptance mapping:** The recommendation remains `no-go`; no row was
+  promoted to `shipped`. No checkbox changed; score remains 245/35/280.
+- **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24-v2.md`;
+  bundle manifest `sha256:109185382ea1a35b8adc89356c8da14f382e96e4c72fa202baf7f8859632a5eb`.
+
 ## 2026-10-24 · production inspection bundle verification
 
 - **Source mapping:** Current private evidence set plus the read-only Vercel

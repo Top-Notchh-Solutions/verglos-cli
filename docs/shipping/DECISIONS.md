@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record current-candidate reconciliation v2
+
+- **Decision:** Accept the byte-bound current-candidate reconciliation and
+  freeze as the authoritative private no-go record.
+- **Result:** CLI `cd9d572e`, Web `cb266b83`, and `2.0.0-alpha.4` are bound;
+  22 non-AppSec rows are partial; 6 gates, 6 correction items, and 1 rollback
+  item remain open. Freeze verification is 24/24 artifacts and 12/12 required
+  kinds, but the candidate remains blocked.
+- **Disposition:** Keep every remaining row unchecked. Do not publish npm,
+  create a tag/release, or infer customer, independent, field, deletion,
+  AppSec/Hunt, or final-release evidence. Score remains 245/35/280.
+- **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24-v2.md`;
+  bundle manifest `sha256:109185382ea1a35b8adc89356c8da14f382e96e4c72fa202baf7f8859632a5eb`.
+
 ## 2026-10-24 · record production inspection bundle verification
 
 - **Decision:** Accept the additive evidence bundle as the current private

@@ -1,5 +1,29 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · current-candidate reconciliation v2
+
+The release ledger is now byte-bound to the actual merged candidates: CLI
+`cd9d572e28462741103cb21a2274e5892939d5d4`, Web
+`cb266b83406bbfffbd5ab02189556e60973a63a6`, version `2.0.0-alpha.4`. The new
+`scripts/build-release-reconciliation-input.mjs` builder verifies configured
+evidence bytes and emits digests for the fail-closed reconciler. Its focused
+tests pass **2/2**; the reconciler and freeze suites pass **16/16**.
+
+The current reconciliation contains all **22** non-AppSec rows as `partial`,
+records **6** open gates, **6** correction items, and **1** rollback item, and
+recommends **no-go**. The candidate freeze verifies **24/24** artifacts,
+including all 12 required kinds, with zero missing artifacts, but remains
+`blocked` because the gates remain open. No checkbox changed; score remains
+**245 checked / 35 open / 280 total (87.5%)**, split **13 AppSec-dependent /
+22 non-AppSec**. Evidence:
+`docs/shipping/evidence/acceptance-release-reconciliation-freeze-2026-10-24-v2.md`;
+the additive bundle verifies **319** files with **0** mismatches, secret scan
+passed, and manifest
+`sha256:109185382ea1a35b8adc89356c8da14f382e96e4c72fa202baf7f8859632a5eb`.
+
+No npm package, tag, GitHub release, payment, customer data operation,
+database deletion, or paid Actions run occurred.
+
 ## Latest continuation result · 2026-10-24 · production inspection bundle
 
 The additive acceptance bundle now contains **310** bounded evidence files;

@@ -1,5 +1,20 @@
 # Verglos V1 Execution Ledger
 
+## Current-candidate reconciliation v2 · 2026-10-24
+
+- **Binding:** The new input builder verified evidence bytes and bound the
+  release ledger to CLI `cd9d572e28462741103cb21a2274e5892939d5d4`, Web
+  `cb266b83406bbfffbd5ab02189556e60973a63a6`, and `2.0.0-alpha.4`.
+- **Result:** 22 non-AppSec rows remain partial; 6 gates, 6 corrections, and
+  1 rollback item remain open. Reconciliation is `no-go`. Freeze verification
+  is 24/24 artifacts and 12/12 required kinds, but status is `blocked`.
+- **Verification:** Builder 2/2; reconciler/freeze suites 16/16. No checkbox
+  changed; score remains 245/35/280.
+- **Boundary:** No npm publication, tag, release, payment, customer data,
+  deletion, or paid Actions run occurred.
+- **Evidence:** `evidence/acceptance-release-reconciliation-freeze-2026-10-24-v2.md`;
+  bundle manifest `sha256:109185382ea1a35b8adc89356c8da14f382e96e4c72fa202baf7f8859632a5eb`.
+
 ## Production inspection bundle verification · 2026-10-24
 
 - **Receipt:** The additive private bundle contains 310 bounded evidence files,

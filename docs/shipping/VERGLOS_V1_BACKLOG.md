@@ -6834,6 +6834,14 @@ row unchecked for actual acceptance/hosted/provider/customer evidence,
 independent review, and the final release decision. The next
 implementation-first queue entry is `ACCEPT-010`. Evidence:
 `docs/shipping/evidence/accept-009-reconciliation-date-boundary-2026-10-23.md`.
+**ACCEPT-009 current-candidate binding addendum (2026-10-24; not a checkbox):**
+Private `scripts/build-release-reconciliation-input.mjs` now binds the
+reconciliation input to exact evidence bytes and the merged CLI/Web candidate
+(`cd9d572e` / `cb266b83`). Builder tests pass **2/2**; the current report
+contains 22 partial non-AppSec rows, 6 open gates, 6 correction items, and 1
+rollback item with a recorded `no-go`. Keep the row unchecked for the remaining
+acceptance, provider, independent-review, and final-release gates. Evidence:
+`docs/shipping/evidence/acceptance-release-reconciliation-freeze-2026-10-24-v2.md`.
 - [ ] **ACCEPT-010** · GA release candidate freeze · deps: ACCEPT-009 + all critical gates · Freeze versions, schemas, migrations, manifests, plan catalog, compatibility, docs, runbooks, notices, SBOM, provenance, and rollback. Commit(s): private `69b2b553`, `199e6095`, `049eee35` implement and harden the twelve-category fail-closed candidate freeze.
 - **ACCEPT-010 artifact-kind addendum (2026-10-23):** Private `199e6095`
   hardens the freeze contract to require a present, required artifact in all

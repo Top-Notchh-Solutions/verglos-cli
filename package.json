@@ -28,6 +28,7 @@
     "acceptance:evidence:verify": "node scripts/verify-acceptance-evidence-bundle.mjs",
     "shipping:backlog:audit": "node scripts/audit-shipping-backlog.mjs",
     "acceptance:study-protocols:check": "node scripts/validate-acceptance-study-protocols.mjs",
+    "acceptance:release:input": "node scripts/build-release-reconciliation-input.mjs",
     "acceptance:release:reconcile": "node scripts/reconcile-release-gates.mjs",
     "acceptance:release:freeze": "node scripts/freeze-release-candidate.mjs",
     "acceptance:release:regress": "node scripts/run-final-regression.mjs",
