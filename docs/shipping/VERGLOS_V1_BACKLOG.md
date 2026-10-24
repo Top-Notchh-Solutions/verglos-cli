@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · merged multi-browser checkout qualification fix
+
+Web PR #270 merged normally as `2358edee90de78c06d6128a6d312165f911f7b6a`.
+The checkout cadence tabs now expose correct keyboard focus semantics, and the
+landing capture harness supports explicit Chromium, Firefox, and WebKit runs.
+The warmed local qualification passed **36/36** measurements (six required
+paths, desktop/mobile, three engines), with zero accessibility findings,
+keyboard failures, responsive failures, metadata failures, crawlability
+failures, or reduced-motion failures. Typecheck and the existing landing
+contract suite passed **4/4**. Evidence:
+`docs/shipping/evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md`.
+
+This advances implementation evidence only. It does not close the hosted,
+human screen-reader, field-CWV, independent-review, AppSec/Hunt, or final
+release boundaries; no backlog checkbox changed. Score remains **245 checked /
+35 open / 280 total (87.5%)**, partitioned as **13 AppSec-dependent / 22
+non-AppSec**.
+
 ## 2026-10-24 · local signed refund integration
 
 The Web current head passed the real database-backed signed Razorpay webhook

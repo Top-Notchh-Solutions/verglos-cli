@@ -1,5 +1,20 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record merged multi-browser checkout qualification fix
+
+- **Decision:** Fix the WebKit keyboard failure in product code and extend the
+  local landing qualification harness to run each supported engine explicitly.
+- **Merge:** Web PR #270 merged normally as
+  `2358edee90de78c06d6128a6d312165f911f7b6a`.
+- **Result:** Correct tab focus semantics are implemented; warmed local
+  Chromium, Firefox, and WebKit qualification passed **36/36** measurements,
+  with typecheck and landing tests **4/4**.
+- **Disposition:** Record implementation evidence only. The automatic Vercel
+  deployment was queued/building at record time, so no hosted or human/field
+  gate is inferred. Keep row checkboxes unchanged; score remains
+  **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · record local signed refund integration
 
 - **Decision:** Validate the real Web database-backed refund handler against a

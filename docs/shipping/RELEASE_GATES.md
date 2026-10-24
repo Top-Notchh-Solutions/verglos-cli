@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · merged multi-browser checkout qualification fix
+
+Web PR #270 merged normally as `2358edee`. The checkout cadence-tab keyboard
+contract is fixed, and local warmed qualification passed **36/36** measurements
+across Chromium, Firefox, and WebKit for all six required public paths at
+desktop/mobile. Typecheck and the landing contract suite passed **4/4**.
+This advances implementation evidence for the Web qualification surface only;
+the automatic Vercel deployment was queued/building at record time. It does not
+open hosted Production, human screen-reader, field-CWV, independent-review,
+AppSec/Hunt, customer, or final-release gates. No checkbox changed; score
+remains **245/35/280 (87.5%)**. Evidence:
+`evidence/final-web-007-multi-browser-local-qualification-2026-10-24.md`.
+
 ## 2026-10-24 · local signed refund integration
 
 The Web signed-handler integration passed **4/4** on a fresh isolated database
