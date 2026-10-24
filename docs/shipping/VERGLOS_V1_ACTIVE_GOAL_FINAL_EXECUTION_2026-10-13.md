@@ -1,5 +1,20 @@
 # Verglos V1 final shipping goal — non-AppSec completion
 
+## Latest continuation result · 2026-10-24 · DIST-002/DIST-003 license validation
+
+The current license inventory test suite passed **6/6**; external license
+records validated **8** records under schema `1.0.0`; and the inventory reported
+**254** lockfile package IDs, **250** package entries, and **0** unresolved
+review blockers. This records current code-side/release-preparation progress
+for `DIST-002` and `DIST-003`; it does not create trusted publication,
+immutable attestation, provider/Production execution, independent review, or
+final release acceptance. Score remains **246 checked / 34 open / 280 total
+(87.9%)**, split **13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-002-003-current-license-validation-2026-10-24.md`.
+Bundle v57 verifies **391** bounded files with **0** mismatches, manifest
+`sha256:387dedb6a694c869f34997049b81a22f825fdf744b87710223a48ec7135899de`,
+and passed secret scanning.
+
 ## Latest continuation result · 2026-10-24 · ACCEPT-006 current protocol recheck
 
 The scorer and study-protocol syntax checks passed; the comprehension scorer

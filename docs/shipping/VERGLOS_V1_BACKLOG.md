@@ -1,5 +1,20 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · DIST-002/DIST-003 current license validation
+
+The current license inventory suite passed **6/6**; **8** external license
+records validated; and the inventory reported **254** lockfile package IDs,
+**250** package entries, and **0** unresolved review blockers. This is additive
+code-side/release-preparation evidence only. Keep `DIST-002` and `DIST-003`
+unchecked for trusted/protected publication, immutable attestation,
+provider/Production execution, independent review, and final release
+acceptance. Score remains **246 checked / 34 open / 280 total (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`docs/shipping/evidence/dist-002-003-current-license-validation-2026-10-24.md`.
+Bundle v57 verifies **391** files with **0** mismatches, matching manifest
+`sha256:387dedb6a694c869f34997049b81a22f825fdf744b87710223a48ec7135899de`,
+and passed secret scanning. Nothing was deleted or overwritten.
+
 ## 2026-10-24 · ACCEPT-006 current protocol recheck
 
 The scorer and study-protocol syntax checks passed; comprehension scorer
