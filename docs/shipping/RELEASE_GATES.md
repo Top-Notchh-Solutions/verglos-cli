@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · FINAL-WEB-001 current truth-registry recheck
+
+The current Web truth-registry suite passed **37/37**, public-release contracts
+passed **12/12**, and executable public smoke passed with **32/32** claims
+publishable, 18 routes, 2 proof assets, 8 sitemap URLs, 6 robots rules, and
+zero issues. This does not satisfy hosted/independent/field acceptance or
+final release. No checkbox changed; score remains **246/34/280 (87.9%)**, split
+**13 AppSec-dependent / 21 non-AppSec**. Evidence:
+`evidence/final-web-001-current-truth-registry-recheck-2026-10-24.md`.
+Bundle v48 verifies **382** files with zero mismatches, matching manifest
+`sha256:92b2f79e73b978080884f76c1fa6c756aef13a180b42decb05d9e85936e9b054`,
+and passed secret scanning.
+
 ## 2026-10-24 · STUDIO-CLI-001 bounded current recheck
 
 The current CLI package suite exited 0 with only two documented Hunt Docker

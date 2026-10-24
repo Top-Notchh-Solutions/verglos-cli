@@ -1,5 +1,18 @@
 # Verglos V1 Execution Ledger
 
+## FINAL-WEB-001 current truth-registry recheck · 2026-10-24
+
+- **Execution:** Ran Web truth-registry tests, public-release contract tests,
+  and executable public-release smoke.
+- **Result:** **37/37**, **12/12**, and `status: passed` with **32/32** claims
+  publishable, 18 routes, 2 proof assets, 8 sitemap URLs, 6 robots rules, and
+  zero issues.
+- **Disposition:** Code-contract evidence only; Node 22.x warning under Node
+  26.4.0 retained. No deployment/provider/independent/field/final action
+  occurred; FINAL-WEB-001 remains unchecked and score remains **246/34/280**.
+- **Evidence:** `evidence/final-web-001-current-truth-registry-recheck-2026-10-24.md`.
+- **Integrity:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v48.json` verifies 382 files with zero mismatches, matching manifest `sha256:92b2f79e73b978080884f76c1fa6c756aef13a180b42decb05d9e85936e9b054`, and passed secret scanning.
+
 ## STUDIO-CLI-001 bounded current recheck · 2026-10-24
 
 - **Execution:** Ran the current CLI package suite and focused Web Studio
