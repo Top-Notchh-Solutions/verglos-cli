@@ -1,5 +1,23 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · Web PR #294 CLI authorization collision boundary
+
+Web PR #294 merged normally as
+`f5544a85857b8d2ebe911e0265ebec5afd55f53d` from `44fbc58`. CLI auth start
+now retries only PostgreSQL SQLSTATE `23505` user-code collisions and fails
+fast on database outages or unrelated constraints. Route/helper/organization
+contracts passed, Web typecheck and diff checks passed. Vercel deployment
+`dpl_GUmcRvJ9c5ykdJEpVTNQBCvhAunj` reached Ready/Production; `verglos.com`
+passed **6/6 HTTP 200**, `www` passed **6/6 expected HTTP 308**, and the
+protected deployment hostname returned **302**. This advances CLI-auth
+implementation and provider/Production evidence only; human/field,
+independent/AppSec, customer/recipient, and final-release gates remain
+separate. GitHub Actions checks failed before repository steps under the
+blocked budget and were not rerun. No checkbox changed; score remains
+**246 checked / 34 open / 280 total (87.9%)**, split **13 AppSec-dependent /
+21 non-AppSec**. Nothing was deleted or overwritten. Evidence:
+`docs/shipping/evidence/cli-auth-unique-collision-boundary-pr294-2026-10-24.md`.
+
 ## 2026-10-24 · Web PR #293 organization write SQLSTATE hardening
 
 Web PR #293 merged normally as
