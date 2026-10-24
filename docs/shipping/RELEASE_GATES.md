@@ -1,5 +1,18 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · DIST-002/003 current publish-contract regression
+
+The bounded trusted-publishing, package-preflight, license, artifact, tag,
+release-note/origin, checksum, and mocked-provenance suites passed **44/44**.
+This does not satisfy protected trusted publication, external provider
+attestation, final license/release clearance, or final acceptance. No checkbox
+changed; score remains **246/34/280 (87.9%)**, split **13 AppSec-dependent / 21
+non-AppSec**. Evidence:
+`evidence/dist-002-003-current-publish-contract-regression-2026-10-24.md`.
+Bundle v39 verifies **373** files with zero mismatches, matching manifest
+`sha256:39916f73fa7739a3cf8ea6578df59bee973e4ef7a5c21570c870ea2b6d7d8fe6`,
+and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-007/008 production browser capture
 
 The existing Chromium Playwright capture and qualification passed **12/12**

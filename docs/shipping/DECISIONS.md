@@ -1,5 +1,18 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · DIST-002/003 current publish-contract regression
+
+- **Decision:** Record the local trusted-publishing and release-artifact
+  contract regression without treating mocked provider behavior as publication.
+- **Result:** **44/44** tests passed across publish preflight, OIDC workflow,
+  license inventory, artifacts, tags, checksums, release metadata, and mocked
+  provenance.
+- **Boundary:** No npm/registry/provider write, protected approval, token use,
+  external attestation, or release sign-off occurred. DIST-002/003 remain
+  unchecked; score remains **246/34/280**.
+- **Evidence:** `evidence/dist-002-003-current-publish-contract-regression-2026-10-24.md`.
+- **Integrity packet:** Bundle `evidence/acceptance-evidence-bundle-2026-10-24-current-candidate-v39.json` verifies 373 files with zero mismatches, matching manifest `sha256:39916f73fa7739a3cf8ea6578df59bee973e4ef7a5c21570c870ea2b6d7d8fe6`, and passed secret scanning.
+
 ## 2026-10-24 · FINAL-WEB-007/008 production browser capture
 
 - **Decision:** Record the bounded Chromium browser qualification against the
