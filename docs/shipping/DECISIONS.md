@@ -1,5 +1,19 @@
 # Verglos shipping decisions
 
+## 2026-10-24 · record authenticated dashboard multi-browser capture
+
+- **Decision:** Re-run the authenticated dashboard capture with Chromium,
+  Firefox, and WebKit after adding bounded real-interaction INP retry.
+- **Result:** Web PR #274 merged as `b9f051fd`; **78 ready measurements** were
+  captured across 13 routes and two viewports per browser. Qualifier gaps were
+  Chromium **73**, Firefox **73**, and WebKit **85**.
+- **Disposition:** Record automated supported-browser progress only. Keep
+  loading/error, large-dataset, human/field, independent-review, customer,
+  and final-release boundaries open; no checkbox changed. Score remains
+  **245/35/280 (87.5%)**. No Actions run or Production/customer operation was
+  used.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-2026-10-24.md`.
+
 ## 2026-10-24 · record authenticated dashboard capture harness
 
 - **Decision:** Merge the bounded Playwright dashboard capture harness and run

@@ -1,5 +1,19 @@
 # Verglos V1 traceability
 
+## 2026-10-24 · authenticated dashboard multi-browser capture
+
+- **Source mapping:** Web PR #274 merged normally as
+  `b9f051fd4c36de9e20fcde3b29bbd3104c08925e`; capture uses the current
+  authenticated dashboard route set and bounded INP retry.
+- **Verification mapping:** Chromium, Firefox, and WebKit each captured 13
+  routes at desktop/mobile (**78 ready measurements total**); qualifier gaps
+  were 73/73/85 respectively.
+- **Acceptance mapping:** Automated supported-browser capture advances
+  QUAL-WEB-006 only. Loading/error, large-dataset, human/field,
+  independent-review, customer, and final-release evidence remain open. No
+  checkbox changed; score remains **245/35/280 (87.5%)**.
+- **Evidence:** `evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-2026-10-24.md`.
+
 ## 2026-10-24 · authenticated dashboard capture harness
 
 - **Source mapping:** Web PR #273 merged normally as

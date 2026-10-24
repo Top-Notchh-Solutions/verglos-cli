@@ -1,5 +1,17 @@
 # Verglos V1 master execution backlog
 
+## 2026-10-24 · authenticated dashboard multi-browser capture
+
+Web PR #274 merged normally as `b9f051fd`. The retry-enabled harness captured
+all 13 authenticated dashboard routes at desktop and mobile in Chromium,
+Firefox, and WebKit: **26 measurements per browser / 78 total**. Qualification
+reported 73 gaps in Chromium, 73 in Firefox, and 85 in WebKit; loading/error
+states and large-dataset rows remain absent by design, and observed page
+failures remain explicit. This advances `QUAL-WEB-006` automated
+supported-browser evidence only. No checkbox changed; score remains **245
+checked / 35 open / 280 total (87.5%)**. Evidence:
+`docs/shipping/evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-2026-10-24.md`.
+
 ## 2026-10-24 · authenticated dashboard capture harness
 
 Web PR #273 merged normally as `8820fbf7`, adding the bounded Playwright

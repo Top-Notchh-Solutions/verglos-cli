@@ -1,5 +1,16 @@
 # Verglos V1 release gates
 
+## 2026-10-24 · authenticated dashboard multi-browser capture
+
+Web PR #274 merged normally as `b9f051fd`. Chromium, Firefox, and WebKit each
+captured all 13 authenticated dashboard routes at desktop/mobile (**78 ready
+measurements total**). The qualifier remains fail-closed at 73/73/85 gaps
+because loading/error, large-dataset, and observed page-contract requirements
+are incomplete. This opens no release gate; human screen-reader, field-CWV,
+independent review, customer, and final-release evidence remain open. No
+checkbox changed; score remains **245/35/280 (87.5%)**. Evidence:
+`evidence/qual-web-006-dashboard-local-authenticated-multi-browser-ready-2026-10-24.md`.
+
 ## 2026-10-24 · authenticated dashboard capture harness
 
 Web PR #273 merged normally as `8820fbf7`. The local Preview-like authenticated
